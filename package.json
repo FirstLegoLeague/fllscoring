@@ -1,0 +1,15 @@
+{
+  "name": "fllscoring",
+  "version": "0.0.0",
+  "description": "fll scoring application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "rikkert@rikkertkoppes.com",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1"
+  }
+}
