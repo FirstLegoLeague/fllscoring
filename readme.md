@@ -16,3 +16,8 @@ Steps
 Building
 
 - for a desktop build: `grunt nodewebkit`
+- for a mobile build: `grunt phonegap`
+
+Authors
+
+- [Rikkert Koppes](rikkert@rikkertkoppes.com)
