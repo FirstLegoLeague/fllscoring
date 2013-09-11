@@ -18,6 +18,11 @@ Building
 - for a desktop build: `grunt nodewebkit`
 - for a mobile build: `grunt phonegap`
 
+Testing
+
+- run `karma start`
+- or run `grunt karma`
+
 Authors
 
 - [Rikkert Koppes](rikkert@rikkertkoppes.com)

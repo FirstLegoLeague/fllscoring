@@ -55,11 +55,23 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        karma: {
+            options: {
+                configFile: 'karma.conf.js',
+            },
+            unit: {
+                runnerPort: 9999,
+                singleRun: true,
+                browsers: ['PhantomJS']
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-node-webkit-builder');
     grunt.loadNpmTasks('grunt-phonegap-build');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('phonegap', ['compress', 'phonegap-build:debug']);
 
