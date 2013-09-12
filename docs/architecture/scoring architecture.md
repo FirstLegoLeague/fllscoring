@@ -110,4 +110,4 @@ The administrative component contains very much the same modules (as redundancy 
 Contributors
 ------------
 
-- [Rikkert Koppes](rikkert@rikkertkoppes.com)
+- [Rikkert Koppes](mailto:rikkert@rikkertkoppes.com)

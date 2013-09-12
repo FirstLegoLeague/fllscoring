@@ -18,10 +18,16 @@ Building
 - for a desktop build: `grunt nodewebkit`
 - for a mobile build: `grunt phonegap`
 
+Run local
+
 Testing
 
 - run `karma start`
 - or run `grunt karma`
+
+Documentation
+
+- [architecture documents](docs/architecture/scoring architecture.md)
 
 TODO's
 --------
@@ -43,4 +49,4 @@ TODO's
 Authors
 --------
 
-- [Rikkert Koppes](rikkert@rikkertkoppes.com)
+- [Rikkert Koppes](mailto:rikkert@rikkertkoppes.com)
