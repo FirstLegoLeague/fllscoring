@@ -20,6 +20,8 @@ Building
 
 Run local
 
+- `node localserver.js` then open [localhost:1390](http://localhost:1390)
+
 Testing
 
 - run `karma start`
