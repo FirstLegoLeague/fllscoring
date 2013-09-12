@@ -4,8 +4,8 @@ var port = 1390;
 
 app.use(express.static('src'));
 
-app.get('/fs', function(req, res){
-  res.send('hw');
+app.get(/^\/fs\/(.*)$/, function(req, res){
+  res.send(req.params[0]);
 });
 
 

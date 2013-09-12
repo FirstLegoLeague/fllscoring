@@ -10,6 +10,9 @@
         Hello phonegap
         <script src="phonegap.js"></script>
         <script src="js/config.js"></script>
-        <script src="components/requirejs/require.js" data-main="fgmain"></script>
+        <script>
+            require.paths['services/fs'] = 'services/fs-pg';
+        </script>
+        <script src="components/requirejs/require.js" data-main="main"></script>
     </body>
 </html>

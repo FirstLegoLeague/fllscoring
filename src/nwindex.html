@@ -8,6 +8,9 @@
     <body>
         Hello node webkit
         <script src="js/config.js"></script>
-        <script src="components/requirejs/require.js" data-main="nwmain"></script>
+        <script>
+            require.paths['services/fs'] = 'services/fs-nw';
+        </script>
+        <script src="components/requirejs/require.js" data-main="main"></script>
     </body>
 </html>
