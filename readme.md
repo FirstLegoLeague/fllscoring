@@ -28,8 +28,10 @@ Testing
 - or run `grunt karma`
 
 Documentation
+-------------
 
-- [architecture documents](docs/architecture/scoring architecture.md)
+- [architecture documents](docs/architecture/readme.md)
+- [internationalization](docs/i18n/readme.md)
 
 TODO's
 --------
