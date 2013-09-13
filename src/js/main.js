@@ -27,5 +27,9 @@ define(['services/fs'],function(fs) {
     }
 
 
-    writeFile().then(readFile()).then(removeFile());
+    writeFile().then(function() {
+        return readFile();
+    }).then(function() {
+        return removeFile();
+    }).done();
 });
