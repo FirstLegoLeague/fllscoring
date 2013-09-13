@@ -80,7 +80,7 @@ define(['q'],function(Q) {
         return def.promise;
     }
 
-    function remove(path,data) {
+    function remove(path) {
         var def = Q.defer();
         var url = baseurl+path;
         fs.unlink(url,function(err,data) {

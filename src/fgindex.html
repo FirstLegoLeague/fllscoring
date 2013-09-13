@@ -13,6 +13,11 @@
         <script>
             require.paths['services/fs'] = 'services/fs-pg';
         </script>
-        <script src="components/requirejs/require.js" data-main="main"></script>
+        <script src="components/requirejs/require.js"></script>
+        <script>
+            document.addEventListener("deviceready", function() {
+                require(['main']);
+            }, false);
+        </script>
     </body>
 </html>
