@@ -1,11 +1,16 @@
 define(['q','jquery'],function(Q,$) {
     var baseurl = '/fs/';
 
-    function get() {
+    function xhrget() {
         return $.get.apply($.get,arguments);
     }
-    function post() {
+    function xhrpost() {
         return $.post.apply($.post,arguments);
+    }
+    function xhrremove(url,settings) {
+        settings = settings||{};
+        settings.type = 'DELETE';
+        return $.ajax(url,settings);
     }
 
     function read(path) {
@@ -23,7 +28,18 @@ define(['q','jquery'],function(Q,$) {
     function write(path,data) {
         var def = Q.defer();
         var url = baseurl+path;
-        this._get(url,data).done(function(data) {
+        this._post(url,data).done(function(data) {
+            def.resolve(data);
+        }).fail(function(data) {
+            def.reject(data);
+        });
+        return def.promise;
+    }
+
+    function remove(path) {
+        var def = Q.defer();
+        var url = baseurl+path;
+        this._delete(url).done(function(data) {
             def.resolve(data);
         }).fail(function(data) {
             def.reject(data);
@@ -32,9 +48,11 @@ define(['q','jquery'],function(Q,$) {
     }
 
     return {
-        _get: get,
-        _post: post,
+        _get: xhrget,
+        _post: xhrpost,
+        _delete: xhrremove,
         read: read,
-        write: write
+        write: write,
+        remove: remove,
     };
 });
