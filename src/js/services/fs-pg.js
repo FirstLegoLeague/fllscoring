@@ -1,87 +1,117 @@
-define(['q'],function(Q) {
+define(['q','services/log'],function(Q,log) {
     var baseurl = '';
 
-    function getFS(cb) {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
-            cb(null,fs);
-        },cb);
+    function getFS() {
+        var def = Q.defer();
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, def.resolve, def.reject);
+        return def.promise;
     }
 
-    function getFileEntry(path,options,cb) {
-        getFS(function(err,fs) {
-            if (err) { return cb({fs:err});}
-            fs.root.getFile(path,options||null,function(fileEntry) {
-                cb(null,fileEntry);
-            },cb);
+    /*
+        recursively gets or creates a directory path
+        path: 'foo/bar/baz';
+        options: {create: true, exclusive: false}|{}
+    */
+    function getPath(path,options) {
+        var parts = path.split('/');
+
+        function getDir(root,name) {
+            var def = Q.defer();
+            root.getDirectory(name,options,def.resolve,def.reject);
+            return def.promise;
+        }
+
+        function getSequence(root,parts) {
+            var name = parts.shift();
+            return getDir(root,name).then(function(dir) {
+                if (parts.length) {
+                    //create deeper path
+                    return getSequence(dir,parts);
+                }
+                return dir;
+            }).fail(function() {
+                log('fail getting directory '+name);
+            });
+        }
+
+        return getFS().then(function(fs) {
+            return getSequence(fs.root,parts);
+        }).fail(function() {
+            log('fail getting file system ');
         });
     }
 
-    function getFile(path,cb) {
-        getFileEntry(path,null,function(err,fileEntry) {
-            if (err) { return cb({fileentry:err});}
-            fileEntry.file(function(file) {
-                cb(null,file);
-            },cb);
+    /*
+        gets a (deep) file entry
+        path: 'foo/bar/baz/moo.txt';
+        option: {create: true, exclusive: false}|{}
+    */
+    function getFileEntry(path,options) {
+        var parts = path.split('/');
+        var fileName = parts.pop();
+        var dirName = parts.join('/');
+
+        return getPath(dirName,options).then(function(dir) {
+            var def = Q.defer();
+            dir.getFile(fileName,options||null,def.resolve,def.reject);
+            return def.promise;
+        }).fail(function() {
+            log('fail getting path '+dirName);
         });
     }
 
-    function getWriter(path,cb) {
-        getFileEntry(path,{create: true, exclusive: false},function(err,fileEntry) {
-            if (err) { return cb({fileentry:err});}
-            fileEntry.createWriter(function(writer) {
-                cb(null,writer);
-            },cb);
+    function getFile(path) {
+        return getFileEntry(path).then(function(fileEntry) {
+            var def = Q.defer();
+            fileEntry.file(def.resolve,def.reject);
+            return def.promise;
+        });
+    }
+
+    function getWriter(path) {
+        return getFileEntry(path,{create: true, exclusive: false}).then(function(fileEntry) {
+            var def = Q.defer();
+            fileEntry.createWriter(def.resolve,def.reject);
+            return def.promise;
+        }).fail(function() {
+            log('fail getting writer '+path);
         });
     }
 
     function read(path) {
-        var def = Q.defer();
         var url = baseurl+path;
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            def.resolve(evt.target.result);
-        };
-        getFile(path,function(err,file) {
-            if (err) {
-                def.reject({file:err});
-            } else {
-                reader.readAsText(file);
-            }
-        });
 
-        return def.promise;
+        return getFile(path).then(function(file) {
+            var def = Q.defer();
+            var reader = new FileReader();
+            reader.onloadend = function(evt) {
+                def.resolve(evt.target.result);
+            };
+            reader.readAsText(file);
+            return def.promise;
+        });
     }
 
     function write(path,data) {
-        var def = Q.defer();
         var url = baseurl+path;
-        getWriter(path,function(err,writer) {
-            if (err) {
-                def.reject(err);
-            } else {
-                writer.onwriteend = function(evt) {
-                    def.resolve();
-                };
-                writer.write(data);
-            }
-        });
 
-        return def.promise;
+        return getWriter(path).then(function(writer) {
+            var def = Q.defer();
+            writer.onwriteend = function(evt) {
+                def.resolve();
+            };
+            writer.write(data);
+            return def.promise;
+        });
     }
 
     function remove(path) {
-        var def = Q.defer();
         var url = baseurl+path;
-        getFileEntry(path,null,function(err,fileEntry) {
-            if (err) {
-                def.reject(err);
-            } else {
-                fileEntry.remove();
-                def.resolve();
-            }
-        });
 
-        return def.promise;
+        return getFileEntry(path).then(function(fileEntry) {
+            var def = Q.defer();
+            fileEntry.remove();
+        });
     }
 
     return {

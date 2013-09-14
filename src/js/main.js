@@ -8,7 +8,7 @@ define([
     //write, read, delete tests
 
     function writeFile() {
-        return fs.write('bar.txt','bar').then(function(data) {
+        return fs.write('foo/bar.txt','file contents').then(function(data) {
             log('success writing',data);
         }).fail(function(data) {
             log('error writing',data);
@@ -16,7 +16,7 @@ define([
     }
 
     function readFile() {
-        return fs.read('bar.txt').then(function(data) {
+        return fs.read('foo/bar.txt').then(function(data) {
             log('success reading',data);
         }).fail(function(data) {
             log('error reading',data);
@@ -24,7 +24,7 @@ define([
     }
 
     function removeFile() {
-        return fs.remove('bar.txt').then(function(data) {
+        return fs.remove('foo/bar.txt').then(function(data) {
             log('success removing',data);
         }).fail(function(data) {
             log('error removing',data);
