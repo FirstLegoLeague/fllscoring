@@ -38,12 +38,13 @@ Documentation
 -------------
 
 - [architecture documents](docs/architecture/readme.md)
+- [templating](docs/templating/readme.md)
 - [internationalization](docs/i18n/readme.md)
 
 TODO's
 --------
 
-1. think about a templating framework (prefer angular atm)
+1. <del>think about a templating framework (prefer angular atm)</del>
 1. sketch up interfaces
 1. create a visual language (styling rules) or use e.g. bootstrap.
 1. create artwork for phonegap (see `src/res/`)

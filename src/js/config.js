@@ -5,6 +5,7 @@ var require = {
     baseUrl: 'js/',
     paths: {
         'q': '../components/q/q',
-        'jquery': '../components/jquery/jquery.min'
+        'jquery': '../components/jquery/jquery.min',
+        'angular': '../components/angular/angular.min'
     }
 };

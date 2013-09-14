@@ -17,6 +17,9 @@
   "dependencies": {
     "requirejs": "~2.1.8",
     "q": "~0.9.7",
-    "jquery": "~2.0.3"
+    "jquery": "~2.0.3",
+    "angular": "~1.0.8",
+    "bootstrap-css": "2.3.2",
+    "font-awesome": "~3.2.1"
   }
 }
