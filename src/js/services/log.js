@@ -1,10 +1,9 @@
 define([
     'jquery'
 ],function($) {
-    var logEl = $('<pre></pre>').appendTo(document.body);
+    var _log = [];
 
-    return function log() {
-        // window.console.log.apply(window.console.log,arguments);
+    var log = function log() {
         var str = $.makeArray(arguments).map(function(arg) {
             var str;
             try {
@@ -14,7 +13,13 @@ define([
             }
             return str;
         }).join(' ');
-        logEl.append(str+'\n');
+        _log.push(str);
         console.log(str);
     };
+
+    log.get = function() {
+        return _log;
+    };
+
+    return log;
 });
