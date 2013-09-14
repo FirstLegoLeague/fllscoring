@@ -47,7 +47,7 @@ TODO's
 1. sketch up interfaces
 1. create a visual language (styling rules) or use e.g. bootstrap.
 1. create artwork for phonegap (see `src/res/`)
-1. create uniform filesystem api module
+1. <del>create uniform filesystem api module</del>
 1. come up with quantitative and qualitative scoresheet formats (as a starter)
 1. come up with a team list format (should be a simple list)
 1. create qualitative score sheet
@@ -56,6 +56,7 @@ TODO's
 1. create communication module (define what it should do in the first place)
 1. create mission definition screen (desktop only)
 1. create team administration screen (desktop only)
+1. implement [internationalization](docs/i18n/readme.md)
 
 Authors
 --------
