@@ -1,3 +1,5 @@
+var pgbuildconfig = require('./pgbuildconfig.json');
+
 module.exports = function(grunt) {
 
     // Project configuration.
@@ -31,10 +33,8 @@ module.exports = function(grunt) {
             debug: {
                 options: {
                     archive: "temp/app.zip",
-                    appId: "547261",
-                    user: {
-                        email: 'rikkert@rikkertkoppes.com'
-                    },
+                    appId: pgbuildconfig.appId,
+                    user: pgbuildconfig.user,
                     download: {
                         // ios: 'dist/ios.ipa',
                         android: 'dist/android.apk'
@@ -44,10 +44,8 @@ module.exports = function(grunt) {
             release: {
                 options: {
                     archive: "temp/app.zip",
-                    appId: "547261",
-                    user: {
-                        email: 'rikkert@rikkertkoppes.com'
-                    },
+                    appId: pgbuildconfig.appId,
+                    user: pgbuildconfig.user,
                     download: {
                         // ios: 'dist/ios.ipa',
                         android: 'dist/android.apk'

@@ -1,0 +1,21 @@
+/*
+    example phonegap build config file
+    copy and rename to "pgbuildconfig.json"
+    then run "grunt phonegap"
+*/
+{
+    "appId": "123456",
+    "user": {
+        "email": "you@yourhost.com"
+    }
+}
+
+/*
+    or use a phonegap build token
+{
+    "appId": "123456",
+    "user": {
+        "token": "ABCD123409876XYZ"
+    }
+}
+*/
