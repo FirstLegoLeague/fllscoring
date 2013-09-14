@@ -2,8 +2,9 @@ define([
     'services/log',
     'tests/fsTest',
     'views/settings',
+    'views/teams',
     'angular'
-],function(log,fsTest,settings) {
+],function(log,fsTest,settings,teams) {
 
     log('device ready');
 
@@ -23,5 +24,5 @@ define([
             };
         }
     ]);
-    angular.bootstrap(document.body,['main',settings]);
+    angular.bootstrap(document.body,['main',settings,teams]);
 });

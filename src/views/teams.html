@@ -1,0 +1,17 @@
+<div ng-controller="teamsCtrl">
+    <h1>Teams <i ng-show="saving" class="icon-save"></i></h1>
+    <p>{{status}}</p>
+    <form>
+        <p>
+            id: <input type="text" ng-model="newTeam.id">
+            name: <input type="text" ng-model="newTeam.name">
+            <button ng-click="addTeam()">Add team</button>
+        </p>
+    </form>
+    <table>
+        <tr ng-repeat="team in teams">
+            <td>{{team.id}}</td>
+            <td>{{team.name}}</td>
+        </tr>
+    </table>
+</div>

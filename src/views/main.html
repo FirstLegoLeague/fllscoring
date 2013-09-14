@@ -5,8 +5,9 @@
     <div class="navbar navbar-fixed-bottom">
         <div class="navbar-inner">
             <ul class="nav">
+                <li><a ng-click="setPage('teams')"><i class="icon-group"></i> Teams</a></li>
                 <li><a ng-click="setPage('scores')"><i class="icon-check"></i> Scores</a></li>
-                <li><a ng-click="setPage('ranking')"><i class="icon-sort-by-order-alt"></i> Ranking</a></li>
+                <li><a ng-click="setPage('ranking')"><i class="icon-sort-by-order"></i> Ranking</a></li>
                 <li><a ng-click="setPage('settings')"><i class="icon-cog"></i> Settings</a></li>
             </ul>
         </div>
@@ -14,6 +15,5 @@
 </div>
 
 <div>
-    main html
     <div ng-include="'views/'+page+'.html'"></div>
 </div>
