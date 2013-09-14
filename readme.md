@@ -37,6 +37,7 @@ Testing
 Documentation
 -------------
 
+- [original proposal](docs/proposal/Scoring System project proposal-v2.pdf)
 - [architecture documents](docs/architecture/readme.md)
 - [templating](docs/templating/readme.md)
 - [internationalization](docs/i18n/readme.md)
