@@ -1,14 +1,16 @@
 define([
     'services/log',
-    'tests/fsTest',
     'views/settings',
     'views/teams',
+    'tests/fsTest',
+    'tests/indexedDBTest',
     'angular'
-],function(log,fsTest,settings,teams) {
+],function(log,settings,teams,fsTest,dbTest) {
 
     log('device ready');
 
     fsTest();
+    dbTest();
 
 
     //initialize main controller and load main view
@@ -18,6 +20,7 @@ define([
         function($scope) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
+            $scope.page = 'settings';
 
             $scope.setPage = function(page) {
                 $scope.page = page;

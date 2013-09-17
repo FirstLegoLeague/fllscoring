@@ -1,5 +1,8 @@
-define(['q','idbstore'],function(Q,IDBStore) {
-    var baseurl = process.cwd()+'/';
+define([
+    'services/log',
+    'idbstore',
+    'q',
+], function(log, IDBStore, Q) {
 
     function createStore() {
         var def = Q.defer();
@@ -42,9 +45,19 @@ define(['q','idbstore'],function(Q,IDBStore) {
         });
     };
 
-    return {
-        read: read,
-        write: write,
-        remove: remove
-    };
+    function run() {
+        write('123','bar').then(function() {
+            log('success write', arguments);
+            return read('123');
+        }).then(function(data) {
+            log('success read',data);
+            return remove('123');
+        }).then(function() {
+            log('success remove',arguments);
+        }).fail(function() {
+            log('error write',arguments);
+        }).done();
+    }
+
+    return run;
 });

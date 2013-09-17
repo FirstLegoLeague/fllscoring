@@ -6,6 +6,7 @@ var require = {
     paths: {
         'q': '../components/q/q',
         'jquery': '../components/jquery/jquery.min',
-        'angular': '../components/angular/angular.min'
+        'angular': '../components/angular/angular.min',
+        'idbstore':'../components/idbwrapper/idbstore'
     }
 };
