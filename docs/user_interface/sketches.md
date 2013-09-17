@@ -31,7 +31,8 @@ menu or require the input of data.
 ![](http://www.esrac.ele.tue.nl/~koen/images_handheld/total.png)
 
 This image gives an overview of the connections between the user interface screens.
-An arrow starting from a button indicates this button opens the indicated screen, either directly or after input of data by the user.
+An arrow starting from a button means this button opens the indicated screen, 
+either directly or after input of data by the user.
 Each screen is explained in the next sections.
 
 ###Main menu
