@@ -25,6 +25,6 @@ Handheld device user interface
 Since the fllscoring system will be used by many people, who will not use it dayly, using the app should be easy.
 
 Main menu
-![](main_menu.png)
+![](http://www.esrac.ele.tue.nl/~koen/images_handheld/main_menu.png)
 
 
