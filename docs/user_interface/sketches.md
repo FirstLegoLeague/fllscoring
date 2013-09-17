@@ -7,7 +7,7 @@ In the regional games of the FLL, much effort is required from referees and scor
 If the scoring requires no effort, more attention can be given to the game/the children.
 We aim to develop a software/hardware solution that makes scoring effortless.
 
-Regional games often in places without internet acces or wireless connection.
+Regional games are often in places without internet acces or wireless connection.
 Scoring using a handheld device (running IoS or Android), 
 will allow fast processing of recorded playing field to final scoring.
 These scores can then be processed on a PC.
@@ -22,8 +22,16 @@ and the PC is used for ranking teams on scores.
 
 Handheld device user interface
 ------------------------------
-Since the fllscoring system will be used by many people, who will not use it dayly, using the app should be easy.
-Buttons shown in blue directly execute an action. Buttons shown in yellow will lead to a different menu or require the input of data.
+Using the app should be easy since the fllscoring system will be used by many people, who will not use it daily.
+Therefore the choices the user has to make should be intuitive and come in a logical order.
+Buttons shown in blue directly execute an action. Buttons shown in yellow will lead to a different 
+menu or require the input of data.
+
+###Overview of user interface interactions
+![](http://www.esrac.ele.tue.nl/~koen/images_handheld/total.png)
+
+This image gives an overview of the connections between the user interface screens.
+Each screen is explained in the next sections.
 
 ###Main menu
 
