@@ -81,6 +81,7 @@ The user can erease one or more teams from the local list.
 
 ![](http://www.esrac.ele.tue.nl/~koen/images_handheld/start_scoring_1.png)
 ![](http://www.esrac.ele.tue.nl/~koen/images_handheld/start_scoring_2.png)
+
 When the user starts scoring, the scoring sheet is shown.
 Multiply types of input should be given.
 This can be yes/no choices, multiply choice answers, or integer numbers.
