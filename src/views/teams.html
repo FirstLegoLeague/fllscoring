@@ -1,17 +1,57 @@
 <div ng-controller="teamsCtrl">
     <h1>Teams <i ng-show="saving" class="icon-save"></i></h1>
-    <p>{{status}}</p>
-    <form>
+    <div class="alert alert-info" ng-show="status">
+        <button type="button" class="close" ng-click="status=''">&times;</button>
+        {{status}}
+    </div>
+    <p class="pull-right">
+        <button class="btn" ng-hide="editMode" ng-click="editMode=true">
+            <i class="icon-edit"></i> Edit
+        </button>
+        <button class="btn btn-primary" ng-show="editMode" ng-click="editMode=false">Done</button>
+    </p>
+    <p class="pull-left">
+        <button class="btn" ng-click="load()">
+            <i class="icon-cloud-download"></i>
+            Load
+        </button>
+    </p>
+    <form class="form-inline" name="newTeamForm" ng-show="editMode">
         <p>
-            id: <input type="text" ng-model="newTeam.id">
-            name: <input type="text" ng-model="newTeam.name">
-            <button ng-click="addTeam()">Add team</button>
+            <span class="control-group" ng-class="{error:!newTeamForm.newTeamNumber.$valid}">
+                <label class="control-label">
+                    Number:
+                    <input type="text" name="newTeamNumber" ng-pattern="teamNumberPattern" class="input-small" ng-model="newTeam.number" size="4">
+                </label>
+            </span>
+            <span class="control-group">
+                <label class="control-label">
+                    Name:
+                    <input type="text" ng-model="newTeam.name">
+                </label>
+            </span>
+            <button class="btn" ng-click="addTeam()" ng-disabled="!newTeamForm.$valid">Add team</button>
         </p>
     </form>
-    <table>
+    <table class="table table-bordered table-striped">
+        <colgroup>
+            <col width="60px">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+            </tr>
+        </thead>
         <tr ng-repeat="team in teams">
-            <td>{{team.id}}</td>
-            <td>{{team.name}}</td>
+            <td>{{team.number}}</td>
+            <td>
+                {{team.name}}
+                <button ng-show="editMode" class="btn btn-danger pull-right" ng-click="removeTeam($index)">
+                    <i class="icon-trash"></i> Delete
+                </button>
+            </td>
         </tr>
     </table>
 </div>

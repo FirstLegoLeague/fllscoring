@@ -20,7 +20,7 @@ define([
         function($scope) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
-            $scope.page = 'settings';
+            $scope.page = 'teams';
 
             $scope.setPage = function(page) {
                 $scope.page = page;
