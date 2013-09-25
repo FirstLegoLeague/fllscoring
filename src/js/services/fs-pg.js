@@ -1,5 +1,5 @@
 define(['q','services/log'],function(Q,log) {
-    var baseurl = '';
+    var baseurl = 'fllscoring/';
 
     function getFS() {
         var def = Q.defer();
@@ -81,7 +81,7 @@ define(['q','services/log'],function(Q,log) {
     function read(path) {
         var url = baseurl+path;
 
-        return getFile(path).then(function(file) {
+        return getFile(url).then(function(file) {
             var def = Q.defer();
             var reader = new FileReader();
             reader.onloadend = function(evt) {
@@ -95,7 +95,7 @@ define(['q','services/log'],function(Q,log) {
     function write(path,data) {
         var url = baseurl+path;
 
-        return getWriter(path).then(function(writer) {
+        return getWriter(url).then(function(writer) {
             var def = Q.defer();
             writer.onwriteend = function(evt) {
                 def.resolve();
@@ -108,7 +108,7 @@ define(['q','services/log'],function(Q,log) {
     function remove(path) {
         var url = baseurl+path;
 
-        return getFileEntry(path).then(function(fileEntry) {
+        return getFileEntry(url).then(function(fileEntry) {
             var def = Q.defer();
             fileEntry.remove();
         });
