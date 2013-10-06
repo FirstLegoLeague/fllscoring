@@ -2,15 +2,16 @@ define([
     'services/log',
     'views/settings',
     'views/teams',
+    'views/scores',
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular'
-],function(log,settings,teams,fsTest,dbTest) {
+],function(log,settings,teams,scores,fsTest,dbTest) {
 
     log('device ready');
 
-    fsTest();
-    dbTest();
+    // fsTest();
+    // dbTest();
 
 
     //initialize main controller and load main view
@@ -20,12 +21,12 @@ define([
         function($scope) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
-            $scope.page = 'teams';
+            $scope.page = 'scores';
 
             $scope.setPage = function(page) {
                 $scope.page = page;
             };
         }
     ]);
-    angular.bootstrap(document.body,['main',settings,teams]);
+    angular.bootstrap(document.body,['main',settings,teams,scores]);
 });

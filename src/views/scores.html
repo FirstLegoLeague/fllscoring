@@ -1,1 +1,23 @@
-scores
+<div ng-controller="scoresCtrl">
+    <h1>Qualitative</h1>
+    <table>
+        <tr ng-repeat="feat in observables">
+            <td>{{feat.title}}</td>
+            <td>
+                <span ng-switch="feat.type.name">
+                    <input ng-model="feat.value" type="checkbox" ng-switch-when="Boolean">
+                    <input ng-model="feat.value" min="{{feat.min||0}}" max="{{feat.max}}" type="number" ng-switch-when="Number">
+                </span>
+            </td>
+            <td>{{1*(feat.value||0)}}</td>
+        </tr>
+    </table>
+
+    <h1>Quantitative</h1>
+    <table>
+        <tr ng-repeat="rule in rules">
+            <td>{{rule.title}}</td>
+            <td>{{result(rule)}}</td>
+        </tr>
+    </table>
+</div>
