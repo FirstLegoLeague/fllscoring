@@ -1,21 +1,52 @@
 <div ng-controller="scoresCtrl">
+    <style>
+        body {
+            padding-bottom: 60px;
+        }
+        table {
+            border-collapse: collapse;
+            border: 1px solid whitesmoke;
+            border-left: 5px solid silver;
+        }
+        td {
+            border: 1px solid whitesmoke;
+            border-width: 1px 0;
+            padding: 4px 10px;
+        }
+        th {
+            color: #666;
+            font-size: 16px;
+            font-weight: normal;
+            text-align: left;
+            padding: 4px 10px;
+        }
+        input {
+            width: 30px;
+        }
+        tbody.error td {
+            color: crimson;
+        }
+    </style>
     <h1>Missions</h1>
-    <table>
-        <tbody ng-repeat="(key,mission) in missions">
+    <table ng-style="{borderLeftColor:teamColor()}">
+        <colgroup>
+            <col width="20">
+        </colgroup>
+        <tbody ng-repeat="mission in missions" ng-class="{error:mission.error}">
             <tr>
-                <td><h2>{{mission.title}}</h2></td>
-                <td>error: {{mission.error}}</td>
-                <td>result: {{mission.result}}</td>
+                <th colspan="3">{{mission.title}}</th>
+                <th>{{mission.result}}</th>
             </tr>
-            <tr ng-repeat="(key,feat) in mission.objectives">
-                <td>{{feat.title}}</td>
+            <tr ng-repeat="objective in mission.objectiveList">
+                <td></td>
+                <td>{{objective.title}}</td>
                 <td>
-                    <span ng-switch="feat.type.name">
-                        <input ng-model="feat.value" type="checkbox" ng-switch-when="Boolean">
-                        <input ng-model="feat.value" min="{{feat.min||0}}" max="{{feat.max}}" type="number" ng-switch-when="Number">
+                    <span ng-switch="objective.type.name">
+                        <input ng-model="objective.value" type="checkbox" ng-switch-when="Boolean">
+                        <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number" ng-switch-when="Number">
                     </span>
                 </td>
-                <td>{{1*(feat.value||0)}}</td>
+                <td></td>
                 <!-- <td>{{result(feat.rule)</td> -->
             </tr>
         </tbody>

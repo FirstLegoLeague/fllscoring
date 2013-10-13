@@ -8,6 +8,19 @@ define([
     var field = {
         "title":"Senior Solutions",
         "missions":{
+            "general":{
+                "title":"Team",
+                "objectives": {
+                    "blueTeam": {
+                        "title":"blue",
+                        "type": Boolean
+                    },
+                    "redTeam": {
+                        "title":"red",
+                        "type": Boolean
+                    }
+                }
+            },
             "bowling":{
                 "title":"Bowling",
                 "objectives": {
@@ -59,7 +72,7 @@ define([
                     }
                 }
             },
-            "medicin":{
+            "medicine":{
                 "title":"Medicine",
                 "objectives": {
                     "orangeBottleMoved":{
@@ -71,9 +84,126 @@ define([
                         "type":Boolean
                     }
                 }
+            },
+            "animals":{
+                "title":"Service Animals",
+                "objectives": {
+                    "dogInBase":{
+                        "title":"Dog is in base",
+                        "type":Boolean
+                    }
+                }
+            },
+            "stove":{
+                "title":"Stove",
+                "objectives":{
+                    "allBurnersBlack":{
+                        "title":"All 4 burners black",
+                        "type":Boolean
+                    }
+                }
+            },
+            "gardening":{
+                "title":"Gardening",
+                "objectives":{
+                    "plantTouchingWhite":{
+                        "title":"Plant's base touching a white target area",
+                        "type":Boolean
+                    }
+                }
+            },
+            "videocall":{
+                "title":"Video call",
+                "objectives":{
+                    "flagsUp":{
+                        "title":"Flags all the way up",
+                        "type":Number,
+                        "max":2
+                    }
+                }
+            },
+            "flexibility":{
+                "title":"Flexibility",
+                "objectives":{
+                    "yellowLoopsInBase":{
+                        "title":"Yellow loops in Base",
+                        "type":Number,
+                        "max":2
+                    }
+                }
+            },
+            "transitions":{
+                "title":"Transitions",
+                "objectives":{
+                    "robotTouchingTiltedPlatform":{
+                        "title":"Robot touching tilted center platform only",
+                        "type":Boolean
+                    },
+                    "robotTouchingBalancedPlatform":{
+                        "title":"Robot touching balanced center platform only",
+                        "type":Boolean
+                    }
+                }
+            },
+            "ballGame":{
+                "title":"Ball game",
+                "objectives":{
+                    "blueCenter":{
+                        "title":"Blue ball in center position",
+                        "type":Boolean
+                    },
+                    "redCenter":{
+                        "title":"Red ball in center position",
+                        "type":Boolean
+                    },
+                    "yellowCenter":{
+                        "title":"Yellow ball in center position",
+                        "type":Boolean
+                    },
+                    "blueOnRack":{
+                        "title":"Blue balls on rack",
+                        "type":Number,
+                        "max":3
+                    },
+                    "redOnRack":{
+                        "title":"Red balls on rack",
+                        "type":Number,
+                        "max":3
+                    }
+                }
+            },
+            "cooperation":{
+                "title":"Similarity recognition and cooperation",
+                "objectives":{
+                    "pointersParallel":{
+                        "title":"Pointers parallel",
+                        "type":Boolean
+                    }
+                }
+            },
+            "cardio":{
+                "title":"Cardiovascular exercise",
+                "objectives":{
+                    "dialBig":{
+                        "title":"Big dial",
+                        "type":Number,
+                        "min":1,
+                        "max":9
+                    },
+                    "dialSmall":{
+                        "title":"Small dial",
+                        "type":Number,
+                        "max":5
+                    }
+                }
             }
         },
         "expectations": {
+            "general": [
+                function(redTeam,  blueTeam) {
+                    return (redTeam + blueTeam) === 1;
+                }
+            ],
             "strength": [
                 function(weightAtRedMaker,  weightAboveRedMaker) {
                     return !(weightAtRedMaker && weightAboveRedMaker);
@@ -83,9 +213,30 @@ define([
                 function(chairFixedInBase,  chairFixedUnderTable) {
                     return !(chairFixedInBase && chairFixedUnderTable);
                 }
+            ],
+            "transitions": [
+                function(robotTouchingTiltedPlatform,  robotTouchingBalancedPlatform) {
+                    return !(robotTouchingTiltedPlatform && robotTouchingBalancedPlatform);
+                }
+            ],
+            "ballGame": [
+                function(blueCenter, redCenter, yellowCenter) {
+                    return (blueCenter + redCenter + yellowCenter <= 1);
+                }
+            ],
+            "cardio": [
+                function(dialBig, dialSmall) {
+                    if (dialBig===9) {
+                        return !dialSmall;
+                    }
+                    return true;
+                }
             ]
         },
         "rules": {
+            "general": function(blueTeam, redTeam) {
+                return blueTeam?'blue':'red';
+            },
             "bowling": function(pinsDown) {
                 switch (pinsDown) {
                     case 0: return 0;
@@ -106,11 +257,90 @@ define([
             "woodworking": function(chairFixedInBase,chairFixedUnderTable) {
                 return chairFixedInBase*15 + chairFixedUnderTable*25;
             },
-            "medicin": function(orangeBottleMoved,greenBottleInBase) {
+            "medicine": function(orangeBottleMoved,greenBottleInBase) {
                 return 25*(!orangeBottleMoved && greenBottleInBase);
+            },
+            "animals":function(dogInBase) {
+                return dogInBase * 20;
+            },
+            "stove":function(allBurnersBlack) {
+                return allBurnersBlack * 25;
+            },
+            "gardening":function(plantTouchingWhite) {
+                return plantTouchingWhite * 25;
+            },
+            "videocall":function(flagsUp) {
+                return flagsUp * 20;
+            },
+            "flexibility":function(yellowLoopsInBase) {
+                return yellowLoopsInBase * 20;
+            },
+            "transitions":function(robotTouchingTiltedPlatform, robotTouchingBalancedPlatform) {
+                return robotTouchingTiltedPlatform*45 + robotTouchingBalancedPlatform*65;
+            },
+            "ballGame":function(blueCenter, redCenter, yellowCenter, blueTeam, redTeam, blueOnRack, redOnRack) {
+                return (blueCenter * blueTeam * 60) +
+                    (redCenter * redTeam * 60) +
+                    (yellowCenter * 10) +
+                    (blueOnRack * 10) +
+                    (redOnRack * 10);
+            },
+            "cooperation":function(pointersParallel) {
+                return pointersParallel * 45;
+            },
+            "cardio":function(dialBig, dialSmall) {
+                if (dialBig === 1 && dialSmall === 0) {return -60;}
+                if (dialBig === 1 && dialSmall === 1) {return -55;}
+                if (dialBig === 1 && dialSmall === 2) {return -50;}
+                if (dialBig === 1 && dialSmall === 3) {return -45;}
+                if (dialBig === 1 && dialSmall === 4) {return -40;}
+                if (dialBig === 1 && dialSmall === 5) {return -35;}
+                if (dialBig === 2 && dialSmall === 0) {return -30;}
+                if (dialBig === 2 && dialSmall === 1) {return -25;}
+                if (dialBig === 2 && dialSmall === 2) {return -20;}
+                if (dialBig === 2 && dialSmall === 3) {return -15;}
+                if (dialBig === 2 && dialSmall === 4) {return -10;}
+                if (dialBig === 2 && dialSmall === 5) {return -5;}
+                if (dialBig === 3 && dialSmall === 0) {return 0;}
+                if (dialBig === 3 && dialSmall === 1) {return 5;}
+                if (dialBig === 3 && dialSmall === 2) {return 10;}
+                if (dialBig === 3 && dialSmall === 3) {return 15;}
+                if (dialBig === 3 && dialSmall === 4) {return 20;}
+                if (dialBig === 3 && dialSmall === 5) {return 25;}
+                if (dialBig === 4 && dialSmall === 0) {return 30;}
+                if (dialBig === 4 && dialSmall === 1) {return 35;}
+                if (dialBig === 4 && dialSmall === 2) {return 40;}
+                if (dialBig === 4 && dialSmall === 3) {return 45;}
+                if (dialBig === 4 && dialSmall === 4) {return 50;}
+                if (dialBig === 4 && dialSmall === 5) {return 55;}
+                if (dialBig === 5 && dialSmall === 0) {return 60;}
+                if (dialBig === 5 && dialSmall === 1) {return 63;}
+                if (dialBig === 5 && dialSmall === 2) {return 66;}
+                if (dialBig === 5 && dialSmall === 3) {return 69;}
+                if (dialBig === 5 && dialSmall === 4) {return 72;}
+                if (dialBig === 5 && dialSmall === 5) {return 75;}
+                if (dialBig === 6 && dialSmall === 0) {return 78;}
+                if (dialBig === 6 && dialSmall === 1) {return 91;}
+                if (dialBig === 6 && dialSmall === 2) {return 94;}
+                if (dialBig === 6 && dialSmall === 3) {return 97;}
+                if (dialBig === 6 && dialSmall === 4) {return 100;}
+                if (dialBig === 6 && dialSmall === 5) {return 103;}
+                if (dialBig === 7 && dialSmall === 0) {return 106;}
+                if (dialBig === 7 && dialSmall === 1) {return 107;}
+                if (dialBig === 7 && dialSmall === 2) {return 108;}
+                if (dialBig === 7 && dialSmall === 3) {return 109;}
+                if (dialBig === 7 && dialSmall === 4) {return 110;}
+                if (dialBig === 7 && dialSmall === 5) {return 111;}
+                if (dialBig === 8 && dialSmall === 0) {return 112;}
+                if (dialBig === 8 && dialSmall === 1) {return 113;}
+                if (dialBig === 8 && dialSmall === 2) {return 114;}
+                if (dialBig === 8 && dialSmall === 3) {return 115;}
+                if (dialBig === 8 && dialSmall === 4) {return 116;}
+                if (dialBig === 8 && dialSmall === 5) {return 117;}
+                if (dialBig === 9 && dialSmall === 0) {return 118;}
             }
         }
-    }
+    };
 
     angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
         '$scope',
@@ -119,13 +349,13 @@ define([
 
             // fs.read('field.js').then(function(defs) {
                 // var field = eval('('+defs+')');
-                $scope.missions = field.missions;
+                $scope.missionIndex = field.missions;
                 $scope.expectations = field.expectations;
-                $scope.rules = field.rules;
-                //todo: implement
-                angular.forEach($scope.expectations,processExpects);
-                angular.forEach($scope.rules,process);
-                console.log($scope.rules);
+                $scope.objectiveIndex = indexObjectives(field.missions);
+                console.log($scope.objectiveIndex);
+                $scope.missions = transpose(field.missions);
+                angular.forEach(field.rules,process);
+                // console.log($scope.rules);
                 // console.log(test);
             // }).fail(function() {
             //     log('error getting field');
@@ -133,51 +363,87 @@ define([
             //     $scope.$apply();
             // }).done();
 
+            //team color
+            $scope.teamColor = function() {
+                return $scope.missionIndex['general'].result;
+            };
+
+
             function getDependencies(fn) {
-                var deps = fn.toString().match(/^function\s*\((.*?)\)/)[1].split(/\s*,\s*/);
-                return deps;
+                var deps = fn.toString().match(/^function\s*\((.*?)\)/)[1];
+                return deps?deps.split(/\s*,\s*/):[];
+            }
+            function getObjectives(names) {
+                return names.map(function(dep) {
+                    return 1*($scope.objectiveIndex[dep].value||0);
+                });
+            }
+            // function inject(fn) {
+            //     var vars = getDependencies(fn);
+            //     return function() {
+            //         return fn.apply(null,vars);
+            //     };
+            // }
+            function getMission(name) {
+                return $scope.missionIndex[name];
             }
 
-            /*
-                for every expectation, a watcher is attached to the dependent variables
-                the expectation is checked when these change and an error flag is
-                set on the mission if the expectation fails
-            */
-            function processExpects(expects,key) {
-                var mission = $scope.missions[key];
-                expects.forEach(function(expect) {
-                    var deps = getDependencies(expect);
-                    deps.forEach(function(name) {
-                        $scope.$watch(function() {
-                            return mission.objectives[name].value;
-                        },function(newValue) {
-                            var vars = deps.map(function(name) {
-                                return 1*($scope.missions[key].objectives[name].value||0);
-                            });
-                            mission.error = !expect.apply(null,vars);
-                        },true);
-                    });
+            function transpose(obj) {
+                return Object.keys(obj).map(function(key) {
+                    var o = obj[key];
+                    o._key = key;
+                    if (o.objectives) {
+                        o.objectiveList = transpose(o.objectives);
+                    }
+                    return o;
                 });
             }
 
-            /*
-                for every mission the score rule is calculated when the
-                dependent objectives change. The result is set as
-                result on the mission object
-            */
+            function indexObjectives(missions) {
+                objs = {};
+                angular.forEach(missions,function(mission) {
+                    angular.forEach(mission.objectives,function(obj,key) {
+                        objs[key] = obj;
+                    });
+                });
+                return objs;
+            }
+
+            function getErrorFunc(key) {
+                var expectations = ($scope.expectations[key]||[function(){return true;}]).map(function(e) {
+                    return {
+                        deps: getDependencies(e),
+                        fn: e
+                    };
+                });
+                return function() {
+                    return !expectations.every(function(exp) {
+                        var vars = getObjectives(exp.deps);
+                        return exp.fn.apply(null,vars);
+                    });
+                };
+            }
+
             function process(rule,key) {
-                var mission = $scope.missions[key];
                 var deps = getDependencies(rule);
-                deps.forEach(function(name) {
-                    $scope.$watch(function() {
-                        return mission.objectives[name].value;
-                    },function(newValue) {
-                        var vars = deps.map(function(name) {
-                            return 1*($scope.missions[key].objectives[name].value||0);
-                        });
-                        mission.result = rule.apply(null,vars);
-                    });
+                var getError = getErrorFunc(key);
+                var mission = getMission(key);
+                //addd watcher for all dependencies
+                $scope.$watch(function() {
+                    return deps.map(function(dep) {
+                        return $scope.objectiveIndex[dep].value;
+                    }).join('|');
+                },function(newValue) {
+                    //check expectations
+                    mission.error = getError();
+                    if (mission.error) {return;}
+
+                    //calculate the result for the mission
+                    vars = getObjectives(deps);
+                    mission.result = rule.apply(null,vars);
+                    console.log('deps for',key,'changed',newValue,mission.result);
                 });
+
             }
         }
     ]);
