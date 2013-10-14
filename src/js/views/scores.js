@@ -291,7 +291,6 @@ define([
                 $scope.missionIndex = field.missions;
                 $scope.missions = transpose(field.missions);
                 $scope.objectiveIndex = indexObjectives(field.missions);
-                console.log($scope.objectiveIndex);
                 angular.forEach($scope.missions,process);
                 // console.log($scope.rules);
                 // console.log(test);
@@ -313,6 +312,8 @@ define([
             }
             function getObjectives(names) {
                 return names.map(function(dep) {
+                    var val = $scope.objectiveIndex[dep].value;
+                    if (val===undefined || val===null) {return undefined;}
                     return 1*($scope.objectiveIndex[dep].value||0);
                 });
             }
