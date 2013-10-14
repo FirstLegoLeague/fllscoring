@@ -19,6 +19,9 @@ define([
                         "title":"red",
                         "type": "Boolean"
                     }
+                },
+                "score":function(blueTeam, redTeam) {
+                    return blueTeam?'blue':'red';
                 }
             },
             "bowling":{
@@ -28,6 +31,17 @@ define([
                         "title":"Number of pins down",
                         "max":6,
                         "type":"Number"
+                    }
+                },
+                "score":function(pinsDown) {
+                    switch (pinsDown) {
+                        case 0: return 0;
+                        case 1: return 7;
+                        case 2: return 14;
+                        case 3: return 21;
+                        case 4: return 28;
+                        case 5: return 35;
+                        case 6: return 60;
                     }
                 }
             },
@@ -42,6 +56,9 @@ define([
                         "title":"Weight height above red maker",
                         "type":"Boolean"
                     }
+                },
+                "score":function(weightAtRedMaker,  weightAboveRedMaker) {
+                    return weightAtRedMaker*15 + weightAboveRedMaker*25;
                 }
             },
             "quilting":{
@@ -57,6 +74,9 @@ define([
                         "max":2,
                         "type":"Number"
                     }
+                },
+                "score":function(blueQuilts,orangeQuilts) {
+                    return blueQuilts*15 + orangeQuilts*30;
                 }
             },
             "woodworking":{
@@ -70,6 +90,9 @@ define([
                         "title":"Chair fixed and any part under table",
                         "type":"Boolean"
                     }
+                },
+                "score":function(chairFixedInBase,chairFixedUnderTable) {
+                    return chairFixedInBase*15 + chairFixedUnderTable*25;
                 }
             },
             "medicine":{
@@ -83,6 +106,9 @@ define([
                         "title":"Green bottle in base",
                         "type":"Boolean"
                     }
+                },
+                "score":function(orangeBottleMoved,greenBottleInBase) {
+                    return 25*(!orangeBottleMoved && greenBottleInBase);
                 }
             },
             "animals":{
@@ -92,6 +118,9 @@ define([
                         "title":"Dog is in base",
                         "type":"Boolean"
                     }
+                },
+                "score":function(dogInBase) {
+                    return dogInBase * 20;
                 }
             },
             "stove":{
@@ -101,6 +130,9 @@ define([
                         "title":"All 4 burners black",
                         "type":"Boolean"
                     }
+                },
+                "score":function(allBurnersBlack) {
+                    return allBurnersBlack * 25;
                 }
             },
             "gardening":{
@@ -110,6 +142,9 @@ define([
                         "title":"Plant's base touching a white target area",
                         "type":"Boolean"
                     }
+                },
+                "score":function(plantTouchingWhite) {
+                    return plantTouchingWhite * 25;
                 }
             },
             "videocall":{
@@ -120,6 +155,9 @@ define([
                         "type":"Number",
                         "max":2
                     }
+                },
+                "score":function(flagsUp) {
+                    return flagsUp * 20;
                 }
             },
             "flexibility":{
@@ -130,6 +168,9 @@ define([
                         "type":"Number",
                         "max":2
                     }
+                },
+                "score":function(yellowLoopsInBase) {
+                    return yellowLoopsInBase * 20;
                 }
             },
             "transitions":{
@@ -143,6 +184,9 @@ define([
                         "title":"Robot touching balanced center platform only",
                         "type":"Boolean"
                     }
+                },
+                "score":function(robotTouchingTiltedPlatform, robotTouchingBalancedPlatform) {
+                    return robotTouchingTiltedPlatform*45 + robotTouchingBalancedPlatform*65;
                 }
             },
             "ballGame":{
@@ -170,6 +214,13 @@ define([
                         "type":"Number",
                         "max":3
                     }
+                },
+                "score":function(blueCenter, redCenter, yellowCenter, blueTeam, redTeam, blueOnRack, redOnRack) {
+                    return (blueCenter * blueTeam * 60) +
+                        (redCenter * redTeam * 60) +
+                        (yellowCenter * 10) +
+                        (blueOnRack * 10) +
+                        (redOnRack * 10);
                 }
             },
             "cooperation":{
@@ -179,6 +230,9 @@ define([
                         "title":"Pointers parallel",
                         "type":"Boolean"
                     }
+                },
+                "score":function(pointersParallel) {
+                    return pointersParallel * 45;
                 }
             },
             "cardio":{
@@ -195,6 +249,57 @@ define([
                         "type":"Number",
                         "max":5
                     }
+                },
+                "score":function(dialBig, dialSmall) {
+                    if (dialBig === 1 && dialSmall === 0) {return -60;}
+                    if (dialBig === 1 && dialSmall === 1) {return -55;}
+                    if (dialBig === 1 && dialSmall === 2) {return -50;}
+                    if (dialBig === 1 && dialSmall === 3) {return -45;}
+                    if (dialBig === 1 && dialSmall === 4) {return -40;}
+                    if (dialBig === 1 && dialSmall === 5) {return -35;}
+                    if (dialBig === 2 && dialSmall === 0) {return -30;}
+                    if (dialBig === 2 && dialSmall === 1) {return -25;}
+                    if (dialBig === 2 && dialSmall === 2) {return -20;}
+                    if (dialBig === 2 && dialSmall === 3) {return -15;}
+                    if (dialBig === 2 && dialSmall === 4) {return -10;}
+                    if (dialBig === 2 && dialSmall === 5) {return -5;}
+                    if (dialBig === 3 && dialSmall === 0) {return 0;}
+                    if (dialBig === 3 && dialSmall === 1) {return 5;}
+                    if (dialBig === 3 && dialSmall === 2) {return 10;}
+                    if (dialBig === 3 && dialSmall === 3) {return 15;}
+                    if (dialBig === 3 && dialSmall === 4) {return 20;}
+                    if (dialBig === 3 && dialSmall === 5) {return 25;}
+                    if (dialBig === 4 && dialSmall === 0) {return 30;}
+                    if (dialBig === 4 && dialSmall === 1) {return 35;}
+                    if (dialBig === 4 && dialSmall === 2) {return 40;}
+                    if (dialBig === 4 && dialSmall === 3) {return 45;}
+                    if (dialBig === 4 && dialSmall === 4) {return 50;}
+                    if (dialBig === 4 && dialSmall === 5) {return 55;}
+                    if (dialBig === 5 && dialSmall === 0) {return 60;}
+                    if (dialBig === 5 && dialSmall === 1) {return 63;}
+                    if (dialBig === 5 && dialSmall === 2) {return 66;}
+                    if (dialBig === 5 && dialSmall === 3) {return 69;}
+                    if (dialBig === 5 && dialSmall === 4) {return 72;}
+                    if (dialBig === 5 && dialSmall === 5) {return 75;}
+                    if (dialBig === 6 && dialSmall === 0) {return 78;}
+                    if (dialBig === 6 && dialSmall === 1) {return 91;}
+                    if (dialBig === 6 && dialSmall === 2) {return 94;}
+                    if (dialBig === 6 && dialSmall === 3) {return 97;}
+                    if (dialBig === 6 && dialSmall === 4) {return 100;}
+                    if (dialBig === 6 && dialSmall === 5) {return 103;}
+                    if (dialBig === 7 && dialSmall === 0) {return 106;}
+                    if (dialBig === 7 && dialSmall === 1) {return 107;}
+                    if (dialBig === 7 && dialSmall === 2) {return 108;}
+                    if (dialBig === 7 && dialSmall === 3) {return 109;}
+                    if (dialBig === 7 && dialSmall === 4) {return 110;}
+                    if (dialBig === 7 && dialSmall === 5) {return 111;}
+                    if (dialBig === 8 && dialSmall === 0) {return 112;}
+                    if (dialBig === 8 && dialSmall === 1) {return 113;}
+                    if (dialBig === 8 && dialSmall === 2) {return 114;}
+                    if (dialBig === 8 && dialSmall === 3) {return 115;}
+                    if (dialBig === 8 && dialSmall === 4) {return 116;}
+                    if (dialBig === 8 && dialSmall === 5) {return 117;}
+                    if (dialBig === 9 && dialSmall === 0) {return 118;}
                 }
             }
         },
@@ -232,113 +337,6 @@ define([
                     return true;
                 }
             ]
-        },
-        "rules": {
-            "general": function(blueTeam, redTeam) {
-                return blueTeam?'blue':'red';
-            },
-            "bowling": function(pinsDown) {
-                switch (pinsDown) {
-                    case 0: return 0;
-                    case 1: return 7;
-                    case 2: return 14;
-                    case 3: return 21;
-                    case 4: return 28;
-                    case 5: return 35;
-                    case 6: return 60;
-                }
-            },
-            "strength": function(weightAtRedMaker,  weightAboveRedMaker) {
-                return weightAtRedMaker*15 + weightAboveRedMaker*25;
-            },
-            "quilting": function(blueQuilts,orangeQuilts) {
-                return blueQuilts*15 + orangeQuilts*30;
-            },
-            "woodworking": function(chairFixedInBase,chairFixedUnderTable) {
-                return chairFixedInBase*15 + chairFixedUnderTable*25;
-            },
-            "medicine": function(orangeBottleMoved,greenBottleInBase) {
-                return 25*(!orangeBottleMoved && greenBottleInBase);
-            },
-            "animals":function(dogInBase) {
-                return dogInBase * 20;
-            },
-            "stove":function(allBurnersBlack) {
-                return allBurnersBlack * 25;
-            },
-            "gardening":function(plantTouchingWhite) {
-                return plantTouchingWhite * 25;
-            },
-            "videocall":function(flagsUp) {
-                return flagsUp * 20;
-            },
-            "flexibility":function(yellowLoopsInBase) {
-                return yellowLoopsInBase * 20;
-            },
-            "transitions":function(robotTouchingTiltedPlatform, robotTouchingBalancedPlatform) {
-                return robotTouchingTiltedPlatform*45 + robotTouchingBalancedPlatform*65;
-            },
-            "ballGame":function(blueCenter, redCenter, yellowCenter, blueTeam, redTeam, blueOnRack, redOnRack) {
-                return (blueCenter * blueTeam * 60) +
-                    (redCenter * redTeam * 60) +
-                    (yellowCenter * 10) +
-                    (blueOnRack * 10) +
-                    (redOnRack * 10);
-            },
-            "cooperation":function(pointersParallel) {
-                return pointersParallel * 45;
-            },
-            "cardio":function(dialBig, dialSmall) {
-                if (dialBig === 1 && dialSmall === 0) {return -60;}
-                if (dialBig === 1 && dialSmall === 1) {return -55;}
-                if (dialBig === 1 && dialSmall === 2) {return -50;}
-                if (dialBig === 1 && dialSmall === 3) {return -45;}
-                if (dialBig === 1 && dialSmall === 4) {return -40;}
-                if (dialBig === 1 && dialSmall === 5) {return -35;}
-                if (dialBig === 2 && dialSmall === 0) {return -30;}
-                if (dialBig === 2 && dialSmall === 1) {return -25;}
-                if (dialBig === 2 && dialSmall === 2) {return -20;}
-                if (dialBig === 2 && dialSmall === 3) {return -15;}
-                if (dialBig === 2 && dialSmall === 4) {return -10;}
-                if (dialBig === 2 && dialSmall === 5) {return -5;}
-                if (dialBig === 3 && dialSmall === 0) {return 0;}
-                if (dialBig === 3 && dialSmall === 1) {return 5;}
-                if (dialBig === 3 && dialSmall === 2) {return 10;}
-                if (dialBig === 3 && dialSmall === 3) {return 15;}
-                if (dialBig === 3 && dialSmall === 4) {return 20;}
-                if (dialBig === 3 && dialSmall === 5) {return 25;}
-                if (dialBig === 4 && dialSmall === 0) {return 30;}
-                if (dialBig === 4 && dialSmall === 1) {return 35;}
-                if (dialBig === 4 && dialSmall === 2) {return 40;}
-                if (dialBig === 4 && dialSmall === 3) {return 45;}
-                if (dialBig === 4 && dialSmall === 4) {return 50;}
-                if (dialBig === 4 && dialSmall === 5) {return 55;}
-                if (dialBig === 5 && dialSmall === 0) {return 60;}
-                if (dialBig === 5 && dialSmall === 1) {return 63;}
-                if (dialBig === 5 && dialSmall === 2) {return 66;}
-                if (dialBig === 5 && dialSmall === 3) {return 69;}
-                if (dialBig === 5 && dialSmall === 4) {return 72;}
-                if (dialBig === 5 && dialSmall === 5) {return 75;}
-                if (dialBig === 6 && dialSmall === 0) {return 78;}
-                if (dialBig === 6 && dialSmall === 1) {return 91;}
-                if (dialBig === 6 && dialSmall === 2) {return 94;}
-                if (dialBig === 6 && dialSmall === 3) {return 97;}
-                if (dialBig === 6 && dialSmall === 4) {return 100;}
-                if (dialBig === 6 && dialSmall === 5) {return 103;}
-                if (dialBig === 7 && dialSmall === 0) {return 106;}
-                if (dialBig === 7 && dialSmall === 1) {return 107;}
-                if (dialBig === 7 && dialSmall === 2) {return 108;}
-                if (dialBig === 7 && dialSmall === 3) {return 109;}
-                if (dialBig === 7 && dialSmall === 4) {return 110;}
-                if (dialBig === 7 && dialSmall === 5) {return 111;}
-                if (dialBig === 8 && dialSmall === 0) {return 112;}
-                if (dialBig === 8 && dialSmall === 1) {return 113;}
-                if (dialBig === 8 && dialSmall === 2) {return 114;}
-                if (dialBig === 8 && dialSmall === 3) {return 115;}
-                if (dialBig === 8 && dialSmall === 4) {return 116;}
-                if (dialBig === 8 && dialSmall === 5) {return 117;}
-                if (dialBig === 9 && dialSmall === 0) {return 118;}
-            }
         }
     };
 
@@ -352,9 +350,9 @@ define([
                 $scope.missionIndex = field.missions;
                 $scope.expectations = field.expectations;
                 $scope.objectiveIndex = indexObjectives(field.missions);
-                console.log($scope.objectiveIndex);
+                // console.log($scope.objectiveIndex);
                 $scope.missions = transpose(field.missions);
-                angular.forEach(field.rules,process);
+                angular.forEach($scope.missions,process);
                 // console.log($scope.rules);
                 // console.log(test);
             // }).fail(function() {
@@ -424,10 +422,10 @@ define([
                 };
             }
 
-            function process(rule,key) {
-                var deps = getDependencies(rule);
-                var getError = getErrorFunc(key);
-                var mission = getMission(key);
+            function process(mission) {
+                var key = mission._key;
+                var deps = getDependencies(mission.score);
+                var getError = getErrorFunc(mission._key);
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
@@ -440,7 +438,7 @@ define([
 
                     //calculate the result for the mission
                     vars = getObjectives(deps);
-                    mission.result = rule.apply(null,vars);
+                    mission.result = mission.score.apply(null,vars);
                     console.log('deps for',key,'changed',newValue,mission.result);
                 });
 
