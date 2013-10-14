@@ -20,6 +20,11 @@ define([
                         "type": "Boolean"
                     }
                 },
+                "expectations":[
+                    function(redTeam,  blueTeam) {
+                        return (redTeam + blueTeam) === 1;
+                    }
+                ],
                 "score":function(blueTeam, redTeam) {
                     return blueTeam?'blue':'red';
                 }
@@ -57,6 +62,11 @@ define([
                         "type":"Boolean"
                     }
                 },
+                "expectations":[
+                    function(weightAtRedMaker,  weightAboveRedMaker) {
+                        return !(weightAtRedMaker && weightAboveRedMaker);
+                    }
+                ],
                 "score":function(weightAtRedMaker,  weightAboveRedMaker) {
                     return weightAtRedMaker*15 + weightAboveRedMaker*25;
                 }
@@ -91,6 +101,11 @@ define([
                         "type":"Boolean"
                     }
                 },
+                "expectations":[
+                    function(chairFixedInBase,  chairFixedUnderTable) {
+                        return !(chairFixedInBase && chairFixedUnderTable);
+                    }
+                ],
                 "score":function(chairFixedInBase,chairFixedUnderTable) {
                     return chairFixedInBase*15 + chairFixedUnderTable*25;
                 }
@@ -185,6 +200,11 @@ define([
                         "type":"Boolean"
                     }
                 },
+                "expectations": [
+                    function(robotTouchingTiltedPlatform,  robotTouchingBalancedPlatform) {
+                        return !(robotTouchingTiltedPlatform && robotTouchingBalancedPlatform);
+                    }
+                ],
                 "score":function(robotTouchingTiltedPlatform, robotTouchingBalancedPlatform) {
                     return robotTouchingTiltedPlatform*45 + robotTouchingBalancedPlatform*65;
                 }
@@ -215,6 +235,11 @@ define([
                         "max":3
                     }
                 },
+                "expectations": [
+                    function(blueCenter, redCenter, yellowCenter) {
+                        return (blueCenter + redCenter + yellowCenter <= 1);
+                    }
+                ],
                 "score":function(blueCenter, redCenter, yellowCenter, blueTeam, redTeam, blueOnRack, redOnRack) {
                     return (blueCenter * blueTeam * 60) +
                         (redCenter * redTeam * 60) +
@@ -250,6 +275,14 @@ define([
                         "max":5
                     }
                 },
+                "expectations": [
+                    function(dialBig, dialSmall) {
+                        if (dialBig===9) {
+                            return !dialSmall;
+                        }
+                        return true;
+                    }
+                ],
                 "score":function(dialBig, dialSmall) {
                     if (dialBig === 1 && dialSmall === 0) {return -60;}
                     if (dialBig === 1 && dialSmall === 1) {return -55;}
@@ -302,41 +335,6 @@ define([
                     if (dialBig === 9 && dialSmall === 0) {return 118;}
                 }
             }
-        },
-        "expectations": {
-            "general": [
-                function(redTeam,  blueTeam) {
-                    return (redTeam + blueTeam) === 1;
-                }
-            ],
-            "strength": [
-                function(weightAtRedMaker,  weightAboveRedMaker) {
-                    return !(weightAtRedMaker && weightAboveRedMaker);
-                }
-            ],
-            "woodworking": [
-                function(chairFixedInBase,  chairFixedUnderTable) {
-                    return !(chairFixedInBase && chairFixedUnderTable);
-                }
-            ],
-            "transitions": [
-                function(robotTouchingTiltedPlatform,  robotTouchingBalancedPlatform) {
-                    return !(robotTouchingTiltedPlatform && robotTouchingBalancedPlatform);
-                }
-            ],
-            "ballGame": [
-                function(blueCenter, redCenter, yellowCenter) {
-                    return (blueCenter + redCenter + yellowCenter <= 1);
-                }
-            ],
-            "cardio": [
-                function(dialBig, dialSmall) {
-                    if (dialBig===9) {
-                        return !dialSmall;
-                    }
-                    return true;
-                }
-            ]
         }
     };
 
@@ -348,10 +346,9 @@ define([
             // fs.read('field.js').then(function(defs) {
                 // var field = eval('('+defs+')');
                 $scope.missionIndex = field.missions;
-                $scope.expectations = field.expectations;
+                $scope.missions = transpose(field.missions);
                 $scope.objectiveIndex = indexObjectives(field.missions);
                 // console.log($scope.objectiveIndex);
-                $scope.missions = transpose(field.missions);
                 angular.forEach($scope.missions,process);
                 // console.log($scope.rules);
                 // console.log(test);
@@ -407,8 +404,8 @@ define([
                 return objs;
             }
 
-            function getErrorFunc(key) {
-                var expectations = ($scope.expectations[key]||[function(){return true;}]).map(function(e) {
+            function getErrorFunc(mission) {
+                var expectations = (mission.expectations||[function(){return true;}]).map(function(e) {
                     return {
                         deps: getDependencies(e),
                         fn: e
@@ -425,7 +422,7 @@ define([
             function process(mission) {
                 var key = mission._key;
                 var deps = getDependencies(mission.score);
-                var getError = getErrorFunc(mission._key);
+                var getError = getErrorFunc(mission);
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
