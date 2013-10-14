@@ -41,7 +41,7 @@
                 <td></td>
                 <td>{{objective.title}}</td>
                 <td>
-                    <span ng-switch="objective.type.name">
+                    <span ng-switch="objective.type">
                         <input ng-model="objective.value" type="checkbox" ng-switch-when="Boolean">
                         <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number" ng-switch-when="Number">
                     </span>

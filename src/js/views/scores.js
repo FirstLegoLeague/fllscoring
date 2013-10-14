@@ -13,11 +13,11 @@ define([
                 "objectives": {
                     "blueTeam": {
                         "title":"blue",
-                        "type": Boolean
+                        "type": "Boolean"
                     },
                     "redTeam": {
                         "title":"red",
-                        "type": Boolean
+                        "type": "Boolean"
                     }
                 }
             },
@@ -27,7 +27,7 @@ define([
                     "pinsDown": {
                         "title":"Number of pins down",
                         "max":6,
-                        "type":Number
+                        "type":"Number"
                     }
                 }
             },
@@ -36,11 +36,11 @@ define([
                 "objectives": {
                     "weightAtRedMaker": {
                         "title":"Weight height at the red maker",
-                        "type":Boolean
+                        "type":"Boolean"
                     },
                     "weightAboveRedMaker": {
                         "title":"Weight height above red maker",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -50,12 +50,12 @@ define([
                     "blueQuilts":{
                         "title":"Blue quilt square touching their black target regions",
                         "max":2,
-                        "type":Number
+                        "type":"Number"
                     },
                     "orangeQuilts":{
                         "title":"Orange quilt square touching their black target regions",
                         "max":2,
-                        "type":Number
+                        "type":"Number"
                     }
                 }
             },
@@ -64,11 +64,11 @@ define([
                 "objectives": {
                     "chairFixedInBase":{
                         "title":"Chair fixed in base",
-                        "type":Boolean
+                        "type":"Boolean"
                     },
                     "chairFixedUnderTable":{
                         "title":"Chair fixed and any part under table",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -77,11 +77,11 @@ define([
                 "objectives": {
                     "orangeBottleMoved":{
                         "title":"Orange bottle moved or outside lines",
-                        "type":Boolean
+                        "type":"Boolean"
                     },
                     "greenBottleInBase":{
                         "title":"Green bottle in base",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -90,7 +90,7 @@ define([
                 "objectives": {
                     "dogInBase":{
                         "title":"Dog is in base",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -99,7 +99,7 @@ define([
                 "objectives":{
                     "allBurnersBlack":{
                         "title":"All 4 burners black",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -108,7 +108,7 @@ define([
                 "objectives":{
                     "plantTouchingWhite":{
                         "title":"Plant's base touching a white target area",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -117,7 +117,7 @@ define([
                 "objectives":{
                     "flagsUp":{
                         "title":"Flags all the way up",
-                        "type":Number,
+                        "type":"Number",
                         "max":2
                     }
                 }
@@ -127,7 +127,7 @@ define([
                 "objectives":{
                     "yellowLoopsInBase":{
                         "title":"Yellow loops in Base",
-                        "type":Number,
+                        "type":"Number",
                         "max":2
                     }
                 }
@@ -137,11 +137,11 @@ define([
                 "objectives":{
                     "robotTouchingTiltedPlatform":{
                         "title":"Robot touching tilted center platform only",
-                        "type":Boolean
+                        "type":"Boolean"
                     },
                     "robotTouchingBalancedPlatform":{
                         "title":"Robot touching balanced center platform only",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -150,24 +150,24 @@ define([
                 "objectives":{
                     "blueCenter":{
                         "title":"Blue ball in center position",
-                        "type":Boolean
+                        "type":"Boolean"
                     },
                     "redCenter":{
                         "title":"Red ball in center position",
-                        "type":Boolean
+                        "type":"Boolean"
                     },
                     "yellowCenter":{
                         "title":"Yellow ball in center position",
-                        "type":Boolean
+                        "type":"Boolean"
                     },
                     "blueOnRack":{
                         "title":"Blue balls on rack",
-                        "type":Number,
+                        "type":"Number",
                         "max":3
                     },
                     "redOnRack":{
                         "title":"Red balls on rack",
-                        "type":Number,
+                        "type":"Number",
                         "max":3
                     }
                 }
@@ -177,7 +177,7 @@ define([
                 "objectives":{
                     "pointersParallel":{
                         "title":"Pointers parallel",
-                        "type":Boolean
+                        "type":"Boolean"
                     }
                 }
             },
@@ -186,13 +186,13 @@ define([
                 "objectives":{
                     "dialBig":{
                         "title":"Big dial",
-                        "type":Number,
+                        "type":"Number",
                         "min":1,
                         "max":9
                     },
                     "dialSmall":{
                         "title":"Small dial",
-                        "type":Number,
+                        "type":"Number",
                         "max":5
                     }
                 }
