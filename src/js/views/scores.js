@@ -11,22 +11,13 @@ define([
             "general":{
                 "title":"Team",
                 "objectives": {
-                    "blueTeam": {
-                        "title":"blue",
-                        "type": "Boolean"
+                    "teamColor": {
+                        "title": ["Red team","Blue team"],
+                        "type": "Enum"
                     },
-                    "redTeam": {
-                        "title":"red",
-                        "type": "Boolean"
-                    }
                 },
-                "expectations":[
-                    function(redTeam,  blueTeam) {
-                        return (redTeam + blueTeam) === 1;
-                    }
-                ],
-                "score":function(blueTeam, redTeam) {
-                    return blueTeam?'blue':'red';
+                "score":function(teamColor) {
+                    return ["Red","Blue"][teamColor];
                 }
             },
             "bowling":{
@@ -39,36 +30,19 @@ define([
                     }
                 },
                 "score":function(pinsDown) {
-                    switch (pinsDown) {
-                        case 0: return 0;
-                        case 1: return 7;
-                        case 2: return 14;
-                        case 3: return 21;
-                        case 4: return 28;
-                        case 5: return 35;
-                        case 6: return 60;
-                    }
+                    return [0,7,14,21,28,35,60][pinsDown];
                 }
             },
             "strength":{
                 "title":"Strength Exercise",
                 "objectives": {
-                    "weightAtRedMaker": {
-                        "title":"Weight height at the red maker",
-                        "type":"Boolean"
+                    "weightPosition": {
+                        "title": ["Weight height at the red maker","Weight height above red maker","Weight elsewhere"],
+                        "type": "Enum"
                     },
-                    "weightAboveRedMaker": {
-                        "title":"Weight height above red maker",
-                        "type":"Boolean"
-                    }
                 },
-                "expectations":[
-                    function(weightAtRedMaker,  weightAboveRedMaker) {
-                        return !(weightAtRedMaker && weightAboveRedMaker);
-                    }
-                ],
-                "score":function(weightAtRedMaker,  weightAboveRedMaker) {
-                    return weightAtRedMaker*15 + weightAboveRedMaker*25;
+                "score":function(weightPosition) {
+                    return [15,25,0][weightPosition];
                 }
             },
             "quilting":{
@@ -92,22 +66,13 @@ define([
             "woodworking":{
                 "title":"Wood Working",
                 "objectives": {
-                    "chairFixedInBase":{
-                        "title":"Chair fixed in base",
-                        "type":"Boolean"
+                    "chairPosition": {
+                        "title": ["Chair fixed in base","Chair fixed and any part under table","Chair elsewhere"],
+                        "type": "Enum"
                     },
-                    "chairFixedUnderTable":{
-                        "title":"Chair fixed and any part under table",
-                        "type":"Boolean"
-                    }
                 },
-                "expectations":[
-                    function(chairFixedInBase,  chairFixedUnderTable) {
-                        return !(chairFixedInBase && chairFixedUnderTable);
-                    }
-                ],
-                "score":function(chairFixedInBase,chairFixedUnderTable) {
-                    return chairFixedInBase*15 + chairFixedUnderTable*25;
+                "score":function(chairPosition) {
+                    return [15,25,0][chairPosition];
                 }
             },
             "medicine":{
@@ -191,38 +156,21 @@ define([
             "transitions":{
                 "title":"Transitions",
                 "objectives":{
-                    "robotTouchingTiltedPlatform":{
-                        "title":"Robot touching tilted center platform only",
-                        "type":"Boolean"
+                    "robotPosition": {
+                        "title": ["Robot touching tilted center platform only","Robot touching balanced center platform only","Robot elsewhere"],
+                        "type": "Enum"
                     },
-                    "robotTouchingBalancedPlatform":{
-                        "title":"Robot touching balanced center platform only",
-                        "type":"Boolean"
-                    }
                 },
-                "expectations": [
-                    function(robotTouchingTiltedPlatform,  robotTouchingBalancedPlatform) {
-                        return !(robotTouchingTiltedPlatform && robotTouchingBalancedPlatform);
-                    }
-                ],
-                "score":function(robotTouchingTiltedPlatform, robotTouchingBalancedPlatform) {
-                    return robotTouchingTiltedPlatform*45 + robotTouchingBalancedPlatform*65;
+                "score":function(robotPosition) {
+                    return [45,65,0][robotPosition];
                 }
             },
             "ballGame":{
                 "title":"Ball game",
                 "objectives":{
-                    "blueCenter":{
-                        "title":"Blue ball in center position",
-                        "type":"Boolean"
-                    },
-                    "redCenter":{
-                        "title":"Red ball in center position",
-                        "type":"Boolean"
-                    },
-                    "yellowCenter":{
-                        "title":"Yellow ball in center position",
-                        "type":"Boolean"
+                    "centerColor": {
+                        "title": ["Red ball in center position","Blue ball in center position","Yellow ball in center position"],
+                        "type": "Enum"
                     },
                     "blueOnRack":{
                         "title":"Blue balls on rack",
@@ -235,14 +183,9 @@ define([
                         "max":3
                     }
                 },
-                "expectations": [
-                    function(blueCenter, redCenter, yellowCenter) {
-                        return (blueCenter + redCenter + yellowCenter <= 1);
-                    }
-                ],
-                "score":function(blueCenter, redCenter, yellowCenter, blueTeam, redTeam, blueOnRack, redOnRack) {
-                    return (blueCenter * blueTeam * 60) +
-                        (redCenter * redTeam * 60) +
+                "score":function(centerColor, teamColor, blueOnRack, redOnRack) {
+                    var yellowCenter = centerColor===2;
+                    return (centerColor === teamColor) * 60 +
                         (yellowCenter * 10) +
                         (blueOnRack * 10) +
                         (redOnRack * 10);
@@ -348,7 +291,7 @@ define([
                 $scope.missionIndex = field.missions;
                 $scope.missions = transpose(field.missions);
                 $scope.objectiveIndex = indexObjectives(field.missions);
-                // console.log($scope.objectiveIndex);
+                console.log($scope.objectiveIndex);
                 angular.forEach($scope.missions,process);
                 // console.log($scope.rules);
                 // console.log(test);
