@@ -45,20 +45,9 @@ Documentation
 TODO's
 --------
 
-1. <del>think about a templating framework (prefer angular atm)</del>
-1. sketch up interfaces
-1. create a visual language (styling rules) or use e.g. bootstrap.
-1. create artwork for phonegap (see `src/res/`)
-1. <del>create uniform filesystem api module</del>
-1. come up with quantitative and qualitative scoresheet formats (as a starter)
-1. come up with a team list format (should be a simple list)
-1. create qualitative score sheet
-1. create quantitative scoresheet
-1. create ranking screen
-1. create communication module (define what it should do in the first place)
-1. create mission definition screen (desktop only)
-1. create team administration screen (desktop only)
-1. implement [internationalization](docs/i18n/readme.md)
+See [case issues](https://github.com/FirstLegoLeague/fllscoring/issues?direction=desc&labels=case&page=1&sort=updated&state=open)
+
+Help is welcome. Please comment on the case if you plan to start working on one. 
 
 Authors
 --------
