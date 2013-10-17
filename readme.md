@@ -40,6 +40,7 @@ Documentation
 - [original proposal](docs/proposal/Scoring System project proposal-v2.pdf)
 - [architecture documents](docs/architecture/readme.md)
 - [templating](docs/templating/readme.md)
+- [interface](docs/user_interface/readme.md)
 - [internationalization](docs/i18n/readme.md)
 
 TODO's
@@ -47,7 +48,7 @@ TODO's
 
 See [case issues](https://github.com/FirstLegoLeague/fllscoring/issues?direction=desc&labels=case&page=1&sort=updated&state=open)
 
-Help is welcome. Please comment on the case if you plan to start working on one. 
+Help is welcome. Please comment on the case if you plan to start working on one.
 
 Authors
 --------
