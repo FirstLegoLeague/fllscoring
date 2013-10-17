@@ -289,16 +289,17 @@ define([
 
             $fs.read('settings.json').then(function(res) {
                 $scope.settings = res;
-
                 load();
             },function() {
                 log('unable to load settings');
+                $scope.settings = {};
+                load();
             });
 
             function load() {
                 //use non-angular fs to load plain javascript instead of json
                     // var field = field2;
-                fs.read('field.js').then(function(defs) {
+                fs.read($scope.settings.challenge).then(function(defs) {
                     init(eval('('+defs+')'));
                 }).fail(function() {
                     log('error getting field');
