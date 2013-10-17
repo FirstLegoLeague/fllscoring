@@ -32,6 +32,18 @@
         }
     </style>
     <h1>Missions</h1>
+    {{settings}} {{team}}
+    <p>
+        <button class="btn" ng-click="showTeams()">Select team</button>
+    </p>
+    <div ng-show="teamsListVisible">
+        <table>
+            <tr ng-repeat="team in teams" ng-click="selectTeam(team)">
+                <td>{{team.number}}</td>
+                <td>{{team.name}}</td>
+            </tr>
+        </table>
+    </div>
     <table ng-style="{borderLeftColor:teamColor()}">
         <colgroup>
             <col width="20">

@@ -1,6 +1,7 @@
 define([
     'services/log',
     'services/fs',
+    'services/ng-fs',
     'angular'
 ], function(log, fs) {
     var moduleName = 'scores';
@@ -282,23 +283,36 @@ define([
     };
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope',
-        function($scope) {
+        '$scope','$fs',
+        function($scope,$fs) {
             log('init scores ctrl');
 
-            // fs.read('field.js').then(function(defs) {
-                // var field = eval('('+defs+')');
+            $fs.read('settings.json').then(function(res) {
+                $scope.settings = res;
+
+                load();
+            },function() {
+                log('unable to load settings');
+            });
+
+            function load() {
+                //use non-angular fs to load plain javascript instead of json
+                    // var field = field2;
+                fs.read('field.js').then(function(defs) {
+                    init(eval('('+defs+')'));
+                }).fail(function() {
+                    log('error getting field');
+                    init(field);
+                }).then(function() {
+                    $scope.$apply();
+                }).done();
+            }
+            function init(field) {
                 $scope.missionIndex = field.missions;
                 $scope.missions = transpose(field.missions);
                 $scope.objectiveIndex = indexObjectives(field.missions);
                 angular.forEach($scope.missions,process);
-                // console.log($scope.rules);
-                // console.log(test);
-            // }).fail(function() {
-            //     log('error getting field');
-            // }).then(function() {
-            //     $scope.$apply();
-            // }).done();
+            }
 
             //team color
             $scope.teamColor = function() {
@@ -384,6 +398,21 @@ define([
                 });
 
             }
+            $scope.showTeams = function() {
+                if (!$scope.teams) {
+                    $fs.read('teams.json').then(function(teams) {
+                        $scope.teams = teams;
+                        $scope.teamsListVisible = true;
+                    });
+                } else {
+                    $scope.teamsListVisible = true;
+                }
+            };
+
+            $scope.selectTeam = function(team) {
+                $scope.team = team;
+                $scope.teamsListVisible = false;
+            };
         }
     ]);
 });
