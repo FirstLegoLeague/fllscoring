@@ -2,6 +2,7 @@ define([
     'services/log',
     'services/fs',
     'services/ng-fs',
+    'directives/sigpad',
     'angular'
 ], function(log, fs) {
     var moduleName = 'scores';
@@ -442,6 +443,7 @@ define([
                 var data = angular.copy($scope.field);
                 data.team = $scope.team;
                 data.table = $scope.settings.table;
+                data.signature = $scope.signature;
 
                 $fs.read('results.json').then(function(results) {
                     return results;

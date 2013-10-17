@@ -30,6 +30,9 @@
         tbody.error td {
             color: crimson;
         }
+        [sigpad] canvas {
+            border: 1px solid silver;
+        }
     </style>
     <h1>Missions</h1>
     {{settings}} {{team}}
@@ -37,6 +40,7 @@
         <button class="btn">Select round</button>
         <button class="btn" ng-click="showTeams()">Select team</button>
     </p>
+
     <div ng-show="teamsListVisible">
         <table>
             <tr ng-repeat="team in teams" ng-click="selectTeam(team)">
@@ -82,6 +86,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <div sigpad ng-model="signature"></div>
+        <button class="btn" ng-click="signature=null">clear</button>
+
         <p>
             <button class="btn" ng-click="save()">Save</button>
             <button class="btn">Discard</button>

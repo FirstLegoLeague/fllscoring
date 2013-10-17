@@ -5,10 +5,11 @@ define([
     'views/scores',
     'views/ranking',
     'services/ng-services',
+    'directives/ng-directives',
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular'
-],function(log,settings,teams,scores,ranking,services,fsTest,dbTest) {
+],function(log,settings,teams,scores,ranking,services,directives,fsTest,dbTest) {
 
     log('device ready');
 
@@ -36,6 +37,7 @@ define([
         teams.name,
         scores.name,
         ranking.name,
-        services.name
+        services.name,
+        directives.name
     ]);
 });

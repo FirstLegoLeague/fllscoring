@@ -21,6 +21,7 @@
     "angular": "~1.0.8",
     "bootstrap-css": "2.3.2",
     "font-awesome": "~3.2.1",
-    "idbwrapper": "~1.3.0"
+    "idbwrapper": "~1.3.0",
+    "signature-pad": "https://github.com/thomasjbradley/signature-pad/archive/master.zip"
   }
 }
