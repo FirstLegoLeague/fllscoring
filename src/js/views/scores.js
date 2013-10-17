@@ -308,7 +308,9 @@ define([
                     $scope.$apply();
                 }).done();
             }
+
             function init(field) {
+                $scope.field = field;
                 $scope.missionIndex = field.missions;
                 $scope.missions = transpose(field.missions);
                 $scope.objectiveIndex = indexObjectives(field.missions);
@@ -316,9 +318,9 @@ define([
             }
 
             //team color
-            $scope.teamColor = function() {
-                return $scope.missionIndex['general'].result;
-            };
+            // $scope.teamColor = function() {
+            //     return $scope.missionIndex['general'].result;
+            // };
 
 
             function getDependencies(fn) {
@@ -395,10 +397,17 @@ define([
                     //calculate the result for the mission
                     vars = getObjectives(deps);
                     mission.result = mission.score.apply(null,vars);
-                    console.log('deps for',key,'changed',newValue,mission.result);
                 });
 
             }
+
+            $scope.score = function() {
+                if (!$scope.missions) {return;}
+                return $scope.missions.reduce(function(prev,mission) {
+                    return prev+(parseInt(mission.result,10)||0);
+                },0);
+            };
+
             $scope.showTeams = function() {
                 if (!$scope.teams) {
                     $fs.read('teams.json').then(function(teams) {
@@ -413,6 +422,32 @@ define([
             $scope.selectTeam = function(team) {
                 $scope.team = team;
                 $scope.teamsListVisible = false;
+            };
+
+            //saves mission scoresheet
+            //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
+            $scope.save = function() {
+                if (!$scope.team) {
+                    alert('no team selected, do so first');
+                    return;
+                }
+                //todo:
+                var fn = [
+                    'result',
+                    $scope.settings.table,
+                    $scope.team.number,
+                    +(new Date())
+                ].join('_')+'.json';
+
+                var data = angular.copy($scope.field);
+                data.team = $scope.team;
+                data.table = $scope.settings.table;
+
+                $fs.write(fn,data).then(function() {
+                    log('result saved');
+                },function() {
+                    log('unable to write result');
+                });
             };
         }
     ]);

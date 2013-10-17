@@ -44,6 +44,7 @@
             </tr>
         </table>
     </div>
+    <p>Total score: {{score()}}</p>
     <table ng-style="{borderLeftColor:teamColor()}">
         <colgroup>
             <col width="20">
@@ -79,4 +80,8 @@
             </tr>
         </tbody>
     </table>
+    <p>
+        <button class="btn" ng-click="save()">Save</button>
+        <button class="btn">Discard</button>
+    </p>
 </div>
