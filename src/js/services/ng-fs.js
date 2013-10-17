@@ -30,7 +30,7 @@ define([
                 });
             },
             write: function(file,data) {
-                return wrap('write')(file,JSON.stringify(data));
+                return wrap('write')(file,angular.toJson(data));
             },
             remove: wrap('remove')
         };
