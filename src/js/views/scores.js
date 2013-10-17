@@ -443,7 +443,20 @@ define([
                 data.team = $scope.team;
                 data.table = $scope.settings.table;
 
-                $fs.write(fn,data).then(function() {
+                $fs.read('results.json').then(function(results) {
+                    return results;
+                },function() {
+                    return [];
+                }).then(function(results) {
+                    return $fs.write(fn,data).then(function() {
+                        results.push({
+                            file: fn,
+                            team: $scope.team,
+                            score: $scope.score()
+                        });
+                        return $fs.write('results.json',results);
+                    });
+                }).then(function() {
                     log('result saved');
                 },function() {
                     log('unable to write result');
