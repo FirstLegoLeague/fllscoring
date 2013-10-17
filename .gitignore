@@ -4,3 +4,4 @@ webkitbuilds/
 temp/
 pgbuildconfig.json
 data/
+*.sublime*
