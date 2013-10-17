@@ -3,12 +3,13 @@ define([
     'angular'
 ],function(log) {
     var moduleName = 'settings';
-    angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
+    return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
         '$scope',
         function($scope) {
             log('init settings ctrl');
             $scope.log = log.get();
+
+
         }
     ]);
-    return moduleName;
 });

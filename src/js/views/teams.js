@@ -1,8 +1,8 @@
 define([
     'services/log',
-    'services/fs',
+    'services/ng-fs',
     'angular'
-], function(log, fs) {
+], function(log) {
     var moduleName = 'teams';
 
     var dummyTeams = [
@@ -309,9 +309,11 @@ define([
         }
     ];
 
-    angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope',
-        function($scope) {
+    return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
+        '$scope','$fs',
+        function($scope,$fs) {
+            console.log($fs);
+
             log('init teams ctrl');
             $scope.log = log.get();
             $scope.teams = [];
@@ -319,15 +321,13 @@ define([
             $scope.editMode = false;
             $scope.teamNumberPattern = /\d+/;
 
-            fs.read('teams.json').then(function(teams) {
+            $fs.read('teams.json').then(function(teams) {
                 $scope.status = '';
-                $scope.teams = JSON.parse(teams);
-            }).fail(function() {
+                $scope.teams = teams;
+            },function() {
                 log('error getting teams');
                 $scope.status = 'No stored teams found, you may add them by hand';
                 $scope.editMode = true;
-            }).then(function() {
-                $scope.$apply();
             });
 
             $scope.load = function() {
@@ -349,16 +349,14 @@ define([
 
             $scope.saveTeams = function() {
                 $scope.saving = true;
-                return fs.write('teams.json', JSON.stringify($scope.teams)).then(function() {
+                return $fs.write('teams.json', $scope.teams).then(function() {
                     log('saved teams');
-                }).fail(function() {
+                },function() {
                     log('error writing teams');
                 }).then(function() {
                     $scope.saving = false;
-                    $scope.$apply();
                 });
             };
         }
     ]);
-    return moduleName;
 });

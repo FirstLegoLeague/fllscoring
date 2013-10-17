@@ -281,7 +281,7 @@ define([
         }
     };
 
-    angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
+    return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
         '$scope',
         function($scope) {
             log('init scores ctrl');
@@ -386,5 +386,4 @@ define([
             }
         }
     ]);
-    return moduleName;
 });

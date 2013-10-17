@@ -3,10 +3,11 @@ define([
     'views/settings',
     'views/teams',
     'views/scores',
+    'services/ng-services',
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular'
-],function(log,settings,teams,scores,fsTest,dbTest) {
+],function(log,settings,teams,scores,services,fsTest,dbTest) {
 
     log('device ready');
 
@@ -28,5 +29,11 @@ define([
             };
         }
     ]);
-    angular.bootstrap(document.body,['main',settings,teams,scores]);
+    angular.bootstrap(document.body,[
+        'main',
+        settings.name,
+        teams.name,
+        scores.name,
+        services.name
+    ]);
 });
