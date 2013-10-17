@@ -45,44 +45,46 @@
             </tr>
         </table>
     </div>
-    <p>Total score: {{score()}}</p>
-    <table ng-style="{borderLeftColor:teamColor()}">
-        <colgroup>
-            <col width="20">
-        </colgroup>
-        <tbody ng-repeat="mission in missions" ng-class="{error:mission.error}">
-            <tr>
-                <th colspan="2">{{mission.title}}</th>
-                <th>{{mission.result}}</th>
-            </tr>
-            <tr ng-repeat="objective in mission.objectiveList">
-                <td></td>
-                <td>
-                    <div ng-switch="objective.type">
-                        <p ng-switch-when="Boolean">
-                            <label for="">{{objective.title}}</label>
-                            <input ng-model="objective.value" type="checkbox">
-                        </p>
-                        <p ng-switch-when="Number">
-                            <label for="">{{objective.title}}</label>
-                            <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number">
-                        </p>
-                        <div ng-switch-when="Enum">
-                            <p ng-repeat="line in objective.title">
-                                <label for="">{{line}}</label>
-                                <input ng-model="objective.value" name="{{objective._key}}" type="radio" value="{{$index}}">
+    <div ng-show="team">
+        <p>Total score: {{score()}}</p>
+        <table ng-style="{borderLeftColor:teamColor()}">
+            <colgroup>
+                <col width="20">
+            </colgroup>
+            <tbody ng-repeat="mission in missions" ng-class="{error:mission.error}">
+                <tr>
+                    <th colspan="2">{{mission.title}}</th>
+                    <th>{{mission.result}}</th>
+                </tr>
+                <tr ng-repeat="objective in mission.objectiveList">
+                    <td></td>
+                    <td>
+                        <div ng-switch="objective.type">
+                            <p ng-switch-when="Boolean">
+                                <label for="">{{objective.title}}</label>
+                                <input ng-model="objective.value" type="checkbox">
                             </p>
+                            <p ng-switch-when="Number">
+                                <label for="">{{objective.title}}</label>
+                                <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number">
+                            </p>
+                            <div ng-switch-when="Enum">
+                                <p ng-repeat="line in objective.title">
+                                    <label for="">{{line}}</label>
+                                    <input ng-model="objective.value" name="{{objective._key}}" type="radio" value="{{$index}}">
+                                </p>
 
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td></td>
-                <!-- <td>{{result(feat.rule)</td> -->
-            </tr>
-        </tbody>
-    </table>
-    <p>
-        <button class="btn" ng-click="save()">Save</button>
-        <button class="btn">Discard</button>
-    </p>
+                    </td>
+                    <td></td>
+                    <!-- <td>{{result(feat.rule)</td> -->
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            <button class="btn" ng-click="save()">Save</button>
+            <button class="btn">Discard</button>
+        </p>
+    </div>
 </div>
