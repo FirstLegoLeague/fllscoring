@@ -1,39 +1,4 @@
 <div ng-controller="scoresCtrl">
-    <style>
-        body {
-            padding-bottom: 60px;
-        }
-        table {
-            border-collapse: collapse;
-            border: 1px solid whitesmoke;
-            border-left: 5px solid silver;
-        }
-        td {
-            border: 1px solid whitesmoke;
-            border-width: 1px 0;
-            padding: 4px 10px;
-        }
-        td label {
-            display: inline-block;
-            width: 300px;
-        }
-        th {
-            color: #666;
-            font-size: 16px;
-            font-weight: normal;
-            text-align: left;
-            padding: 4px 10px;
-        }
-        input {
-            width: 30px;
-        }
-        tbody.error td {
-            color: crimson;
-        }
-        [sigpad] canvas {
-            border: 1px solid silver;
-        }
-    </style>
     <h1>Missions</h1>
     {{settings}} {{team}}
     <p>
@@ -42,7 +7,7 @@
     </p>
 
     <div ng-show="teamsListVisible">
-        <table>
+        <table class="table table-bordered table-striped">
             <tr ng-repeat="team in teams" ng-click="selectTeam(team)">
                 <td>{{team.number}}</td>
                 <td>{{team.name}}</td>
@@ -51,44 +16,42 @@
     </div>
     <div ng-show="team">
         <p>Total score: {{score()}}</p>
-        <table ng-style="{borderLeftColor:teamColor()}">
-            <colgroup>
-                <col width="20">
-            </colgroup>
-            <tbody ng-repeat="mission in missions" ng-class="{error:mission.error}">
-                <tr>
-                    <th colspan="2">{{mission.title}}</th>
-                    <th>{{mission.result}}</th>
-                </tr>
-                <tr ng-repeat="objective in mission.objectiveList">
-                    <td></td>
-                    <td>
-                        <div ng-switch="objective.type">
-                            <p ng-switch-when="Boolean">
-                                <label for="">{{objective.title}}</label>
-                                <input ng-model="objective.value" type="checkbox">
-                            </p>
-                            <p ng-switch-when="Number">
-                                <label for="">{{objective.title}}</label>
-                                <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number">
-                            </p>
-                            <div ng-switch-when="Enum">
-                                <p ng-repeat="line in objective.title">
-                                    <label for="">{{line}}</label>
-                                    <input ng-model="objective.value" name="{{objective._key}}" type="radio" value="{{$index}}">
-                                </p>
+        <div class="missions" ng-style="{borderLeftColor:teamColor()}">
+            <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
+                <h2>
+                    {{mission.title}}
+                    <span class="result">{{mission.result}}</span>
+                </h2>
+                <div class="objective" ng-repeat="objective in mission.objectiveList" ng-switch="objective.type">
+                    <div>
+                        <label class="btn" ng-switch-when="Boolean">
+                            {{objective.title}}
+                            <input ng-model="objective.value" type="checkbox">
+                        </label>
+                        <label class="btn" ng-switch-when="Number">
+                            {{objective.title}}
+                            <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number">
+                        </label>
+                        <div ng-switch-when="Enum">
+                            <label class="btn" ng-repeat="line in objective.title">
+                                {{line}}
+                                <input ng-model="objective.value" name="{{objective._key}}" type="radio" value="{{$index}}">
+                            </label>
 
-                            </div>
                         </div>
-                    </td>
-                    <td></td>
-                    <!-- <td>{{result(feat.rule)</td> -->
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </section>
 
-        <div sigpad ng-model="signature"></div>
-        <button class="btn" ng-click="signature=null">clear</button>
+            <section class="panel">
+                <h2>
+                    Signature
+                    <button class="btn pull-right" ng-click="signature=null">clear</button>
+                </h2>
+                <div sigpad ng-model="signature"></div>
+            </section>
+        </div>
+
 
         <p>
             <button class="btn" ng-click="save()">Save</button>

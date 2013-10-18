@@ -35,6 +35,11 @@ define([
             },
             link: function($scope,element,attrs,ctrl) {
                 var model = $parse(attrs.ngModel);
+                var config = $parse(attrs.sigpad)($scope)||{};
+
+                var c = element[0].getElementsByTagName('canvas')[0];
+                c.width = c.clientWidth;
+                c.height = c.clientHeight;
 
                 var api = $(element).signaturePad({
                     drawOnly:true,

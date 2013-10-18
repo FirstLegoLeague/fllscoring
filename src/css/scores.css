@@ -1,0 +1,57 @@
+.panel {
+    padding-bottom: 30px;
+}
+.panel h2 {
+    color: #666;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: left;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border-top: 1px solid silver;
+    margin: 0;
+    line-height: 30px;
+    overflow: auto;
+}
+
+
+.missions {
+    border: 1px solid whitesmoke;
+    border-left: 5px solid silver;
+}
+
+.missions h2 .result {
+    float: right;
+    font-weight: bold;
+}
+
+.missions label.btn {
+    display: block;
+    text-align: left;
+    overflow: auto;
+    margin: 2px 50px;
+    line-height: 30px;
+    padding: 10px;
+}
+.missions label.btn input {
+    float: right;
+    margin: 0;
+    height: 20px;
+}
+.missions label.btn input[type=checkbox],
+.missions label.btn input[type=radio] {
+    height: 28px;
+}
+
+input[type=number] {
+    width: 30px;
+}
+.error td {
+    color: crimson;
+}
+[sigpad] canvas {
+    border: 1px solid silver;
+    height: 200px;
+    width: 400px;
+    margin: 10px;
+}

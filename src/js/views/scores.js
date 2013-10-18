@@ -386,6 +386,7 @@ define([
                 var key = mission._key;
                 var deps = getDependencies(mission.score);
                 var getError = getErrorFunc(mission);
+                mission.result = 0;
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
@@ -398,7 +399,7 @@ define([
 
                     //calculate the result for the mission
                     vars = getObjectives(deps);
-                    mission.result = mission.score.apply(null,vars);
+                    mission.result = mission.score.apply(null,vars)||0;
                 });
 
             }
