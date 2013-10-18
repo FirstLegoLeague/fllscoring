@@ -448,12 +448,11 @@ define([
 
 
                 return $fs.write(fn,data).then(function() {
-                    $results.data.push({
+                    return $results.add({
                         file: fn,
                         team: $scope.team,
                         score: $scope.score()
                     });
-                    return $results.save();
                 }).then(function() {
                     log('result saved');
                 },function() {

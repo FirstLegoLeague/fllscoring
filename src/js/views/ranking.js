@@ -12,8 +12,7 @@ define([
             $scope.results = $results.data;
 
             $scope.removeResult = function(index) {
-                $scope.results.splice(index,1);
-                $results.save();
+                $results.remove(index);
             };
         }
     ]);

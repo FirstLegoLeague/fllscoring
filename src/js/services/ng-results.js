@@ -9,14 +9,14 @@ define([
     module.factory('$results',['$fs',function($fs) {
         var results = [];
 
-        var save = function() {
+        function save() {
             return $fs.write('results.json',results).then(function() {
                 log('results saved');
             },function() {
                 log('results write error');
             });
-        };
-        var load = function() {
+        }
+        function load() {
             return $fs.read('results.json').then(function(res) {
                 //remove everything
                 res.unshift(results.length);
@@ -26,14 +26,28 @@ define([
                 //error
                 log('results read error');
             });
-        };
+        }
+        function remove(index) {
+            var rem = results.splice(index,1);
+            return $fs.remove(rem[0].file).then(function() {
+                return save();
+            },function() {
+                log('error removing result');
+            });
+        }
+        function add(data) {
+            results.push(data);
+            return save();
+        }
 
         load();
 
         return {
             data: results,
             load: load,
-            save: save
+            save: save,
+            remove: remove,
+            add: add
         };
     }]);
 });
