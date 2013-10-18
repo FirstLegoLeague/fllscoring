@@ -9,6 +9,9 @@ define([
         function($scope,$results) {
             log('init ranking ctrl');
 
+            $scope.sort = 'score';
+            $scope.rev = true;
+
             $scope.results = $results.data;
 
             $scope.removeResult = function(index) {

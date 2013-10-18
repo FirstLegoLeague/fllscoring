@@ -3,17 +3,17 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Score</th>
+                <th ng-click="sort='team.number';rev=false">#</th>
+                <th ng-click="sort='team.name';rev=false">Name</th>
+                <th ng-click="sort='score';rev=true">Score</th>
             </tr>
         </thead>
-        <tr ng-repeat="result in results">
+        <tr ng-repeat="result in results | orderBy:sort:rev">
             <td>{{result.team.number}}</td>
             <td>{{result.team.name}}</td>
             <td>{{result.score}}</td>
             <td>
-                <button class="btn btn-danger" ng-click="removeResult($idnex)">
+                <button class="btn btn-danger" ng-click="removeResult($index)">
                     <i class="icon-trash"></i>
                     Delete
                 </button>
