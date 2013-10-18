@@ -1,6 +1,8 @@
 FLL Scoring
 =============
 
+To have a look at what we are at, see [Testing](https://github.com/FirstLegoLeague/fllscoring/wiki/Testing). No guarantees.
+
 Development prerequisites
 ---------------
 
