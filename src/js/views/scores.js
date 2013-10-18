@@ -2,6 +2,7 @@ define([
     'services/log',
     'services/fs',
     'services/ng-fs',
+    'services/ng-results',
     'directives/sigpad',
     'angular'
 ], function(log, fs) {
@@ -284,8 +285,8 @@ define([
     };
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs',
-        function($scope,$fs) {
+        '$scope','$fs','$results',
+        function($scope,$fs,$results) {
             log('init scores ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -445,19 +446,14 @@ define([
                 data.table = $scope.settings.table;
                 data.signature = $scope.signature;
 
-                $fs.read('results.json').then(function(results) {
-                    return results;
-                },function() {
-                    return [];
-                }).then(function(results) {
-                    return $fs.write(fn,data).then(function() {
-                        results.push({
-                            file: fn,
-                            team: $scope.team,
-                            score: $scope.score()
-                        });
-                        return $fs.write('results.json',results);
+
+                return $fs.write(fn,data).then(function() {
+                    $results.data.push({
+                        file: fn,
+                        team: $scope.team,
+                        score: $scope.score()
                     });
+                    return $results.save();
                 }).then(function() {
                     log('result saved');
                 },function() {

@@ -12,6 +12,12 @@
             <td>{{result.team.number}}</td>
             <td>{{result.team.name}}</td>
             <td>{{result.score}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="removeResult($idnex)">
+                    <i class="icon-trash"></i>
+                    Delete
+                </button>
+            </td>
         </tr>
     </table>
 </div>

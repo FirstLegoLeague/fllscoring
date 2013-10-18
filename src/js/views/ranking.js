@@ -1,19 +1,20 @@
 define([
     'services/log',
-    'services/ng-fs',
+    'services/ng-results',
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$fs',
-        function($scope,$fs) {
+        '$scope', '$results',
+        function($scope,$results) {
             log('init ranking ctrl');
 
-            $fs.read('results.json').then(function(res) {
-                $scope.results = res;
-            },function() {
-                $scope.results = {};
-            });
+            $scope.results = $results.data;
+
+            $scope.removeResult = function(index) {
+                $scope.results.splice(index,1);
+                $results.save();
+            };
         }
     ]);
 });
