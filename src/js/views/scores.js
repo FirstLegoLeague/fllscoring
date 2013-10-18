@@ -332,7 +332,7 @@ define([
             function getObjectives(names) {
                 return names.map(function(dep) {
                     var val = $scope.objectiveIndex[dep].value;
-                    if (val===undefined || val===null) {return undefined;}
+                    if (val===undefined || val===null) {return 0;}
                     return 1*($scope.objectiveIndex[dep].value||0);
                 });
             }
@@ -403,6 +403,13 @@ define([
                 });
 
             }
+
+            $scope.inc = function(objective) {
+                objective.value = Math.min(objective.max||Number.Infinity,(objective.value||0)+1);
+            };
+            $scope.dec = function(objective) {
+                objective.value = Math.max(objective.min||0,(objective.value||0)-1);
+            };
 
             $scope.score = function() {
                 if (!$scope.missions) {return;}

@@ -25,7 +25,7 @@
     font-weight: bold;
 }
 
-.missions label.btn {
+.missions .field {
     display: block;
     text-align: left;
     overflow: auto;
@@ -33,18 +33,36 @@
     line-height: 30px;
     padding: 10px;
 }
-.missions label.btn input {
-    float: right;
+.missions span.field {
+    font-size: 14px;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.missions .field input {
     margin: 0;
     height: 20px;
 }
-.missions label.btn input[type=checkbox],
-.missions label.btn input[type=radio] {
+.missions .field input,
+.missions .field .btn {
+    float: right;
+    margin: 0px 2px;
+}
+.missions .field input[type=checkbox],
+.missions .field input[type=radio] {
     height: 28px;
 }
 
 input[type=number] {
-    width: 30px;
+    width: 35px;
 }
 .error td {
     color: crimson;

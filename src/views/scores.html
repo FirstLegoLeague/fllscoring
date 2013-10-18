@@ -24,16 +24,18 @@
                 </h2>
                 <div class="objective" ng-repeat="objective in mission.objectiveList" ng-switch="objective.type">
                     <div>
-                        <label class="btn" ng-switch-when="Boolean">
+                        <label class="field btn" ng-switch-when="Boolean">
                             {{objective.title}}
                             <input ng-model="objective.value" type="checkbox">
                         </label>
-                        <label class="btn" ng-switch-when="Number">
+                        <span class="field" ng-switch-when="Number">
                             {{objective.title}}
+                            <span class="btn" ng-click="inc(objective)">up</span>
                             <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number">
-                        </label>
+                            <span class="btn" ng-click="dec(objective)">down</span>
+                        </span>
                         <div ng-switch-when="Enum">
-                            <label class="btn" ng-repeat="line in objective.title">
+                            <label class="field btn" ng-repeat="line in objective.title">
                                 {{line}}
                                 <input ng-model="objective.value" name="{{objective._key}}" type="radio" value="{{$index}}">
                             </label>
