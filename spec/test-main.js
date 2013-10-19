@@ -13,7 +13,10 @@ requirejs.config({
 
     paths: {
         'q': '../components/q/q',
-        'jquery': '../components/jquery/jquery.min'
+        'jquery': '../components/jquery/jquery.min',
+        'angular': '../components/angular/angular.min',
+        'idbstore':'../components/idbwrapper/idbstore',
+        'signaturepad':'../components/signature-pad/jquery.signaturepad.min'
     },
 
     // shim: {

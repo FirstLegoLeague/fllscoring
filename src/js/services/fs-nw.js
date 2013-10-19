@@ -1,6 +1,4 @@
 define(['q','idbstore'],function(Q,IDBStore) {
-    var baseurl = process.cwd()+'/';
-
     function createStore() {
         var def = Q.defer();
         var store = new IDBStore({
