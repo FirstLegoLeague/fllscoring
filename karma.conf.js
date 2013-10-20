@@ -15,6 +15,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'spec/test-main.js',
+      //squire for requirejs mocking
+      {pattern: 'node_modules/squirejs/src/Squire.js', included: false},
       {pattern: 'src/components/**/*.js', included: false},
       {pattern: 'src/js/**/*.js', included: false},
       {pattern: 'spec/*Spec.js', included: false}
@@ -23,7 +25,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      
+
     ],
 
 
