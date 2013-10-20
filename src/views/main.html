@@ -1,7 +1,8 @@
 <link rel="stylesheet" type="text/css" href="components/bootstrap-css/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
 
-<div class="container-fluid">
+<div class="container-fluid" fll-size ng-class="containerClass($width,$height)">
+    {{containerClass($width,$height)}}
     <div class="navbar navbar-fixed-bottom">
         <div class="navbar-inner">
             <ul class="nav">

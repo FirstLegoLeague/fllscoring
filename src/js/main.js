@@ -7,10 +7,11 @@ define([
     'views/ranking',
     'services/ng-services',
     'directives/ng-directives',
+    'directives/size',
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular'
-],function(FastClick,log,settings,teams,scores,ranking,services,directives,fsTest,dbTest) {
+],function(FastClick,log,settings,teams,scores,ranking,services,directives,size,fsTest,dbTest) {
 
     log('device ready');
 
@@ -34,6 +35,17 @@ define([
 
             $scope.setPage = function(page) {
                 $scope.page = page;
+            };
+
+            $scope.containerClass = function(w,h) {
+                w = w();
+                if (w<480) {
+                    return 'smallWindow';
+                } else if (w<1024) {
+                    return 'mediumWindow';
+                } else {
+                    return 'largeWindow';
+                }
             };
         }
     ]);
