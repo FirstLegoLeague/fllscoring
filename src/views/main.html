@@ -2,14 +2,14 @@
 <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
 
 <div class="container-fluid" fll-size ng-class="containerClass($width,$height)">
-    {{containerClass($width,$height)}}
+    {{containerClass($width,$height)}} {{$width()}}
     <div class="navbar navbar-fixed-bottom">
         <div class="navbar-inner">
             <ul class="nav">
-                <li><a ng-click="setPage('teams')"><i class="icon-group"></i> Teams</a></li>
-                <li><a ng-click="setPage('scores')"><i class="icon-check"></i> Scores</a></li>
-                <li><a ng-click="setPage('ranking')"><i class="icon-sort-by-order"></i> Ranking</a></li>
-                <li><a ng-click="setPage('settings')"><i class="icon-cog"></i> Settings</a></li>
+                <li><a ng-click="setPage('teams')"><i class="icon-group"></i> <span>Teams</span></a></li>
+                <li><a ng-click="setPage('scores')"><i class="icon-check"></i> <span>Scores</span></a></li>
+                <li><a ng-click="setPage('ranking')"><i class="icon-sort-by-order"></i> <span>Ranking</span></a></li>
+                <li><a ng-click="setPage('settings')"><i class="icon-cog"></i> <span>Settings</span></a></li>
             </ul>
         </div>
     </div>

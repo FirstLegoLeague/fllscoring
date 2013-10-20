@@ -39,9 +39,9 @@ define([
 
             $scope.containerClass = function(w,h) {
                 w = w();
-                if (w<480) {
+                if (w<=480) {
                     return 'smallWindow';
-                } else if (w<1024) {
+                } else if (w<=1024) {
                     return 'mediumWindow';
                 } else {
                     return 'largeWindow';

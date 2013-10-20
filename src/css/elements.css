@@ -9,3 +9,10 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
+.smallWindow .navbar {
+    font-size: 32px;
+}
+.smallWindow .navbar .nav span {
+    display: none;
+}
