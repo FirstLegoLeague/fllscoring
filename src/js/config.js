@@ -8,7 +8,8 @@ var require = {
         'jquery': '../components/jquery/jquery.min',
         'angular': '../components/angular/angular.min',
         'idbstore':'../components/idbwrapper/idbstore',
-        'signaturepad':'../components/signature-pad/jquery.signaturepad.min'
+        'signaturepad':'../components/signature-pad/jquery.signaturepad.min',
+        'fastclick':'../components/fastclick/lib/fastclick'
     },
     shim: {
         'signaturepad': {

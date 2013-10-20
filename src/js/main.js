@@ -1,4 +1,5 @@
 define([
+    'fastclick',
     'services/log',
     'views/settings',
     'views/teams',
@@ -9,12 +10,17 @@ define([
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular'
-],function(log,settings,teams,scores,ranking,services,directives,fsTest,dbTest) {
+],function(FastClick,log,settings,teams,scores,ranking,services,directives,fsTest,dbTest) {
 
     log('device ready');
 
     // fsTest();
     // dbTest();
+
+    //initiate fastclick
+    $(function() {
+        FastClick.attach(document.body);
+    });
 
 
     //initialize main controller and load main view

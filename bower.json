@@ -22,6 +22,7 @@
     "bootstrap-css": "2.3.2",
     "font-awesome": "~3.2.1",
     "idbwrapper": "~1.3.0",
-    "signature-pad": "https://github.com/thomasjbradley/signature-pad/archive/master.zip"
+    "signature-pad": "https://github.com/thomasjbradley/signature-pad/archive/master.zip",
+    "fastclick": "~0.6.10"
   }
 }
