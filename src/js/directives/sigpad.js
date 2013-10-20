@@ -7,7 +7,7 @@ define([
     'jquery',
     'signaturepad'
 ],function(module) {
-    module.directive('sigpad',['$parse',function($parse) {
+    module.directive('fllSigpad',['$parse',function($parse) {
         return {
             template: '<canvas></canvas>',
             controller: function() {
@@ -35,7 +35,7 @@ define([
             },
             link: function($scope,element,attrs,ctrl) {
                 var model = $parse(attrs.ngModel);
-                var config = $parse(attrs.sigpad)($scope)||{};
+                var config = $parse(attrs.fllSigpad)($scope)||{};
 
                 var c = element[0].getElementsByTagName('canvas')[0];
                 c.width = c.clientWidth;
