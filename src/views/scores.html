@@ -7,8 +7,9 @@
     </p>
 
     <div ng-show="teamsListVisible">
+        <p><input ng-model="teamFilter"></p>
         <table class="table table-bordered table-striped">
-            <tr ng-repeat="team in teams" ng-click="selectTeam(team)">
+            <tr ng-repeat="team in teams | filter:teamFilter" ng-click="selectTeam(team)">
                 <td>{{team.number}}</td>
                 <td>{{team.name}}</td>
             </tr>
