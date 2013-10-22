@@ -37,14 +37,18 @@ define([
                 $scope.page = page;
             };
 
+            $scope.setPlatform = function(platform) {
+                $scope.platform = platform;
+            }
+
             $scope.containerClass = function(w,h) {
                 w = w();
                 if (w<=480) {
-                    return 'smallWindow';
+                    return $scope.platform + ' smallWindow';
                 } else if (w<=1024) {
-                    return 'mediumWindow';
+                    return $scope.platform + ' mediumWindow';
                 } else {
-                    return 'largeWindow';
+                    return $scope.platform + ' largeWindow';
                 }
             };
         }
