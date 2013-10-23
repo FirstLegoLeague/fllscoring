@@ -12,6 +12,8 @@ requirejs.config({
     baseUrl: '/base/src/js',
 
     paths: {
+        'squire': '/base/node_modules/squirejs/src/Squire',
+        'injector': '/base/spec/injector',
         'q': '../components/q/q',
         'jquery': '../components/jquery/jquery.min',
         'angular': '../components/angular/angular.min',
@@ -24,12 +26,13 @@ requirejs.config({
     //         exports: '_'
     //     }
     // },
+});
 
-    // ask Require.js to load these files (all our tests)
-    deps: tests,
-
-    // start test run, once Require.js is done
-    callback: window.__karma__.start
+require(['q'],function(Q) {
+    require(tests,function(resolvedTests) {
+        //start tests when they are ready
+        Q.all(arguments).then(window.__karma__.start);
+    });
 });
 
 /**
