@@ -19,7 +19,7 @@ src/components/*/*
 !src/components/fastclick/lib/fastclick.js
 
 !src/components/font-awesome/css
-!src/components/font-awesome/css/*/css
+!src/components/font-awesome/font
 
 !src/components/idbwrapper/idbstore*.js
 
