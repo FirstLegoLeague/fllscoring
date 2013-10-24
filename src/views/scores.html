@@ -1,4 +1,4 @@
-<div ng-controller="scoresCtrl" class="viewScores">
+<div ng-controller="scoresCtrl">
     <div ng-show="teamsListVisible" class="teams">
         <p><input ng-model="teamFilter"></p>
         <div class="team" ng-repeat="team in teams | filter:teamFilter" ng-click="selectTeam(team)">

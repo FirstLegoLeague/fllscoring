@@ -31,10 +31,11 @@ define([
         function($scope) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
-            $scope.page = 'scores';
+            $scope.pages = ['teams','scores','ranking','settings'];
+            $scope.currentPage = $scope.pages[1];
 
             $scope.setPage = function(page) {
-                $scope.page = page;
+                $scope.currentPage = page;
             };
 
             $scope.setPlatform = function(platform) {
@@ -51,6 +52,8 @@ define([
                     return $scope.platform + ' largeWindow';
                 }
             };
+
+            // $scope.
         }
     ]);
     angular.bootstrap(document.body,[

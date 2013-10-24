@@ -13,11 +13,12 @@
             </ul>
         </div>
     </div>
-    <div>
-        <div ng-include="'views/teams.html'" ng-show="page=='teams'"></div>
-        <div ng-include="'views/scores.html'" ng-show="page=='scores'"></div>
-        <div ng-include="'views/ranking.html'" ng-show="page=='ranking'"></div>
-        <div ng-include="'views/settings.html'" ng-show="page=='settings'"></div>
+    <div class="viewMain" ng-class="currentPage" ng-cloak>
+        <div ng-repeat="page in pages"
+            ng-include="'views/'+page+'.html'"
+            ng-class="'view-'+page"
+            xxng-show="currentPage == page"
+        ></div>
     </div>
     {{containerClass($width,$height)}} {{$width()}}
 </div>
