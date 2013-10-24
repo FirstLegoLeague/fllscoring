@@ -70,60 +70,60 @@ table {
 }
 
 /* small layout */
-@media screen {
-    .smallWindow .viewMain {
-        -webkit-transition: all 0.2s;
+@media screen and (max-width: 480px) {
+    .viewMain {
+        -webkit-transition: -webkit-transform 0.2s;
         width: 400%;
         position: absolute;
         top: 0px;
         bottom: 80px;
     }
-    .smallWindow .viewMain > div {
+    .viewMain > div {
         width: 25%;
         height: 100%;
         float: left;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
-    .smallWindow .viewMain.teams {
+    .viewMain.teams {
         -webkit-transform: translateX(0);
     }
-    .smallWindow .viewMain.scores {
+    .viewMain.scores {
         -webkit-transform: translateX(-25%);
     }
-    .smallWindow .viewMain.ranking {
+    .viewMain.ranking {
         -webkit-transform: translateX(-50%);
     }
-    .smallWindow .viewMain.settings {
+    .viewMain.settings {
         -webkit-transform: translateX(-75%);
     }
 }
 
 /* medium layout */
-@media screen {
-    .mediumWindow .viewMain {
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+    .viewMain {
         position: absolute;
         width: 100%;
         top: 0px;
         bottom: 50px;
     }
-    .mediumWindow .viewMain > div {
+    .viewMain > div {
         background-color: white;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
-    .mediumWindow .view-teams {
+    .view-teams {
         position: absolute;
         width: 250px;
         height: 100%;
     }
-    .mediumWindow .view-scores {
+    .view-scores {
         position: absolute;
         left: 250px;
         right: 0;
         height: 100%;
     }
-    .mediumWindow .viewMain.settings .view-settings {
+    .viewMain.settings .view-settings {
         position: absolute;
         left: 0;
         top: 0;
@@ -133,14 +133,14 @@ table {
 }
 
 /* large layout */
-@media screen {
-    .largeWindow .viewMain {
+@media screen and (min-width: 1025px) {
+    .viewMain {
         position: absolute;
         width: 100%;
         top: 0px;
         bottom: 50px;
     }
-    .largeWindow .viewMain > div {
+    .viewMain > div {
         background-color: white;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
@@ -150,12 +150,12 @@ table {
         top: 0;
         right: 0;
         bottom: 0;
-        -webkit-transition: all 0.2s;
+        -webkit-transition: opacity 0.2s;
     }
-    .largeWindow .viewMain.teams .view-teams,
-    .largeWindow .viewMain.scores .view-scores,
-    .largeWindow .viewMain.ranking .view-ranking,
-    .largeWindow .viewMain.settings .view-settings {
+    .viewMain.teams .view-teams,
+    .viewMain.scores .view-scores,
+    .viewMain.ranking .view-ranking,
+    .viewMain.settings .view-settings {
         opacity: 1;
         z-index: 2;
     }
