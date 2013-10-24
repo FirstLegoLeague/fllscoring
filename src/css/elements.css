@@ -1,8 +1,17 @@
 body {
-    padding-bottom: 60px;
+    padding-bottom: 80px;
+    font-family: 'Segoe UI','helvetica','Arial';
+    font-size: 18px;
 }
 .tablewrapper {
 
+}
+
+h1 {
+    font-family: 'Segoe UI Light','helvetica narrow','Arial Narrow';
+    color: dodgerblue;
+    font-size: 32px;
+    padding: 0px 12px;
 }
 
 table {
@@ -10,9 +19,51 @@ table {
     width: 100%;
 }
 
-.smallWindow .navbar {
-    font-size: 32px;
+/* teams */
+@media screen {
+    .teams {
+        /*background-color: #333;*/
+    }
+    .team {
+        background-color: rgba(128,128,128,0.1);
+        color: dodgerblue;
+        padding: 12px 12px;
+        margin: 20px 0;
+    }
+    .team .number {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .team .name {
+        font-size: 28px;
+        line-height: 32px;
+    }
+    .team i {
+        float: right;
+        color: crimson;
+        font-size: 56px;
+    }
 }
-.smallWindow .navbar .nav span {
-    display: none;
+
+/* navigation bar */
+@media screen {
+    .navbar .nav {
+        margin: 0;
+        width: 100%;
+    }
+    .navbar li {
+        /*border: 1px solid red;*/
+        box-sizing: border-box;
+        width: 25%;
+        text-align: center;
+    }
+
+    .smallWindow .navbar i {
+        font-size: 28px;
+        display: block;
+    }
+
+    .smallWindow .navbar .nav span {
+        /*display: none;*/
+    }
 }

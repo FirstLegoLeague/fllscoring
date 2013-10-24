@@ -429,6 +429,8 @@ define([
                 }
             };
 
+            $scope.showTeams();
+
             $scope.selectTeam = function(team) {
                 $scope.team = team;
                 $scope.teamsListVisible = false;

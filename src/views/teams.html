@@ -1,21 +1,21 @@
 <div ng-controller="teamsCtrl">
-    <h1>Teams <i ng-show="saving" class="icon-save"></i></h1>
-    <div class="alert alert-info" ng-show="status">
-        <button type="button" class="close" ng-click="status=''">&times;</button>
-        {{status}}
-    </div>
     <p class="pull-right">
         <button class="btn" ng-hide="editMode" ng-click="editMode=true">
             <i class="icon-edit"></i> Edit
         </button>
         <button class="btn btn-primary" ng-show="editMode" ng-click="editMode=false">Done</button>
     </p>
-    <p class="pull-left">
+    <p class="pull-right">
         <button class="btn" ng-click="load()">
             <i class="icon-cloud-download"></i>
             Load
         </button>
     </p>
+    <h1>Teams <i ng-show="saving" class="icon-save"></i></h1>
+    <div class="alert alert-info" ng-show="status">
+        <button type="button" class="close" ng-click="status=''">&times;</button>
+        {{status}}
+    </div>
     <form class="form-inline" name="newTeamForm" ng-show="editMode">
         <p>
             <span class="control-group" ng-class="{error:!newTeamForm.newTeamNumber.$valid}">
@@ -33,25 +33,12 @@
             <button class="btn" ng-click="addTeam()" ng-disabled="!newTeamForm.$valid">Add team</button>
         </p>
     </form>
-    <table class="table table-bordered table-striped">
-        <colgroup>
-            <col width="60px">
-            <col>
-        </colgroup>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tr ng-repeat="team in teams">
-            <td>{{team.number}}</td>
-            <td>
-                {{team.name}}
-                <button ng-show="editMode" class="btn btn-danger pull-right" ng-click="removeTeam($index)">
-                    <i class="icon-trash"></i> Delete
-                </button>
-            </td>
-        </tr>
-    </table>
+
+    <div class="teams">
+        <div class="team" ng-repeat="team in teams">
+            <i ng-show="editMode" class="icon-remove-sign" ng-click="removeTeam($index)"></i>
+            <div class="number">{{team.number}}</div>
+            <div class="name">{{team.name}}</div>
+        </div>
+    </div>
 </div>

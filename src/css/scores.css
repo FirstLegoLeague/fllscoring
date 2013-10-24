@@ -1,3 +1,10 @@
+.viewScores .teams {
+    background-color: #333;
+    height: 400px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .panel {
     padding-bottom: 30px;
 }

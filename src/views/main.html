@@ -1,8 +1,8 @@
 <link rel="stylesheet" type="text/css" href="components/bootstrap-css/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/main.css">
 
-<div class="container-fluid" fll-size ng-class="containerClass($width,$height)">
-    {{containerClass($width,$height)}} {{$width()}}
+<div fll-size ng-class="containerClass($width,$height)">
     <div class="navbar navbar-fixed-bottom">
         <div class="navbar-inner">
             <ul class="nav">
@@ -19,5 +19,6 @@
         <div ng-include="'views/ranking.html'" ng-show="page=='ranking'"></div>
         <div ng-include="'views/settings.html'" ng-show="page=='settings'"></div>
     </div>
+    {{containerClass($width,$height)}} {{$width()}}
 </div>
 
