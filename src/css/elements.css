@@ -45,11 +45,26 @@ table {
     .team .name {
         font-size: 28px;
         line-height: 32px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .team i {
         float: right;
         color: crimson;
         font-size: 56px;
+    }
+
+    .mediumWindow .team .number {
+        font-size: 11px;
+        line-height: 18px;
+    }
+    .mediumWindow .team .name {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .mediumWindow .team i {
+        font-size: 38px;
     }
 }
 
@@ -129,12 +144,12 @@ table {
         position: absolute;
     }
     .viewMain .view-teams {
-        width: 250px;
+        width: 300px;
         height: 100%;
         display: block;
     }
     .viewMain .view-scores {
-        left: 250px;
+        left: 300px;
         right: 0;
         height: 100%;
         display: block;
