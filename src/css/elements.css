@@ -1,18 +1,25 @@
-body {
-    padding-bottom: 80px;
-    font-family: 'Segoe UI','helvetica','Arial';
-    font-size: 18px;
+html,body {
     overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+}
+body {
+    /*padding-bottom: 80px;*/
+    font-family: 'latolight', 'Segoe UI','helvetica','Arial';
+    font-size: 18px;
 }
 .tablewrapper {
 
 }
 
 h1 {
-    font-family: 'Segoe UI Light','helvetica','Arial';
+    font-family: 'latolight', 'Segoe UI Light','helvetica','Arial';
     color: dodgerblue;
     font-size: 32px;
     padding: 0px 12px;
+    font-weight: normal;
 }
 
 table {
@@ -101,6 +108,13 @@ table {
 
 /* medium layout */
 @media screen and (min-width: 481px) and (max-width: 1024px) {
+    body > div {
+        height: 100%;
+        position: relative;
+    }
+    [fll-size] {
+        height: 100%;
+    }
     .viewMain {
         position: absolute;
         width: 100%;
@@ -111,24 +125,27 @@ table {
         background-color: white;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
-    }
-    .view-teams {
+        display: none;
         position: absolute;
+    }
+    .viewMain .view-teams {
         width: 250px;
         height: 100%;
+        display: block;
     }
-    .view-scores {
-        position: absolute;
+    .viewMain .view-scores {
         left: 250px;
         right: 0;
         height: 100%;
+        display: block;
     }
+    .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
-        position: absolute;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
+        display: block;
     }
 }
 
