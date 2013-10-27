@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fll>
+    <season year="2012" name="Senior Solutions" />
+
+    <mission description="Flexibility">
+        <objective id="yellowloops" description="Yellow Loops in Base" type="number" min="0" max="2" />
+        <!--
+            The following could be added, but it'd serve no purpose:
+            <score points="0">
+                <condition id="yellowloops" value="0" />
+            </score>
+        -->
+        <score points="20">
+            <condition id="yellowloops" value="1" />
+        </score>
+        <score points="40">
+            <condition id="yellowloops" value="2" />
+        </score>
+    </mission>
+
+    <mission description="Medicine">
+        <objective id="meds" description="Green in Base, Orange Not Moved" type="yesno" />
+        <score points="25">
+            <condition id="meds" value="yes" />
+        </score>
+    </mission>
+
+    <mission description="Helping Animals">
+        <objective id="animals" description="Dog in Base" type="yesno" />
+        <score points="20">
+            <condition id="animals" value="yes" />
+        </score>
+    </mission>
+
+    <mission description="Wood work">
+        <objective id="chairbase"  description="Chare Repaired and in Base"     type="yesno" />
+        <objective id="chairtable" description="Chare Repaired and under Table" type="yesno" />
+        <constraint message="Chair cannot be in base AND under the table.">
+            <condition id="chairbase"  value="yes" />
+            <condition id="chairtable" value="yes" />
+        </constraint>
+        <score points="15">
+            <condition id="chairbase"  value="yes" />
+        </score>
+        <score points="25">
+            <condition id="chairtable" value="yes" />
+        </score>
+    </mission>
+
+    <mission description="Videophone">
+        <objective id="flags" description="Flags Fully Upright" type="number" min="0" max="2" />
+        <score points="20">
+            <condition id="flags" value="1" />
+        </score>
+        <score points="40">
+            <condition id="flags" value="2" />
+        </score>
+    </mission>
+
+    <mission description="Quilts">
+        <objective id="quiltsblue"   description="Blue Squares Touch Target" type="number" min="0" max="2"   />
+        <objective id="quiltsorange" description="Orange Squares Touch Target" type="number" min="0" max="2" />
+        <score points="15">
+            <condition id="quiltsblue" value="1" />
+        </score>
+        <score points="30">
+            <condition id="quiltsblue" value="2" />
+        </score>
+        <score points="30">
+            <condition id="quiltsorange" value="1" />
+        </score>
+        <score points="60">
+            <condition id="quiltsorange" value="2" />
+        </score>
+    </mission>
+
+    <mission description="Cooperation and Recognising Similarities">
+        <objective id="coop" description="Dials on Both Fields are Parallel" type="yesno" />
+        <score points="45">
+            <condition id="coop" value="yes" />
+        </score>
+    </mission>
+
+    <mission description="Ball Game">
+        <objective id="ballcount" description="Balls on Rack" type="number" min="0" max="7" />
+        <objective id="ballmiddle" description="Middle Ball" type="enum">
+            <option id="your" description="Yours" />
+            <option id="them" description="Theirs" />
+            <option id="none" description="Neither" />
+        </objective>
+        <constraint message="If no balls are left, the middle ball must be 'Neither'.">
+            <condition id="ballcount"  value="0"    />
+            <condition id="ballmiddle" value="your" />
+        </constraint>
+        <constraint message="If no balls are left, the middle ball must be 'Neither'.">
+            <condition id="ballcount"  value="0"    />
+            <condition id="ballmiddle" value="them" />
+        </constraint>
+        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
+            <condition id="ballcount"  value="1"    />
+            <condition id="ballmiddle" value="none" />
+        </constraint>
+        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
+            <condition id="ballcount"  value="2"    />
+            <condition id="ballmiddle" value="none" />
+        </constraint>
+        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
+            <condition id="ballcount"  value="3"    />
+            <condition id="ballmiddle" value="none" />
+        </constraint>
+        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
+            <condition id="ballcount"  value="4"    />
+            <condition id="ballmiddle" value="none" />
+        </constraint>
+        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
+            <condition id="ballcount"  value="5"    />
+            <condition id="ballmiddle" value="none" />
+        </constraint>
+        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
+            <condition id="ballcount"  value="6"    />
+            <condition id="ballmiddle" value="none" />
+        </constraint>
+        <constraint message="If all balls are left, the middle ball must be 'Neither'.">
+            <condition id="ballcount"  value="7"    />
+            <condition id="ballmiddle" value="your" />
+        </constraint>
+        <constraint message="If all balls are left, the middle ball must be 'Neither'.">
+            <condition id="ballcount"  value="7"    />
+            <condition id="ballmiddle" value="them" />
+        </constraint>
+        <score points="10">
+            <condition id="ballcount"  value="1"    />
+        </score>
+        <score points="20">
+            <condition id="ballcount"  value="2"    />
+        </score>
+        <score points="30">
+            <condition id="ballcount"  value="3"    />
+        </score>
+        <score points="40">
+            <condition id="ballcount"  value="4"    />
+        </score>
+        <score points="50">
+            <condition id="ballcount"  value="5"    />
+        </score>
+        <score points="60">
+            <condition id="ballcount"  value="6"    />
+        </score>
+        <score points="70">
+            <condition id="ballcount"  value="7"    />
+        </score>
+        <score points="60">
+            <condition id="ballmiddle" value="your" />
+        </score>
+    </mission>
+
+    <mission description="Gardening">
+        <objective id="plants" description="Base of Plants Touch Target" type="yesno" />
+        <score points="25">
+            <condition id="plants" value="yes" />
+        </score>
+    </mission>
+
+    <mission description="Stove">
+        <objective id="stove" description="All Burners are Black" type="yesno" />
+        <score points="25">
+            <condition id="stove" value="yes" />
+        </score>
+    </mission>
+
+    <mission description="Bowling">
+        <objective id="pins" description="Pins Hit" type="number" min="0" max="6" />
+        <score points="7" >
+            <condition id="pins" value="1" />
+        </score>
+        <score points="14">
+            <condition id="pins" value="2" />
+        </score>
+        <score points="21">
+            <condition id="pins" value="3" />
+        </score>
+        <score points="28">
+            <condition id="pins" value="4" />
+        </score>
+        <score points="35">
+            <condition id="pins" value="5" />
+        </score>
+        <score points="60">
+            <condition id="pins" value="6" />
+        </score>
+    </mission>
+
+    <mission description="Transitions">
+        <objective id="platformslanted" description="Robot Only Touches Slanted Platform" type="yesno" />
+        <objective id="platformbalanced" description="Robot Only Touches Balanced Platform" type="yesno" />
+        <objective id="platformclear" description="Platform Only Touches Robot and Mat" type="yesno" />
+        <constraint message="Platform cannot be slanted AND balanced.">
+            <condition id="platformslanted"  value="yes" />
+            <condition id="platformbalanced" value="yes" />
+        </constraint>
+        <score points="45">
+            <condition id="platformslanted"  value="yes" />
+            <condition id="platformclear"    value="yes" />
+        </score>
+        <score points="65">
+            <condition id="platformbalanced" value="yes" />
+            <condition id="platformclear"    value="yes" />
+        </score>
+    </mission>
+
+    <mission description="Strength Training">
+        <objective id="strength" description="Weight raised" type="enum">
+            <option id="low" description="Low" />
+            <option id="high" description="High" />
+            <option id="none" description="Not Done" />
+        </objective>
+        <score points="15">
+            <condition id="strength" value="low"  />
+        </score>
+        <score points="25">
+            <condition id="strength" value="high" />
+        </score>
+    </mission>
+
+    <mission description="Cardio Training">
+        <objective id="dialbig"   description="Dial Big Step"   type="number" min="1" max="9" />
+        <objective id="dialsmall" description="Dial Small Step" type="number" min="0" max="5" />
+
+        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
+            <condition id="dialbig"   value="9" />
+            <condition id="dialsmall" value="1" />
+        </constraint>
+        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
+            <condition id="dialbig"   value="9" />
+            <condition id="dialsmall" value="2" />
+        </constraint>
+        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
+            <condition id="dialbig"   value="9" />
+            <condition id="dialsmall" value="3" />
+        </constraint>
+        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
+            <condition id="dialbig"   value="9" />
+            <condition id="dialsmall" value="4" />
+        </constraint>
+        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
+            <condition id="dialbig"   value="9" />
+            <condition id="dialsmall" value="5" />
+        </constraint>
+
+        <score points="-60">
+            <condition id="dialbig"   value="1" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="-55">
+            <condition id="dialbig"   value="1" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="-50">
+            <condition id="dialbig"   value="1" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="-45">
+            <condition id="dialbig"   value="1" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="-40">
+            <condition id="dialbig"   value="1" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="-35">
+            <condition id="dialbig"   value="1" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="-30">
+            <condition id="dialbig"   value="2" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="-25">
+            <condition id="dialbig"   value="2" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="-20">
+            <condition id="dialbig"   value="2" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="-15">
+            <condition id="dialbig"   value="2" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="-10">
+            <condition id="dialbig"   value="2" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="-5">
+            <condition id="dialbig"   value="2" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="0">
+            <condition id="dialbig"   value="3" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="5">
+            <condition id="dialbig"   value="3" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="10">
+            <condition id="dialbig"   value="3" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="15">
+            <condition id="dialbig"   value="3" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="20">
+            <condition id="dialbig"   value="3" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="25">
+            <condition id="dialbig"   value="3" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="30">
+            <condition id="dialbig"   value="4" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="35">
+            <condition id="dialbig"   value="4" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="40">
+            <condition id="dialbig"   value="4" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="45">
+            <condition id="dialbig"   value="4" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="50">
+            <condition id="dialbig"   value="4" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="55">
+            <condition id="dialbig"   value="4" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="60">
+            <condition id="dialbig"   value="5" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="63">
+            <condition id="dialbig"   value="5" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="66">
+            <condition id="dialbig"   value="5" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="69">
+            <condition id="dialbig"   value="5" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="72">
+            <condition id="dialbig"   value="5" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="75">
+            <condition id="dialbig"   value="5" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="78">
+            <condition id="dialbig"   value="6" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="91">
+            <condition id="dialbig"   value="6" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="94">
+            <condition id="dialbig"   value="6" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="97">
+            <condition id="dialbig"   value="6" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="100">
+            <condition id="dialbig"   value="6" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="103">
+            <condition id="dialbig"   value="6" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="106">
+            <condition id="dialbig"   value="7" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="107">
+            <condition id="dialbig"   value="7" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="108">
+            <condition id="dialbig"   value="7" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="109">
+            <condition id="dialbig"   value="7" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="110">
+            <condition id="dialbig"   value="7" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="111">
+            <condition id="dialbig"   value="7" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="112">
+            <condition id="dialbig"   value="8" />
+            <condition id="dialsmall" value="0" />
+        </score>
+        <score points="113">
+            <condition id="dialbig"   value="8" />
+            <condition id="dialsmall" value="1" />
+        </score>
+        <score points="114">
+            <condition id="dialbig"   value="8" />
+            <condition id="dialsmall" value="2" />
+        </score>
+        <score points="115">
+            <condition id="dialbig"   value="8" />
+            <condition id="dialsmall" value="3" />
+        </score>
+        <score points="116">
+            <condition id="dialbig"   value="8" />
+            <condition id="dialsmall" value="4" />
+        </score>
+        <score points="117">
+            <condition id="dialbig"   value="8" />
+            <condition id="dialsmall" value="5" />
+        </score>
+
+        <score points="118">
+            <condition id="dialbig"   value="9" />
+            <condition id="dialsmall" value="0" />
+        </score>
+    </mission>
+
+</fll>
