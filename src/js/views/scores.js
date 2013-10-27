@@ -404,11 +404,11 @@ define([
 
             }
 
-            $scope.inc = function(objective) {
-                objective.value = Math.min(objective.max||Number.Infinity,(objective.value||0)+1);
+            $scope.inc = function(objective,amount) {
+                objective.value = Math.min(objective.max||Number.Infinity,(objective.value||0)+(amount||1));
             };
-            $scope.dec = function(objective) {
-                objective.value = Math.max(objective.min||0,(objective.value||0)-1);
+            $scope.dec = function(objective,amount) {
+                objective.value = Math.max(objective.min||0,(objective.value||0)-(amount||1));
             };
 
             $scope.score = function() {
