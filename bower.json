@@ -23,6 +23,7 @@
     "font-awesome": "~3.2.1",
     "idbwrapper": "~1.3.0",
     "signature-pad": "https://github.com/thomasjbradley/signature-pad/archive/master.zip",
-    "fastclick": "~0.6.10"
+    "fastclick": "~0.6.10",
+    "angular-mocks": "~1.2.0-rc.3"
   }
 }

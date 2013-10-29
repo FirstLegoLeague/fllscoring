@@ -17,6 +17,7 @@ requirejs.config({
         'q': '../components/q/q',
         'jquery': '../components/jquery/jquery.min',
         'angular': '../components/angular/angular.min',
+        'angular-mocks': '../components/angular-mocks/angular-mocks',
         'idbstore':'../components/idbwrapper/idbstore',
         'signaturepad':'../components/signature-pad/jquery.signaturepad.min'
     },
@@ -28,7 +29,7 @@ requirejs.config({
     // },
 });
 
-require(['q'],function(Q) {
+require(['q','angular','angular-mocks'],function(Q) {
     require(tests,function(resolvedTests) {
         //start tests when they are ready
         Q.all(arguments).then(window.__karma__.start);
