@@ -7,7 +7,7 @@ define([
     'services/fs',
     'services/ng-services'
 ],function(fs,module) {
-    module.factory('$fs',['$q','$rootScope',function($q,$rootScope) {
+    return module.factory('$fs',['$q','$rootScope',function($q,$rootScope) {
 
         function wrap(name) {
             return function() {

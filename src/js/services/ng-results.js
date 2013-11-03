@@ -6,7 +6,7 @@ define([
     'services/log',
     'services/ng-fs'
 ],function(module,log) {
-    module.factory('$results',['$fs',function($fs) {
+    return module.factory('$results',['$fs',function($fs) {
         var results = [];
 
         function save() {

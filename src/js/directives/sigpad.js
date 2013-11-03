@@ -7,7 +7,7 @@ define([
     'jquery',
     'signaturepad'
 ],function(module) {
-    module.directive('fllSigpad',['$parse',function($parse) {
+    return module.directive('fllSigpad',['$parse',function($parse) {
         return {
             template: '<canvas></canvas>',
             controller: function() {

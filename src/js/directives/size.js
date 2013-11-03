@@ -17,7 +17,7 @@ define([
     'directives/ng-directives',
     'jquery'
 ],function(module) {
-    module.directive('fllSize',['$window','$rootScope','$parse',function($window,$rootScope,$parse) {
+    return module.directive('fllSize',['$window','$rootScope','$parse',function($window,$rootScope,$parse) {
         return {
             scope: true,
             link: function($scope,$element,$attrs) {

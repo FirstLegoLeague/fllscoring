@@ -5,7 +5,7 @@ define([
     'services/ng-services',
     'services/log',
 ],function(module,log) {
-    module.factory('$connect',['$http','$q','$timeout',function($http,$q,$timeout) {
+    return module.factory('$connect',['$http','$q','$timeout',function($http,$q,$timeout) {
         return {
             send: function() {
                 return $timeout(function() {
