@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/FirstLegoLeague/fllscoring.png?branch=master)](https://travis-ci.org/FirstLegoLeague/fllscoring)
+
 FLL Scoring
 =============
 
