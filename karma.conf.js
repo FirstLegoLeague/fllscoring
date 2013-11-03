@@ -14,6 +14,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'src/components/jquery/jquery.min.js',
+      'src/components/angular/angular.min.js',
+      'src/components/angular-mocks/angular-mocks.js',
       'spec/test-main.js',
       //squire for requirejs mocking
       {pattern: 'node_modules/squirejs/src/Squire.js', included: false},

@@ -29,7 +29,7 @@ requirejs.config({
     // },
 });
 
-require(['q','angular','angular-mocks'],function(Q) {
+require(['q'],function(Q) {
     require(tests,function(resolvedTests) {
         //start tests when they are ready
         Q.all(arguments).then(window.__karma__.start);

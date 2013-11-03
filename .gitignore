@@ -9,6 +9,7 @@ data/
 src/components/*/*
 
 !src/components/angular/angular*.js
+!src/components/angular-mocks/angular*.js
 
 !src/components/bootstrap-css/css
 !src/components/bootstrap-css/img
