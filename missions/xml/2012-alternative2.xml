@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fll>
+
+    <season year="2012" name="Senior Solutions" />
+
+    <strings>
+        <string id="chairposition"   message="Chair cannot be in base AND under the table." />
+        <string id="noballs"         message="When no balls are left, the middle ball must be 'Neither'." />
+        <string id="someballs"       message="When some, but not all, balls are left, the middle ball cannot be 'Neither'." />
+        <string id="allballs"        message="When all balls are left, the middle ball must be 'Neither'." />
+        <string id="platformstate"   message="Platform cannot be slanted AND balanced." />
+        <string id="dialcombination" message="When Big Dial is on 9, Small Dial must be on 0." />
+    </strings>
+
+    <!-- Slightly tweaked the naming of tags and attributes: I think the name
+         "id" should be 'reserved' for defining new identifiers. So it would
+         be appropriate for defining the "yellowloops" objective, but referring
+         to it may be better with "objective=" instead of "id=". Same holds for
+         matching the values.
+     -->
+    <mission description="Flexibility">
+        <objective id="yellowloops" description="Yellow Loops in Base" type="number" min="0" max="2" />
+        <switch objective="yellowloops">
+            <case value="0" score="0"  />
+            <case value="1" score="20" />
+            <case value="2" score="40" />
+        </switch>
+    </mission>
+
+    <!-- Let's try some alternative naming for switch/case here -->
+    <mission description="Medicine">
+        <objective id="meds" description="Green in Base, Orange Not Moved" type="yesno" />
+        <map objective="meds">
+            <match value="no"  score="0"  />
+            <match value="yes" score="25" />
+        </map>
+    </mission>
+
+    <!-- Maybe put the score in it's own tag? There could also be an <error> tag, of course. 
+         More verbose though.
+      -->
+    <mission description="Helping Animals">
+        <objective id="animals" description="Dog in Base" type="yesno" />
+        <switch objective="animals">
+            <case value="no" ><score value="0" /></case>
+            <case value="yes"><score value="0" /></case>
+        </switch>
+    </mission>
+
+    <!-- The first XML proposal (<score> tag with embedded <condition> tags)
+         is nice for complex scenarios, but is cumbersome for 'list-like'
+         cases (and it could be error-prone because not all cases are
+         explicitly mentioned). The second proposal (on which this file is
+         based) is nice for lists, but hard to write and understand
+         for the more complex cases, like "Wood work".
+
+         Many missions seem to have enums as input (yesno, or fixed number of
+         values), and then need to come up with a score (could be 0) for each
+         of the combinations.
+
+         If we can come up with a way to clearly define these multi-dimensional
+         maps in our XML, we have the best of both worlds: compact
+         representation for both simple and complex cases.
+
+         The following mission is an attempt to arrive at such a
+         representation. The idea is mostly to define the syntax for the multi-
+         dimensional 'map'. This map can then either be used to directly define
+         the scores (or errors), or it can be used to first define a new
+         intermediate value, which can then be used for translating these
+         values to scores/errors. The latter approach is used below.
+
+         Note: just one of the <map> tags below is needed in the final version,
+         each of them is a different way to arrive at the same destination:
+         the definition of a 'variable' called "chairstate", which is used in
+         the <switch> at the end.
+     -->
+    <mission description="Wood work">
+        <objective id="chairbase"  description="Chair Repaired and in Base"     type="yesno" />
+        <objective id="chairtable" description="Chair Repaired and under Table" type="yesno" />
+
+        <!-- Somewhat clear, but a little verbose and it's not 'enforced' that
+             you should use the same order of objectives on each line (useful
+             for automatic validation of all input values).
+         -->
+        <map id="chairstate">
+            <item name="notrepaired"><condition objective="chairbase" value="no"  /><condition objective="chairtable" value="no"  /></item>
+            <item name="table"      ><condition objective="chairbase" value="no"  /><condition objective="chairtable" value="yes" /></item>
+            <item name="base"       ><condition objective="chairbase" value="yes" /><condition objective="chairtable" value="no"  /></item>
+            <item name="invalid"    ><condition objective="chairbase" value="yes" /><condition objective="chairtable" value="yes" /></item>
+        </map>
+
+        <!-- Pretty clear, compact, relatively easy to (automatically) verify,
+             but probably not so nice for code-generation, and I don't like the
+             fact that it 'encodes' structure in the attribute values.
+         -->
+        <map id="chairstate" objectives="chairbase,chairtable">
+            <item value="no,no"   name="notrepaired"/>
+            <item value="no,yes"  name="table"      />
+            <item value="yes,no"  name="base"       />
+            <item value="yes,yes" name="invalid"    />
+        </map>
+
+        <!-- This one does not encode the structure in an attribute value
+             anymore (explicitly puts them in <index> tags).
+             It has the advantage that it is very compact.
+             It has the disadvantage that it's not clear in what order the
+             values will have to listed (I listed them as "no, yes" here,
+             but the objective is defined as a "yesno" type, which suggests
+             the other way around...).
+         -->
+        <map id="chairstate">
+            <indexes>
+                <index objective="chairbase"  />
+                <index objective="chairtable" />
+            </indexes>
+            <items>
+                <item name="notrepaired" />
+                <item name="table"       />
+                <item name="base"        />
+                <item name="invalid"     />
+            </items>
+        </map>
+
+        <!-- Made naming the item values explicit. No more confusion of value-ordering.
+             (Much) more verbose though.
+         -->
+        <map id="chairstate">
+            <indexes>
+                <index objective="chairbase" />
+                <index objective="chairtable" />
+            </indexes>
+            <items>
+                <case value="no" ><case value="no" ><value name="notrepaired" /></case></case>
+                <case value="no" ><case value="yes"><value name="table"       /></case></case>
+                <case value="yes"><case value="no" ><value name="base"        /></case></case>
+                <case value="yes"><case value="yes"><value name="invalid"     /></case></case>
+            </items>
+        </map>
+
+        <!-- Still pretty neat list-like visualisation of the possible outcomes
+             of the map, less repetition of case tags.
+         -->
+        <map id="chairstate">
+            <indexes>
+                <index objective="chairbase" />
+                <index objective="chairtable" />
+            </indexes>
+            <items>
+                <case value="no" >
+                    <case value="no" ><value name="notrepaired" /></case>
+                    <case value="yes"><value name="table"       /></case>
+                </case>
+                <case value="yes">
+                    <case value="no" ><value name="base"        /></case>
+                    <case value="yes"><value name="invalid"     /></case>
+                </case>
+            </items>
+        </map>
+
+        <!-- The final translation from the map to scores is trivial, and
+             (IMO) clearest of both earlier proposals.
+         -->
+        <switch map="chairstate"><!-- note: we switch on the map, not an objective -->
+            <case value="notrepaired" score="0"             />
+            <case value="base"        score="15"            />
+            <case value="table"       score="25"            />
+            <case value="invalid"     error="chairposition" />
+        </switch>
+    </mission>
+
+    <mission description="Videophone">
+        <objective id="flags" description="Flags Fully Upright" type="number" min="0" max="2" />
+        <switch objective="flags">
+            <case value="0" score="0"  />
+            <case value="1" score="20" />
+            <case value="2" score="40" />
+        </switch>
+    </mission>
+
+    <mission description="Quilts">
+        <objective id="quiltsblue"   description="Blue Squares Touch Target" type="number" min="0" max="2"   />
+        <objective id="quiltsorange" description="Orange Squares Touch Target" type="number" min="0" max="2" />
+        <switch objective="quiltsblue">
+            <case value="0" score="0"  />
+            <case value="1" score="15" />
+            <case value="2" score="30" />
+        </switch>
+        <switch objective="quiltsorange">
+            <case value="0" score="0"  />
+            <case value="1" score="30" />
+            <case value="2" score="60" />
+        </switch>
+    </mission>
+
+    <mission description="Cooperation and Recognising Similarities">
+        <objective id="coop" description="Dials on Both Fields are Parallel" type="yesno" />
+        <switch objective="coop">
+            <case value="no"  score="0"  />
+            <case value="yes" score="45" />
+        </switch>
+    </mission>
+
+    <!-- In the <option> tag, I've changed 'id' to 'name' here, as the option
+         for an enum may also appear at other enums.
+     -->
+    <mission description="Ball Game">
+        <objective id="ballcount" description="Balls on Rack" type="number" min="0" max="7" />
+        <objective id="ballmiddle" description="Middle Ball" type="enum">
+            <option name="your" description="Yours" />
+            <option name="them" description="Theirs" />
+            <option name="none" description="Neither" />
+        </objective>
+        <switch objective="ballmiddle">
+            <case value="your">
+                <switch objective="ballcount">
+                    <case value="0" error="noballs"   />
+                    <case value="1" score="70"        />
+                    <case value="2" score="80"        />
+                    <case value="3" score="90"        />
+                    <case value="4" score="100"       />
+                    <case value="5" score="110"       />
+                    <case value="6" score="120"       />
+                    <case value="7" error="allballs"  />
+                </switch>
+            </case>
+            <case value="them">
+                <switch objective="ballcount">
+                    <case value="0" error="noballs"   />
+                    <case value="1" score="10"        />
+                    <case value="2" score="20"        />
+                    <case value="3" score="30"        />
+                    <case value="4" score="40"        />
+                    <case value="5" score="50"        />
+                    <case value="6" score="60"        />
+                    <case value="7" error="allballs"  />
+                </switch>
+            </case>
+            <case value="none">
+                <switch objective="ballcount">
+                    <case value="0" score="0"         />
+                    <case value="1" error="someballs" />
+                    <case value="2" error="someballs" />
+                    <case value="3" error="someballs" />
+                    <case value="4" error="someballs" />
+                    <case value="5" error="someballs" />
+                    <case value="6" error="someballs" />
+                    <case value="7" score="70"        />
+                </switch>
+            </case>
+        </switch>
+    </mission>
+
+    <mission description="Gardening">
+        <objective id="plants" description="Base of Plants Touch Target" type="yesno" />
+        <switch objective="plants">
+            <case value="no"  score="0"  />
+            <case value="yes" score="25" />
+        </switch>
+    </mission>
+
+    <mission description="Stove">
+        <objective id="stove" description="All Burners are Black" type="yesno" />
+        <switch objective="stove">
+            <case value="no"  score="0"  />
+            <case value="yes" score="25" />
+        </switch>
+    </mission>
+
+    <mission description="Bowling">
+        <objective id="pins" description="Pins Hit" type="number" min="0" max="6" />
+        <switch objective="pins">
+            <case value="0" score="0"  />
+            <case value="1" score="7"  />
+            <case value="2" score="14" />
+            <case value="3" score="21" />
+            <case value="4" score="28" />
+            <case value="5" score="35" />
+            <case value="6" score="60" />
+        </switch>
+    </mission>
+
+    <mission description="Transitions">
+        <objective id="platformslanted" description="Robot Only Touches Slanted Platform" type="yesno" />
+        <objective id="platformbalanced" description="Robot Only Touches Balanced Platform" type="yesno" />
+        <objective id="platformclear" description="Platform Only Touches Robot and Mat" type="yesno" />
+        <switch objective="platformclear">
+            <case value="no" error="">  <!-- This shortcut prevents checking for "balanced and slanted",
+                                           but I wanted to show the possibility of not writing down the
+                                           full tree of possible states. -->
+            <case value="yes">
+                <switch objective="platformslanted">
+                    <case value="no">
+                        <switch objective="platformbalanced">
+                            <case value="no"  score="0"             />
+                            <case value="yes" score="65"            />
+                        </switch>
+                    </case>
+                    <case value="yes">
+                        <switch objective="platformbalanced">
+                            <case value="no"  score="45"            />
+                            <case value="yes" error="platformstate" />
+                        </switch>
+                    </case>
+                </switch>
+            </case>
+        </switch>
+    </mission>
+
+    <mission description="Strength Training">
+        <objective id="strength" description="Weight raised" type="enum">
+            <option id="low"  description="Low"      />
+            <option id="high" description="High"     />
+            <option id="none" description="Not Done" />
+        </objective>
+        <switch objective="strength">
+            <case value="none" score="0"  />
+            <case value="low"  score="15" />
+            <case value="high" score="25" />
+        </switch>
+    </mission>
+
+    <mission description="Cardio Training">
+        <objective id="dialbig"   description="Dial Big Step"   type="number" min="1" max="9" />
+        <objective id="dialsmall" description="Dial Small Step" type="number" min="0" max="5" />
+
+        <switch objective="dialbig">
+            <case value="1">
+                <switch objective="dialsmall">
+                    <case value="0" score="-60" />
+                    <case value="1" score="-55" />
+                    <case value="2" score="-50" />
+                    <case value="3" score="-45" />
+                    <case value="4" score="-40" />
+                    <case value="5" score="-35" />
+                </switch>
+            </case>
+            <case value="2">
+                <switch objective="dialsmall">
+                    <case value="0" score="-30" />
+                    <case value="1" score="-25" />
+                    <case value="2" score="-20" />
+                    <case value="3" score="-15" />
+                    <case value="4" score="-10" />
+                    <case value="5" score="-5"  />
+                </switch>
+            </case>
+            <case value="3">
+                <switch objective="dialsmall">
+                    <case value="0" score="0"   />
+                    <case value="1" score="5"   />
+                    <case value="2" score="10"  />
+                    <case value="3" score="15"  />
+                    <case value="4" score="20"  />
+                    <case value="5" score="25"  />
+                </switch>
+            </case>
+            <case value="4">
+                <switch objective="dialsmall">
+                    <case value="0" score="30"  />
+                    <case value="1" score="35"  />
+                    <case value="2" score="40"  />
+                    <case value="3" score="45"  />
+                    <case value="4" score="50"  />
+                    <case value="5" score="55"  />
+                </switch>
+            </case>
+            <case value="5">
+                <switch objective="dialsmall">
+                    <case value="0" score="60"  />
+                    <case value="1" score="63"  />
+                    <case value="2" score="66"  />
+                    <case value="3" score="69"  />
+                    <case value="4" score="72"  />
+                    <case value="5" score="75"  />
+                </switch>
+            </case>
+            <case value="6">
+                <switch objective="dialsmall">
+                    <case value="0" score="78"  />
+                    <case value="1" score="91"  />
+                    <case value="2" score="94"  />
+                    <case value="3" score="97"  />
+                    <case value="4" score="100" />
+                    <case value="5" score="103" />
+                </switch>
+            </case>
+            <case value="7">
+                <switch objective="dialsmall">
+                    <case value="0" score="106" />
+                    <case value="1" score="107" />
+                    <case value="2" score="108" />
+                    <case value="3" score="109" />
+                    <case value="4" score="110" />
+                    <case value="5" score="111" />
+                </switch>
+            </case>
+            <case value="8">
+                <switch objective="dialsmall">
+                    <case value="0" score="112" />
+                    <case value="1" score="113" />
+                    <case value="2" score="114" />
+                    <case value="3" score="115" />
+                    <case value="4" score="116" />
+                    <case value="5" score="117" />
+                </switch>
+            </case>
+            <case value="9">
+                <switch objective="dialsmall">
+                    <case value="0" score="118" />
+                    <case value="1" error="dialcombination" />
+                    <case value="2" error="dialcombination" />
+                    <case value="3" error="dialcombination" />
+                    <case value="4" error="dialcombination" />
+                    <case value="5" error="dialcombination" />
+                </switch>
+            </case>
+        </switch>
+
+    </mission>
+
+</fll>
