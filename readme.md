@@ -17,7 +17,7 @@ Steps
 
 - Clone the repository
 - `npm install`
-- `bower install`
+- `bower install` (this should be done automatically by npm install)
 
 Building
 --------

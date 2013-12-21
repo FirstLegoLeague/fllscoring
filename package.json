@@ -4,7 +4,8 @@
   "description": "fll scoring application",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox --reporters dots"
+    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox --reporters dots",
+    "install": "bower install"
   },
   "repository": "",
   "author": "rikkert@rikkertkoppes.com",
