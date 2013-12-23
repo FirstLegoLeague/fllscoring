@@ -58,6 +58,7 @@
     margin: 0;
     height: 20px;
 }
+.missions .field [fll-spinner],
 .missions .field input,
 .missions .field .btn {
     float: right;

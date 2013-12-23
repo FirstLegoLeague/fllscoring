@@ -14,6 +14,9 @@ var require = {
     shim: {
         'signaturepad': {
             deps: ['jquery']
+        },
+        'angular': {
+            deps: ['jquery']
         }
     }
 };

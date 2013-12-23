@@ -4,6 +4,7 @@ define([
     'services/ng-fs',
     'services/ng-results',
     'directives/sigpad',
+    'directives/spinner',
     'angular'
 ], function(log, fs) {
     var moduleName = 'scores';

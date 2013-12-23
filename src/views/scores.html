@@ -30,9 +30,7 @@
                         </label>
                         <span class="field" ng-switch-when="Number">
                             {{objective.title}}
-                            <span class="btn" ng-click="inc(objective)">up</span>
-                            <input ng-model="objective.value" min="{{objective.min||0}}" max="{{objective.max}}" type="number">
-                            <span class="btn" ng-click="dec(objective)">down</span>
+                            <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
                         </span>
                         <div ng-switch-when="Enum">
                             <label class="field btn" ng-repeat="line in objective.title">
