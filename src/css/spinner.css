@@ -2,6 +2,9 @@
     [fll-spinner] {
         display: inline-block;
         vertical-align: middle;
+        overflow: hidden;
+        /* fix for overflow-scrolling bug */
+        -webkit-transform: translateZ(0);
     }
     .spinner {
         display: inline-block;
