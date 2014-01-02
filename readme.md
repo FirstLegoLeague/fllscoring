@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/FirstLegoLeague/fllscoring.png?branch=master)](https://travis-ci.org/FirstLegoLeague/fllscoring)
+[![Dependency Status](https://david-dm.org/FirstLegoLeague/fllscoring.png)](https://david-dm.org/FirstLegoLeague/fllscoring)
+[![devDependency Status](https://david-dm.org/FirstLegoLeague/fllscoring/dev-status.png)](https://david-dm.org/FirstLegoLeague/fllscoring#info=devDependencies)
 
 FLL Scoring
 =============
