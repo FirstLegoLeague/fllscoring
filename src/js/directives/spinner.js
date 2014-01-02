@@ -34,6 +34,26 @@ define([
             this.initialize();
         }
 
+        function getEvent(e) {
+            if (typeof e.originalEvent.touches !== "undefined" && e.originalEvent.touches.length) {
+                return e.originalEvent.touches[0];
+            }
+            return e;
+        }
+
+        function handle(fn,scope) {
+            return function(e) {
+                fn.call(scope||this,e,getEvent(e));
+            };
+        }
+
+        var isTouch = "ontouchend" in document;
+        var events = {
+            start: isTouch?'touchstart':'mousedown',
+            move: isTouch?'touchmove':'mousemove',
+            end: isTouch?'touchend':'mouseup'
+        };
+
         Spinner.prototype.setup = function(options) {
             this.options = $.extend(defaults,options);
             this.elFrame = this.elContainer.children(this.options.selector);
@@ -45,11 +65,11 @@ define([
         };
 
         Spinner.prototype.initialize = function() {
-            this.elPrev.on('touchstart mousedown',$.proxy(this.prev,this));
-            this.elNext.on('touchstart mousedown',$.proxy(this.next,this));
-            this.elContainer.on('touchstart mousedown',$.proxy(this.dragstart,this));
-            $(document).on('touchmove mousemove',$.proxy(this.drag,this));
-            $(document).on('touchend mouseup',$.proxy(this.dragend,this));
+            this.elPrev.on(events.start,handle(this.prev,this));
+            this.elNext.on(events.start,handle(this.next,this));
+            this.elContainer.on(events.start,handle(this.dragstart,this));
+            $(document).on(events.move,handle(this.drag,this));
+            $(document).on(events.end,handle(this.dragend,this));
             this.set(0,true);
         };
 
@@ -84,17 +104,17 @@ define([
             e && e.stopPropagation();
         };
 
-        Spinner.prototype.dragstart = function(e) {
+        Spinner.prototype.dragstart = function(e,ev) {
             this.dragging = true;
             this.elContainer.addClass('dragging');
-            this.x = [e.pageX,e.pageY];
+            this.x = [ev.screenX,ev.screenY];
             this.t = e.timeStamp;
         };
-        Spinner.prototype.drag = function(e) {
+        Spinner.prototype.drag = function(e,ev) {
             if (this.dragging) {
-                this.dx = vdiff([e.pageX,e.pageY],this.x);
+                this.dx = vdiff([ev.screenX,ev.screenY],this.x);
                 this.dt = (e.timeStamp - this.t)/1000;
-                this.x = [e.pageX,e.pageY];
+                this.x = [ev.screenX,ev.screenY];
                 this.t = e.timeStamp;
                 this.v = [this.dx[0]/this.dt,this.dx[1]/this.dt];
                 this.offset += this.dx[0];
@@ -103,11 +123,8 @@ define([
                 e.preventDefault();
             }
         };
-        Spinner.prototype.dragend = function(e) {
+        Spinner.prototype.dragend = function(e,ev) {
             if (this.dragging) {
-                this.dx = vdiff([e.pageX,e.pageY],this.x);
-                this.dt = (e.timeStamp - this.t)/1000;
-                this.v = [this.dx[0]/this.dt,this.dx[1]/this.dt];
                 this.elContainer.removeClass('dragging');
                 if (Math.abs(this.v[0]) < this.options.snap) {
                     this.snap();
@@ -145,11 +162,11 @@ define([
         '$parse','$timeout',
         function($parse,$timeout) {
             function numbers(min,max) {
-                var i,numbers = [];
+                var i,nrs = [];
                 for (i=min; i<=max; i++) {
-                   numbers.push(i);
+                   nrs.push(i);
                 }
-                return numbers;
+                return nrs;
             }
 
             return {
@@ -183,7 +200,7 @@ define([
                         setting = false;
                     });
 
-                    $timeout(init,false)
+                    $timeout(init,false);
 
                     function init() {
                         var el = $element.children().first();
@@ -200,11 +217,11 @@ define([
                         $scope.numbers = numbers(min,max);
                         $timeout(function() {
                             s.repaint();
-                        },false)
+                        },false);
                     }
 
                 }
             };
         }
-    ]);;
+    ]);
 });
