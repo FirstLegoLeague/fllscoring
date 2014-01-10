@@ -309,9 +309,11 @@ define([
         }
     ];
 
-    return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs',
-        function($scope,$fs) {
+    return angular.module(moduleName, []).config(['$httpProvider', function($httpProvider) {
+            delete $httpProvider.defaults.headers.common["X-Requested-With"];
+        }]).controller(moduleName + 'Ctrl', [
+        '$scope','$fs','$http',
+        function($scope,$fs,$http) {
             console.log($fs);
 
             log('init teams ctrl');
@@ -331,9 +333,16 @@ define([
             });
 
             $scope.load = function() {
-                log('remote loading of teams not yet implemented');
-                $scope.teams = angular.copy(dummyTeams);
-                $scope.saveTeams();
+                var url = 'http://fll.mobilesorcery.nl/api/public/teams/';
+                $http.get(url).success(function(res) {
+                    $scope.teams = res.map(function(team) {
+                        return {
+                            number: team.id,
+                            name: team.name
+                        };
+                    });
+                    $scope.saveTeams();
+                });
             };
 
             $scope.addTeam = function() {
