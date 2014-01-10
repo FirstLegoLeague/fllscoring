@@ -2,7 +2,7 @@
 var nodeRequire = require;
 //requirejs base config
 var require = {
-    baseUrl: 'js/',
+    baseUrl: '/js/',
     paths: {
         'q': '../components/q/q',
         'jquery': '../components/jquery/jquery.min',
