@@ -342,6 +342,8 @@ define([
                         };
                     });
                     $scope.saveTeams();
+                }).error(function() {
+                    log('failed retrieving teams');
                 });
             };
 
