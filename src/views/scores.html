@@ -1,18 +1,14 @@
 <div ng-controller="scoresCtrl">
-    <div ng-show="teamsListVisible" class="teams">
-        <p><input ng-model="teamFilter"></p>
-        <div class="team" ng-repeat="team in teams | filter:teamFilter" ng-click="selectTeam(team)">
-            <div class="number">{{team.number}}</div>
-            <div class="name">{{team.name}}</div>
-        </div>
-    </div>
-
     <p class="pull-right">
         <button class="btn">Select round</button>
         <button class="btn" ng-click="showTeams()">Select team</button>
     </p>
     <h1>Missions</h1>
     {{settings}} {{team}}
+
+    <div ng-hide="team">
+        <p>Please select a team first</p>
+    </div>
 
     <div ng-show="team">
         <p>Total score: {{score()}}</p>

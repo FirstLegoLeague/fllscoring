@@ -420,22 +420,16 @@ define([
             };
 
             $scope.showTeams = function() {
-                if (!$scope.teams) {
-                    $fs.read('teams.json').then(function(teams) {
-                        $scope.teams = teams;
-                        $scope.teamsListVisible = true;
-                    });
-                } else {
-                    $scope.teamsListVisible = true;
-                }
+                $scope.setPage('teams');
             };
-
-            $scope.showTeams();
 
             $scope.selectTeam = function(team) {
                 $scope.team = team;
-                $scope.teamsListVisible = false;
             };
+
+            $scope.$root.$on('selectTeam',function(e,team) {
+                $scope.selectTeam(team);
+            });
 
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045

@@ -38,10 +38,16 @@ define([
                         };
                     });
                     $scope.saveTeams();
+                    log('successfully retrieved teams');
                 }).error(function() {
                     log('failed retrieving teams');
                 });
             };
+
+            $scope.selectTeam = function(team) {
+                $scope.setPage('scores');
+                $scope.$root.$emit('selectTeam',team);
+            }
 
             $scope.addTeam = function() {
                 $scope.teams.push(angular.copy($scope.newTeam));

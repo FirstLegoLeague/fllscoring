@@ -35,7 +35,7 @@
     </form>
 
     <div class="teams">
-        <div class="team" ng-repeat="team in teams" ng-click="setPage('scores')">
+        <div class="team" ng-repeat="team in teams" ng-click="selectTeam(team)">
             <i ng-show="editMode" class="icon-remove-sign" ng-click="removeTeam($index)"></i>
             <div class="number">{{team.number}}</div>
             <div class="name">{{team.name}}</div>
