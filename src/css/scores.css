@@ -6,31 +6,26 @@
 }
 
 .panel {
-    padding-bottom: 30px;
+    margin-bottom: 20px;
+    background-color: #E5EDF0;
+    background-color: rgba(128,128,128,0.1);
+    color: dodgerblue;
 }
 .panel h2 {
-    color: #666;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: normal;
     text-align: left;
     padding: 4px 10px;
-    background-color: whitesmoke;
-    border-top: 1px solid silver;
     margin: 0;
-    line-height: 30px;
+    line-height: 24px;
     overflow: auto;
 }
 
-
-.missions {
-    border: 1px solid whitesmoke;
-    border-left: 5px solid silver;
-}
-
-.missions h2 .result {
+.panel h2 .result {
     float: right;
     font-weight: bold;
 }
+
 
 .missions .field {
     display: block;
@@ -44,14 +39,6 @@
     font-size: 14px;
     text-shadow: 0 1px 1px rgba(255,255,255,0.75);
     vertical-align: middle;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
-    border-bottom-color: #b3b3b3;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
 }
 .missions .field input {
     margin: 0;

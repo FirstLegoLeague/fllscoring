@@ -20,7 +20,7 @@
                 </h2>
                 <div class="objective" ng-repeat="objective in mission.objectiveList" ng-switch="objective.type">
                     <div>
-                        <label class="field btn" ng-switch-when="Boolean">
+                        <label class="field" ng-switch-when="Boolean">
                             {{objective.title}}
                             <input ng-model="objective.value" type="checkbox">
                         </label>
@@ -29,7 +29,7 @@
                             <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
                         </span>
                         <div ng-switch-when="Enum">
-                            <label class="field btn" ng-repeat="line in objective.title">
+                            <label class="field" ng-repeat="line in objective.title">
                                 {{line}}
                                 <input ng-model="objective.value" name="{{objective._key}}" type="radio" value="{{$index}}">
                             </label>
