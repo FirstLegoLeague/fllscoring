@@ -17,7 +17,7 @@ define([
             $scope.teams = [];
             $scope.newTeam = {};
             $scope.editMode = false;
-            $scope.teamNumberPattern = /\d+/;
+            $scope.teamNumberPattern = /^\d+$/;
 
             $fs.read('teams.json').then(function(teams) {
                 $scope.status = '';
@@ -47,9 +47,16 @@ define([
             $scope.selectTeam = function(team) {
                 $scope.setPage('scores');
                 $scope.$root.$emit('selectTeam',team);
-            }
+            };
+
+            $scope.canAddTeam = function() {
+                return $scope.newTeam.name && $scope.newTeam.number;
+            };
 
             $scope.addTeam = function() {
+                if (!$scope.canAddTeam()) {
+                    return;
+                }
                 $scope.teams.push(angular.copy($scope.newTeam));
                 $scope.newTeam = {};
                 $scope.saveTeams();
