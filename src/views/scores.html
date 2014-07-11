@@ -7,10 +7,10 @@
     {{settings}} {{team}}
 
     <div ng-hide="team">
-        <p>Please select a team first</p>
+        <p>Warning: no team selected</p>
     </div>
 
-    <div ng-show="team">
+    <div>
         <p>Total score: {{score()}}</p>
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
             <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
