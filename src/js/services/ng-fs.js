@@ -3,7 +3,7 @@
  * data is automatically applied to the rootscope,
  * data is marshalled and unmarshalled to json
  */
-define([
+define('services/ng-fs',[
     'services/fs',
     'services/ng-services'
 ],function(fs,module) {

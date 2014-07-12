@@ -21,7 +21,7 @@ module.exports = function(config) {
       'src/components/idbwrapper/idbstore.js',
       'spec/defineShim.js',
       'spec/asyncJasmine.js',
-      'src/js/services/fs-*.js',
+      'src/js/services/*.js',
       'spec/*Spec.js'
     ],
 

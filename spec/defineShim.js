@@ -1,6 +1,12 @@
 !function() {
 	var store = {};
 	this.factory = function(name,deps) {
+		if (!store[name]) {
+			console.log('unable to find module',name,'in store');
+			console.log(JSON.stringify(store,null,2));
+			return;
+		};
+		deps = deps||{};
 		var resolvedDeps = store[name].deps.map(function(dep) {
 			return deps[dep]||undefined;
 		});

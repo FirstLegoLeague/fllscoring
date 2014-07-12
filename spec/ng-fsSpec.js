@@ -1,14 +1,11 @@
-define(['injector'],function(Injector) {
-    var injector = new Injector();
+describe('ng-fs',function() {
+	var fs = factory('services/ng-fs',{
+		'services/ng-services': factory('services/ng-services')
+    });
 
-
-    return injector.require(['services/fs-nw'],function(fs) {
-        // console.log('fs',fs);
-
-        describe('test',function() {
-            it('should pass',function() {
-                expect(true).toBe(true);
-            });
+    describe('test',function() {
+        it('should pass',function() {
+            expect(true).toBe(true);
         });
     });
 });
