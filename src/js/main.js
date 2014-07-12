@@ -9,11 +9,13 @@ define([
     'services/ng-services',
     'directives/ng-directives',
     'directives/size',
+    'filters/ng-filters',
+    'filters/index',
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular-bootstrap',
     'angular'
-],function(FastClick,log,settings,teams,scoresheet,scores,ranking,services,directives,size,fsTest,dbTest) {
+],function(FastClick,log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
     log('device ready');
 
@@ -66,6 +68,7 @@ define([
         scoresheet.name,
         scores.name,
         ranking.name,
+        filters.name,
         services.name,
         directives.name
     ]);
