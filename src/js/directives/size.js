@@ -13,7 +13,7 @@
  *
  * ng-class="ng-class="{small:$width.between(0,400),middle:$width.between(400,700),large:$width.between(700)}"
  */
-define([
+define('directives/size',[
     'directives/ng-directives',
     'jquery'
 ],function(module) {
@@ -21,8 +21,6 @@ define([
         return {
             scope: true,
             link: function($scope,$element,$attrs) {
-                console.log($element);
-
                 var def = ($attrs.fllSize||'$width,$height').split(/\s*,\s*/);
                 var w = $parse(def[0]);
                 var h = $parse(def[1]);
