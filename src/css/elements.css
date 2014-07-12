@@ -103,6 +103,7 @@ table {
         bottom: 80px;
     }
     .viewMain > div {
+        margin-top: 69px;
         width: 20%;
         height: 100%;
         float: left;
@@ -146,6 +147,7 @@ table {
         width: 100%;
         top: 0px;
         bottom: 50px;
+        margin-top: 40px;
     }
     .viewMain > div {
         background-color: white;
@@ -185,6 +187,7 @@ table {
         width: 100%;
         top: 0px;
         bottom: 50px;
+        margin-top: 40px;
     }
     .viewMain > div {
         background-color: white;
