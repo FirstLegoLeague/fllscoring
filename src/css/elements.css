@@ -95,37 +95,47 @@ table {
 /* small layout */
 @media screen and (max-width: 480px) {
     .viewMain {
+        transition: transform 0.2s;
         -webkit-transition: -webkit-transform 0.2s;
-        width: 400%;
+        width: 500%;
         position: absolute;
         top: 0px;
         bottom: 80px;
     }
     .viewMain > div {
-        width: 25%;
+        width: 20%;
         height: 100%;
         float: left;
         overflow: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
     }
     .viewMain.teams {
+        transform: translateX(0);
         -webkit-transform: translateX(0);
     }
     .viewMain.scoresheet {
+        transform: translateX(-20%);
         -webkit-transform: translateX(-20%);
     }
     .viewMain.scores {
+        transform: translateX(-40%);
         -webkit-transform: translateX(-40%);
     }
     .viewMain.ranking {
+        transform: translateX(-60%);
         -webkit-transform: translateX(-60%);
     }
     .viewMain.settings {
+        transform: translateX(-80%);
         -webkit-transform: translateX(-80%);
     }
 
     .btn-enum {
         font-weight: 500;
+    }
+
+    .panel {
+        padding: 1px;
     }
 }
 
@@ -149,6 +159,7 @@ table {
         bottom: 0;
         -webkit-transition: opacity 0.2s;
     }
+
     .viewMain.teams .view-teams,
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
