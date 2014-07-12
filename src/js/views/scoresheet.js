@@ -1,4 +1,4 @@
-define([
+define('views/scoresheet',[
     'services/log',
     'services/fs',
     'services/ng-fs',
