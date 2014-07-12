@@ -1,4 +1,4 @@
-define([
+define('views/scoresheet',[
     'services/log',
     'services/fs',
     'services/ng-fs',
@@ -7,7 +7,7 @@ define([
     'directives/spinner',
     'angular'
 ], function(log, fs) {
-    var moduleName = 'scores';
+    var moduleName = 'scoresheet';
 
     var field = {
         "title":"Senior Solutions",
@@ -20,6 +20,7 @@ define([
                         "type": "Enum"
                     },
                 },
+                "description": "blabla description",
                 "score":function(teamColor) {
                     return ["Red","Blue"][teamColor];
                 }
@@ -288,7 +289,7 @@ define([
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
         '$scope','$fs','$results','$modal',
         function($scope,$fs,$results,$modal) {
-            log('init scores ctrl');
+            log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
                 $scope.settings = res;
@@ -465,15 +466,15 @@ define([
                 });
             };
 
-            $scope.open = function (size) {
+            $scope.open = function (size, mission) {
 
                 var modalInstance = $modal.open({
                   templateUrl: 'myModalContent.html',
                   controller: 'ModalInstanceCtrl',
                   size: size,
                   resolve: {
-                    items: function () {
-                      return ['item1', 'item2', 'item3'];
+                    mission: function () {
+                      return mission;
                     }
                   }
                 });
@@ -487,16 +488,13 @@ define([
 
         }
     ]).controller('ModalInstanceCtrl',[
-        '$scope', '$modalInstance', 'items',
-        function ($scope, $modalInstance, items) {
+        '$scope', '$modalInstance', 'mission',
+        function ($scope, $modalInstance, mission) {
 
-          $scope.items = items;
-          $scope.selected = {
-            item: $scope.items[0]
-          };
+          $scope.mission = mission;
 
           $scope.ok = function () {
-            $modalInstance.close($scope.selected.item);
+            $modalInstance.close();
           };
 
           $scope.cancel = function () {
