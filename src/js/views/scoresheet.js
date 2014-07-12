@@ -319,6 +319,7 @@ define('views/scoresheet',[
                 $scope.missionIndex = field.missions;
                 $scope.missions = transpose(field.missions);
                 $scope.objectiveIndex = indexObjectives(field.missions);
+                $scope.match = { round: 1 };
                 angular.forEach($scope.missions,process);
             }
 
@@ -445,6 +446,7 @@ define('views/scoresheet',[
 
                 var data = angular.copy($scope.field);
                 data.team = $scope.team;
+                data.match = $scope.match;
                 data.table = $scope.settings.table;
                 data.signature = $scope.signature;
 
@@ -453,6 +455,7 @@ define('views/scoresheet',[
                     return $results.add({
                         file: fn,
                         team: $scope.team,
+                        match: $scope.match,
                         score: $scope.score()
                     });
                 }).then(function() {
