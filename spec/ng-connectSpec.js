@@ -1,4 +1,4 @@
-xdescribe('ng-connect',function() {
+describe('ng-connect',function() {
     var ngServices = factory('services/ng-services');
     var connect = factory('services/ng-connect',{
         'services/ng-services': ngServices
