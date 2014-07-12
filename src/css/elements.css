@@ -183,7 +183,7 @@ table {
         z-index: 2;
     }
 
-    #scores {
-        padding: 10px;
+    .panel {
+       padding: 10px;
     }
 }

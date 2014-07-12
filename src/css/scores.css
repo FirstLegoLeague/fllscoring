@@ -25,8 +25,6 @@
 
 .description {
     float: right;
-    margin-top: 10px;
-    margin-right: 10px;
     cursor: pointer;
 }
 
@@ -35,6 +33,7 @@
     background-color: #E5EDF0;
     background-color: rgba(128,128,128,0.1);
     color: dodgerblue;
+    padding: 10px;
 }
 .panel h2 {
     font-size: 20px;
