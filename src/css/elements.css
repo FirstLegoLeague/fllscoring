@@ -111,7 +111,7 @@ table {
     .viewMain.teams {
         -webkit-transform: translateX(0);
     }
-    .viewMain.scores {
+    .viewMain.scoreheets {
         -webkit-transform: translateX(-25%);
     }
     .viewMain.ranking {
@@ -143,14 +143,14 @@ table {
         -webkit-transition: opacity 0.2s;
     }
     .viewMain.teams .view-teams,
-    .viewMain.scores .view-scores,
+    .viewMain.scoreheet .view-scoresheet,
     .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
         opacity: 1;
         z-index: 2;
     }
 
-    #scores {
+    #scoreheets {
         padding: 5px;
     }
 }
@@ -176,7 +176,7 @@ table {
         -webkit-transition: opacity 0.2s;
     }
     .viewMain.teams .view-teams,
-    .viewMain.scores .view-scores,
+    .viewMain.scoresheet .view-scoresheet,
     .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
         opacity: 1;

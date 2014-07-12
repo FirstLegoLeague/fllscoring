@@ -7,7 +7,7 @@ define([
     'directives/spinner',
     'angular'
 ], function(log, fs) {
-    var moduleName = 'scores';
+    var moduleName = 'scoresheet';
 
     var field = {
         "title":"Senior Solutions",
@@ -288,7 +288,7 @@ define([
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
         '$scope','$fs','$results','$modal',
         function($scope,$fs,$results,$modal) {
-            log('init scores ctrl');
+            log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
                 $scope.settings = res;

@@ -45,7 +45,7 @@ define('views/teams',[
             };
 
             $scope.selectTeam = function(team) {
-                $scope.setPage('scores');
+                $scope.setPage('scoresheet');
                 $scope.$root.$emit('selectTeam',team);
             };
 
