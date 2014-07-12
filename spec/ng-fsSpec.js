@@ -1,6 +1,7 @@
 describe('ng-fs',function() {
+	var ngServices = factory('services/ng-services');
 	var fs = factory('services/ng-fs',{
-		'services/ng-services': factory('services/ng-services')
+		'services/ng-services': ngServices
     });
 
     describe('test',function() {

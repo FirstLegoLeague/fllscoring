@@ -1,7 +1,7 @@
 /**
  * stub for communication module
  */
-define([
+define('services/ng-connect',[
     'services/ng-services',
     'services/log',
 ],function(module,log) {
