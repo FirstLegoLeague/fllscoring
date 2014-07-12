@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 0.10
 before_install:
-  - "npm i -g bower"
+  - "npm i -g bower karma-cli"
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
