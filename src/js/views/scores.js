@@ -3,19 +3,22 @@ define([
     'services/ng-scores',
     'angular'
 ],function(log) {
-    var moduleName = 'ranking';
+    var moduleName = 'scores';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
         '$scope', '$scores',
         function($scope,$scores) {
-            log('init ranking ctrl');
+            log('init scores ctrl');
 
             $scope.sort = 'score';
             $scope.rev = true;
 
             $scope.scores = $scores.scores;
 
-            $scope.removeResult = function(index) {
+            $scope.removeScore = function(index) {
                 $scores.remove(index);
+            };
+            $scope.editScore = function(index) {
+                alert("todo");
             };
         }
     ]);

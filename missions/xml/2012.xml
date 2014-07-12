@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="../xsl/missions.xsl"?>
-<fll:challenge xmlns:fll="http://nickygerritsen.nl/missions.xsd" year="2012" name="Senior Solutions">
+<fll:challenge
+    xmlns:fll="http://nickygerritsen.nl/missions.xsd" year="2012" name="Senior Solutions">
 
     <strings>
         <string id="flexibility-name">      Flexibility</string>
@@ -82,7 +83,7 @@
 
     <mission name="flexibility-name" description="flexibility-desc">
         <objective-number id="yellowloops" description="yellowloops-desc" min="0" max="2" default="0" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="yellowloops" />
             </indexes>
@@ -91,12 +92,12 @@
                 <case> <index-ref value="1" /> <points amount="20" /> </case>
                 <case> <index-ref value="2" /> <points amount="40" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="medicine-name" description="medicine-desc">
         <objective-yesno id="meds" description="meds-desc" default="no" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="meds" />
             </indexes>
@@ -104,12 +105,12 @@
                 <case> <index-ref value="no"  /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes" /> <points amount="25" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="animals-name" description="animals-desc">
         <objective-yesno id="dog" description="dog-desc" default="no" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="dog" />
             </indexes>
@@ -117,13 +118,13 @@
                 <case> <index-ref value="no"  /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes" /> <points amount="20" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="woodwork-name" description="woodwork-desc">
         <objective-yesno id="chairbase"  description="chairbase-desc"  default="no" />
         <objective-yesno id="chairtable" description="chairtable-desc" default="no" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="chairbase" /><index objective="chairtable" />
             </indexes>
@@ -133,12 +134,13 @@
                 <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="15" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="yes" /> <error message="chairposition-error" /> </case>
             </cases>
-        </switch>
+        </score>
+
     </mission>
 
     <mission name="videocall-name" description="videocall-desc">
         <objective-number id="flags" description="flags-desc" min="0" max="2" default="0" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="flags" />
             </indexes>
@@ -147,13 +149,13 @@
                 <case> <index-ref value="1" /> <points amount="20" /> </case>
                 <case> <index-ref value="2" /> <points amount="40" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="quilts-name" description="quilts-desc">
         <objective-number id="quiltsblue"   description="quiltsblue-desc"   min="0" max="2" default="0" />
         <objective-number id="quiltsorange" description="quiltsorange-desc" min="0" max="2" default="0" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="quiltsblue" />
             </indexes>
@@ -162,8 +164,8 @@
                 <case> <index-ref value="1" /> <points amount="15" /> </case>
                 <case> <index-ref value="2" /> <points amount="30" /> </case>
             </cases>
-        </switch>
-        <switch>
+        </score>
+        <score>
             <indexes>
                 <index objective="quiltsorange" />
             </indexes>
@@ -172,12 +174,12 @@
                 <case> <index-ref value="1" /> <points amount="30" /> </case>
                 <case> <index-ref value="2" /> <points amount="60" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="similarity-name" description="similarity-desc">
         <objective-yesno id="coop" description="coop-desc" default="no" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="coop" />
             </indexes>
@@ -185,17 +187,17 @@
                 <case> <index-ref value="no"  /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes" /> <points amount="45" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="ballgame-name" description="ballgame-desc">
-        <objective-number id="ballcount"  description="ballcount-desc"  min="0" max="7" default="7" />
+        <objective-number id="ballcount"  description="ballcount-desc"  min="0" max="7" default="3" />
         <objective-enum   id="ballmiddle" description="ballmiddle-desc" default="none">
             <option name="your" description="yours" />
             <option name="them" description="theirs" />
             <option name="none" description="neither" />
         </objective-enum>
-        <switch>
+        <score>
             <indexes>
                 <index objective="ballmiddle" /><index objective="ballcount" />
             </indexes>
@@ -227,12 +229,12 @@
                 <case> <index-ref value="none" /> <index-ref value="6" /> <error message="someballs-error" /> </case>
                 <case> <index-ref value="none" /> <index-ref value="7" /> <points amount="70"  /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="gardening-name" description="gardening-desc">
         <objective-yesno id="plants" description="plants-desc" default="no" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="plants" />
             </indexes>
@@ -240,12 +242,12 @@
                 <case> <index-ref value="no"  /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes" /> <points amount="25" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="stove-name" description="stove-desc">
         <objective-yesno id="burners" description="burners-desc" default="no" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="burners" />
             </indexes>
@@ -253,12 +255,12 @@
                 <case> <index-ref value="no"  /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes" /> <points amount="25" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="bowling-name" description="bowling-desc">
         <objective-number id="pins" description="pins-desc" min="0" max="6" default="0" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="pins" />
             </indexes>
@@ -271,14 +273,14 @@
                 <case> <index-ref value="5" /> <points amount="35" /> </case>
                 <case> <index-ref value="6" /> <points amount="60" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="transitions-name" description="transitions-desc">
         <objective-yesno id="platslant" description="platformslanted-desc"  default="no"  />
         <objective-yesno id="platbalan" description="platformbalanced-desc" default="no"  />
         <objective-yesno id="platclear" description="platformclear-desc"    default="yes" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="platslant" /><index objective="platbalan" /><index objective="platclear" />
             </indexes>
@@ -292,7 +294,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="no"  /> <error message="platformstate-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="yes" /> <error message="platformstate-error" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="exercise-name" description="exercise-desc">
@@ -301,7 +303,7 @@
             <option name="hi" description="high" />
             <option name="no" description="none" />
         </objective-enum>
-        <switch>
+        <score>
             <indexes>
                 <index objective="strength"  />
             </indexes>
@@ -310,13 +312,13 @@
                 <case> <index-ref value="lo" /> <points amount="15" /> </case>
                 <case> <index-ref value="hi" /> <points amount="25" /> </case>
             </cases>
-        </switch>
+        </score>
     </mission>
 
     <mission name="training-name" description="training-desc">
         <objective-number id="dialbig"   description="dialbig-desc"   min="1" max="9" default="3" />
         <objective-number id="dialsmall" description="dialsmall-desc" min="0" max="5" default="0" />
-        <switch>
+        <score>
             <indexes>
                 <index objective="dialbig" /><index objective="dialsmall" />
             </indexes>
@@ -384,7 +386,7 @@
                 <case> <index-ref value="9" /> <index-ref value="4" /> <error message="dialcombination-error" /> </case>
                 <case> <index-ref value="9" /> <index-ref value="5" /> <error message="dialcombination-error" /> </case>
             </cases>
-        </switch>
+        </score>
 
     </mission>
 

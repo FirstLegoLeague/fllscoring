@@ -3,7 +3,7 @@ define('views/scoresheet',[
     'services/fs',
     'services/ng-fs',
     'services/ng-challenge',
-    'services/ng-results',
+    'services/ng-scores',
     'directives/sigpad',
     'directives/spinner',
     'angular'
@@ -11,8 +11,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$results','$modal','$challenge',
-        function($scope,$fs,$results,$modal,$challenge) {
+        '$scope','$fs','$scores','$modal','$challenge',
+        function($scope,$fs,$scores,$modal,$challenge) {
             log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -30,6 +30,7 @@ define('views/scoresheet',[
                     $scope.missionIndex = defs.missionIndex;
                     $scope.missions = defs.missions;
                     $scope.objectiveIndex = defs.objectiveIndex;
+                    $scope.match = { round: 1 };
                     angular.forEach($scope.missions,process);
                     $scope.$apply();
                 });
@@ -120,7 +121,7 @@ define('views/scoresheet',[
                 }
                 //todo:
                 var fn = [
-                    'result',
+                    'score',
                     $scope.settings.table,
                     $scope.team.number,
                     +(new Date())
@@ -128,14 +129,16 @@ define('views/scoresheet',[
 
                 var data = angular.copy($scope.field);
                 data.team = $scope.team;
+                data.match = $scope.match;
                 data.table = $scope.settings.table;
                 data.signature = $scope.signature;
 
 
                 return $fs.write(fn,data).then(function() {
-                    return $results.add({
+                    return $scores.add({
                         file: fn,
                         team: $scope.team,
+                        match: $scope.match,
                         score: $scope.score()
                     });
                 }).then(function() {

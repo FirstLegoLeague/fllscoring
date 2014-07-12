@@ -30,7 +30,7 @@ define('services/ng-fs',[
                 });
             },
             write: function(file,data) {
-                return wrap('write')(file,angular.toJson(data));
+                return wrap('write')(file,angular.toJson(data) + '\n');
             },
             remove: wrap('remove')
         };
