@@ -465,15 +465,15 @@ define([
                 });
             };
 
-            $scope.open = function (size) {
+            $scope.open = function (size, mission) {
 
                 var modalInstance = $modal.open({
                   templateUrl: 'myModalContent.html',
                   controller: 'ModalInstanceCtrl',
                   size: size,
                   resolve: {
-                    items: function () {
-                      return ['item1', 'item2', 'item3'];
+                    mission: function () {
+                      return mission;
                     }
                   }
                 });
@@ -487,16 +487,13 @@ define([
 
         }
     ]).controller('ModalInstanceCtrl',[
-        '$scope', '$modalInstance', 'items',
-        function ($scope, $modalInstance, items) {
+        '$scope', '$modalInstance', 'mission',
+        function ($scope, $modalInstance, mission) {
 
-          $scope.items = items;
-          $scope.selected = {
-            item: $scope.items[0]
-          };
+          $scope.mission = mission;
 
           $scope.ok = function () {
-            $modalInstance.close($scope.selected.item);
+            $modalInstance.close();
           };
 
           $scope.cancel = function () {
