@@ -67,7 +67,7 @@ table {
         font-size: 38px;
     }
 
-    i {
+    .active i {
         color: #319cff;
     }
 }
@@ -105,9 +105,9 @@ table {
         position: absolute;
         top: 0px;
         bottom: 80px;
+        margin-top: 79px;
     }
     .viewMain > div {
-        margin-top: 69px;
         width: 20%;
         height: 100%;
         float: left;
@@ -151,7 +151,7 @@ table {
         width: 100%;
         top: 0px;
         bottom: 50px;
-        margin-top: 40px;
+        margin-top: 50px;
     }
     .viewMain > div {
         background-color: white;
@@ -191,7 +191,7 @@ table {
         width: 100%;
         top: 0px;
         bottom: 50px;
-        margin-top: 40px;
+        margin-top: 50px;
     }
     .viewMain > div {
         background-color: white;
