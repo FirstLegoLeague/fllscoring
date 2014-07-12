@@ -114,8 +114,8 @@
                 <index objective="dog" />
             </indexes>
             <cases>
-                <case> <index value="no"  /> <points amount="0"  /> </case>
-                <case> <index value="yes" /> <points amount="20" /> </case>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="20" /> </case>
             </cases>
         </switch>
     </mission>
@@ -275,7 +275,7 @@
     </mission>
 
     <mission name="transitions-name" description="transitions-desc">
-        <objective-yesno id="platslant" Wdescription="platformslanted-desc"  default="no"  />
+        <objective-yesno id="platslant" description="platformslanted-desc"  default="no"  />
         <objective-yesno id="platbalan" description="platformbalanced-desc" default="no"  />
         <objective-yesno id="platclear" description="platformclear-desc"    default="yes" />
         <switch>
@@ -388,4 +388,4 @@
 
     </mission>
 
-</fll:season>
+</fll:challenge>
