@@ -1,4 +1,4 @@
-xdescribe('size',function() {
+describe('size',function() {
     var ngDirectives = factory('directives/ng-directives');
     var module = factory('directives/size',{
         'directives/ng-directives': ngDirectives
