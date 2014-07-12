@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "express": "^3.4.8",
+    "karma-coverage": "^0.2.4",
     "mkdirp": "^0.3.5"
   }
 }
