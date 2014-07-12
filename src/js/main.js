@@ -3,7 +3,7 @@ define([
     'services/log',
     'views/settings',
     'views/teams',
-    'views/scores',
+    'views/scoresheet',
     'views/ranking',
     'services/ng-services',
     'directives/ng-directives',
@@ -12,7 +12,7 @@ define([
     'tests/indexedDBTest',
     'angular-bootstrap',
     'angular'
-],function(FastClick,log,settings,teams,scores,ranking,services,directives,size,fsTest,dbTest) {
+],function(FastClick,log,settings,teams,scoresheet,ranking,services,directives,size,fsTest,dbTest) {
 
     log('device ready');
 
@@ -32,7 +32,7 @@ define([
         function($scope) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
-            $scope.pages = ['teams','scores','ranking','settings'];
+            $scope.pages = ['teams','scoresheet','ranking','settings'];
             $scope.currentPage = $scope.pages[1];
 
             $scope.setPage = function(page) {
@@ -62,7 +62,7 @@ define([
         'ui.bootstrap',
         settings.name,
         teams.name,
-        scores.name,
+        scoresheet.name,
         ranking.name,
         services.name,
         directives.name

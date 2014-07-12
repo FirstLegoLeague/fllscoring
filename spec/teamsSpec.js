@@ -52,12 +52,12 @@ describe('teams', function() {
     });
 
     describe('selectTeam', function() {
-        it('shoud select the scores page', function() {
+        it('shoud select the scoresheet page', function() {
             var team = dummyTeam;
             var eventSpy = jasmine.createSpy('eventSpy');
             $scope.$root.$on('selectTeam', eventSpy);
             $scope.selectTeam(team);
-            expect($scope.setPage).toHaveBeenCalledWith('scores');
+            expect($scope.setPage).toHaveBeenCalledWith('scoresheet');
             expect(eventSpy).toHaveBeenCalled();
             expect(eventSpy.mostRecentCall.args[1]).toBe(team);
         });

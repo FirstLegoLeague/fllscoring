@@ -1,16 +1,16 @@
-.view-scores .teams {
+.view-scoresheet .teams {
     background-color: #333;
     height: 400px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-#scores {
+#scoresheet {
     max-width: 900px;
     margin: auto;
 }
 
-#scores .btn {
+#scoresheet .btn {
     width: 150px;
     margin-bottom: 20px;
 }

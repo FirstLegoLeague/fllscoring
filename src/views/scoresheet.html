@@ -1,5 +1,5 @@
-<div ng-controller="scoresCtrl" id="scores">
-    <h1>Scores</h1>
+<div ng-controller="scoresheetCtrl" id="scoresheet">
+    <h1>Scoresheet</h1>
 
     <div>
 
@@ -9,7 +9,7 @@
                 <div>
                     <script type="text/ng-template" id="myModalContent.html">
                         <div class="modal-header">
-                            <h3 class="modal-title">missie</h3>
+                            <h3 class="modal-title">{{mission.title}}</h3>
                         </div>
                         <div class="modal-body">
                            abc
@@ -19,7 +19,7 @@
                         </div>
                     </script>
 
-                    <div class="description" ng-click="open('lg')">description</div>
+                    <div class="description" ng-click="open('lg', mission)">description</div>
                 </div>
 
                 <h2>
@@ -70,7 +70,7 @@
 
         <p>
             <button class="btn" ng-show="team" ng-click="save()">Save</button>
-            <button class="btn" id="discard" onclick="confirm('Sure to discard these scores?')">Discard</button>
+            <button class="btn" id="discard" onclick="confirm('Sure to discard this scoresheet?')">Discard</button>
         </p>
     </div>
 </div>
