@@ -79,7 +79,7 @@
     </strings>
 
     <mission name="flexibility-name" description="flexibility-desc">
-        <objective id="yellowloops" description="yellowloops-desc" type="number" min="0" max="2" default="0" />
+        <objective-number id="yellowloops" description="yellowloops-desc" min="0" max="2" default="0" />
         <switch>
             <indexes>
                 <index objective="yellowloops" />
@@ -93,7 +93,7 @@
     </mission>
 
     <mission name="medicine-name" description="medicine-desc">
-        <objective id="meds" description="meds-desc" type="yesno" default="no" />
+        <objective-yesno id="meds" description="meds-desc" default="no" />
         <switch>
             <indexes>
                 <index objective="meds" />
@@ -106,7 +106,7 @@
     </mission>
 
     <mission name="animals-name" description="animals-desc">
-        <objective id="dog" description="dog-desc" type="yesno" default="0" />
+        <objective-yesno id="dog" description="dog-desc" default="0" />
         <switch>
             <indexes>
                 <index objective="dog" />
@@ -119,8 +119,8 @@
     </mission>
 
     <mission name="woodwork-name" description="woodwork-desc">
-        <objective id="chairbase"  description="chairbase-desc"  type="yesno" default="no" />
-        <objective id="chairtable" description="chairtable-desc" type="yesno" default="no" />
+        <objective-yesno id="chairbase"  description="chairbase-desc"  default="no" />
+        <objective-yesno id="chairtable" description="chairtable-desc" default="no" />
         <switch>
             <indexes>
                 <index objective="chairbase" />
@@ -136,7 +136,7 @@
     </mission>
 
     <mission name="videocall-name" description="videocall-desc">
-        <objective id="flags" description="flags-desc" type="number" min="0" max="2" default="0" />
+        <objective-number id="flags" description="flags-desc" min="0" max="2" default="0" />
         <switch>
             <indexes>
                 <index objective="flags" />
@@ -150,8 +150,8 @@
     </mission>
 
     <mission name="quilts-name" description="quilts-desc">
-        <objective id="quiltsblue"   description="quiltsblue-desc"   type="number" min="0" max="2" default="0" />
-        <objective id="quiltsorange" description="quiltsorange-desc" type="number" min="0" max="2" default="0" />
+        <objective-number id="quiltsblue"   description="quiltsblue-desc"   min="0" max="2" default="0" />
+        <objective-number id="quiltsorange" description="quiltsorange-desc" min="0" max="2" default="0" />
         <switch>
             <indexes>
                 <index objective="quiltsblue" />
@@ -175,7 +175,7 @@
     </mission>
 
     <mission name="similarity-name" description="similarity-desc">
-        <objective id="coop" description="coop-desc" type="yesno" default="no" />
+        <objective-yesno id="coop" description="coop-desc" default="no" />
         <switch>
             <indexes>
                 <index objective="coop" />
@@ -188,12 +188,12 @@
     </mission>
 
     <mission name="ballgame-name" description="ballgame-desc">
-        <objective id="ballcount" description="ballcount-desc" type="number" min="0" max="7" default="7" />
-        <objective id="ballmiddle" description="ballmiddle-desc" type="enum" default="none">
+        <objective-number id="ballcount"  description="ballcount-desc"  min="0" max="7" default="7" />
+        <objective-enum   id="ballmiddle" description="ballmiddle-desc" default="none">
             <option name="your" description="yours" />
             <option name="them" description="theirs" />
             <option name="none" description="neither" />
-        </objective>
+        </objective-enum>
         <switch>
             <indexes>
                 <index objective="ballcount" />
@@ -231,7 +231,7 @@
     </mission>
 
     <mission name="gardening-name" description="gardening-desc">
-        <objective id="plants" description="plants-desc" type="yesno" default="no" />
+        <objective-yesno id="plants" description="plants-desc" default="no" />
         <switch>
             <indexes>
                 <index objective="plants" />
@@ -244,7 +244,7 @@
     </mission>
 
     <mission name="stove-name" description="stove-desc">
-        <objective id="burners" description="burners-desc" type="yesno" default="no" />
+        <objective-yesno id="burners" description="burners-desc" default="no" />
         <switch>
             <indexes>
                 <index objective="burners" />
@@ -257,7 +257,7 @@
     </mission>
 
     <mission name="bowling-name" description="bowling-desc">
-        <objective id="pins" description="pins-desc" type="number" min="0" max="6" default="0" />
+        <objective-number id="pins" description="pins-desc" min="0" max="6" default="0" />
         <switch>
             <indexes>
                 <index objective="pins" />
@@ -275,9 +275,9 @@
     </mission>
 
     <mission name="transitions-name" description="transitions-desc">
-        <objective id="platformslanted"  description="platformslanted-desc"  type="yesno" default="no"  />
-        <objective id="platformbalanced" description="platformbalanced-desc" type="yesno" default="no"  />
-        <objective id="platformclear"    description="platformclear-desc"    type="yesno" default="yes" />
+        <objective-yesno id="platformslanted"  description="platformslanted-desc"  default="no"  />
+        <objective-yesno id="platformbalanced" description="platformbalanced-desc" default="no"  />
+        <objective-yesno id="platformclear"    description="platformclear-desc"    default="yes" />
         <switch>
             <indexes>
                 <index objective="platformslanted"  />
@@ -298,7 +298,7 @@
     </mission>
 
     <mission name="exercise-name" description="exercise-desc">
-        <objective id="strength" description="strength-desc" type="enum" default="no">
+        <objective-enum id="strength" description="strength-desc" default="no">
             <option name="lo" description="low"  />
             <option name="hi" description="high" />
             <option name="no" description="none" />
@@ -316,12 +316,12 @@
     </mission>
 
     <mission name="training-name" description="training-desc">
-        <objective id="dialbig"   description="dialbig-desc"   type="number" min="1" max="9" default="3" />
-        <objective id="dialsmall" description="dialsmall-desc" type="number" min="0" max="5" default="0" />
+        <objective-number id="dialbig"   description="dialbig-desc"   min="1" max="9" default="3" />
+        <objective-number id="dialsmall" description="dialsmall-desc" min="0" max="5" default="0" />
         <switch>
             <indexes>
-                <index objective="dialbig"  />
-                <index objective="dialsmall"  />
+                <index objective="dialbig"   />
+                <index objective="dialsmall" />
             </indexes>
             <cases>
                 <case> <index value="1" /> <index value="0" /> <result score="-60" /> </case>
