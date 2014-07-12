@@ -4,7 +4,7 @@
  * <input spinner>
  *
  */
-define([
+define('directives/spinner',[
     'directives/ng-directives',
     'jquery'
 ],function(module) {
