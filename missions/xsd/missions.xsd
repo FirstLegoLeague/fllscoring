@@ -34,7 +34,7 @@
         </xs:simpleContent>
     </xs:complexType>
 
-    <!-- A mission. Contains one or more objectives and one more more switches -->
+    <!-- A mission. Contains one or more objectives and one more more scores -->
     <xs:complexType name="mission">
         <xs:sequence>
             <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -42,7 +42,7 @@
                 <xs:element name="objective-number" type="fll:objective-number" />
                 <xs:element name="objective-enum" type="fll:objective-enum" />
             </xs:choice>
-            <xs:element name="switch" type="fll:switch" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="score" type="fll:score" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
 
         <xs:attribute name="name" type="xs:string" use="required" />
@@ -88,15 +88,15 @@
         <xs:attribute name="description" type="xs:string" use="required" />
     </xs:complexType>
 
-    <!-- Switch node for values -->
-    <xs:complexType name="switch">
+    <!-- Score node for values -->
+    <xs:complexType name="score">
         <xs:sequence>
             <xs:element name="indexes" type="fll:indexes" />
             <xs:element name="cases" type="fll:cases" />
         </xs:sequence>
     </xs:complexType>
 
-    <!-- Indexes list for a switch -->
+    <!-- Indexes list for a score -->
     <xs:complexType name="indexes">
         <xs:sequence>
             <xs:element name="index" type="fll:index" minOccurs="1" maxOccurs="unbounded" />
@@ -108,14 +108,14 @@
         <xs:attribute name="objective" type="xs:string" use="required" />
     </xs:complexType>
 
-    <!-- Cases for a switch -->
+    <!-- Cases for a score -->
     <xs:complexType name="cases">
         <xs:sequence>
             <xs:element name="case" type="fll:case" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
 
-    <!-- One case for a switch -->
+    <!-- One case for a score -->
     <xs:complexType name="case">
         <xs:sequence>
             <xs:element name="index-ref" type="fll:index-ref" minOccurs="1" maxOccurs="unbounded" />
