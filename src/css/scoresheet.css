@@ -11,8 +11,20 @@
 }
 
 #scoresheet .btn {
-    width: 150px;
+    min-width: 150px;
     margin-bottom: 20px;
+}
+
+#scoresheet .btn-group {
+    width: 100%;
+    text-align: center;
+}
+
+
+.btn-enum {
+    color: dodgerblue;
+    background: #bbddff;
+    font-size: 16px;
 }
 
 #discard {

@@ -111,7 +111,7 @@ table {
     .viewMain.teams {
         -webkit-transform: translateX(0);
     }
-    .viewMain.scoreheets {
+    .viewMain.scoreheet {
         -webkit-transform: translateX(-25%);
     }
     .viewMain.ranking {
@@ -143,14 +143,14 @@ table {
         -webkit-transition: opacity 0.2s;
     }
     .viewMain.teams .view-teams,
-    .viewMain.scoreheet .view-scoresheet,
+    .viewMain.scoresheet .view-scoresheet,
     .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
         opacity: 1;
         z-index: 2;
     }
 
-    #scoreheets {
+    .panel {
         padding: 5px;
     }
 }
