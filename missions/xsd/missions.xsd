@@ -1,8 +1,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:fll" xmlns:fll="urn:fll">
-    <xs:element name="season" type="fll:season" />
+    <xs:element name="challenge" type="fll:challenge" />
 
     <!-- Definition of main fll node -->
-    <xs:complexType name="season">
+    <xs:complexType name="challenge">
         <xs:sequence>
             <!-- Strings node for translations -->
             <xs:element name="strings" type="fll:strings" />
@@ -24,12 +24,11 @@
 
     <!-- Defintion of <string/> node -->
     <xs:complexType name="string">
-        <xs:complexContent>
-            <xs:restriction base="xs:anyType">
-                <xs:attribute name="id"      type="xs:string" use="required" />
-                <xs:attribute name="message" type="xs:string" use="required" />
-            </xs:restriction>
-        </xs:complexContent>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:string" use="required" />
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 
     <!-- A mission. Contains one or more objectives and one more more switches -->
@@ -116,7 +115,7 @@
     <!-- One case for a switch -->
     <xs:complexType name="case">
         <xs:sequence>
-            <xs:element name="index" type="fll:caseindex" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="index-ref" type="fll:index-ref" minOccurs="1" maxOccurs="unbounded" />
             <xs:choice>
                 <xs:element name="points" type="fll:points" />
                 <xs:element name="error" type="fll:error" />
@@ -125,7 +124,7 @@
     </xs:complexType>
 
     <!-- Index in a case -->
-    <xs:complexType name="caseindex">
+    <xs:complexType name="index-ref">
         <xs:attribute name="value" type="xs:string" />
     </xs:complexType>
 
