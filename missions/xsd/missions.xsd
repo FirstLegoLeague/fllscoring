@@ -75,7 +75,7 @@
     <!-- Enum objective. Requires id and description. Optional default and has sub-options -->
     <xs:complexType name="objective-enum">
         <xs:sequence>
-            <xs:element name="option" type="fll:option" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="option" type="fll:option" minOccurs="2" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="id" type="xs:string" use="required" />
         <xs:attribute name="description" type="xs:string" use="required" />
