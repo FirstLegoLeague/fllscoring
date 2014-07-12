@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<fll:season xlmns:fll="urn:fll" year="2012" name="Senior Solutions">
+<fll:season xmlns:fll="urn:fll" year="2012" name="Senior Solutions">
 
     <strings>
         <string id="flexibility-name"      message="Flexibility" />
@@ -67,7 +67,7 @@
         <string id="exercise-name"         message="Strength Exercise" />
         <string id="exercise-desc"         message="Robot lifts the west bar to make the weight rise." />
         <string id="strength-desc"         message="Weight raised" />
-        <string id="low"                   message=Low" />
+        <string id="low"                   message="Low" />
         <string id="high"                  message="High" />
         <string id="none"                  message="Not Done" />
 
@@ -382,11 +382,11 @@
                 <case> <index value="8" /> <index value="5" /> <result score="117" /> </case>
 
                 <case> <index value="9" /> <index value="0" /> <result score="118" /> </case>
-                <case> <index value="9" /> <index value="1" /> <result score=error="dialcombination-error" /> </case>
-                <case> <index value="9" /> <index value="2" /> <result score=error="dialcombination-error" /> </case>
-                <case> <index value="9" /> <index value="3" /> <result score=error="dialcombination-error" /> </case>
-                <case> <index value="9" /> <index value="4" /> <result score=error="dialcombination-error" /> </case>
-                <case> <index value="9" /> <index value="5" /> <result score=error="dialcombination-error" /> </case>
+                <case> <index value="9" /> <index value="1" /> <result error="dialcombination-error" /> </case>
+                <case> <index value="9" /> <index value="2" /> <result error="dialcombination-error" /> </case>
+                <case> <index value="9" /> <index value="3" /> <result error="dialcombination-error" /> </case>
+                <case> <index value="9" /> <index value="4" /> <result error="dialcombination-error" /> </case>
+                <case> <index value="9" /> <index value="5" /> <result error="dialcombination-error" /> </case>
             </cases>
         </switch>
 
