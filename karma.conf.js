@@ -9,7 +9,7 @@ module.exports = function(config) {
 
 
     // frameworks to use
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
@@ -17,12 +17,12 @@ module.exports = function(config) {
       'src/components/jquery/jquery.min.js',
       'src/components/angular/angular.min.js',
       'src/components/angular-mocks/angular-mocks.js',
-      'spec/test-main.js',
-      //squire for requirejs mocking
-      {pattern: 'node_modules/squirejs/src/Squire.js', included: false},
-      {pattern: 'src/components/**/*.js', included: false},
-      {pattern: 'src/js/**/*.js', included: false},
-      {pattern: 'spec/*.js', included: false}
+      'src/components/q/q.js',
+      'src/components/idbwrapper/idbstore.js',
+      'spec/defineShim.js',
+      'spec/asyncJasmine.js',
+      'src/js/services/fs-*.js',
+      'spec/*Spec.js'
     ],
 
 
