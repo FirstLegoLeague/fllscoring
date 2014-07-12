@@ -1,457 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../xsl/missions.xsl"?>
-<fll>
-    <season year="2012" name="Senior Solutions" />
 
-    <mission description="Flexibility">
-        <objective id="yellowloops" description="Yellow Loops in Base" type="number" min="0" max="2" />
-        <!--
-            The following could be added, but it'd serve no purpose:
-            <score points="0">
-                <condition id="yellowloops" value="0" />
-            </score>
-        -->
-        <score points="20">
-            <condition id="yellowloops" value="1" />
-        </score>
-        <score points="40">
-            <condition id="yellowloops" value="2" />
-        </score>
+<fll:challenge xmlns:fll="urn:fll" year="2012" name="Senior Solutions">
+
+    <strings>
+        <string id="flexibility-name">      Flexibility</string>
+        <string id="flexibility-desc">      <![CDATA[Robot gets yellow loops to Base.]]></string>
+        <string id="yellowloops-desc">      Yellow Loops in Base</string>
+
+        <string id="medicine-name">         Medicine</string>
+        <string id="medicine-desc">         <![CDATA[The bottles are arranged randomly before the start of each match (See Field Setup). Robot gets the green medicine bottle to Base without disturbing orange ones.]]></string>
+        <string id="meds-desc">             Green in Base, Orange Not Moved</string>
+
+        <string id="animals-name">          Service Animals</string>
+        <string id="animals-desc">          <![CDATA[Robot applies force to gray disc, causing dog with phone to move toward Base.]]></string>
+        <string id="dog-desc">              Dog in Base</string>
+
+        <string id="woodwork-name">         Wood Working</string>
+        <string id="woodwork-desc">         <![CDATA[Robot gets the chair to Base. You fix the chair by hand. Robot brings the chair to the table.]]></string>
+        <string id="chairbase-desc">        Chair Repaired and in Base</string>
+        <string id="chairtable-desc">       Chair Repaired and under Table</string>
+        <string id="chairposition-error">   Chair cannot be in base AND under the table.</string>
+
+        <string id="videocall-name">        Video Call</string>
+        <string id="videocall-desc">        <![CDATA[Robot gets the flags to rise.]]></string>
+        <string id="flags-desc">            Flags Fully Upright</string>
+
+        <string id="quilts-name">           Quilts</string>
+        <string id="quilts-desc">           <![CDATA[Robot adds squares to quilts.]]></string>
+        <string id="quiltsblue-desc">       Blue Squares Touch Target</string>
+        <string id="quiltsorange-desc">     Orange Squares Touch Target</string>
+
+        <string id="similarity-name">       Similarity Recognition and Cooperation</string>
+        <string id="similarity-desc">       <![CDATA[Robot aligns your pointer with the other team’s pointer.]]></string>
+        <string id="coop-desc">             Dials on Both Fields are Parallel</string>
+
+        <string id="ballgame-name">         Ball Game</string>
+        <string id="ballgame-desc">         <![CDATA[Both teams get points for the total number of balls on the racks at the end of the match, but only one team gets points when their color is at the center.]]></string>
+        <string id="ballcount-desc">        Balls on Rack</string>
+        <string id="ballmiddle-desc">       Middle Ball</string>
+        <string id="yours">                 Yours</string>
+        <string id="theirs">                Theirs</string>
+        <string id="neither">               Neither</string>
+        <string id="noballs-error">         When no balls are left, the middle ball must be 'Neither'.</string>
+        <string id="someballs-error">       When some, but not all, balls are left, the middle ball cannot be 'Neither'.</string>
+        <string id="allballs-error">        When all balls are left, the middle ball must be 'Neither'.</string>
+
+        <string id="gardening-name">        Gardening</string>
+        <string id="gardening-desc">        <![CDATA[Robot adds to the garden.]]></string>
+        <string id="plants-desc">           Base of Plants Touch Target</string>
+
+        <string id="stove-name">            Stove</string>
+        <string id="stove-desc">            <![CDATA[Robot gets all burners to show black.]]></string>
+        <string id="burners-desc">          All Burners are Black</string>
+
+        <string id="bowling-name">          Bowling</string>
+        <string id="bowling-desc">          <![CDATA[Robot sends balls to knock pins down. If the pins are not all down after the first try using a yellow ball, the referee returns that ball to Base for a second try (this can only happen once per match).]]></string>
+        <string id="pins-desc">             Pins Hit</string>
+
+        <string id="transitions-name">      Transitions</string>
+        <string id="transitions-desc">      <![CDATA[Robot gets onto the center platform and is there when the match ends.]]></string>
+        <string id="platformslanted-desc">  Robot Only Touches Slanted Platform</string>
+        <string id="platformbalanced-desc"> Robot Only Touches Balanced Platform</string>
+        <string id="platformclear-desc">    Platform Only Touches Robot and Mat</string>
+        <string id="platformstate-error">   Platform cannot be slanted AND balanced.</string>
+
+        <string id="exercise-name">         Strength Exercise</string>
+        <string id="exercise-desc">         <![CDATA[Robot lifts the west bar to make the weight rise.]]></string>
+        <string id="strength-desc">         Weight raised</string>
+        <string id="low">                   Low</string>
+        <string id="high">                  High</string>
+        <string id="none">                  Not Done</string>
+
+        <string id="training-name">         Cardio Training</string>
+        <string id="training-desc">         <![CDATA[Robot turns the pinwheel 90° at a time.]]></string>
+        <string id="dialbig-desc">          Dial Big Step</string>
+        <string id="dialsmall-desc">        Dial Small Step</string>
+        <string id="dialcombination-error"> When Big Dial is on 9, Small Dial must be on 0.</string>
+    </strings>
+
+    <!-- Do NOT edit below this line -->
+
+    <mission name="flexibility-name" description="flexibility-desc">
+        <objective-number id="yellowloops" description="yellowloops-desc" min="0" max="2" default="0" />
+        <switch>
+            <indexes>
+                <index objective="yellowloops" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="20" /> </case>
+                <case> <index-ref value="2" /> <points amount="40" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Medicine">
-        <objective id="meds" description="Green in Base, Orange Not Moved" type="yesno" />
-        <score points="25">
-            <condition id="meds" value="yes" />
-        </score>
+    <mission name="medicine-name" description="medicine-desc">
+        <objective-yesno id="meds" description="meds-desc" default="no" />
+        <switch>
+            <indexes>
+                <index objective="meds" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="25" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Helping Animals">
-        <objective id="animals" description="Dog in Base" type="yesno" />
-        <score points="20">
-            <condition id="animals" value="yes" />
-        </score>
+    <mission name="animals-name" description="animals-desc">
+        <objective-yesno id="dog" description="dog-desc" default="no" />
+        <switch>
+            <indexes>
+                <index objective="dog" />
+            </indexes>
+            <cases>
+                <case> <index value="no"  /> <points amount="0"  /> </case>
+                <case> <index value="yes" /> <points amount="20" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Wood work">
-        <objective id="chairbase"  description="Chare Repaired and in Base"     type="yesno" />
-        <objective id="chairtable" description="Chare Repaired and under Table" type="yesno" />
-        <constraint message="Chair cannot be in base AND under the table.">
-            <condition id="chairbase"  value="yes" />
-            <condition id="chairtable" value="yes" />
-        </constraint>
-        <score points="15">
-            <condition id="chairbase"  value="yes" />
-        </score>
-        <score points="25">
-            <condition id="chairtable" value="yes" />
-        </score>
+    <mission name="woodwork-name" description="woodwork-desc">
+        <objective-yesno id="chairbase"  description="chairbase-desc"  default="no" />
+        <objective-yesno id="chairtable" description="chairtable-desc" default="no" />
+        <switch>
+            <indexes>
+                <index objective="chairbase" /><index objective="chairtable" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="25" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="15" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <error message="chairposition-error" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Videophone">
-        <objective id="flags" description="Flags Fully Upright" type="number" min="0" max="2" />
-        <score points="20">
-            <condition id="flags" value="1" />
-        </score>
-        <score points="40">
-            <condition id="flags" value="2" />
-        </score>
+    <mission name="videocall-name" description="videocall-desc">
+        <objective-number id="flags" description="flags-desc" min="0" max="2" default="0" />
+        <switch>
+            <indexes>
+                <index objective="flags" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="20" /> </case>
+                <case> <index-ref value="2" /> <points amount="40" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Quilts">
-        <objective id="quiltsblue"   description="Blue Squares Touch Target" type="number" min="0" max="2"   />
-        <objective id="quiltsorange" description="Orange Squares Touch Target" type="number" min="0" max="2" />
-        <score points="15">
-            <condition id="quiltsblue" value="1" />
-        </score>
-        <score points="30">
-            <condition id="quiltsblue" value="2" />
-        </score>
-        <score points="30">
-            <condition id="quiltsorange" value="1" />
-        </score>
-        <score points="60">
-            <condition id="quiltsorange" value="2" />
-        </score>
+    <mission name="quilts-name" description="quilts-desc">
+        <objective-number id="quiltsblue"   description="quiltsblue-desc"   min="0" max="2" default="0" />
+        <objective-number id="quiltsorange" description="quiltsorange-desc" min="0" max="2" default="0" />
+        <switch>
+            <indexes>
+                <index objective="quiltsblue" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="15" /> </case>
+                <case> <index-ref value="2" /> <points amount="30" /> </case>
+            </cases>
+        </switch>
+        <switch>
+            <indexes>
+                <index objective="quiltsorange" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="30" /> </case>
+                <case> <index-ref value="2" /> <points amount="60" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Cooperation and Recognising Similarities">
-        <objective id="coop" description="Dials on Both Fields are Parallel" type="yesno" />
-        <score points="45">
-            <condition id="coop" value="yes" />
-        </score>
+    <mission name="similarity-name" description="similarity-desc">
+        <objective-yesno id="coop" description="coop-desc" default="no" />
+        <switch>
+            <indexes>
+                <index objective="coop" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="45" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Ball Game">
-        <objective id="ballcount" description="Balls on Rack" type="number" min="0" max="7" />
-        <objective id="ballmiddle" description="Middle Ball" type="enum">
-            <option id="your" description="Yours" />
-            <option id="them" description="Theirs" />
-            <option id="none" description="Neither" />
-        </objective>
-        <constraint message="If no balls are left, the middle ball must be 'Neither'.">
-            <condition id="ballcount"  value="0"    />
-            <condition id="ballmiddle" value="your" />
-        </constraint>
-        <constraint message="If no balls are left, the middle ball must be 'Neither'.">
-            <condition id="ballcount"  value="0"    />
-            <condition id="ballmiddle" value="them" />
-        </constraint>
-        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
-            <condition id="ballcount"  value="1"    />
-            <condition id="ballmiddle" value="none" />
-        </constraint>
-        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
-            <condition id="ballcount"  value="2"    />
-            <condition id="ballmiddle" value="none" />
-        </constraint>
-        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
-            <condition id="ballcount"  value="3"    />
-            <condition id="ballmiddle" value="none" />
-        </constraint>
-        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
-            <condition id="ballcount"  value="4"    />
-            <condition id="ballmiddle" value="none" />
-        </constraint>
-        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
-            <condition id="ballcount"  value="5"    />
-            <condition id="ballmiddle" value="none" />
-        </constraint>
-        <constraint message="When some, but not all, balls are left, the middle ball cannot be 'Neither'.">
-            <condition id="ballcount"  value="6"    />
-            <condition id="ballmiddle" value="none" />
-        </constraint>
-        <constraint message="If all balls are left, the middle ball must be 'Neither'.">
-            <condition id="ballcount"  value="7"    />
-            <condition id="ballmiddle" value="your" />
-        </constraint>
-        <constraint message="If all balls are left, the middle ball must be 'Neither'.">
-            <condition id="ballcount"  value="7"    />
-            <condition id="ballmiddle" value="them" />
-        </constraint>
-        <score points="10">
-            <condition id="ballcount"  value="1"    />
-        </score>
-        <score points="20">
-            <condition id="ballcount"  value="2"    />
-        </score>
-        <score points="30">
-            <condition id="ballcount"  value="3"    />
-        </score>
-        <score points="40">
-            <condition id="ballcount"  value="4"    />
-        </score>
-        <score points="50">
-            <condition id="ballcount"  value="5"    />
-        </score>
-        <score points="60">
-            <condition id="ballcount"  value="6"    />
-        </score>
-        <score points="70">
-            <condition id="ballcount"  value="7"    />
-        </score>
-        <score points="60">
-            <condition id="ballmiddle" value="your" />
-        </score>
+    <mission name="ballgame-name" description="ballgame-desc">
+        <objective-number id="ballcount"  description="ballcount-desc"  min="0" max="7" default="7" />
+        <objective-enum   id="ballmiddle" description="ballmiddle-desc" default="none">
+            <option name="your" description="yours" />
+            <option name="them" description="theirs" />
+            <option name="none" description="neither" />
+        </objective-enum>
+        <switch>
+            <indexes>
+                <index objective="ballmiddle" /><index objective="ballcount" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="your" /> <index-ref value="0" /> <error message="noballs-error"   /> </case>
+                <case> <index-ref value="your" /> <index-ref value="1" /> <points amount="70"  /> </case>
+                <case> <index-ref value="your" /> <index-ref value="2" /> <points amount="80"  /> </case>
+                <case> <index-ref value="your" /> <index-ref value="3" /> <points amount="90"  /> </case>
+                <case> <index-ref value="your" /> <index-ref value="4" /> <points amount="100" /> </case>
+                <case> <index-ref value="your" /> <index-ref value="5" /> <points amount="110" /> </case>
+                <case> <index-ref value="your" /> <index-ref value="6" /> <points amount="120" /> </case>
+                <case> <index-ref value="your" /> <index-ref value="7" /> <error message="allballs-error"  /> </case>
+
+                <case> <index-ref value="them" /> <index-ref value="0" /> <error message="noballs-error"   /> </case>
+                <case> <index-ref value="them" /> <index-ref value="1" /> <points amount="10"  /> </case>
+                <case> <index-ref value="them" /> <index-ref value="2" /> <points amount="20"  /> </case>
+                <case> <index-ref value="them" /> <index-ref value="3" /> <points amount="30"  /> </case>
+                <case> <index-ref value="them" /> <index-ref value="4" /> <points amount="40"  /> </case>
+                <case> <index-ref value="them" /> <index-ref value="5" /> <points amount="50"  /> </case>
+                <case> <index-ref value="them" /> <index-ref value="6" /> <points amount="60"  /> </case>
+                <case> <index-ref value="them" /> <index-ref value="7" /> <error message="allballs-error"  /> </case>
+
+                <case> <index-ref value="none" /> <index-ref value="0" /> <points amount="0"   /> </case>
+                <case> <index-ref value="none" /> <index-ref value="1" /> <error message="someballs-error" /> </case>
+                <case> <index-ref value="none" /> <index-ref value="2" /> <error message="someballs-error" /> </case>
+                <case> <index-ref value="none" /> <index-ref value="3" /> <error message="someballs-error" /> </case>
+                <case> <index-ref value="none" /> <index-ref value="4" /> <error message="someballs-error" /> </case>
+                <case> <index-ref value="none" /> <index-ref value="5" /> <error message="someballs-error" /> </case>
+                <case> <index-ref value="none" /> <index-ref value="6" /> <error message="someballs-error" /> </case>
+                <case> <index-ref value="none" /> <index-ref value="7" /> <points amount="70"  /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Gardening">
-        <objective id="plants" description="Base of Plants Touch Target" type="yesno" />
-        <score points="25">
-            <condition id="plants" value="yes" />
-        </score>
+    <mission name="gardening-name" description="gardening-desc">
+        <objective-yesno id="plants" description="plants-desc" default="no" />
+        <switch>
+            <indexes>
+                <index objective="plants" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="25" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Stove">
-        <objective id="stove" description="All Burners are Black" type="yesno" />
-        <score points="25">
-            <condition id="stove" value="yes" />
-        </score>
+    <mission name="stove-name" description="stove-desc">
+        <objective-yesno id="burners" description="burners-desc" default="no" />
+        <switch>
+            <indexes>
+                <index objective="burners" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="25" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Bowling">
-        <objective id="pins" description="Pins Hit" type="number" min="0" max="6" />
-        <score points="7" >
-            <condition id="pins" value="1" />
-        </score>
-        <score points="14">
-            <condition id="pins" value="2" />
-        </score>
-        <score points="21">
-            <condition id="pins" value="3" />
-        </score>
-        <score points="28">
-            <condition id="pins" value="4" />
-        </score>
-        <score points="35">
-            <condition id="pins" value="5" />
-        </score>
-        <score points="60">
-            <condition id="pins" value="6" />
-        </score>
+    <mission name="bowling-name" description="bowling-desc">
+        <objective-number id="pins" description="pins-desc" min="0" max="6" default="0" />
+        <switch>
+            <indexes>
+                <index objective="pins" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="7"  /> </case>
+                <case> <index-ref value="2" /> <points amount="14" /> </case>
+                <case> <index-ref value="3" /> <points amount="21" /> </case>
+                <case> <index-ref value="4" /> <points amount="28" /> </case>
+                <case> <index-ref value="5" /> <points amount="35" /> </case>
+                <case> <index-ref value="6" /> <points amount="60" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Transitions">
-        <objective id="platformslanted" description="Robot Only Touches Slanted Platform" type="yesno" />
-        <objective id="platformbalanced" description="Robot Only Touches Balanced Platform" type="yesno" />
-        <objective id="platformclear" description="Platform Only Touches Robot and Mat" type="yesno" />
-        <constraint message="Platform cannot be slanted AND balanced.">
-            <condition id="platformslanted"  value="yes" />
-            <condition id="platformbalanced" value="yes" />
-        </constraint>
-        <score points="45">
-            <condition id="platformslanted"  value="yes" />
-            <condition id="platformclear"    value="yes" />
-        </score>
-        <score points="65">
-            <condition id="platformbalanced" value="yes" />
-            <condition id="platformclear"    value="yes" />
-        </score>
+    <mission name="transitions-name" description="transitions-desc">
+        <objective-yesno id="platslant" Wdescription="platformslanted-desc"  default="no"  />
+        <objective-yesno id="platbalan" description="platformbalanced-desc" default="no"  />
+        <objective-yesno id="platclear" description="platformclear-desc"    default="yes" />
+        <switch>
+            <indexes>
+                <index objective="platslant" /><index objective="platbalan" /><index objective="platclear" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="65" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="45" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="no"  /> <error message="platformstate-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="yes" /> <error message="platformstate-error" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Strength Training">
-        <objective id="strength" description="Weight raised" type="enum">
-            <option id="low" description="Low" />
-            <option id="high" description="High" />
-            <option id="none" description="Not Done" />
-        </objective>
-        <score points="15">
-            <condition id="strength" value="low"  />
-        </score>
-        <score points="25">
-            <condition id="strength" value="high" />
-        </score>
+    <mission name="exercise-name" description="exercise-desc">
+        <objective-enum id="strength" description="strength-desc" default="no">
+            <option name="lo" description="low"  />
+            <option name="hi" description="high" />
+            <option name="no" description="none" />
+        </objective-enum>
+        <switch>
+            <indexes>
+                <index objective="strength"  />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="lo" /> <points amount="15" /> </case>
+                <case> <index-ref value="hi" /> <points amount="25" /> </case>
+            </cases>
+        </switch>
     </mission>
 
-    <mission description="Cardio Training">
-        <objective id="dialbig"   description="Dial Big Step"   type="number" min="1" max="9" />
-        <objective id="dialsmall" description="Dial Small Step" type="number" min="0" max="5" />
+    <mission name="training-name" description="training-desc">
+        <objective-number id="dialbig"   description="dialbig-desc"   min="1" max="9" default="3" />
+        <objective-number id="dialsmall" description="dialsmall-desc" min="0" max="5" default="0" />
+        <switch>
+            <indexes>
+                <index objective="dialbig" /><index objective="dialsmall" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="1" /> <index-ref value="0" /> <points amount="-60" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="1" /> <points amount="-55" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="2" /> <points amount="-50" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="3" /> <points amount="-45" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="4" /> <points amount="-40" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="5" /> <points amount="-35" /> </case>
 
-        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
-            <condition id="dialbig"   value="9" />
-            <condition id="dialsmall" value="1" />
-        </constraint>
-        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
-            <condition id="dialbig"   value="9" />
-            <condition id="dialsmall" value="2" />
-        </constraint>
-        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
-            <condition id="dialbig"   value="9" />
-            <condition id="dialsmall" value="3" />
-        </constraint>
-        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
-            <condition id="dialbig"   value="9" />
-            <condition id="dialsmall" value="4" />
-        </constraint>
-        <constraint message="When Big Dial is on 9, Small Dial can only be on 0.">
-            <condition id="dialbig"   value="9" />
-            <condition id="dialsmall" value="5" />
-        </constraint>
+                <case> <index-ref value="2" /> <index-ref value="0" /> <points amount="-30" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="1" /> <points amount="-25" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="2" /> <points amount="-20" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="3" /> <points amount="-15" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="4" /> <points amount="-10" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="5" /> <points amount="-5"  /> </case>
 
-        <score points="-60">
-            <condition id="dialbig"   value="1" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="-55">
-            <condition id="dialbig"   value="1" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="-50">
-            <condition id="dialbig"   value="1" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="-45">
-            <condition id="dialbig"   value="1" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="-40">
-            <condition id="dialbig"   value="1" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="-35">
-            <condition id="dialbig"   value="1" />
-            <condition id="dialsmall" value="5" />
-        </score>
+                <case> <index-ref value="3" /> <index-ref value="0" /> <points amount="0"   /> </case>
+                <case> <index-ref value="3" /> <index-ref value="1" /> <points amount="5"   /> </case>
+                <case> <index-ref value="3" /> <index-ref value="2" /> <points amount="10"  /> </case>
+                <case> <index-ref value="3" /> <index-ref value="3" /> <points amount="15"  /> </case>
+                <case> <index-ref value="3" /> <index-ref value="4" /> <points amount="20"  /> </case>
+                <case> <index-ref value="3" /> <index-ref value="5" /> <points amount="25"  /> </case>
 
-        <score points="-30">
-            <condition id="dialbig"   value="2" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="-25">
-            <condition id="dialbig"   value="2" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="-20">
-            <condition id="dialbig"   value="2" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="-15">
-            <condition id="dialbig"   value="2" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="-10">
-            <condition id="dialbig"   value="2" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="-5">
-            <condition id="dialbig"   value="2" />
-            <condition id="dialsmall" value="5" />
-        </score>
+                <case> <index-ref value="4" /> <index-ref value="0" /> <points amount="30"  /> </case>
+                <case> <index-ref value="4" /> <index-ref value="1" /> <points amount="35"  /> </case>
+                <case> <index-ref value="4" /> <index-ref value="2" /> <points amount="40"  /> </case>
+                <case> <index-ref value="4" /> <index-ref value="3" /> <points amount="45"  /> </case>
+                <case> <index-ref value="4" /> <index-ref value="4" /> <points amount="50"  /> </case>
+                <case> <index-ref value="4" /> <index-ref value="5" /> <points amount="55"  /> </case>
 
-        <score points="0">
-            <condition id="dialbig"   value="3" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="5">
-            <condition id="dialbig"   value="3" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="10">
-            <condition id="dialbig"   value="3" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="15">
-            <condition id="dialbig"   value="3" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="20">
-            <condition id="dialbig"   value="3" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="25">
-            <condition id="dialbig"   value="3" />
-            <condition id="dialsmall" value="5" />
-        </score>
+                <case> <index-ref value="5" /> <index-ref value="0" /> <points amount="60"  /> </case>
+                <case> <index-ref value="5" /> <index-ref value="1" /> <points amount="63"  /> </case>
+                <case> <index-ref value="5" /> <index-ref value="2" /> <points amount="66"  /> </case>
+                <case> <index-ref value="5" /> <index-ref value="3" /> <points amount="69"  /> </case>
+                <case> <index-ref value="5" /> <index-ref value="4" /> <points amount="72"  /> </case>
+                <case> <index-ref value="5" /> <index-ref value="5" /> <points amount="75"  /> </case>
 
-        <score points="30">
-            <condition id="dialbig"   value="4" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="35">
-            <condition id="dialbig"   value="4" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="40">
-            <condition id="dialbig"   value="4" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="45">
-            <condition id="dialbig"   value="4" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="50">
-            <condition id="dialbig"   value="4" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="55">
-            <condition id="dialbig"   value="4" />
-            <condition id="dialsmall" value="5" />
-        </score>
+                <case> <index-ref value="6" /> <index-ref value="0" /> <points amount="78"  /> </case>
+                <case> <index-ref value="6" /> <index-ref value="1" /> <points amount="91"  /> </case>
+                <case> <index-ref value="6" /> <index-ref value="2" /> <points amount="94"  /> </case>
+                <case> <index-ref value="6" /> <index-ref value="3" /> <points amount="97"  /> </case>
+                <case> <index-ref value="6" /> <index-ref value="4" /> <points amount="100" /> </case>
+                <case> <index-ref value="6" /> <index-ref value="5" /> <points amount="103" /> </case>
 
-        <score points="60">
-            <condition id="dialbig"   value="5" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="63">
-            <condition id="dialbig"   value="5" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="66">
-            <condition id="dialbig"   value="5" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="69">
-            <condition id="dialbig"   value="5" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="72">
-            <condition id="dialbig"   value="5" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="75">
-            <condition id="dialbig"   value="5" />
-            <condition id="dialsmall" value="5" />
-        </score>
+                <case> <index-ref value="7" /> <index-ref value="0" /> <points amount="106" /> </case>
+                <case> <index-ref value="7" /> <index-ref value="1" /> <points amount="107" /> </case>
+                <case> <index-ref value="7" /> <index-ref value="2" /> <points amount="108" /> </case>
+                <case> <index-ref value="7" /> <index-ref value="3" /> <points amount="109" /> </case>
+                <case> <index-ref value="7" /> <index-ref value="4" /> <points amount="110" /> </case>
+                <case> <index-ref value="7" /> <index-ref value="5" /> <points amount="111" /> </case>
 
-        <score points="78">
-            <condition id="dialbig"   value="6" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="91">
-            <condition id="dialbig"   value="6" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="94">
-            <condition id="dialbig"   value="6" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="97">
-            <condition id="dialbig"   value="6" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="100">
-            <condition id="dialbig"   value="6" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="103">
-            <condition id="dialbig"   value="6" />
-            <condition id="dialsmall" value="5" />
-        </score>
+                <case> <index-ref value="8" /> <index-ref value="0" /> <points amount="112" /> </case>
+                <case> <index-ref value="8" /> <index-ref value="1" /> <points amount="113" /> </case>
+                <case> <index-ref value="8" /> <index-ref value="2" /> <points amount="114" /> </case>
+                <case> <index-ref value="8" /> <index-ref value="3" /> <points amount="115" /> </case>
+                <case> <index-ref value="8" /> <index-ref value="4" /> <points amount="116" /> </case>
+                <case> <index-ref value="8" /> <index-ref value="5" /> <points amount="117" /> </case>
 
-        <score points="106">
-            <condition id="dialbig"   value="7" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="107">
-            <condition id="dialbig"   value="7" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="108">
-            <condition id="dialbig"   value="7" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="109">
-            <condition id="dialbig"   value="7" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="110">
-            <condition id="dialbig"   value="7" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="111">
-            <condition id="dialbig"   value="7" />
-            <condition id="dialsmall" value="5" />
-        </score>
+                <case> <index-ref value="9" /> <index-ref value="0" /> <points amount="118" /> </case>
+                <case> <index-ref value="9" /> <index-ref value="1" /> <error message="dialcombination-error" /> </case>
+                <case> <index-ref value="9" /> <index-ref value="2" /> <error message="dialcombination-error" /> </case>
+                <case> <index-ref value="9" /> <index-ref value="3" /> <error message="dialcombination-error" /> </case>
+                <case> <index-ref value="9" /> <index-ref value="4" /> <error message="dialcombination-error" /> </case>
+                <case> <index-ref value="9" /> <index-ref value="5" /> <error message="dialcombination-error" /> </case>
+            </cases>
+        </switch>
 
-        <score points="112">
-            <condition id="dialbig"   value="8" />
-            <condition id="dialsmall" value="0" />
-        </score>
-        <score points="113">
-            <condition id="dialbig"   value="8" />
-            <condition id="dialsmall" value="1" />
-        </score>
-        <score points="114">
-            <condition id="dialbig"   value="8" />
-            <condition id="dialsmall" value="2" />
-        </score>
-        <score points="115">
-            <condition id="dialbig"   value="8" />
-            <condition id="dialsmall" value="3" />
-        </score>
-        <score points="116">
-            <condition id="dialbig"   value="8" />
-            <condition id="dialsmall" value="4" />
-        </score>
-        <score points="117">
-            <condition id="dialbig"   value="8" />
-            <condition id="dialsmall" value="5" />
-        </score>
-
-        <score points="118">
-            <condition id="dialbig"   value="9" />
-            <condition id="dialsmall" value="0" />
-        </score>
     </mission>
 
-</fll>
+</fll:season>
