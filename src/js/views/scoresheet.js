@@ -20,6 +20,7 @@ define([
                         "type": "Enum"
                     },
                 },
+                "description": "blabla description",
                 "score":function(teamColor) {
                     return ["Red","Blue"][teamColor];
                 }
