@@ -84,10 +84,13 @@ define('directives/spinner',[
 
         Spinner.prototype.set = function(value,trigger) {
             this.max = this.elFrame.children().length-1;
+            if (value > 0) {
+                this.min = 1;
+            }
             this.value = clamp(value||0,this.min,this.max);
             this.offset = -1*this.step*this.value;
             transform(this.elFrame,this.offset);
-            trigger && this.elContainer.trigger('change',[this.value,this]);
+            trigger && this.elContainer.trigger('change',[this.value-1,this]);
         };
 
         Spinner.prototype.repaint = function() {
@@ -162,7 +165,7 @@ define('directives/spinner',[
         '$parse','$timeout',
         function($parse,$timeout) {
             function numbers(min,max) {
-                var i,nrs = [];
+                var i,nrs = [""];
                 for (i=min; i<=max; i++) {
                    nrs.push(i);
                 }
