@@ -5,9 +5,23 @@
 
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
             <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
-                <div class="description">
-                    description
+
+                <div>
+                    <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                            <h3 class="modal-title">missie</h3>
+                        </div>
+                        <div class="modal-body">
+                           abc
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" ng-click="ok()">OK</button>
+                        </div>
+                    </script>
+
+                    <div class="description" ng-click="open('lg')">description</div>
                 </div>
+
                 <h2>
                     {{mission.title}}
                 </h2>
@@ -22,10 +36,9 @@
                             <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
                         </span>
                         <div ng-switch-when="Enum">
-                            <label class="field" ng-repeat="line in objective.title">
-                                {{line}}
-                                <input ng-model="objective.value" name="{{objective._key}}" type="radio" value="{{$index}}">
-                            </label>
+                            <div class="btn-group">
+                                <label ng-repeat="line in objective.title" class="btn btn-primary" ng-model="radioModel" value="{{$index}}">{{line}}</label>
+                            </div>
                         </div>
                     </div>
                 </div>

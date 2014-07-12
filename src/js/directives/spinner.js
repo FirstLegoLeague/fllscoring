@@ -47,7 +47,15 @@ define('directives/spinner',[
             };
         }
 
-        var isTouch = "ontouchend" in document;
+        function is_touch_device() {
+            try {
+                document.createEvent("TouchEvent");
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        var isTouch = is_touch_device();
         var events = {
             start: isTouch?'touchstart':'mousedown',
             move: isTouch?'touchmove':'mousemove',
@@ -70,7 +78,7 @@ define('directives/spinner',[
             this.elContainer.on(events.start,handle(this.dragstart,this));
             $(document).on(events.move,handle(this.drag,this));
             $(document).on(events.end,handle(this.dragend,this));
-            this.set(0,true);
+            this.set(this.defaultValue,true);
         };
 
         function transform(el,value) {
@@ -94,7 +102,7 @@ define('directives/spinner',[
         };
 
         Spinner.prototype.repaint = function() {
-            this.set(this.value);
+            this.set(this.value, false);
         };
 
         Spinner.prototype.prev = function(e) {

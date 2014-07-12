@@ -7,6 +7,7 @@ var require = {
         'q': '../components/q/q',
         'jquery': '../components/jquery/jquery.min',
         'angular': '../components/angular/angular.min',
+        'angular-bootstrap': '../components/angular-bootstrap/ui-bootstrap-tpls',
         'idbstore':'../components/idbwrapper/idbstore',
         'signaturepad':'../components/signature-pad/jquery.signaturepad.min',
         'fastclick':'../components/fastclick/lib/fastclick'
@@ -17,6 +18,9 @@ var require = {
         },
         'angular': {
             deps: ['jquery']
+        },
+        'angular-bootstrap': {
+            deps: ['angular']
         }
     }
 };

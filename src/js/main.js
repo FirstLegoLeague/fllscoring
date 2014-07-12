@@ -10,6 +10,7 @@ define([
     'directives/size',
     'tests/fsTest',
     'tests/indexedDBTest',
+    'angular-bootstrap',
     'angular'
 ],function(FastClick,log,settings,teams,scores,ranking,services,directives,size,fsTest,dbTest) {
 
@@ -58,6 +59,7 @@ define([
     ]);
     angular.bootstrap(document.body,[
         'main',
+        'ui.bootstrap',
         settings.name,
         teams.name,
         scores.name,
