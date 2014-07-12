@@ -66,6 +66,10 @@ table {
     .mediumWindow .team i {
         font-size: 38px;
     }
+
+    i {
+        color: #319cff;
+    }
 }
 
 /* navigation bar */
