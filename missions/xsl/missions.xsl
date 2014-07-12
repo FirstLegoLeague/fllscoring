@@ -59,32 +59,39 @@
         </html>
     </xsl:template>
 
+    <xsl:template match="strings">
+    </xsl:template>
+
     <xsl:template match="mission">
+        <xsl:variable name="key" select="@name"/>
         <div class="mission">
             <h2>
-                <xsl:value-of select="@description"/>
+                <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
             </h2>
             <xsl:apply-templates />
         </div>
     </xsl:template>
 
-    <xsl:template match="objective[@type='enum']">
+    <xsl:template match="objective-enum">
+        <xsl:variable name="key" select="@description"/>
         <div class="objective">
             <span class="desc">
-                <xsl:value-of select="@description"/>
+                <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
             </span>
             <span class="values">
                 <xsl:for-each select="option">
-                    <span><xsl:value-of select="@description"/></span>
+                    <xsl:variable name="key2" select="@description"/>
+                    <span><xsl:value-of select="/fll:challenge/strings/string[@id=$key2]"/></span>
                 </xsl:for-each>
             </span>
         </div>
     </xsl:template>
 
-    <xsl:template match="objective[@type='number']">
+    <xsl:template match="objective-number">
+        <xsl:variable name="key" select="@description"/>
         <div class="objective">
             <span class="desc">
-                <xsl:value-of select="@description"/>
+                <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
             </span>
             <span class="values">
                 <xsl:call-template name="numbers">
@@ -95,10 +102,11 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="objective[@type='yesno']">
+    <xsl:template match="objective-yesno">
+        <xsl:variable name="key" select="@description"/>
         <div class="objective">
             <span class="desc">
-                <xsl:value-of select="@description"/>
+                <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
             </span>
             <span class="values">
                 <span>Yes</span>
@@ -116,8 +124,8 @@
             </span>
 
             <xsl:call-template name="numbers">
-              <xsl:with-param name="min" select="$min+1"/>
-              <xsl:with-param name="max" select="$max"/>
+                <xsl:with-param name="min" select="$min+1"/>
+                <xsl:with-param name="max" select="$max"/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
