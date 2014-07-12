@@ -1,6 +1,7 @@
 define([
     'services/log',
     'services/ng-scores',
+    'directives/really',
     'angular'
 ],function(log) {
     var moduleName = 'scores';
@@ -9,7 +10,7 @@ define([
         function($scope,$scores) {
             log('init scores ctrl');
 
-            $scope.sort = 'score';
+            $scope.sort = 'index';
             $scope.rev = true;
 
             $scope.scores = $scores.scores;
@@ -18,7 +19,7 @@ define([
                 $scores.remove(index);
             };
             $scope.editScore = function(index) {
-                alert("todo");
+                alert("todo edit team/round/score " + $scores.scores[index].score);
             };
         }
     ]);

@@ -2,6 +2,7 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
+                <th ng-click="sort='index';rev=true">#</th>
                 <th ng-click="sort='match.round';rev=false">Round</th>
                 <th ng-click="sort='team.number';rev=false">Team</th>
                 <th ng-click="sort='team.name';rev=false">Name</th>
@@ -9,17 +10,18 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tr ng-repeat="score in scores | orderBy:sort:rev">
+        <tr ng-repeat="score in scores | index | orderBy:sort:rev">
+            <td>{{score.index + 1}}</td>
             <td>{{score.match.round}}</td>
             <td>{{score.team.number}}</td>
             <td>{{score.team.name}}</td>
             <td>{{score.score}}</td>
             <td>
-                <button class="btn btn-danger" ng-click="removeScore($index)">
+                <button class="btn btn-danger" fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
                     <i class="icon-trash"></i>
                     Delete
                 </button>
-                <button class="btn btn-danger" ng-click="editScore($index)">
+                <button class="btn btn-default" ng-click="editScore(score.index)">
                     <i class="icon-pencil"></i>
                     Edit
                 </button>
