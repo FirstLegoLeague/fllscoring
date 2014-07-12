@@ -1,4 +1,4 @@
-define([
+define('views/teams',[
     'services/log',
     'services/ng-fs',
     'angular'
@@ -50,7 +50,7 @@ define([
             };
 
             $scope.canAddTeam = function() {
-                return $scope.newTeam.name && $scope.newTeam.number;
+                return !!($scope.newTeam.name && $scope.newTeam.number);
             };
 
             $scope.addTeam = function() {
