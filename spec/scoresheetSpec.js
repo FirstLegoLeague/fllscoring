@@ -30,7 +30,7 @@ describe('scoresheet',function() {
         	controller = $controller('scoresheetCtrl', {
         		'$scope': $scope,
         		'$fs': fsMock,
-        		'$results': {},
+        		'$scores': {},
                 '$modal': {},
                 '$challenge': {}
         	});

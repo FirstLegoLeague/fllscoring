@@ -3,7 +3,7 @@ define('views/scoresheet',[
     'services/fs',
     'services/ng-fs',
     'services/ng-challenge',
-    'services/ng-results',
+    'services/ng-scores',
     'directives/sigpad',
     'directives/spinner',
     'angular'
@@ -288,8 +288,8 @@ define('views/scoresheet',[
     };
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$results','$modal','$challenge',
-        function($scope,$fs,$results,$modal,$challenge) {
+        '$scope','$fs','$scores','$modal','$challenge',
+        function($scope,$fs,$scores,$modal,$challenge) {
             log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -438,7 +438,7 @@ define('views/scoresheet',[
                 }
                 //todo:
                 var fn = [
-                    'result',
+                    'score',
                     $scope.settings.table,
                     $scope.team.number,
                     +(new Date())
@@ -452,7 +452,7 @@ define('views/scoresheet',[
 
 
                 return $fs.write(fn,data).then(function() {
-                    return $results.add({
+                    return $scores.add({
                         file: fn,
                         team: $scope.team,
                         match: $scope.match,

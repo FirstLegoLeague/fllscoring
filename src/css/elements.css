@@ -77,7 +77,7 @@ table {
     .navbar li {
         /*border: 1px solid red;*/
         box-sizing: border-box;
-        width: 25%;
+        width: 20%;
         text-align: center;
         cursor: pointer;
     }
@@ -112,13 +112,16 @@ table {
         -webkit-transform: translateX(0);
     }
     .viewMain.scoresheet {
-        -webkit-transform: translateX(-25%);
+        -webkit-transform: translateX(-20%);
+    }
+    .viewMain.scores {
+        -webkit-transform: translateX(-40%);
     }
     .viewMain.ranking {
-        -webkit-transform: translateX(-50%);
+        -webkit-transform: translateX(-60%);
     }
     .viewMain.settings {
-        -webkit-transform: translateX(-75%);
+        -webkit-transform: translateX(-80%);
     }
 
     .btn-enum {
@@ -148,6 +151,7 @@ table {
     }
     .viewMain.teams .view-teams,
     .viewMain.scoresheet .view-scoresheet,
+    .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
         opacity: 1;
@@ -185,6 +189,7 @@ table {
     }
     .viewMain.teams .view-teams,
     .viewMain.scoresheet .view-scoresheet,
+    .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
         opacity: 1;

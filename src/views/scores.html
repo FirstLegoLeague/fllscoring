@@ -1,0 +1,30 @@
+<div ng-controller="scoresCtrl">
+    <h1>Scores</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th ng-click="sort='match.round';rev=false">Round</th>
+                <th ng-click="sort='team.number';rev=false">Team</th>
+                <th ng-click="sort='team.name';rev=false">Name</th>
+                <th ng-click="sort='score';rev=true">Score</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="score in scores | orderBy:sort:rev">
+            <td>{{score.match.round}}</td>
+            <td>{{score.team.number}}</td>
+            <td>{{score.team.name}}</td>
+            <td>{{score.score}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="removeScore($index)">
+                    <i class="icon-trash"></i>
+                    Delete
+                </button>
+                <button class="btn btn-danger" ng-click="editScore($index)">
+                    <i class="icon-pencil"></i>
+                    Edit
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>

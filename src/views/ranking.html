@@ -8,7 +8,7 @@
                 <th ng-click="sort='score';rev=true">Score</th>
             </tr>
         </thead>
-        <tr ng-repeat="result in results | orderBy:sort:rev">
+        <tr ng-repeat="result in scores | orderBy:sort:rev">
             <td>{{result.team.number}}</td>
             <td>{{result.team.name}}</td>
             <td>{{result.score}}</td>

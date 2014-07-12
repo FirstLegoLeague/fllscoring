@@ -1,49 +1,49 @@
 /**
- * service handling all access to results
+ * service handling all access to scores
  */
 define([
     'services/ng-services',
     'services/log',
     'services/ng-fs'
 ],function(module,log) {
-    return module.factory('$results',['$fs',function($fs) {
-        var results = [];
+    return module.factory('$scores',['$fs',function($fs) {
+        var scores = [];
 
         function save() {
-            return $fs.write('results.json',results).then(function() {
-                log('results saved');
+            return $fs.write('scores.json',scores).then(function() {
+                log('scores saved');
             },function() {
-                log('results write error');
+                log('scores write error');
             });
         }
         function load() {
-            return $fs.read('results.json').then(function(res) {
+            return $fs.read('scores.json').then(function(res) {
                 //remove everything
-                res.unshift(results.length);
+                res.unshift(scores.length);
                 res.unshift(0);
-                results.splice.apply(results,res);
+                scores.splice.apply(scores,res);
             },function() {
                 //error
-                log('results read error');
+                log('scores read error');
             });
         }
         function remove(index) {
-            var rem = results.splice(index,1);
+            var rem = scores.splice(index,1);
             return $fs.remove(rem[0].file).then(function() {
                 return save();
             },function() {
-                log('error removing result');
+                log('error removing score');
             });
         }
         function add(data) {
-            results.push(data);
+            scores.push(data);
             return save();
         }
 
         load();
 
         return {
-            data: results,
+            scores: scores,
             load: load,
             save: save,
             remove: remove,
