@@ -1,4 +1,7 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:fll" xmlns:fll="urn:fll">
+<xs:schema
+        targetNamespace="http://nickygerritsen.nl/missions.xsd"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:fll="http://nickygerritsen.nl/missions.xsd">
     <xs:element name="challenge" type="fll:challenge" />
 
     <!-- Definition of main fll node -->

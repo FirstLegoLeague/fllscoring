@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<fll:challenge xmlns:fll="urn:fll" year="2012" name="Senior Solutions">
+<?xml-stylesheet type="text/xsl" href="../xsl/missions.xsl"?>
+<fll:challenge xmlns:fll="http://nickygerritsen.nl/missions.xsd" year="2012" name="Senior Solutions">
 
     <strings>
         <string id="flexibility-name">      Flexibility</string>
