@@ -79,6 +79,7 @@ table {
         box-sizing: border-box;
         width: 25%;
         text-align: center;
+        cursor: pointer;
     }
 
     .smallWindow .navbar i {
@@ -123,44 +124,34 @@ table {
 
 /* medium layout */
 @media screen and (min-width: 481px) and (max-width: 1024px) {
-    body > div {
-        height: 100%;
-        position: relative;
-    }
-    [fll-size] {
-        height: 100%;
-    }
     .viewMain {
         position: absolute;
         width: 100%;
         top: 0px;
-        bottom: 41px;
+        bottom: 50px;
     }
     .viewMain > div {
         background-color: white;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
-        display: none;
+        opacity: 0;
         position: absolute;
-    }
-    .viewMain .view-teams {
-        width: 300px;
-        height: 100%;
-        display: block;
-    }
-    .viewMain .view-scores {
-        left: 300px;
-        right: 0;
-        height: 100%;
-        display: block;
-    }
-    .viewMain.ranking .view-ranking,
-    .viewMain.settings .view-settings {
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
-        display: block;
+        -webkit-transition: opacity 0.2s;
+    }
+    .viewMain.teams .view-teams,
+    .viewMain.scores .view-scores,
+    .viewMain.ranking .view-ranking,
+    .viewMain.settings .view-settings {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    #scores {
+        padding: 5px;
     }
 }
 
@@ -190,5 +181,9 @@ table {
     .viewMain.settings .view-settings {
         opacity: 1;
         z-index: 2;
+    }
+
+    #scores {
+        padding: 10px;
     }
 }

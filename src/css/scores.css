@@ -5,6 +5,31 @@
     -webkit-overflow-scrolling: touch;
 }
 
+#scores {
+    max-width: 900px;
+    margin: auto;
+}
+
+#scores .btn {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+#discard {
+    float: right;
+}
+
+#totalScore {
+    text-align: right;
+}
+
+.description {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
 .panel {
     margin-bottom: 20px;
     background-color: #E5EDF0;
@@ -34,9 +59,9 @@
     margin: 2px 50px;
     line-height: 30px;
     padding: 10px;
+    font-size: 18px;
 }
 .missions span.field {
-    font-size: 14px;
     text-shadow: 0 1px 1px rgba(255,255,255,0.75);
     vertical-align: middle;
 }
