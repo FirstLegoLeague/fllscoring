@@ -12,18 +12,17 @@
 
 #scoresheet .btn {
     min-width: 150px;
-    margin-bottom: 20px;
 }
 
 #scoresheet .btn-group {
-    width: 100%;
     text-align: center;
+    width: 100%;
 }
 
 
 .btn-enum {
     color: #00376c;
-    background: #cee7ff;
+    background: #e2f1ff;
     font-size: 18px;
     text-shadow: none;
 }

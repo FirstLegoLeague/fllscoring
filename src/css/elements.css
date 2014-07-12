@@ -111,7 +111,7 @@ table {
     .viewMain.teams {
         -webkit-transform: translateX(0);
     }
-    .viewMain.scoreheet {
+    .viewMain.scoresheet {
         -webkit-transform: translateX(-25%);
     }
     .viewMain.ranking {
