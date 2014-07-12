@@ -13,7 +13,11 @@
         <script src="phonegap.js"></script>
         <script src="js/config.js"></script>
         <script>
-            require.paths['services/fs'] = 'services/fs-pg';
+            require.map = {
+                '*': {
+                    'services/fs':'services/fs-pg'
+                }
+            };
         </script>
         <script src="components/requirejs/require.js"></script>
         <script>

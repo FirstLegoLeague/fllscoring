@@ -1,4 +1,4 @@
-define(['q','jquery'],function(Q,$) {
+define('services/fs-xhr',['q','jquery'],function(Q,$) {
     var baseurl = '/fs/';
 
     function xhrget() {

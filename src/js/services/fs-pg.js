@@ -1,4 +1,4 @@
-define(['q','services/log'],function(Q,log) {
+define('services/fs-pg',['q','services/log'],function(Q,log) {
     var baseurl = 'fllscoring/';
 
     function getFS() {

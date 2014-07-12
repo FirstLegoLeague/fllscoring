@@ -1,4 +1,4 @@
-define(['q','idbstore'],function(Q,IDBStore) {
+define('services/fs-nw',['q','idbstore'],function(Q,IDBStore) {
     function createStore() {
         var def = Q.defer();
         var store = new IDBStore({
