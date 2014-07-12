@@ -31,7 +31,8 @@ describe('scoresheet',function() {
         		'$scope': $scope,
         		'$fs': fsMock,
         		'$results': {},
-                '$modal': {}
+                '$modal': {},
+                '$challenge': {}
         	});
         });
     });
@@ -45,5 +46,25 @@ describe('scoresheet',function() {
     	it('should initialize',function() {
 
     	});
+    });
+
+    describe('showteams', function() {
+        it('shoud select the teams page', function() {
+            $scope.showTeams();
+            expect($scope.setPage).toHaveBeenCalledWith('teams');
+        });
+    });
+
+    describe('selectTeam', function() {
+        it('shoud set the team on the scope', function() {
+            $scope.selectTeam(dummyTeam);
+            expect($scope.team).toBe(dummyTeam);
+        });
+
+        it('should call the selectTeam method on selectTeam event',function() {
+            $scope.selectTeam = jasmine.createSpy('selectTeam');
+            $scope.$root.$emit('selectTeam',dummyTeam);
+            expect($scope.selectTeam).toHaveBeenCalledWith(dummyTeam);
+        });
     });
 })

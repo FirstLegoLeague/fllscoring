@@ -2,6 +2,7 @@ define('views/scoresheet',[
     'services/log',
     'services/fs',
     'services/ng-fs',
+    'services/ng-challenge',
     'services/ng-results',
     'directives/sigpad',
     'directives/spinner',
@@ -287,8 +288,8 @@ define('views/scoresheet',[
     };
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$results','$modal',
-        function($scope,$fs,$results,$modal) {
+        '$scope','$fs','$results','$modal','$challenge',
+        function($scope,$fs,$results,$modal,$challenge) {
             log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -326,11 +327,6 @@ define('views/scoresheet',[
             //     return $scope.missionIndex['general'].result;
             // };
 
-
-            function getDependencies(fn) {
-                var deps = fn.toString().match(/^function\s*\((.*?)\)/)[1];
-                return deps?deps.split(/\s*,\s*/):[];
-            }
             function getObjectives(names) {
                 return names.map(function(dep) {
                     var val = $scope.objectiveIndex[dep].value;
@@ -372,7 +368,7 @@ define('views/scoresheet',[
             function getErrorFunc(mission) {
                 var expectations = (mission.expectations||[function(){return true;}]).map(function(e) {
                     return {
-                        deps: getDependencies(e),
+                        deps: $challenge.getDependencies(e),
                         fn: e
                     };
                 });
@@ -386,7 +382,7 @@ define('views/scoresheet',[
 
             function process(mission) {
                 var key = mission._key;
-                var deps = getDependencies(mission.score);
+                var deps = $challenge.getDependencies(mission.score);
                 var getError = getErrorFunc(mission);
                 mission.result = 0;
                 //addd watcher for all dependencies
