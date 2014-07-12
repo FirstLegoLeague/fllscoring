@@ -11,8 +11,29 @@
 }
 
 #scoresheet .btn {
-    width: 150px;
-    margin-bottom: 20px;
+    min-width: 150px;
+}
+
+#scoresheet .btn-group {
+    text-align: center;
+    width: 100%;
+}
+
+
+.btn-enum {
+    color: #00376c;
+    background: #e2f1ff;
+    font-size: 18px;
+    text-shadow: none;
+}
+
+.btn-enum:hover, .btn-enum:focus {
+    transition: background-position none;
+}
+
+.btn-enum.active {
+    background: #00376c;
+    color: #94caff;
 }
 
 #discard {
