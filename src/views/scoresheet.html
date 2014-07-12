@@ -29,7 +29,10 @@
                     <div>
                         <label class="field" ng-switch-when="Boolean">
                             {{objective.title}}
-                            <input ng-model="objective.value" type="checkbox">
+                            <div class="btn-group">
+                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="0">yes</label>
+                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="1">no</label>
+                            </div>
                         </label>
                         <span class="field" ng-switch-when="Number">
                             {{objective.title}}
@@ -37,7 +40,7 @@
                         </span>
                         <div ng-switch-when="Enum">
                             <div class="btn-group">
-                                <label ng-repeat="line in objective.title" class="btn btn-primary btn-enum" ng-model="objective.value" btn-radio="{{$index}}">{{line}}</label>
+                                <label ng-repeat="line in objective.title" class="btn btn-enum" ng-model="objective.value" btn-radio="{{$index}}">{{line}}</label>
                             </div>
                         </div>
                     </div>

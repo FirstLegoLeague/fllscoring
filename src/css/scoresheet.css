@@ -22,9 +22,19 @@
 
 
 .btn-enum {
-    color: dodgerblue;
-    background: #bbddff;
-    font-size: 16px;
+    color: #00376c;
+    background: #cee7ff;
+    font-size: 18px;
+    text-shadow: none;
+}
+
+.btn-enum:hover, .btn-enum:focus {
+    transition: background-position none;
+}
+
+.btn-enum.active {
+    background: #00376c;
+    color: #94caff;
 }
 
 #discard {

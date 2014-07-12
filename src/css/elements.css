@@ -120,6 +120,10 @@ table {
     .viewMain.settings {
         -webkit-transform: translateX(-75%);
     }
+
+    .btn-enum {
+        font-weight: 500;
+    }
 }
 
 /* medium layout */
@@ -152,6 +156,10 @@ table {
 
     .panel {
         padding: 5px;
+    }
+
+    .btn-enum {
+        font-weight: 500;
     }
 }
 
