@@ -12,7 +12,7 @@
                             <h3 class="modal-title">{{mission.title}}</h3>
                         </div>
                         <div class="modal-body">
-                           abc
+                           {{mission.description}}
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" ng-click="ok()">OK</button>
@@ -37,7 +37,7 @@
                         </span>
                         <div ng-switch-when="Enum">
                             <div class="btn-group">
-                                <label ng-repeat="line in objective.title" class="btn btn-primary" ng-model="radioModel" value="{{$index}}">{{line}}</label>
+                                <label ng-repeat="line in objective.title" class="btn btn-primary" ng-model="objective.value" btn-radio="{{$index}}">{{line}}</label>
                             </div>
                         </div>
                     </div>
