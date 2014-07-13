@@ -34,7 +34,15 @@ define('views/teams',[
                     $scope.teams = res.map(function(team) {
                         return {
                             number: team.id,
-                            name: team.name
+                            name: team.name,
+                            affiliation: team.affiliation,
+                            cityState: team.cityState,
+                            country: team.country,
+                            coach1: team.coach1,
+                            coach2: team.coach2,
+                            judgingGroup: team.judgingGroup,
+                            pitLocation: team.pitLocation,
+                            translationNeeded: team.translationNeeded
                         };
                     });
                     $scope.saveTeams();
