@@ -88,12 +88,12 @@ The scorekeeper will also be notified here when the system has received multiple
 
 ## 5.2 Ranking
 The ranking view shows the scores, but ordered on the highest score. The teams who will advance to the next round shall be highlighted for readability.
-![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/13.%20Scorekeeper%20-%20Ranking.png)
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/14.%20Scorekeeper%20-%20Ranking.png)
 
 ## 5.3 Output
 The output view is the heart and soul for connecting to other systems. The scorekeeper can publish scores here, for display on beamer overlays. Also selected rounds can be exported to Excel, CSV, JSON and XML to make sure connecting other systems is as easy as possible.
-![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/13.%20Scorekeeper%20-%20Output.png)
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/15.%20Scorekeeper%20-%20Output.png)
 
 ## 5.4 Logs
 In the logs view the raw scores are displayed, by default ordered by date/time of score entry. This view can be used by the scorekeeper to validate scores when issues have been found. It also displays the table on which the robot match has been played, and also the referee who judged the match.
-![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/13.%20Scorekeeper%20-%20Logs.png)
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/16.%20Scorekeeper%20-%20Logs.png)
