@@ -18,6 +18,7 @@ describe('ranking', function() {
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
                 '$scores': {}
+                '$stages': stagesMock,
             });
         });
     });

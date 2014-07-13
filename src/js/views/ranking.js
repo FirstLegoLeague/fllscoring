@@ -1,18 +1,5 @@
 "use strict";
 
-function getDummyStages() {
-    // Stage setup.
-    // 0 rounds means the stage-type isn't used for this tournament.
-    var stages = [
-        { id: "practice", name: "Oefenrondes", rounds: 2 },
-        { id: "qualifying", name: "Voorrondes", rounds: 3 },
-        { id: "quarter", name: "Kwart finales", rounds: 0 },
-        { id: "semi", name: "Halve finales", rounds: 0 },
-        { id: "final", name: "Finale", rounds: 1 },
-    ];
-    return stages;
-}
-
 function getDummyScoreboard() {
     // Scoreboard contains scores for each stage of the tournament.
     // For each of these stages, there's a list of teams who have played
@@ -80,31 +67,22 @@ define('views/ranking',[
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
-    return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$scores',
-        function($scope, $scores) {
+    return angular.module(moduleName,[]).controller(moduleName+'Ctrl', [
+        '$scope', '$scores', '$stages',
+        function($scope, $scores, $stages) {
             log('init ranking ctrl');
 
             $scope.sort = 'rank';
             $scope.rev = false;
 
-            var stages = getDummyStages();
             var scoreboard = getDummyScoreboard();
-
-            // Workaround for lack of 'numbered' for loop in angular
-            stages.map(function(stage) {
-                stage._rounds = new Array(stage.rounds);
-                for (var i = 0; i < stage.rounds; i++) {
-                    stage._rounds[i] = i + 1;
-                }
-            });
 
             $scope.doSort = function(col,defaultSort) {
                 $scope.rev = ($scope.sort === col)? !$scope.rev : defaultSort;
                 $scope.sort = col;
             };
 
-            $scope.stages = stages;
+            $scope.stages = $stages.stages;
             $scope.scoreboard = getDummyScoreboard();
         }
     ]);
