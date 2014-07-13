@@ -99,6 +99,11 @@ define([
                 }
             });
 
+            $scope.doSort = function(col,defaultSort) {
+                $scope.rev = ($scope.sort === col)? !$scope.rev : defaultSort;
+                $scope.sort = col;
+            };
+
             $scope.stages = stages;
             $scope.scoreboard = getDummyScoreboard();
         }
