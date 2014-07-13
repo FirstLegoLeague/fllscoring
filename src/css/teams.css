@@ -43,3 +43,8 @@
 input[type=text].team-number {
 	width: 30px;
 }
+
+.form-new-team {
+	float: left;
+	margin-bottom: 0;
+}

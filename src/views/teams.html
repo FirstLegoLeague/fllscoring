@@ -1,4 +1,20 @@
 <div ng-controller="teamsCtrl" id="teams">
+
+    <form class="form-inline form-new-team" name="newTeamForm" ng-show="editMode">
+        <span class="control-group" ng-class="{error:!newTeamForm.newTeamNumber.$valid}">
+            <label class="control-label">
+                Number:
+                <input type="text" name="newTeamNumber" ng-pattern="teamNumberPattern" class="input-small" ng-model="newTeam.number" size="4" required>
+            </label>
+        </span>
+        <span class="control-group">
+            <label class="control-label">
+                Name:
+                <input type="text" ng-model="newTeam.name" required>
+            </label>
+        </span>
+        <button class="btn" ng-click="addTeam()" ng-disabled="!newTeamForm.$valid">Add team</button>
+    </form>
     <p class="pull-right">
         <button ng-class="{active:editMode}" class="btn" ng-click="editMode=!editMode;saveTeams()">
             <i class="icon-edit"></i> Edit
@@ -15,23 +31,6 @@
         <button type="button" class="close" ng-click="status=''">&times;</button>
         {{status}}
     </div>
-    <form class="form-inline" name="newTeamForm" ng-show="editMode">
-        <p>
-            <span class="control-group" ng-class="{error:!newTeamForm.newTeamNumber.$valid}">
-                <label class="control-label">
-                    Number:
-                    <input type="text" name="newTeamNumber" ng-pattern="teamNumberPattern" class="input-small" ng-model="newTeam.number" size="4" required>
-                </label>
-            </span>
-            <span class="control-group">
-                <label class="control-label">
-                    Name:
-                    <input type="text" ng-model="newTeam.name" required>
-                </label>
-            </span>
-            <button class="btn" ng-click="addTeam()" ng-disabled="!newTeamForm.$valid">Add team</button>
-        </p>
-    </form>
 
     <table class="table table-bordered table-striped table-teams smallLayoutHide mediumLayoutHide">
         <thead>
@@ -45,7 +44,7 @@
                 <th ng-click="sort='team.coach2';rev=false">Coach 2</th>
                 <th ng-click="sort='team.judgingGroup';rev=false">Judging Group</th>
                 <th ng-click="sort='team.pitLocation';rev=false">Pit Location</th>
-                <th ng-click="sort='team.translationNeeded';rev=false">Translation</th>
+                <th ng-click="sort='team.translationNeeded';rev=false" style="width: 50px;">Translation</th>
             </tr>
         </thead>
         <tr ng-show="!editMode" ng-repeat="team in teams | index | orderBy:sort:rev">
@@ -63,13 +62,13 @@
         <tr ng-show="editMode" ng-repeat="team in teams | index | orderBy:sort:rev">
             <td><input type="text" ng-model=team.number class="team-number" ng-blur="saveTeams()"></td>
             <td><input type="text" ng-model=team.name ng-blur="saveTeams()"></td>
-            <td><input type="text" ng-model=team.cityState ng-blur="saveTeams()"></td>
-            <td><input type="text" ng-model=team.country ng-blur="saveTeams()"></td></td>
-            <td><input type="text" ng-model=team.affiliation ng-blur="saveTeams()"></td></td>
-            <td><input type="text" ng-model=team.coach1 ng-blur="saveTeams()"></td></td>
-            <td><input type="text" ng-model=team.coach2 ng-blur="saveTeams()"></td></td>
-            <td><input type="text" ng-model=team.judgingGroup class="team-number" ng-blur="saveTeams()"></td></td>
-            <td><input type="text" ng-model=team.pitLocation class="team-number" ng-blur="saveTeams()"></td></td>
+            <td><input type="text" ng-model=team.cityState ng-blur="saveTeams()">
+            <td><input type="text" ng-model=team.country ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.affiliation ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.coach1 ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.coach2 ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.judgingGroup class="team-number" ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.pitLocation class="team-number" ng-blur="saveTeams()"></td>
             <td><input type="checkbox" ng-model=team.translationNeeded ng-change="saveTeams()"></td>
             <td>
                 <span ng-show="editMode">
