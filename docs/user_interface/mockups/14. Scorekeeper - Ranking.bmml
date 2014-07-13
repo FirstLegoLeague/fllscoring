@@ -1,0 +1,20 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1136" measuredH="587" mockupW="739" mockupH="571">
+  <controls>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="397" y="16" w="739" h="571" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>FLL%20Scoring%0Ahttp%3A//localhost%3A1399</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::ButtonBar" x="426" y="109" w="683" h="40" measuredW="258" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>1</selectedIndex>
+        <text>Scores%2C%20Ranking%2C%20Output%2C%20Logs</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::DataGrid" x="426" y="170" w="683" h="367" measuredW="238" measuredH="111" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Rank%2C%20TreamID%2C%20Teamname%2C%20Score%0A1%2C%204321%2C%20De%20Geeks%2C472%0A2%2C%201234%2C%20De%20Viooltjes%2C313%0A3%2C%201128%2C%20De%20Aapjes%2C100</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

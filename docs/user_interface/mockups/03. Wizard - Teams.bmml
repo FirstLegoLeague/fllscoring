@@ -1,0 +1,82 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1157" measuredH="584" mockupW="739" mockupH="571">
+  <controls>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="418" y="13" w="739" h="571" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>FLL%20Scoring%0Ahttp%3A//localhost%3A1399/</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Label" x="581" y="100" w="413" h="-1" measuredW="241" measuredH="32" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>We%20need%20teams%21%20%282/5%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Label" x="591" y="147" w="393" h="-1" measuredW="225" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Of%20course%20you%20need%20some%20contenders%2C</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Button" x="713" y="504" w="149" h="40" measuredW="63" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Next%20%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Label" x="616" y="168" w="343" h="-1" measuredW="251" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Enter%20the%20team%20numbers%20and%20names%20below</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::DataGrid" x="473" y="196" w="614" h="293" measuredW="363" measuredH="111" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ID%2C%20Name%2C%20City%2C%20State%2C%20Country%0A1234%2C%20De%20Viooltjes%2C%20New%20York%2C%20NY%2C%20USA%0A4321%2C%20De%20Geeks%2C%20Duisburg%2C%20-%2C%20Germany%0A1128%2C%20De%20Aapjes%2C%20Amsterdam%2C%20-%2C%20The%20Netherlands</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="1085" y="196" w="-1" h="293" measuredW="16" measuredH="100" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::TextInput" x="540" y="306" w="138" h="-1" measuredW="74" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>13421772</borderColor>
+        <text>New%20team</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::TextInput" x="477" y="306" w="59" h="-1" measuredW="74" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>13421772</borderColor>
+        <text>New%20team</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::PointyButton" x="436" y="103" w="-1" h="-1" measuredW="59" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <direction>left</direction>
+        <newLayout>true</newLayout>
+        <text>Back</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::TextInput" x="684" y="306" w="131" h="-1" measuredW="74" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>13421772</borderColor>
+        <text>New%20team</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::TextInput" x="820" y="306" w="68" h="-1" measuredW="74" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>13421772</borderColor>
+        <text>New%20team</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::TextInput" x="892" y="306" w="188" h="-1" measuredW="74" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>13421772</borderColor>
+        <text>New%20team</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
