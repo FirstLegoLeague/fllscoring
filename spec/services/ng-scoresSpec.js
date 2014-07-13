@@ -47,7 +47,7 @@ describe('ng-scores',function() {
                 expect(fsMock.read).toHaveBeenCalledWith('scores.json');
                 expect($scores.scores).toEqual([mockScore]);
                 done();
-            });
+            }).done();
         });
     });
 
@@ -59,7 +59,7 @@ describe('ng-scores',function() {
                 expect($scores.scores).toEqual([]);
                 expect(fsMock.write).not.toHaveBeenCalled();
                 done();
-            });
+            }).done();
         });
     });
 
@@ -70,7 +70,7 @@ describe('ng-scores',function() {
             }).then(function() {
                 expect(fsMock.write).toHaveBeenCalledWith('scores.json',[mockScore])
                 done();
-            });
+            }).done();
         });
     });
 
@@ -85,7 +85,7 @@ describe('ng-scores',function() {
                 expect($scores.save).toHaveBeenCalled();
                 expect(fsMock.remove).toHaveBeenCalledWith('bar');
                 done();
-            });
+            }).done();
         });
     });
 
