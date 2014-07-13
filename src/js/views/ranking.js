@@ -74,7 +74,7 @@ function getDummyScoreboard() {
     return scoreboard;
 }
 
-define([
+define('views/ranking',[
     'services/log',
     'services/ng-scores',
     'angular'
@@ -98,6 +98,11 @@ define([
                     stage._rounds[i] = i + 1;
                 }
             });
+
+            $scope.doSort = function(col,defaultSort) {
+                $scope.rev = ($scope.sort === col)? !$scope.rev : defaultSort;
+                $scope.sort = col;
+            };
 
             $scope.stages = stages;
             $scope.scoreboard = getDummyScoreboard();
