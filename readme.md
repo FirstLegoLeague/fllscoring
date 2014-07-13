@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/FirstLegoLeague/fllscoring.png?branch=master)](https://travis-ci.org/FirstLegoLeague/fllscoring)
+[![Coverage Status](https://coveralls.io/repos/FirstLegoLeague/fllscoring/badge.png)](https://coveralls.io/r/FirstLegoLeague/fllscoring)
 [![Dependency Status](https://david-dm.org/FirstLegoLeague/fllscoring.png)](https://david-dm.org/FirstLegoLeague/fllscoring)
 [![devDependency Status](https://david-dm.org/FirstLegoLeague/fllscoring/dev-status.png)](https://david-dm.org/FirstLegoLeague/fllscoring#info=devDependencies)
 
