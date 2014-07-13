@@ -1,0 +1,329 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1284" measuredH="897" mockupW="1135" mockupH="831">
+  <controls>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="149" y="66" w="739" h="598" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <markup>true</markup>
+        <text>FLL%20Scoring%0Ahttp%3A//localhost%3A1399</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::FieldSet" x="170" y="233" w="339" h="90" measuredW="200" measuredH="170" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Move%20that%20bus%21%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Label" x="184" y="252" w="183" h="-1" measuredW="181" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20container%20back%20in%20base%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Label" x="184" y="287" w="234" h="-1" measuredW="231" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20content%20of%20the%20container%20rebuild%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Switch" x="447" y="251" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Switch" x="447" y="283" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="5" locked="false" isInGroup="-1"/>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::HelpButton" x="271" y="231" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::FieldSet" x="170" y="333" w="339" h="90" measuredW="200" measuredH="170" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>The%20second%20mission</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Label" x="184" y="358" w="215" h="-1" measuredW="209" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>What%20did%20happen%20during%20this%20round%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::ButtonBar" x="182" y="383" w="315" h="27" measuredW="314" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nothing%2C%20Container%20in%20base%2C%20Content%20rebuild</text>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::FieldSet" x="170" y="435" w="339" h="55" measuredW="200" measuredH="170" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Break%20the%20house%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Label" x="184" y="454" w="239" h="-1" measuredW="160" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20house%20still%20standing%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Switch" x="447" y="453" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="12" locked="false" isInGroup="-1"/>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::HelpButton" x="283" y="433" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="13" locked="false" isInGroup="-1"/>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::TextArea" x="149" y="137" w="739" h="86" measuredW="200" measuredH="140" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::SubTitle" x="673" y="150" w="-1" h="-1" measuredW="194" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <text>Score%3A%20233%20points</text>
+      </controlProperties>
+    </control>
+    <control controlID="92" controlTypeID="com.balsamiq.mockups::FieldSet" x="528" y="233" w="339" h="173" measuredW="200" measuredH="170" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>BallParty%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::Label" x="542" y="252" w="239" h="-1" measuredW="199" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Are%20you%20the%20red%20or%20the%20blue%20team%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::HelpButton" x="597" y="231" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="18" locked="false" isInGroup="-1"/>
+    <control controlID="96" controlTypeID="com.balsamiq.mockups::ButtonBar" x="542" y="276" w="311" h="27" measuredW="98" measuredH="27" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Red%2C%20Blue</text>
+      </controlProperties>
+    </control>
+    <control controlID="97" controlTypeID="com.balsamiq.mockups::Label" x="542" y="309" w="239" h="-1" measuredW="237" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20balls%20remain%20in%20the%20structure%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::NumericStepper" x="812" y="308" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::Label" x="542" y="342" w="239" h="-1" measuredW="196" measuredH="21" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20middle%20ball%20yours%20or%20theirs%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::ButtonBar" x="542" y="366" w="311" h="27" measuredW="114" measuredH="27" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ours%2C%20Theirs</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::FieldSet" x="170" y="506" w="339" h="115" measuredW="200" measuredH="170" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Hands%20cleaning%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Label" x="184" y="525" w="239" h="-1" measuredW="231" measuredH="21" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20red%20bacteria%20are%20in%20the%20sink%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="105" controlTypeID="com.balsamiq.mockups::HelpButton" x="279" y="504" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="26" locked="false" isInGroup="-1"/>
+    <control controlID="106" controlTypeID="com.balsamiq.mockups::NumericStepper" x="453" y="525" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="107" controlTypeID="com.balsamiq.mockups::Label" x="184" y="555" w="250" h="-1" measuredW="246" measuredH="21" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20green%20bacteria%20are%20in%20the%20sink%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="108" controlTypeID="com.balsamiq.mockups::NumericStepper" x="453" y="555" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::Label" x="184" y="585" w="254" h="-1" measuredW="249" measuredH="21" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20purple%20bacteria%20are%20in%20the%20sink%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="110" controlTypeID="com.balsamiq.mockups::NumericStepper" x="453" y="585" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="111" controlTypeID="com.balsamiq.mockups::iPadPopover" x="244" y="246" w="-1" h="-1" measuredW="222" measuredH="187" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <popoverArrowPosition>0</popoverArrowPosition>
+        <text>This%20is%20the%20description%20of%20the%0Afirst%20mission.%20The%20first%20mission%20%0Arequires%20the%20robot%20and%20the%20%0Ateam%20to%20do%20some%20things%2C%20and%20%0Ashould%20do%20them%20correct.%20If%20they%0Aare%20correct%20the%20team%20gets%20%0Apoints%2C%20otherwise%20they%20fail.%0A%20%0ASee%20Q%26A%203.</text>
+      </controlProperties>
+    </control>
+    <control controlID="112" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="902" y="66" w="382" h="831" measuredW="450" measuredH="400" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <markup>true</markup>
+        <text>FLL%20Scoring%0Ahttp%3A//localhost%3A1399</text>
+      </controlProperties>
+    </control>
+    <control controlID="113" controlTypeID="com.balsamiq.mockups::FieldSet" x="923" y="276" w="339" h="90" measuredW="200" measuredH="170" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Move%20that%20bus%21%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="114" controlTypeID="com.balsamiq.mockups::Label" x="937" y="295" w="183" h="-1" measuredW="181" measuredH="21" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20container%20back%20in%20base%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="115" controlTypeID="com.balsamiq.mockups::Label" x="937" y="330" w="234" h="-1" measuredW="231" measuredH="21" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20content%20of%20the%20container%20rebuild%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="116" controlTypeID="com.balsamiq.mockups::Switch" x="1200" y="294" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="37" locked="false" isInGroup="-1"/>
+    <control controlID="117" controlTypeID="com.balsamiq.mockups::Switch" x="1200" y="326" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="38" locked="false" isInGroup="-1"/>
+    <control controlID="118" controlTypeID="com.balsamiq.mockups::HelpButton" x="1024" y="274" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="39" locked="false" isInGroup="-1"/>
+    <control controlID="119" controlTypeID="com.balsamiq.mockups::FieldSet" x="923" y="376" w="339" h="90" measuredW="200" measuredH="170" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>The%20second%20mission</text>
+      </controlProperties>
+    </control>
+    <control controlID="120" controlTypeID="com.balsamiq.mockups::Label" x="937" y="401" w="215" h="-1" measuredW="209" measuredH="21" zOrder="41" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>What%20did%20happen%20during%20this%20round%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="121" controlTypeID="com.balsamiq.mockups::ButtonBar" x="935" y="426" w="315" h="27" measuredW="314" measuredH="27" zOrder="42" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nothing%2C%20Container%20in%20base%2C%20Content%20rebuild</text>
+      </controlProperties>
+    </control>
+    <control controlID="122" controlTypeID="com.balsamiq.mockups::FieldSet" x="923" y="478" w="339" h="55" measuredW="200" measuredH="170" zOrder="43" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Break%20the%20house%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="123" controlTypeID="com.balsamiq.mockups::Label" x="937" y="497" w="239" h="-1" measuredW="160" measuredH="21" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20house%20still%20standing%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="124" controlTypeID="com.balsamiq.mockups::Switch" x="1200" y="496" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="45" locked="false" isInGroup="-1"/>
+    <control controlID="125" controlTypeID="com.balsamiq.mockups::HelpButton" x="1036" y="476" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="46" locked="false" isInGroup="-1"/>
+    <control controlID="126" controlTypeID="com.balsamiq.mockups::TextArea" x="902" y="137" w="382" h="124" measuredW="200" measuredH="140" zOrder="47" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="127" controlTypeID="com.balsamiq.mockups::SubTitle" x="1144" y="150" w="-1" h="-1" measuredW="118" measuredH="27" zOrder="48" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <text>233%20points</text>
+      </controlProperties>
+    </control>
+    <control controlID="129" controlTypeID="com.balsamiq.mockups::FieldSet" x="923" y="679" w="339" h="173" measuredW="200" measuredH="170" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>BallParty%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="130" controlTypeID="com.balsamiq.mockups::Label" x="937" y="698" w="239" h="-1" measuredW="199" measuredH="21" zOrder="50" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Are%20you%20the%20red%20or%20the%20blue%20team%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="131" controlTypeID="com.balsamiq.mockups::HelpButton" x="992" y="677" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="51" locked="false" isInGroup="-1"/>
+    <control controlID="132" controlTypeID="com.balsamiq.mockups::ButtonBar" x="937" y="722" w="311" h="27" measuredW="98" measuredH="27" zOrder="52" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Red%2C%20Blue</text>
+      </controlProperties>
+    </control>
+    <control controlID="133" controlTypeID="com.balsamiq.mockups::Label" x="937" y="755" w="239" h="-1" measuredW="237" measuredH="21" zOrder="53" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20balls%20remain%20in%20the%20structure%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="134" controlTypeID="com.balsamiq.mockups::NumericStepper" x="1207" y="754" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="54" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="135" controlTypeID="com.balsamiq.mockups::Label" x="937" y="788" w="239" h="-1" measuredW="196" measuredH="21" zOrder="55" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20the%20middle%20ball%20yours%20or%20theirs%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="136" controlTypeID="com.balsamiq.mockups::ButtonBar" x="937" y="812" w="311" h="27" measuredW="114" measuredH="27" zOrder="56" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ours%2C%20Theirs</text>
+      </controlProperties>
+    </control>
+    <control controlID="137" controlTypeID="com.balsamiq.mockups::FieldSet" x="923" y="549" w="339" h="115" measuredW="200" measuredH="170" zOrder="57" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Hands%20cleaning%20%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="138" controlTypeID="com.balsamiq.mockups::Label" x="937" y="568" w="239" h="-1" measuredW="231" measuredH="21" zOrder="58" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20red%20bacteria%20are%20in%20the%20sink%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="139" controlTypeID="com.balsamiq.mockups::HelpButton" x="1032" y="547" w="-1" h="-1" measuredW="18" measuredH="18" zOrder="59" locked="false" isInGroup="-1"/>
+    <control controlID="140" controlTypeID="com.balsamiq.mockups::NumericStepper" x="1206" y="568" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="141" controlTypeID="com.balsamiq.mockups::Label" x="937" y="598" w="251" h="-1" measuredW="246" measuredH="21" zOrder="61" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20green%20bacteria%20are%20in%20the%20sink%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="142" controlTypeID="com.balsamiq.mockups::NumericStepper" x="1206" y="598" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="62" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="143" controlTypeID="com.balsamiq.mockups::Label" x="937" y="628" w="251" h="-1" measuredW="249" measuredH="21" zOrder="63" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20many%20purple%20bacteria%20are%20in%20the%20sink%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="144" controlTypeID="com.balsamiq.mockups::NumericStepper" x="1206" y="628" w="-1" h="-1" measuredW="41" measuredH="24" zOrder="64" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>3</text>
+      </controlProperties>
+    </control>
+    <control controlID="145" controlTypeID="com.balsamiq.mockups::iPadPopover" x="997" y="289" w="-1" h="-1" measuredW="222" measuredH="187" zOrder="65" locked="false" isInGroup="-1">
+      <controlProperties>
+        <popoverArrowPosition>0</popoverArrowPosition>
+        <text>This%20is%20the%20description%20of%20the%0Afirst%20mission.%20The%20first%20mission%20%0Arequires%20the%20robot%20and%20the%20%0Ateam%20to%20do%20some%20things%2C%20and%20%0Ashould%20do%20them%20correct.%20If%20they%0Aare%20correct%20the%20team%20gets%20%0Apoints%2C%20otherwise%20they%20fail.%0A%20%0ASee%20Q%26A%203.</text>
+      </controlProperties>
+    </control>
+    <control controlID="146" controlTypeID="com.balsamiq.mockups::ComboBox" x="174" y="151" w="224" h="-1" measuredW="112" measuredH="24" zOrder="66" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20table</text>
+      </controlProperties>
+    </control>
+    <control controlID="147" controlTypeID="com.balsamiq.mockups::ComboBox" x="426" y="151" w="224" h="-1" measuredW="126" measuredH="24" zOrder="67" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20referee</text>
+      </controlProperties>
+    </control>
+    <control controlID="148" controlTypeID="com.balsamiq.mockups::Button" x="528" y="423" w="339" h="38" measuredW="52" measuredH="27" zOrder="68" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save</text>
+      </controlProperties>
+    </control>
+    <control controlID="149" controlTypeID="com.balsamiq.mockups::ComboBox" x="923" y="151" w="212" h="-1" measuredW="112" measuredH="24" zOrder="69" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20table</text>
+      </controlProperties>
+    </control>
+    <control controlID="150" controlTypeID="com.balsamiq.mockups::ComboBox" x="923" y="186" w="339" h="-1" measuredW="126" measuredH="24" zOrder="70" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20referee</text>
+      </controlProperties>
+    </control>
+    <control controlID="151" controlTypeID="com.balsamiq.mockups::ComboBox" x="174" y="186" w="224" h="-1" measuredW="117" measuredH="24" zOrder="71" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20round</text>
+      </controlProperties>
+    </control>
+    <control controlID="152" controlTypeID="com.balsamiq.mockups::ComboBox" x="426" y="186" w="441" h="-1" measuredW="114" measuredH="24" zOrder="72" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20team</text>
+      </controlProperties>
+    </control>
+    <control controlID="153" controlTypeID="com.balsamiq.mockups::ComboBox" x="923" y="222" w="119" h="-1" measuredW="117" measuredH="24" zOrder="73" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20round</text>
+      </controlProperties>
+    </control>
+    <control controlID="154" controlTypeID="com.balsamiq.mockups::ComboBox" x="1055" y="222" w="207" h="-1" measuredW="114" measuredH="24" zOrder="74" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20a%20team</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

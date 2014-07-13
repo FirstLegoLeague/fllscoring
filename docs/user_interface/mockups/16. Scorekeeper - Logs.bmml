@@ -1,0 +1,21 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1136" measuredH="587" mockupW="739" mockupH="571">
+  <controls>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="397" y="16" w="739" h="571" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>FLL%20Scoring%0Ahttp%3A//localhost%3A1399</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::ButtonBar" x="426" y="109" w="683" h="40" measuredW="258" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>3</selectedIndex>
+        <text>Scores%2C%20Ranking%2C%20Output%2C%20Logs</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::DataGrid" x="426" y="170" w="683" h="365" measuredW="413" measuredH="261" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hLines>true</hLines>
+        <text>ID%2C%20Round%2C%20TeamId%2C%20TeamName%2C%20Score%2C%20Date%0A8%2C%20Round%203%2C%201128%2C%20De%20Aapjes%2C%20100%2C%2013-Jul-2014%2012%3A20%3A28%0A7%2C%20Round%203%2C%204321%2C%20De%20Geeks%2C%20281%2C%2013-Jul-2014%2012%3A19%3A53%0A6%2C%20Round%202%2C%201234%2C%20De%20Geeks%2C%20184%2C%2013-Jul-2014%2012%3A13%3A23%0A5%2C%20Round%201%2C%201128%2C%20De%20Aapjes%2C%2030%2C%2013-Jul-2014%2012%3A12%3A11%0A4%2C%20Round%201%2C%201234%2C%20De%20Aapjes%2C%2050%2C%2013-Jul-2014%2012%3A05%3A43%0A3%2C%20Round%202%2C%201128%2C%20De%20Viooltjes%2C%20231%2C%2013-Jul-2014%2012%3A03%3A59%0A2%2C%20Round%201%2C%204321%2C%20De%20Geeks%2C%20472%2C%2013-Jul-2014%2011%3A58%3A22%0A1%2C%20Round%201%2C%201128%2C%20De%20Viooltjes%2C%20313%2C%2013-Jul-2014%2011%3A57%3A30</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
