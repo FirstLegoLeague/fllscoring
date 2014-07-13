@@ -1,22 +1,22 @@
 <div ng-controller="rankingCtrl">
-    <table class="table table-bordered table-striped">
+    <h1 ng-repeat-start="stage in stages" ng-if="stage.rounds > 0">{{stage.name}}</h1>
+    <table ng-repeat-end class="table table-bordered table-striped" ng-if="stage.rounds > 0">
         <thead>
             <tr>
-                <th ng-click="sort='team.number';rev=false">#</th>
+                <th ng-click="sort='team.rank';rev=false">Rank</th>
+                <th ng-click="sort='team.number';rev=false">Team</th>
                 <th ng-click="sort='team.name';rev=false">Name</th>
-                <th ng-click="sort='score';rev=true">Score</th>
+                <th ng-if="stage.rounds > 1" ng-repeat="round in stage._rounds track by $index" ng-click="sort='scores[{{round}}].';rev=false">Round {{round}}</th>
+                <th ng-if="stage.rounds > 1" ng-click="sort='team.highest';rev=false">Highest</th>
+                <th ng-if="stage.rounds == 1" ng-click="sort='team.highest';rev=false">Score</th>
             </tr>
         </thead>
-        <tr ng-repeat="result in scores | orderBy:sort:rev">
-            <td>{{result.team.number}}</td>
-            <td>{{result.team.name}}</td>
-            <td>{{result.score}}</td>
-            <td>
-                <button class="btn btn-danger" ng-click="removeResult($index)">
-                    <i class="icon-trash"></i>
-                    Delete
-                </button>
-            </td>
+        <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:sort:rev">
+            <td>{{item.rank}}</td>
+            <td>{{item.team.number}}</td>
+            <td>{{item.team.name}}</td>
+            <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
+            <td>{{item.highest}}</td>
         </tr>
     </table>
 </div>
