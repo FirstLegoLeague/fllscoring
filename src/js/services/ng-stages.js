@@ -1,7 +1,7 @@
 /**
  * Tournament stages (e.g. qualifying rounds, semi finals, final, etc.).
  */
-define([
+define('services/ng-stages',[
     'services/ng-services',
     'services/log',
     'services/ng-fs'
@@ -41,7 +41,7 @@ define([
         }
         function remove(index) {
             stages.splice(index, 1);
-            return save();
+            return this.save();
         }
         /**
          * Add new stage.
@@ -50,7 +50,7 @@ define([
         function add(data) {
             stages.push(data);
             sanitize();
-            return save();
+            return this.save();
         }
 
         function sanitize() {
