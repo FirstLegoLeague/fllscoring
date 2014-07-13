@@ -74,7 +74,7 @@ function getDummyScoreboard() {
     return scoreboard;
 }
 
-define([
+define('views/ranking',[
     'services/log',
     'services/ng-scores',
     'angular'
