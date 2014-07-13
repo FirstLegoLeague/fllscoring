@@ -46,10 +46,9 @@
                 <th ng-click="sort='team.judgingGroup';rev=false">Judging Group</th>
                 <th ng-click="sort='team.pitLocation';rev=false">Pit Location</th>
                 <th ng-click="sort='team.translationNeeded';rev=false">Translation</th>
-                <th></th>
             </tr>
         </thead>
-        <tr ng-repeat="team in teams | index | orderBy:sort:rev">
+        <tr ng-show="!editMode" ng-repeat="team in teams | index | orderBy:sort:rev">
             <td>{{team.number}}</td>
             <td>{{team.name}}</td>
             <td>{{team.cityState}}</td>
@@ -60,6 +59,18 @@
             <td>{{team.judgingGroup}}</td>
             <td>{{team.pitLocation}}</td>
             <td><i ng-show="team.translationNeeded===true" class="icon-ok"></i></td>
+        </tr>
+        <tr ng-show="editMode" ng-repeat="team in teams | index | orderBy:sort:rev">
+            <td><input type="text" ng-model=team.number class="team-number" ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.name ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.cityState ng-blur="saveTeams()"></td>
+            <td><input type="text" ng-model=team.country ng-blur="saveTeams()"></td></td>
+            <td><input type="text" ng-model=team.affiliation ng-blur="saveTeams()"></td></td>
+            <td><input type="text" ng-model=team.coach1 ng-blur="saveTeams()"></td></td>
+            <td><input type="text" ng-model=team.coach2 ng-blur="saveTeams()"></td></td>
+            <td><input type="text" ng-model=team.judgingGroup class="team-number" ng-blur="saveTeams()"></td></td>
+            <td><input type="text" ng-model=team.pitLocation class="team-number" ng-blur="saveTeams()"></td></td>
+            <td><input type="checkbox" ng-model=team.translationNeeded ng-change="saveTeams()"></td>
             <td>
                 <span ng-show="editMode">
                     <i class="icon-trash clickable" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam($index)"></i>
@@ -68,8 +79,11 @@
         </tr>
     </table>
     <div class="largeLayoutHide">
-        <div ng-class="{clickable:!editMode}" class="team" ng-repeat="team in teams | index | orderBy:sort:ref" ng-click="isCollapsed = ((!editMode) && !isCollapsed) || (isCollapsed && editMode)">
-            ({{team.number}}) {{team.name}}, {{team.cityState}}
+        <div ng-class="{clickable:!editMode}" class="team" ng-repeat="team in teams | index | orderBy:sort:ref" ng-click="isCollapsed = toggleExtended(isCollapsed)">
+            <span ng-show="!editMode">({{team.number}}) {{team.name}}, {{team.cityState}}</span>
+            <input ng-show="editMode" ng-model="team.number" ng-blur="saveTeams()" class="team-number">
+            <input ng-show="editMode" ng-model="team.name" ng-blur="saveTeams()">
+            <input ng-show="editMode" ng-model="team.cityState" ng-blur="saveTeams()">
             <button ng-show="editMode" class="btn" ng-class="{active:isCollapsed}" ng-click="isCollapsed=!isCollapsed">+</button>
             <div ng-class="{collapse:!isCollapsed}" class="extended">
                 <div>
@@ -104,7 +118,7 @@
                 </div>
                 <div>
                     <span class="title">Translation needed</span>
-                    <span ng-show="!editMode&&team.translationNeeded===true"><i class="icon-ok"></i></span>
+                    <span ng-show="!editMode &amp;&amp; team.translationNeeded===true"><i class="icon-ok"></i></span>
                     <input ng-show="editMode" type="checkbox" ng-model="team.translationNeeded" ng-change="saveTeams()">
                 </div>
         </div>

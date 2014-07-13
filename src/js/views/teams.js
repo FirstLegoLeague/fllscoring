@@ -84,6 +84,14 @@ define('views/teams',[
                     $scope.saving = false;
                 });
             };
+
+            $scope.toggleExtended = function(isCollapsed) {
+                if ($scope.editMode) {
+                    return isCollapsed;
+                } else {
+                    return !isCollapsed;
+                }
+            }
         }
     ]);
 });

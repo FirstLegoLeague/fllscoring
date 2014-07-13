@@ -10,16 +10,15 @@
 	outline: 0;
 }
 
-.table-teams th:last-child {
-	width: 15px;
-	text-align: center;
-}
-
 .team {
     background-color: rgba(128,128,128,0.1);
     color: dodgerblue;
     padding: 12px 12px;
     margin: 20px 0;
+}
+
+.table-teams input[type=text] {
+	width: 150px;
 }
 
 .team button {
@@ -39,4 +38,8 @@
 
 .clickable {
 	cursor: pointer;
+}
+
+input[type=text].team-number {
+	width: 30px;
 }
