@@ -10,7 +10,6 @@ define('views/teams',[
         }]).controller(moduleName + 'Ctrl', [
         '$scope','$fs','$http',
         function($scope,$fs,$http) {
-            console.log($fs);
 
             log('init teams ctrl');
             $scope.log = log.get();
