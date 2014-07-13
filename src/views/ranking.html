@@ -3,12 +3,12 @@
     <table ng-repeat-end class="table table-bordered table-striped" ng-if="stage.rounds > 0">
         <thead>
             <tr>
-                <th ng-click="doSort('team.rank',false)">Rank</th>
+                <th ng-click="doSort('rank',false)">Rank</th>
                 <th ng-click="doSort('team.number',false)">Team</th>
                 <th ng-click="doSort('team.name',false)">Name</th>
-                <th ng-if="stage.rounds > 1" ng-repeat="round in stage._rounds track by $index" ng-click="sort='scores[{{round}}].';rev=false">Round {{round}}</th>
-                <th ng-if="stage.rounds > 1" ng-click="sort='team.highest';rev=false">Highest</th>
-                <th ng-if="stage.rounds == 1" ng-click="sort='team.highest';rev=false">Score</th>
+                <th ng-if="stage.rounds > 1" ng-repeat="round in stage._rounds track by $index" ng-click="doSort('scores['+$index+']',true)">Round {{round}}</th>
+                <th ng-if="stage.rounds > 1" ng-click="doSort('highest',true)">Highest</th>
+                <th ng-if="stage.rounds == 1" ng-click="doSort('highest',true)">Score</th>
             </tr>
         </thead>
         <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:sort:rev">

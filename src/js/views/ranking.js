@@ -85,8 +85,8 @@ define('views/ranking',[
         function($scope, $scores) {
             log('init ranking ctrl');
 
-            $scope.sort = 'score';
-            $scope.rev = true;
+            $scope.sort = 'rank';
+            $scope.rev = false;
 
             var stages = getDummyStages();
             var scoreboard = getDummyScoreboard();
