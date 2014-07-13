@@ -1,4 +1,7 @@
 {
   "name": "fllscoring",
-  "main": "nwindex.html"
+  "main": "nwindex.html",
+  "window": {
+    "toolbar":false
+  }
 }
