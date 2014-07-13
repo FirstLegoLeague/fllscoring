@@ -47,7 +47,7 @@ define('directives/size',[
                     h($scope).value = $element[0].clientHeight;
                 }
                 function between(x,y) {
-                    y = y||Number.Infinity;
+                    y = y||Number.POSITIVE_INFINITY;
                     return (this()>=x && this()<y);
                 }
             }
