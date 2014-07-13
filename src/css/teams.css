@@ -1,7 +1,10 @@
 #teams {
-
+	overflow-y: auto;
 }
 
+#teams .scroller {
+	min-width: 1000px;
+}
 
 #teams .btn {
 	outline: 0;
@@ -12,6 +15,28 @@
 	text-align: center;
 }
 
-.table-teams .icon-trash {
+.team {
+    background-color: rgba(128,128,128,0.1);
+    color: dodgerblue;
+    padding: 12px 12px;
+    margin: 20px 0;
+}
+
+.team button {
+	float: right;
+}
+
+.team .extended {
+	margin-top: 5px;
+	padding-left: 10px;
+	font-size: 14px;
+}
+
+.team .title {
+	display: inline-block;
+	width: 130px;
+}
+
+.clickable {
 	cursor: pointer;
 }
