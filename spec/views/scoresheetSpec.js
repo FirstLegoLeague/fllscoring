@@ -9,21 +9,9 @@ describe('scoresheet',function() {
 		number: '123',
 		name: 'foo'
 	};
-	var fsMock;
+	var fsMock = createFsMock();
 
     beforeEach(function() {
-    	fsMock = {
-			read: jasmine.createSpy('fsRead').andReturn({
-				then: function(){}
-			}),
-			write: jasmine.createSpy('fsWrite').andReturn({
-				then: function(){
-					return {
-						then: function(){}
-					}
-				}
-			})
-		};
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope) {
         	$scope = $rootScope.$new();
@@ -32,7 +20,14 @@ describe('scoresheet',function() {
         		'$fs': fsMock,
         		'$scores': {},
                 '$modal': {},
-                '$challenge': {}
+                '$challenge': {},
+                '$window': {
+                    Date: function() {
+                        this.valueOf = function() {
+                            return 42;
+                        };
+                    }
+                }
         	});
         });
     });
@@ -65,6 +60,31 @@ describe('scoresheet',function() {
             $scope.selectTeam = jasmine.createSpy('selectTeam');
             $scope.$root.$emit('selectTeam',dummyTeam);
             expect($scope.selectTeam).toHaveBeenCalledWith(dummyTeam);
+        });
+    });
+
+    describe('saving',function() {
+        it('should not save when no team is selected',function() {
+            $scope.save();
+            expect(fsMock.write).not.toHaveBeenCalled();
+        });
+        it('should save',function() {
+            $scope.team = dummyTeam;
+            $scope.field = {};
+            $scope.match = 1;
+            $scope.settings = {
+                table: 3
+            };
+            spyOn(Date,'valueOf').andReturn(42);
+            $scope.signature = [1,2,3,4];
+            $scope.save();
+            expect(fsMock.write.mostRecentCall.args[0]).toEqual('score_3_123_42.json');
+            expect(fsMock.write.mostRecentCall.args[1]).toEqual({
+                team: dummyTeam,
+                match: $scope.match,
+                table: $scope.settings.table,
+                signature: $scope.signature
+            });
         });
     });
 })

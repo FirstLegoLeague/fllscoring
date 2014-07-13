@@ -11,8 +11,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$scores','$modal','$challenge',
-        function($scope,$fs,$scores,$modal,$challenge) {
+        '$scope','$fs','$scores','$modal','$challenge','$window',
+        function($scope,$fs,$scores,$modal,$challenge,$window) {
             log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -124,7 +124,7 @@ define('views/scoresheet',[
                     'score',
                     $scope.settings.table,
                     $scope.team.number,
-                    +(new Date())
+                    +(new $window.Date())
                 ].join('_')+'.json';
 
                 var data = angular.copy($scope.field);
