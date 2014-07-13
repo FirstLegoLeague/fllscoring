@@ -2,7 +2,7 @@
  * wraps Thomas J Bradleys signature-pad
  * in a angularjs component
  */
-define([
+define('directives/sigpad',[
     'directives/ng-directives',
     'jquery',
     'signaturepad'
