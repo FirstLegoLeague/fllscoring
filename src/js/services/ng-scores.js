@@ -63,7 +63,7 @@ function getDummyScoreboard() {
  * Service handling all access to scores, including scoreboard
  * and ranking computation.
  */
-define([
+define('services/ng-scores',[
     'services/ng-services',
     'services/log',
     'services/ng-fs',
@@ -96,17 +96,18 @@ define([
             });
         }
         function remove(index) {
+            var self = this;
             // First remove the scoresheet, then re-save scores
-            var score = scores.splice(index, 1);
+            var score = scores.splice(index, 1)[0];
             return $fs.remove(score.file).then(function() {
-                return save();
+                return self.save();
             }, function(err) {
                 log('error removing score', err);
             });
         }
         function add(data) {
             scores.push(data);
-            return save();
+            return this.save();
         }
 
         function getScoreboard() {
