@@ -28,43 +28,6 @@ table {
 
 /* teams */
 @media screen {
-    .teams {
-        /*background-color: #333;*/
-    }
-    .team {
-        background-color: rgba(128,128,128,0.1);
-        color: dodgerblue;
-        padding: 12px 12px;
-        margin: 20px 0;
-    }
-    .team .number {
-        font-size: 16px;
-        line-height: 24px;
-    }
-    .team .name {
-        font-size: 28px;
-        line-height: 32px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .team i {
-        float: right;
-        color: crimson;
-        font-size: 56px;
-    }
-
-    .mediumWindow .team .number {
-        font-size: 11px;
-        line-height: 18px;
-    }
-    .mediumWindow .team .name {
-        font-size: 20px;
-        line-height: 24px;
-    }
-    .mediumWindow .team i {
-        font-size: 38px;
-    }
 
     .active i {
         color: #319cff;
@@ -142,12 +105,19 @@ table {
     }
 
     .btn-enum {
-        /**font-weight: 500;**/
         text-rendering: optimizeLegibility;
     }
 
     .panel {
         padding: 1px;
+    }
+
+    .smallLayoutShow {
+        display: initial;
+    }
+
+    .smallLayoutHide {
+        display: none !important;
     }
 }
 
@@ -189,6 +159,18 @@ table {
     .btn-enum {
         font-weight: 500;
     }
+
+    #teams .table-teams {
+        display: none;
+    }
+
+    .mediumLayoutShow {
+        display: initial;
+    }
+
+    .mediumLayoutHide {
+        display: none !important;
+    }
 }
 
 /* large layout */
@@ -223,5 +205,13 @@ table {
 
     .panel, #teams {
        padding: 10px;
+    }
+
+    .largeLayoutShow {
+        display: initial;
+    }
+
+    .largeLayoutHide {
+        display: none !important;
     }
 }
