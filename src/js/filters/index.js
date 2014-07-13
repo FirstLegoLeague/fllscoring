@@ -14,11 +14,12 @@ define('filters/index',[
 ],function(module) {
     return module.filter('index', function () {
         return function (array, index) {
-            if (!index)
+            if (!index) {
                 index = 'index';
-            for (var i = 0; i < array.length; ++i) {
-                array[i][index] = i;
             }
+            array.forEach(function(item,i) {
+                item[index] = i;
+            })
             return array;
         };
     });
