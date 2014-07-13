@@ -3,7 +3,8 @@ In effort to make recording and managing scores as easy and dynamic as possible 
 
 This document describes the screens of the application and the flow between them.
 
-**Note:** All terminology is not final, and is bound to change.
+**Note 1:** All terminology is not final, and is bound to change.
+**Note 2:** All images used in this document are mockups, not final designs. (!!!)
 
 # 1. Server/Client/Calculator
 
@@ -18,11 +19,11 @@ The user will start with a choice between these three.
 
 # 2. Setup wizard
 In order to make the system easy to use, a wizard is provided to setup the tournament. This wizards contains five steps, after which the whole system is ready for use. The wizard contains of:
-* **Tournament information**
-* **Team information**
-* **Team information**
-* **Round information**
-* **Referee information**
+* **Tournament information
+* Team information
+* Team information
+* Round information
+* Referee information
 
 After completing the wizard an option is presented to print out scoring forms.
 
@@ -68,3 +69,31 @@ Referees judge the robot competitions, and are the last data needed for a comple
 ## 2.6. Wizard completed
 When all five screens are provided with data, the wizard is finished and the system is setup for the tournament. Here the user is also presented with the option to print out score forms, when the robot matches are judged using paper forms.
 ![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/07.%20Wizard%20-%20Completed.png)
+
+# 3. Using the system
+When the tournament is set up, the system can be used. Here the user is presented with the option to connect to a server which hosts the tournament data, or use locally stored data (from the setup flow) if only one device is used or no network is available. There are two ways to connect to a server; using a QR-code scanner, or by entering the server address manually.
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/08.%20Client%20-%20Select%20connect%20type.png)
+
+# 4. Authenticating
+After connecting to a server, the user can choose between being a scorekeeper and being a referee. After a choice is made the authentication code is requested. This is the admin or referee code as entered during the setup-wizard. This code needs to be distrubuted manually before the start of the tournament.
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/08.%20Client%20-%20Select%20connect%20type.png)
+
+# 5. Being a scorekeeper
+The scorekeeper sees an overview of all scores send in by referees, the ranking of these scores and has the ability to publish scores and generate outputs of scores/ranking in various formats.
+
+## 5.1 Scores
+The scores view shows an overview of all scores send in by referees. The view is sorted by team-id by default, but can be sorted otherwise by clicking/tapping one of the table-headers. When a tournament is using paper forms at the robot games the scorekeeper can enter scores in this view. By tapping a score, or empty score field, a textfield appears where the score can be typed. Alternatively a button appears which opens the scoreform, so the scorekeeper can copy the paper form into the system.
+The scorekeeper will also be notified here when the system has received multiple scores for a team in a certain round. The scorekeeper can use the Scores or Logs view to resolve these issues.
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/13.%20Scorekeeper%20-%20Scores.png)
+
+## 5.2 Ranking
+The ranking view shows the scores, but ordered on the highest score. The teams who will advance to the next round shall be highlighted for readability.
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/14.%20Scorekeeper%20-%20Ranking.png)
+
+## 5.3 Output
+The output view is the heart and soul for connecting to other systems. The scorekeeper can publish scores here, for display on beamer overlays. Also selected rounds can be exported to Excel, CSV, JSON and XML to make sure connecting other systems is as easy as possible.
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/15.%20Scorekeeper%20-%20Output.png)
+
+## 5.4 Logs
+In the logs view the raw scores are displayed, by default ordered by date/time of score entry. This view can be used by the scorekeeper to validate scores when issues have been found. It also displays the table on which the robot match has been played, and also the referee who judged the match.
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/16.%20Scorekeeper%20-%20Logs.png)
