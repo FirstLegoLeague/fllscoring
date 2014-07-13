@@ -2,14 +2,14 @@
 
 describe('ng-connect',function() {
     var ngServices = factory('services/ng-services');
-    var connect = factory('services/ng-connect',{
+    var module = factory('services/ng-connect',{
         'services/ng-services': ngServices
     });
 
     var $connect;
 
     beforeEach(function() {
-        angular.mock.module(connect.name);
+        angular.mock.module(module.name);
         angular.mock.inject(["$connect", function(_$connect_) {
             $connect = _$connect_;
         }]);
