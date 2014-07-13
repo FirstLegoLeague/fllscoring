@@ -1,4 +1,4 @@
-define([
+define('views/scores',[
     'services/log',
     'services/ng-scores',
     'directives/really',
