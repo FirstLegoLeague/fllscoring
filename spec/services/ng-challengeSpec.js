@@ -2,15 +2,11 @@ describe('ng-challenge',function() {
     var ngServices = factory('services/ng-services');
     var challenge, q;
 
-    var dummyChallenge = JSON.stringify({foo:'bar'});
+    var dummyChallenge = {foo:'bar'};
 
     var module = factory('services/ng-challenge',{
         'services/ng-services': ngServices,
-        'services/fs': {
-            read: function() {
-                return Q.when(dummyChallenge);
-            }
-        }
+        'services/fs': createFsMock(JSON.stringify(dummyChallenge))
     });
 
     beforeEach(function() {
@@ -31,7 +27,7 @@ describe('ng-challenge',function() {
         it('should load, then init',function(done) {
             challenge.init = jasmine.createSpy('init').andReturn(42);
             challenge.load('foo').then(function() {
-                expect(challenge.init).toHaveBeenCalledWith({foo:'bar'});
+                expect(challenge.init).toHaveBeenCalledWith(dummyChallenge);
                 done();
             });
         });
