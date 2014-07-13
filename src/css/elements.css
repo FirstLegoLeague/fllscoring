@@ -69,6 +69,10 @@ table {
     .active i {
         color: #319cff;
     }
+
+    .active {
+        outline: 0;
+    }
 }
 
 /* navigation bar */
@@ -178,7 +182,7 @@ table {
         z-index: 2;
     }
 
-    .panel {
+    .panel, #teams {
         padding: 5px;
     }
 
@@ -217,7 +221,7 @@ table {
         z-index: 2;
     }
 
-    .panel {
+    .panel, #teams {
        padding: 10px;
     }
 }

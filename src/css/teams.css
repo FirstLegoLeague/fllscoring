@@ -1,8 +1,11 @@
 #teams {
-    max-width: 1400px;
-    margin: auto;
+
 }
 
+
+#teams .btn {
+	outline: 0;
+}
 
 .table-teams th:last-child {
 	width: 15px;

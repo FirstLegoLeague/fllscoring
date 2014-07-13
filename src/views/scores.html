@@ -17,13 +17,13 @@
             <td>{{score.team.name}}</td>
             <td>{{score.score}}</td>
             <td>
-                <button class="btn btn-danger" fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
-                    <i class="icon-trash"></i>
-                    Delete
-                </button>
                 <button class="btn btn-default" ng-click="editScore(score.index)">
                     <i class="icon-pencil"></i>
                     Edit
+                </button>
+                <button class="btn btn-danger" fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
+                    <i class="icon-trash"></i>
+                    Delete
                 </button>
             </td>
         </tr>

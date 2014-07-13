@@ -19,6 +19,7 @@
     white-space: normal;
     text-align: right;
     display: block;
+    float: right;
 }
 
 .btn-enum {
