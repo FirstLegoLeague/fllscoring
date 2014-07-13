@@ -33,7 +33,7 @@
         </p>
     </form>
 
-    <table class="table table-bordered table-striped table-teams">
+    <table class="table table-bordered table-striped table-teams smallLayoutHide mediumLayoutHide">
         <thead>
             <tr>
                 <th ng-click="sort='team.number';rev=true">#</th>
@@ -62,9 +62,44 @@
             <td><i ng-show="team.translationNeeded===true" class="icon-ok"></i></td>
             <td>
                 <span ng-show="editMode">
-                    <i class="icon-trash" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam($index)"></i>
+                    <i class="icon-trash clickable" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam($index)"></i>
                 </span>
             </td>
         </tr>
     </table>
+    <div class="largeLayoutHide">
+        <div class="team clickable" ng-repeat="team in teams | index | orderBy:sort:ref" ng-click="isCollapsed = !isCollapsed">
+            ({{team.number}}) {{team.name}}, {{team.cityState}}
+            <button class="btn" ng-class="{active:isCollapsed}">+</button>
+            <div ng-class="{collapse:!isCollapsed}" class="extended">
+                <div>
+                    <span class="title">Country</span>
+                    {{team.country}}
+                </div>
+                <div>
+                    <span class="title">Affiliation</span>
+                    {{team.affiliation}}
+                </div>
+                <div>
+                    <span class="title">Coach 1</span>
+                    {{team.coach1}}
+                </div>
+                <div>
+                    <span class="title">Coach 2</span>
+                    {{team.coach2}}
+                </div>
+                <div>
+                    <span class="title">Judging group</span>
+                    {{team.judgingGroup}}
+                </div>
+                <div>
+                    <span class="title">Pit location</span>
+                    {{team.pitLocation}}
+                </div>
+                <div>
+                    <span class="title">Translation needed</span>
+                    <span ng-show="team.translationNeeded===true"><i class="icon-ok"></i></span>
+                </div>
+        </div>
+    </div>
 </div>
