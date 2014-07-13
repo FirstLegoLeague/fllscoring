@@ -1,0 +1,143 @@
+<xs:schema
+        targetNamespace="http://fll-tools.com/applications/scoring/v1/challenge.xsd"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd">
+    <xs:element name="challenge" type="fll:challenge" />
+
+    <!-- Definition of main fll node -->
+    <xs:complexType name="challenge">
+        <xs:sequence>
+            <!-- Strings node for translations -->
+            <xs:element name="strings" type="fll:strings" />
+
+            <!-- We need at least one mission to make sense -->
+            <xs:element name="mission" type="fll:mission" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="year" type="xs:integer" use="required" />
+        <xs:attribute name="name" type="xs:string"  use="required" />
+    </xs:complexType>
+
+    <!-- Definition of <strings/> node -->
+    <xs:complexType name="strings">
+        <xs:sequence>
+            <!-- Contains zero or more translation nodes -->
+            <xs:element name="string" type="fll:string" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Defintion of <string/> node -->
+    <xs:complexType name="string">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:string" use="required" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- A mission. Contains one or more objectives and one more more scores -->
+    <xs:complexType name="mission">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="objective-yesno" type="fll:objective-yesno" />
+                <xs:element name="objective-number" type="fll:objective-number" />
+                <xs:element name="objective-enum" type="fll:objective-enum" />
+            </xs:choice>
+            <xs:element name="score" type="fll:score" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="description" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <!-- Boolean objective. Requires id and description and has optional default which is either yes or no -->
+    <xs:complexType name="objective-yesno">
+        <xs:attribute name="id" type="xs:string" use="required" />
+        <xs:attribute name="description" type="xs:string" use="required" />
+        <xs:attribute name="default">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="yes"/>
+                    <xs:enumeration value="no"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <!-- Number objective. Requires id, description, min and max and has optional integer default -->
+    <xs:complexType name="objective-number">
+        <xs:attribute name="id" type="xs:string" use="required" />
+        <xs:attribute name="description" type="xs:string" use="required" />
+        <xs:attribute name="min" type="xs:integer" use="required" />
+        <xs:attribute name="max" type="xs:integer" use="required" />
+        <xs:attribute name="default" type="xs:integer" />
+    </xs:complexType>
+
+    <!-- Enum objective. Requires id and description. Optional default and has sub-options -->
+    <xs:complexType name="objective-enum">
+        <xs:sequence>
+            <xs:element name="option" type="fll:option" minOccurs="2" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required" />
+        <xs:attribute name="description" type="xs:string" use="required" />
+        <xs:attribute name="default" type="xs:string" />
+    </xs:complexType>
+
+    <!-- <option> node for enums -->
+    <xs:complexType name="option">
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="description" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <!-- Score node for values -->
+    <xs:complexType name="score">
+        <xs:sequence>
+            <xs:element name="indexes" type="fll:indexes" />
+            <xs:element name="cases" type="fll:cases" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Indexes list for a score -->
+    <xs:complexType name="indexes">
+        <xs:sequence>
+            <xs:element name="index" type="fll:index" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- One index -->
+    <xs:complexType name="index">
+        <xs:attribute name="objective" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <!-- Cases for a score -->
+    <xs:complexType name="cases">
+        <xs:sequence>
+            <xs:element name="case" type="fll:case" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- One case for a score -->
+    <xs:complexType name="case">
+        <xs:sequence>
+            <xs:element name="index-ref" type="fll:index-ref" minOccurs="1" maxOccurs="unbounded" />
+            <xs:choice>
+                <xs:element name="points" type="fll:points" />
+                <xs:element name="error" type="fll:error" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Index in a case -->
+    <xs:complexType name="index-ref">
+        <xs:attribute name="value" type="xs:string" />
+    </xs:complexType>
+
+    <!-- Points as result for a case -->
+    <xs:complexType name="points">
+        <xs:attribute name="amount" type="xs:integer" />
+    </xs:complexType>
+
+    <!-- Error as result for a case -->
+    <xs:complexType name="error">
+        <xs:attribute name="message" type="xs:string" />
+    </xs:complexType>
+</xs:schema>
