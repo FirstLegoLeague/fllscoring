@@ -3,8 +3,9 @@ In effort to make recording and managing scores as easy and dynamic as possible 
 
 This document describes the screens of the application and the flow between them.
 
-**Note 1:** All terminology is not final, and is bound to change.
-**Note 2:** All images used in this document are mockups, not final designs. (!!!)
+**Notes**
+* All terminology is not final, and is bound to change.
+* All images used in this document are mockups, not final designs. (!!!)
 
 # 1. Server/Client/Calculator
 
@@ -19,7 +20,7 @@ The user will start with a choice between these three.
 
 # 2. Setup wizard
 In order to make the system easy to use, a wizard is provided to setup the tournament. This wizards contains five steps, after which the whole system is ready for use. The wizard contains of:
-* **Tournament information
+* Tournament information
 * Team information
 * Team information
 * Round information
@@ -76,11 +77,11 @@ When the tournament is set up, the system can be used. Here the user is presente
 
 # 4. Authenticating
 After connecting to a server, the user can choose between being a scorekeeper and being a referee. After a choice is made the authentication code is requested. This is the admin or referee code as entered during the setup-wizard. This code needs to be distrubuted manually before the start of the tournament.
-![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/08.%20Client%20-%20Select%20connect%20type.png)
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/09.%20Client%20-%20Connect%20authentication.png)
 
 # 5. Just scoring
 For the score calculation mode no authentication, tournament setup or network connection is needed. This mode is designed for scorekeepers who receive paper scoreforms, and need to calculate the scores.
-![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/08.%20Client%20-%20Select%20connect%20type.png)
+![](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/docs/user_interface/mockups/PNGs/10.%20Just%20calculate.png)
 
 # 6. Being a referee
 When a referee is authenticated, he/she is presented with the score form. To use the score form a couple of selections need to be made; Referee, table, round and team. When a score is saved round and team will be reset, referee and table will be remembered by the system. After the referee enteres the values into the scoreform, the score can be read from the screen. 

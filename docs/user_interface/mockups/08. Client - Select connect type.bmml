@@ -30,11 +30,11 @@
         <text>FLL%20Scoring%0Ahttp%3A//localhost%3A1399</text>
       </controlProperties>
     </control>
-    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="878" y="103" w="413" h="-1" measuredW="267" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="878" y="103" w="413" h="-1" measuredW="246" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <align>center</align>
         <size>24</size>
-        <text>Welcome%20mister%20referee%21</text>
+        <text>Welcome%20mister%20client%21</text>
       </controlProperties>
     </control>
     <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="930" y="150" w="309" h="-1" measuredW="294" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
