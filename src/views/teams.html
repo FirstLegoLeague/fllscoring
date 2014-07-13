@@ -1,9 +1,8 @@
 <div ng-controller="teamsCtrl" id="teams">
     <p class="pull-right">
-        <button class="btn" ng-hide="editMode" ng-click="editMode=true">
+        <button ng-class="{active:editMode}" class="btn" ng-click="editMode=!editMode">
             <i class="icon-edit"></i> Edit
         </button>
-        <button class="btn btn-primary" ng-show="editMode" ng-click="editMode=false">Done</button>
     </p>
     <p class="pull-right">
         <button class="btn" ng-click="load()">
