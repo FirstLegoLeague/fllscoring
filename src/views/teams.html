@@ -1,6 +1,6 @@
 <div ng-controller="teamsCtrl" id="teams">
     <p class="pull-right">
-        <button ng-class="{active:editMode}" class="btn" ng-click="editMode=!editMode">
+        <button ng-class="{active:editMode}" class="btn" ng-click="editMode=!editMode;saveTeams()">
             <i class="icon-edit"></i> Edit
         </button>
     </p>
@@ -38,9 +38,9 @@
             <tr>
                 <th ng-click="sort='team.number';rev=true">#</th>
                 <th ng-click="sort='team.name';rev=false">Name</th>
-                <th ng-click="sort='team.affiliation';rev=false">Affiliation</th>
                 <th ng-click="sort='team.cityState';rev=false">City (State)</th>
                 <th ng-click="sort='team.country';rev=false">Country</th>
+                <th ng-click="sort='team.affiliation';rev=false">Affiliation</th>
                 <th ng-click="sort='team.coach1';rev=false">Coach 1</th>
                 <th ng-click="sort='team.coach2';rev=false">Coach 2</th>
                 <th ng-click="sort='team.judgingGroup';rev=false">Judging Group</th>
@@ -68,37 +68,44 @@
         </tr>
     </table>
     <div class="largeLayoutHide">
-        <div class="team clickable" ng-repeat="team in teams | index | orderBy:sort:ref" ng-click="isCollapsed = !isCollapsed">
+        <div ng-class="{clickable:!editMode}" class="team" ng-repeat="team in teams | index | orderBy:sort:ref" ng-click="isCollapsed = ((!editMode) && !isCollapsed) || (isCollapsed && editMode)">
             ({{team.number}}) {{team.name}}, {{team.cityState}}
-            <button class="btn" ng-class="{active:isCollapsed}">+</button>
+            <button ng-show="editMode" class="btn" ng-class="{active:isCollapsed}" ng-click="isCollapsed=!isCollapsed">+</button>
             <div ng-class="{collapse:!isCollapsed}" class="extended">
                 <div>
                     <span class="title">Country</span>
-                    {{team.country}}
+                    <span ng-show="!editMode">{{team.country}}</span>
+                    <input ng-show="editMode" ng-model="team.country" ng-blur="saveTeams()">
                 </div>
                 <div>
                     <span class="title">Affiliation</span>
-                    {{team.affiliation}}
+                    <span ng-show="!editMode">{{team.affiliation}}</span>
+                    <input ng-show="editMode" ng-model="team.affiliation" ng-blur="saveTeams()">
                 </div>
                 <div>
                     <span class="title">Coach 1</span>
-                    {{team.coach1}}
+                    <span ng-show="!editMode">{{team.coach1}}</span>
+                    <input ng-show="editMode" ng-model="team.coach1" ng-blur="saveTeams()">
                 </div>
                 <div>
                     <span class="title">Coach 2</span>
-                    {{team.coach2}}
+                    <span ng-show="!editMode">{{team.coach2}}</span>
+                    <input ng-show="editMode" ng-model="team.coach2" ng-blur="saveTeams()">
                 </div>
                 <div>
                     <span class="title">Judging group</span>
-                    {{team.judgingGroup}}
+                    <span ng-show="!editMode">{{team.judgingGroup}}</span>
+                    <input ng-show="editMode" ng-model="team.judgingGroup" ng-blur="saveTeams()">
                 </div>
                 <div>
                     <span class="title">Pit location</span>
-                    {{team.pitLocation}}
+                    <span ng-show="!editMode">{{team.pitLocation}}</span>
+                    <input ng-show="editMode" ng-model="team.pitLocation" ng-blur="saveTeams()">
                 </div>
                 <div>
                     <span class="title">Translation needed</span>
-                    <span ng-show="team.translationNeeded===true"><i class="icon-ok"></i></span>
+                    <span ng-show="!editMode&&team.translationNeeded===true"><i class="icon-ok"></i></span>
+                    <input ng-show="editMode" type="checkbox" ng-model="team.translationNeeded" ng-change="saveTeams()">
                 </div>
         </div>
     </div>
