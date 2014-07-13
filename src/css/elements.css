@@ -6,7 +6,6 @@ html,body {
     position: relative;
 }
 body {
-    /*padding-bottom: 80px;*/
     font-family: 'latolight', 'Segoe UI','helvetica','Arial';
     font-size: 18px;
 }
@@ -79,11 +78,14 @@ table {
         width: 100%;
     }
     .navbar li {
-        /*border: 1px solid red;*/
         box-sizing: border-box;
         width: 20%;
         text-align: center;
         cursor: pointer;
+    }
+    .navbar .nav li a {
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .smallWindow .navbar i {
@@ -104,7 +106,7 @@ table {
         width: 500%;
         position: absolute;
         top: 0px;
-        bottom: 80px;
+        bottom: 0px;
         margin-top: 79px;
     }
     .viewMain > div {
@@ -136,7 +138,8 @@ table {
     }
 
     .btn-enum {
-        font-weight: 500;
+        /**font-weight: 500;**/
+        text-rendering: optimizeLegibility;
     }
 
     .panel {
@@ -150,7 +153,7 @@ table {
         position: absolute;
         width: 100%;
         top: 0px;
-        bottom: 50px;
+        bottom: 0px;
         margin-top: 50px;
     }
     .viewMain > div {

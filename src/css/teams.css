@@ -1,0 +1,14 @@
+#teams {
+    max-width: 1400px;
+    margin: auto;
+}
+
+
+.table-teams th:last-child {
+	width: 15px;
+	text-align: center;
+}
+
+.table-teams .icon-trash {
+	cursor: pointer;
+}

@@ -1,4 +1,4 @@
-<div ng-controller="teamsCtrl">
+<div ng-controller="teamsCtrl" id="teams">
     <p class="pull-right">
         <button class="btn" ng-hide="editMode" ng-click="editMode=true">
             <i class="icon-edit"></i> Edit
@@ -34,11 +34,38 @@
         </p>
     </form>
 
-    <div class="teams">
-        <div class="team" ng-repeat="team in teams" ng-click="selectTeam(team)">
-            <i ng-show="editMode" class="icon-remove-sign" ng-click="removeTeam($index)"></i>
-            <div class="number">{{team.number}}</div>
-            <div class="name">{{team.name}}</div>
-        </div>
-    </div>
+    <table class="table table-bordered table-striped table-teams">
+        <thead>
+            <tr>
+                <th ng-click="sort='team.number';rev=true">#</th>
+                <th ng-click="sort='team.name';rev=false">Name</th>
+                <th ng-click="sort='team.affiliation';rev=false">Affiliation</th>
+                <th ng-click="sort='team.cityState';rev=false">City (State)</th>
+                <th ng-click="sort='team.country';rev=false">Country</th>
+                <th ng-click="sort='team.coach1';rev=false">Coach 1</th>
+                <th ng-click="sort='team.coach2';rev=false">Coach 2</th>
+                <th ng-click="sort='team.judgingGroup';rev=false">Judging Group</th>
+                <th ng-click="sort='team.pitLocation';rev=false">Pit Location</th>
+                <th ng-click="sort='team.translationNeeded';rev=false">Translation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr ng-repeat="team in teams | index | orderBy:sort:rev">
+            <td>{{team.number}}</td>
+            <td>{{team.name}}</td>
+            <td>{{team.cityState}}</td>
+            <td>{{team.country}}</td>
+            <td>{{team.affiliation}}</td>
+            <td>{{team.coach1}}</td>
+            <td>{{team.coach2}}</td>
+            <td>{{team.judgingGroup}}</td>
+            <td>{{team.pitLocation}}</td>
+            <td><i ng-show="team.translationNeeded===true" class="icon-ok"></i></td>
+            <td>
+                <span ng-show="editMode">
+                    <i class="icon-trash" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam($index)"></i>
+                </span>
+            </td>
+        </tr>
+    </table>
 </div>
