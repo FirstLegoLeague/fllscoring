@@ -1,4 +1,4 @@
-ddescribe('ng-fs',function() {
+describe('ng-fs',function() {
     var ngServices = factory('services/ng-services');
     var fsMock = createFsMock('"dummydata"');
     var module = factory('services/ng-fs',{
