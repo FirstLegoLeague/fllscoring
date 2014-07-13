@@ -1,4 +1,4 @@
-define([
+define('views/settings',[
     'services/log',
     'services/ng-fs',
     'angular'
