@@ -57,15 +57,10 @@
             // In case of async runner, tell Jasmine to wait for it
             if (async) {
                 // Obtain $rootScope to allow pumping digest loop
-                var $rootScope;
-                angular.mock.inject(["$rootScope", function(_$rootScope_) {
-                    $rootScope = _$rootScope_;
-                }]);
-
-                waitsFor(function() {
+                waitsFor(angular.mock.inject(function($rootScope) {
                     $rootScope.$digest();
                     return runnerDone;
-                }, desc, timeout);
+                }), desc, timeout);
             }
         };
     }
