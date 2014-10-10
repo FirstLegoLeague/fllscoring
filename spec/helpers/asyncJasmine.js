@@ -87,6 +87,6 @@
     it = makeAsyncDesc(it);
     iit = makeAsyncDesc(iit);
     beforeEach = makeAsyncNoDesc(beforeEach, "beforeEach");
-    afterEach = makeAsyncNoDesc(beforeEach, "afterEach");
+    afterEach = makeAsyncNoDesc(afterEach, "afterEach");
 
 })();
