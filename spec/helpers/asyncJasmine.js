@@ -41,11 +41,11 @@
             var async = false;
             if (runner.length > 0) {
                 // Runner uses explicit done callback
-                runner(done);
+                runner.call(this,done);
                 async = true;
             } else {
                 // Runner may be synchronous, or return a promise
-                var result = runner();
+                var result = runner.call(this);
                 if (isPromise(result)) {
                     // Runner returned a promise.
                     // Wait for it to be resolved or rejected.
