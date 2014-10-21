@@ -7,9 +7,13 @@ describe('ng-stages',function() {
         'services/log': logMock
     });
 
+    var $rootScope;
     var $stages;
+    var $q;
     var mockStage = { id: "practice", name: "Oefenrondes", rounds: 2 };
-    var mockStageSanitized = { id: "practice", name: "Oefenrondes", rounds: 2, _rounds:[1,2] };
+    var mockStageSanitized = { id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] };
+    var unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
+    var unusedMockStageSanitized = { id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     var fsMock;
 
     beforeEach(function() {
@@ -18,52 +22,69 @@ describe('ng-stages',function() {
         angular.mock.module(function($provide) {
             $provide.value('$fs', fsMock);
         });
-        angular.mock.inject(["$stages", function(_$stages_) {
+        angular.mock.inject(["$q", "$stages", "$rootScope", function(_$q_, _$stages_, _$rootScope_) {
+            $q = _$q_;
+            $rootScope = _$rootScope_;
             $stages = _$stages_;
         }]);
+        // $stages needs to initialize itself, wait for that to
+        // complete before starting each test.
+        return $stages.init();
     });
 
-    describe('initals',function() {
-        it('should give empty scores initially',function(done) {
-            $stages.load().then(function() {
-                expect($stages.stages).toEqual([mockStageSanitized]);
-                done();
-            }).done();
+    describe('initializing',function() {
+        it('should load stages by default', function() {
+            expect($stages.stages).toEqual([mockStageSanitized]);
         });
     });
 
-    describe('adding stages',function() {
-        it('should add a stage to the list, sanitze and save',function() {
-            $stages.save = jasmine.createSpy('saveSpy').andReturn(42);
+    describe('loading', function() {
+        it('should load and sanitize stages',function() {
+            return $stages.load().then(function() {
+                expect($stages.stages).toEqual([mockStageSanitized]);
+            });
+        });
+    });
+
+    describe('adding',function() {
+        it('should add a stage to the list and add autogen properties',function() {
+            $stages.clear();
             var res = $stages.add(mockStage);
             expect($stages.stages).toEqual([mockStageSanitized]);
-            expect(res).toBe(42);
-            expect($stages.save).toHaveBeenCalled();
+        });
+        it('should reject duplicate stage ids',function() {
+            $stages.clear();
+            $stages.add(mockStage);
+            expect(function() {
+                $stages.add(mockStage);
+            }).toThrow();
+        });
+        it('should maintain existing stages and allStages arrays', function() {
+            $stages.clear();
+            var allStages = $stages.allStages;
+            var stages = $stages.stages;
+            expect(allStages).toEqual([]);
+            expect(stages).toEqual([]);
+            $stages.add(mockStage);
+            $stages.add(unusedMockStage);
+            expect(allStages).toEqual([mockStageSanitized, unusedMockStageSanitized]);
+            expect(stages).toEqual([mockStageSanitized]);
         });
     });
 
     describe('saving',function() {
-        it('should write stages to stages.json',function(done) {
-            $stages.load().then(function() {
-                return $stages.save();
-            }).then(function() {
+        it('should write stages to stages.json',function() {
+            return $stages.save().then(function() {
                 expect(fsMock.write).toHaveBeenCalledWith('stages.json',[mockStage])
-                done();
-            }).done();
+            });
         });
     });
 
     describe('removing',function() {
-        it('should remove the provided index and save',function(done) {
-            $stages.save = jasmine.createSpy('saveSpy');
-            $stages.load().then(function() {
-                expect($stages.stages).toEqual([mockStageSanitized]);
-                return $stages.remove(0);
-            }).then(function() {
-                expect($stages.stages).toEqual([]);
-                expect($stages.save).toHaveBeenCalled();
-                done();
-            }).done();
+        it('should remove the provided id',function() {
+            expect($stages.stages).toEqual([mockStageSanitized]);
+            $stages.remove("practice");
+            expect($stages.stages).toEqual([]);
         });
     });
 

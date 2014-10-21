@@ -51,8 +51,11 @@
                     <button class="btn" ng-hide="team" ng-click="showTeams()">Select team</button>
                     <span ng-show="team">{{team.name}} ({{team.number}})</span>
                     <br>
-                    <button ng-hide="team" class="btn">Select round</button>
-                    <span ng-show="team">Round {{match.round}}</span>
+                    <button ng-hide="stage" class="btn" ng-click="chooseStage()">Select stage</button>
+                    <span ng-show="stage">Stage {{stage.name}}</span>
+                    <br>
+                    <button ng-hide="!stage || round" class="btn" ng-click="chooseRound(stage)">Select round</button>
+                    <span ng-show="round">Round {{round}}</span>
                     <br>
                     <div id="totalScore">
                         Total score: {{score()}}
@@ -60,7 +63,7 @@
                 </h2>
             </section>
 
-            <section class="panel" ng-show="team">
+            <section class="panel" ng-show="team &amp;&amp; stage &amp;&amp; round">
                 <h2>
                     Signature
                     <button class="btn pull-right" ng-click="signature=null">clear</button>

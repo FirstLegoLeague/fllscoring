@@ -3,7 +3,8 @@
         <thead>
             <tr>
                 <th ng-click="sort='index';rev=true">#</th>
-                <th ng-click="sort='match.round';rev=false">Round</th>
+                <th ng-click="sort='stage.index';rev=false">Stage</th>
+                <th ng-click="sort='round';rev=false">Round</th>
                 <th ng-click="sort='team.number';rev=false">Team</th>
                 <th ng-click="sort='team.name';rev=false">Name</th>
                 <th ng-click="sort='score';rev=true">Score</th>
@@ -12,7 +13,8 @@
         </thead>
         <tr ng-repeat="score in scores | index | orderBy:sort:rev">
             <td>{{score.index + 1}}</td>
-            <td>{{score.match.round}}</td>
+            <td>{{score.stage.name}}</td>
+            <td>{{score.round}}</td>
             <td>{{score.team.number}}</td>
             <td>{{score.team.name}}</td>
             <td>{{score.score}}</td>

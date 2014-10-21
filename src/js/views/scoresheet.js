@@ -4,6 +4,7 @@ define('views/scoresheet',[
     'services/ng-fs',
     'services/ng-challenge',
     'services/ng-scores',
+    'services/ng-stages',
     'directives/sigpad',
     'directives/spinner',
     'angular'
@@ -11,8 +12,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$scores','$modal','$challenge','$window',
-        function($scope,$fs,$scores,$modal,$challenge,$window) {
+        '$scope','$fs','$scores','$stages','$modal','$challenge','$window',
+        function($scope,$fs,$scores,$stages,$modal,$challenge,$window) {
             log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -30,7 +31,6 @@ define('views/scoresheet',[
                     $scope.missionIndex = defs.missionIndex;
                     $scope.missions = defs.missions;
                     $scope.objectiveIndex = defs.objectiveIndex;
-                    $scope.match = { round: 1 };
                     angular.forEach($scope.missions,process);
                     $scope.$apply();
                 });
@@ -113,10 +113,20 @@ define('views/scoresheet',[
                 $scope.selectTeam(team);
             });
 
+            $scope.chooseStage = function() {
+                alert('todo: implement choose stage, using random for now');
+                $scope.stage = $stages.stages[Math.floor(Math.random() * $stages.stages.length)];
+            }
+
+            $scope.chooseRound = function(stage) {
+                alert('todo: implement choose round, using random for now');
+                $scope.round = Math.ceil(Math.random() * stage.rounds);
+            }
+
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
             $scope.save = function() {
-                if (!$scope.team) {
+                if (!$scope.team || !$scope.stage || !$scope.round) {
                     alert('no team selected, do so first');
                     return;
                 }
@@ -130,7 +140,8 @@ define('views/scoresheet',[
 
                 var data = angular.copy($scope.field);
                 data.team = $scope.team;
-                data.match = $scope.match;
+                data.stage = $scope.stage;
+                data.round = $scope.round;
                 data.table = $scope.settings.table;
                 data.signature = $scope.signature;
 
@@ -139,7 +150,8 @@ define('views/scoresheet',[
                     return $scores.add({
                         file: fn,
                         team: $scope.team,
-                        match: $scope.match,
+                        stage: $scope.stage,
+                        round: $scope.round,
                         score: $scope.score()
                     });
                 }).then(function() {

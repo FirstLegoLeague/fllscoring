@@ -9,6 +9,7 @@ describe('scoresheet',function() {
 		number: '123',
 		name: 'foo'
 	};
+	var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
 	var fsMock = createFsMock();
 
     beforeEach(function() {
@@ -19,6 +20,7 @@ describe('scoresheet',function() {
         		'$scope': $scope,
         		'$fs': fsMock,
         		'$scores': {},
+                '$stages': {},
                 '$modal': {},
                 '$challenge': {},
                 '$window': {
@@ -44,14 +46,14 @@ describe('scoresheet',function() {
     });
 
     describe('showteams', function() {
-        it('shoud select the teams page', function() {
+        it('should select the teams page', function() {
             $scope.showTeams();
             expect($scope.setPage).toHaveBeenCalledWith('teams');
         });
     });
 
     describe('selectTeam', function() {
-        it('shoud set the team on the scope', function() {
+        it('should set the team on the scope', function() {
             $scope.selectTeam(dummyTeam);
             expect($scope.team).toBe(dummyTeam);
         });
@@ -64,14 +66,15 @@ describe('scoresheet',function() {
     });
 
     describe('saving',function() {
-        it('should not save when no team is selected',function() {
+        it('should not save when no team, stage or round is selected',function() {
             $scope.save();
             expect(fsMock.write).not.toHaveBeenCalled();
         });
         it('should save',function() {
             $scope.team = dummyTeam;
             $scope.field = {};
-            $scope.match = 1;
+            $scope.stage = dummyStage;
+            $scope.round = 1;
             $scope.settings = {
                 table: 3
             };
@@ -81,7 +84,8 @@ describe('scoresheet',function() {
             expect(fsMock.write.mostRecentCall.args[0]).toEqual('score_3_123_42.json');
             expect(fsMock.write.mostRecentCall.args[1]).toEqual({
                 team: dummyTeam,
-                match: $scope.match,
+                stage: dummyStage,
+                round: 1,
                 table: $scope.settings.table,
                 signature: $scope.signature
             });
