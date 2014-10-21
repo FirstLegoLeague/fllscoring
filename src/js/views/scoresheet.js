@@ -101,6 +101,7 @@ define('views/scoresheet',[
             };
 
             $scope.showTeams = function() {
+                alert('todo: make work on small screens && improve team selection');
                 $scope.setPage('teams');
             };
 

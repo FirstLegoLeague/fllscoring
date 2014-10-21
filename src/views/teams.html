@@ -47,7 +47,7 @@
                 <th ng-click="sort='team.translationNeeded';rev=false" style="width: 50px;">Translation</th>
             </tr>
         </thead>
-        <tr ng-show="!editMode" ng-repeat="team in teams | index | orderBy:sort:rev">
+        <tr ng-show="!editMode" ng-repeat="team in teams | index | orderBy:sort:rev" ng-click="selectTeam(team)">
             <td>{{team.number}}</td>
             <td>{{team.name}}</td>
             <td>{{team.cityState}}</td>
