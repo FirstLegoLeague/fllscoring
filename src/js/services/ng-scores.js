@@ -69,61 +69,136 @@ define('services/ng-scores',[
     'services/ng-fs',
     'services/ng-stages'
 ],function(module,log) {
-    return module.factory('$scores',['$fs', '$stages', function($fs, $stages) {
-        var scores = [];
-        var stages = $stages.stages;
+    "use strict";
 
-        function clear() {
-            scores.splice(0, scores.length);
+    return module.service('$scores', ['$fs', '$stages', '$q', function($fs, $stages, $q) {
+
+        function Scores() {
+            /**
+             * Current list of scores.
+             * Each score is an object describing which team scored that
+             * score in which round, and possibly contains a reference to the
+             * scoresheet file.
+             * You can use directly use this property in e.g. views, as
+             * the reference will remain valid.
+             */
+            this.scores = [];
+
+            this.scoreboard = getDummyScoreboard();
+
+            // TODO: add a $watch on $stages.stages to call this._update()?
+            // See also the _update() call in this.init().
+            this._stages = $stages.stages;
+
+            this._rawScores = [];
+
+            this._updating = 0;
+            this._initialized = null; // Promise<void>
+            this.init();
         }
-        function save() {
-            return $fs.write('scores.json',scores).then(function() {
+
+        /**
+         * Initialize service, if not initialized already.
+         * @returns Promise<void> that is resolved when init is complete.
+         */
+        Scores.prototype.init = function() {
+            var self = this;
+            if (!this._initialized) {
+                this._initialized = this.load()
+                    .then(function() {
+                        return $stages.init();
+                    }).then(function() {
+                        self._update();
+                    })
+            }
+            return this._initialized;
+        }
+
+
+        Scores.prototype.clear = function() {
+            this._rawScores = [];
+            this._update();
+        };
+
+        Scores.prototype.save = function() {
+            return $fs.write('scores.json', this._rawScores).then(function() {
                 log('scores saved');
             }, function(err) {
                 log('scores write error', err);
             });
-        }
-        function load() {
+        };
+
+        Scores.prototype.load = function() {
+            var self = this;
             return $fs.read('scores.json').then(function(res) {
-                // Replace contents of array (without creating a new object, so any
-                // existing references to it remain valid)
-                res.unshift(scores.length);
-                res.unshift(0);
-                scores.splice.apply(scores,res);
+                self.beginupdate();
+                try {
+                    self.clear();
+                    res.forEach(self.add.bind(self));
+                } finally {
+                    self.endupdate();
+                }
             }, function(err) {
-                //error
                 log('scores read error', err);
             });
-        }
-        function remove(index) {
+        };
+
+        Scores.prototype.remove = function(index) {
+            // TODO: this function used to remove an associated
+            // score sheet file.
+            // However, as creating that scoresheet was not
+            // the concern of this class, I (Martin) decided
+            // that removing it should not be its concern either.
+            // Note that e.g. the clear() method also did not
+            // remove 'obsolete' scoresheet files.
+            // Additionally note that a scoresheet may be the digital
+            // representation of a 'physical' scoresheet, something
+            // with a signature even, and may indeed be a very different
+            // beast than 'merely' a score entry.
+            this._rawScores.splice(index, 1);
+            this._update();
+        };
+
+        Scores.prototype.add = function(score) {
+            // Create a copy of the score, in case the
+            // original score is being modified...
+            // TODO: recursively do that for the stages etc. as well?
+            // Or maybe e.g. only store the stage ID and team number?
+            this._rawScores.push({
+                file: score.file,
+                team: score.team,
+                stage: score.stage,
+                round: score.round,
+                score: score.score
+            });
+            this._update();
+        };
+
+        Scores.prototype.beginupdate = function() {
+            this._updating++;
+        };
+
+        Scores.prototype.endupdate = function() {
+            if (this._updating <= 0) {
+                throw new Error("beginupdate()/endupdate() calls mismatched");
+            }
+            this._updating--;
+            if (this._updating === 0) {
+                this._update();
+            }
+        };
+
+        Scores.prototype._update = function() {
             var self = this;
-            // First remove the scoresheet, then re-save scores
-            var score = scores.splice(index, 1)[0];
-            return $fs.remove(score.file).then(function() {
-                return self.save();
-            }, function(err) {
-                log('error removing score', err);
+            if (this._updating > 0) {
+                return;
+            }
+            this.scores.splice(0, this.scores.length); // clear without creating new object
+            this._rawScores.forEach(function(score) {
+                self.scores.push(score);
             });
         }
-        function add(data) {
-            scores.push(data);
-            return this.save();
-        }
 
-        function getScoreboard() {
-            return getDummyScoreboard();
-        }
-
-        load();
-
-        return {
-            scores: scores,
-            clear: clear,
-            load: load,
-            save: save,
-            remove: remove,
-            add: add,
-            getScoreboard: getScoreboard
-        };
+        return new Scores();
     }]);
 });

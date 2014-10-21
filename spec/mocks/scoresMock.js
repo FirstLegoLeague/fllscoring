@@ -4,6 +4,6 @@ var scoresMock = {
     },{
         score: 2
     }],
+    scoreboard: getDummyScoreboard(),
     remove: jasmine.createSpy('scoreRemoveSpy'),
-    getScoreboard: jasmine.createSpy('getScoreboardSpy').andReturn(getDummyScoreboard())
 };

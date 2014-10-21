@@ -20,7 +20,7 @@ define('views/ranking',[
             };
 
             $scope.stages = $stages.stages;
-            $scope.scoreboard = $scores.getScoreboard();
+            $scope.scoreboard = $scores.scoreboard;
         }
     ]);
 });

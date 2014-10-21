@@ -147,13 +147,14 @@ define('views/scoresheet',[
 
 
                 return $fs.write(fn,data).then(function() {
-                    return $scores.add({
+                    $scores.add({
                         file: fn,
                         team: $scope.team,
                         stage: $scope.stage,
                         round: $scope.round,
                         score: $scope.score()
                     });
+                    return $scores.save();
                 }).then(function() {
                     log('result saved');
                 },function() {
