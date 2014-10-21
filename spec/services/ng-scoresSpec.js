@@ -10,14 +10,19 @@ describe('ng-scores',function() {
     var $scores;
     var mockScore = {
         file:'bar'
-    }
+    };
+    var mockStages = {
+        stages: [
+            { id: "test", rounds: 3, name: "Test stage" }
+        ]
+    };
     var fsMock;
 
     beforeEach(function() {
         fsMock = createFsMock([mockScore]);
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
-            $provide.value('$stages', stagesMock);
+            $provide.value('$stages', mockStages);
             $provide.value('$fs', fsMock);
         });
         angular.mock.inject(["$scores", function(_$scores_) {
@@ -25,7 +30,7 @@ describe('ng-scores',function() {
         }]);
     });
 
-    describe('initals',function() {
+    describe('initialize',function() {
         it('should give empty scores initially',function() {
             expect($scores.scores).toEqual([])
         });
