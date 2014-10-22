@@ -63,6 +63,17 @@ module.exports = function(grunt) {
                 singleRun: true,
                 browsers: ['PhantomJS']
             }
+        },
+
+        saxon: {
+            options: {
+                saxonPath: 'tools/saxon9he.jar',
+                xslPath: 'challenges/xsl/challenge.xsl'
+            },
+            files: {
+                src: 'challenges/xml/*.xml',
+                dest: 'challenges/html/'
+            }
         }
     });
 
@@ -72,6 +83,44 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('phonegap', ['compress', 'phonegap-build:debug']);
+
+    grunt.registerMultiTask('saxon', function() {
+        var options = this.options();
+        var saxonPath = options.saxonPath;
+        var xslPath = options.xslPath;
+        var npath = require('path');
+        var nfs = require('fs');
+        var saxon = require('saxon-stream2');
+        var xslt = saxon(saxonPath,xslPath,{timeout:5000});
+        var done = this.async();
+
+        this.files.forEach(function(f) {
+            f.src.filter(function(filepath) {
+                // Warn on and remove invalid source files (if nonull was set).
+                if (!grunt.file.exists(filepath)) {
+                    grunt.log.warn('Source file "' + filepath + '" not found.');
+                    return false;
+                } else {
+                    return true;
+                }
+            }).forEach(function(filepath) {
+                var base = npath.basename(filepath,'.xml');
+                var dest = npath.resolve(f.dest,base)+'.html';
+                // console.log(filepath);
+                // console.log(dest);
+                nfs.createReadStream(filepath,{encoding:'utf-8'})
+                    .pipe(xslt)
+                    .pipe(nfs.createWriteStream(dest))
+                    .on('error',function(err) {
+                        done(err);
+                    })
+                    .on('finish',function() {
+                        console.log('done');
+                        done();
+                    });
+            });
+        });
+    });
 
     // Default task(s).
     // grunt.registerTask('default', ['uglify']);
