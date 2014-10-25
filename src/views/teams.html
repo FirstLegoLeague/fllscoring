@@ -1,5 +1,39 @@
 <div ng-controller="teamsCtrl" id="teams">
 
+    <div class="teamImport" ng-show="importMode">
+        <p>
+            Paste a team list below
+        </p>
+        <p>
+            <textarea name="" ng-model="importRaw"></textarea>
+        </p>
+        <p>
+            <label>
+                <input type="checkbox" ng-model="importHeader">
+                Data contains header
+            </label>
+        </p>
+        <p>
+            Number column
+            <input type="text" ng-model="importNumberColumn" size="3">
+            ({{importNumberExample}})
+        </p>
+        <p>
+            Name column
+            <input type="text" ng-model="importNameColumn" size="3">
+            ({{importNameExample}})
+        </p>
+
+        <table>
+            <tr ng-repeat="line in importLines">
+                <td ng-repeat="field in line">
+                    {{field}}
+                </td>
+            </tr>
+        </table>
+        <button class="btn" ng-click="finishImport()">Ok</button>
+    </div>
+
     <form class="form-inline form-new-team" name="newTeamForm" ng-show="editMode">
         <span class="control-group" ng-class="{error:!newTeamForm.newTeamNumber.$valid}">
             <label class="control-label">
@@ -16,14 +50,16 @@
         <button class="btn" ng-click="addTeam()" ng-disabled="!newTeamForm.$valid">Add team</button>
     </form>
     <p class="pull-right">
-        <button ng-class="{active:editMode}" class="btn" ng-click="editMode=!editMode;saveTeams()">
-            <i class="icon-edit"></i> Edit
+        <button class="btn" ng-click="import()">
+            <i class="icon-plus-sign-alt"></i>
+            Import
         </button>
-    </p>
-    <p class="pull-right">
         <button class="btn" ng-click="load()">
             <i class="icon-cloud-download"></i>
             Load
+        </button>
+        <button ng-class="{active:editMode}" class="btn" ng-click="editMode=!editMode;saveTeams()">
+            <i class="icon-edit"></i> Edit
         </button>
     </p>
     <h5>&nbsp;<i ng-show="saving" class="icon-save"></i></h5>
@@ -120,6 +156,7 @@
                     <span ng-show="!editMode &amp;&amp; team.translationNeeded===true"><i class="icon-ok"></i></span>
                     <input ng-show="editMode" type="checkbox" ng-model="team.translationNeeded" ng-change="saveTeams()">
                 </div>
+            </div>
         </div>
     </div>
 </div>

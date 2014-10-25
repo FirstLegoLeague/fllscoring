@@ -51,6 +51,51 @@ define('views/teams',[
                 });
             };
 
+            $scope.import = function() {
+                $scope.importMode = true;
+                $scope.importRaw = '';
+            };
+
+            $scope.finishImport = function() {
+                $scope.importMode = false;
+                $scope.teams = $scope.importLines.map(function(line) {
+                    return {
+                        number: line[$scope.importNumberColumn -1],
+                        name: line[$scope.importNameColumn -1]
+                    };
+                });
+            };
+
+            $scope.$watch('importRaw',function(data) {
+                parseData($scope.importRaw);
+            });
+
+            $scope.$watch('importHeader',function(data) {
+                parseData($scope.importRaw);
+            });
+
+            function parseData(data) {
+                //parse raw import, split lines
+                var lines = data.split(/[\n\r]/);
+                if ($scope.importHeader) {
+                    lines.shift();
+                }
+                lines = lines.map(function(line) {
+                    //split by tab character
+                    return line.split(/\t/);
+                });
+                //try to guess names and number columns
+                $scope.importNumberColumn = 1;
+                $scope.importNameColumn = 2;
+
+                if (lines[0]) {
+                    $scope.importNumberExample = lines[0][$scope.importNumberColumn -1];
+                    $scope.importNameExample = lines[0][$scope.importNameColumn -1];
+                }
+
+                $scope.importLines = lines;
+            }
+
             $scope.selectTeam = function(team) {
                 $scope.setPage('scoresheet');
                 $scope.$root.$emit('selectTeam',team);
@@ -91,7 +136,7 @@ define('views/teams',[
                 } else {
                     return !isCollapsed;
                 }
-            }
+            };
         }
     ]);
 });
