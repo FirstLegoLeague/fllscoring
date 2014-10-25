@@ -52,6 +52,14 @@ Documentation
 - [interface](docs/user_interface/readme.md)
 - [internationalization](docs/i18n/readme.md)
 
+Generating HTML and PDF scoresheets
+-----------------------------
+
+- run `grunt html`
+- run `grunt pdf`
+
+These files are also included in the repo: `challenges/html` and `challenges/pdf`
+
 TODO's
 --------
 
