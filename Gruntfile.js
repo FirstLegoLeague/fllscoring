@@ -145,8 +145,13 @@ module.exports = function(grunt) {
                     encoding: 'utf-8'
                 })
                     .pipe(xslt)
+                    .on('error', function(err) {
+                        console.log('xslt error:',err);
+                        done(err);
+                    })
                     .pipe(nfs.createWriteStream(dest))
                     .on('error', function(err) {
+                        console.log('write error:',err);
                         done(err);
                     })
                     .on('finish', function() {
