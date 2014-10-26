@@ -67,10 +67,16 @@ define('views/teams',[
             };
 
             $scope.$watch('importRaw',function(data) {
+                if (!data) {
+                    return;
+                }
                 parseData($scope.importRaw);
             });
 
             $scope.$watch('importHeader',function(data) {
+                if (!data) {
+                    return;
+                }
                 parseData($scope.importRaw);
             });
 
