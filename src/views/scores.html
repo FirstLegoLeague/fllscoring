@@ -11,13 +11,26 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tr ng-repeat="score in scores | index | orderBy:sort:rev">
+        <tr ng-repeat="score in scores | index | orderBy:sort:rev" ng-class="{error: score.error, warning: score.modified}">
             <td>{{score.index + 1}}</td>
-            <td>{{score.stage.name}}</td>
-            <td>{{score.round}}</td>
-            <td>{{score.team.number}}</td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}"></i>
+                {{score.stage.name}}
+            </td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownRoundError'" title="{{score.error.message}}"></i>
+                {{score.round}}
+            </td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'InvalidTeamError'" title="{{score.error.message}}"></i>
+                {{score.team.number}}
+            </td>
             <td>{{score.team.name}}</td>
-            <td>{{score.score}}</td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'InvalidScoreError'" title="{{score.error.message}}"></i>
+                {{score.score}}
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}"></i>
+            </td>
             <td>
                 <button class="btn btn-default" ng-click="editScore(score.index)">
                     <i class="icon-pencil"></i>
