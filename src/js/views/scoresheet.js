@@ -12,8 +12,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$scores','$stages','$modal','$challenge','$window',
-        function($scope,$fs,$scores,$stages,$modal,$challenge,$window) {
+        '$scope','$fs','$scores','$stages','$modal','$challenge','$window','$q',
+        function($scope,$fs,$scores,$stages,$modal,$challenge,$window,$q) {
             log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -128,7 +128,7 @@ define('views/scoresheet',[
             $scope.save = function() {
                 if (!$scope.team || !$scope.stage || !$scope.round) {
                     alert('no team selected, do so first');
-                    return;
+                    return $q.reject(new Error('no team selected, do so first'));
                 }
                 //todo:
                 var fn = [

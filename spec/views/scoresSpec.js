@@ -1,4 +1,4 @@
-describe('ranking', function() {
+describe('scores', function() {
 
     var module = factory('views/scores', {
         'services/log': logMock

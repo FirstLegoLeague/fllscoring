@@ -8,8 +8,8 @@ define('views/teams',[
     return angular.module(moduleName, []).config(['$httpProvider', function($httpProvider) {
             delete $httpProvider.defaults.headers.common["X-Requested-With"];
         }]).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$http',
-        function($scope,$fs,$http) {
+        '$scope','$fs','$http','$q',
+        function($scope,$fs,$http,$q) {
 
             log('init teams ctrl');
             $scope.log = log.get();
@@ -18,14 +18,21 @@ define('views/teams',[
             $scope.editMode = false;
             $scope.teamNumberPattern = /^\d+$/;
 
-            $fs.read('teams.json').then(function(teams) {
-                $scope.status = '';
-                $scope.teams = teams;
-            },function() {
-                log('error getting teams');
-                $scope.status = 'No stored teams found, you may add them by hand';
-                $scope.editMode = true;
-            });
+            var initialized = null;
+
+            $scope.init = function() {
+                if (!initialized) {
+                    initialized = $fs.read('teams.json').then(function(teams) {
+                        $scope.status = '';
+                        $scope.teams = teams;
+                    },function() {
+                        log('error getting teams');
+                        $scope.status = 'No stored teams found, you may add them by hand';
+                        $scope.editMode = true;
+                    });
+                }
+                return initialized;
+            }
 
             $scope.load = function() {
                 var url = 'http://fll.mobilesorcery.nl/api/public/teams/';
@@ -113,16 +120,16 @@ define('views/teams',[
 
             $scope.addTeam = function() {
                 if (!$scope.canAddTeam()) {
-                    return;
+                    return $q.reject(new Error("cannot add team"));
                 }
                 $scope.teams.push(angular.copy($scope.newTeam));
                 $scope.newTeam = {};
-                $scope.saveTeams();
+                return $scope.saveTeams();
             };
 
             $scope.removeTeam = function(index) {
                 $scope.teams.splice(index, 1);
-                $scope.saveTeams();
+                return $scope.saveTeams();
             };
 
             $scope.saveTeams = function() {

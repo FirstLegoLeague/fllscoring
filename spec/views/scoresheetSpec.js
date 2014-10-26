@@ -10,7 +10,7 @@ describe('scoresheet',function() {
 		name: 'foo'
 	};
 	var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
-	var fsMock = createFsMock({});
+	var fsMock = createFsMock({"settings.json": []});
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -22,7 +22,7 @@ describe('scoresheet',function() {
         		'$scores': {},
                 '$stages': {},
                 '$modal': {},
-                '$challenge': {},
+                '$challenge': challengeMock,
                 '$window': {
                     Date: function() {
                         this.valueOf = function() {
@@ -67,8 +67,9 @@ describe('scoresheet',function() {
 
     describe('saving',function() {
         it('should not save when no team, stage or round is selected',function() {
-            $scope.save();
-            expect(fsMock.write).not.toHaveBeenCalled();
+            return $scope.save().catch(function() {
+                expect(fsMock.write).not.toHaveBeenCalled();
+            });
         });
         it('should save',function() {
             $scope.team = dummyTeam;
@@ -80,14 +81,15 @@ describe('scoresheet',function() {
             };
             spyOn(Date,'valueOf').andReturn(42);
             $scope.signature = [1,2,3,4];
-            $scope.save();
-            expect(fsMock.write.mostRecentCall.args[0]).toEqual('score_3_123_42.json');
-            expect(fsMock.write.mostRecentCall.args[1]).toEqual({
-                team: dummyTeam,
-                stage: dummyStage,
-                round: 1,
-                table: $scope.settings.table,
-                signature: $scope.signature
+            return $scope.save().then(function() {
+                expect(fsMock.write.mostRecentCall.args[0]).toEqual('score_3_123_42.json');
+                expect(fsMock.write.mostRecentCall.args[1]).toEqual({
+                    team: dummyTeam,
+                    stage: dummyStage,
+                    round: 1,
+                    table: 3,
+                    signature: $scope.signature
+                });
             });
         });
     });

@@ -1,4 +1,4 @@
-describe('teams', function() {
+describe('settings', function() {
 
     var module = factory('views/settings', {
         'services/log': logMock
@@ -6,7 +6,7 @@ describe('teams', function() {
 
     var $scope, controller;
 
-    var fsMock = createFsMock({'settings.json': []});
+    var fsMock = createFsMock({'settings.json': {}});
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -29,10 +29,10 @@ describe('teams', function() {
     describe('missing settings.json on storage',function() {
         beforeEach(function() {
             fsMock.read = jasmine.createSpy('fsReadSpy').andCallFake(function() {
-                return Q.reject('no file found');
+                return Q.reject(new Error('fake file-not-found for settings'));
             });
         })
-        it('should initialize in editmode when no teams found on storage', function() {
+        xit('should initialize in editmode when no teams found on storage', function() {
             //TODO: check state after reading
         });
     });
