@@ -10,7 +10,7 @@ describe('scoresheet',function() {
 		name: 'foo'
 	};
 	var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
-	var fsMock = createFsMock();
+	var fsMock = createFsMock({});
 
     beforeEach(function() {
         angular.mock.module(module.name);

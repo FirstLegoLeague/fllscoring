@@ -17,7 +17,7 @@ describe('ng-stages',function() {
     var fsMock;
 
     beforeEach(function() {
-        fsMock = createFsMock([mockStage]);
+        fsMock = createFsMock({"stages.json": [mockStage]});
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
             $provide.value('$fs', fsMock);

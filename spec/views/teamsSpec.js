@@ -30,7 +30,7 @@ describe('teams', function() {
         pitLocation: 'moo',
         translationNeeded: false
     };
-    var fsMock = createFsMock([mockTeam]);
+    var fsMock = createFsMock({'teams.json': [mockTeam]});
 
     beforeEach(function() {
         angular.mock.module(module.name);

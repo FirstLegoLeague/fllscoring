@@ -6,7 +6,7 @@ describe('ng-challenge',function() {
 
     var module = factory('services/ng-challenge',{
         'services/ng-services': ngServices,
-        'services/fs': createFsMock(JSON.stringify(dummyChallenge))
+        'services/fs': createFsMock({'foo': JSON.stringify(dummyChallenge)})
     });
 
     beforeEach(function() {

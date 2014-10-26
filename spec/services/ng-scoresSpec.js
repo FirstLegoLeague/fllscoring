@@ -28,7 +28,7 @@ describe('ng-scores',function() {
     var fsMock;
 
     beforeEach(function() {
-        fsMock = createFsMock([mockScore]);
+        fsMock = createFsMock({"scores.json": [mockScore]});
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
             $provide.value('$stages', mockStages);

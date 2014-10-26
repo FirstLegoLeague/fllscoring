@@ -6,7 +6,7 @@ describe('teams', function() {
 
     var $scope, controller;
 
-    var fsMock = createFsMock('settigns');
+    var fsMock = createFsMock({'settings.json': []});
 
     beforeEach(function() {
         angular.mock.module(module.name);
