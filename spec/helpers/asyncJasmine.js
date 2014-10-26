@@ -31,10 +31,23 @@
             // is ready.
             var runnerDone = false;
             function done(err) {
+                if (runnerDone) {
+                    throw new Error("jasmine done callback called more than once");
+                }
                 runnerDone = true;
                 if (err) {
                     throw err;
                 }
+                // Detect promise chains that failed, without someone
+                // explicitly caring about the error
+                // TODO: think of a way to ensure all promises are either
+                // resolved or rejected. I've still seen 'unhandled ...' messages
+                // from Q itself, which means we're not catching all of them.
+                var rejections = Q.getUnhandledReasons();
+                if (rejections.length > 0) {
+                    throw new Error("unhandled Promise rejections:\n  " + rejections.join(",\n  "));
+                }
+                Q.resetUnhandledRejections();
             }
 
             // Run runner
@@ -61,11 +74,12 @@
                 angular.mock.inject(["$rootScope", function(_$rootScope_) {
                     $rootScope = _$rootScope_;
                 }]);
-
                 waitsFor(function() {
                     $rootScope.$digest();
                     return runnerDone;
                 }, desc, timeout);
+            } else {
+                done();
             }
         };
     }
