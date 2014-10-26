@@ -72,8 +72,6 @@ define('services/ng-stages',[
                 self.add({ id: "quarter", name: "Kwart finales", rounds: 0 });
                 self.add({ id: "semi", name: "Halve finales", rounds: 0 });
                 self.add({ id: "final", name: "Finale", rounds: 1 });
-            }).finally(function() {
-                self._update();
             });
         }
 
@@ -114,7 +112,7 @@ define('services/ng-stages',[
          * @param id {string} Stage ID.
          */
         Stages.prototype.get = function(id) {
-            return this.stageMap[id];
+            return this._stagesMap[id];
         }
 
         Stages.prototype._update = function() {

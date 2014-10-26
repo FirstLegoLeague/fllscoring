@@ -46,6 +46,12 @@ describe('ng-stages',function() {
         });
     });
 
+    describe('getting',function() {
+        it('should get a sanitized stage', function() {
+            expect($stages.get("practice")).toEqual(mockStageSanitized);
+        });
+    });
+
     describe('adding',function() {
         it('should add a stage to the list and add autogen properties',function() {
             $stages.clear();
