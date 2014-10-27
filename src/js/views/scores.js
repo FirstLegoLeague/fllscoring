@@ -15,6 +15,10 @@ define('views/scores',[
 
             $scope.scores = $scores.scores;
 
+            $scope.doSort = function(col, defaultSort) {
+                $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : defaultSort;
+                $scope.sort = col;
+            };
             $scope.removeScore = function(index) {
                 $scores.remove(index);
                 return $scores.save();
