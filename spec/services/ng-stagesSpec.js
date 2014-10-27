@@ -11,9 +11,9 @@ describe('ng-stages',function() {
     var $stages;
     var $q;
     var mockStage = { id: "practice", name: "Oefenrondes", rounds: 2 };
-    var mockStageSanitized = { id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] };
+    var mockStageSanitized = { index: 0, id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] };
     var unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
-    var unusedMockStageSanitized = { id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
+    var unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     var fsMock;
 
     beforeEach(function() {

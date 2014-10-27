@@ -133,6 +133,7 @@ define('services/ng-stages',[
                 }
 
                 var stage = {
+                    index: index,
                     id: s.id,
                     name: s.name,
                     rounds: s.rounds,
