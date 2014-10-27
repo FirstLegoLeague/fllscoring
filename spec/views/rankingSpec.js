@@ -17,7 +17,7 @@ describe('ranking', function() {
             $scope = $rootScope.$new();
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
-                '$scores': scoresMock,
+                '$scores': createScoresMock(),
                 '$stages': stagesMock,
             });
         });

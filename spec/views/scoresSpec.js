@@ -4,9 +4,10 @@ describe('scores', function() {
         'services/log': logMock
     });
 
-    var $scope, controller;
+    var $scope, controller, scoresMock;
 
     beforeEach(function() {
+        scoresMock = createScoresMock();
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope) {
             $scope = $rootScope.$new();
@@ -25,10 +26,11 @@ describe('scores', function() {
         });
     });
 
-    describe('amending scores',function() {
+    describe('editing scores',function() {
         it('should remove a score',function() {
             $scope.removeScore(1);
             expect(scoresMock.remove).toHaveBeenCalledWith(1);
+            expect(scoresMock.save).toHaveBeenCalledWith();
         });
 
         xit('should edit a score',function() {
