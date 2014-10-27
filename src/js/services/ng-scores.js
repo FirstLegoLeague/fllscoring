@@ -10,7 +10,7 @@ define('services/ng-scores',[
 ],function(module,log) {
     "use strict";
 
-    return module.service('$scores', ['$fs', '$stages', '$q', function($fs, $stages, $q) {
+    return module.service('$scores', ['$rootScope', '$fs', '$stages', '$q', function($rootScope, $fs, $stages, $q) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -68,6 +68,8 @@ define('services/ng-scores',[
         /* Main Scores class */
 
         function Scores() {
+            var self = this;
+
             /**
              * Current list of scores.
              * Each score is an object describing which team scored that
@@ -94,9 +96,17 @@ define('services/ng-scores',[
             this.InvalidScoreError = InvalidScoreError;
             this.DuplicateScoreError = DuplicateScoreError;
 
-            // TODO: add a $watch on $stages.stages to call this._update()?
-            // See also the _update() call in this.init().
+            // We need to track changes to $stages, in order to update
+            // the stage-references from the scores.
+            // Note that the scores on disk only store stageId's, not
+            // the full stage, as the content of a stage may change
+            // (mostly during development).
             this._stages = $stages.stages;
+            $rootScope.$watch(function() {
+                return self._stages;
+            }, function() {
+                self._update();
+            });
 
             this._rawScores = [];
 
@@ -174,12 +184,10 @@ define('services/ng-scores',[
         Scores.prototype.add = function(score) {
             // Create a copy of the score, in case the
             // original score is being modified...
-            // TODO: recursively do that for the stages etc. as well?
-            // Or maybe e.g. only store the stage ID and team number?
             this._rawScores.push({
                 file: score.file,
-                team: score.team,
-                stage: score.stage,
+                team: score.team, // TODO: apply same trick as stage-property when we have $teams service
+                stageId: (score.stageId !== undefined) ? score.stageId : score.stage.id,
                 round: score.round,
                 score: score.score,
                 originalScore: score.originalScore !== undefined ? score.originalScore : score.score
@@ -202,7 +210,7 @@ define('services/ng-scores',[
             // mark it as modified.
             old.file = score.file;
             old.team = score.team;
-            old.stage = score.stage;
+            old.stageId = (score.stageId !== undefined) ? score.stageId : score.stage.id,
             old.round = score.round;
             old.score = score.score;
             this._update();
@@ -255,7 +263,7 @@ define('services/ng-scores',[
                 var s = {
                     file: _score.file,
                     team: _score.team,
-                    stage: _score.stage,
+                    stage: $stages.get(_score.stageId),
                     round: _score.round,
                     score: _score.score,
                     originalScore: _score.originalScore,
@@ -271,16 +279,14 @@ define('services/ng-scores',[
                 }
 
                 // Check whether score is for a 'known' stage
-                var stageId = s.stage ? s.stage.id : undefined;
-                var bstage = board[stageId];
+                var bstage = board[_score.stageId];
                 if (!bstage) {
-                    s.error = new UnknownStageError(stageId);
+                    s.error = new UnknownStageError(_score.stageId);
                     return;
                 }
 
                 // Check whether score's round is valid for this stage
-                var stage = $stages.get(stageId);
-                if (!(s.round >= 1 && s.round <= stage.rounds)) {
+                if (!(s.round >= 1 && s.round <= s.stage.rounds)) {
                     s.error = new UnknownRoundError(s.round);
                     return;
                 }
@@ -316,8 +322,8 @@ define('services/ng-scores',[
                     }
                 }
                 if (!bteam) {
-                    var initialScores = new Array(stage.rounds);
-                    for (i = 0; i < stage.rounds; i++) {
+                    var initialScores = new Array(s.stage.rounds);
+                    for (i = 0; i < s.stage.rounds; i++) {
                         initialScores[i] = null;
                     }
                     bteam = {
@@ -332,7 +338,7 @@ define('services/ng-scores',[
                 // Add score to team's entry
                 if (bteam.scores[s.round - 1] !== null) {
                     // TODO: mark other scores too
-                    s.error = new DuplicateScoreError(bteam.team, stage, s.round);
+                    s.error = new DuplicateScoreError(bteam.team, s.stage, s.round);
                     return;
                 }
                 bteam.scores[s.round - 1] = s.score;

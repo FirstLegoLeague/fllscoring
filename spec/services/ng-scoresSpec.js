@@ -8,34 +8,48 @@ describe('ng-scores',function() {
     });
 
     var $scores;
+    var $stages;
     var dummyTeam =  {
         number: '123',
         name: 'foo'
     };
-    var mockStage = { id: "test", rounds: 3, name: "Test stage" };
-    var mockScore = {
+    var rawMockStage = { id: "test", rounds: 3, name: "Test stage" };
+    var rawMockScore = {
         file: 'somescore.json',
         team: dummyTeam,
-        stage: mockStage,
+        stageId: "test",
         round: 1,
         score: 123,
         originalScore: 123
     };
+    var mockStage;
+    var mockScore;
     var fsMock;
 
     beforeEach(function() {
-        fsMock = createFsMock({"scores.json": [mockScore]});
         fsMock = createFsMock({
-            "scores.json": [mockScore],
-            "stages.json": [mockStage]
+            "scores.json": [rawMockScore],
+            "stages.json": [rawMockStage]
         });
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
             $provide.value('$fs', fsMock);
         });
-        angular.mock.inject(["$scores", function(_$scores_) {
+        angular.mock.inject(["$scores", "$stages", function(_$scores_, _$stages_) {
             $scores = _$scores_;
+            $stages = _$stages_;
         }]);
+        $stages.init().then(function() {
+            mockStage = $stages.get(rawMockStage.id);
+            mockScore = {
+                file: 'somescore.json',
+                team: dummyTeam,
+                stage: mockStage,
+                round: 1,
+                score: 123,
+                originalScore: 123
+            };
+        });
         return $scores.init();
     });
 
@@ -93,7 +107,7 @@ describe('ng-scores',function() {
     describe('saving',function() {
         it('should write scores to scores.json',function() {
             return $scores.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('scores.json', [mockScore])
+                expect(fsMock.write).toHaveBeenCalledWith('scores.json', [rawMockScore])
             });
         });
     });
