@@ -14,8 +14,8 @@ define('views/ranking',[
             $scope.sort = 'rank';
             $scope.rev = false;
 
-            $scope.doSort = function(col,defaultSort) {
-                $scope.rev = ($scope.sort === col)? !$scope.rev : defaultSort;
+            $scope.doSort = function(col, defaultSort) {
+                $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : defaultSort;
                 $scope.sort = col;
             };
 
