@@ -17,6 +17,7 @@ define('views/scores',[
 
             $scope.removeScore = function(index) {
                 $scores.remove(index);
+                return $scores.save();
             };
             $scope.editScore = function(index) {
                 alert("todo edit team/round/score " + $scores.scores[index].score);
