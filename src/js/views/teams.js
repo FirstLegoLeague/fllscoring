@@ -34,6 +34,8 @@ define('views/teams',[
                 return initialized;
             }
 
+            $scope.init();
+
             $scope.load = function() {
                 var url = 'http://fll.mobilesorcery.nl/api/public/teams/';
                 $http.get(url).success(function(res) {
