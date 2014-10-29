@@ -99,6 +99,19 @@ define('views/scoresheet',[
                     return prev+(parseInt(mission.result,10)||0);
                 },0);
             };
+            
+            $scope.isSaveable = function() {
+                if (!$scope.missions) {return false;}
+                
+                return 
+                    $scope.stage && 
+                    $scope.round && 
+                    $scope.team && 
+                    $scope.signature && 
+                    $scope.missions.reduce(function(prev,mission) {
+                      return prev && mission.result !== undefined;
+                      },true);
+            };
 
             $scope.showTeams = function() {
                 alert('todo: make work on small screens && improve team selection');
