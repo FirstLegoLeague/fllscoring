@@ -19,6 +19,10 @@ define('views/ranking',[
                 $scope.sort = col;
             };
 
+            $scope.toggle = function(stage) {
+                stage.$collapsed = !stage.$collapsed;
+            };
+
             $scope.stages = $stages.stages;
             $scope.scoreboard = $scores.scoreboard;
         }

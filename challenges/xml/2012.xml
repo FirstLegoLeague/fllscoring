@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="../xsl/challenge.xsl"?>
 <fll:challenge
-    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2012" name="Senior Solutions">
+    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2012" version="1" name="Senior Solutions">
 
-    <strings>
+    <strings language="en-US">
+        <!-- This first set of strings should always be defined, for every language and challenge -->
+        <string id="yes">                   Yes</string>
+        <string id="no">                    No</string>
+
         <string id="flexibility-name">      Flexibility</string>
         <string id="flexibility-desc">      <![CDATA[Robot gets yellow loops to Base.]]></string>
         <string id="yellowloops-desc">      Yellow Loops in Base</string>
