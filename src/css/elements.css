@@ -179,7 +179,7 @@ table {
         position: absolute;
         width: 100%;
         top: 0px;
-        bottom: 50px;
+        bottom: 0px;
         margin-top: 50px;
     }
     .viewMain > div {

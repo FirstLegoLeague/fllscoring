@@ -2,20 +2,35 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th ng-click="sort='index';rev=true">#</th>
-                <th ng-click="sort='match.round';rev=false">Round</th>
-                <th ng-click="sort='team.number';rev=false">Team</th>
-                <th ng-click="sort='team.name';rev=false">Name</th>
-                <th ng-click="sort='score';rev=true">Score</th>
+                <th ng-click="doSort('index',true)">#</th>
+                <th ng-click="doSort(['stage.index','-index'],false)">Stage</th>
+                <th ng-click="doSort(['stage.index','round','-index'],false)">Round</th>
+                <th ng-click="doSort('team.number',false)">Team</th>
+                <th ng-click="doSort('team.name',false)">Name</th>
+                <th ng-click="doSort('score',true)">Score</th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tr ng-repeat="score in scores | index | orderBy:sort:rev">
+        <tr ng-repeat="score in scores | index | orderBy:sort:rev" ng-class="{error: score.error, warning: score.modified}">
             <td>{{score.index + 1}}</td>
-            <td>{{score.match.round}}</td>
-            <td>{{score.team.number}}</td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}"></i>
+                {{score.stage.name}}
+            </td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownRoundError'" title="{{score.error.message}}"></i>
+                {{score.round}}
+            </td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'InvalidTeamError'" title="{{score.error.message}}"></i>
+                {{score.team.number}}
+            </td>
             <td>{{score.team.name}}</td>
-            <td>{{score.score}}</td>
+            <td>
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'InvalidScoreError'" title="{{score.error.message}}"></i>
+                {{score.score}}
+                <i class="icon-exclamation-sign" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}"></i>
+            </td>
             <td>
                 <button class="btn btn-default" ng-click="editScore(score.index)">
                     <i class="icon-pencil"></i>

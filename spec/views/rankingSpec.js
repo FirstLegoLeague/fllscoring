@@ -17,15 +17,16 @@ describe('ranking', function() {
             $scope = $rootScope.$new();
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
-                '$scores': {}
+                '$scores': createScoresMock(),
+                '$stages': stagesMock,
             });
         });
     });
 
     describe('initialization', function() {
         it('should initialize', function() {
-            expect($scope.sort).toEqual('score');
-            expect($scope.rev).toEqual(true);
+            expect($scope.sort).toEqual('rank');
+            expect($scope.rev).toEqual(false);
         });
     });
 

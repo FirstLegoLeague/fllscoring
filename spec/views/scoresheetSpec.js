@@ -9,21 +9,10 @@ describe('scoresheet',function() {
 		number: '123',
 		name: 'foo'
 	};
-	var fsMock;
+	var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
+	var fsMock = createFsMock({"settings.json": []});
 
     beforeEach(function() {
-    	fsMock = {
-			read: jasmine.createSpy('fsRead').andReturn({
-				then: function(){}
-			}),
-			write: jasmine.createSpy('fsWrite').andReturn({
-				then: function(){
-					return {
-						then: function(){}
-					}
-				}
-			})
-		};
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope) {
         	$scope = $rootScope.$new();
@@ -31,8 +20,16 @@ describe('scoresheet',function() {
         		'$scope': $scope,
         		'$fs': fsMock,
         		'$scores': {},
+                '$stages': {},
                 '$modal': {},
-                '$challenge': {}
+                '$challenge': challengeMock,
+                '$window': {
+                    Date: function() {
+                        this.valueOf = function() {
+                            return 42;
+                        };
+                    }
+                }
         	});
         });
     });
@@ -49,14 +46,14 @@ describe('scoresheet',function() {
     });
 
     describe('showteams', function() {
-        it('shoud select the teams page', function() {
+        it('should select the teams page', function() {
             $scope.showTeams();
             expect($scope.setPage).toHaveBeenCalledWith('teams');
         });
     });
 
     describe('selectTeam', function() {
-        it('shoud set the team on the scope', function() {
+        it('should set the team on the scope', function() {
             $scope.selectTeam(dummyTeam);
             expect($scope.team).toBe(dummyTeam);
         });
@@ -65,6 +62,35 @@ describe('scoresheet',function() {
             $scope.selectTeam = jasmine.createSpy('selectTeam');
             $scope.$root.$emit('selectTeam',dummyTeam);
             expect($scope.selectTeam).toHaveBeenCalledWith(dummyTeam);
+        });
+    });
+
+    describe('saving',function() {
+        it('should not save when no team, stage or round is selected',function() {
+            return $scope.save().catch(function() {
+                expect(fsMock.write).not.toHaveBeenCalled();
+            });
+        });
+        it('should save',function() {
+            $scope.team = dummyTeam;
+            $scope.field = {};
+            $scope.stage = dummyStage;
+            $scope.round = 1;
+            $scope.settings = {
+                table: 3
+            };
+            spyOn(Date,'valueOf').andReturn(42);
+            $scope.signature = [1,2,3,4];
+            return $scope.save().then(function() {
+                expect(fsMock.write.mostRecentCall.args[0]).toEqual('score_3_123_42.json');
+                expect(fsMock.write.mostRecentCall.args[1]).toEqual({
+                    team: dummyTeam,
+                    stage: dummyStage,
+                    round: 1,
+                    table: 3,
+                    signature: $scope.signature
+                });
+            });
         });
     });
 })

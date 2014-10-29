@@ -1,42 +1,73 @@
-#teams {
-	overflow-y: auto;
+/* main layout */
+@media screen {
+    #teams {
+        overflow-y: auto;
+    }
+
+    #teams .scroller {
+        min-width: 1000px;
+    }
+
+    .form-new-team {
+        float: left;
+        margin-bottom: 0;
+    }
 }
 
-#teams .scroller {
-	min-width: 1000px;
+/* import popup */
+@media screen {
+    #teams .teamImport {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        padding: 10px;
+        background-color: white;
+    }
 }
 
+/* small and medium layout team rows */
+@media screen {
+    .team {
+        background-color: rgba(128,128,128,0.1);
+        color: dodgerblue;
+        padding: 12px 12px;
+        margin: 20px 0;
+    }
+    .team button {
+        float: right;
+    }
+
+    .team .extended {
+        margin-top: 5px;
+        padding-left: 10px;
+        font-size: 14px;
+    }
+
+    .team .title {
+        display: inline-block;
+        width: 130px;
+    }
+}
+
+/* large layout team rows */
+@media screen {
+    .table-teams input[type=text] {
+        width: 150px;
+    }
+    input[type=text].team-number {
+        width: 30px;
+    }
+}
+
+
+/* TODO: move to generic css? */
 #teams .btn {
-	outline: 0;
+    outline: 0;
 }
-
-.table-teams th:last-child {
-	width: 15px;
-	text-align: center;
-}
-
-.team {
-    background-color: rgba(128,128,128,0.1);
-    color: dodgerblue;
-    padding: 12px 12px;
-    margin: 20px 0;
-}
-
-.team button {
-	float: right;
-}
-
-.team .extended {
-	margin-top: 5px;
-	padding-left: 10px;
-	font-size: 14px;
-}
-
-.team .title {
-	display: inline-block;
-	width: 130px;
-}
-
 .clickable {
-	cursor: pointer;
+    cursor: pointer;
 }
+
+

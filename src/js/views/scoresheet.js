@@ -4,6 +4,7 @@ define('views/scoresheet',[
     'services/ng-fs',
     'services/ng-challenge',
     'services/ng-scores',
+    'services/ng-stages',
     'directives/sigpad',
     'directives/spinner',
     'angular'
@@ -11,8 +12,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$scores','$modal','$challenge',
-        function($scope,$fs,$scores,$modal,$challenge) {
+        '$scope','$fs','$scores','$stages','$modal','$challenge','$window','$q',
+        function($scope,$fs,$scores,$stages,$modal,$challenge,$window,$q) {
             log('init scoresheet ctrl');
 
             $fs.read('settings.json').then(function(res) {
@@ -30,7 +31,6 @@ define('views/scoresheet',[
                     $scope.missionIndex = defs.missionIndex;
                     $scope.missions = defs.missions;
                     $scope.objectiveIndex = defs.objectiveIndex;
-                    $scope.match = { round: 1 };
                     angular.forEach($scope.missions,process);
                     $scope.$apply();
                 });
@@ -99,8 +99,25 @@ define('views/scoresheet',[
                     return prev+(parseInt(mission.result,10)||0);
                 },0);
             };
+            
+            $scope.isSaveable = function() {
+                if (!$scope.missions) {return false;}
+                
+                var val =  
+                    $scope.stage !== undefined && $scope.stage !== null &&  
+                    $scope.round !== undefined && $scope.round !== null &&  
+                    $scope.team !== undefined && $scope.team !== null &&  
+                    $scope.signature !== undefined && $scope.signature !== null &&  
+                    $scope.missions.every(function(mission) {
+                      return mission.result !== undefined && mission.result !== null;
+                      });
+                
+                console.log("saveable " + val);
+                return val;
+            };
 
             $scope.showTeams = function() {
+                //alert('todo: make work on small screens && improve team selection');
                 $scope.setPage('teams');
             };
 
@@ -112,35 +129,57 @@ define('views/scoresheet',[
                 $scope.selectTeam(team);
             });
 
+            $scope.chooseStage = function() {
+                //alert('todo: implement choose stage, using random for now');
+                $scope.stage = $stages.stages[Math.floor(Math.random() * $stages.stages.length)];
+            }
+
+            $scope.chooseRound = function(stage) {
+                //alert('todo: implement choose round, using random for now');
+                $scope.round = Math.ceil(Math.random() * stage.rounds);
+            }
+            
+            $scope.discard = function() {
+                $scope.signature = null;
+                $scope.team = null;
+                $scope.stage = null;
+                $scope.round = null;
+                console.log('discard');
+                load();
+            }
+
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
             $scope.save = function() {
-                if (!$scope.team) {
+                if (!$scope.team || !$scope.stage || !$scope.round) {
                     alert('no team selected, do so first');
-                    return;
+                    return $q.reject(new Error('no team selected, do so first'));
                 }
                 //todo:
                 var fn = [
                     'score',
                     $scope.settings.table,
                     $scope.team.number,
-                    +(new Date())
+                    +(new $window.Date())
                 ].join('_')+'.json';
 
                 var data = angular.copy($scope.field);
                 data.team = $scope.team;
-                data.match = $scope.match;
+                data.stage = $scope.stage;
+                data.round = $scope.round;
                 data.table = $scope.settings.table;
                 data.signature = $scope.signature;
 
 
                 return $fs.write(fn,data).then(function() {
-                    return $scores.add({
+                    $scores.add({
                         file: fn,
                         team: $scope.team,
-                        match: $scope.match,
+                        stage: $scope.stage,
+                        round: $scope.round,
                         score: $scope.score()
                     });
+                    return $scores.save();
                 }).then(function() {
                     log('result saved');
                 },function() {
@@ -167,7 +206,6 @@ define('views/scoresheet',[
                   $log.info('Modal dismissed at: ' + new Date());
                 });
               };
-
         }
     ]).controller('ModalInstanceCtrl',[
         '$scope', '$modalInstance', 'mission',

@@ -8,8 +8,8 @@ define('views/teams',[
     return angular.module(moduleName, []).config(['$httpProvider', function($httpProvider) {
             delete $httpProvider.defaults.headers.common["X-Requested-With"];
         }]).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$http',
-        function($scope,$fs,$http) {
+        '$scope','$fs','$http','$q',
+        function($scope,$fs,$http,$q) {
 
             log('init teams ctrl');
             $scope.log = log.get();
@@ -18,14 +18,23 @@ define('views/teams',[
             $scope.editMode = false;
             $scope.teamNumberPattern = /^\d+$/;
 
-            $fs.read('teams.json').then(function(teams) {
-                $scope.status = '';
-                $scope.teams = teams;
-            },function() {
-                log('error getting teams');
-                $scope.status = 'No stored teams found, you may add them by hand';
-                $scope.editMode = true;
-            });
+            var initialized = null;
+
+            $scope.init = function() {
+                if (!initialized) {
+                    initialized = $fs.read('teams.json').then(function(teams) {
+                        $scope.status = '';
+                        $scope.teams = teams;
+                    },function() {
+                        log('error getting teams');
+                        $scope.status = 'No stored teams found, you may add them by hand';
+                        $scope.editMode = true;
+                    });
+                }
+                return initialized;
+            }
+
+            $scope.init();
 
             $scope.load = function() {
                 var url = 'http://fll.mobilesorcery.nl/api/public/teams/';
@@ -51,6 +60,57 @@ define('views/teams',[
                 });
             };
 
+            $scope.import = function() {
+                $scope.importMode = true;
+                $scope.importRaw = '';
+            };
+
+            $scope.finishImport = function() {
+                $scope.importMode = false;
+                $scope.teams = $scope.importLines.map(function(line) {
+                    return {
+                        number: line[$scope.importNumberColumn -1],
+                        name: line[$scope.importNameColumn -1]
+                    };
+                });
+            };
+
+            $scope.$watch('importRaw',function(data) {
+                if (!data) {
+                    return;
+                }
+                parseData($scope.importRaw);
+            });
+
+            $scope.$watch('importHeader',function(data) {
+                if (!data) {
+                    return;
+                }
+                parseData($scope.importRaw);
+            });
+
+            function parseData(data) {
+                //parse raw import, split lines
+                var lines = data.split(/[\n\r]/);
+                if ($scope.importHeader) {
+                    lines.shift();
+                }
+                lines = lines.map(function(line) {
+                    //split by tab character
+                    return line.split(/\t/);
+                });
+                //try to guess names and number columns
+                $scope.importNumberColumn = 1;
+                $scope.importNameColumn = 2;
+
+                if (lines[0]) {
+                    $scope.importNumberExample = lines[0][$scope.importNumberColumn -1];
+                    $scope.importNameExample = lines[0][$scope.importNameColumn -1];
+                }
+
+                $scope.importLines = lines;
+            }
+
             $scope.selectTeam = function(team) {
                 $scope.setPage('scoresheet');
                 $scope.$root.$emit('selectTeam',team);
@@ -62,16 +122,16 @@ define('views/teams',[
 
             $scope.addTeam = function() {
                 if (!$scope.canAddTeam()) {
-                    return;
+                    return $q.reject(new Error("cannot add team"));
                 }
                 $scope.teams.push(angular.copy($scope.newTeam));
                 $scope.newTeam = {};
-                $scope.saveTeams();
+                return $scope.saveTeams();
             };
 
             $scope.removeTeam = function(index) {
                 $scope.teams.splice(index, 1);
-                $scope.saveTeams();
+                return $scope.saveTeams();
             };
 
             $scope.saveTeams = function() {
@@ -83,6 +143,14 @@ define('views/teams',[
                 }).then(function() {
                     $scope.saving = false;
                 });
+            };
+
+            $scope.toggleExtended = function(isCollapsed) {
+                if ($scope.editMode) {
+                    return isCollapsed;
+                } else {
+                    return !isCollapsed;
+                }
             };
         }
     ]);

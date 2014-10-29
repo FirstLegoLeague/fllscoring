@@ -1,6 +1,6 @@
 describe('ng-fs',function() {
     var ngServices = factory('services/ng-services');
-    var fsMock = createFsMock('"dummydata"');
+    var fsMock = createFsMock({'foo': '"dummydata"'});
     var module = factory('services/ng-fs',{
         'services/ng-services': ngServices,
         'services/fs': fsMock
