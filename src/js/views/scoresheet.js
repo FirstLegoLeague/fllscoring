@@ -122,6 +122,10 @@ define('views/scoresheet',[
                 alert('todo: implement choose round, using random for now');
                 $scope.round = Math.ceil(Math.random() * stage.rounds);
             }
+            
+            $scope.discard = function() {
+              alert("todo: discard");
+            }
 
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
@@ -181,7 +185,6 @@ define('views/scoresheet',[
                   $log.info('Modal dismissed at: ' + new Date());
                 });
               };
-
         }
     ]).controller('ModalInstanceCtrl',[
         '$scope', '$modalInstance', 'mission',
