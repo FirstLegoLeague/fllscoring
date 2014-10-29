@@ -23,6 +23,18 @@ define('views/ranking',[
                 stage.$collapsed = !stage.$collapsed;
             };
 
+            $scope.maxRounds = function() {
+                return $stages.stages.reduce(function(max,stage) {
+                    //log(stage.name + ": " + stage.$rounds.length);
+                    //log("maxRounds: " + max);
+                    return Math.max(max, stage.$rounds.length);
+                },0);
+            };
+
+            $scope.emptyCols = function(stage) {
+                return new Array($scope.maxRounds() - stage.$rounds.length);
+            };
+
             $scope.stages = $stages.stages;
             $scope.scoreboard = $scores.scoreboard;
         }

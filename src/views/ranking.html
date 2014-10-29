@@ -2,11 +2,15 @@
     <h1 ng-repeat-start="stage in stages"
         ng-if="stage.rounds > 0"
     >
-        {{stage.name}}
-        <span class="icon" ng-class="{
-            'icon-caret-down':stage.$collapsed,
-            'icon-caret-up':!stage.$collapsed
+        <span class="icon" style="cursor: pointer;" ng-class="{
+            'icon-caret-down':!stage.$collapsed,
+            'icon-caret-right':stage.$collapsed
         }" ng-click="toggle(stage)"></span>
+        {{stage.name}}
+        <span ng-if="scoreboard[stage.id].length > 0 && stage.$collapsed"
+            style="margin-left: 1em">
+            <small>({{scoreboard[stage.id].length}})</small>
+        </span>
     </h1>
     <div ng-repeat-end ng-hide="stage.$collapsed">
         <table
@@ -15,20 +19,27 @@
         >
             <thead>
                 <tr>
-                    <th ng-click="doSort('rank',false)">Rank</th>
-                    <th ng-click="doSort('team.number',false)">Team</th>
-                    <th ng-click="doSort('team.name',false)">Name</th>
-                    <th ng-if="stage.rounds > 1" ng-repeat="round in stage.$rounds track by $index" ng-click="doSort('scores['+$index+']',true)">Round {{round}}</th>
-                    <th ng-if="stage.rounds > 1" ng-click="doSort('highest',true)">Highest</th>
-                    <th ng-if="stage.rounds == 1" ng-click="doSort('highest',true)">Score</th>
+                    <th class="span1" ng-click="doSort('rank',false)">Rank</th>
+                    <th class="span1" ng-click="doSort('team.number',false)">Team</th>
+                    <th class="span2" ng-click="doSort('team.name',false)">Name</th>
+                    <th class="span1" ng-if="stage.rounds > 1" ng-click="doSort('highest',true)">Highest</th>
+                    <th class="span1" ng-if="stage.rounds == 1" ng-click="doSort('highest',true)">Score</th>
+                    <th class="span1" ng-if="stage.rounds > 1" ng-repeat="round in stage.$rounds track by $index" ng-click="doSort('scores['+$index+']',true)">Round {{round}}</th>
+                    <!-- padding cols -->
+                    <th ng-repeat="col in emptyCols(stage) track by $index" class="span1"></th>
+                    <th ng-if="stage.rounds == 1" class="span1"></th>
+                    
                 </tr>
             </thead>
             <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:sort:rev">
                 <td>{{item.rank}}</td>
                 <td>{{item.team.number}}</td>
                 <td>{{item.team.name}}</td>
-                <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
                 <td>{{item.highest}}</td>
+                <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
+                <!-- padding cols -->
+                <td ng-repeat="col in emptyCols(stage) track by $index" class="span1"></td>
+                <td ng-if="stage.rounds == 1"></td>
             </tr>
         </table>
     </div>
