@@ -103,14 +103,17 @@ define('views/scoresheet',[
             $scope.isSaveable = function() {
                 if (!$scope.missions) {return false;}
                 
-                return 
-                    $scope.stage && 
-                    $scope.round && 
-                    $scope.team && 
-                    $scope.signature && 
-                    $scope.missions.reduce(function(prev,mission) {
-                      return prev && mission.result !== undefined;
-                      },true);
+                var val =  
+                    $scope.stage !== undefined && 
+                    $scope.round !== undefined && 
+                    $scope.team !== undefined && 
+                    $scope.signature !== undefined && 
+                    $scope.missions.every(function(mission) {
+                      return mission.result !== undefined;
+                      });
+                
+                console.log("saveable " + val);
+                return val;
             };
 
             $scope.showTeams = function() {
@@ -137,7 +140,7 @@ define('views/scoresheet',[
             }
             
             $scope.discard = function() {
-              alert("todo: discard");
+                load();
             }
 
             //saves mission scoresheet
