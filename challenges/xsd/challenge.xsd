@@ -6,16 +6,16 @@
 
     <!-- Definition of main fll node -->
     <xs:complexType name="challenge">
-	<xs:sequence>
-	    <!-- Strings node for translations -->
-	    <xs:element name="strings" type="fll:strings" minOccurs="1" maxOccurs="unbounded" />
+    <xs:sequence>
+        <!-- Strings node for translations -->
+        <xs:element name="strings" type="fll:strings" minOccurs="1" maxOccurs="unbounded" />
 
-	    <!-- We need at least one mission to make sense -->
-	    <xs:element name="mission" type="fll:mission" minOccurs="1" maxOccurs="unbounded" />
-	</xs:sequence>
-	<xs:attribute name="year" type="xs:integer" use="required" />
-	<xs:attribute name="version" type="xs:integer" use="required" />
-	<xs:attribute name="name" type="xs:string"  use="required" />
+        <!-- We need at least one mission to make sense -->
+        <xs:element name="mission" type="fll:mission" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="year" type="xs:integer" use="required" />
+    <xs:attribute name="version" type="xs:integer" use="required" />
+    <xs:attribute name="name" type="xs:string"  use="required" />
     </xs:complexType>
 
     <!-- Definition of <strings/> node -->
@@ -24,13 +24,13 @@
             <!-- Contains zero or more translation nodes -->
             <xs:element name="string" type="fll:string" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
-	<xs:attribute name="language" use="required">
-	    <xs:simpleType>
-		<xs:restriction base="xs:string">
-		    <xs:pattern value="[a-z]{2}-[A-Z]{2}"/>
-		</xs:restriction>
-	    </xs:simpleType>
-	</xs:attribute>
+    <xs:attribute name="language" use="required">
+        <xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z]{2}-[A-Z]{2}"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
     </xs:complexType>
 
     <!-- Defintion of <string/> node -->
@@ -129,7 +129,7 @@
             <xs:element name="index-ref" type="fll:index-ref" minOccurs="1" maxOccurs="unbounded" />
             <xs:choice>
                 <xs:element name="points" type="fll:points" />
-		<xs:element name="percentage" type="fll:percentage" />
+        <xs:element name="percentage" type="fll:percentage" />
                 <xs:element name="error" type="fll:error" />
             </xs:choice>
         </xs:sequence>
@@ -147,7 +147,7 @@
 
     <!-- Percentage as result for a case -->
     <xs:complexType name="percentage">
-	<xs:attribute name="amount" type="xs:integer" />
+    <xs:attribute name="amount" type="xs:integer" />
     </xs:complexType>
 
     <!-- Error as result for a case -->

@@ -16,3 +16,11 @@ indent_size = 4
 [*.js]
 indent_style = space
 indent_size = 4
+
+[*.xml]
+indent_style = space
+indent_size = 4
+
+[*.xsd]
+indent_style = space
+indent_size = 4

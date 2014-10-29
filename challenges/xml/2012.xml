@@ -4,9 +4,9 @@
     xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2012" version="1" name="Senior Solutions">
 
     <strings language="en-US">
-	<!-- This first set of strings should always be defined, for every language and mission -->
-	<string id="yes">                   Yes</string>
-	<string id="no">                    No</string>
+    <!-- This first set of strings should always be defined, for every language and mission -->
+    <string id="yes">                   Yes</string>
+    <string id="no">                    No</string>
 
         <string id="flexibility-name">      Flexibility</string>
         <string id="flexibility-desc">      <![CDATA[Robot gets yellow loops to Base.]]></string>
