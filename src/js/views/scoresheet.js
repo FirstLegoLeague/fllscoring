@@ -104,12 +104,12 @@ define('views/scoresheet',[
                 if (!$scope.missions) {return false;}
                 
                 var val =  
-                    $scope.stage !== undefined && 
-                    $scope.round !== undefined && 
-                    $scope.team !== undefined && 
-                    $scope.signature !== undefined && 
+                    $scope.stage !== undefined && $scope.stage !== null &&  
+                    $scope.round !== undefined && $scope.round !== null &&  
+                    $scope.team !== undefined && $scope.team !== null &&  
+                    $scope.signature !== undefined && $scope.signature !== null &&  
                     $scope.missions.every(function(mission) {
-                      return mission.result !== undefined;
+                      return mission.result !== undefined && mission.result !== null;
                       });
                 
                 console.log("saveable " + val);
@@ -117,7 +117,7 @@ define('views/scoresheet',[
             };
 
             $scope.showTeams = function() {
-                alert('todo: make work on small screens && improve team selection');
+                //alert('todo: make work on small screens && improve team selection');
                 $scope.setPage('teams');
             };
 
@@ -130,16 +130,21 @@ define('views/scoresheet',[
             });
 
             $scope.chooseStage = function() {
-                alert('todo: implement choose stage, using random for now');
+                //alert('todo: implement choose stage, using random for now');
                 $scope.stage = $stages.stages[Math.floor(Math.random() * $stages.stages.length)];
             }
 
             $scope.chooseRound = function(stage) {
-                alert('todo: implement choose round, using random for now');
+                //alert('todo: implement choose round, using random for now');
                 $scope.round = Math.ceil(Math.random() * stage.rounds);
             }
             
             $scope.discard = function() {
+                $scope.signature = null;
+                $scope.team = null;
+                $scope.stage = null;
+                $scope.round = null;
+                console.log('discard');
                 load();
             }
 
