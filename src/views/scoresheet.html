@@ -82,7 +82,7 @@
 
             <section class="panel" ng-show="team &amp;&amp; stage &amp;&amp; round">
                 <h2>
-                    Signature
+                    Team signature
                     <button class="btn pull-right btn-enum" ng-click="signature=null">clear</button>
                 </h2>
                 <div fll-sigpad ng-model="signature"></div>
@@ -91,7 +91,7 @@
 
 
         <p>
-            <button class="btn btn-enum" ng-disabled="!isSaveable()" ng-click="save()">Save</button>
+            <button class="btn btn-enum" id="save" ng-disabled="!isSaveable()" ng-click="save()">Save</button>
             <button class="btn btn-enum" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="discard()">Discard</button>
         </p>
     </div>
