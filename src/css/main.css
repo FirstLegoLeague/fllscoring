@@ -3,3 +3,7 @@
 @import url('scoresheet.css');
 @import url('teams.css');
 @import url('spinner.css');
+
+table.table td.clearCell, table.table th.clearCell {
+	background-color: #ffffff !important;
+}

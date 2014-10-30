@@ -11,12 +11,36 @@ define('views/ranking',[
         function($scope, $scores, $stages) {
             log('init ranking ctrl');
 
+            // temporary default sort values
             $scope.sort = 'rank';
             $scope.rev = false;
 
-            $scope.doSort = function(col, defaultSort) {
-                $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : defaultSort;
-                $scope.sort = col;
+            $scope.doSort = function(stage, col, defaultSort) {
+                if (stage.sort == col){
+                    stage.rev = (String(stage.sort) === String(col)) ? !stage.rev : defaultSort;
+                }
+                stage.sort = col;
+            };
+
+            $scope.sortIcon = function(stage, col){
+                // got into trouble with a default sort order here...
+                var icon = '';
+                if (stage.sort == col) {
+                    if (stage.rev){
+                        icon = 'icon-sort-down';
+                    } else {
+                        icon = 'icon-sort-up';
+                    }
+                } else if (stage.sort == null && col == $scope.sort) {
+                    if (stage.rev == null && $scope.rev) {
+                        icon = 'icon-sort-down';
+                    } else {
+                        icon = 'icon-sort-up';
+                    }
+                } else {
+                    icon = 'icon-sort';
+                }
+                return icon;
             };
 
             $scope.toggle = function(stage) {
