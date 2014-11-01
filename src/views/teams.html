@@ -108,7 +108,7 @@
             <td><input type="checkbox" ng-model=team.translationNeeded ng-change="saveTeams()"></td>
             <td>
                 <span ng-show="editMode">
-                    <i class="icon-trash clickable" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam($index)"></i>
+                    <i class="icon-trash clickable" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam(team.number)"></i>
                 </span>
             </td>
         </tr>

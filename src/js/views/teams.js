@@ -1,6 +1,6 @@
 define('views/teams',[
     'services/log',
-    'services/ng-fs',
+    'services/ng-teams',
     'angular'
 ], function(log) {
     var moduleName = 'teams';
@@ -8,39 +8,40 @@ define('views/teams',[
     return angular.module(moduleName, []).config(['$httpProvider', function($httpProvider) {
             delete $httpProvider.defaults.headers.common["X-Requested-With"];
         }]).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$http','$q',
-        function($scope,$fs,$http,$q) {
+        '$scope','$http','$q','$teams',
+        function($scope,$http,$q,$teams) {
 
             log('init teams ctrl');
             $scope.log = log.get();
-            $scope.teams = [];
+            $scope.teams = $teams.teams;
             $scope.newTeam = {};
             $scope.editMode = false;
             $scope.teamNumberPattern = /^\d+$/;
+            $scope.status = "Initializing...";
 
             var initialized = null;
 
             $scope.init = function() {
                 if (!initialized) {
-                    initialized = $fs.read('teams.json').then(function(teams) {
-                        $scope.status = '';
-                        $scope.teams = teams;
-                    },function() {
-                        log('error getting teams');
-                        $scope.status = 'No stored teams found, you may add them by hand';
-                        $scope.editMode = true;
+                    initialized = $teams.init().then(function() {
+                        if ($teams.teams.length === 0) {
+                            $scope.status = 'No stored teams found, you may add them by hand';
+                            $scope.editMode = true;
+                        } else {
+                            $scope.status = '';
+                        }
                     });
                 }
                 return initialized;
             }
-
             $scope.init();
 
             $scope.load = function() {
                 var url = 'http://fll.mobilesorcery.nl/api/public/teams/';
-                $http.get(url).success(function(res) {
-                    $scope.teams = res.map(function(team) {
-                        return {
+                return $http.get(url).success(function(res) {
+                    $teams.clear();
+                    res.forEach(function(team) {
+                        $teams.add({
                             number: team.id,
                             name: team.name,
                             affiliation: team.affiliation,
@@ -51,10 +52,11 @@ define('views/teams',[
                             judgingGroup: team.judgingGroup,
                             pitLocation: team.pitLocation,
                             translationNeeded: team.translationNeeded
-                        };
+                        });
                     });
-                    $scope.saveTeams();
-                    log('successfully retrieved teams');
+                    return $scope.saveTeams().then(function() {
+                        log('successfully retrieved and saved teams');
+                    });
                 }).error(function() {
                     log('failed retrieving teams');
                 });
@@ -67,11 +69,12 @@ define('views/teams',[
 
             $scope.finishImport = function() {
                 $scope.importMode = false;
-                $scope.teams = $scope.importLines.map(function(line) {
-                    return {
+                $teams.clear();
+                $scope.importLines.forEach(function(line) {
+                    $teams.add({
                         number: line[$scope.importNumberColumn -1],
                         name: line[$scope.importNameColumn -1]
-                    };
+                    });
                 });
             };
 
@@ -124,23 +127,31 @@ define('views/teams',[
                 if (!$scope.canAddTeam()) {
                     return $q.reject(new Error("cannot add team"));
                 }
-                $scope.teams.push(angular.copy($scope.newTeam));
+                $teams.add($scope.newTeam);
                 $scope.newTeam = {};
                 return $scope.saveTeams();
             };
 
-            $scope.removeTeam = function(index) {
-                $scope.teams.splice(index, 1);
+            $scope.removeTeam = function(number) {
+                $teams.remove(number);
                 return $scope.saveTeams();
             };
 
             $scope.saveTeams = function() {
                 $scope.saving = true;
-                return $fs.write('teams.json', $scope.teams).then(function() {
-                    log('saved teams');
-                },function() {
-                    log('error writing teams');
-                }).then(function() {
+                // Teams used to be managed by the scope, but
+                // that's now moved to a service.
+                // However, most of the logic still assumes
+                // being able to directly edit the team's properties.
+                // To make transition to the service smooth and quick,
+                // we simply copy the desired-teams-list, and (re-)add
+                // these to the teams service.
+                var newTeams = $scope.teams.slice();
+                $teams.clear();
+                newTeams.forEach(function(team) {
+                    $teams.add(team);
+                });
+                return $teams.save().finally(function() {
                     $scope.saving = false;
                 });
             };

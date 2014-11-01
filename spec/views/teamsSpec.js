@@ -4,7 +4,7 @@ describe('teams', function() {
         'services/log': logMock
     });
 
-    var $scope, controller, $httpBackend;
+    var $scope, controller, $httpBackend, $teams;
     var mockTeam = {
         name: 'foo',
         number: 123,
@@ -31,21 +31,19 @@ describe('teams', function() {
         translationNeeded: false
     };
 
-    var fsMock;
-
     beforeEach(function() {
-        fsMock = createFsMock({'teams.json': [mockTeam]});
         angular.mock.module(module.name);
-        angular.mock.inject(function($controller, $rootScope,_$httpBackend_) {
+        angular.mock.inject(function($controller, $rootScope, _$httpBackend_) {
             $scope = $rootScope.$new();
             $httpBackend = _$httpBackend_;
             $httpBackend.when('GET','http://fll.mobilesorcery.nl/api/public/teams/')
             .respond([
                 mockRemoteTeam
             ]);
+            $teams = createTeamsMock([mockTeam]);
             controller = $controller('teamsCtrl', {
                 '$scope': $scope,
-                '$fs': fsMock
+                '$teams': $teams
             });
         });
         return $scope.init();
@@ -61,7 +59,6 @@ describe('teams', function() {
             expect($scope.teams).toEqual([mockTeam]);
             expect($scope.newTeam).toEqual({});
             expect($scope.editMode).toBe(false);
-            expect(fsMock.read).toHaveBeenCalled();
         });
 
     });
@@ -71,23 +68,20 @@ describe('teams', function() {
             // TODO: this test is broken, because $scope.init() is already called
             // before this test starts, as construction of the controller has
             // been done by an earlier beforeEach() call.
-            // So, this fsMock.read override is too late.
-            fsMock.read = jasmine.createSpy('fsReadSpy').andCallFake(function() {
-                return Q.reject(new Error('fake file-not-found for teams'));
-            });
+            // So, the teams have already been loaded.
+            $teams.teams = [];
         })
         it('should initialize in editmode when no teams found on storage', function() {
             expect($scope.teams).toEqual([]);
             expect($scope.newTeam).toEqual({});
-            expect($scope.editMode).toBe(false);
-            //TODO: check state after reading
+            expect($scope.editMode).toBe(true);
         });
     });
 
     describe('load', function() {
         it('should call the web service for new teams',function() {
             $scope.load();
-            $scope.saveTeams = jasmine.createSpy('saveTeamsSpy');
+            $scope.saveTeams = jasmine.createSpy('saveTeamsSpy').andReturn(Q.when());
             $httpBackend.flush();
             expect($scope.saveTeams).toHaveBeenCalled();
             expect($scope.teams).toEqual([mockTeam])
@@ -115,20 +109,18 @@ describe('teams', function() {
 
     describe('addTeam', function() {
         it('should add the newTeam from scope to the teams list and blank the new team and save it', function() {
-            $scope.teams = [];
-            $scope.saveTeams = jasmine.createSpy('saveTeams');
+            $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
             $scope.newTeam = mockTeam;
             $scope.addTeam();
-            expect($scope.teams).toEqual([mockTeam]);
+            expect($teams.add).toHaveBeenCalledWith(mockTeam);
             expect($scope.newTeam).toEqual({});
             expect($scope.saveTeams).toHaveBeenCalled();
         });
         it('should not add a team when data is incomplete', function() {
-            $scope.teams = [];
-            $scope.saveTeams = jasmine.createSpy('saveTeams');
+            $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
             $scope.newTeam = {foo:'bar'};
             $scope.addTeam();
-            expect($scope.teams).toEqual([]);
+            expect($teams.add).not.toHaveBeenCalled();
             expect($scope.newTeam).toEqual({foo:'bar'});
             expect($scope.saveTeams).not.toHaveBeenCalled();
         });
@@ -136,20 +128,18 @@ describe('teams', function() {
 
     describe('removeTeam', function() {
         it('should remove the team with the given index', function() {
-            $scope.teams = [];
-            $scope.saveTeams = jasmine.createSpy('saveTeams');
-            $scope.teams = [mockTeam];
-            $scope.removeTeam(0);
-            expect($scope.teams).toEqual([]);
+            $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
+            $scope.removeTeam(123);
+            expect($teams.remove).toHaveBeenCalledWith(123);
             expect($scope.saveTeams).toHaveBeenCalled();
         });
     });
 
     describe('saveTeams', function() {
-        it('should call the fs write with the teams', function() {
+        it('should call $teams.save', function() {
             $scope.teams = [mockTeam];
             $scope.saveTeams();
-            expect(fsMock.write).toHaveBeenCalledWith('teams.json', [mockTeam]);
+            expect($teams.save).toHaveBeenCalled();
         });
     });
 
