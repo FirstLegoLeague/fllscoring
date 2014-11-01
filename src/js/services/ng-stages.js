@@ -76,11 +76,11 @@ define('services/ng-stages',[
         }
 
         Stages.prototype.remove = function(id) {
-            var index = this._stagesMap[id];
-            if (!index) {
+            var stage = this._stagesMap[id];
+            if (!stage) {
                 return;
             }
-            this._rawStages.splice(index, 1);
+            this._rawStages.splice(stage.index, 1);
             this._update();
         }
 
