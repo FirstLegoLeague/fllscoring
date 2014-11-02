@@ -10,7 +10,9 @@ define('services/ng-scores',[
 ],function(module,log) {
     "use strict";
 
-    return module.service('$scores', ['$rootScope', '$fs', '$stages', '$q', function($rootScope, $fs, $stages, $q) {
+    return module.service('$scores',
+        ['$rootScope', '$fs', '$stages', '$q', '$teams',
+        function($rootScope, $fs, $stages, $q, $teams) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -102,12 +104,18 @@ define('services/ng-scores',[
             // Note that the scores on disk only store stageId's, not
             // the full stage, as the content of a stage may change
             // (mostly during development).
-            this._stages = $stages.stages;
             $rootScope.$watch(function() {
-                return self._stages;
+                return $stages.stages;
             }, function() {
                 self._update();
-            });
+            }, true);
+
+            // Also need to track updates to $teams
+            $rootScope.$watch(function() {
+                return $teams.teams;
+            }, function() {
+                self._update();
+            }, true);
 
             this._rawScores = [];
 
@@ -130,7 +138,9 @@ define('services/ng-scores',[
                         // as some views may e.g. iterate over all
                         // available stages in the scoreboard already.
                         self._update();
-                        // In the mean time, start loading our scores.
+
+                        return $teams.init();
+                    }).then(function() {
                         return self.load();
                     });
             }
@@ -187,7 +197,7 @@ define('services/ng-scores',[
             // original score is being modified...
             this._rawScores.push({
                 file: score.file,
-                team: score.team, // TODO: apply same trick as stage-property when we have $teams service
+                teamNumber: parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10),
                 stageId: (score.stageId !== undefined) ? score.stageId : score.stage.id,
                 round: score.round,
                 score: score.score,
@@ -210,7 +220,7 @@ define('services/ng-scores',[
             // Note: we leave eg. originalScore intact, so _update() will
             // mark it as modified.
             old.file = score.file;
-            old.team = score.team;
+            old.teamNumber = parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10)
             old.stageId = (score.stageId !== undefined) ? score.stageId : score.stage.id,
             old.round = score.round;
             old.score = score.score;
@@ -251,7 +261,7 @@ define('services/ng-scores',[
             }
 
             // Create empty lists for each stage
-            this._stages.forEach(function(stage) {
+            $stages.stages.forEach(function(stage) {
                 board[stage.id] = [];
             });
 
@@ -263,7 +273,7 @@ define('services/ng-scores',[
                 // additional info
                 var s = {
                     file: _score.file,
-                    team: _score.team,
+                    team: $teams.get(_score.teamNumber),
                     stage: $stages.get(_score.stageId),
                     round: _score.round,
                     score: _score.score,
@@ -307,9 +317,8 @@ define('services/ng-scores',[
                 }
 
                 // Check whether team is valid
-                var teamId = s.team ? s.team.number : undefined;
-                if (teamId === undefined || teamId === null) {
-                    s.error = new UnknownTeamError(teamId);
+                if (!s.team) {
+                    s.error = new UnknownTeamError(_score.teamNumber);
                     return;
                 }
 
@@ -317,7 +326,7 @@ define('services/ng-scores',[
                 var bteam;
                 var i;
                 for (i = 0; i < bstage.length; i++) {
-                    if (bstage[i].team.number === teamId) {
+                    if (bstage[i].team.number === s.team.number) {
                         bteam = bstage[i];
                         break;
                     }
