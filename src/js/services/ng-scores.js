@@ -47,9 +47,9 @@ define('services/ng-scores',[
             this.message = format("invalid score '{0}'", String(score));
         }
 
-        function InvalidTeamError(team) {
+        function UnknownTeamError(team) {
             this.team = team;
-            this.name = "InvalidTeamError";
+            this.name = "UnknownTeamError";
             this.message = format("invalid team '{0}'", String(team));
         }
 
@@ -94,6 +94,7 @@ define('services/ng-scores',[
             this.UnknownStageError = UnknownStageError;
             this.UnknownRoundError = UnknownRoundError;
             this.InvalidScoreError = InvalidScoreError;
+            this.UnknownTeamError = UnknownTeamError;
             this.DuplicateScoreError = DuplicateScoreError;
 
             // We need to track changes to $stages, in order to update
@@ -308,7 +309,7 @@ define('services/ng-scores',[
                 // Check whether team is valid
                 var teamId = s.team ? s.team.number : undefined;
                 if (teamId === undefined || teamId === null) {
-                    s.error = new InvalidTeamError(teamId);
+                    s.error = new UnknownTeamError(teamId);
                     return;
                 }
 
