@@ -18,7 +18,7 @@
             ng-if="stage.rounds > 0"
         >
             <thead>
-                <tr>
+                <tr class="clickable">
                     <th class="span1" ng-click="doSort(stage, 'rank',false)">
                         <span style="float: left;">Rank</span>
                         <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'rank')"></span>
@@ -46,7 +46,6 @@
                     <!-- padding cols -->
                     <th class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></th>
                     <th class="span1 clearCell" ng-if="stage.rounds == 1" ></th>
-                    
                 </tr>
             </thead>
             <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:stage.sort:stage.rev">

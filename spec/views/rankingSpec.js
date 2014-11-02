@@ -32,23 +32,25 @@ describe('ranking', function() {
 
     describe('sorting',function() {
         it('should sort on the given direction when the column is not sorted',function() {
-            $scope.doSort('foo',false);
-            expect($scope.sort).toEqual('foo');
-            expect($scope.rev).toEqual(false);
-            $scope.doSort('bar',true);
-            expect($scope.sort).toEqual('bar');
-            expect($scope.rev).toEqual(true);
+            var stage = {};
+            $scope.doSort(stage, 'foo',false);
+            expect(stage.sort).toEqual('foo');
+            expect(stage.rev).toEqual(false);
+            $scope.doSort(stage, 'bar',true);
+            expect(stage.sort).toEqual('bar');
+            expect(stage.rev).toEqual(true);
         });
 
         it('should toggle the sort when column is already sorted',function() {
-            $scope.sort = 'foo';
-            $scope.rev = true;
-            $scope.doSort('foo',true);
-            expect($scope.sort).toEqual('foo');
-            expect($scope.rev).toEqual(false);
-            $scope.doSort('foo',true);
-            expect($scope.sort).toEqual('foo');
-            expect($scope.rev).toEqual(true);
+            var stage = {};
+            stage.sort = 'foo';
+            stage.rev = true;
+            $scope.doSort(stage, 'foo',true);
+            expect(stage.sort).toEqual('foo');
+            expect(stage.rev).toEqual(false);
+            $scope.doSort(stage, 'foo',true);
+            expect(stage.sort).toEqual('foo');
+            expect(stage.rev).toEqual(true);
         })
     });
 
