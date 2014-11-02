@@ -44,10 +44,10 @@
                 // resolved or rejected. I've still seen 'unhandled ...' messages
                 // from Q itself, which means we're not catching all of them.
                 var rejections = Q.getUnhandledReasons();
+                Q.resetUnhandledRejections();
                 if (rejections.length > 0) {
                     throw new Error("unhandled Promise rejections:\n  " + rejections.join(",\n  "));
                 }
-                Q.resetUnhandledRejections();
             }
 
             // Run runner
