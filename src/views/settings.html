@@ -1,18 +1,64 @@
 <div ng-controller="settingsCtrl">
 
+<ul class="nav nav-tabs nav-justified" role="tablist">
+  <li role="presentation" ng-class="{active:tab===1}"><a href ng-click="tab = 1">Tables & Referees</a></li>
+  <li role="presentation" ng-class="{active:tab===2}"><a href ng-click="tab = 2">Rounds & Stages</a></li>
+  <li role="presentation" ng-class="{active:tab===3}"><a href ng-click="tab = 3">Challenge</a></li>
+  <li role="presentation" ng-class="{active:tab===4}"><a href ng-click="tab = 4">Log</a></li>
+  
+</ul>
+
+<div ng-show="tab === 1">
     <p>
         <label for="">Table</label>
         <input type="text" ng-model="settings.table">
     </p>
+</div>
+<div ng-show="tab === 2">
+	      
+		   <p class="pull-right">
+		  <button class="btn" ng-click="CreateStage()">
+            <i class="icon-plus-sign-alt"></i>
+            Add new stage
+        </button>
+		     <button class="btn" ng-click="CreateRound()">
+            <i class="icon-plus-sign-alt"></i>
+            Add new round
+        </button>
+		</p>
+<-- Todo: load from db -->
+
+
+			<h3>Stage 1</h3>
+	<table class="table table-hover table-bordered table-striped table-teams smallLayoutHide mediumLayoutHide">
+	<tr><th>Name</th><th>Scores</th><th>Order</th><th>Move</th><th>Delete</th></tr>
+	<tr><td>Round 1</td><td>24</td><td><div class="icon-chevron-sign-down" /> <div class="icon-chevron-sign-up" /></td><td>Move</td><td>Delete</td></tr>
+	</table>
+
+	<h3>Stage 2</h3>
+	
+	<h3>Stage 3</h3>
+	
+
+
+
+</div>
+<div ng-show="tab === 3">
     <p>
         <label for="">Challenge</label>
         <input type="text" ng-model="settings.challenge">
-        (currently the filename containing missions)
+        (currently the filename containing missions!)
+</p>
+<p>
+        
     </p>
-    <p>
-        <button class="btn" ng-click="save()">Save</button>
-    </p>
-
-    <h1>Log</h1>
+</div>
+<div ng-show="tab === 4">
+    <h1 >Log</h1>
     <pre><code ng-repeat="line in log track by $index">{{line}}<br></code></pre>
+	</div>
+   <button class="btn" ng-click="save()">
+            <i class="icon-ok"></i>
+            Save settings
+        </button>
 </div>
