@@ -5,8 +5,8 @@ define('views/settings',[
 ],function(log) {
     var moduleName = 'settings';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$fs',
-        function($scope,$fs) {
+        '$scope', '$fs', '$stages',
+        function($scope,$fs, $stages) {
             log('init settings ctrl');
             $scope.log = log.get();
 
@@ -23,6 +23,8 @@ define('views/settings',[
                     log('unable to write settings');
                 });
             };
+
+            $scope.stages = $stages.stages;
         }
     ]);
 });
