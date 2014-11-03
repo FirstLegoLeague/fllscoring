@@ -40,7 +40,7 @@ define('views/ranking',[
                         icon = 'icon-sort-up';
                     }
                 } else {
-                    icon = 'icon-sort';
+                    icon = ''; // no icon if column is not sorted
                 }
                 return icon;
             };
