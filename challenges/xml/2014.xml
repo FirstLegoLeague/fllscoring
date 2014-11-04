@@ -322,7 +322,7 @@
                 <index objective="yellow-moved" /><index objective="dial-major-color" /><index objective="ticks-past-major" />
             </indexes>
             <cases>
-                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="na" /> <points amount="0" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="na" /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
