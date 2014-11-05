@@ -61,6 +61,10 @@ define([
             // $scope.
         }
     ]);
+    angular.module('main').config(function($compileProvider){
+        // Override to allow data: URI's (e.g. for CSV export)
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
+    });
     angular.bootstrap(document.body,[
         'main',
         'ui.bootstrap',
