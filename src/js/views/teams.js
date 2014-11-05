@@ -114,6 +114,8 @@ define('views/teams',[
                 $scope.importLines = lines;
             }
 
+
+	
             $scope.selectTeam = function(team) {
                 $scope.setPage('scoresheet');
                 $scope.$root.$emit('selectTeam',team);

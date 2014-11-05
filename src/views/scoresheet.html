@@ -6,7 +6,7 @@
             <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
 
                 <div>
-                    <script type="text/ng-template" id="myModalContent.html">
+                    <script type="text/ng-template" id="descriptionModalContent.html">
                         <div class="modal-header">
                             <h3 class="modal-title">{{mission.title}}</h3>
                         </div>
@@ -18,7 +18,7 @@
                         </div>
                     </script>
 
-                    <div class="description" ng-click="open('lg', mission)">description</div>
+                    <div class="description" ng-click="openDescriptionModal('lg', mission)">description</div>
                 </div>
 
                 <h2>
@@ -57,15 +57,15 @@
                     <table>
                         <tr>
                             <td>
-                                <button class="btn btn-enum" ng-click="showTeams()">Select team</button>
+                                <button class="btn btn-enum" ng-click="openTeamModal('lg', teams)">Team </button>
                             </td>
                             <td>
-                                <span ng-show="team">{{team.name}} ({{team.number}})</span>
+                                <span ng-show="team">({{team.number}}) {{team.name}} </span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <button class="btn btn-enum" ng-click="chooseStage()">Select stage</button>
+                                <button class="btn btn-enum" ng-click="chooseStage()">Stage </button>
                             </td>
                             <td>
                                 <span ng-show="stage">Stage {{stage.name}}</span>
@@ -73,7 +73,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <button ng-enable="!stage || round" class="btn btn-enum" ng-click="chooseRound(stage)">Select round</button>
+                                <button ng-enable="!stage || round" class="btn btn-enum" ng-click="chooseRound(stage)">Round </button>
                             </td>
                             <td>
                                 <span ng-show="round">Round {{round}}</span>
@@ -100,5 +100,44 @@
             <button class="btn btn-enum" id="save" ng-disabled="!isSaveable()" ng-click="save()">Save</button>
             <button class="btn btn-enum" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="discard()">Discard</button>
         </p>
+		
+		<div ng-show="selectedTeam"> gekozen team: {{selectedTeam}} </div>
     </div>
+	
+</div>
+
+
+<div ng-controller="SelectTeam">
+    <script type="text/ng-template" id="teamModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Select a team</h3>
+        </div>
+        <div class="modal-body">
+				
+		<table class="table table-hover table-striped table-teams">
+			<thead>
+				<tr>
+					<th ng-click="sort='team.number';rev=true">#</th>
+					<th ng-click="sort='team.name';rev=true">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="!editMode" ng-repeat="team in teams" ng-click="selectTeamPop(team)">
+					<td><h2>{{team.number}}</h2></td> 
+					<td>{{team.name}}
+					<br />
+					<small>{{team.affiliation}}, {{team.cityState}}</small>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		
+        </div>
+        <div class="modal-footer">
+            <div class="selectedLbl">Selected: <span ng-show="team">({{team.number}}) {{team.name}} </span></div>
+			<button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 </div>

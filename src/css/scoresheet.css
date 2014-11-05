@@ -4,6 +4,13 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
+.selectedLbl {
+	float: left;
+	align: left;
+	font-size: 130%;
+	font-weight: bold;
+}
+
 
 #scoresheet {
     max-width: 900px;
