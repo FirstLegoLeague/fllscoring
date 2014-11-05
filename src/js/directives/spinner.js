@@ -197,11 +197,11 @@ define('directives/spinner',[
                     var model = $parse($attrs.ngModel);
                     var setting = false;
                     $scope.$watch($attrs.min,function(newValue) {
-                        min = newValue;
+                        min = 1*newValue;
                         repaint();
                     });
                     $scope.$watch($attrs.max,function(newValue) {
-                        max = newValue;
+                        max = 1*newValue;
                         repaint();
                     });
                     $scope.$parent.$watch($attrs.ngModel,function(newValue) {
@@ -218,7 +218,8 @@ define('directives/spinner',[
                         s = new Spinner(el);
 
                         el.bind('change',function(event, n, element) {
-                            model.assign($scope.$parent,n+min);
+                            //TODO: work with numbers
+                            model.assign($scope.$parent,String(n+min));
                             setting = true;
                             $scope.$apply();
                         });
