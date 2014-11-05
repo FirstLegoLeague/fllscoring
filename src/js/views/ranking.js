@@ -61,6 +61,42 @@ define('views/ranking',[
                 return new Array($scope.maxRounds() - stage.$rounds.length);
             };
 
+            $scope.csvdata = {};
+            $scope.csvname = {};
+
+            function toCSV(rows) {
+                return rows.map(function(row) {
+                    return row.map(function(col) {
+                        // Escape quotes, and wrap in quotes
+                        if (col === undefined || col === null) {
+                            col = "";
+                        }
+                        return '"' + String(col).replace(/"/gi, '""') + '"';
+                    }).join(",");
+                }).join("\r\n");
+            }
+
+            $scope.$watch("scoreboard", function() {
+                $scope.csvdata = {};
+                $scope.csvname = {};
+                Object.keys($scores.scoreboard).forEach(function(stageId) {
+                    var ranking = $scores.scoreboard[stageId];
+                    var rows = ranking.map(function(entry) {
+                        return [
+                            entry.rank,
+                            entry.team.number,
+                            entry.team.name,
+                        ].concat(entry.scores);
+                    });
+                    var header = ["Rank", "Team Number", "Team Name"];
+                    var stage = $stages.get(stageId);
+                    header = header.concat(stage.$rounds.map(function(round) { return "Round " + round; }));
+                    rows.unshift(header);
+                    $scope.csvname[stageId] = encodeURIComponent("ranking_" + stageId + ".csv");
+                    $scope.csvdata[stageId] = "data:text/csv;charset=utf-8," + encodeURIComponent(toCSV(rows));
+                });
+            }, true);
+
             $scope.stages = $stages.stages;
             $scope.scoreboard = $scores.scoreboard;
         }

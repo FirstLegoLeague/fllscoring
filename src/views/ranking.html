@@ -1,7 +1,6 @@
 <div ng-controller="rankingCtrl">
-    <h1 ng-repeat-start="stage in stages"
-        ng-if="stage.rounds > 0"
-    >
+    <a ng-repeat-start="stage in stages" class="pull-right" style="margin-top: 1em;" href="{{csvdata[stage.id]}}" download="{{csvname[stage.id]}}"><i class="icon-download-alt"></i> Export</a>
+    <h1 ng-if="stage.rounds > 0">
         <span class="icon" style="cursor: pointer;" ng-class="{
             'icon-caret-down':!stage.$collapsed,
             'icon-caret-right':stage.$collapsed
