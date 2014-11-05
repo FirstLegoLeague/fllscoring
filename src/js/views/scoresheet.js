@@ -35,30 +35,10 @@ define('views/scoresheet',[
                 });
             }
 
-            //team color
-            // $scope.teamColor = function() {
-            //     return $scope.missionIndex['general'].result;
-            // };
-
             function getObjectives(names) {
                 return names.map(function(dep) {
                     return $scope.objectiveIndex[dep].value;
                 });
-            }
-
-            function getErrorFunc(mission) {
-                var expectations = (mission.expectations||[function(){return true;}]).map(function(e) {
-                    return {
-                        deps: $challenge.getDependencies(e),
-                        fn: e
-                    };
-                });
-                return function() {
-                    return !expectations.every(function(exp) {
-                        var vars = getObjectives(exp.deps);
-                        return exp.fn.apply(null,vars);
-                    });
-                };
             }
 
             function process(mission) {
@@ -66,7 +46,6 @@ define('views/scoresheet',[
                 var deps = mission.score.reduce(function(all,score) {
                     return all.concat($challenge.getDependencies(score));
                 },[]);
-                var getError = getErrorFunc(mission);
                 mission.result = 0;
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
