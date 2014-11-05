@@ -73,6 +73,10 @@
     font-weight: bold;
 }
 
+.missions .error {
+    background-color: crimson;
+    color: white;
+}
 
 .missions .field {
     display: block;

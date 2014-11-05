@@ -2,6 +2,7 @@
     <div>
 
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
+            <h1>{{field.title}}</h1>
             <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
 
                 <div>
@@ -22,28 +23,33 @@
 
                 <h2>
                     {{mission.title}}
+                    ({{mission.result}})
                 </h2>
-                <div class="objective" ng-repeat="objective in mission.objectiveList" ng-switch="objective.type">
+                <div class="objective" ng-repeat="objective in mission.objectives" ng-switch="objective.type">
                     <div>
-                        <label class="field" ng-switch-when="Boolean">
+                        <label class="field" ng-switch-when="yesno">
                             {{objective.title}}
                             <div class="btn-group">
-                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="0">yes</label>
-                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="1">no</label>
+                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">yes</label>
+                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">no</label>
                             </div>
                         </label>
-                        <span class="field" ng-switch-when="Number">
+                        <span class="field" ng-switch-when="number">
                             {{objective.title}}
                             <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
                         </span>
-                        <div ng-switch-when="Enum">
+                        <div ng-switch-when="enum">
                             <div class="btn-group">
-                                <label ng-repeat="line in objective.title" class="btn btn-enum" ng-model="objective.value" btn-radio="{{$index}}">{{line}}</label>
+                                <label ng-repeat="line in objective.title" class="btn btn-enum" ng-model="objective.value" btn-radio="line.id">{{line.title}}</label>
                             </div>
                             <div style="clear:both;"></div>
                         </div>
                     </div>
                 </div>
+                <p ng-show="mission.errors"
+                    ng-repeat="error in mission.errors"
+                    class="error"
+                >{{error.message}}</p>
             </section>
 
             <section class="panel">

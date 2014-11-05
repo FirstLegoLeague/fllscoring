@@ -28,7 +28,6 @@ define('views/scoresheet',[
             function load() {
                 $challenge.load($scope.settings.challenge).then(function(defs) {
                     $scope.field = defs.field;
-                    $scope.missionIndex = defs.missionIndex;
                     $scope.missions = defs.missions;
                     $scope.objectiveIndex = defs.objectiveIndex;
                     angular.forEach($scope.missions,process);
@@ -43,9 +42,7 @@ define('views/scoresheet',[
 
             function getObjectives(names) {
                 return names.map(function(dep) {
-                    var val = $scope.objectiveIndex[dep].value;
-                    if (val===undefined || val===null) {return 0;}
-                    return 1*($scope.objectiveIndex[dep].value||0);
+                    return $scope.objectiveIndex[dep].value;
                 });
             }
 
@@ -66,7 +63,9 @@ define('views/scoresheet',[
 
             function process(mission) {
                 var key = mission._key;
-                var deps = $challenge.getDependencies(mission.score);
+                var deps = mission.score.reduce(function(all,score) {
+                    return all.concat($challenge.getDependencies(score));
+                },[]);
                 var getError = getErrorFunc(mission);
                 mission.result = 0;
                 //addd watcher for all dependencies
@@ -75,13 +74,18 @@ define('views/scoresheet',[
                         return $scope.objectiveIndex[dep].value;
                     }).join('|');
                 },function(newValue) {
-                    //check expectations
-                    mission.error = getError();
-                    if (mission.error) {return;}
-
-                    //calculate the result for the mission
-                    vars = getObjectives(deps);
-                    mission.result = mission.score.apply(null,vars)||0;
+                    mission.errors = [];
+                    mission.result = mission.score.reduce(function(total,score) {
+                        var deps = $challenge.getDependencies(score);
+                        var vars = getObjectives(deps);
+                        var res = score.apply(null,vars);
+                        if (res instanceof Error) {
+                            mission.errors.push(res);
+                            //do not count this bit
+                            return total;
+                        }
+                        return total + res||0;
+                    },0);
                 });
 
             }
@@ -99,19 +103,19 @@ define('views/scoresheet',[
                     return prev+(parseInt(mission.result,10)||0);
                 },0);
             };
-            
+
             $scope.isSaveable = function() {
                 if (!$scope.missions) {return false;}
-                
-                var val =  
-                    $scope.stage !== undefined && $scope.stage !== null &&  
-                    $scope.round !== undefined && $scope.round !== null &&  
-                    $scope.team !== undefined && $scope.team !== null &&  
-                    $scope.signature !== undefined && $scope.signature !== null &&  
+
+                var val =
+                    $scope.stage !== undefined && $scope.stage !== null &&
+                    $scope.round !== undefined && $scope.round !== null &&
+                    $scope.team !== undefined && $scope.team !== null &&
+                    $scope.signature !== undefined && $scope.signature !== null &&
                     $scope.missions.every(function(mission) {
                       return mission.result !== undefined && mission.result !== null;
                       });
-                
+
                 console.log("saveable " + val);
                 return val;
             };
@@ -138,7 +142,7 @@ define('views/scoresheet',[
                 //alert('todo: implement choose round, using random for now');
                 $scope.round = Math.ceil(Math.random() * stage.rounds);
             }
-            
+
             $scope.discard = function() {
                 $scope.signature = null;
                 $scope.team = null;
