@@ -46,7 +46,6 @@ define('views/scoresheet',[
                 var deps = mission.score.reduce(function(all,score) {
                     return all.concat($challenge.getDependencies(score));
                 },[]);
-                mission.result = 0;
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
@@ -54,6 +53,7 @@ define('views/scoresheet',[
                     }).join('|');
                 },function(newValue) {
                     mission.errors = [];
+                    mission.percentages = [];
                     mission.result = mission.score.reduce(function(total,score) {
                         var deps = $challenge.getDependencies(score);
                         var vars = getObjectives(deps);
@@ -61,6 +61,12 @@ define('views/scoresheet',[
                         if (res instanceof Error) {
                             mission.errors.push(res);
                             //do not count this bit
+                            return total;
+                        }
+                        //check for fraction. TODO: work with Percentage object
+                        if (typeof res === 'number' && (res % 1) !== 0) {
+                            mission.percentages.push(res);
+                            //do not count
                             return total;
                         }
                         return total + res||0;
@@ -78,9 +84,31 @@ define('views/scoresheet',[
 
             $scope.score = function() {
                 if (!$scope.missions) {return;}
-                return $scope.missions.reduce(function(prev,mission) {
-                    return prev+(parseInt(mission.result,10)||0);
+                //step 1: sum all scores from missions without percentages
+                var subScore = $scope.missions.filter(function(m) {
+                    return m.percentages.length === 0;
+                }).reduce(function(total,m) {
+                    return total + m.result;
                 },0);
+                //step 2: sum all percentages
+                var bonus = $scope.missions.filter(function(m) {
+                    return m.percentages.length !== 0;
+                }).reduce(function(total,m) {
+                    //sum of mission percentages
+                    return total + m.percentages.reduce(function(total,perc) {
+                        return total + perc;
+                    },0);
+                },1);   //add 1 for multiplication later on
+                //step 3: apply percentages
+                var bonusScore = Math.ceil(subScore * bonus);
+                //step 4: add points from missions with percentages
+                var restScore = $scope.missions.filter(function(m) {
+                    return m.percentages.length !== 0;
+                }).reduce(function(total,m) {
+                    return total + m.result;
+                },0);
+
+                return bonusScore + restScore;
             };
 
             $scope.isSaveable = function() {
