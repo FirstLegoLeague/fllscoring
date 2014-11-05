@@ -86,6 +86,8 @@
         <string id="ticks-3">                     3</string>
         <string id="ticks-4">                     4</string>
         <string id="ticks-5">                     5</string>
+        <string id="engagement-na-error">         Bulb cannot face UP and DOWN at the same time</string>
+        <string id="engagement-logic-error">      Bulb cannot face UP and DOWN at the same time</string>
 
         <string id="changing-conditions-name">    Adapting to changing conditions</string>
         <string id="changing-conditions-desc">    <![CDATA[Todo: Kenny]]></string>
@@ -323,94 +325,94 @@
             </indexes>
             <cases>
                 <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="na" /> <percentage amount="0" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
 
-                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="0"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
 
-                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="1"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
 
-                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="2"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
 
-                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
 
-                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
 
-                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
 
                 <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="na" /> <percentage amount="0" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="na" /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
 
-                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="0"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="0"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="0"  /> <percentage amount="10" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="0"  /> <percentage amount="16" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="0"  /> <percentage amount="22" /> </case>
@@ -421,7 +423,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="0"  /> <percentage amount="52" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="0"  /> <percentage amount="58" /> </case>
 
-                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="1"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="1"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="1"  /> <percentage amount="11" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="1"  /> <percentage amount="17" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="1"  /> <percentage amount="23" /> </case>
@@ -432,7 +434,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="1"  /> <percentage amount="53" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="1"  /> <percentage amount="59" /> </case>
 
-                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="2"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="2"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="2"  /> <percentage amount="12" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="2"  /> <percentage amount="18" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="2"  /> <percentage amount="24" /> </case>
@@ -443,7 +445,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="2"  /> <percentage amount="54" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="2"  /> <percentage amount="60" /> </case>
 
-                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="3"  /> <percentage amount="13" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="3"  /> <percentage amount="19" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="3"  /> <percentage amount="25" /> </case>
@@ -454,7 +456,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="3"  /> <percentage amount="55" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="3"  /> <percentage amount="61" /> </case>
 
-                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="4"  /> <percentage amount="14" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="4"  /> <percentage amount="20" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="4"  /> <percentage amount="26" /> </case>
@@ -465,7 +467,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="4"  /> <percentage amount="56" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="4"  /> <percentage amount="62" /> </case>
 
-                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-combination-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="5"  /> <percentage amount="15" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="5"  /> <percentage amount="21" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="5"  /> <percentage amount="27" /> </case>
