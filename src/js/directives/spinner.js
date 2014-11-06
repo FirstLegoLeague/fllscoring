@@ -82,11 +82,15 @@ define('directives/spinner',[
         };
 
         function transform(el,value) {
-            var translate = ['translate3d(',value,'px,0px,0px)'].join('');
+            //use margin for now, since translation seems to break in chrome until the element is redrawn
+            // var translate = ['translate3d(',value,'px,0px,0px)'].join('');
+            // el.css({
+            //     transform: translate,
+            //     MozTransform: translate,
+            //     WebkitTransform: translate
+            // });
             el.css({
-                transform: translate,
-                MozTransform: translate,
-                WebkitTransform: translate
+                marginLeft: value+'px'
             });
         }
 
