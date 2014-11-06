@@ -36,7 +36,7 @@
         <string id="sports-desc">                 <![CDATA[Todo: Kenny]]></string>
         <string id="ballshot-desc">               Ball shot from east/north of "Shot Lines" toward Net</string>
         <string id="ballscored-desc">             Ball touching mat in Net at end of match</string>
-        <string id="sports-error">                Model must have been presented for it to be touching the circle</string>
+        <string id="sports-error">                Ball must have been shot for it to be touching the net</string>
 
         <string id="competition-name">            Robotics Competition</string>
         <string id="competition-desc">            <![CDATA[Todo: Kenny]]></string>
@@ -86,8 +86,8 @@
         <string id="ticks-3">                     3</string>
         <string id="ticks-4">                     4</string>
         <string id="ticks-5">                     5</string>
-        <string id="engagement-na-error">         Bulb cannot face UP and DOWN at the same time</string>
-        <string id="engagement-logic-error">      Bulb cannot face UP and DOWN at the same time</string>
+        <string id="engagement-na-error">         Either none or both questions should be answered with "N/A"</string>
+        <string id="engagement-logic-error">      Dial must remain on "N/A" until yellow section has moved</string>
 
         <string id="changing-conditions-name">    Adapting to changing conditions</string>
         <string id="changing-conditions-desc">    <![CDATA[Todo: Kenny]]></string>
