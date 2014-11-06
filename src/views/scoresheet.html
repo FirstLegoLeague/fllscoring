@@ -38,7 +38,7 @@
                             {{objective.title}}
                             <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
                         </span>
-                        <div ng-switch-when="enum">
+                        <div class="field" ng-switch-when="enum">
                             {{objective.title}}
                             <div class="btn-group">
                                 <label ng-repeat="line in objective.options" class="btn btn-enum" ng-model="objective.value" btn-radio="line.value">{{line.title}}</label>
