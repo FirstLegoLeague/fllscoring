@@ -224,7 +224,7 @@ define('views/scoresheet',[
 
                   $scope.selected = selectedItem;
                 }, function () {
-                  log.info('Description dismissed at: ' + new Date());
+                  log('Description dismissed at: ' + new Date());
                 });
               };
 
@@ -246,11 +246,11 @@ define('views/scoresheet',[
                 });
 
                 modalInstance.result.then(function (selectedTeam) {
-                    //log.info('Team selected: ' + selectedTeam);
+                    //log('Team selected: ' + selectedTeam);
                     //$scope.selectedTeam = selectedTeam;
                     $scope.$root.$emit('selectTeam',selectedTeam);
                 }, function () {
-                    log.info('Team select dismissed at: ' + new Date());
+                    log('Team select dismissed at: ' + new Date());
                 });
             };
         }
