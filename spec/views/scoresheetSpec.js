@@ -1,25 +1,25 @@
 describe('scoresheet',function() {
 
-	var module = factory('views/scoresheet',{
-		'services/log': logMock
+    var module = factory('views/scoresheet',{
+        'services/log': logMock
     });
 
-	var $scope, controller;
-	var dummyTeam =  {
-		number: '123',
-		name: 'foo'
-	};
-	var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
-	var fsMock = createFsMock({"settings.json": []});
+    var $scope, controller;
+    var dummyTeam =  {
+        number: '123',
+        name: 'foo'
+    };
+    var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
+    var fsMock = createFsMock({"settings.json": []});
 
     beforeEach(function() {
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope) {
-        	$scope = $rootScope.$new();
-        	controller = $controller('scoresheetCtrl', {
-        		'$scope': $scope,
-        		'$fs': fsMock,
-        		'$scores': {},
+            $scope = $rootScope.$new();
+            controller = $controller('scoresheetCtrl', {
+                '$scope': $scope,
+                '$fs': fsMock,
+                '$scores': {},
                 '$stages': {},
                 '$modal': {},
                 '$teams': {},
@@ -31,19 +31,19 @@ describe('scoresheet',function() {
                         };
                     }
                 }
-        	});
+            });
         });
     });
 
     beforeEach(function() {
-    	//spy setPage method;
-    	$scope.setPage = jasmine.createSpy('setPage');
+        //spy setPage method;
+        $scope.setPage = jasmine.createSpy('setPage');
     });
 
     describe('initialization',function() {
-    	it('should initialize',function() {
+        it('should initialize',function() {
 
-    	});
+        });
     });
 
     describe('showteams', function() {
