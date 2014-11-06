@@ -36,18 +36,18 @@ describe('ng-challenge',function() {
     describe('init',function() {
         it('should prepare the challenge',function() {
             var field = {
-                missions: {
-                    'test': {
-                        objectives: ['moo']
-                    }
-                }
+                missions: [{
+                    id: 'test',
+                    objectives: [{
+                        id: 'moo',
+                    }]
+                }]
             };
             var res = challenge.init(field);
 
             expect(res.field).toEqual(field);
-            expect(res.missionIndex).toEqual(field.missions);
-            expect(res.missions).toEqual([{objectives:['moo'],_key:'test',objectiveList:['moo']}]);
-            expect(res.objectiveIndex).toEqual({0: 'moo'});
+            expect(res.missions).toEqual([{objectives:[{id:'moo'}],id:'test'}]);
+            expect(res.objectiveIndex).toEqual({moo: {id:'moo'}});
         });
     });
 });
