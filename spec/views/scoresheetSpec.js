@@ -22,6 +22,7 @@ describe('scoresheet',function() {
         		'$scores': {},
                 '$stages': {},
                 '$modal': {},
+                '$teams': {},
                 '$challenge': challengeMock,
                 '$window': {
                     Date: function() {

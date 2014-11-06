@@ -14,6 +14,7 @@ describe('settings', function() {
             $scope = $rootScope.$new();
             controller = $controller('settingsCtrl', {
                 '$scope': $scope,
+                '$stages': {},
                 '$fs': fsMock
             });
         });
