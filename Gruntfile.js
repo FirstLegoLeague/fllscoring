@@ -179,21 +179,14 @@ module.exports = function(grunt) {
         var address = options.address;
         var npath = require('path');
         var nfs = require('fs');
+        var Q = require('q');
         var done = this.async();
         var exec = require('child_process').exec;
 
-        this.files.forEach(function(f) {
-            f.src.filter(function(filepath) {
-                // Warn on and remove invalid source files (if nonull was set).
-                if (!grunt.file.exists(filepath)) {
-                    grunt.log.warn('Source file "' + filepath + '" not found.');
-                    return false;
-                } else {
-                    return true;
-                }
-            }).forEach(function(filepath) {
+        function process(filepath,dest) {
+            return Q.promise(function(resolve,reject) {
                 var base = npath.basename(filepath, '.html');
-                var dest = npath.resolve(f.dest, base) + '.pdf';
+                dest = npath.resolve(dest, base) + '.pdf';
 
                 var cmd = [
                     '"' + phantomPath + '"',
@@ -206,10 +199,29 @@ module.exports = function(grunt) {
                 exec(cmd, function(error, stdout, stderr) {
                     if (error !== null) {
                         console.log('exec error: ' + error);
+                        reject(error);
                     }
-                    done();
+                    resolve();
                 });
             });
+        }
+
+        this.files.forEach(function(f) {
+            f.src.filter(function(filepath) {
+                // Warn on and remove invalid source files (if nonull was set).
+                if (!grunt.file.exists(filepath)) {
+                    grunt.log.warn('Source file "' + filepath + '" not found.');
+                    return false;
+                } else {
+                    return true;
+                }
+            }).map(function(filepath) {
+                return function() {
+                    return process(filepath,f.dest);
+                };
+            }).reduce(function(pending,promise) {
+                return pending.then(promise);
+            },Q()).then(done,done);
         });
     });
 
