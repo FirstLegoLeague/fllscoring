@@ -1471,17 +1471,12 @@ define('services/ng-challenge',[
             }]
         };
 
+
         function indexObjectives(missions) {
             objs = {};
             angular.forEach(missions,function(mission) {
-                angular.forEach(mission.objectives,function(obj,key) {
-                    objs[key] = obj;
-                });
-                //TODO: do this in the parser
-                mission.objectives = Object.keys(mission.objectives).map(function(key) {
-                    var o = mission.objectives[key];
-                    o._key = key;
-                    return o;
+                angular.forEach(mission.objectives,function(obj) {
+                    objs[obj.id] = obj;
                 });
             });
             return objs;
@@ -1504,27 +1499,10 @@ define('services/ng-challenge',[
                 });
             },
             init: function(field) {
-                var red = {
+                return {
                     field: field,
                     missions: field.missions,
                     objectiveIndex: indexObjectives(field.missions)
-                };
-                return red;
-                // angular.forEach($scope.missions,process);
-            },
-            getErrorFunc: function(mission) {
-                var self = this;
-                var expectations = (mission.expectations||[function(){return true;}]).map(function(e) {
-                    return {
-                        deps: self.getDependencies(e),
-                        fn: e
-                    };
-                });
-                return function() {
-                    return !expectations.every(function(exp) {
-                        var vars = getObjectives(exp.deps);
-                        return exp.fn.apply(null,vars);
-                    });
                 };
             }
         };
