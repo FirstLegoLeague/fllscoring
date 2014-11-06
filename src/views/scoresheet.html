@@ -100,10 +100,10 @@
             <button class="btn btn-enum" id="save" ng-disabled="!isSaveable()" ng-click="save()">Save</button>
             <button class="btn btn-enum" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="discard()">Discard</button>
         </p>
-		
+
 		<div ng-show="selectedTeam"> gekozen team: {{selectedTeam}} </div>
     </div>
-	
+
 </div>
 
 
@@ -113,7 +113,7 @@
             <h3 class="modal-title">Select a team</h3>
         </div>
         <div class="modal-body">
-				
+
 		<table class="table table-hover table-striped table-teams">
 			<thead>
 				<tr>
@@ -123,7 +123,7 @@
 			</thead>
 			<tbody>
 				<tr ng-show="!editMode" ng-repeat="team in teams" ng-click="selectTeamPop(team)">
-					<td><h2>{{team.number}}</h2></td> 
+					<td><h2>{{team.number}}</h2></td>
 					<td>{{team.name}}
 					<br />
 					<small>{{team.affiliation}}, {{team.cityState}}</small>
@@ -132,7 +132,7 @@
 			</tbody>
 		</table>
 		<hr>
-		
+
         </div>
         <div class="modal-footer">
             <div class="selectedLbl">Selected: <span ng-show="team">({{team.number}}) {{team.name}} </span></div>
