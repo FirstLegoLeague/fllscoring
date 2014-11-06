@@ -16,10 +16,6 @@ define('views/scoresheet',[
         '$scope','$fs','$scores','$stages','$modal','$challenge','$window','$q','$teams',
         function($scope,$fs,$scores,$stages,$modal,$challenge,$window,$q,$teams) {
             log('init scoresheet ctrl');
-            //$scope.selectedTeam = null ; //placeholder var for selected team
-            //$scope.selectTeam = function(team) {
-            //    $scope.$root.$emit('selectTeam',team);
-            //};
 
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
@@ -142,36 +138,6 @@ define('views/scoresheet',[
                 $scope.setPage('teams');
             };
 
-            $scope.selectTeam = function(team) {
-                $scope.team = team;
-            };
-
-            $scope.$root.$on('selectTeam',function(e,team) {
-                $scope.selectTeam(team);
-            });
-
-            $scope.chooseStage = function(stage) {
-                //alert('todo: implement choose stage, using random for now');
-                //$scope.stage = $stages.stages[Math.floor(Math.random() * $stages.stages.length)];
-                $scope.stage = stage;
-
-            };
-
-            $scope.$root.$on('chooseStage',function(e,stage) {
-                $scope.chooseStage(stage);
-            });
-
-            $scope.chooseRound = function(round) {
-                //alert('todo: implement choose round, using random for now');
-                //$scope.round = Math.ceil(Math.random() * stage.rounds);
-                $scope.round = round;
-            };
-
-            $scope.$root.$on('chooseRound',function(e,round) {
-                $scope.chooseRound(round);
-            });
-
-
             $scope.discard = function() {
                 $scope.signature = null;
                 $scope.team = null;
@@ -220,6 +186,31 @@ define('views/scoresheet',[
                 });
             };
 
+            /* Methods used by Modal windows */
+            $scope.selectTeam = function(team) {
+                $scope.team = team;
+            };
+
+            $scope.$root.$on('selectTeam',function(e,team) {
+                $scope.selectTeam(team);
+            });
+
+            $scope.chooseStage = function(stage) {
+                $scope.stage = stage;
+            };
+
+            $scope.$root.$on('chooseStage',function(e,stage) {
+                $scope.chooseStage(stage);
+            });
+
+            $scope.chooseRound = function(round) {
+                $scope.round = round;
+            };
+
+            $scope.$root.$on('chooseRound',function(e,round) {
+                $scope.chooseRound(round);
+            });
+
             $scope.openDescriptionModal = function (size, mission) {
 
                 var modalInstance = $modal.open({
@@ -234,7 +225,6 @@ define('views/scoresheet',[
                 });
 
                 modalInstance.result.then(function (selectedItem) {
-
                   $scope.selected = selectedItem;
                 }, function () {
                   log('Description dismissed at: ' + new Date());
@@ -251,7 +241,6 @@ define('views/scoresheet',[
                   controller: 'TeamModalInstanceCtrl',
                   size: size,
                   resolve: {
-
                     teams: function () {
                       return teams;
                     }
@@ -259,8 +248,6 @@ define('views/scoresheet',[
                 });
 
                 modalInstance.result.then(function (selectedTeam) {
-                    //log('Team selected: ' + selectedTeam);
-                    //$scope.selectedTeam = selectedTeam;
                     $scope.$root.$emit('selectTeam',selectedTeam);
                 }, function () {
                     log('Team select dismissed at: ' + new Date());
@@ -282,9 +269,6 @@ define('views/scoresheet',[
                 });
 
                 modalInstance.result.then(function (result) {
-                    //$scope.selectedTeam = selectedTeam;
-                    log("in result function: " + result.stage + "r: " + result.round);
-
                     $scope.$root.$emit('chooseStage',result.stage);
                     $scope.$root.$emit('chooseRound',result.round);
                 }, function () {
@@ -338,7 +322,6 @@ define('views/scoresheet',[
 
             // function that should be in the lib:
             $scope.getNumber = function(num) {
-                log("returning array of " + num);
                 return new Array(num);   
             };
           
