@@ -48,7 +48,6 @@ define('views/scoresheet',[
             }
 
             function process(mission) {
-                var key = mission._key;
                 var deps = mission.score.reduce(function(all,score) {
                     return all.concat($challenge.getDependencies(score));
                 },[]);
@@ -314,7 +313,7 @@ define('views/scoresheet',[
         function ($scope, $modalInstance, stages) {
 
             $scope.stages = stages;
-            
+
             $scope.selectRoundPop = function(stage, round) {
                 $scope.stage = stage;
                 $scope.round = round;
@@ -322,15 +321,15 @@ define('views/scoresheet',[
 
             // function that should be in the lib:
             $scope.getNumber = function(num) {
-                return new Array(num);   
+                return new Array(num);
             };
-          
+
             $scope.ok = function () {
                 log("after OK: " + $scope.round);
                 $modalInstance.close({"stage": $scope.stage, "round": $scope.round});
 
             };
-              
+
             $scope.cancel = function () {
                 $modalInstance.dismiss('cancel');
             };

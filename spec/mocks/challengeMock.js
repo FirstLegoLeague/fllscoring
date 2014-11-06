@@ -1,18 +1,17 @@
 var challengeMock = (function() {
     var field = {
-        missions: {
-            'test': {
-                _keys: 'test',
-                objectives: ['moo'],
-                score: function() { return 0; }
-            }
-        },
-        title: 'test field'
+        title: 'test field',
+        missions: [{
+            id: 'test',
+            objectives: [{id:'moo'}],
+            score: [
+                function() { return 0; }
+            ]
+        }]
     };
     var definition = {
         field: field,
-        missionIndex: field.missions,
-        missions: [ field.missions['test'] ],
+        missions: field.missions,
         objectiveIndex: {} // todo
     };
     return {
