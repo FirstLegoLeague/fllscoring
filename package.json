@@ -22,7 +22,8 @@
     "karma-jasmine": "^0.1.5",
     "phantomjs": "~1.9.11",
     "saxon-stream2": "0.0.1",
-    "grunt-http-server": "~1.0.0"
+    "grunt-http-server": "~1.0.0",
+    "q": "~1.0.1"
   },
   "dependencies": {
     "express": "^3.4.8",

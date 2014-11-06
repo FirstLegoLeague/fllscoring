@@ -121,11 +121,34 @@ module.exports = function(grunt) {
         var xslPath = options.xslPath;
         var npath = require('path');
         var nfs = require('fs');
+        var Q = require('q');
         var saxon = require('saxon-stream2');
-        var xslt = saxon(saxonPath, xslPath, {
-            timeout: 5000
-        });
         var done = this.async();
+
+        function process(filepath,dest) {
+            return Q.promise(function(resolve,reject) {
+                var xslt = saxon(saxonPath, xslPath, {
+                    timeout: 5000
+                });
+                nfs.createReadStream(filepath, {
+                    encoding: 'utf-8'
+                })
+                    .pipe(xslt)
+                    .on('error', function(err) {
+                        console.log('xslt error:',err);
+                        reject(err);
+                    })
+                    .pipe(nfs.createWriteStream(dest))
+                    .on('error', function(err) {
+                        console.log('write error:',err);
+                        reject(err);
+                    })
+                    .on('finish', function() {
+                        console.log('done');
+                        resolve();
+                    });
+            });
+        }
 
         this.files.forEach(function(f) {
             f.src.filter(function(filepath) {
@@ -136,29 +159,17 @@ module.exports = function(grunt) {
                 } else {
                     return true;
                 }
-            }).forEach(function(filepath) {
-                var base = npath.basename(filepath, '.xml');
-                var dest = npath.resolve(f.dest, base) + '.html';
-                // console.log(filepath);
-                // console.log(dest);
-                nfs.createReadStream(filepath, {
-                    encoding: 'utf-8'
-                })
-                    .pipe(xslt)
-                    .on('error', function(err) {
-                        console.log('xslt error:',err);
-                        done(err);
-                    })
-                    .pipe(nfs.createWriteStream(dest))
-                    .on('error', function(err) {
-                        console.log('write error:',err);
-                        done(err);
-                    })
-                    .on('finish', function() {
-                        console.log('done');
-                        done();
-                    });
-            });
+            }).map(function(filepath) {
+                return function() {
+                    var base = npath.basename(filepath, '.xml');
+                    var dest = npath.resolve(f.dest, base) + '.html';
+                    // console.log(filepath);
+                    // console.log(dest);
+                    return process(filepath,dest);
+                };
+            }).reduce(function(pending,promise) {
+                return pending.then(promise);
+            },Q()).then(done,done);
         });
     });
 

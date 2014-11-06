@@ -46,6 +46,7 @@
                     .objective .values {
                         float: right;
                         font-weight: bold;
+                        text-align: right;
                     }
                     .objective .values span {
                         margin: 0 10px;
