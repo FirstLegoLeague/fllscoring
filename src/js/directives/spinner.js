@@ -82,11 +82,15 @@ define('directives/spinner',[
         };
 
         function transform(el,value) {
-            var translate = ['translate3d(',value,'px,0px,0px)'].join('');
+            //use margin for now, since translation seems to break in chrome until the element is redrawn
+            // var translate = ['translate3d(',value,'px,0px,0px)'].join('');
+            // el.css({
+            //     transform: translate,
+            //     MozTransform: translate,
+            //     WebkitTransform: translate
+            // });
             el.css({
-                transform: translate,
-                MozTransform: translate,
-                WebkitTransform: translate
+                marginLeft: value+'px'
             });
         }
 
@@ -98,7 +102,9 @@ define('directives/spinner',[
             this.value = clamp(value||0,this.min,this.max);
             this.offset = -1*this.step*this.value;
             transform(this.elFrame,this.offset);
-            trigger && this.elContainer.trigger('change',[this.value-1,this]);
+            if (trigger) {
+                this.elContainer.trigger('change',[this.value-1,this]);
+            }
         };
 
         Spinner.prototype.repaint = function() {
@@ -107,12 +113,16 @@ define('directives/spinner',[
 
         Spinner.prototype.prev = function(e) {
             this.set(this.value-1,true);
-            e && e.stopPropagation();
+            if (e) {
+                e.stopPropagation();
+            }
         };
 
         Spinner.prototype.next = function(e) {
             this.set(this.value+1,true);
-            e && e.stopPropagation();
+            if (e) {
+                e.stopPropagation();
+            }
         };
 
         Spinner.prototype.dragstart = function(e,ev) {

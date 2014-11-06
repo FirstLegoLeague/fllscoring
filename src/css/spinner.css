@@ -5,6 +5,10 @@
         overflow: hidden;
         /* fix for overflow-scrolling bug */
         -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
     }
     .spinner {
         display: inline-block;
@@ -14,28 +18,34 @@
         width: 126px;
         padding-left: 95px;
         -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
         position: relative;
         overflow: hidden;
         background-color: white;
     }
     .spinner .frame {
         display: block;
-        margin-left: 0px;
+        margin-left: 0;
         width: 640px;
-        -webkit-transition: -webkit-transform 0.1s;
-        -moz-transition: -moz-transform 0.1s;
-        transition: transform 0.1s;
+        -webkit-transition: -webkit-transform 0.1s, margin 0.1s;
+        -moz-transition: -moz-transform 0.1s, margin 0.1s;
+        -o-transition: -o-transform 0.1s, margin 0.1s;
+        transition: transform 0.1s, margin 0.1s;
 
     }
     .spinner.dragging .frame {
-        -webkit-transition: none;s;
+        -webkit-transition: none;
         -moz-transition: none;
+        -o-transition: none;
         transition: none;
     }
     .spinner.drifting .frame {
-        -webkit-transition: -webkit-transform 0.5s ease-out;
-        -moz-transition: -moz-transform 0.5s ease-out;
-        transition: transform 0.5s ease-out;
+        -webkit-transition: -webkit-transform 0.5s ease-out, margin 0.1s ease-out;
+        -moz-transition: -moz-transform 0.5s ease-out, margin 0.1s ease-out;
+        -o-transition: -o-transform 0.5s ease-out, margin 0.1s ease-out;
+        transition: transform 0.5s ease-out, margin 0.1s ease-out;
     }
 
     .spinner .prev,
@@ -44,29 +54,35 @@
         float: left;
         width: 32px;
         height: 32px;
-        border-width: 0px 1px;
+        border-width: 0 1px;
         line-height: 30px;
         text-align: center;
         background-color: white;
         box-sizing: content-box;
         padding: 0;
         font-size: inherit;
+        cursor: default;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;  ;
     }
 
     .spinner .prev,
     .spinner .next {
-        box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.5);
+        box-shadow: 0 0 30px 10px rgba(0,0,0,0.5);
         border: none;
     }
     .spinner .prev {
         position: absolute;
         border-right: 1px solid steelblue;
-        left: 0px;
+        left: 0;
     }
     .spinner .next {
         position: absolute;
         border-left: 1px solid steelblue;
-        right: 0px;
+        right: 0;
     }
 
     .spinner .inner {

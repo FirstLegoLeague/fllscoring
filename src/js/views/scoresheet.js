@@ -16,7 +16,6 @@ define('views/scoresheet',[
         '$scope','$fs','$scores','$stages','$modal','$challenge','$window','$q','$teams',
         function($scope,$fs,$scores,$stages,$modal,$challenge,$window,$q,$teams) {
             log('init scoresheet ctrl');
-            
             //$scope.selectedTeam = null ; //placeholder var for selected team
             //$scope.selectTeam = function(team) {
             //    $scope.$root.$emit('selectTeam',team);
@@ -26,8 +25,7 @@ define('views/scoresheet',[
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;
 
-            
-            
+
             $fs.read('settings.json').then(function(res) {
                 $scope.settings = res;
                 load();
@@ -138,7 +136,6 @@ define('views/scoresheet',[
                 console.log("saveable " + val);
                 return val;
             };
-            
 
             $scope.showTeams = function() {
                 //alert('todo: make work on small screens && improve team selection');
@@ -157,6 +154,7 @@ define('views/scoresheet',[
                 //alert('todo: implement choose stage, using random for now');
                 //$scope.stage = $stages.stages[Math.floor(Math.random() * $stages.stages.length)];
                 $scope.stage = stage;
+
             };
 
             $scope.$root.$on('chooseStage',function(e,stage) {
@@ -173,6 +171,7 @@ define('views/scoresheet',[
                 $scope.chooseRound(round);
             });
 
+
             $scope.discard = function() {
                 $scope.signature = null;
                 $scope.team = null;
@@ -180,7 +179,7 @@ define('views/scoresheet',[
                 $scope.round = null;
                 console.log('discard');
                 load();
-            }
+            };
 
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
@@ -235,21 +234,24 @@ define('views/scoresheet',[
                 });
 
                 modalInstance.result.then(function (selectedItem) {
-                            
+
                   $scope.selected = selectedItem;
                 }, function () {
                   log('Description dismissed at: ' + new Date());
                 });
               };
-              
+
+
             $scope.openTeamModal = function (size, teams) {
 
                 var modalInstance = $modal.open({
-            
+
+
                   templateUrl: 'teamModalContent.html',
                   controller: 'TeamModalInstanceCtrl',
                   size: size,
                   resolve: {
+
                     teams: function () {
                       return teams;
                     }
@@ -268,7 +270,7 @@ define('views/scoresheet',[
             $scope.openRoundModal = function (size, stages) {
 
                 var modalInstance = $modal.open({
-            
+
                   templateUrl: 'roundModalContent.html',
                   controller: 'RoundModalInstanceCtrl',
                   size: size,
@@ -289,6 +291,7 @@ define('views/scoresheet',[
                     log('Round select dismissed at: ' + new Date());
                 });
             };
+
         }
     ]).controller('DescriptionModalInstanceCtrl',[
         '$scope', '$modalInstance', 'mission',
@@ -309,15 +312,15 @@ define('views/scoresheet',[
         function ($scope, $modalInstance, teams) {
 
             $scope.teams = teams;
-            
+
             $scope.selectTeamPop = function(team) {
                 $scope.team = team;
             };
-          
+
             $scope.ok = function () {
                 $modalInstance.close($scope.team);
             };
-              
+
             $scope.cancel = function () {
                 $modalInstance.dismiss('cancel');
             };
