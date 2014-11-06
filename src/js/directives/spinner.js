@@ -102,7 +102,9 @@ define('directives/spinner',[
             this.value = clamp(value||0,this.min,this.max);
             this.offset = -1*this.step*this.value;
             transform(this.elFrame,this.offset);
-            trigger && this.elContainer.trigger('change',[this.value-1,this]);
+            if (trigger) {
+                this.elContainer.trigger('change',[this.value-1,this]);
+            }
         };
 
         Spinner.prototype.repaint = function() {
@@ -111,12 +113,16 @@ define('directives/spinner',[
 
         Spinner.prototype.prev = function(e) {
             this.set(this.value-1,true);
-            e && e.stopPropagation();
+            if (e) {
+                e.stopPropagation();
+            }
         };
 
         Spinner.prototype.next = function(e) {
             this.set(this.value+1,true);
-            e && e.stopPropagation();
+            if (e) {
+                e.stopPropagation();
+            }
         };
 
         Spinner.prototype.dragstart = function(e,ev) {
