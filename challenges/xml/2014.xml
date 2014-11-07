@@ -13,8 +13,8 @@
         <string id="identical-desc">              Your model is in Base and is identical</string>
         <string id="engineering-error">           Basket must be in Base for model to be in Base</string>
 
-        <string id="door-name">                   Opening Doors</string>
-        <string id="door-desc">                   <![CDATA[Todo: Kenny]]></string>
+        <string id="doors-name">                   Opening Doors</string>
+        <string id="doors-desc">                   <![CDATA[Todo: Kenny]]></string>
         <string id="dooropen-desc">               Door opened by pushing handle down</string>
 
         <string id="projectbased-name">           Project-Based Learning</string>

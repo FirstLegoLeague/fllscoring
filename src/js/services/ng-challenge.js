@@ -638,8 +638,8 @@ define('services/ng-challenge',[
                     }
                 ]
             }, {
-                "title": "doors-name",
-                "description": "doors-desc",
+                "title": "Opening Doors",
+                "description": "Todo: Kenny",
                 "objectives": [{
                     "id": "dooropen",
                     "title": "Door opened by pushing handle down",
