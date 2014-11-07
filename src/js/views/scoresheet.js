@@ -186,12 +186,12 @@ define('views/scoresheet',[
             };
 
             /* Methods used by Modal windows */
-            $scope.selectTeam = function(team) {
+            $scope.chooseTeam = function(team) {
                 $scope.team = team;
             };
 
-            $scope.$root.$on('selectTeam',function(e,team) {
-                $scope.selectTeam(team);
+            $scope.$root.$on('chooseTeam',function(e,team) {
+                $scope.chooseTeam(team);
             });
 
             $scope.chooseStage = function(stage) {
@@ -247,7 +247,7 @@ define('views/scoresheet',[
                 });
 
                 modalInstance.result.then(function (selectedTeam) {
-                    $scope.$root.$emit('selectTeam',selectedTeam);
+                    $scope.$root.$emit('chooseTeam',selectedTeam);
                 }, function () {
                     log('Team select dismissed at: ' + new Date());
                 });
