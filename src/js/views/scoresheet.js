@@ -145,6 +145,19 @@ define('views/scoresheet',[
                 console.log('discard');
                 load();
             };
+			
+			$scope.scoresheetValid = false;
+			$scope.validateScoresheet = function() {
+				if (!$scope.team || !$scope.stage){
+					log("Make sure you selected a team and stage/round");
+					return;
+				}
+				
+				// TODO implement proper validation of Scoresheet form
+				// mainly check for required fields. Replace var with Angular validation functions.
+				$scope.scoreSheetValid = true;
+				log("Form is valid");
+			};
 
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
@@ -180,6 +193,11 @@ define('views/scoresheet',[
                     return $scores.save();
                 }).then(function() {
                     log('result saved');
+					alert('Thanks for submitting a score of '
+						+ $scope.score() 
+						+ ' points for team ( ' + $scope.team.number + ' ) ' + $scope.team.name 
+						+ ' in ' + $scope.stage.name + ' ' + $scope.round + '.'
+					);
                 },function() {
                     log('unable to write result');
                 });
