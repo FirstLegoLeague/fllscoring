@@ -125,16 +125,13 @@ define('views/scoresheet',[
                     $scope.team !== undefined && $scope.team !== null &&
                     $scope.signature !== undefined && $scope.signature !== null &&
                     $scope.missions.every(function(mission) {
-                      return mission.result !== undefined && mission.result !== null;
-                      });
+                        return mission.objectives.every(function(objective) {
+                          return objective.value !== undefined && objective.value !== null;
+                        });
+                    });
 
                 console.log("saveable " + val);
                 return val;
-            };
-
-            $scope.showTeams = function() {
-                //alert('todo: make work on small screens && improve team selection');
-                $scope.setPage('teams');
             };
 
             $scope.discard = function() {
@@ -142,23 +139,14 @@ define('views/scoresheet',[
                 $scope.team = null;
                 $scope.stage = null;
                 $scope.round = null;
+                $scope.missions.forEach(function(mission) {
+                    mission.objectives.forEach(function(objective) {
+                        delete objective["value"];
+                    });
+                });
                 console.log('discard');
-                load();
             };
-			
-			$scope.scoresheetValid = false;
-			$scope.validateScoresheet = function() {
-				if (!$scope.team || !$scope.stage){
-					log("Make sure you selected a team and stage/round");
-					return;
-				}
-				
-				// TODO implement proper validation of Scoresheet form
-				// mainly check for required fields. Replace var with Angular validation functions.
-				$scope.scoreSheetValid = true;
-				log("Form is valid");
-			};
-
+            
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
             $scope.save = function() {
@@ -198,6 +186,7 @@ define('views/scoresheet',[
 						+ ' points for team ( ' + $scope.team.number + ' ) ' + $scope.team.name 
 						+ ' in ' + $scope.stage.name + ' ' + $scope.round + '.'
 					);
+          $scope.discard();
                 },function() {
                     log('unable to write result');
                 });

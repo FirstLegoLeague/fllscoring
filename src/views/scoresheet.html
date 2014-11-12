@@ -84,31 +84,21 @@
                         class="error"
                     >{{error.message}}</p>
                 </section>
-                <section class="panel">
-                    <h2>Validate Scoresheet</h2>
-                    <div>
-                        <button class="btn btn-enum" id="submit" type="submit">Sign Scoresheet</button>
-                    </div>
-                    <div style="clear: both;"></div>
-                </section>
             </form><!-- END of scoresheetForm -->
-            <div ng-show="team &amp;&amp; stage &amp;&amp; round && scoreSheetValid">
             <section class="panel">
-                <div class="description">Referee name</div>
                 <h2>
-                    Team Review
-                </h2>
-                <div class="scorereview">
                     <table>
                         <tr>
-                            <td>Team
+                            <td>
+                                <button class="btn btn-enum" ng-click="openTeamModal('lg', teams)">Team </button>
                             </td>
                             <td>
                                 <span ng-show="team">({{team.number}}) {{team.name}} </span>
                             </td>
                         </tr>
                         <tr>
-                            <td>Stage &amp; Rounds
+                            <td>
+                                <button class="btn btn-enum" ng-click="openRoundModal('lg', stages)">Stage &amp; Round</button>
                             </td>
                             <td>
                                 <span ng-show="stage">Stage {{stage.name}}</span>
@@ -125,7 +115,7 @@
                     <div id="totalScore">
                         Total score: {{score()}}
                     </div>
-                </div>
+                </h2>
             </section>
 
             <section class="panel">
@@ -135,7 +125,6 @@
                 </h2>
                 <div fll-sigpad ng-model="signature"></div>
             </section>
-            </div>
         </div>
 
 
