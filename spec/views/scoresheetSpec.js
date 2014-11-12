@@ -46,23 +46,20 @@ describe('scoresheet',function() {
         });
     });
 
-    describe('showteams', function() {
-        it('should select the teams page', function() {
-            $scope.showTeams();
-            expect($scope.setPage).toHaveBeenCalledWith('teams');
-        });
-    });
-
-    describe('selectTeam', function() {
+    describe('chooseTeam', function() {
         it('should set the team on the scope', function() {
-            $scope.selectTeam(dummyTeam);
+            $scope.chooseTeam(dummyTeam);
             expect($scope.team).toBe(dummyTeam);
         });
-
-        it('should call the selectTeam method on selectTeam event',function() {
-            $scope.selectTeam = jasmine.createSpy('selectTeam');
-            $scope.$root.$emit('selectTeam',dummyTeam);
-            expect($scope.selectTeam).toHaveBeenCalledWith(dummyTeam);
+    });
+    
+    describe('discard', function() {
+        it('should discard form', function() {
+            $scope.settings = {};
+            $scope.missions = [];
+            $scope.signature = "dummy";
+            $scope.discard();
+            expect($scope.signature).toEqual(null);
         });
     });
 
