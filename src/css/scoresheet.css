@@ -106,9 +106,14 @@
 .missions .field [fll-spinner],
 .missions .field input,
 .missions .field .btn {
-    float: right;
     margin: 0px 2px;
 }
+.missions .field [fll-spinner],
+.missions .field input,
+.missions .field .btn-group {
+    float: right;
+}
+
 .missions .field input[type=checkbox],
 .missions .field input[type=radio] {
     height: 28px;
