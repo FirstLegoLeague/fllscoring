@@ -18,7 +18,7 @@
                     return 0
                 }
                 if (basket === 'no' && identical === 'yes') {
-                    return new Error("Basket must be in Base for model to be in Base")
+                    return 0
                 }
                 if (basket === 'yes' && identical === 'no') {
                     return 30
@@ -676,7 +676,7 @@
                     return 0.53
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '1') {
-                    return 0.59
+                    return 0.58
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '2') {
                     return new Error("Either none or both questions should be answered with \"N/A\"")
@@ -706,7 +706,7 @@
                     return 0.54
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '2') {
-                    return 0.6
+                    return new Error("Dial cannot turn that far")
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '3') {
                     return new Error("Either none or both questions should be answered with \"N/A\"")
@@ -736,7 +736,7 @@
                     return 0.55
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '3') {
-                    return 0.61
+                    return new Error("Dial cannot turn that far")
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '4') {
                     return new Error("Either none or both questions should be answered with \"N/A\"")
@@ -766,7 +766,7 @@
                     return 0.56
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '4') {
-                    return 0.62
+                    return new Error("Dial cannot turn that far")
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '5') {
                     return new Error("Either none or both questions should be answered with \"N/A\"")
@@ -796,7 +796,7 @@
                     return 0.57
                 }
                 if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '5') {
-                    return 0.63
+                    return new Error("Dial cannot turn that far")
                 }
             }
         ]
