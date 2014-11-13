@@ -1,9 +1,10 @@
 var express = require('express');
 var app = express();
-var port = 1390;
 var fs = require('fs');
 var mkdirp = require("mkdirp");
 var dirname = require('path').dirname;
+var argv = require('minimist')(process.argv.slice(2));
+var port = argv.p||1390;
 
 app.use(express.static('src'));
 

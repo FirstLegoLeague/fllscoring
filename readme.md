@@ -36,6 +36,7 @@ Run local
 --------
 
 - `node localserver.js` then open [localhost:1390](http://localhost:1390)
+	- to specify another port, use `node localserver.js -p 8000`
 
 Testing
 -------
