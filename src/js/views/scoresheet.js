@@ -151,7 +151,7 @@ define('views/scoresheet',[
                 });
                 console.log('discard');
             };
-            
+
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
             $scope.save = function() {
@@ -186,11 +186,11 @@ define('views/scoresheet',[
                     return $scores.save();
                 }).then(function() {
                     log('result saved');
-					alert('Thanks for submitting a score of '
-						+ $scope.score() 
-						+ ' points for team ( ' + $scope.team.number + ' ) ' + $scope.team.name 
-						+ ' in ' + $scope.stage.name + ' ' + $scope.round + '.'
-					);
+                    alert('Thanks for submitting a score of '
+                        + $scope.score()
+                        + ' points for team ( ' + $scope.team.number + ' ) ' + $scope.team.name
+                        + ' in ' + $scope.stage.name + ' ' + $scope.round + '.'
+                    );
           $scope.discard();
                 },function() {
                     log('unable to write result');
