@@ -1,5 +1,10 @@
 <div ng-controller="scoresheetCtrl" id="scoresheet">
     <div>
+        <div ng-show="errorMessage">
+            <p class="error">
+                {{errorMessage}}
+            </p>
+        </div>
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
             <h1>{{field.title}}</h1>
             <section class="panel">

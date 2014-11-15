@@ -3,8 +3,9 @@ define('services/ng-challenge',[
     'services/ng-services',
     'services/fs'
 ],function(log,module,fs) {
-    return module.factory('$challenge',['$fs',function($fs) {
+    return module.factory('$challenge',['$fs','$http',function($fs,$http) {
         var mission;
+        var fallBackChallenge = 'challenge/2014';
 
         var field = {
             "title": "Senior Solutions",
@@ -1464,8 +1465,17 @@ define('services/ng-challenge',[
                 return fs.read(challenge).then(function(defs) {
                     return self.init(eval('('+defs+')'));
                 }).fail(function() {
+                    //temp: get from remote service
+                    return $fs.read('settings.json').then(function(settings) {
+                        var url = settings.host+'/'+fallBackChallenge;
+                        return $http.get(url,{
+                            transformResponse: function(d) {return d;}
+                        });
+                    }).then(function(response) {
+                        return self.init(eval('('+response.data+')'));
+                    });
+                }).fail(function() {
                     log('error getting field');
-                    return self.init(field);
                 });
             },
             init: function(field) {

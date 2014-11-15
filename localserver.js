@@ -39,6 +39,24 @@ app.get(/^\/fs\/(.*)$/, function(req, res) {
     });
 });
 
+//get challenges over xhr, for hosted service
+app.get('/challenge/:year', function(req, res) {
+    var path = __dirname + '/challenges/js/' + req.params.year + '.js';
+    fs.exists(path, function(exists) {
+        if (exists) {
+            fs.readFile(path, function(err, data) {
+                if (err) {
+                    res.status(500).send('error reading file');
+                }
+                res.header('Content-Type','text/plain');
+                res.send(data);
+            });
+        } else {
+            res.status(404).send('file not found');
+        }
+    });
+});
+
 
 function writeFile(path, contents, cb) {
     var dir = dirname(path);
