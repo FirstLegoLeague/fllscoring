@@ -1,58 +1,90 @@
 <div ng-controller="scoresheetCtrl" id="scoresheet">
     <div>
-
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
             <h1>{{field.title}}</h1>
-            <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
-
-                <div>
-                    <script type="text/ng-template" id="descriptionModalContent.html">
-                        <div class="modal-header">
-                            <h3 class="modal-title">{{mission.title}}</h3>
-                        </div>
-                        <div class="modal-body">
-                           {{mission.description}}
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" ng-click="ok()">OK</button>
-                        </div>
-                    </script>
-
-                    <div class="description" ng-click="openDescriptionModal('lg', mission)">description</div>
-                </div>
-
+            <section class="panel">
                 <h2>
-                    {{mission.title}}
-                    ({{mission.result}})
+                    <table>
+                        <tr>
+                            <td>
+                                <button class="btn btn-enum" ng-click="openTeamModal('lg', teams)">Team </button>
+                            </td>
+                            <td>
+                                <span ng-show="team">({{team.number}}) {{team.name}} </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="btn btn-enum" ng-click="openRoundModal('lg', stages)">Stage &amp; Round</button>
+                            </td>
+                            <td>
+                                <span ng-show="stage">Stage {{stage.name}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <span ng-show="round">Round {{round}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="totalScore">
+                        Total score: {{score()}}
+                    </div>
                 </h2>
-                <div class="objective" ng-repeat="objective in mission.objectives" ng-switch="objective.type">
+            </section>
+            <form id="scoresheetForm" ng-submit="validateScoresheet()">
+                <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
+
                     <div>
-                        <label class="field" ng-switch-when="yesno">
-                            {{objective.title}}
-                            <div class="btn-group">
-                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">yes</label>
-                                <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">no</label>
+                        <script type="text/ng-template" id="descriptionModalContent.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">{{mission.title}}</h3>
                             </div>
-                        </label>
-                        <span class="field" ng-switch-when="number">
-                            {{objective.title}}
-                            <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
-                        </span>
-                        <div class="field" ng-switch-when="enum">
-                            {{objective.title}}
-                            <div class="btn-group">
-                                <label ng-repeat="line in objective.options" class="btn btn-enum" ng-model="objective.value" btn-radio="line.value">{{line.title}}</label>
+                            <div class="modal-body">
+                               {{mission.description}}
                             </div>
-                            <div style="clear:both;"></div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                            </div>
+                        </script>
+
+                        <div class="description" ng-click="openDescriptionModal('lg', mission)">description</div>
+                    </div>
+
+                    <h2>
+                        {{mission.title}}
+                        ({{mission.result}})
+                    </h2>
+                    <div class="objective" ng-repeat="objective in mission.objectives" ng-switch="objective.type">
+                        <div>
+                            <label class="field" ng-switch-when="yesno">
+                                {{objective.title}}
+                                <div class="btn-group">
+                                    <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">yes</label>
+                                    <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">no</label>
+                                </div>
+                            </label>
+                            <span class="field" ng-switch-when="number">
+                                {{objective.title}}
+                                <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
+                            </span>
+                            <div class="field" ng-switch-when="enum">
+                                {{objective.title}}
+                                <div class="btn-group">
+                                    <label ng-repeat="line in objective.options" class="btn btn-enum" ng-model="objective.value" btn-radio="line.value">{{line.title}}</label>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <p ng-show="mission.errors"
-                    ng-repeat="error in mission.errors"
-                    class="error"
-                >{{error.message}}</p>
-            </section>
-
+                    <p ng-show="mission.errors"
+                        ng-repeat="error in mission.errors"
+                        class="error"
+                    >{{error.message}}</p>
+                </section>
+            </form><!-- END of scoresheetForm -->
             <section class="panel">
                 <h2>
                     <table>
@@ -86,7 +118,7 @@
                 </h2>
             </section>
 
-            <section class="panel" ng-show="team &amp;&amp; stage &amp;&amp; round">
+            <section class="panel">
                 <h2>
                     Team signature
                     <button class="btn pull-right btn-enum" ng-click="signature=null">clear</button>
@@ -96,10 +128,10 @@
         </div>
 
 
-        <p>
-            <button class="btn btn-enum" id="save" ng-disabled="!isSaveable()" ng-click="save()">Save</button>
+        <div>
             <button class="btn btn-enum" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="discard()">Discard</button>
-        </p>
+            <button class="btn btn-enum" id="save" ng-disabled="!isSaveable()" ng-click="save()">Save</button>
+        </div>
 
     </div>
 
@@ -172,6 +204,6 @@
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
-    </script> 
+    </script>
 
 </div>

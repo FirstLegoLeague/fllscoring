@@ -27,7 +27,10 @@
   },
   "dependencies": {
     "express": "^3.4.8",
+    "js-beautify": "^1.5.4",
     "karma-coverage": "^0.2.4",
-    "mkdirp": "^0.3.5"
+    "minimist": "^1.1.0",
+    "mkdirp": "^0.3.5",
+    "xml2js": "^0.4.4"
   }
 }

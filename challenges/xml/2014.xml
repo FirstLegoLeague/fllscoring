@@ -11,7 +11,6 @@
         <string id="engineering-desc">            <![CDATA[Todo: Kenny]]></string>
         <string id="basket-desc">                 Basket in Base</string>
         <string id="identical-desc">              Your model is in Base and is identical</string>
-        <string id="engineering-error">           Basket must be in Base for model to be in Base</string>
 
         <string id="doors-name">                   Opening Doors</string>
         <string id="doors-desc">                   <![CDATA[Todo: Kenny]]></string>
@@ -88,6 +87,7 @@
         <string id="ticks-5">                     5</string>
         <string id="engagement-na-error">         Either none or both questions should be answered with "N/A"</string>
         <string id="engagement-logic-error">      Dial must remain on "N/A" until yellow section has moved</string>
+        <string id="engagement-max-error">        Dial cannot turn that far</string>
 
         <string id="changing-conditions-name">    Adapting to changing conditions</string>
         <string id="changing-conditions-desc">    <![CDATA[Todo: Kenny]]></string>
@@ -110,7 +110,7 @@
             </indexes>
             <cases>
                 <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="yes" /> <error message="engineering-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="30" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="45" /> </case>
             </cases>
@@ -432,7 +432,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="1"  /> <percentage amount="41" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="1"  /> <percentage amount="47" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="1"  /> <percentage amount="53" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="1"  /> <percentage amount="59" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="1"  /> <percentage amount="58" /> </case>
 
                 <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="2"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="2"  /> <percentage amount="12" /> </case>
@@ -443,7 +443,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="2"  /> <percentage amount="42" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="2"  /> <percentage amount="48" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="2"  /> <percentage amount="54" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="2"  /> <percentage amount="60" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="2"  /> <error message="engagement-max-error" /> </case>
 
                 <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="3"  /> <percentage amount="13" /> </case>
@@ -454,7 +454,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="3"  /> <percentage amount="43" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="3"  /> <percentage amount="49" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="3"  /> <percentage amount="55" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="3"  /> <percentage amount="61" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="3"  /> <error message="engagement-max-error" /> </case>
 
                 <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="4"  /> <percentage amount="14" /> </case>
@@ -465,7 +465,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="4"  /> <percentage amount="44" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="4"  /> <percentage amount="50" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="4"  /> <percentage amount="56" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="4"  /> <percentage amount="62" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="4"  /> <error message="engagement-max-error" /> </case>
 
                 <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="5"  /> <percentage amount="15" /> </case>
@@ -476,7 +476,7 @@
                 <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="5"  /> <percentage amount="45" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="5"  /> <percentage amount="51" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="5"  /> <percentage amount="57" /> </case>
-                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="5"  /> <percentage amount="63" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="5"  /> <error message="engagement-max-error" /> </case>
             </cases>
         </score>
     </mission>

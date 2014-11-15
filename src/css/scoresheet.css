@@ -45,7 +45,7 @@
     color: #94caff;
 }
 
-#discard {
+#save, #submit {
     float: right;
 }
 
@@ -106,9 +106,14 @@
 .missions .field [fll-spinner],
 .missions .field input,
 .missions .field .btn {
-    float: right;
     margin: 0px 2px;
 }
+.missions .field [fll-spinner],
+.missions .field input,
+.missions .field .btn-group {
+    float: right;
+}
+
 .missions .field input[type=checkbox],
 .missions .field input[type=radio] {
     height: 28px;
@@ -125,4 +130,8 @@ input[type=number] {
     height: 200px;
     width: 400px;
     margin: 10px;
+}
+.scorereview {
+	padding: 10px 2px 10px 10px;
+	margin: 2px;
 }
