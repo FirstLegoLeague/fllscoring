@@ -26,6 +26,12 @@ define('views/scores',[
             $scope.editScore = function(index) {
                 alert("todo edit team/round/score " + $scores.scores[index].score);
             };
+            $scope.pollSheets = function(index) {
+                return $scores.pollSheets().catch(function(err) {
+                    console.log("pollSheets() failed", err);
+                    alert("failed to poll sheets: " + err);
+                });
+            }
         }
     ]);
 });

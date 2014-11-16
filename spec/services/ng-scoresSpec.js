@@ -30,7 +30,7 @@ describe('ng-scores',function() {
 
     beforeEach(function() {
         fsMock = createFsMock({
-            "scores.json": { version: 2, scores: [rawMockScore] },
+            "scores.json": { version: 2, scores: [rawMockScore], sheets: [] },
             "stages.json": [rawMockStage],
             "teams.json": [dummyTeam]
         });
@@ -115,7 +115,14 @@ describe('ng-scores',function() {
     describe('saving',function() {
         it('should write scores to scores.json',function() {
             return $scores.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('scores.json', [rawMockScore])
+                expect(fsMock.write).toHaveBeenCalledWith(
+                    'scores.json',
+                    {
+                        version: 2,
+                        scores: [rawMockScore],
+                        sheets: []
+                    }
+                );
             });
         });
     });

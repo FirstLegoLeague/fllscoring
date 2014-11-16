@@ -177,18 +177,9 @@ define('views/scoresheet',[
                 data.round = $scope.round;
                 data.table = $scope.settings.table;
                 data.signature = $scope.signature;
+                data.score = $scope.score();
 
-
-                return $fs.write(fn,data).then(function() {
-                    $scores.add({
-                        file: fn,
-                        team: $scope.team,
-                        stage: $scope.stage,
-                        round: $scope.round,
-                        score: $scope.score()
-                    });
-                    return $scores.save();
-                }).then(function() {
+                return $fs.write("scoresheets/" + fn,data).then(function() {
                     log('result saved');
                     alert('Thanks for submitting a score of '
                         + $scope.score()
