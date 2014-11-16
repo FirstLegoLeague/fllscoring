@@ -25,16 +25,39 @@ app.use(function(req, res, next) {
 
 app.get(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
-    fs.exists(path, function(exists) {
-        if (exists) {
+    fs.stat(path, function(err, stat) {
+        if (err) {
+            res.status(404).send('file not found');
+            return;
+        }
+        if (stat.isFile()) {
             fs.readFile(path, function(err, data) {
                 if (err) {
                     res.status(500).send('error reading file');
+                    return;
                 }
                 res.send(data);
             });
+        } else if (stat.isDirectory()) {
+            fs.readdir(path, function(err, filenames) {
+                if (err) {
+                    res.status(500).send('error reading dir');
+                    return;
+                }
+                // FIXME: this doesn't work for filenames containing
+                // newlines. Probably not likely, but stil...
+                var hasNewline = filenames.some(function(name) {
+                    return name.indexOf("\n") >= 0;
+                });
+                if (hasNewline) {
+                    res.status(500).send('invalid filename(s)');
+                    return;
+                }
+                res.send(filenames.join('\n'));
+            });
         } else {
-            res.status(404).send('file not found');
+            res.status(500).send('error reading file');
+            return;
         }
     });
 });
