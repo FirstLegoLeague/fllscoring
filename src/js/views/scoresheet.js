@@ -6,6 +6,7 @@ define('views/scoresheet',[
     'services/ng-scores',
     'services/ng-teams',
     'services/ng-stages',
+    'services/ng-settings',
     'directives/sigpad',
     'directives/spinner',
     'angular'
@@ -13,8 +14,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$scores','$stages','$modal','$challenge','$window','$q','$teams',
-        function($scope,$fs,$scores,$stages,$modal,$challenge,$window,$q,$teams) {
+        '$scope','$fs','$scores','$stages','$settings','$modal','$challenge','$window','$q','$teams',
+        function($scope,$fs,$scores,$stages,$settings,$modal,$challenge,$window,$q,$teams) {
             log('init scoresheet ctrl');
 
             // Set up defaults
@@ -26,12 +27,8 @@ define('views/scoresheet',[
             $scope.stages = $stages.stages;
 
 
-            $fs.read('settings.json').then(function(res) {
+            $settings.init().then(function(res) {
                 $scope.settings = res;
-                load();
-            },function() {
-                log('unable to load settings');
-                $scope.settings = {};
                 load();
             });
 

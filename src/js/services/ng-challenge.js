@@ -1,11 +1,12 @@
 define('services/ng-challenge',[
     'services/log',
     'services/ng-services',
-    'services/fs'
+    'services/fs',
+    'services/ng-settings'
 ],function(log,module,fs) {
     return module.factory('$challenge',[
-        '$fs','$http',
-        function($fs,$http) {
+        '$http','$settings',
+        function($http,$settings) {
             var mission;
             var fallBackChallenge = 'challenge/2014';
 
@@ -1468,8 +1469,8 @@ define('services/ng-challenge',[
                         return self.init(eval('('+defs+')'));
                     }).fail(function() {
                         //temp: get from remote service
-                        return $fs.read('settings.json').then(function(settings) {
-                            var url = settings.host+'/'+fallBackChallenge;
+                        return $settings.init().then(function(settings) {
+                            var url = (settings.host||'')+'/'+fallBackChallenge;
                             return $http.get(url,{
                                 transformResponse: function(d) {return d;}
                             });
