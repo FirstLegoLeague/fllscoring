@@ -8,6 +8,14 @@ var port = argv.p||1390;
 
 app.use(express.static('src'));
 
+//allow cors headers
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+
+    next();
+});
+
 //set raw body as data arrives
 app.use(function(req, res, next) {
     var data = '';
