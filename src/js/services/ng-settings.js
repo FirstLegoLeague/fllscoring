@@ -54,6 +54,10 @@ define('services/ng-settings',[
             });
         };
 
+        Settings.prototype.save = function() {
+            return $fs.write('settings.json',this.settings);
+        };
+
         return new Settings();
     }]);
 });
