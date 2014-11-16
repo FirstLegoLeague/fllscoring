@@ -6,4 +6,6 @@ before_install:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-after_script: 'npm install coveralls@2.10.0 && cat "./coverage/Firefox 19.0.0 (Linux)/lcov.info" | coveralls'
+after_script:
+  - ls ./coverage
+  - 'npm install coveralls@2.10.0 && cat "./coverage/Firefox 19.0.0 (Linux)/lcov.info" | coveralls'
