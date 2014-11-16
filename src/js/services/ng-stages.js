@@ -44,12 +44,12 @@ define('services/ng-stages',[
                 this._initialized = this.load();
             }
             return this._initialized;
-        }
+        };
 
         Stages.prototype.clear = function() {
             this._rawStages = [];
             this._update();
-        }
+        };
 
         Stages.prototype.save = function() {
             return $fs.write('stages.json', this._rawStages).then(function() {
@@ -57,7 +57,7 @@ define('services/ng-stages',[
             }, function(err) {
                 log('stages write error', err);
             });
-        }
+        };
 
         Stages.prototype.load = function() {
             var self = this;
@@ -73,7 +73,7 @@ define('services/ng-stages',[
                 self.add({ id: "semi", name: "Halve finales", rounds: 0 });
                 self.add({ id: "final", name: "Finale", rounds: 1 });
             });
-        }
+        };
 
         Stages.prototype.remove = function(id) {
             var stage = this._stagesMap[id];
@@ -82,7 +82,7 @@ define('services/ng-stages',[
             }
             this._rawStages.splice(stage.index, 1);
             this._update();
-        }
+        };
 
         /**
          * Add new stage.
@@ -102,7 +102,7 @@ define('services/ng-stages',[
                 rounds: parseInt(stage.rounds, 10),
             });
             this._update();
-        }
+        };
 
         /**
          * Return stage by id.
@@ -113,7 +113,7 @@ define('services/ng-stages',[
          */
         Stages.prototype.get = function(id) {
             return this._stagesMap[id];
-        }
+        };
 
         Stages.prototype._update = function() {
             var self = this;
@@ -145,7 +145,7 @@ define('services/ng-stages',[
                 }
                 self._stagesMap[stage.id] = stage;
             });
-        }
+        };
 
         return new Stages();
     }]);

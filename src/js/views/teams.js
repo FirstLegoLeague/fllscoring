@@ -33,7 +33,7 @@ define('views/teams',[
                     });
                 }
                 return initialized;
-            }
+            };
             $scope.init();
 
             $scope.load = function() {
@@ -115,7 +115,7 @@ define('views/teams',[
             }
 
 
-	
+
             $scope.selectTeam = function(team) {
                 $scope.setPage('scoresheet');
                 $scope.$root.$emit('selectTeam',team);

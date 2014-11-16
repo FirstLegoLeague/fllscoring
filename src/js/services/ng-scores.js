@@ -554,7 +554,7 @@ define('services/ng-scores',[
                     self.validationErrors.push(score.error);
                 }
             });
-        }
+        };
 
         return new Scores();
     }]);
