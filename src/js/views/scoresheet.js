@@ -17,6 +17,10 @@ define('views/scoresheet',[
         function($scope,$fs,$scores,$stages,$modal,$challenge,$window,$q,$teams) {
             log('init scoresheet ctrl');
 
+            // Set up defaults
+            $scope.settings = {};
+            $scope.missions = [];
+
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;

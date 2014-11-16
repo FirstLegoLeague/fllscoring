@@ -52,11 +52,9 @@ describe('scoresheet',function() {
             expect($scope.team).toBe(dummyTeam);
         });
     });
-    
+
     describe('discard', function() {
         it('should discard form', function() {
-            $scope.settings = {};
-            $scope.missions = [];
             $scope.signature = "dummy";
             $scope.discard();
             expect($scope.signature).toEqual(null);
@@ -86,7 +84,7 @@ describe('scoresheet',function() {
                     stage: dummyStage,
                     round: 1,
                     table: 3,
-                    signature: $scope.signature
+                    signature: [1,2,3,4]
                 });
             });
         });
