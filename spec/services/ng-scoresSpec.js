@@ -30,7 +30,7 @@ describe('ng-scores',function() {
 
     beforeEach(function() {
         fsMock = createFsMock({
-            "scores.json": [rawMockScore],
+            "scores.json": { version: 2, scores: [rawMockScore] },
             "stages.json": [rawMockStage],
             "teams.json": [dummyTeam]
         });

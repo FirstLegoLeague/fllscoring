@@ -10,6 +10,10 @@ define('services/ng-scores',[
 ],function(module,log) {
     "use strict";
 
+    // Current file version for scores.
+    // Increment when adding/removing 'features' to stored scores.
+    var SCORES_VERSION = 2;
+
     return module.service('$scores',
         ['$rootScope', '$fs', '$stages', '$q', '$teams',
         function($rootScope, $fs, $stages, $q, $teams) {
@@ -154,7 +158,11 @@ define('services/ng-scores',[
         };
 
         Scores.prototype.save = function() {
-            return $fs.write('scores.json', this._rawScores).then(function() {
+            var data = {
+                version: 2,
+                scores: this._rawScores
+            };
+            return $fs.write('scores.json', data).then(function() {
                 log('scores saved');
             }, function(err) {
                 log('scores write error', err);
@@ -166,8 +174,28 @@ define('services/ng-scores',[
             return $fs.read('scores.json').then(function(res) {
                 self.beginupdate();
                 try {
+                    // Determine scores file version
+                    var scores;
+                    var version;
+                    if (res.version === undefined) {
+                        // 'Legacy' storage, all scores stored directly
+                        // as an array
+                        scores = res;
+                        version = 1;
+                    } else {
+                        // New style storage, scores in a property,
+                        // and an explicit version identifier.
+                        version = res.version;
+                        scores = res.scores;
+                    }
+                    if (version > SCORES_VERSION) {
+                        throw new Error(format("unknown scores version {0}, (expected {1})", version, SCORES_VERSION));
+                    }
                     self.clear();
-                    res.forEach(self.add.bind(self));
+                    scores.forEach(function(score) {
+                        self.add(score);
+                    });
+                    log("scores loaded, version " + version);
                 } finally {
                     self.endupdate();
                 }
