@@ -9,7 +9,13 @@ describe('ng-challenge',function() {
         'services/fs': createFsMock({'foo': JSON.stringify(dummyChallenge)})
     });
 
+    var settingsMock;
+
     beforeEach(function() {
+        settingsMock = createSettingsMock({});
+        angular.mock.module(function($provide) {
+            $provide.value('$settings', settingsMock);
+        });
         angular.mock.module(module.name);
         angular.mock.inject(function($challenge,$q) {
             challenge = $challenge;

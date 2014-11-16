@@ -6,7 +6,7 @@ describe('settings', function() {
 
     var $scope, controller;
 
-    var fsMock = createFsMock({'settings.json': {}});
+    var settingsMock = createSettingsMock({});
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -15,7 +15,7 @@ describe('settings', function() {
             controller = $controller('settingsCtrl', {
                 '$scope': $scope,
                 '$stages': {},
-                '$fs': fsMock
+                '$settings': settingsMock
             });
         });
     });
@@ -32,7 +32,7 @@ describe('settings', function() {
             fsMock.read = jasmine.createSpy('fsReadSpy').andCallFake(function() {
                 return Q.reject(new Error('fake file-not-found for settings'));
             });
-        })
+        });
         xit('should initialize in editmode when no teams found on storage', function() {
             //TODO: check state after reading
         });
@@ -42,7 +42,7 @@ describe('settings', function() {
         it('should write to the file system',function() {
             $scope.settings = 'data';
             $scope.save();
-            expect(fsMock.write).toHaveBeenCalledWith('settings.json','data');
+            expect(settingsMock.save).toHaveBeenCalledWith();
         });
     });
 });
