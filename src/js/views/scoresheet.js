@@ -191,7 +191,7 @@ define('views/scoresheet',[
                         + ' points for team ( ' + $scope.team.number + ' ) ' + $scope.team.name
                         + ' in ' + $scope.stage.name + ' ' + $scope.round + '.'
                     );
-          $scope.discard();
+                    $scope.discard();
                 },function() {
                     log('unable to write result');
                 });
