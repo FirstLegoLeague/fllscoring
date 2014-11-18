@@ -3,7 +3,7 @@
 <fll:challenge
     xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2014" version="1" name="World Class">
 
-    <strings language="en-US">
+    <strings language="nl-NL">
         <string id="yes">                         Ja</string>
         <string id="no">                          Nee</string>
 
@@ -21,7 +21,7 @@
         <string id="loops-desc">                  Lussen aan de weegschaal</string>
 
         <string id="apprentice-name">             Stagelopen</string>
-        <string id="apprentice-desc">             <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De LEGO poppetjes zijn beide verbonden (op een manier naar keuze) aan een model dat jullie ontwerpen en meenemen. Dit model stelt een vaardigheid, prestatie, carrière of hobby voor dat een speciale betekenis voor jullie team heeft.</li><li>Het model raakt de witte cirkel rond het projectonderwijs-model aan.</li><li>Het model is niet in de basis.</li><li>Het vastmaken van missiemodellen is normaal niet toegestaan vanwege regel 39.4, deze missie is daar een uitzondering op.</li><li>Het eigen model mag simpel, of complex zijn, het mag primitief of realistisch zijn, de keuze is aan jullie. De keuze wat voor model jullie bouwen, heeft geen invloed op de score.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>]]></string>
+        <string id="apprentice-desc">             <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De LEGO-poppetjes zijn beiden verbonden (op een manier naar keuze) aan een model dat jullie ontwerpen en meenemen. Dit model stelt een vaardigheid, prestatie, carrière of hobby voor dat een speciale betekenis voor jullie team heeft.</li><li>Het model raakt de witte cirkel rond het projectonderwijs-model aan.</li><li>Het model is niet in de basis.</li><li>Het vastmaken van missiemodellen is normaal niet toegestaan vanwege regel 39.4, deze missie is daar een uitzondering op.</li><li>Het eigen model mag simpel, of complex zijn, het mag primitief of realistisch zijn, de keuze is aan jullie. De keuze wat voor model jullie bouwen, heeft geen invloed op de score.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>]]></string>
         <string id="modelshown-desc">             Model getoond aan de scheidsrechter</string>
         <string id="touchingcicrle-desc">         Raakt de cirkel, niet in de basis en poppetjes verbonden</string>
         <string id="apprentice-error">            Model moet getoond zijn voordat het de cirkel kan aanraken</string>
