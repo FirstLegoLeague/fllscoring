@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/challenge.xsl"?>
+<fll:challenge
+    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2014" version="1" name="World Class">
+
+    <strings language="en-US">
+        <string id="yes">                         Ja</string>
+        <string id="no">                          Nee</string>
+
+        <string id="engineering-name">            Reverse Engineering</string>
+        <string id="engineering-desc">            <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Jullie mand is in de basis.</li><li>Het model raakt de witte cirkel rond het projectonderwijs-model aan.</li><li>Jullie hebben een model gemaakt ‘identiek’ aan het model dat het andere team in jullie mand heeft gedaan. De verbindingen tussen de elementen moeten hetzelfde zijn, maar elementen mogen wel ‘gedraaid’ zitten.</li><li>Het model is in de basis.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>]]></string>
+        <string id="basket-desc">                 Mand in de basis</string>
+        <string id="identical-desc">              Jullie model ligt in de basis en is ‘identiek’</string>
+
+        <string id="doors-name">                  Deuren openen</string>
+        <string id="doors-desc">                   <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li> De deur moet ver genoeg geopend zijn zodat de scheidsrechter dit kan zien.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De hendel moet omlaag gedrukt zijn.</li></ul>]]></string>
+        <string id="dooropen-desc">               Deur geopend door de hendel omlaag te drukken </string>
+
+        <string id="projectbased-name">           Projectonderwijs</string>
+        <string id="projectbased-desc">           <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De lussen (welke symbool staan voor kennis en vaardigheden) hangen aan de weegschaal zoals getoond.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>]]></string>
+        <string id="loops-desc">                  Lussen aan de weegschaal</string>
+
+        <string id="apprentice-name">             Stagelopen</string>
+        <string id="apprentice-desc">             <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De LEGO poppetjes zijn beide verbonden (op een manier naar keuze) aan een model dat jullie ontwerpen en meenemen. Dit model stelt een vaardigheid, prestatie, carrière of hobby voor dat een speciale betekenis voor jullie team heeft.</li><li>Het model raakt de witte cirkel rond het projectonderwijs-model aan.</li><li>Het model is niet in de basis.</li><li>Het vastmaken van missiemodellen is normaal niet toegestaan vanwege regel 39.4, deze missie is daar een uitzondering op.</li><li>Het eigen model mag simpel, of complex zijn, het mag primitief of realistisch zijn, de keuze is aan jullie. De keuze wat voor model jullie bouwen, heeft geen invloed op de score.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>]]></string>
+        <string id="modelshown-desc">             Model getoond aan de scheidsrechter</string>
+        <string id="touchingcicrle-desc">         Raakt de cirkel, niet in de basis en poppetjes verbonden</string>
+        <string id="apprentice-error">            Model moet getoond zijn voordat het de cirkel kan aanraken</string>
+
+        <string id="search-name">                 Zoekmachine</string>
+        <string id="search-desc">                 <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het kleurenwiel heeft minimaal een keer gedraaid.</li><li>Als één kleur verschijnt in het witte frame, dan raakt de lus van de zichtbare kleur het model niet meer aan.</li><li>Als twee kleuren verschijnen in het witte venster, dan is de lus van de kleur die niet zichtbaar is in het venster, de lus die het model niet meer raakt.</li><li>Beide lussen die niet verwijderd dienen te worden raken via ‘hun’ gaten het model aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Alleen de beweging van de schuif heeft het kleurenwiel in beweging gebracht.</li></ul>]]></string>
+        <string id="wheelspin-desc">              Alleen de schuif heeft het wiel 1+ keer rondgedraaid</string>
+        <string id="searchloop-desc">             Alleen de juiste lus is verwijderd</string>
+
+        <string id="sports-name">                 Sport</string>
+        <string id="sports-desc">                 <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De bal raakt de mat in het doel.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Alle onderdelen die met het schot te maken hebben waren volledig ten noordoosten van de ‘schietlijn’ op het moment dat de bal werd losgelaten richting het doel.</li></ul>]]></string>
+        <string id="ballshot-desc">               Schot genomen vanuit positie Noord-Oost van de lijn </string>
+        <string id="ballscored-desc">             Bal raakt de mat in het doel aan het eind van de wedstrijd</string>
+        <string id="sports-error">                Bal moet eerst geschoten zijn voordat het in het doel kan zijn</string>
+
+        <string id="competition-name">            Robotwedstrijden</string>
+        <string id="competition-desc">            <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het blauw-geel-rode robotelement (model) is geïnstalleerd in de robotarm zoals zichtbaar op de afbeelding.</li><li>De lus raakt niet langer de robotarm aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen strategisch object raakt de robotarm aan.</li><li>De lus werd alleen door het gebruik van de zwarte schuif losgemaakt.</li></ul>]]></string>
+        <string id="roboticsinsert-desc">         Alleen het robotelement is geïnstalleerd in de robotarm</string>
+        <string id="competitionloop-desc">        Lus raakt de robotarm niet aan</string>
+
+        <string id="senses-name">                 Gebruik de juiste zintuigen en leerstijlen</string>
+        <string id="senses-desc">                 <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De lus raakt het zintuigen model niet meer aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De lus werd alleen door het gebruik van de schuif losgemaakt.</li></ul>]]></string>
+        <string id="sensesloop-desc">             Lus raakt het model niet aan</string>
+
+        <string id="remotecomm-name">             Leren/communiceren op afstand</string>
+        <string id="remotecomm-desc">             <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Geen.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De scheidsrechter heeft gezien dat de schuif door de robot westwaarts is verplaatst.</li></ul>]]></string>
+        <string id="pullslider-desc">             Scheids zag de robot de schuif verplaatsen</string>
+
+        <string id="outsidebox-name">             Outside the Box denken</string>
+        <string id="outsidebox-desc">             <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het ‘idee-model’ raakt niet langer het ‘doos-model’ aan.</li><li>Als het ‘idee-model’ het ‘doos-model’ niet meer aanraakt, is de afbeelding van de gloeilamp van bovenaf zichtbaar.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Het ‘doos-model’ is nooit in de basis geweest.</li></ul>]]></string>
+        <string id="bulbup-desc">                 Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar boven gericht</string>
+        <string id="bulbdown-desc">               Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar boven gericht</string>
+        <string id="outsidebox-error">            De lamp kan niet tegelijk naar boven en beneden gericht zijn</string>
+
+        <string id="community-name">              Gemeenschappelijk leren</string>
+        <string id="community-desc">              <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De ‘kennis & vaardigheden lus’ raakt het gemeenschapsmodel niet meer aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>]]></string>
+        <string id="communityloop-desc">          Lus raakt het model niet aan</string>
+
+        <string id="cloud-name">                  Cloud toegang</string>
+        <string id="cloud-desc">                  <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De SD-kaart staat omhoog.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De juiste “key” is in de Cloud geplaatst.</li></ul>]]></string>
+        <string id="sdcardup-desc">               SD card staat omhoog omdat de juiste "key" is ingebracht</string>
+
+        <string id="engagement-name">             Betrokkenheid</string>
+        <string id="engagement-desc">             <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het gele gedeelte is naar het zuiden verplaatst.</li><li>Het rad is duidelijk met de klok mee gedraaid ten opzichte van de start positie. Zie het overzicht voor de score.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De wijzer mag alleen verplaatst worden doordat de robot aan het rad te draait.</li><li>De robot mag het rad maar een keer 180⁰ draaien, per keer dat de basis wordt verlaten. De scheidsrechter zal extra draaiingen ongedaan maken</li></ul>]]></string>
+        <string id="yellow-moved-desc">           Gele gedeelte is naar het zuiden verplaatst</string>
+        <string id="dial-major-color-desc">       Aangewezen kleur</string>
+        <string id="ticks-past-major-desc">       Klikken voorbij de kleur</string>
+        <string id="na">                          NVT</string>
+        <string id="red-10">                      Rood 10%</string>
+        <string id="orange-16">                   Oranje 16%</string>
+        <string id="green-22">                    Groen 22%</string>
+        <string id="blue-28">                     Blauw 28%</string>
+        <string id="red-34">                      Rood 34%</string>
+        <string id="blue-40">                     Blauw 40%</string>
+        <string id="green-46">                    Groen 46%</string>
+        <string id="orange-52">                   Oranje 52%</string>
+        <string id="red-58">                      Rood 58%</string>
+        <string id="ticks-0">                     0</string>
+        <string id="ticks-1">                     1</string>
+        <string id="ticks-2">                     2</string>
+        <string id="ticks-3">                     3</string>
+        <string id="ticks-4">                     4</string>
+        <string id="ticks-5">                     5</string>
+        <string id="engagement-na-error">         Er moet of twee keer "NVT" of twee keer een waarde worden gekozen</string>
+        <string id="engagement-logic-error">      De wijzer blijft op "NVT" staan als het gele gedeelte niet geactiveerd is/string>
+        <string id="engagement-max-error">        De wijzer kan niet zover draaien</string>
+
+        <string id="changing-conditions-name">    Flexibiliteit</string>
+        <string id="changing-conditions-desc">    <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het model is 90⁰ gedraaid tegen de richting van de klok in ten opzichte van de beginpositie.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>]]></string>
+        <string id="model-rotated-desc">          Model is 90 graden tegen de klok in gedraaid   </string>
+
+        <string id="penalties-name">              Strafpunten</string>
+        <string id="penalties-desc">              <![CDATA[Als een aanraakstrafpunt, rommelstrafpunt of uitvouwstrafpunt wordt toegekend (zoals beschreven in de Regels 32, 33, 43, 44 en 45), plaatst de scheidsrechter een markering (zie afbeelding) op de mat. De markeringen worden geplaatst op een manier dat ze jullie of jullie robot niet in de weg zitten. Verloren vracht is op zichzelf een penalty en dus geen rommelstrafpunt.]]></string>
+        <string id="penalties-objective-desc">    Robot, rommel of uitvouwstrafpunten</string>
+    </strings>
+
+    <!-- Do NOT edit below this line -->
+
+    <mission name="engineering-name" description="engineering-desc">
+        <objective-yesno id="basket" description="basket-desc" default="no" />
+        <objective-yesno id="identical" description="identical-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="basket" />
+                <index objective="identical" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="30" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="45" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="doors-name" description="doors-desc">
+        <objective-yesno id="dooropen" description="dooropen-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="dooropen" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="15" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="projectbased-name" description="projectbased-desc">
+        <objective-number id="loops" description="loops-desc" min="0" max="8" default="0" />
+        <score>
+            <indexes>
+                <index objective="loops" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="20" /> </case>
+                <case> <index-ref value="2" /> <points amount="30" /> </case>
+                <case> <index-ref value="3" /> <points amount="40" /> </case>
+                <case> <index-ref value="4" /> <points amount="50" /> </case>
+                <case> <index-ref value="5" /> <points amount="60" /> </case>
+                <case> <index-ref value="6" /> <points amount="70" /> </case>
+                <case> <index-ref value="7" /> <points amount="80" /> </case>
+                <case> <index-ref value="8" /> <points amount="90" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="apprentice-name" description="apprentice-desc">
+        <objective-yesno id="modelshown" description="modelshown-desc" default="no" />
+        <objective-yesno id="touchingcicrle" description="touchingcicrle-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="modelshown" />
+                <index objective="touchingcicrle" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <error message="apprentice-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="20" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="35" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="search-name" description="search-desc">
+        <objective-yesno id="wheelspin" description="wheelspin-desc" default="no" />
+        <objective-yesno id="searchloop" description="searchloop-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="wheelspin" />
+                <index objective="searchloop" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="15" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="60" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="sports-name" description="sports-desc">
+        <objective-yesno id="ballshot" description="ballshot-desc" default="no" />
+        <objective-yesno id="ballscored" description="ballscored-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="ballshot" />
+                <index objective="ballscored" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="30" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="60" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="competition-name" description="competition-desc">
+        <objective-yesno id="roboticsinsert" description="roboticsinsert-desc" default="no" />
+        <objective-yesno id="competitionloop" description="competitionloop-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="roboticsinsert" />
+                <index objective="competitionloop" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="25" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="55" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="senses-name" description="senses-desc">
+        <objective-yesno id="sensesloop" description="sensesloop-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="sensesloop" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="40" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="remotecomm-name" description="remotecomm-desc">
+        <objective-yesno id="pullslider" description="pullslider-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="pullslider" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="40" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="outsidebox-name" description="outsidebox-desc">
+        <objective-yesno id="bulbup" description="bulbup-desc" default="no" />
+        <objective-yesno id="bulbdown" description="bulbdown-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="bulbup" />
+                <index objective="bulbdown" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="25"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="40" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <error message="outsidebox-error" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="community-name" description="community-desc">
+        <objective-yesno id="communityloop" description="communityloop-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="communityloop" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="25" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="cloud-name" description="cloud-desc">
+        <objective-yesno id="sdcardup" description="sdcardup-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="sdcardup" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="30" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="engagement-name" description="engagement-desc">
+        <objective-yesno id="yellow-moved" description="yellow-moved-desc" default="no"  />
+        <objective-enum id="dial-major-color" description="dial-major-color-desc" default="na">
+            <option name="na" description="na" />
+            <option name="red10" description="red-10" />
+            <option name="orange16" description="orange-16" />
+            <option name="green22" description="green-22" />
+            <option name="blue28" description="blue-28" />
+            <option name="red34" description="red-34" />
+            <option name="blue40" description="blue-40" />
+            <option name="green46" description="green-46" />
+            <option name="orange52" description="orange-52" />
+            <option name="red58" description="red-58" />
+        </objective-enum>
+        <objective-enum id="ticks-past-major" description="ticks-past-major-desc" default="na">
+            <option name="na" description="na" />
+            <option name="0" description="ticks-0" />
+            <option name="1" description="ticks-1" />
+            <option name="2" description="ticks-2" />
+            <option name="3" description="ticks-3" />
+            <option name="4" description="ticks-4" />
+            <option name="5" description="ticks-5" />
+        </objective-enum>
+        <score>
+            <indexes>
+                <index objective="yellow-moved" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" />  <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="20" /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="yellow-moved" /><index objective="dial-major-color" /><index objective="ticks-past-major" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="na" /> <percentage amount="0" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="0"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="0"  /> <error message="engagement-logic-error" /> </case>
+
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="1"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="1"  /> <error message="engagement-logic-error" /> </case>
+
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="2"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="2"  /> <error message="engagement-logic-error" /> </case>
+
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="3"  /> <error message="engagement-logic-error" /> </case>
+
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="4"  /> <error message="engagement-logic-error" /> </case>
+
+                <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange16" /> <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green22" />  <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue28" />   <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red34" />    <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="5"  /> <error message="engagement-logic-error" /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="na" /> <percentage amount="0" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="0"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="0"  /> <percentage amount="10" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="0"  /> <percentage amount="16" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="0"  /> <percentage amount="22" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="0"  /> <percentage amount="28" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="0"  /> <percentage amount="34" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="0"  /> <percentage amount="40" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="0"  /> <percentage amount="46" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="0"  /> <percentage amount="52" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="0"  /> <percentage amount="58" /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="1"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="1"  /> <percentage amount="11" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="1"  /> <percentage amount="17" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="1"  /> <percentage amount="23" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="1"  /> <percentage amount="29" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="1"  /> <percentage amount="35" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="1"  /> <percentage amount="41" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="1"  /> <percentage amount="47" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="1"  /> <percentage amount="53" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="1"  /> <percentage amount="58" /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="2"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="2"  /> <percentage amount="12" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="2"  /> <percentage amount="18" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="2"  /> <percentage amount="24" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="2"  /> <percentage amount="30" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="2"  /> <percentage amount="36" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="2"  /> <percentage amount="42" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="2"  /> <percentage amount="48" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="2"  /> <percentage amount="54" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="2"  /> <error message="engagement-max-error" /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="3"  /> <percentage amount="13" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="3"  /> <percentage amount="19" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="3"  /> <percentage amount="25" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="3"  /> <percentage amount="31" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="3"  /> <percentage amount="37" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="3"  /> <percentage amount="43" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="3"  /> <percentage amount="49" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="3"  /> <percentage amount="55" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="3"  /> <error message="engagement-max-error" /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="4"  /> <percentage amount="14" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="4"  /> <percentage amount="20" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="4"  /> <percentage amount="26" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="4"  /> <percentage amount="32" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="4"  /> <percentage amount="38" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="4"  /> <percentage amount="44" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="4"  /> <percentage amount="50" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="4"  /> <percentage amount="56" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="4"  /> <error message="engagement-max-error" /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-na-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="5"  /> <percentage amount="15" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange16" /> <index-ref value="5"  /> <percentage amount="21" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green22" />  <index-ref value="5"  /> <percentage amount="27" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue28" />   <index-ref value="5"  /> <percentage amount="33" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red34" />    <index-ref value="5"  /> <percentage amount="39" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="blue40" />   <index-ref value="5"  /> <percentage amount="45" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="green46" />  <index-ref value="5"  /> <percentage amount="51" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="orange52" /> <index-ref value="5"  /> <percentage amount="57" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="red58" />    <index-ref value="5"  /> <error message="engagement-max-error" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="changing-conditions-name" description="changing-conditions-desc">
+        <objective-yesno id="model-rotated" description="model-rotated-desc" default="no"  />
+        <score>
+            <indexes>
+                <index objective="model-rotated" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="15" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="penalties-name" description="training-desc">
+        <objective-number id="penalties-objective" description="penalties-objective-desc" min="0" max="8" default="0" />
+        <score>
+            <indexes>
+                <index objective="penalties-objective" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"   /> </case>
+                <case> <index-ref value="1" /> <points amount="-10" /> </case>
+                <case> <index-ref value="2" /> <points amount="-20" /> </case>
+                <case> <index-ref value="3" /> <points amount="-30" /> </case>
+                <case> <index-ref value="4" /> <points amount="-40" /> </case>
+                <case> <index-ref value="5" /> <points amount="-50" /> </case>
+                <case> <index-ref value="6" /> <points amount="-60" /> </case>
+                <case> <index-ref value="7" /> <points amount="-70" /> </case>
+                <case> <index-ref value="8" /> <points amount="-80" /> </case>
+            </cases>
+        </score>
+
+    </mission>
+
+</fll:challenge>
