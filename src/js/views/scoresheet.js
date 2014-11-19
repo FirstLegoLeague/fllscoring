@@ -178,14 +178,14 @@ define('views/scoresheet',[
 
                 return $fs.write("scoresheets/" + fn,data).then(function() {
                     log('result saved');
-                    alert('Thanks for submitting a score of '
-                        + $scope.score()
-                        + ' points for team ( ' + $scope.team.number + ' ) ' + $scope.team.name
-                        + ' in ' + $scope.stage.name + ' ' + $scope.round + '.'
-                    );
                     $scope.discard();
+                    alert('Thanks for submitting a score of '
+                        + data.score
+                        + ' points for team ( ' + data.team.number + ' ) ' + data.team.name
+                        + ' in ' + data.stage.name + ' ' + data.round + '.'
+                    );
                 },function() {
-                    log('unable to write result');
+                    alert('unable to write result');
                 });
             };
 
