@@ -47,7 +47,7 @@
                             <div class="modal-header">
                                 <h3 class="modal-title">{{mission.title}}</h3>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" ng-bind-html="mission.description">
                                {{mission.description}}
                             </div>
                             <div class="modal-footer">
