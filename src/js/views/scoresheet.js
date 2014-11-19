@@ -133,7 +133,7 @@ define('views/scoresheet',[
                     $scope.missions.every(function(mission) {
                         return mission.objectives.every(function(objective) {
                           return objective.value !== undefined && objective.value !== null;
-                        });
+                        }) && mission.errors.length == 0;
                     });
 
                 console.log("saveable " + val);
