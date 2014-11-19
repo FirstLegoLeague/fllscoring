@@ -53,7 +53,7 @@
         <string id="outsidebox-name">             Outside the Box denken</string>
         <string id="outsidebox-desc">             <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het ‘idee-model’ raakt niet langer het ‘doos-model’ aan.</li><li>Als het ‘idee-model’ het ‘doos-model’ niet meer aanraakt, is de afbeelding van de gloeilamp van bovenaf zichtbaar.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Het ‘doos-model’ is nooit in de basis geweest.</li></ul>]]></string>
         <string id="bulbup-desc">                 Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar boven gericht</string>
-        <string id="bulbdown-desc">               Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar boven gericht</string>
+        <string id="bulbdown-desc">               Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar beneden gericht</string>
         <string id="outsidebox-error">            De lamp kan niet tegelijk naar boven en beneden gericht zijn</string>
 
         <string id="community-name">              Gemeenschappelijk leren</string>

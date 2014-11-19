@@ -226,7 +226,7 @@
             "type": "yesno"
         }, {
             "id": "bulbdown",
-            "title": "Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar boven gericht",
+            "title": "Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar beneden gericht",
             "type": "yesno"
         }],
         "score": [function(bulbup, bulbdown) {
