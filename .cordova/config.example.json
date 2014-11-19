@@ -1,0 +1,14 @@
+{
+    "lib": {
+	"www": {
+	    "id": "com.phonegap.hello-world",
+	    "version": "master",
+	    "uri": "https://github.com/phonegap/phonegap-app-hello-world/archive/master.tar.gz",
+	    "link": false
+	}
+    },
+    "phonegap": {
+	// Replace 123456 with your phoengap build app ID
+	"id": 123456
+    }
+}

@@ -29,27 +29,30 @@ module.exports = function(grunt) {
             }
         },
 
-        "phonegap-build": {
-            debug: {
-                options: {
-                    archive: "temp/app.zip",
-                    appId: pgbuildconfig.appId,
-                    user: pgbuildconfig.user,
-                    download: {
-                        // ios: 'dist/ios.ipa',
-                        android: 'dist/android.apk'
-                    }
-                }
-            },
-            release: {
-                options: {
-                    archive: "temp/app.zip",
-                    appId: pgbuildconfig.appId,
-                    user: pgbuildconfig.user,
-                    download: {
-                        // ios: 'dist/ios.ipa',
-                        android: 'dist/android.apk'
-                    }
+	"phonegap": {
+	    config: {
+		root: "src",
+		config: "src/config.xml",
+		html: "fgindex.html",
+		name: function(){
+		    var pkg = grunt.file.readJSON('package.json');
+		    return pkg.name;
+		},
+		debuggable: true,
+		releases: 'releases',
+		platforms: ['ios', 'android'],
+		plugins: [
+		    'org.apache.cordova.file'
+		],
+		verbose: true,
+		releaseName: function(){
+		    var pkg = grunt.file.readJSON('package.json');
+		    return(pkg.name + '-' + pkg.version);
+		},
+		remote: {
+		    username: pgbuildconfig.username,
+		    password: pgbuildconfig.password,
+		    platforms: ['ios', 'android']
                 }
             }
         },
@@ -106,12 +109,14 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-node-webkit-builder');
-    grunt.loadNpmTasks('grunt-phonegap-build');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-http-server');
+    grunt.loadNpmTasks('grunt-phonegap');
 
-    grunt.registerTask('phonegap', ['compress', 'phonegap-build:debug']);
+    grunt.registerTask('phonegap', ['phonegap:login', 'phonegap:build', 'phonegap:logout']);
+    grunt.registerTask('phonegap:ios', ['phonegap:login', 'phonegap:build:ios', 'phonegap:logout']);
+    grunt.registerTask('phonegap:android', ['phonegap:login', 'phonegap:build:android', 'phonegap:logout']);
     grunt.registerTask('html', ['saxon']);
     grunt.registerTask('pdf', ['saxon','http-server', 'phantomJSScreenShot']);
 

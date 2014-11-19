@@ -3,7 +3,9 @@ coverage/
 webkitbuilds/
 temp/
 pgbuildconfig.json
+.cordova/config.json
 data/
+build/
 *.sublime*
 
 # bower stuff, include actual files
