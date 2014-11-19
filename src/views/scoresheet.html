@@ -64,13 +64,13 @@
                     </h2>
                     <div class="objective" ng-repeat="objective in mission.objectives" ng-switch="objective.type">
                         <div>
-                            <label class="field" ng-switch-when="yesno">
+			    <span class="field" ng-switch-when="yesno">
                                 {{objective.title}}
                                 <div class="btn-group">
                                     <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">yes</label>
                                     <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">no</label>
                                 </div>
-                            </label>
+			    </span>
                             <span class="field" ng-switch-when="number">
                                 {{objective.title}}
                                 <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
