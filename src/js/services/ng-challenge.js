@@ -8,7 +8,7 @@ define('services/ng-challenge',[
         '$http','$settings',
         function($http,$settings) {
             var mission;
-            var fallBackChallenge = 'challenge/2014';
+            var fallBackChallenge = 'challenge/2014_nl_NL';
 
             var field = {
                 "title": "Senior Solutions",
