@@ -86,7 +86,7 @@
         <string id="ticks-4">                     4</string>
         <string id="ticks-5">                     5</string>
         <string id="engagement-na-error">         Er moet of twee keer "NVT" of twee keer een waarde worden gekozen</string>
-        <string id="engagement-logic-error">      De wijzer blijft op "NVT" staan als het gele gedeelte niet geactiveerd is/string>
+        <string id="engagement-logic-error">      De wijzer blijft op "NVT" staan als het gele gedeelte niet geactiveerd is</string>
         <string id="engagement-max-error">        De wijzer kan niet zover draaien</string>
 
         <string id="changing-conditions-name">    Flexibiliteit</string>
