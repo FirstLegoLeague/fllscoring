@@ -153,7 +153,7 @@ define('services/ng-scores',[
                     });
             }
             return this._initialized;
-        }
+        };
 
 
         Scores.prototype.clear = function() {

@@ -43,15 +43,19 @@ define('views/scores',[
                 $scores.save();
             };
 
-            $scope.cancelEditScore = function(index) {
+            $scope.cancelEditScore = function() {
                 $scores._update();
             };
 
-            $scope.pollSheets = function(index) {
+            $scope.pollSheets = function() {
                 return $scores.pollSheets().catch(function(err) {
                     console.log("pollSheets() failed", err);
                     alert("failed to poll sheets: " + err);
                 });
+            };
+
+            $scope.refresh = function() {
+                $scores.load();
             };
         }
     ]);
