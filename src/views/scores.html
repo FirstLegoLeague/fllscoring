@@ -64,10 +64,19 @@
                     <i class="icon-pencil"></i>
                     Save
                 </button>
-                <button class="btn btn-danger" fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
+                <button class="btn btn-danger"
+                    ng-if="!score.$editing"
+                    fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
                     <i class="icon-trash"></i>
                     Delete
                 </button>
+                <button class="btn btn-default"
+                    ng-if="score.$editing"
+                    ng-click="cancelEditScore(score.index)"
+                >
+                    Cancel
+                </button>
+
             </td>
         </tr>
     </table>
