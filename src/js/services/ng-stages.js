@@ -63,7 +63,9 @@ define('services/ng-stages',[
             var self = this;
             this.clear();
             return $fs.read('stages.json').then(function(res) {
-                res.forEach(self.add.bind(self));
+                res.forEach(function(s) {
+                    self.add(s);
+                });
             }, function(err) {
                 log('stages read error', err);
                 log('stages using defaults');

@@ -53,7 +53,9 @@ define('services/ng-teams',[
             var self = this;
             this.clear();
             return $fs.read('teams.json').then(function(res) {
-                res.forEach(self.add.bind(self));
+                res.forEach(function(t) {
+                    self.add(t);
+                });
             }, function(err) {
                 log('teams read error', err);
             });
