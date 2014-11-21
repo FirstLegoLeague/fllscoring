@@ -29,30 +29,30 @@ module.exports = function(grunt) {
             }
         },
 
-	"phonegap": {
-	    config: {
-		root: "src",
-		config: "src/config.xml",
-		html: "fgindex.html",
-		name: function(){
-		    var pkg = grunt.file.readJSON('package.json');
-		    return pkg.name;
-		},
-		debuggable: true,
-		releases: 'releases',
-		platforms: ['ios', 'android'],
-		plugins: [
-		    'org.apache.cordova.file'
-		],
-		verbose: true,
-		releaseName: function(){
-		    var pkg = grunt.file.readJSON('package.json');
-		    return(pkg.name + '-' + pkg.version);
-		},
-		remote: {
-		    username: pgbuildconfig.username,
-		    password: pgbuildconfig.password,
-		    platforms: ['ios', 'android']
+        "phonegap": {
+            config: {
+            root: "src",
+            config: "src/config.xml",
+            html: "fgindex.html",
+            name: function(){
+                var pkg = grunt.file.readJSON('package.json');
+                return pkg.name;
+            },
+            debuggable: true,
+            releases: 'releases',
+            platforms: ['ios', 'android'],
+            plugins: [
+                'org.apache.cordova.file'
+            ],
+            verbose: true,
+            releaseName: function(){
+                var pkg = grunt.file.readJSON('package.json');
+                return(pkg.name + '-' + pkg.version);
+            },
+            remote: {
+                username: pgbuildconfig.username,
+                password: pgbuildconfig.password,
+                platforms: ['ios', 'android']
                 }
             }
         },
