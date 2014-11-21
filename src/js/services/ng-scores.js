@@ -261,6 +261,7 @@ define('services/ng-scores',[
             old.stageId = (score.stageId !== undefined) ? score.stageId : score.stage.id,
             old.round = score.round;
             old.score = score.score;
+            old.edited = score.edited;
             this._update();
         };
 

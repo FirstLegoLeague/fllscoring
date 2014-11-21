@@ -6,8 +6,8 @@ define('views/scores',[
 ],function(log) {
     var moduleName = 'scores';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$scores',
-        function($scope,$scores) {
+        '$scope', '$scores','$teams',
+        function($scope,$scores,$teams) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
@@ -24,7 +24,20 @@ define('views/scores',[
                 return $scores.save();
             };
             $scope.editScore = function(index) {
-                alert("todo edit team/round/score " + $scores.scores[index].score);
+                var score = $scores.scores[index];
+                score.teamNumber = score.team.number;
+                score.$editing = true;
+            };
+
+            $scope.finishEditScore = function(index) {
+                var score = $scores.scores[index];
+                score.team = $teams.get(score.teamNumber);
+                score.edited = (new Date()).toString();
+                score.round = parseInt(score.round,10);
+                score.score = parseInt(score.score,10);
+                delete score.$editing;
+                $scores.update(score.index,score);
+                $scores.save();
             };
             $scope.pollSheets = function(index) {
                 return $scores.pollSheets().catch(function(err) {
