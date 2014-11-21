@@ -32,6 +32,10 @@ define('views/scores',[
             $scope.finishEditScore = function(index) {
                 var score = $scores.scores[index];
                 score.team = $teams.get(score.teamNumber);
+                if (!score.team) {
+                    alert('Team number not found');
+                    return;
+                }
                 score.round = parseInt(score.round,10);
                 score.score = parseInt(score.score,10);
                 delete score.$editing;
