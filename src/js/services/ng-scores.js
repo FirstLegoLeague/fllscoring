@@ -257,11 +257,11 @@ define('services/ng-scores',[
             // Note: we leave eg. originalScore intact, so _update() will
             // mark it as modified.
             old.file = score.file;
-            old.teamNumber = parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10)
-            old.stageId = (score.stageId !== undefined) ? score.stageId : score.stage.id,
+            old.teamNumber = parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10);
+            old.stageId = (score.stageId !== undefined) ? score.stageId : score.stage.id;
             old.round = score.round;
             old.score = score.score;
-            old.edited = score.edited;
+            old.edited = (new Date()).toString();
             this._update();
         };
 
