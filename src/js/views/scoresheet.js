@@ -138,7 +138,7 @@ define('views/scoresheet',[
                         }) && mission.errors.length == 0;
                     });
 
-                console.log("saveable " + val);
+                // console.log("saveable " + val);
                 return val;
             };
 
