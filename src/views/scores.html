@@ -1,5 +1,6 @@
 <div ng-controller="scoresCtrl">
     <button class="btn" ng-click="pollSheets()"><i class="icon-repeat"></i> Check for new scores</button>
+    <button class="btn" ng-click="refresh()"><i class="icon-repeat"></i> Refresh scores</button>
     <br />
     <br />
     <table class="table table-bordered table-striped">
@@ -22,27 +23,61 @@
             </td>
             <td>
                 <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownRoundError'" title="{{score.error.message}}"></i>
-                {{score.round}}
+                <span ng-if="!score.$editing">
+                    {{score.round}}
+                </span>
+                <span ng-if="score.$editing">
+                    <input type="text" ng-model="score.round">
+                </span>
             </td>
             <td>
                 <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownTeamError'" title="{{score.error.message}}"></i>
-                {{score.team.number}}
+                <span ng-if="!score.$editing">
+                    {{score.team.number}}
+                </span>
+                <span ng-if="score.$editing">
+                    <input type="text" ng-model="score.teamNumber">
+                </span>
             </td>
             <td>{{score.team.name}}</td>
             <td>
                 <i class="icon-exclamation-sign" ng-show="score.error.name == 'InvalidScoreError'" title="{{score.error.message}}"></i>
-                {{score.score}}
+                <span ng-if="!score.$editing">
+                    {{score.score}}
+                </span>
+                <span ng-if="score.$editing">
+                    <input type="text" ng-model="score.score">
+                </span>
                 <i class="icon-exclamation-sign" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}"></i>
             </td>
             <td>
-                <button class="btn btn-default" ng-click="editScore(score.index)">
+                <button class="btn btn-default"
+                    ng-if="!score.$editing"
+                    ng-click="editScore(score.index)"
+                >
                     <i class="icon-pencil"></i>
                     Edit
                 </button>
-                <button class="btn btn-danger" fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
+                <button class="btn btn-default"
+                    ng-if="score.$editing"
+                    ng-click="finishEditScore(score.index)"
+                >
+                    <i class="icon-pencil"></i>
+                    Save
+                </button>
+                <button class="btn btn-danger"
+                    ng-if="!score.$editing"
+                    fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
                     <i class="icon-trash"></i>
                     Delete
                 </button>
+                <button class="btn btn-default"
+                    ng-if="score.$editing"
+                    ng-click="cancelEditScore(score.index)"
+                >
+                    Cancel
+                </button>
+
             </td>
         </tr>
     </table>
