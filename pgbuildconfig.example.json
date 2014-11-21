@@ -4,18 +4,6 @@
     then run "grunt phonegap"
 */
 {
-    "appId": "123456",
-    "user": {
-        "email": "you@yourhost.com"
-    }
+    "username": "you@yourhost.com",
+    "password": "mysecretpassord"
 }
-
-/*
-    or use a phonegap build token
-{
-    "appId": "123456",
-    "user": {
-        "token": "ABCD123409876XYZ"
-    }
-}
-*/

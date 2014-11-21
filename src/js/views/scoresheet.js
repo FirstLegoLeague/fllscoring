@@ -6,6 +6,7 @@ define('views/scoresheet',[
     'services/ng-scores',
     'services/ng-teams',
     'services/ng-stages',
+    'services/ng-settings',
     'directives/sigpad',
     'directives/spinner',
     'angular'
@@ -13,21 +14,21 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$scores','$stages','$modal','$challenge','$window','$q','$teams',
-        function($scope,$fs,$scores,$stages,$modal,$challenge,$window,$q,$teams) {
+        '$scope','$fs','$scores','$stages','$settings','$modal','$challenge','$window','$q','$teams',
+        function($scope,$fs,$scores,$stages,$settings,$modal,$challenge,$window,$q,$teams) {
             log('init scoresheet ctrl');
+
+            // Set up defaults
+            $scope.settings = {};
+            $scope.missions = [];
 
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;
 
 
-            $fs.read('settings.json').then(function(res) {
+            $settings.init().then(function(res) {
                 $scope.settings = res;
-                load();
-            },function() {
-                log('unable to load settings');
-                $scope.settings = {};
                 load();
             });
 
@@ -38,6 +39,11 @@ define('views/scoresheet',[
                     $scope.objectiveIndex = defs.objectiveIndex;
                     angular.forEach($scope.missions,process);
                     $scope.$apply();
+                }).fail(function() {
+                    //could not read field locally or remotely
+                    $scope.errorMessage = 'Could not load field, please configure host in settings';
+                    $scope.$apply();
+                    alert($scope.errorMessage);
                 });
             }
 
@@ -51,6 +57,8 @@ define('views/scoresheet',[
                 var deps = mission.score.reduce(function(all,score) {
                     return all.concat($challenge.getDependencies(score));
                 },[]);
+                mission.errors = [];
+                mission.percentages = [];
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
@@ -127,10 +135,10 @@ define('views/scoresheet',[
                     $scope.missions.every(function(mission) {
                         return mission.objectives.every(function(objective) {
                           return objective.value !== undefined && objective.value !== null;
-                        });
+                        }) && mission.errors.length == 0;
                     });
 
-                console.log("saveable " + val);
+                // console.log("saveable " + val);
                 return val;
             };
 
@@ -146,7 +154,7 @@ define('views/scoresheet',[
                 });
                 console.log('discard');
             };
-            
+
             //saves mission scoresheet
             //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
             $scope.save = function() {
@@ -168,27 +176,18 @@ define('views/scoresheet',[
                 data.round = $scope.round;
                 data.table = $scope.settings.table;
                 data.signature = $scope.signature;
+                data.score = $scope.score();
 
-
-                return $fs.write(fn,data).then(function() {
-                    $scores.add({
-                        file: fn,
-                        team: $scope.team,
-                        stage: $scope.stage,
-                        round: $scope.round,
-                        score: $scope.score()
-                    });
-                    return $scores.save();
-                }).then(function() {
+                return $fs.write("scoresheets/" + fn,data).then(function() {
                     log('result saved');
-					alert('Thanks for submitting a score of '
-						+ $scope.score() 
-						+ ' points for team ( ' + $scope.team.number + ' ) ' + $scope.team.name 
-						+ ' in ' + $scope.stage.name + ' ' + $scope.round + '.'
-					);
-          $scope.discard();
+                    $scope.discard();
+                    alert('Thanks for submitting a score of '
+                        + data.score
+                        + ' points for team ( ' + data.team.number + ' ) ' + data.team.name
+                        + ' in ' + data.stage.name + ' ' + data.round + '.'
+                    );
                 },function() {
-                    log('unable to write result');
+                    alert('unable to write result');
                 });
             };
 

@@ -4,8 +4,7 @@
   "description": "fll scoring application",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox --reporters dots,coverage",
-    "install": "bower install"
+    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox --reporters dots,coverage"
   },
   "repository": "",
   "author": "rikkert@rikkertkoppes.com",
@@ -15,7 +14,7 @@
     "grunt-contrib-compress": "~0.5.2",
     "grunt-karma": "^0.8.3",
     "grunt-node-webkit-builder": "~0.1.3",
-    "grunt-phonegap-build": "0.0.8",
+    "grunt-phonegap": "0.15.2",
     "karma": "^0.12.17",
     "karma-chrome-launcher": "^0.1.4",
     "karma-firefox-launcher": "^0.1.3",

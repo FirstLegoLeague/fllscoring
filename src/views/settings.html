@@ -48,19 +48,24 @@
             <button class="btn" ng-click="CreateRound(stage)">
                 <i class="icon-plus-sign-alt"></i>
                 Add new round
-            </button>    
+            </button>
         </p>
         <hr ng-repeat-end style="clear: both;"/>
 
     </div>
     <div ng-show="tab === 3">
         <p>
+            <label for="">Host</label>
+            <input type="text" ng-model="settings.host" />
+            (shared host to get data from and save data to)
+        </p>
+        <p>
             <label for="">Challenge</label>
             <input type="text" ng-model="settings.challenge" />
             (currently the filename containing missions!)
         </p>
         <p>
-            
+
         </p>
     </div>
     <div ng-show="tab === 4">

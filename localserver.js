@@ -8,6 +8,14 @@ var port = argv.p||1390;
 
 app.use(express.static('src'));
 
+//allow cors headers
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+
+    next();
+});
+
 //set raw body as data arrives
 app.use(function(req, res, next) {
     var data = '';
@@ -25,12 +33,53 @@ app.use(function(req, res, next) {
 
 app.get(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
+    fs.stat(path, function(err, stat) {
+        if (err) {
+            res.status(404).send('file not found');
+            return;
+        }
+        if (stat.isFile()) {
+            fs.readFile(path, function(err, data) {
+                if (err) {
+                    res.status(500).send('error reading file');
+                    return;
+                }
+                res.send(data);
+            });
+        } else if (stat.isDirectory()) {
+            fs.readdir(path, function(err, filenames) {
+                if (err) {
+                    res.status(500).send('error reading dir');
+                    return;
+                }
+                // FIXME: this doesn't work for filenames containing
+                // newlines. Probably not likely, but stil...
+                var hasNewline = filenames.some(function(name) {
+                    return name.indexOf("\n") >= 0;
+                });
+                if (hasNewline) {
+                    res.status(500).send('invalid filename(s)');
+                    return;
+                }
+                res.send(filenames.join('\n'));
+            });
+        } else {
+            res.status(500).send('error reading file');
+            return;
+        }
+    });
+});
+
+//get challenges over xhr, for hosted service
+app.get('/challenge/:year', function(req, res) {
+    var path = __dirname + '/challenges/js/' + req.params.year + '.js';
     fs.exists(path, function(exists) {
         if (exists) {
             fs.readFile(path, function(err, data) {
                 if (err) {
                     res.status(500).send('error reading file');
                 }
+                res.header('Content-Type','text/plain');
                 res.send(data);
             });
         } else {

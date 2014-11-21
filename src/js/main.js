@@ -14,6 +14,7 @@ define([
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular-bootstrap',
+    'angular-sanitize',
     'angular'
 ],function(FastClick,log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
@@ -68,6 +69,7 @@ define([
     angular.bootstrap(document.body,[
         'main',
         'ui.bootstrap',
+        'ngSanitize',
         settings.name,
         teams.name,
         scoresheet.name,

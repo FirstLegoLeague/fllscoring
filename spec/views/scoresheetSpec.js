@@ -11,6 +11,7 @@ describe('scoresheet',function() {
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
     var fsMock = createFsMock({"settings.json": []});
+    var settingsMock = createSettingsMock({});
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -19,6 +20,7 @@ describe('scoresheet',function() {
             controller = $controller('scoresheetCtrl', {
                 '$scope': $scope,
                 '$fs': fsMock,
+                '$settings': settingsMock,
                 '$scores': {},
                 '$stages': {},
                 '$modal': {},
@@ -52,11 +54,9 @@ describe('scoresheet',function() {
             expect($scope.team).toBe(dummyTeam);
         });
     });
-    
+
     describe('discard', function() {
         it('should discard form', function() {
-            $scope.settings = {};
-            $scope.missions = [];
             $scope.signature = "dummy";
             $scope.discard();
             expect($scope.signature).toEqual(null);
@@ -80,13 +80,14 @@ describe('scoresheet',function() {
             spyOn(Date,'valueOf').andReturn(42);
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(fsMock.write.mostRecentCall.args[0]).toEqual('score_3_123_42.json');
+                expect(fsMock.write.mostRecentCall.args[0]).toEqual('scoresheets/score_3_123_42.json');
                 expect(fsMock.write.mostRecentCall.args[1]).toEqual({
                     team: dummyTeam,
                     stage: dummyStage,
                     round: 1,
                     table: 3,
-                    signature: $scope.signature
+                    signature: [1,2,3,4],
+                    score: 0
                 });
             });
         });

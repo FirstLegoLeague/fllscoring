@@ -27,8 +27,9 @@ Building
 
 - for a desktop build: `grunt nodewebkit`
 - for a mobile build: `grunt phonegap`
+ - to build only one of iOS or Android, use `grunt phonegap:ios` or `grunt phonegap:android` respectively
 
-For the phonegap build, copy `pgbuildconfig.example.json` to `pgbuildconfig` and adjust your phonegap build credentials. You can create an account on [phonegap build](http://build.phonegap.com/)
+For the phonegap build, copy `pgbuildconfig.example.json` to `pgbuildconfig.json` and adjust your phonegap build credentials. You can create an account on [phonegap build](http://build.phonegap.com/). Also, make sure you you copy .cordova/config.example.json to .cordova/config.json and insert your application ID from phonegap build into it. The first time you build the app you must comment the app ID line out, it will generate one for you. Afterwards check the Phonegap build website for the generated app ID.
 
 For iOS, see [Building for iOS](https://github.com/FirstLegoLeague/fllscoring/wiki/Building-for-iOS)
 

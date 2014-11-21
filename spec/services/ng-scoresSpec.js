@@ -30,7 +30,7 @@ describe('ng-scores',function() {
 
     beforeEach(function() {
         fsMock = createFsMock({
-            "scores.json": [rawMockScore],
+            "scores.json": { version: 2, scores: [rawMockScore], sheets: [] },
             "stages.json": [rawMockStage],
             "teams.json": [dummyTeam]
         });
@@ -115,7 +115,14 @@ describe('ng-scores',function() {
     describe('saving',function() {
         it('should write scores to scores.json',function() {
             return $scores.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('scores.json', [rawMockScore])
+                expect(fsMock.write).toHaveBeenCalledWith(
+                    'scores.json',
+                    {
+                        version: 2,
+                        scores: [rawMockScore],
+                        sheets: []
+                    }
+                );
             });
         });
     });
@@ -295,6 +302,77 @@ describe('ng-scores',function() {
             expect($scores.validationErrors.length).toBeGreaterThan(0);
             $scores.update(1, { team: team1, stage: mockStage, round: 2, score: 20 });
             expect($scores.validationErrors.length).toEqual(0);
+        });
+    });
+
+    describe("pollSheets", function() {
+        var importedScore;
+        var mockFiles;
+        var mockDirs;
+
+        beforeEach(function() {
+            importedScore = {
+                file: "sheet_1.json",
+                team: mockTeam,
+                stage: mockStage,
+                round: 1,
+                score: 456,
+                originalScore: 456
+            };
+            mockFiles = {
+                "scores.json": { version: 2, scores: [], sheets: [] },
+                "scoresheets/sheet_1.json": { teamNumber: 123, stageId: "test", round: 1, score: 456 }
+            };
+            mockDirs = {
+                "scoresheets": ["sheet_1.json"],
+            };
+            fsMock._setFiles(mockFiles);
+            fsMock._setDirs(mockDirs);
+            $scores.clear();
+        });
+
+        it("should pick up a new sheet", function() {
+            return $scores.pollSheets().then(function() {
+                expect(filteredScores()).toEqual([importedScore]);
+            });
+        });
+
+        it("should ignore already processed sheets", function() {
+            return $scores.pollSheets().then(function() {
+                expect($scores.scores.length).toEqual(1);
+                return $scores.pollSheets();
+            }).then(function() {
+                expect($scores.scores.length).toEqual(1);
+            });
+        });
+
+        it("should ignore already processed sheets across loads", function() {
+            mockFiles["scores.json"] = { version: 2, scores: [], sheets: ["sheet_1.json"] };
+            return $scores.load().then(function() {
+                return $scores.pollSheets();
+            }).then(function() {
+                expect($scores.scores.length).toEqual(0);
+            });
+        });
+
+        it("should remember processed sheets", function() {
+            return $scores.pollSheets().then(function() {
+                expect(fsMock.write).toHaveBeenCalledWith(
+                    'scores.json',
+                    {
+                        version: 2,
+                        scores: [{
+                            file: "sheet_1.json",
+                            teamNumber: 123,
+                            stageId: "test",
+                            round: 1,
+                            score: 456,
+                            originalScore: 456
+                        }],
+                        sheets: ["sheet_1.json"]
+                    }
+                );
+            });
         });
     });
 

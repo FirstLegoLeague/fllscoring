@@ -1,5 +1,10 @@
 <div ng-controller="scoresheetCtrl" id="scoresheet">
     <div>
+        <div ng-show="errorMessage">
+            <p class="error">
+                {{errorMessage}}
+            </p>
+        </div>
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
             <h1>{{field.title}}</h1>
             <section class="panel">
@@ -42,7 +47,7 @@
                             <div class="modal-header">
                                 <h3 class="modal-title">{{mission.title}}</h3>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" ng-bind-html="mission.description">
                                {{mission.description}}
                             </div>
                             <div class="modal-footer">
@@ -59,13 +64,13 @@
                     </h2>
                     <div class="objective" ng-repeat="objective in mission.objectives" ng-switch="objective.type">
                         <div>
-                            <label class="field" ng-switch-when="yesno">
+			    <span class="field" ng-switch-when="yesno">
                                 {{objective.title}}
                                 <div class="btn-group">
                                     <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">yes</label>
                                     <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">no</label>
                                 </div>
-                            </label>
+			    </span>
                             <span class="field" ng-switch-when="number">
                                 {{objective.title}}
                                 <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
@@ -151,7 +156,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="team in teams" ng-click="selectTeamPop(team)">
-                    <td><h2>{{team.number}}</h2></td> 
+                    <td><h2>{{team.number}}</h2></td>
                     <td>{{team.name}}
                     <br />
                     <small>{{team.affiliation}}, {{team.cityState}}</small>
@@ -160,44 +165,44 @@
             </tbody>
         </table>
         <hr>
-        
+
         </div>
         <div class="modal-footer">
             <div class="selectedLbl">Selected: <span ng-show="team">({{team.number}}) {{team.name}} </span></div>
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
-    </script>   
+    </script>
     <script type="text/ng-template" id="roundModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title">Select a round</h3>
         </div>
         <div class="modal-body">
-                
+
         <table class="table table-bordered">
             <tbody>
                 <tr ng-repeat="stage in stages">
                     <td>
                         <h2>{{stage.name}}</h2>
-                    </td> 
+                    </td>
                     <td>
                         <div class="btn-group btn-group-justified">
                             <div class="btn-group" >
                                 <button
-                                    type="button" 
-                                    class="btn btn-default" 
+                                    type="button"
+                                    class="btn btn-default"
                                     ng-repeat="dummy in getNumber(stage.rounds) track by $index"
                                     ng-click="selectRoundPop(stage, $index+1)"
-                                    >{{$index+1}} 
+                                    >{{$index+1}}
                                 </button>
                             </div>
-                        </div> 
+                        </div>
                     </td>
                 </tr ng-repeat-end>
             </tbody>
         </table>
         <hr>
-        
+
         </div>
         <div class="modal-footer">
             <div class="selectedLbl">Selected: <span ng-show="round">{{stage.name}} - {{round}} </span></div>

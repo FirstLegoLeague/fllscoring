@@ -1,5 +1,3 @@
-"use strict";
-
 describe('ng-teams',function() {
     var ngServices = factory('services/ng-services');
     var module = factory('services/ng-teams',{

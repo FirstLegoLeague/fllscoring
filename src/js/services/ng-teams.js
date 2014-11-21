@@ -34,12 +34,12 @@ define('services/ng-teams',[
                 this._initialized = this.load();
             }
             return this._initialized;
-        }
+        };
 
         Teams.prototype.clear = function() {
             this._rawTeams = [];
             this._update();
-        }
+        };
 
         Teams.prototype.save = function() {
             return $fs.write('teams.json', this._rawTeams).then(function() {
@@ -47,17 +47,19 @@ define('services/ng-teams',[
             }, function(err) {
                 log('teams write error', err);
             });
-        }
+        };
 
         Teams.prototype.load = function() {
             var self = this;
             this.clear();
             return $fs.read('teams.json').then(function(res) {
-                res.forEach(self.add.bind(self));
+                res.forEach(function(t) {
+                    self.add(t);
+                });
             }, function(err) {
                 log('teams read error', err);
             });
-        }
+        };
 
         Teams.prototype.remove = function(id) {
             var team = this._teamsMap[id];
@@ -66,7 +68,7 @@ define('services/ng-teams',[
             }
             this._rawTeams.splice(team.index, 1);
             this._update();
-        }
+        };
 
         /**
          * Add new team.
@@ -92,7 +94,7 @@ define('services/ng-teams',[
             }
             this._rawTeams.push(t);
             this._update();
-        }
+        };
 
         /**
          * Return team by number (id).
@@ -103,7 +105,7 @@ define('services/ng-teams',[
          */
         Teams.prototype.get = function(number) {
             return this._teamsMap[number];
-        }
+        };
 
         Teams.prototype._update = function() {
             var self = this;
@@ -133,7 +135,7 @@ define('services/ng-teams',[
                 self.teams.push(t);
                 self._teamsMap[t.number] = t;
             });
-        }
+        };
 
         return new Teams();
     }]);

@@ -7,6 +7,7 @@ var require = {
         'q': '../components/q/q',
         'jquery': '../components/jquery/jquery.min',
         'angular': '../components/angular/angular.min',
+        'angular-sanitize': '../components/angular-sanitize/angular-sanitize.min',
         'angular-bootstrap': '../components/angular-bootstrap/ui-bootstrap-tpls',
         'idbstore':'../components/idbwrapper/idbstore',
         'signaturepad':'../components/signature-pad/jquery.signaturepad.min',
@@ -20,6 +21,9 @@ var require = {
             deps: ['jquery']
         },
         'angular-bootstrap': {
+            deps: ['angular']
+        },
+        'angular-sanitize': {
             deps: ['angular']
         }
     }

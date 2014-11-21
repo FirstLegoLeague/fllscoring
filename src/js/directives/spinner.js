@@ -99,8 +99,13 @@ define('directives/spinner',[
             if (value > 0) {
                 this.min = 1;
             }
-            this.value = clamp(value||0,this.min,this.max);
-            this.offset = -1*this.step*this.value;
+            if (value !== undefined) {
+                this.value = clamp(value||0,this.min,this.max);
+                this.offset = -1*this.step*this.value;
+            } else {
+                this.value = undefined;
+                this.offset = 0;
+            }
             transform(this.elFrame,this.offset);
             if (trigger) {
                 this.elContainer.trigger('change',[this.value-1,this]);
@@ -119,7 +124,7 @@ define('directives/spinner',[
         };
 
         Spinner.prototype.next = function(e) {
-            this.set(this.value+1,true);
+            this.set((this.value||0)+1,true);
             if (e) {
                 e.stopPropagation();
             }
@@ -214,9 +219,13 @@ define('directives/spinner',[
                         max = 1*newValue;
                         repaint();
                     });
-                    $scope.$parent.$watch($attrs.ngModel,function(newValue) {
+                    $scope.$parent.$watch($attrs.ngModel,function(newValue,oldValue) {
                         if (s && !setting) {
-                            s.set(newValue-min);
+                            if (newValue === undefined) {
+                                s.set(undefined);
+                            } else {
+                                s.set(newValue-min);
+                            }
                         }
                         setting = false;
                     });
