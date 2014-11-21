@@ -57,6 +57,8 @@ define('views/scoresheet',[
                 var deps = mission.score.reduce(function(all,score) {
                     return all.concat($challenge.getDependencies(score));
                 },[]);
+                mission.errors = [];
+                mission.percentages = [];
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
