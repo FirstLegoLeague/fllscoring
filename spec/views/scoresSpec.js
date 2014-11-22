@@ -4,16 +4,18 @@ describe('scores', function() {
         'services/log': logMock
     });
 
-    var $scope, controller, scoresMock;
+    var $scope, controller, scoresMock, teamsMock;
 
     beforeEach(function() {
         scoresMock = createScoresMock();
+        teamsMock = createTeamsMock();
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope) {
             $scope = $rootScope.$new();
             controller = $controller('scoresCtrl', {
                 '$scope': $scope,
-                '$scores': scoresMock
+                '$scores': scoresMock,
+                '$teams': teamsMock
             });
         });
     });
