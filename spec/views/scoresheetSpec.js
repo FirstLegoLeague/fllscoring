@@ -21,7 +21,6 @@ describe('scoresheet',function() {
                 '$scope': $scope,
                 '$fs': fsMock,
                 '$settings': settingsMock,
-                '$scores': {},
                 '$stages': {},
                 '$modal': {},
                 '$teams': {},

@@ -14,8 +14,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$scores','$stages','$settings','$modal','$challenge','$window','$q','$teams',
-        function($scope,$fs,$scores,$stages,$settings,$modal,$challenge,$window,$q,$teams) {
+        '$scope','$fs','$stages','$settings','$modal','$challenge','$window','$q','$teams',
+        function($scope,$fs,$stages,$settings,$modal,$challenge,$window,$q,$teams) {
             log('init scoresheet ctrl');
 
             // Set up defaults
