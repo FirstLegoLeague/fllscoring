@@ -54,4 +54,22 @@ describe('ranking', function() {
         })
     });
 
+    describe('export',function() {
+        it('should generate CSV data and filenames',function() {
+            expect($scope.csvname).toEqual({});
+            expect($scope.csvdata).toEqual({});
+            $scope.rebuildCSV({
+                'qualifying': [
+                    { rank: 1, team: { name: "foo", number: 123 }, highest: 10, scores: [0, 10, 5] },
+                    { rank: 1, team: { name: "\"bar\"", number: 456 }, highest: 10, scores: [10, 0, 5] }
+                ]
+            });
+            expect($scope.csvname["qualifying"]).toEqual("ranking_qualifying.csv");
+            expect($scope.csvdata["qualifying"]).toEqual("data:text/csv;charset=utf-8," + encodeURIComponent([
+                '"Rank","Team Number","Team Name","Highest","Round 1","Round 2","Round 3"',
+                '"1","123","foo","10","0","10","5"',
+                '"1","456","""bar""","10","10","0","5"',
+            ].join("\r\n")));
+        });
+    });
 });
