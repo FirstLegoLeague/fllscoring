@@ -61,9 +61,14 @@ define('views/ranking',[
                 return new Array($scope.maxRounds() - stage.$rounds.length);
             };
 
-            $scope.csvdata = {};
-            $scope.csvname = {};
+            // Data for CSV export links, indexed by stage ID
+            $scope.csvdata = {}; // CSV data itself
+            $scope.csvname = {}; // Filenames suggested to user
 
+            // Convert a 2D matrix to a CSV string.
+            // All cells are converted to strings and fully quoted,
+            // except null or undefined cells, which are passed as empty
+            // values (without quotes).
             function toCSV(rows) {
                 return rows.map(function(row) {
                     return row.map(function(col) {
@@ -73,14 +78,18 @@ define('views/ranking',[
                         }
                         return '"' + String(col).replace(/"/gi, '""') + '"';
                     }).join(",");
-                }).join("\r\n");
+                }).join("\r\n"); // Use Windows line-endings, to make it Notepad-friendly
             }
 
-            $scope.$watch("scoreboard", function() {
+            /**
+             * Rebuild CSV data (contents and filenames) of given scoreboard.
+             * @param scoreboard Per-stage ranking as present in e.g. $scores.scoreboard.
+             */
+            $scope.rebuildCSV = function(scoreboard) {
                 $scope.csvdata = {};
                 $scope.csvname = {};
-                Object.keys($scores.scoreboard).forEach(function(stageId) {
-                    var ranking = $scores.scoreboard[stageId];
+                Object.keys(scoreboard).forEach(function(stageId) {
+                    var ranking = scoreboard[stageId];
                     var rows = ranking.map(function(entry) {
                         return [
                             entry.rank,
@@ -96,6 +105,11 @@ define('views/ranking',[
                     $scope.csvname[stageId] = encodeURIComponent("ranking_" + stageId + ".csv");
                     $scope.csvdata[stageId] = "data:text/csv;charset=utf-8," + encodeURIComponent(toCSV(rows));
                 });
+            }
+
+            // Rebuild CSV data and filenames when scoreboard is updated
+            $scope.$watch("scoreboard", function() {
+                $scope.rebuildCSV($scores.scoreboard);
             }, true);
 
             $scope.stages = $stages.stages;
