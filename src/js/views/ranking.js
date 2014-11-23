@@ -86,9 +86,10 @@ define('views/ranking',[
                             entry.rank,
                             entry.team.number,
                             entry.team.name,
+                            entry.highest,
                         ].concat(entry.scores);
                     });
-                    var header = ["Rank", "Team Number", "Team Name"];
+                    var header = ["Rank", "Team Number", "Team Name", "Highest"];
                     var stage = $stages.get(stageId);
                     header = header.concat(stage.$rounds.map(function(round) { return "Round " + round; }));
                     rows.unshift(header);
