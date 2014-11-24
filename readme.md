@@ -35,13 +35,14 @@ For iOS, see [Building for iOS](https://github.com/FirstLegoLeague/fllscoring/wi
 
 To build js challenge files from the xml description files, use
 
-	 node tools\buildchallenge.js challenges\xml\2014.xml > challenges\js\2014.js
+     node tools\buildchallenge.js challenges\xml\2014.xml > challenges\js\2014.js
 
 Run local
 --------
 
 - `node localserver.js` then open [localhost:1390](http://localhost:1390)
-	- to specify another port, use `node localserver.js -p 8000`
+    - to specify another port, use `node localserver.js -p 8000`
+    - to add basic authentication, use `node localserver.js -u username:password`
 
 Testing
 -------
