@@ -36,7 +36,9 @@ define([
         function($scope, $scores) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
+            $scope.scoringView = 'views/mainScoring.html';
             $scope.pages = ['teams','scoresheet','scores','ranking','settings'];
+            $scope.scoringPages = ['scoresheet','settings'];
             $scope.currentPage = $scope.pages[1];
             $scope.validationErrors = $scores.validationErrors;
 
