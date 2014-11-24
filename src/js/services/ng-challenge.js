@@ -8,621 +8,20 @@ define('services/ng-challenge',[
         '$http','$settings',
         function($http,$settings) {
             var mission;
-            var fallBackChallenge = 'challenge/2014_nl_NL';
-
-            var field = {
-                "title": "Senior Solutions",
-                "missions": [{
-                    "title": "Flexibility",
-                    "description": "Robot gets yellow loops to Base.",
-                    "objectives": [{
-                        "id": "yellowloops",
-                        "title": "Yellow Loops in Base",
-                        "type": "number",
-                        "min": "0",
-                        "max": "2"
-                    }],
-                    "score": [
-                        function(yellowloops) {
-                            if (yellowloops === '0') {
-                                return 0
-                            }
-                            if (yellowloops === '1') {
-                                return 20
-                            }
-                            if (yellowloops === '2') {
-                                return 40
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Medicine",
-                    "description": "The bottles are arranged randomly before the start of each match (See Field Setup). Robot gets the green medicine bottle to Base without disturbing orange ones.",
-                    "objectives": [{
-                        "id": "meds",
-                        "title": "Green in Base, Orange Not Moved",
-                        "type": "yesno"
-                    }],
-                    "score": [
-                        function(meds) {
-                            if (meds === 'no') {
-                                return 0
-                            }
-                            if (meds === 'yes') {
-                                return 25
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Service Animals",
-                    "description": "Robot applies force to gray disc, causing dog with phone to move toward Base.",
-                    "objectives": [{
-                        "id": "dog",
-                        "title": "Dog in Base",
-                        "type": "yesno"
-                    }],
-                    "score": [
-                        function(dog) {
-                            if (dog === 'no') {
-                                return 0
-                            }
-                            if (dog === 'yes') {
-                                return 20
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Wood Working",
-                    "description": "Robot gets the chair to Base. You fix the chair by hand. Robot brings the chair to the table.",
-                    "objectives": [{
-                        "id": "chairbase",
-                        "title": "Chair Repaired and in Base",
-                        "type": "yesno"
-                    }, {
-                        "id": "chairtable",
-                        "title": "Chair Repaired and under Table",
-                        "type": "yesno"
-                    }],
-                    "score": [
-                        function(chairbase, chairtable) {
-                            if (chairbase === 'no' && chairtable === 'no') {
-                                return 0
-                            }
-                            if (chairbase === 'no' && chairtable === 'yes') {
-                                return 25
-                            }
-                            if (chairbase === 'yes' && chairtable === 'no') {
-                                return 15
-                            }
-                            if (chairbase === 'yes' && chairtable === 'yes') {
-                                return new Error("Chair cannot be in base AND under the table.")
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Video Call",
-                    "description": "Robot gets the flags to rise.",
-                    "objectives": [{
-                        "id": "flags",
-                        "title": "Flags Fully Upright",
-                        "type": "number",
-                        "min": "0",
-                        "max": "2"
-                    }],
-                    "score": [
-                        function(flags) {
-                            if (flags === '0') {
-                                return 0
-                            }
-                            if (flags === '1') {
-                                return 20
-                            }
-                            if (flags === '2') {
-                                return 40
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Quilts",
-                    "description": "Robot adds squares to quilts.",
-                    "objectives": [{
-                        "id": "quiltsblue",
-                        "title": "Blue Squares Touch Target",
-                        "type": "number",
-                        "min": "0",
-                        "max": "2"
-                    }, {
-                        "id": "quiltsorange",
-                        "title": "Orange Squares Touch Target",
-                        "type": "number",
-                        "min": "0",
-                        "max": "2"
-                    }],
-                    "score": [
-                        function(quiltsblue) {
-                            if (quiltsblue === '0') {
-                                return 0
-                            }
-                            if (quiltsblue === '1') {
-                                return 15
-                            }
-                            if (quiltsblue === '2') {
-                                return 30
-                            }
-                        },
-                        function(quiltsorange) {
-                            if (quiltsorange === '0') {
-                                return 0
-                            }
-                            if (quiltsorange === '1') {
-                                return 30
-                            }
-                            if (quiltsorange === '2') {
-                                return 60
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Similarity Recognition and Cooperation",
-                    "description": "Robot aligns your pointer with the other team’s pointer.",
-                    "objectives": [{
-                        "id": "coop",
-                        "title": "Dials on Both Fields are Parallel",
-                        "type": "yesno"
-                    }],
-                    "score": [
-                        function(coop) {
-                            if (coop === 'no') {
-                                return 0
-                            }
-                            if (coop === 'yes') {
-                                return 45
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Ball Game",
-                    "description": "Both teams get points for the total number of balls on the racks at the end of the match, but only one team gets points when their color is at the center.",
-                    "objectives": [{
-                        "id": "ballcount",
-                        "title": "Balls on Rack",
-                        "type": "number",
-                        "min": "0",
-                        "max": "7"
-                    }, {
-                        "id": "ballmiddle",
-                        "title": "Middle Ball",
-                        "options": [{
-                            "value": "your",
-                            "title": "Yours"
-                        }, {
-                            "value": "them",
-                            "title": "Theirs"
-                        }, {
-                            "value": "none",
-                            "title": "Neither"
-                        }],
-                        "type": "enum"
-                    }],
-                    "score": [
-                        function(ballmiddle, ballcount) {
-                            if (ballmiddle === 'your' && ballcount === '0') {
-                                return new Error("When no balls are left, the middle ball must be 'Neither'.")
-                            }
-                            if (ballmiddle === 'your' && ballcount === '1') {
-                                return 70
-                            }
-                            if (ballmiddle === 'your' && ballcount === '2') {
-                                return 80
-                            }
-                            if (ballmiddle === 'your' && ballcount === '3') {
-                                return 90
-                            }
-                            if (ballmiddle === 'your' && ballcount === '4') {
-                                return 100
-                            }
-                            if (ballmiddle === 'your' && ballcount === '5') {
-                                return 110
-                            }
-                            if (ballmiddle === 'your' && ballcount === '6') {
-                                return 120
-                            }
-                            if (ballmiddle === 'your' && ballcount === '7') {
-                                return new Error("When all balls are left, the middle ball must be 'Neither'.")
-                            }
-                            if (ballmiddle === 'them' && ballcount === '0') {
-                                return new Error("When no balls are left, the middle ball must be 'Neither'.")
-                            }
-                            if (ballmiddle === 'them' && ballcount === '1') {
-                                return 10
-                            }
-                            if (ballmiddle === 'them' && ballcount === '2') {
-                                return 20
-                            }
-                            if (ballmiddle === 'them' && ballcount === '3') {
-                                return 30
-                            }
-                            if (ballmiddle === 'them' && ballcount === '4') {
-                                return 40
-                            }
-                            if (ballmiddle === 'them' && ballcount === '5') {
-                                return 50
-                            }
-                            if (ballmiddle === 'them' && ballcount === '6') {
-                                return 60
-                            }
-                            if (ballmiddle === 'them' && ballcount === '7') {
-                                return new Error("When all balls are left, the middle ball must be 'Neither'.")
-                            }
-                            if (ballmiddle === 'none' && ballcount === '0') {
-                                return 0
-                            }
-                            if (ballmiddle === 'none' && ballcount === '1') {
-                                return new Error("When some, but not all, balls are left, the middle ball cannot be 'Neither'.")
-                            }
-                            if (ballmiddle === 'none' && ballcount === '2') {
-                                return new Error("When some, but not all, balls are left, the middle ball cannot be 'Neither'.")
-                            }
-                            if (ballmiddle === 'none' && ballcount === '3') {
-                                return new Error("When some, but not all, balls are left, the middle ball cannot be 'Neither'.")
-                            }
-                            if (ballmiddle === 'none' && ballcount === '4') {
-                                return new Error("When some, but not all, balls are left, the middle ball cannot be 'Neither'.")
-                            }
-                            if (ballmiddle === 'none' && ballcount === '5') {
-                                return new Error("When some, but not all, balls are left, the middle ball cannot be 'Neither'.")
-                            }
-                            if (ballmiddle === 'none' && ballcount === '6') {
-                                return new Error("When some, but not all, balls are left, the middle ball cannot be 'Neither'.")
-                            }
-                            if (ballmiddle === 'none' && ballcount === '7') {
-                                return 70
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Gardening",
-                    "description": "Robot adds to the garden.",
-                    "objectives": [{
-                        "id": "plants",
-                        "title": "Base of Plants Touch Target",
-                        "type": "yesno"
-                    }],
-                    "score": [
-                        function(plants) {
-                            if (plants === 'no') {
-                                return 0
-                            }
-                            if (plants === 'yes') {
-                                return 25
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Stove",
-                    "description": "Robot gets all burners to show black.",
-                    "objectives": [{
-                        "id": "burners",
-                        "title": "All Burners are Black",
-                        "type": "yesno"
-                    }],
-                    "score": [
-                        function(burners) {
-                            if (burners === 'no') {
-                                return 0
-                            }
-                            if (burners === 'yes') {
-                                return 25
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Bowling",
-                    "description": "Robot sends balls to knock pins down. If the pins are not all down after the first try using a yellow ball, the referee returns that ball to Base for a second try (this can only happen once per match).",
-                    "objectives": [{
-                        "id": "pins",
-                        "title": "Pins Hit",
-                        "type": "number",
-                        "min": "0",
-                        "max": "6"
-                    }],
-                    "score": [
-                        function(pins) {
-                            if (pins === '0') {
-                                return 0
-                            }
-                            if (pins === '1') {
-                                return 7
-                            }
-                            if (pins === '2') {
-                                return 14
-                            }
-                            if (pins === '3') {
-                                return 21
-                            }
-                            if (pins === '4') {
-                                return 28
-                            }
-                            if (pins === '5') {
-                                return 35
-                            }
-                            if (pins === '6') {
-                                return 60
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Transitions",
-                    "description": "Robot gets onto the center platform and is there when the match ends.",
-                    "objectives": [{
-                        "id": "platslant",
-                        "title": "Robot Only Touches Slanted Platform",
-                        "type": "yesno"
-                    }, {
-                        "id": "platbalan",
-                        "title": "Robot Only Touches Balanced Platform",
-                        "type": "yesno"
-                    }, {
-                        "id": "platclear",
-                        "title": "Platform Only Touches Robot and Mat",
-                        "type": "yesno"
-                    }],
-                    "score": [
-                        function(platslant, platbalan, platclear) {
-                            if (platslant === 'no' && platbalan === 'no' && platclear === 'no') {
-                                return 0
-                            }
-                            if (platslant === 'no' && platbalan === 'no' && platclear === 'yes') {
-                                return 0
-                            }
-                            if (platslant === 'no' && platbalan === 'yes' && platclear === 'no') {
-                                return 0
-                            }
-                            if (platslant === 'no' && platbalan === 'yes' && platclear === 'yes') {
-                                return 65
-                            }
-                            if (platslant === 'yes' && platbalan === 'no' && platclear === 'no') {
-                                return 0
-                            }
-                            if (platslant === 'yes' && platbalan === 'no' && platclear === 'yes') {
-                                return 45
-                            }
-                            if (platslant === 'yes' && platbalan === 'yes' && platclear === 'no') {
-                                return new Error("Platform cannot be slanted AND balanced.")
-                            }
-                            if (platslant === 'yes' && platbalan === 'yes' && platclear === 'yes') {
-                                return new Error("Platform cannot be slanted AND balanced.")
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Strength Exercise",
-                    "description": "Robot lifts the west bar to make the weight rise.",
-                    "objectives": [{
-                        "id": "strength",
-                        "title": "Weight raised",
-                        "options": [{
-                            "value": "lo",
-                            "title": "Low"
-                        }, {
-                            "value": "hi",
-                            "title": "High"
-                        }, {
-                            "value": "no",
-                            "title": "Not Done"
-                        }],
-                        "type": "enum"
-                    }],
-                    "score": [
-                        function(strength) {
-                            if (strength === 'no') {
-                                return 0
-                            }
-                            if (strength === 'lo') {
-                                return 15
-                            }
-                            if (strength === 'hi') {
-                                return 25
-                            }
-                        }
-                    ]
-                }, {
-                    "title": "Cardio Training",
-                    "description": "Robot turns the pinwheel 90° at a time.",
-                    "objectives": [{
-                        "id": "dialbig",
-                        "title": "Dial Big Step",
-                        "type": "number",
-                        "min": "1",
-                        "max": "9"
-                    }, {
-                        "id": "dialsmall",
-                        "title": "Dial Small Step",
-                        "type": "number",
-                        "min": "0",
-                        "max": "5"
-                    }],
-                    "score": [
-                        function(dialbig, dialsmall) {
-                            if (dialbig === '1' && dialsmall === '0') {
-                                return -60
-                            }
-                            if (dialbig === '1' && dialsmall === '1') {
-                                return -55
-                            }
-                            if (dialbig === '1' && dialsmall === '2') {
-                                return -50
-                            }
-                            if (dialbig === '1' && dialsmall === '3') {
-                                return -45
-                            }
-                            if (dialbig === '1' && dialsmall === '4') {
-                                return -40
-                            }
-                            if (dialbig === '1' && dialsmall === '5') {
-                                return -35
-                            }
-                            if (dialbig === '2' && dialsmall === '0') {
-                                return -30
-                            }
-                            if (dialbig === '2' && dialsmall === '1') {
-                                return -25
-                            }
-                            if (dialbig === '2' && dialsmall === '2') {
-                                return -20
-                            }
-                            if (dialbig === '2' && dialsmall === '3') {
-                                return -15
-                            }
-                            if (dialbig === '2' && dialsmall === '4') {
-                                return -10
-                            }
-                            if (dialbig === '2' && dialsmall === '5') {
-                                return -5
-                            }
-                            if (dialbig === '3' && dialsmall === '0') {
-                                return 0
-                            }
-                            if (dialbig === '3' && dialsmall === '1') {
-                                return 5
-                            }
-                            if (dialbig === '3' && dialsmall === '2') {
-                                return 10
-                            }
-                            if (dialbig === '3' && dialsmall === '3') {
-                                return 15
-                            }
-                            if (dialbig === '3' && dialsmall === '4') {
-                                return 20
-                            }
-                            if (dialbig === '3' && dialsmall === '5') {
-                                return 25
-                            }
-                            if (dialbig === '4' && dialsmall === '0') {
-                                return 30
-                            }
-                            if (dialbig === '4' && dialsmall === '1') {
-                                return 35
-                            }
-                            if (dialbig === '4' && dialsmall === '2') {
-                                return 40
-                            }
-                            if (dialbig === '4' && dialsmall === '3') {
-                                return 45
-                            }
-                            if (dialbig === '4' && dialsmall === '4') {
-                                return 50
-                            }
-                            if (dialbig === '4' && dialsmall === '5') {
-                                return 55
-                            }
-                            if (dialbig === '5' && dialsmall === '0') {
-                                return 60
-                            }
-                            if (dialbig === '5' && dialsmall === '1') {
-                                return 63
-                            }
-                            if (dialbig === '5' && dialsmall === '2') {
-                                return 66
-                            }
-                            if (dialbig === '5' && dialsmall === '3') {
-                                return 69
-                            }
-                            if (dialbig === '5' && dialsmall === '4') {
-                                return 72
-                            }
-                            if (dialbig === '5' && dialsmall === '5') {
-                                return 75
-                            }
-                            if (dialbig === '6' && dialsmall === '0') {
-                                return 78
-                            }
-                            if (dialbig === '6' && dialsmall === '1') {
-                                return 91
-                            }
-                            if (dialbig === '6' && dialsmall === '2') {
-                                return 94
-                            }
-                            if (dialbig === '6' && dialsmall === '3') {
-                                return 97
-                            }
-                            if (dialbig === '6' && dialsmall === '4') {
-                                return 100
-                            }
-                            if (dialbig === '6' && dialsmall === '5') {
-                                return 103
-                            }
-                            if (dialbig === '7' && dialsmall === '0') {
-                                return 106
-                            }
-                            if (dialbig === '7' && dialsmall === '1') {
-                                return 107
-                            }
-                            if (dialbig === '7' && dialsmall === '2') {
-                                return 108
-                            }
-                            if (dialbig === '7' && dialsmall === '3') {
-                                return 109
-                            }
-                            if (dialbig === '7' && dialsmall === '4') {
-                                return 110
-                            }
-                            if (dialbig === '7' && dialsmall === '5') {
-                                return 111
-                            }
-                            if (dialbig === '8' && dialsmall === '0') {
-                                return 112
-                            }
-                            if (dialbig === '8' && dialsmall === '1') {
-                                return 113
-                            }
-                            if (dialbig === '8' && dialsmall === '2') {
-                                return 114
-                            }
-                            if (dialbig === '8' && dialsmall === '3') {
-                                return 115
-                            }
-                            if (dialbig === '8' && dialsmall === '4') {
-                                return 116
-                            }
-                            if (dialbig === '8' && dialsmall === '5') {
-                                return 117
-                            }
-                            if (dialbig === '9' && dialsmall === '0') {
-                                return 118
-                            }
-                            if (dialbig === '9' && dialsmall === '1') {
-                                return new Error("When Big Dial is on 9, Small Dial must be on 0.")
-                            }
-                            if (dialbig === '9' && dialsmall === '2') {
-                                return new Error("When Big Dial is on 9, Small Dial must be on 0.")
-                            }
-                            if (dialbig === '9' && dialsmall === '3') {
-                                return new Error("When Big Dial is on 9, Small Dial must be on 0.")
-                            }
-                            if (dialbig === '9' && dialsmall === '4') {
-                                return new Error("When Big Dial is on 9, Small Dial must be on 0.")
-                            }
-                            if (dialbig === '9' && dialsmall === '5') {
-                                return new Error("When Big Dial is on 9, Small Dial must be on 0.")
-                            }
-                        }
-                    ]
-                }]
-            };
+            var fallBackChallenge = 'challenge/2014_nl_NL-no-enum';
 
             var field = {
                 "title": "World Class",
                 "missions": [{
                     "title": "Reverse Engineering",
-                    "description": "Todo: Kenny",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Jullie mand is in de basis.</li><li>Het model raakt de witte cirkel rond het projectonderwijs-model aan.</li><li>Jullie hebben een model gemaakt ‘identiek’ aan het model dat het andere team in jullie mand heeft gedaan. De verbindingen tussen de elementen moeten hetzelfde zijn, maar elementen mogen wel ‘gedraaid’ zitten.</li><li>Het model is in de basis.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>",
                     "objectives": [{
                         "id": "basket",
-                        "title": "Basket in Base",
+                        "title": "Mand in de basis",
                         "type": "yesno"
                     }, {
                         "id": "identical",
-                        "title": "Your model is in Base and is identical",
+                        "title": "Jullie model ligt in de basis en is ‘identiek’",
                         "type": "yesno"
                     }],
                     "score": [function(basket, identical) {
@@ -640,11 +39,11 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Opening Doors",
-                    "description": "Todo: Kenny",
+                    "title": "Deuren openen",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li> De deur moet ver genoeg geopend zijn zodat de scheidsrechter dit kan zien.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De hendel moet omlaag gedrukt zijn.</li></ul>",
                     "objectives": [{
                         "id": "dooropen",
-                        "title": "Door opened by pushing handle down",
+                        "title": "Deur geopend door de hendel omlaag te drukken",
                         "type": "yesno"
                     }],
                     "score": [function(dooropen) {
@@ -656,14 +55,40 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Project-Based Learning",
-                    "description": "Todo: Kenny",
+                    "title": "Projectonderwijs",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De lussen (welke symbool staan voor kennis en vaardigheden) hangen aan de weegschaal zoals getoond.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>",
                     "objectives": [{
                         "id": "loops",
-                        "title": "Loops on scale",
-                        "type": "number",
-                        "min": "0",
-                        "max": "8"
+                        "title": "Lussen aan de weegschaal",
+                        "options": [{
+                            "value": "0",
+                            "title": "0"
+                        }, {
+                            "value": "1",
+                            "title": "1"
+                        }, {
+                            "value": "2",
+                            "title": "2"
+                        }, {
+                            "value": "3",
+                            "title": "3"
+                        }, {
+                            "value": "4",
+                            "title": "4"
+                        }, {
+                            "value": "5",
+                            "title": "5"
+                        }, {
+                            "value": "6",
+                            "title": "6"
+                        }, {
+                            "value": "7",
+                            "title": "7"
+                        }, {
+                            "value": "8",
+                            "title": "8"
+                        }],
+                        "type": "enum"
                     }],
                     "score": [function(loops) {
                         if (loops === '0') {
@@ -695,15 +120,15 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Apprenticeship",
-                    "description": "Todo: Kenny",
+                    "title": "Stagelopen",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De LEGO-poppetjes zijn beiden verbonden (op een manier naar keuze) aan een model dat jullie ontwerpen en meenemen. Dit model stelt een vaardigheid, prestatie, carrière of hobby voor dat een speciale betekenis voor jullie team heeft.</li><li>Het model raakt de witte cirkel rond het projectonderwijs-model aan.</li><li>Het model is niet in de basis.</li><li>Het vastmaken van missiemodellen is normaal niet toegestaan vanwege regel 39.4, deze missie is daar een uitzondering op.</li><li>Het eigen model mag simpel, of complex zijn, het mag primitief of realistisch zijn, de keuze is aan jullie. De keuze wat voor model jullie bouwen, heeft geen invloed op de score.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>",
                     "objectives": [{
                         "id": "modelshown",
-                        "title": "Model presented to Referee",
+                        "title": "Model getoond aan de scheidsrechter",
                         "type": "yesno"
                     }, {
                         "id": "touchingcicrle",
-                        "title": "Touching circle, not in Base, people Bound",
+                        "title": "Raakt de cirkel, niet in de basis en poppetjes verbonden",
                         "type": "yesno"
                     }],
                     "score": [function(modelshown, touchingcicrle) {
@@ -711,7 +136,7 @@ define('services/ng-challenge',[
                             return 0
                         }
                         if (modelshown === 'no' && touchingcicrle === 'yes') {
-                            return new Error("Model must have been presented for it to be touching the circle")
+                            return new Error("Model moet getoond zijn voordat het de cirkel kan aanraken")
                         }
                         if (modelshown === 'yes' && touchingcicrle === 'no') {
                             return 20
@@ -721,15 +146,15 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Search Engine",
-                    "description": "Todo: Kenny",
+                    "title": "Zoekmachine",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het kleurenwiel heeft minimaal een keer gedraaid.</li><li>Als één kleur verschijnt in het witte frame, dan raakt de lus van de zichtbare kleur het model niet meer aan.</li><li>Als twee kleuren verschijnen in het witte venster, dan is de lus van de kleur die niet zichtbaar is in het venster, de lus die het model niet meer raakt.</li><li>Beide lussen die niet verwijderd dienen te worden raken via ‘hun’ gaten het model aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Alleen de beweging van de schuif heeft het kleurenwiel in beweging gebracht.</li></ul>",
                     "objectives": [{
                         "id": "wheelspin",
-                        "title": "Only Slider caused wheel to spin 1+ times",
+                        "title": "Alleen de schuif heeft het wiel 1+ keer rondgedraaid",
                         "type": "yesno"
                     }, {
                         "id": "searchloop",
-                        "title": "Only correct loop removed",
+                        "title": "Alleen de juiste lus is verwijderd",
                         "type": "yesno"
                     }],
                     "score": [function(wheelspin, searchloop) {
@@ -747,15 +172,15 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Sports",
-                    "description": "Todo: Kenny",
+                    "title": "Sport",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De bal raakt de mat in het doel.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Alle onderdelen die met het schot te maken hebben waren volledig ten noordoosten van de ‘schietlijn’ op het moment dat de bal werd losgelaten richting het doel.</li></ul>",
                     "objectives": [{
                         "id": "ballshot",
-                        "title": "Ball shot from east/north of \"Shot Lines\" toward Net",
+                        "title": "Schot genomen vanuit positie Noord-Oost van de lijn",
                         "type": "yesno"
                     }, {
                         "id": "ballscored",
-                        "title": "Ball touching mat in Net at end of match",
+                        "title": "Bal raakt de mat in het doel aan het eind van de wedstrijd",
                         "type": "yesno"
                     }],
                     "score": [function(ballshot, ballscored) {
@@ -773,15 +198,15 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Robotics Competition",
-                    "description": "Todo: Kenny",
+                    "title": "Robotwedstrijden",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het blauw-geel-rode robotelement (model) is geïnstalleerd in de robotarm zoals zichtbaar op de afbeelding.</li><li>De lus raakt niet langer de robotarm aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen strategisch object raakt de robotarm aan.</li><li>De lus werd alleen door het gebruik van de zwarte schuif losgemaakt.</li></ul>",
                     "objectives": [{
                         "id": "roboticsinsert",
-                        "title": "Only Robotics Insert installed",
+                        "title": "Alleen het robotelement is geïnstalleerd in de robotarm",
                         "type": "yesno"
                     }, {
                         "id": "competitionloop",
-                        "title": "Loop no longer touching model",
+                        "title": "Lus raakt de robotarm niet aan",
                         "type": "yesno"
                     }],
                     "score": [function(roboticsinsert, competitionloop) {
@@ -799,11 +224,11 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Using the Right Senses",
-                    "description": "Todo: Kenny",
+                    "title": "Gebruik de juiste zintuigen en leerstijlen",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De lus raakt het zintuigen model niet meer aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De lus werd alleen door het gebruik van de schuif losgemaakt.</li></ul>",
                     "objectives": [{
                         "id": "sensesloop",
-                        "title": "Loop no longer touching model",
+                        "title": "Lus raakt het model niet aan",
                         "type": "yesno"
                     }],
                     "score": [function(sensesloop) {
@@ -815,11 +240,11 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Remote Communication / Learning",
-                    "description": "Todo: Kenny",
+                    "title": "Leren/communiceren op afstand",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Geen.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De scheidsrechter heeft gezien dat de schuif door de robot westwaarts is verplaatst.</li></ul>",
                     "objectives": [{
                         "id": "pullslider",
-                        "title": "Referee saw robot pull slider west",
+                        "title": "Scheids zag de robot de schuif verplaatsen",
                         "type": "yesno"
                     }],
                     "score": [function(pullslider) {
@@ -831,15 +256,15 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Thinking Outside the Box",
-                    "description": "Todo: Kenny",
+                    "title": "Outside the Box denken",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het ‘idee-model’ raakt niet langer het ‘doos-model’ aan.</li><li>Als het ‘idee-model’ het ‘doos-model’ niet meer aanraakt, is de afbeelding van de gloeilamp van bovenaf zichtbaar.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Het ‘doos-model’ is nooit in de basis geweest.</li></ul>",
                     "objectives": [{
                         "id": "bulbup",
-                        "title": "Idea model not touching Box, Box never in Base, Bulb faces UP",
+                        "title": "Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar boven gericht",
                         "type": "yesno"
                     }, {
                         "id": "bulbdown",
-                        "title": "Idea model not touching Box, Box never in Base, Bulb faces DOWN",
+                        "title": "Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is naar beneden gericht",
                         "type": "yesno"
                     }],
                     "score": [function(bulbup, bulbdown) {
@@ -853,15 +278,15 @@ define('services/ng-challenge',[
                             return 40
                         }
                         if (bulbup === 'yes' && bulbdown === 'yes') {
-                            return new Error("Bulb cannot face UP and DOWN at the same time")
+                            return new Error("De lamp kan niet tegelijk naar boven en beneden gericht zijn")
                         }
                     }]
                 }, {
-                    "title": "Community Learning",
-                    "description": "Todo: Kenny",
+                    "title": "Gemeenschappelijk leren",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De ‘kennis & vaardigheden lus’ raakt het gemeenschapsmodel niet meer aan.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>",
                     "objectives": [{
                         "id": "communityloop",
-                        "title": "Loop no longer touching model",
+                        "title": "Lus raakt het model niet aan",
                         "type": "yesno"
                     }],
                     "score": [function(communityloop) {
@@ -873,11 +298,11 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Cloud Access",
-                    "description": "Todo: Kenny",
+                    "title": "Cloud toegang",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De SD-kaart staat omhoog.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De juiste “key” is in de Cloud geplaatst.</li></ul>",
                     "objectives": [{
                         "id": "sdcardup",
-                        "title": "SD card is UP due to inserted \"key\"",
+                        "title": "SD card staat omhoog omdat de juiste \"key\" is ingebracht",
                         "type": "yesno"
                     }],
                     "score": [function(sdcardup) {
@@ -889,53 +314,53 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Engagement",
-                    "description": "Todo: Kenny",
+                    "title": "Betrokkenheid",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het gele gedeelte is naar het zuiden verplaatst.</li><li>Het rad is duidelijk met de klok mee gedraaid ten opzichte van de start positie. Zie het overzicht voor de score.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>De wijzer mag alleen verplaatst worden doordat de robot aan het rad te draait.</li><li>De robot mag het rad maar een keer 180⁰ draaien, per keer dat de basis wordt verlaten. De scheidsrechter zal extra draaiingen ongedaan maken</li></ul>",
                     "objectives": [{
                         "id": "yellow_moved",
-                        "title": "Yellow section moved south",
+                        "title": "Gele gedeelte is naar het zuiden verplaatst",
                         "type": "yesno"
                     }, {
                         "id": "dial_major_color",
-                        "title": "Dial major marker color",
+                        "title": "Aangewezen kleur",
                         "options": [{
                             "value": "na",
-                            "title": "N/A"
+                            "title": "NVT"
                         }, {
                             "value": "red10",
-                            "title": "Red 10%"
+                            "title": "Rood 10%"
                         }, {
                             "value": "orange16",
-                            "title": "Orange 16%"
+                            "title": "Oranje 16%"
                         }, {
                             "value": "green22",
-                            "title": "Green 22%"
+                            "title": "Groen 22%"
                         }, {
                             "value": "blue28",
-                            "title": "Blue 28%"
+                            "title": "Blauw 28%"
                         }, {
                             "value": "red34",
-                            "title": "Red 34%"
+                            "title": "Rood 34%"
                         }, {
                             "value": "blue40",
-                            "title": "Blue 40%"
+                            "title": "Blauw 40%"
                         }, {
                             "value": "green46",
-                            "title": "Green 46%"
+                            "title": "Groen 46%"
                         }, {
                             "value": "orange52",
-                            "title": "Orange 52%"
+                            "title": "Oranje 52%"
                         }, {
                             "value": "red58",
-                            "title": "Red 58%"
+                            "title": "Rood 58%"
                         }],
                         "type": "enum"
                     }, {
                         "id": "ticks_past_major",
-                        "title": "Ticks past major marker",
+                        "title": "Klikken voorbij de kleur",
                         "options": [{
                             "value": "na",
-                            "title": "N/A"
+                            "title": "NVT"
                         }, {
                             "value": "0",
                             "title": "0"
@@ -969,244 +394,244 @@ define('services/ng-challenge',[
                             return 0
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '0') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '0') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '1') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '1') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '2') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '2') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '3') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '3') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '4') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '4') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '5') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '5') {
-                            return new Error("Dial must remain on \"N/A\" until yellow section has moved")
+                            return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === 'na') {
                             return 0
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red10' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'orange16' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'green22' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'blue28' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red34' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'blue40' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'green46' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'orange52' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === 'na') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '0') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red10' && ticks_past_major === '0') {
                             return 0.1
@@ -1236,7 +661,7 @@ define('services/ng-challenge',[
                             return 0.58
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '1') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red10' && ticks_past_major === '1') {
                             return 0.11
@@ -1266,7 +691,7 @@ define('services/ng-challenge',[
                             return 0.58
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '2') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red10' && ticks_past_major === '2') {
                             return 0.12
@@ -1293,10 +718,10 @@ define('services/ng-challenge',[
                             return 0.54
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '2') {
-                            return new Error("Dial cannot turn that far")
+                            return new Error("De wijzer kan niet zover draaien")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '3') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red10' && ticks_past_major === '3') {
                             return 0.13
@@ -1323,10 +748,10 @@ define('services/ng-challenge',[
                             return 0.55
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '3') {
-                            return new Error("Dial cannot turn that far")
+                            return new Error("De wijzer kan niet zover draaien")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '4') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red10' && ticks_past_major === '4') {
                             return 0.14
@@ -1353,10 +778,10 @@ define('services/ng-challenge',[
                             return 0.56
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '4') {
-                            return new Error("Dial cannot turn that far")
+                            return new Error("De wijzer kan niet zover draaien")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === '5') {
-                            return new Error("Either none or both questions should be answered with \"N/A\"")
+                            return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red10' && ticks_past_major === '5') {
                             return 0.15
@@ -1383,15 +808,15 @@ define('services/ng-challenge',[
                             return 0.57
                         }
                         if (yellow_moved === 'yes' && dial_major_color === 'red58' && ticks_past_major === '5') {
-                            return new Error("Dial cannot turn that far")
+                            return new Error("De wijzer kan niet zover draaien")
                         }
                     }]
                 }, {
-                    "title": "Adapting to changing conditions",
-                    "description": "Todo: Kenny",
+                    "title": "Flexibiliteit",
+                    "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Het model is 90⁰ gedraaid tegen de richting van de klok in ten opzichte van de beginpositie.</li></ul> <b>Vereiste methode en beperkingen:</b> <ul><li>Geen.</li></ul>",
                     "objectives": [{
                         "id": "model_rotated",
-                        "title": "Model rotated 90-ish degrees CCW",
+                        "title": "Model is 90 graden tegen de klok in gedraaid",
                         "type": "yesno"
                     }],
                     "score": [function(model_rotated) {
@@ -1403,14 +828,40 @@ define('services/ng-challenge',[
                         }
                     }]
                 }, {
-                    "title": "Penalties",
+                    "title": "Strafpunten",
                     "description": "training-desc",
                     "objectives": [{
                         "id": "penalties_objective",
-                        "title": "Robot, Sprawl, Junk penalties",
-                        "type": "number",
-                        "min": "0",
-                        "max": "8"
+                        "title": "Robot, rommel of uitvouwstrafpunten",
+                        "options": [{
+                            "value": "0",
+                            "title": "0"
+                        }, {
+                            "value": "1",
+                            "title": "1"
+                        }, {
+                            "value": "2",
+                            "title": "2"
+                        }, {
+                            "value": "3",
+                            "title": "3"
+                        }, {
+                            "value": "4",
+                            "title": "4"
+                        }, {
+                            "value": "5",
+                            "title": "5"
+                        }, {
+                            "value": "6",
+                            "title": "6"
+                        }, {
+                            "value": "7",
+                            "title": "7"
+                        }, {
+                            "value": "8",
+                            "title": "8"
+                        }],
+                        "type": "enum"
                     }],
                     "score": [function(penalties_objective) {
                         if (penalties_objective === '0') {
@@ -1443,6 +894,7 @@ define('services/ng-challenge',[
                     }]
                 }]
             };
+
 
 
 
