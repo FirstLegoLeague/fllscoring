@@ -60,10 +60,10 @@ js/views/teams.js
 components/angular/angular.min.js
 components/angular-bootstrap/ui-bootstrap-tpls.js
 components/angular-sanitize/angular-sanitize.min.js
+components/angular-touch/angular-touch.min.js
 components/bootstrap-css/css/bootstrap.min.css
 #components/bootstrap-css/fonts/glyphicons-halflings-regular.woff
 #components/bootstrap-css/fonts/glyphicons-halflings-regular.ttf
-components/fastclick/lib/fastclick.js
 components/font-awesome/css/font-awesome.min.css
 components/jquery/jquery.min.js
 components/q/q.js

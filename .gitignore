@@ -14,15 +14,12 @@ src/components/*/*
 !src/components/angular/angular*.js
 !src/components/angular-sanitize/angular-sanitize*.js
 !src/components/angular-mocks/angular*.js
+!src/components/angular-touch/angular*.js
 !src/components/angular-bootstrap/*.js
 
 !src/components/bootstrap-css/css
 !src/components/bootstrap-css/img
 !src/components/bootstrap-css/js
-
-
-!src/components/fastclick/lib
-!src/components/fastclick/lib/fastclick.js
 
 !src/components/font-awesome/css
 !src/components/font-awesome/font

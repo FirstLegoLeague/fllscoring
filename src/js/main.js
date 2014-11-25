@@ -1,5 +1,4 @@
 define([
-    'fastclick',
     'services/log',
     'views/settings',
     'views/teams',
@@ -14,20 +13,15 @@ define([
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular-bootstrap',
+    'angular-touch',
     'angular-sanitize',
     'angular'
-],function(FastClick,log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
+],function(log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
     log('device ready');
 
     // fsTest();
     // dbTest();
-
-    //initiate fastclick
-    $(function() {
-        FastClick.attach(document.body);
-    });
-
 
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
@@ -70,6 +64,7 @@ define([
         'main',
         'ui.bootstrap',
         'ngSanitize',
+        'ngTouch',
         settings.name,
         teams.name,
         scoresheet.name,
