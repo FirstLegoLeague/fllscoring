@@ -1,11 +1,11 @@
 CACHE MANIFEST
-#2014-11-25 1230
+#2014-11-25 1932
 
 CACHE:
 index.html
-scoring.html
+#scoring.html
 views/main.html
-views/mainScoring.html
+#views/mainScoring.html
 views/ranking.html
 views/scores.html
 views/scoresheet.html
