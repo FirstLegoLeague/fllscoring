@@ -81,6 +81,7 @@ table {
         height: 100%;
         float: left;
         overflow: auto;
+        -webkit-overflow-scrolling: touch;
         overflow-scrolling: touch;
     }
     .viewMain.teams {
@@ -134,13 +135,13 @@ table {
         background-color: white;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
-        opacity: 0;
+        overflow-scrolling: touch;
         position: absolute;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
-        -webkit-transition: opacity 0.2s;
+        display: none;
     }
 
     .viewMain.teams .view-teams,
@@ -148,8 +149,7 @@ table {
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
-        opacity: 1;
-        z-index: 2;
+        display: block;
     }
 
     .panel, #teams {
@@ -186,22 +186,21 @@ table {
         background-color: white;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
-        opacity: 0;
+        overflow-scrolling: touch;
         position: absolute;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
         padding: 0 10px;
-        -webkit-transition: opacity 0.2s;
+        display: none;
     }
     .viewMain.teams .view-teams,
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
     .viewMain.settings .view-settings {
-        opacity: 1;
-        z-index: 2;
+        display: block;
     }
 
     /*.panel, #teams {

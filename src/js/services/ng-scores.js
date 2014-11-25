@@ -349,6 +349,16 @@ define('services/ng-scores',[
             });
         };
 
+        function clearValidationErrors() {
+            this.validationErrors.splice(0, this.validationErrors.length);
+            $rootScope.$broadcast('validationError',this.validationErrors);
+        }
+
+        function addValidationError(error) {
+            this.validationErrors.push(error);
+            $rootScope.$broadcast('validationError',this.validationErrors);
+        }
+
         Scores.prototype._update = function() {
             if (this._updating > 0) {
                 return;
@@ -359,7 +369,7 @@ define('services/ng-scores',[
 
             // Clear existing properties
             this.scores.splice(0, this.scores.length); // clear without creating new object
-            this.validationErrors.splice(0, this.validationErrors.length);
+            clearValidationErrors.call(this);
             var k;
             for (k in board) {
                 if (!board.hasOwnProperty(k)) {
@@ -520,6 +530,21 @@ define('services/ng-scores',[
                 return result;
             }
 
+            function createSortedScores(teamEntry) {
+                teamEntry.sortedScores = teamEntry.scores.slice(0); // create a copy
+                teamEntry.sortedScores.sort(scoreCompare);
+                teamEntry.highest = teamEntry.sortedScores[0];
+            }
+
+            function calculateRank(state,teamEntry) {
+                if (state.lastScores === null || scoresCompare(state.lastScores, teamEntry.sortedScores) !== 0) {
+                    state.rank++;
+                }
+                state.lastScores = teamEntry.sortedScores;
+                teamEntry.rank = state.rank;
+                return state;
+            }
+
             // Sort by scores and compute rankings
             for (var stageId in board) {
                 if (!board.hasOwnProperty(stageId)) {
@@ -528,31 +553,22 @@ define('services/ng-scores',[
                 var stage = board[stageId];
 
                 // Create sorted scores and compute highest score per team
-                stage.forEach(function(teamEntry) {
-                    teamEntry.sortedScores = teamEntry.scores.slice(0); // create a copy
-                    teamEntry.sortedScores.sort(scoreCompare);
-                    teamEntry.highest = teamEntry.sortedScores[0];
-                });
+                stage.forEach(createSortedScores);
 
                 // Sort teams based on sorted scores
                 stage.sort(entryCompare);
 
                 // Compute ranking, assigning equal rank to equal scores
-                var rank = 0;
-                var lastScores = null;
-                stage.forEach(function(teamEntry) {
-                    if (lastScores === null || scoresCompare(lastScores, teamEntry.sortedScores) !== 0) {
-                        rank++;
-                    }
-                    lastScores = teamEntry.sortedScores;
-                    teamEntry.rank = rank;
+                stage.reduce(calculateRank,{
+                    rank: 0,
+                    lastScores: null
                 });
             }
 
             // Update validation errors (useful for views)
             this.scores.forEach(function(score) {
                 if (score.error) {
-                    self.validationErrors.push(score.error);
+                    addValidationError.call(self,score.error);
                 }
             });
         };

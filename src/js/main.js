@@ -1,5 +1,4 @@
 define([
-    'fastclick',
     'services/log',
     'views/settings',
     'views/teams',
@@ -14,33 +13,32 @@ define([
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular-bootstrap',
+    'angular-touch',
     'angular-sanitize',
     'angular'
-],function(FastClick,log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
+],function(log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
     log('device ready');
 
     // fsTest();
     // dbTest();
 
-    //initiate fastclick
-    $(function() {
-        FastClick.attach(document.body);
-    });
-
-
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
     angular.module('main',[]).controller('mainCtrl',[
-        '$scope', '$scores',
-        function($scope, $scores) {
+        '$scope',
+        function($scope) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
             $scope.scoringView = 'views/mainScoring.html';
             $scope.pages = ['teams','scoresheet','scores','ranking','settings'];
             $scope.scoringPages = ['scoresheet','settings'];
             $scope.currentPage = $scope.pages[1];
-            $scope.validationErrors = $scores.validationErrors;
+            $scope.validationErrors = [];
+
+            $scope.$on('validationError',function(e,validationErrors) {
+                $scope.validationErrors = validationErrors;
+            });
 
             $scope.setPage = function(page) {
                 $scope.currentPage = page;
@@ -48,7 +46,7 @@ define([
 
             $scope.setPlatform = function(platform) {
                 $scope.platform = platform;
-            }
+            };
 
             $scope.containerClass = function(w,h) {
                 w = w();
@@ -72,6 +70,7 @@ define([
         'main',
         'ui.bootstrap',
         'ngSanitize',
+        'ngTouch',
         settings.name,
         teams.name,
         scoresheet.name,
