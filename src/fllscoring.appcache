@@ -3,9 +3,9 @@ CACHE MANIFEST
 
 CACHE:
 index.html
-#scoring.html
+scoring.html
 views/main.html
-#views/mainScoring.html
+views/mainScoring.html
 views/ranking.html
 views/scores.html
 views/scoresheet.html
