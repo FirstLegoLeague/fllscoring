@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
     });
 });
 
-
+//reading the "file system"
 app.get(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
     fs.stat(path, function(err, stat) {
@@ -106,6 +106,7 @@ function writeFile(path, contents, cb) {
     });
 }
 
+// writing the "file system"
 app.post(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
     writeFile(path, req.body, function(err) {
@@ -117,6 +118,7 @@ app.post(/^\/fs\/(.*)$/, function(req, res) {
     });
 });
 
+// deleting in the "file system"
 app.delete(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
     fs.unlink(path, function(err) {
