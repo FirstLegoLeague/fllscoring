@@ -26,13 +26,17 @@ define([
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
     angular.module('main',[]).controller('mainCtrl',[
-        '$scope', '$scores',
-        function($scope, $scores) {
+        '$scope',
+        function($scope) {
             log('init main ctrl');
             $scope.mainView = 'views/main.html';
             $scope.pages = ['teams','scoresheet','scores','ranking','settings'];
             $scope.currentPage = $scope.pages[1];
-            $scope.validationErrors = $scores.validationErrors;
+            $scope.validationErrors = [];
+
+            $scope.$on('validationError',function(e,validationErrors) {
+                $scope.validationErrors = validationErrors;
+            });
 
             $scope.setPage = function(page) {
                 $scope.currentPage = page;
