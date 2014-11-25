@@ -40,7 +40,7 @@ define([
 
             $scope.setPlatform = function(platform) {
                 $scope.platform = platform;
-            }
+            };
 
             $scope.containerClass = function(w,h) {
                 w = w();
