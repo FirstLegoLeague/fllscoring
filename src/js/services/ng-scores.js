@@ -229,17 +229,26 @@ define('services/ng-scores',[
             this._update();
         };
 
+        function sanitize(score) {
+            // Convert 'dirty' input score to a representation that we can store
+            // on a filesystem. This means e.g. not storing denormalized version of
+            // team and stage, but only their ID's. Additionally, forces values to be
+            // of the right type where possible.
+            return {
+                file: (score.file !== undefined && score.file !== null) ? String(score.file) : "",
+                teamNumber: parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10),
+                stageId: String((score.stageId !== undefined) ? score.stageId : score.stage.id),
+                round: parseInt(score.round, 10),
+                score: score.score, // can be Number, null, "dnc", etc.
+                originalScore: parseInt(score.originalScore !== undefined ? score.originalScore : score.score, 10),
+                edited: score.edited !== undefined ? String(score.edited) : undefined // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
+            };
+        }
+
         Scores.prototype.add = function(score) {
             // Create a copy of the score, in case the
             // original score is being modified...
-            this._rawScores.push({
-                file: score.file,
-                teamNumber: parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10),
-                stageId: (score.stageId !== undefined) ? score.stageId : score.stage.id,
-                round: score.round,
-                score: score.score,
-                originalScore: score.originalScore !== undefined ? score.originalScore : score.score
-            });
+            this._rawScores.push(sanitize(score));
             this._update();
         };
 
@@ -250,18 +259,12 @@ define('services/ng-scores',[
          * the score as modified.
          */
         Scores.prototype.update = function(index, score) {
-            var old = this._rawScores[index];
-            if (!old) {
+            if (index < 0 || index >= this._rawScores.length) {
                 throw new RangeError("unknown score index: " + index);
             }
-            // Note: we leave eg. originalScore intact, so _update() will
-            // mark it as modified.
-            old.file = score.file;
-            old.teamNumber = parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10);
-            old.stageId = (score.stageId !== undefined) ? score.stageId : score.stage.id;
-            old.round = score.round;
-            old.score = score.score;
-            old.edited = (new Date()).toString();
+            var newScore = sanitize(score);
+            newScore.edited = (new Date()).toString();
+            this._rawScores.splice(index, 1, newScore);
             this._update();
         };
 
@@ -380,11 +383,13 @@ define('services/ng-scores',[
                 // additional info
                 var s = {
                     file: _score.file,
+                    teamNumber: _score.teamNumber,
                     team: $teams.get(_score.teamNumber),
                     stage: $stages.get(_score.stageId),
                     round: _score.round,
                     score: _score.score,
                     originalScore: _score.originalScore,
+                    edited: _score.edited,
                     modified: false,
                     error: null
                 };

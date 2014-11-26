@@ -25,22 +25,21 @@ define('views/scores',[
             };
             $scope.editScore = function(index) {
                 var score = $scores.scores[index];
-                score.teamNumber = score.team.number;
                 score.$editing = true;
             };
 
             $scope.finishEditScore = function(index) {
+                // The score entry is edited 'inline', then used to
+                // replace the entry in the scores list and its storage.
+                // Because scores are always 'sanitized' before storing,
+                // the $editing flag is automatically discarded.
                 var score = $scores.scores[index];
-                score.team = $teams.get(score.teamNumber);
-                if (!score.team) {
-                    alert('Team number not found');
-                    return;
+                try {
+                    $scores.update(score.index, score);
+                    $scores.save();
+                } catch(e) {
+                    alert("Error updating score: " + e);
                 }
-                score.round = parseInt(score.round,10);
-                score.score = parseInt(score.score,10);
-                delete score.$editing;
-                $scores.update(score.index,score);
-                $scores.save();
             };
 
             $scope.cancelEditScore = function() {
