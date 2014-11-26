@@ -385,6 +385,7 @@ define('services/ng-scores',[
                     file: _score.file,
                     teamNumber: _score.teamNumber,
                     team: $teams.get(_score.teamNumber),
+                    stageId: _score.stageId,
                     stage: $stages.get(_score.stageId),
                     round: _score.round,
                     score: _score.score,

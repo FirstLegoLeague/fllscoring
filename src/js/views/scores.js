@@ -6,14 +6,15 @@ define('views/scores',[
 ],function(log) {
     var moduleName = 'scores';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$scores','$teams',
-        function($scope,$scores,$teams) {
+        '$scope', '$scores','$teams','$stages',
+        function($scope,$scores,$teams,$stages) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
             $scope.rev = true;
 
             $scope.scores = $scores.scores;
+            $scope.stages = $stages.stages;
 
             $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : defaultSort;

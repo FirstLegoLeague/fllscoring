@@ -15,7 +15,8 @@ describe('scores', function() {
             controller = $controller('scoresCtrl', {
                 '$scope': $scope,
                 '$scores': scoresMock,
-                '$teams': teamsMock
+                '$teams': teamsMock,
+                '$stages': stagesMock
             });
         });
     });
