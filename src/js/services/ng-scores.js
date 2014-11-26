@@ -349,16 +349,6 @@ define('services/ng-scores',[
             });
         };
 
-        function clearValidationErrors() {
-            this.validationErrors.splice(0, this.validationErrors.length);
-            $rootScope.$broadcast('validationError',this.validationErrors);
-        }
-
-        function addValidationError(error) {
-            this.validationErrors.push(error);
-            $rootScope.$broadcast('validationError',this.validationErrors);
-        }
-
         Scores.prototype._update = function() {
             if (this._updating > 0) {
                 return;
@@ -369,7 +359,6 @@ define('services/ng-scores',[
 
             // Clear existing properties
             this.scores.splice(0, this.scores.length); // clear without creating new object
-            clearValidationErrors.call(this);
             var k;
             for (k in board) {
                 if (!board.hasOwnProperty(k)) {
@@ -566,11 +555,13 @@ define('services/ng-scores',[
             }
 
             // Update validation errors (useful for views)
+            this.validationErrors.splice(0, this.validationErrors.length);
             this.scores.forEach(function(score) {
                 if (score.error) {
-                    addValidationError.call(self,score.error);
+                    self.validationErrors.push(score.error);
                 }
             });
+            $rootScope.$broadcast('validationError', this.validationErrors);
         };
 
         return new Scores();
