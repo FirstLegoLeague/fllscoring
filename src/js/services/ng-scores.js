@@ -446,25 +446,36 @@ define('services/ng-scores',[
                 }
                 if (!bteam) {
                     var initialScores = new Array(s.stage.rounds);
+                    var initialEntries = new Array(s.stage.rounds);
                     for (i = 0; i < s.stage.rounds; i++) {
                         initialScores[i] = null;
+                        initialEntries[i] = null;
                     }
                     bteam = {
                         team: s.team,
                         scores: initialScores,
                         rank: null,
                         highest: null,
+                        entries: initialEntries,
                     };
                     bstage.push(bteam);
                 }
 
                 // Add score to team's entry
                 if (bteam.scores[s.round - 1] !== null) {
-                    // TODO: mark other scores too
-                    s.error = new DuplicateScoreError(bteam.team, s.stage, s.round);
+                    // Find the original entry with which this entry collides,
+                    // then assign an error to that entry and to ourselves.
+                    var dupEntry = bteam.entries[s.round - 1];
+                    var e = dupEntry.error;
+                    if (!e) {
+                        e = new DuplicateScoreError(bteam.team, s.stage, s.round);
+                        dupEntry.error = e;
+                    }
+                    s.error = e;
                     return;
                 }
                 bteam.scores[s.round - 1] = s.score;
+                bteam.entries[s.round - 1] = s;
             });
 
             // Compares two scores.
