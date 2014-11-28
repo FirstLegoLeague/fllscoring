@@ -5,8 +5,17 @@ var mkdirp = require("mkdirp");
 var dirname = require('path').dirname;
 var argv = require('minimist')(process.argv.slice(2));
 var port = argv.p||1390;
+var basicAuth = argv.u;
 
 app.use(express.static('src'));
+
+//set up basic authentication
+if (basicAuth) {
+    var pair = basicAuth.split(':');
+    var user = pair[0];
+    var pass = pair[1];
+    app.use(express.basicAuth(user, pass));
+}
 
 //allow cors headers
 app.use(function(req, res, next) {
@@ -30,7 +39,7 @@ app.use(function(req, res, next) {
     });
 });
 
-
+//reading the "file system"
 app.get(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
     fs.stat(path, function(err, stat) {
@@ -97,6 +106,7 @@ function writeFile(path, contents, cb) {
     });
 }
 
+// writing the "file system"
 app.post(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
     writeFile(path, req.body, function(err) {
@@ -108,6 +118,7 @@ app.post(/^\/fs\/(.*)$/, function(req, res) {
     });
 });
 
+// deleting in the "file system"
 app.delete(/^\/fs\/(.*)$/, function(req, res) {
     var path = __dirname + '/data/' + req.params[0];
     fs.unlink(path, function(err) {

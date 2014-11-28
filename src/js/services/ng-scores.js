@@ -229,17 +229,26 @@ define('services/ng-scores',[
             this._update();
         };
 
+        function sanitize(score) {
+            // Convert 'dirty' input score to a representation that we can store
+            // on a filesystem. This means e.g. not storing denormalized version of
+            // team and stage, but only their ID's. Additionally, forces values to be
+            // of the right type where possible.
+            return {
+                file: (score.file !== undefined && score.file !== null) ? String(score.file) : "",
+                teamNumber: parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10),
+                stageId: String((score.stageId !== undefined) ? score.stageId : score.stage.id),
+                round: parseInt(score.round, 10),
+                score: score.score, // can be Number, null, "dnc", etc.
+                originalScore: parseInt(score.originalScore !== undefined ? score.originalScore : score.score, 10),
+                edited: score.edited !== undefined ? String(score.edited) : undefined // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
+            };
+        }
+
         Scores.prototype.add = function(score) {
             // Create a copy of the score, in case the
             // original score is being modified...
-            this._rawScores.push({
-                file: score.file,
-                teamNumber: parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10),
-                stageId: (score.stageId !== undefined) ? score.stageId : score.stage.id,
-                round: score.round,
-                score: score.score,
-                originalScore: score.originalScore !== undefined ? score.originalScore : score.score
-            });
+            this._rawScores.push(sanitize(score));
             this._update();
         };
 
@@ -250,18 +259,12 @@ define('services/ng-scores',[
          * the score as modified.
          */
         Scores.prototype.update = function(index, score) {
-            var old = this._rawScores[index];
-            if (!old) {
+            if (index < 0 || index >= this._rawScores.length) {
                 throw new RangeError("unknown score index: " + index);
             }
-            // Note: we leave eg. originalScore intact, so _update() will
-            // mark it as modified.
-            old.file = score.file;
-            old.teamNumber = parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10);
-            old.stageId = (score.stageId !== undefined) ? score.stageId : score.stage.id;
-            old.round = score.round;
-            old.score = score.score;
-            old.edited = (new Date()).toString();
+            var newScore = sanitize(score);
+            newScore.edited = (new Date()).toString();
+            this._rawScores.splice(index, 1, newScore);
             this._update();
         };
 
@@ -359,7 +362,6 @@ define('services/ng-scores',[
 
             // Clear existing properties
             this.scores.splice(0, this.scores.length); // clear without creating new object
-            this.validationErrors.splice(0, this.validationErrors.length);
             var k;
             for (k in board) {
                 if (!board.hasOwnProperty(k)) {
@@ -381,11 +383,14 @@ define('services/ng-scores',[
                 // additional info
                 var s = {
                     file: _score.file,
+                    teamNumber: _score.teamNumber,
                     team: $teams.get(_score.teamNumber),
+                    stageId: _score.stageId,
                     stage: $stages.get(_score.stageId),
                     round: _score.round,
                     score: _score.score,
                     originalScore: _score.originalScore,
+                    edited: _score.edited,
                     modified: false,
                     error: null
                 };
@@ -441,25 +446,36 @@ define('services/ng-scores',[
                 }
                 if (!bteam) {
                     var initialScores = new Array(s.stage.rounds);
+                    var initialEntries = new Array(s.stage.rounds);
                     for (i = 0; i < s.stage.rounds; i++) {
                         initialScores[i] = null;
+                        initialEntries[i] = null;
                     }
                     bteam = {
                         team: s.team,
                         scores: initialScores,
                         rank: null,
                         highest: null,
+                        entries: initialEntries,
                     };
                     bstage.push(bteam);
                 }
 
                 // Add score to team's entry
                 if (bteam.scores[s.round - 1] !== null) {
-                    // TODO: mark other scores too
-                    s.error = new DuplicateScoreError(bteam.team, s.stage, s.round);
+                    // Find the original entry with which this entry collides,
+                    // then assign an error to that entry and to ourselves.
+                    var dupEntry = bteam.entries[s.round - 1];
+                    var e = dupEntry.error;
+                    if (!e) {
+                        e = new DuplicateScoreError(bteam.team, s.stage, s.round);
+                        dupEntry.error = e;
+                    }
+                    s.error = e;
                     return;
                 }
                 bteam.scores[s.round - 1] = s.score;
+                bteam.entries[s.round - 1] = s;
             });
 
             // Compares two scores.
@@ -520,6 +536,21 @@ define('services/ng-scores',[
                 return result;
             }
 
+            function createSortedScores(teamEntry) {
+                teamEntry.sortedScores = teamEntry.scores.slice(0); // create a copy
+                teamEntry.sortedScores.sort(scoreCompare);
+                teamEntry.highest = teamEntry.sortedScores[0];
+            }
+
+            function calculateRank(state,teamEntry) {
+                if (state.lastScores === null || scoresCompare(state.lastScores, teamEntry.sortedScores) !== 0) {
+                    state.rank++;
+                }
+                state.lastScores = teamEntry.sortedScores;
+                teamEntry.rank = state.rank;
+                return state;
+            }
+
             // Sort by scores and compute rankings
             for (var stageId in board) {
                 if (!board.hasOwnProperty(stageId)) {
@@ -528,33 +559,26 @@ define('services/ng-scores',[
                 var stage = board[stageId];
 
                 // Create sorted scores and compute highest score per team
-                stage.forEach(function(teamEntry) {
-                    teamEntry.sortedScores = teamEntry.scores.slice(0); // create a copy
-                    teamEntry.sortedScores.sort(scoreCompare);
-                    teamEntry.highest = teamEntry.sortedScores[0];
-                });
+                stage.forEach(createSortedScores);
 
                 // Sort teams based on sorted scores
                 stage.sort(entryCompare);
 
                 // Compute ranking, assigning equal rank to equal scores
-                var rank = 0;
-                var lastScores = null;
-                stage.forEach(function(teamEntry) {
-                    if (lastScores === null || scoresCompare(lastScores, teamEntry.sortedScores) !== 0) {
-                        rank++;
-                    }
-                    lastScores = teamEntry.sortedScores;
-                    teamEntry.rank = rank;
+                stage.reduce(calculateRank,{
+                    rank: 0,
+                    lastScores: null
                 });
             }
 
             // Update validation errors (useful for views)
+            this.validationErrors.splice(0, this.validationErrors.length);
             this.scores.forEach(function(score) {
                 if (score.error) {
                     self.validationErrors.push(score.error);
                 }
             });
+            $rootScope.$broadcast('validationError', this.validationErrors);
         };
 
         return new Scores();

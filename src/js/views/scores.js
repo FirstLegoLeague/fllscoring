@@ -6,14 +6,15 @@ define('views/scores',[
 ],function(log) {
     var moduleName = 'scores';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$scores','$teams',
-        function($scope,$scores,$teams) {
+        '$scope', '$scores','$teams','$stages',
+        function($scope,$scores,$teams,$stages) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
             $scope.rev = true;
 
             $scope.scores = $scores.scores;
+            $scope.stages = $stages.stages;
 
             $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : defaultSort;
@@ -25,22 +26,21 @@ define('views/scores',[
             };
             $scope.editScore = function(index) {
                 var score = $scores.scores[index];
-                score.teamNumber = score.team.number;
                 score.$editing = true;
             };
 
             $scope.finishEditScore = function(index) {
+                // The score entry is edited 'inline', then used to
+                // replace the entry in the scores list and its storage.
+                // Because scores are always 'sanitized' before storing,
+                // the $editing flag is automatically discarded.
                 var score = $scores.scores[index];
-                score.team = $teams.get(score.teamNumber);
-                if (!score.team) {
-                    alert('Team number not found');
-                    return;
+                try {
+                    $scores.update(score.index, score);
+                    $scores.save();
+                } catch(e) {
+                    alert("Error updating score: " + e);
                 }
-                score.round = parseInt(score.round,10);
-                score.score = parseInt(score.score,10);
-                delete score.$editing;
-                $scores.update(score.index,score);
-                $scores.save();
             };
 
             $scope.cancelEditScore = function() {

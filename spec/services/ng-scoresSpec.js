@@ -146,6 +146,7 @@ describe('ng-scores',function() {
             $scores.update(0, mockScore);
             expect($scores.scores[0].score).toEqual(151);
             expect($scores.scores[0].modified).toBeTruthy();
+            expect($scores.scores[0].edited).toBeTruthy();
         });
     });
 

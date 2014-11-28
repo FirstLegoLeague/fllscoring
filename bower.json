@@ -22,10 +22,10 @@
     "font-awesome": "~3.2.1",
     "idbwrapper": "~1.3.0",
     "signature-pad": "https://github.com/thomasjbradley/signature-pad/archive/master.zip",
-    "fastclick": "~1.0.2",
     "angular": "~1.2.20",
     "angular-mocks": "~1.2.20",
     "angular-bootstrap": "~0.11.0",
-    "angular-sanitize": "~1.3.3"
+    "angular-sanitize": "~1.3.3",
+    "angular-touch": "~1.3.4"
   }
 }
