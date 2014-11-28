@@ -131,7 +131,7 @@ define('views/scoresheet',[
                     $scope.stage !== undefined && $scope.stage !== null &&
                     $scope.round !== undefined && $scope.round !== null &&
                     $scope.team !== undefined && $scope.team !== null &&
-                    $scope.signature !== undefined && $scope.signature !== null &&
+                    // $scope.signature !== undefined && $scope.signature !== null &&
                     $scope.missions.every(function(mission) {
                         return mission.objectives.every(function(objective) {
                           return objective.value !== undefined && objective.value !== null;
