@@ -229,26 +229,68 @@ define('services/ng-scores',[
             this._update();
         };
 
-        function sanitize(score) {
-            // Convert 'dirty' input score to a representation that we can store
-            // on a filesystem. This means e.g. not storing denormalized version of
-            // team and stage, but only their ID's. Additionally, forces values to be
-            // of the right type where possible.
+        /**
+         * Convert 'dirty' score value to correct type used during score
+         * computations etc.
+         * Valid inputs are fixed strings like "dnc" (Did Not Compete) and
+         * "dnq" (Did Not Qualify) in any combination of upper/lower case,
+         * null (dummy entry, maybe because score was removed) and numbers
+         * (also as strings). Empty string is converted to null.
+         * Invalid input is simply returned (and later marked as invalid
+         * during scoreboard computation).
+         */
+        function sanitizeScore(score) {
+            // Passthrough for already valid inputs
+            if (typeof score === "number")
+                return score;
+            switch (score) {
+                case "dnc":
+                case "dsq":
+                case null:
+                    return score;
+            }
+            // Accept numbers stored as strings
+            var n = parseInt(score, 10);
+            if (String(n) === score)
+                return n;
+            // Try to convert some spellings of accepted strings
+            if (typeof score === "string") {
+                var s = score.toLowerCase();
+                switch (s) {
+                    case "dnc":
+                    case "dsq":
+                        return s;
+                    case "":
+                        return null;
+                }
+            }
+            // Pass through the rest
+            log("Warning: invalid score " + score);
+            return score;
+        }
+
+        /**
+         * Convert 'dirty' input score entry to a representation that we can store
+         * on a filesystem. This means e.g. not storing denormalized version of
+         * team and stage, but only their ID's. Additionally, forces values to be
+         * of the right type where possible.
+         */
+        function sanitizeEntry(entry) {
             return {
-                file: (score.file !== undefined && score.file !== null) ? String(score.file) : "",
-                teamNumber: parseInt((score.teamNumber !== undefined) ? score.teamNumber : score.team.number, 10),
-                stageId: String((score.stageId !== undefined) ? score.stageId : score.stage.id),
-                round: parseInt(score.round, 10),
-                score: score.score, // can be Number, null, "dnc", etc.
-                originalScore: parseInt(score.originalScore !== undefined ? score.originalScore : score.score, 10),
-                edited: score.edited !== undefined ? String(score.edited) : undefined // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
+                file: (entry.file !== undefined && entry.file !== null) ? String(entry.file) : "",
+                teamNumber: parseInt((entry.teamNumber !== undefined) ? entry.teamNumber : entry.team.number, 10),
+                stageId: String((entry.stageId !== undefined) ? entry.stageId : entry.stage.id),
+                round: parseInt(entry.round, 10),
+                score: sanitizeScore(entry.score), // can be Number, null, "dnc", etc.
+                originalScore: parseInt(entry.originalScore !== undefined ? entry.originalScore : entry.score, 10),
+                edited: entry.edited !== undefined ? String(entry.edited) : undefined // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
             };
         }
 
         Scores.prototype.add = function(score) {
             // Create a copy of the score, in case the
             // original score is being modified...
-            this._rawScores.push(sanitize(score));
+            this._rawScores.push(sanitizeEntry(score));
             this._update();
         };
 
@@ -262,7 +304,7 @@ define('services/ng-scores',[
             if (index < 0 || index >= this._rawScores.length) {
                 throw new RangeError("unknown score index: " + index);
             }
-            var newScore = sanitize(score);
+            var newScore = sanitizeEntry(score);
             newScore.edited = (new Date()).toString();
             this._rawScores.splice(index, 1, newScore);
             this._update();
