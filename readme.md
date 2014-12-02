@@ -75,7 +75,12 @@ See [case issues](https://github.com/FirstLegoLeague/fllscoring/issues?direction
 
 Help is welcome. Please comment on the case if you plan to start working on one.
 
+License
+--------
+This projected is licensed under the terms of the [GNU GPL v2.0 licenses](https://raw.githubusercontent.com/FirstLegoLeague/fllscoring/master/LICENSE.txt)
+
 Authors
 --------
 
 - [Rikkert Koppes](mailto:rikkert@rikkertkoppes.com)
+- [Kenny Meesters](maito:k.meesters@gmail.com)
