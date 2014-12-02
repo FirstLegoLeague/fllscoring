@@ -9,7 +9,15 @@ beforeEach(function() {
             var actual = this.actual;
             var notText = this.isNot ? " not" : "";
             this.message = function() {
-                return "Expected " + actual.constructor.name + notText + " is instance of " + expectedInstance.name;
+                var actualType;
+                if (actual === null) {
+                    actualType = "null";
+                } else if (actual === undefined) {
+                    actualType = "undefined";
+                } else {
+                    actualType = actual.constructor.name;
+                }
+                return "Expected " + actualType + notText + " is instance of " + expectedInstance.name;
             };
             return actual instanceof expectedInstance;
         }
