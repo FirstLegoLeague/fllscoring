@@ -12,9 +12,11 @@ build/
 src/components/*/*
 
 !src/components/angular/angular*.js
+!src/components/angular/angular*.map
 !src/components/angular-sanitize/angular-sanitize*.js
 !src/components/angular-mocks/angular*.js
 !src/components/angular-touch/angular*.js
+!src/components/angular-touch/angular*.map
 !src/components/angular-bootstrap/*.js
 
 !src/components/bootstrap-css/css
