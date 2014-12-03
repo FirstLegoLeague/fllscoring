@@ -83,6 +83,7 @@ table {
         overflow: auto;
         -webkit-overflow-scrolling: touch;
         overflow-scrolling: touch;
+        padding-bottom: 40px;
     }
     .viewMain.teams {
         transform: translateX(0);
@@ -142,6 +143,7 @@ table {
         right: 0;
         bottom: 0;
         display: none;
+        padding-bottom: 40px;
     }
 
     .viewMain.teams .view-teams,
@@ -194,6 +196,7 @@ table {
         bottom: 0;
         padding: 0 10px;
         display: none;
+        padding-bottom: 40px;
     }
     .viewMain.teams .view-teams,
     .viewMain.scoresheet .view-scoresheet,
