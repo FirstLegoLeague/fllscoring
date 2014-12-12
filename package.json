@@ -29,7 +29,8 @@
     "express": "^4.10.4",
     "js-beautify": "^1.5.4",
     "minimist": "^1.1.0",
-    "mkdirp": "^0.5.0",
-    "xml2js": "^0.4.4"
+    "mkdirp": "~0.5.0",
+    "xml2js": "^0.4.4",
+    "basic-auth-connect": "~1.0.0"
   }
 }
