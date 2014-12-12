@@ -365,7 +365,7 @@
                 <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="2"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="2"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="2"  /> <percentage amount="0" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="2"  /> <percentage amount="0" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="2"  /> <error message="engagement-max-error" /> </case>
 
                 <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="3"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="3"  /> <percentage amount="0" /> </case>
@@ -376,7 +376,7 @@
                 <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="3"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="3"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="3"  /> <percentage amount="0" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="3"  /> <percentage amount="0" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="3"  /> <error message="engagement-max-error" /> </case>
 
                 <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="4"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="4"  /> <percentage amount="0" /> </case>
@@ -387,7 +387,7 @@
                 <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="4"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="4"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="4"  /> <percentage amount="0" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="4"  /> <percentage amount="0" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="4"  /> <error message="engagement-max-error" /> </case>
 
                 <case> <index-ref value="no"  /> <index-ref value="na" />       <index-ref value="5"  /> <error message="engagement-na-error" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="red10" />    <index-ref value="5"  /> <percentage amount="0" /> </case>
@@ -398,7 +398,7 @@
                 <case> <index-ref value="no"  /> <index-ref value="blue40" />   <index-ref value="5"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="green46" />  <index-ref value="5"  /> <percentage amount="0" /> </case>
                 <case> <index-ref value="no"  /> <index-ref value="orange52" /> <index-ref value="5"  /> <percentage amount="0" /> </case>
-                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="5"  /> <percentage amount="0" /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="red58" />    <index-ref value="5"  /> <error message="engagement-max-error" /> </case>
 
                 <case> <index-ref value="yes" /> <index-ref value="na" />       <index-ref value="na" /> <percentage amount="0" /> </case>
                 <case> <index-ref value="yes" /> <index-ref value="red10" />    <index-ref value="na" /> <error message="engagement-na-error" /> </case>
