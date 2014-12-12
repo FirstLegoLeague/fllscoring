@@ -8,32 +8,31 @@
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
             <h1>{{field.title}}</h1>
             <section class="panel">
-                <h2>Team & round</h2>
-                    <table>
-                        <tr>
-                            <td>
-                                <button class="btn btn-select" ng-click="openTeamModal('lg', teams)"><div class="icon-group"/> Team</button>
-                                <span ng-show="team">({{team.number}}) {{team.name}} </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class="btn btn-select" ng-click="openRoundModal('lg', stages)"><div class="icon-tag"/> Stage &amp; round</button>
-                                <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    </table>
-                    <div id="totalScore">
-                        Total score: {{score()}}
-                    </div>
-                
+                <h2>Team &amp; round</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="btn btn-select" ng-click="openTeamModal('lg', teams)"><div class="icon-group"/> Team</button>
+                            <span ng-show="team">({{team.number}}) {{team.name}} </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-select" ng-click="openRoundModal('lg', stages)"><div class="icon-tag"/> Stage &amp; round</button>
+                            <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+                <div id="totalScore">
+                    Total score: {{score()}}
+                </div>
             </section>
             <form id="scoresheetForm" ng-submit="validateScoresheet()">
                 <section class="panel" ng-repeat="mission in missions" ng-class="{error:mission.error}">
@@ -41,13 +40,12 @@
                     <div>
                         <script type="text/ng-template" id="descriptionModalContent.html">
                             <div class="modal-header">
-								<button class="btn btn-danger btn-dialog" ng-click="cancel()"><div class="icon-remove" /></button>
+                                <button class="btn btn-danger btn-dialog" ng-click="cancel()"><div class="icon-remove" /></button>
                                 <h3 class="modal-title">{{mission.title}}</h3>
                             </div>
                             <div class="modal-body" ng-bind-html="mission.description">
                                {{mission.description}}
                             </div>
-                            
                         </script>
 
                         <div class="description" ng-click="openDescriptionModal('lg', mission)"><div class="icon-question-sign"/></div>
@@ -59,13 +57,13 @@
                     </h2>
                     <div class="objective" ng-repeat="objective in mission.objectives" ng-switch="objective.type">
                         <div>
-			    <span class="field" ng-switch-when="yesno">
+                            <span class="field" ng-switch-when="yesno">
                                 {{objective.title}}
                                 <div class="btn-group">
                                     <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">yes</label>
                                     <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">no</label>
                                 </div>
-			    </span>
+                            </span>
                             <span class="field" ng-switch-when="number">
                                 {{objective.title}}
                                 <span fll-spinner ng-model="objective.value" min="objective.min||0" max="objective.max"></span>
@@ -79,16 +77,16 @@
                             </div>
                         </div>
                     </div>
-					<div ng-show="mission.errors" ng-repeat="error in mission.errors" class="error">
-					<div class="icon-warning-sign" />
+                    <div ng-show="mission.errors" ng-repeat="error in mission.errors" class="error">
+                    <div class="icon-warning-sign" />
                     {{error.message}}</div>
                 </section>
             </form><!-- END of scoresheetForm -->
             <section class="panel">
-                <h2>Team & round</h2>
+                <h2>Team &amp; round</h2>
                     <table>
                         <tr>
-							<td>
+                            <td>
                                 <button class="btn btn-select" ng-click="openTeamModal('lg', teams)"><div class="icon-group"/> Team</button>
                                 <span ng-show="team">({{team.number}}) {{team.name}} </span>
                             </td>
@@ -103,7 +101,6 @@
                     <div id="totalScore">
                         Total score: {{score()}}
                     </div>
-              
             </section>
 
             <section class="panel">
@@ -127,8 +124,7 @@
     <script type="text/ng-template" id="teamModalContent.html">
         <div class="modal-header">
             <button class="btn btn-danger btn-dialog" ng-click="cancel()"><div class="icon-remove" /></button>
-			<h3 class="modal-title">Select a team</h3>
-			
+            <h3 class="modal-title">Select a team</h3>
         </div>
         <div class="modal-body">
 
@@ -153,12 +149,11 @@
         <div class="modal-footer">
             <div class="selectedLbl">Selected: <span ng-show="team">({{team.number}}) {{team.name}} </span></div>
             <button class="btn btn-success" ng-click="ok()"><div class="icon-ok"/>OK</button>
-            
         </div>
     </script>
     <script type="text/ng-template" id="roundModalContent.html">
         <div class="modal-header">
-			<button class="btn btn-danger btn-dialog" ng-click="cancel()"><div class="icon-remove" /></button>
+            <button class="btn btn-danger btn-dialog" ng-click="cancel()"><div class="icon-remove" /></button>
             <h3 class="modal-title">Select a round</h3>
         </div>
         <div class="modal-body">
