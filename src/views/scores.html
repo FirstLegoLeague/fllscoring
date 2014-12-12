@@ -15,7 +15,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tr ng-repeat="score in scores | index | orderBy:sort:rev" ng-class="{error: score.error, warning: score.modified}">
+        <tr ng-repeat="score in scores | index | orderBy:sort:rev" ng-class="{error: score.error, warning: score.modified && !score.error}">
             <td>{{score.index + 1}}</td>
             <td>
                 <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}"></i>

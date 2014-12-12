@@ -83,15 +83,50 @@ describe('ng-scores',function() {
     });
 
     describe('adding scores',function() {
-        it('should add a score to the list',function() {
+        beforeEach(function() {
             $scores.clear();
             expect(filteredScores()).toEqual([]);
+        });
+        it('should add a score to the list', function() {
             $scores.add(mockScore);
             expect(filteredScores()).toEqual([mockScore]);
-            // Duplicate scores are allowed in this stage
+        });
+        it('should allow duplicates', function() {
+            // Duplicate scores are 'allowed' during adding, but
+            // are rejected in scoreboard computation.
+            $scores.add(mockScore);
             $scores.add(mockScore);
             expect(filteredScores()).toEqual([mockScore, mockScore]);
             expect($scores.validationErrors.length).toBeGreaterThan(0);
+        });
+        it('should accept numeric scores as strings', function() {
+            var tmp = angular.copy(mockScore);
+            tmp.score = String(tmp.score);
+            $scores.add(tmp);
+            // Note: the 'accepted' score should really be a number, not a string
+            expect($scores.scores[0].score).toEqual(150);
+            expect($scores.validationErrors.length).toEqual(0);
+        });
+        it('should accept and convert different casing for DNC', function() {
+            var tmp = angular.copy(mockScore);
+            tmp.score = "DnC";
+            $scores.add(tmp);
+            expect($scores.scores[0].score).toEqual("dnc");
+            expect($scores.validationErrors.length).toEqual(0);
+        });
+        it('should accept and convert different casing for DSQ', function() {
+            var tmp = angular.copy(mockScore);
+            tmp.score = "DsQ";
+            $scores.add(tmp);
+            expect($scores.scores[0].score).toEqual("dsq");
+            expect($scores.validationErrors.length).toEqual(0);
+        });
+        it('should reject but convert an empty score', function() {
+            var tmp = angular.copy(mockScore);
+            tmp.score = "";
+            $scores.add(tmp);
+            expect($scores.scores[0].score).toEqual(null);
+            expect($scores.validationErrors.length).toEqual(1);
         });
     });
 
@@ -144,9 +179,19 @@ describe('ng-scores',function() {
             expect($scores.scores[0].score).toEqual(150);
             // ... but updating it should
             $scores.update(0, mockScore);
+            expect($scores.scores[0].originalScore).toEqual(150);
             expect($scores.scores[0].score).toEqual(151);
             expect($scores.scores[0].modified).toBeTruthy();
             expect($scores.scores[0].edited).toBeTruthy();
+        });
+        it('should accept numeric scores as strings',function() {
+            $scores.clear();
+            $scores.add(mockScore);
+            mockScore.score = "151";
+            $scores.update(0, mockScore);
+            // Note: the 'accepted' score should really be a number, not a string
+            expect($scores.scores[0].originalScore).toEqual(150);
+            expect($scores.scores[0].score).toEqual(151);
         });
     });
 
@@ -267,7 +312,7 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 3, score: Infinity },
                 { team: team2, stage: mockStage, round: 1, score: {} },
                 { team: team2, stage: mockStage, round: 2, score: true },
-                { team: team2, stage: mockStage, round: 3, score: "DSQ" }, // not sure whether we should allow this one
+                { team: team2, stage: mockStage, round: 3, score: 10000 },
             ], true);
             $scores.scores.forEach(function(score) {
                 expect(score.error).toBeInstanceOf($scores.InvalidScoreError);

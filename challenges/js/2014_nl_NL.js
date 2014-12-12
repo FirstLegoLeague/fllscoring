@@ -386,181 +386,181 @@
                 return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
             }
             if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '0') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '1') {
                 return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
             }
             if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '1') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '2') {
                 return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
             }
             if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '2') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return new Error("De wijzer kan niet zover draaien")
             }
             if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '3') {
                 return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
             }
             if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '3') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return new Error("De wijzer kan niet zover draaien")
             }
             if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '4') {
                 return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
             }
             if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '4') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return new Error("De wijzer kan niet zover draaien")
             }
             if (yellow_moved === 'no' && dial_major_color === 'na' && ticks_past_major === '5') {
                 return new Error("Er moet of twee keer \"NVT\" of twee keer een waarde worden gekozen")
             }
             if (yellow_moved === 'no' && dial_major_color === 'red10' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange16' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green22' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue28' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red34' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'blue40' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'green46' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'orange52' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return 0
             }
             if (yellow_moved === 'no' && dial_major_color === 'red58' && ticks_past_major === '5') {
-                return new Error("De wijzer blijft op \"NVT\" staan als het gele gedeelte niet geactiveerd is")
+                return new Error("De wijzer kan niet zover draaien")
             }
             if (yellow_moved === 'yes' && dial_major_color === 'na' && ticks_past_major === 'na') {
                 return 0

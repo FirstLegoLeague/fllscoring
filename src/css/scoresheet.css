@@ -7,10 +7,14 @@
 .selectedLbl {
 	float: left;
 	align: left;
+	font-size: 100%;
+	
+}
+.round-label{
+	float: center;
 	font-size: 130%;
 	font-weight: bold;
 }
-
 
 #scoresheet {
     max-width: 900px;
@@ -19,7 +23,14 @@
 
 #scoresheet .btn {
     min-width: 150px;
+	padding: 4px;
     font-size: 18px;
+}
+
+.btn-round {
+	margin: 0px 15px;
+	min-width: 50px;
+	min-height: 50px;
 }
 
 .btn-group {
@@ -30,10 +41,19 @@
 }
 
 .btn-enum {
-    color: #00376c;
-    background: #e2f1ff;
+    color: ##777;
+    background: #f1f8ff;
     font-size: 18px;
     text-shadow: none;
+}
+
+.btn-select{
+	font-weight: normal;
+	font-size: 12px;
+    text-align: left;
+	margin: 0px 15px;
+	min-height: 30px;
+	
 }
 
 .btn-enum:hover, .btn-enum:focus, .btn:hover, .btn:focus {
@@ -42,11 +62,16 @@
 
 .btn-enum.active {
     background: #00376c;
-    color: #94caff;
+    color: #F0F8FF;
+	font-weight: bold;
 }
 
 #save, #submit {
     float: right;
+}
+
+.btn-dialog{
+	float: right;
 }
 
 #totalScore {
@@ -62,7 +87,7 @@
     margin-bottom: 20px;
     background-color: #E5EDF0;
     background-color: rgba(128,128,128,0.1);
-    color: dodgerblue;
+    color: MidnightBlue;
     padding: 10px;
 }
 .panel h2 {
@@ -83,6 +108,9 @@
 .missions .error {
     background-color: crimson;
     color: white;
+	display: block;
+	padding: 3px;
+	
 }
 
 .missions .field {
