@@ -11,7 +11,7 @@ var basicAuthCreds = argv.u;
 app.use(express.static('src'));
 
 //set up basic authentication
-if (basicAuth) {
+if (basicAuthCreds) {
     var pair = basicAuthCreds.split(':');
     var user = pair[0];
     var pass = pair[1];
