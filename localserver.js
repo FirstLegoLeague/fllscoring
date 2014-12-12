@@ -5,16 +5,17 @@ var mkdirp = require("mkdirp");
 var dirname = require('path').dirname;
 var argv = require('minimist')(process.argv.slice(2));
 var port = argv.p||1390;
-var basicAuth = argv.u;
+var basicAuth = require('basic-auth-connect');
+var basicAuthCreds = argv.u;
 
 app.use(express.static('src'));
 
 //set up basic authentication
 if (basicAuth) {
-    var pair = basicAuth.split(':');
+    var pair = basicAuthCreds.split(':');
     var user = pair[0];
     var pass = pair[1];
-    app.use(express.basicAuth(user, pass));
+    app.use(basicAuth(user, pass));
 }
 
 //allow cors headers
