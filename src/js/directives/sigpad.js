@@ -36,10 +36,9 @@ define('directives/sigpad',[
             link: function($scope,element,attrs,ctrl) {
                 var model = $parse(attrs.ngModel);
                 var config = $parse(attrs.fllSigpad)($scope)||{};
-
                 var c = element[0].getElementsByTagName('canvas')[0];
-                c.width = c.clientWidth;
-                c.height = c.clientHeight;
+                c.width = 400;//c.clientWidth;
+                c.height = 200;//c.clientHeight;
 
                 var api = $(element).signaturePad({
                     drawOnly:true,
