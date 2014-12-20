@@ -135,7 +135,7 @@ define('views/scoresheet',[
                     $scope.missions.every(function(mission) {
                         return mission.objectives.every(function(objective) {
                           return objective.value !== undefined && objective.value !== null;
-                        }) && mission.errors.length == 0;
+                        }) && mission.errors.length === 0;
                     });
 
                 // console.log("saveable " + val);
@@ -181,10 +181,10 @@ define('views/scoresheet',[
                 return $fs.write("scoresheets/" + fn,data).then(function() {
                     log('result saved');
                     $scope.discard();
-                    alert('Thanks for submitting a score of '
-                        + data.score
-                        + ' points for team ( ' + data.team.number + ' ) ' + data.team.name
-                        + ' in ' + data.stage.name + ' ' + data.round + '.'
+                    alert('Thanks for submitting a score of ' +
+                        data.score +
+                        ' points for team ( ' + data.team.number + ' ) ' + data.team.name +
+                        ' in ' + data.stage.name + ' ' + data.round + '.'
                     );
                 },function() {
                     alert('unable to write result');
