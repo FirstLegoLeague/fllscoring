@@ -1,12 +1,18 @@
-function createScoresMock() {
+function createScoresMock($q) {
     return {
         scores: [{
-            score: 1
+            score: 1,
+            index: 0
         },{
-            score: 2
+            score: 2,
+            index: 1
         }],
         scoreboard: {},
         remove: jasmine.createSpy('scoreRemoveSpy'),
+        load: jasmine.createSpy('scoreLoadSpy'),
+        pollSheets: jasmine.createSpy('scorePollSheetsSpy').andReturn($q.when()),
+        update: jasmine.createSpy('scoreUpdateSpy'),
+        _update: jasmine.createSpy('score_UpdateSpy'),
         save: jasmine.createSpy('scoreSaveSpy')
     };
 }

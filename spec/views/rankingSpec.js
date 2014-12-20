@@ -13,9 +13,9 @@ describe('ranking', function() {
 
     beforeEach(function() {
         angular.mock.module(module.name);
-        angular.mock.inject(function($controller, $rootScope) {
+        angular.mock.inject(function($controller, $rootScope,$q) {
             $scope = $rootScope.$new();
-            scoresMock = createScoresMock();
+            scoresMock = createScoresMock($q);
             stagesMock = createStagesMock();
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
