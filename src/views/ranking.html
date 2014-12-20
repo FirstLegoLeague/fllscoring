@@ -1,64 +1,67 @@
 <div ng-controller="rankingCtrl">
-    <a ng-repeat-start="stage in stages" class="pull-right" style="margin-top: 1em;" href="{{csvdata[stage.id]}}" download="{{csvname[stage.id]}}"><i class="icon-download-alt"></i> Export</a>
-    <h1 ng-if="stage.rounds > 0">
-        <span class="icon" style="cursor: pointer;" ng-class="{
-            'icon-caret-down':!stage.$collapsed,
-            'icon-caret-right':stage.$collapsed
-        }" ng-click="toggle(stage)"></span>
-        {{stage.name}}
-        <span ng-if="scoreboard[stage.id].length > 0 && stage.$collapsed"
-            style="margin-left: 1em">
-            <small>({{scoreboard[stage.id].length}})</small>
-        </span>
-    </h1>
-    <div ng-repeat-end ng-hide="stage.$collapsed">
-        <table
-            class="table table-bordered table-striped"
-            ng-if="stage.rounds > 0"
-        >
-            <thead>
-                <tr class="clickable">
-                    <th class="span1" ng-click="doSort(stage, 'rank',false)">
-                        <span style="float: left;">Rank</span>
-                        <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'rank')"></span>
-                    </th>
-                    <th class="span1" ng-click="doSort(stage, 'team.number',false)">
-                        <span style="float: left;">Team</span>
-                        <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'team.number')"></span>
-                    </th>
-                    <th class="span2" ng-click="doSort(stage, 'team.name',false)">
-                        <span style="float: left;">Name</span>
-                        <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'team.name')"></span>
-                    </th>
-                    <th class="span1" ng-if="stage.rounds > 1" ng-click="doSort(stage, 'highest',true)">
-                        <span style="float: left;">Highest</span>
-                        <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'highest')"></span>
-                    </th>
-                    <th class="span1" ng-if="stage.rounds == 1" ng-click="doSort(stage, 'highest',true)">
-                        <span style="float: left;">Score</span>
-                        <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'highest')"></span>
-                    </th>
-                    <th class="span1" ng-if="stage.rounds > 1" ng-repeat="round in stage.$rounds track by $index" ng-click="doSort(stage, 'scores['+$index+']',true)">
-                        <span style="float: left;">Round {{round}}</span>
-                        <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'scores['+$index+']')"></span>
-                    </th>
-                    <!-- padding cols -->
-                    <th class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></th>
-                    <th class="span1 clearCell" ng-if="stage.rounds == 1" ></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:stage.sort:stage.rev track by item.team.number">
-                    <td>{{item.rank}}</td>
-                    <td>{{item.team.number}}</td>
-                    <td>{{item.team.name}}</td>
-                    <td>{{item.highest}}</td>
-                    <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
-                    <!-- padding cols -->
-                    <td class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></td>
-                    <td class="span1 clearCell" ng-if="stage.rounds == 1"></td>
-                </tr>
-            </tbody>
-        </table>
+    <div ng-repeat="stage in stages">
+        <a class="pull-right" style="margin-top: 1em;" href="{{csvdata[stage.id]}}" download="{{csvname[stage.id]}}"><i class="icon-download-alt"></i> Export</a>
+        <h1 ng-if="stage.rounds > 0">
+            <span class="icon" style="cursor: pointer;" ng-class="{
+                'icon-caret-down':!stage.$collapsed,
+                'icon-caret-right':stage.$collapsed
+            }" ng-click="toggle(stage)"></span>
+            {{stage.name}}
+            <span ng-if="scoreboard[stage.id].length > 0"
+                style="margin-left: 1em">
+                <small>({{scoreboard[stage.id].length}})</small>
+            </span>
+        </h1>
+        <div ng-hide="stage.$collapsed">
+            <table
+                class="table table-bordered table-striped"
+                ng-if="stage.rounds > 0"
+            >
+                <thead>
+                    <tr class="clickable">
+                        <th class="span1" ng-click="doSort(stage, 'rank',false)">
+                            <span style="float: left;">Rank</span>
+                            <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'rank')"></span>
+                        </th>
+                        <th class="span1" ng-click="doSort(stage, 'team.number',false)">
+                            <span style="float: left;">Team</span>
+                            <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'team.number')"></span>
+                        </th>
+                        <th class="span2" ng-click="doSort(stage, 'team.name',false)">
+                            <span style="float: left;">Name</span>
+                            <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'team.name')"></span>
+                        </th>
+                        <th class="span1" ng-if="stage.rounds > 1" ng-click="doSort(stage, 'highest',true)">
+                            <span style="float: left;">Highest</span>
+                            <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'highest')"></span>
+                        </th>
+                        <th class="span1" ng-if="stage.rounds == 1" ng-click="doSort(stage, 'highest',true)">
+                            <span style="float: left;">Score</span>
+                            <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'highest')"></span>
+                        </th>
+                        <th class="span1" ng-if="stage.rounds > 1" ng-repeat="round in stage.$rounds track by $index" ng-click="doSort(stage, 'scores['+$index+']',true)">
+                            <span style="float: left;">Round {{round}}</span>
+                            <span style="float: right;" class="icon" ng-class="sortIcon(stage, 'scores['+$index+']')"></span>
+                        </th>
+                        <!-- padding cols -->
+                        <th class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></th>
+                        <th class="span1 clearCell" ng-if="stage.rounds == 1" ></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:stage.sort:stage.rev track by item.team.number">
+                        <td>{{item.rank}}</td>
+                        <td>{{item.team.number}}</td>
+                        <td>{{item.team.name}}</td>
+                        <td>{{item.highest}}</td>
+                        <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
+                        <!-- padding cols -->
+                        <td class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></td>
+                        <td class="span1 clearCell" ng-if="stage.rounds == 1"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Showing {{scoreboard[stage.id].length}} entries.</p>
+        </div>
     </div>
 </div>
