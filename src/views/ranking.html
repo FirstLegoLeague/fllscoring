@@ -48,7 +48,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:stage.sort:stage.rev">
+                <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:stage.sort:stage.rev track by item.team.number">
                     <td>{{item.rank}}</td>
                     <td>{{item.team.number}}</td>
                     <td>{{item.team.name}}</td>
