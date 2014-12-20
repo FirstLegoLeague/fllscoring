@@ -33,8 +33,8 @@ define('views/ranking',[
                     } else {
                         icon = 'icon-sort-up';
                     }
-                } else if (stage.sort == null && col == $scope.sort) {
-                    if (stage.rev == null && $scope.rev) {
+                } else if (stage.sort === null && col == $scope.sort) {
+                    if (stage.rev === null && $scope.rev) {
                         icon = 'icon-sort-down';
                     } else {
                         icon = 'icon-sort-up';
@@ -105,7 +105,7 @@ define('views/ranking',[
                     $scope.csvname[stageId] = encodeURIComponent("ranking_" + stageId + ".csv");
                     $scope.csvdata[stageId] = "data:text/csv;charset=utf-8," + encodeURIComponent(toCSV(rows));
                 });
-            }
+            };
 
             // Rebuild CSV data and filenames when scoreboard is updated
             $scope.$watch("scoreboard", function() {

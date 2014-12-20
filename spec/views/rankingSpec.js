@@ -51,7 +51,7 @@ describe('ranking', function() {
             $scope.doSort(stage, 'foo',true);
             expect(stage.sort).toEqual('foo');
             expect(stage.rev).toEqual(true);
-        })
+        });
     });
 
     describe('export',function() {
