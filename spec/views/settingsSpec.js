@@ -6,12 +6,13 @@ describe('settings', function() {
 
     var $scope, controller;
 
-    var settingsMock = createSettingsMock({});
+    var settingsMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
-        angular.mock.inject(function($controller, $rootScope) {
+        angular.mock.inject(function($controller, $rootScope, $q) {
             $scope = $rootScope.$new();
+            settingsMock = createSettingsMock($q, {});
             controller = $controller('settingsCtrl', {
                 '$scope': $scope,
                 '$stages': {},
@@ -22,7 +23,9 @@ describe('settings', function() {
 
     describe('initialization', function() {
         it('should initialize', function() {
-            //TODO: check state after reading
+            //let $settings init
+            $scope.$digest();
+            expect($scope.settings).toEqual({});
         });
 
     });

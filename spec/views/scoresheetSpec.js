@@ -11,11 +11,12 @@ describe('scoresheet',function() {
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
     var fsMock = createFsMock({"settings.json": []});
-    var settingsMock = createSettingsMock({});
+    var settingsMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
-        angular.mock.inject(function($controller,$rootScope) {
+        angular.mock.inject(function($controller,$rootScope,$q) {
+            settingsMock = createSettingsMock($q,{});
             $scope = $rootScope.$new();
             controller = $controller('scoresheetCtrl', {
                 '$scope': $scope,

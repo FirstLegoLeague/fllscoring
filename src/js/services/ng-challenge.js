@@ -929,7 +929,7 @@ define('services/ng-challenge',[
                         }).then(function(response) {
                             return self.init(eval('('+response.data+')'));
                         });
-                    }).fail(function() {
+                    }).catch(function() {
                         log('error getting field');
                     });
                 },

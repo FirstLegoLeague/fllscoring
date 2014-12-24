@@ -4,21 +4,26 @@ describe('ng-challenge',function() {
 
     var dummyChallenge = {foo:'bar'};
 
+    var fsMock, settingsMock,$q,$rootScope;
+    fsMock = createFsMock({'foo': JSON.stringify(dummyChallenge)});
+
     var module = factory('services/ng-challenge',{
         'services/ng-services': ngServices,
-        'services/fs': createFsMock({'foo': JSON.stringify(dummyChallenge)})
+        'services/fs': fsMock
     });
 
-    var settingsMock;
-
     beforeEach(function() {
-        settingsMock = createSettingsMock({});
-        angular.mock.module(function($provide) {
-            $provide.value('$settings', settingsMock);
-        });
         angular.mock.module(module.name);
-        angular.mock.inject(function($challenge,$q) {
+        angular.mock.module(function($provide) {
+            $provide.service('$settings', function($q) {
+                settingsMock = createSettingsMock($q, {});
+                return settingsMock;
+            });
+        });
+        angular.mock.inject(function($challenge,_$q_,_$rootScope_) {
             challenge = $challenge;
+            $q = _$q_;
+            $rootScope = _$rootScope_;
         });
     });
 
@@ -36,6 +41,7 @@ describe('ng-challenge',function() {
                 expect(challenge.init).toHaveBeenCalledWith(dummyChallenge);
                 done();
             });
+            $rootScope.$digest();
         });
     });
 
