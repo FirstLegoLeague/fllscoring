@@ -63,7 +63,11 @@
                     // Runner returned a promise.
                     // Wait for it to be resolved or rejected.
                     async = true;
-                    result.then(function() { done(); }, done);
+                    var lastPromise = result.then(function() { done(); }, done);
+                    //thow any other exceptions (if Q)
+                    if (lastPromise.done) {
+                        lastPromise.done();
+                    }
                 }
             }
 
