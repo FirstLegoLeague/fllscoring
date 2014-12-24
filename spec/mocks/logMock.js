@@ -1,2 +1,2 @@
-var logMock = function() {};
-logMock.get = function() {};
+var logMock = jasmine.createSpy('log');
+logMock.get = jasmine.createSpy('log.get');

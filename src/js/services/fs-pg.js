@@ -29,15 +29,17 @@ define('services/fs-pg',['q','services/log'],function(Q,log) {
                     return getSequence(dir,parts);
                 }
                 return dir;
-            }).fail(function() {
+            }).fail(function(err) {
                 log('fail getting directory '+name);
+                throw err;
             });
         }
 
         return getFS().then(function(fs) {
             return getSequence(fs.root,parts);
-        }).fail(function() {
+        }).fail(function(err) {
             log('fail getting file system ');
+            throw err;
         });
     }
 
@@ -55,8 +57,9 @@ define('services/fs-pg',['q','services/log'],function(Q,log) {
             var def = Q.defer();
             dir.getFile(fileName,options||null,def.resolve,def.reject);
             return def.promise;
-        }).fail(function() {
+        }).fail(function(err) {
             log('fail getting path '+dirName);
+            throw err;
         });
     }
 
@@ -73,8 +76,9 @@ define('services/fs-pg',['q','services/log'],function(Q,log) {
             var def = Q.defer();
             fileEntry.createWriter(def.resolve,def.reject);
             return def.promise;
-        }).fail(function() {
+        }).fail(function(err) {
             log('fail getting writer '+path);
+            throw err;
         });
     }
 
