@@ -46,7 +46,7 @@ define('services/ng-settings',[
                     self.settings = {};
                     return self.settings;
                 });
-            }).catch(function() {
+            }).catch(function(err) {
                 //return ephemeral settings
                 log('unable to create settings file, giving up', err);
                 self.settings = {};
