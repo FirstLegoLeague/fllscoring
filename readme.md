@@ -69,11 +69,13 @@ For iOS, see [Building for iOS](https://github.com/FirstLegoLeague/fllscoring/wi
 (Only) when XML definition files have changed:
 -----------------------------
 
+- run `grunt challenge`
+
+This will rebuild html, pdf and js versions of the challenge. This can also be done individually if you'd wish:
+
 - run `grunt html`
 - run `grunt pdf`
 - run `grunt js`
-
-This will rebuild html, pdf and js versions of the challenge.
 
 These files are also included in the repo: `challenges/html`, `challenges/pdf`, `challenges/js`
 

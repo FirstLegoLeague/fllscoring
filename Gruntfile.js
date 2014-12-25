@@ -130,6 +130,7 @@ module.exports = function(grunt) {
     grunt.registerTask('html', ['saxon']);
     grunt.registerTask('js', ['jsChallenge']);
     grunt.registerTask('pdf', ['saxon','http-server', 'phantomJSScreenShot']);
+    grunt.registerTask('challenge', ['js', 'pdf']); //html is generated with pdf
 
     grunt.registerMultiTask('jsChallenge', function() {
         var options = this.options();
