@@ -1,7 +1,5 @@
 describe('fs-pg',function() {
 
-
-
     var fs = factory('services/fs-pg',{
         'q':Q,
         'services/log': logMock

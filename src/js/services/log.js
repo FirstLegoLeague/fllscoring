@@ -1,4 +1,4 @@
-define([
+define('services/log',[
     'jquery'
 ],function($) {
     var _log = [];
