@@ -8,8 +8,8 @@ define('services/fs-nw',['q','idbstore'],function(Q,IDBStore) {
             onStoreReady: function() {
                 def.resolve(store);
             },
-            onError: function() {
-                def.reject();
+            onError: function(err) {
+                def.reject(err);
             }
         });
         return def.promise;
