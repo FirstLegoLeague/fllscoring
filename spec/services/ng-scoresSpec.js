@@ -181,11 +181,11 @@ describe('ng-scores',function() {
             expect($scores.scores[0].score).toEqual(null);
             expect($scores.validationErrors.length).toEqual(1);
         });
-        it('should store the edited date of a score',function() {
+        it('should store the edited date of a score as string',function() {
             var tmp = angular.copy(mockScore);
             tmp.edited = new Date(2015,1,7);
             $scores.add(tmp);
-            expect($scores.scores[0].edited).toEqual('Sat Feb 07 2015 00:00:00 GMT+0100 (W. Europe Standard Time)');
+            expect(typeof $scores.scores[0].edited).toBe('string');
         });
     });
 
