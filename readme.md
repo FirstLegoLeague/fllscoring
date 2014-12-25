@@ -66,9 +66,16 @@ For the phonegap build, copy `pgbuildconfig.example.json` to `pgbuildconfig.json
 
 For iOS, see [Building for iOS](https://github.com/FirstLegoLeague/fllscoring/wiki/Building-for-iOS)
 
-To build js challenge files from the xml description files, use
+(Only) when XML definition files have changed:
+-----------------------------
 
-     node tools\buildchallenge.js challenges\xml\2014.xml > challenges\js\2014.js
+- run `grunt html`
+- run `grunt pdf`
+- run `grunt js`
+
+This will rebuild html, pdf and js versions of the challenge.
+
+These files are also included in the repo: `challenges/html`, `challenges/pdf`, `challenges/js`
 
 Documentation
 -------------
@@ -78,14 +85,6 @@ Documentation
 - [templating](docs/templating/readme.md)
 - [interface](docs/user_interface/readme.md)
 - [internationalization](docs/i18n/readme.md)
-
-Generating HTML and PDF scoresheets
------------------------------
-
-- run `grunt html`
-- run `grunt pdf`
-
-These files are also included in the repo: `challenges/html` and `challenges/pdf`
 
 TODO's
 --------
