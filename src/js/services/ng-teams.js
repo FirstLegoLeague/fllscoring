@@ -109,11 +109,11 @@ define('services/ng-teams',[
 
         Teams.prototype._update = function() {
             var self = this;
-            this._teamsMap = Object.create(null);
+            this._teamsMap = {};
             this.teams.splice(0, this.teams.length); // clear without creating new object
             this._rawTeams.forEach(function(team, index) {
                 if (team.number in self._teamsMap) {
-                    // shouldn't ever happen, unless one fiddles with
+                    // should never happen, unless one fiddles with
                     // the raw storage
                     throw new Error("duplicate team number " + team.number);
                 }

@@ -7,6 +7,7 @@ describe('ng-teams',function() {
 
     var $teams;
     var rawMockTeam = { number: "123", name: "Oefenrondes", cityState: "foo" };
+    var rawMockTeam2 = { number: "123", name: "Oefenrondes", translationNeeded: true };
     var savedMockTeam = {
         number: 123,
         name: "Oefenrondes",
@@ -32,6 +33,19 @@ describe('ng-teams',function() {
         pitLocation: "",
         translationNeeded: false
     };
+    var mockTeam2 = {
+        index: 0,
+        number: 123,
+        name: "Oefenrondes",
+        affiliation: "",
+        cityState: "",
+        country: "",
+        coach1: "",
+        coach2: "",
+        judgingGroup: "",
+        pitLocation: "",
+        translationNeeded: true
+    };
     var fsMock;
 
     beforeEach(function() {
@@ -54,25 +68,60 @@ describe('ng-teams',function() {
         });
     });
 
-    describe('loading', function() {
+    describe('save',function() {
+        it('should write teams to teams.json',function() {
+            return $teams.save().then(function() {
+                expect(fsMock.write).toHaveBeenCalledWith('teams.json',[savedMockTeam])
+            });
+        });
+
+        it('should log an error if writing fails',function() {
+            fsMock.write.andReturn(Q.reject('foo'));
+            return $teams.save().then(function() {
+                expect(logMock).toHaveBeenCalledWith('teams write error','foo');
+            });
+        });
+    });
+
+    describe('load', function() {
         it('should load and sanitize teams',function() {
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);
             });
         });
-    });
 
-    describe('getting',function() {
-        it('should get a sanitized team', function() {
-            expect($teams.get(123)).toEqual(mockTeam);
+        it('should log an error if loading fails',function() {
+            fsMock.read.andReturn(Q.reject('foo'));
+            return $teams.load().then(function() {
+                expect(logMock).toHaveBeenCalledWith('teams read error','foo');
+            });
         });
     });
 
-    describe('adding',function() {
+    describe('remove',function() {
+        it('should remove the provided id',function() {
+            expect($teams.teams).toEqual([mockTeam]);
+            $teams.remove(123);
+            expect($teams.teams).toEqual([]);
+        });
+
+        it('should not remove the team if not found',function() {
+            expect($teams.teams).toEqual([mockTeam]);
+            $teams.remove(42);
+            expect($teams.teams).toEqual([mockTeam]);
+        })
+    });
+
+    describe('add',function() {
         it('should add a team to the list and add autogen properties',function() {
             $teams.clear();
             var res = $teams.add(rawMockTeam);
             expect($teams.teams).toEqual([mockTeam]);
+        });
+        it('should add a team to the list and add autogen properties',function() {
+            $teams.clear();
+            var res = $teams.add(rawMockTeam2);
+            expect($teams.teams).toEqual([mockTeam2]);
         });
         it('should reject duplicate team ids',function() {
             $teams.clear();
@@ -90,20 +139,18 @@ describe('ng-teams',function() {
         });
     });
 
-    describe('saving',function() {
-        it('should write teams to teams.json',function() {
-            return $teams.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('teams.json',[savedMockTeam])
-            });
+    describe('get',function() {
+        it('should get a sanitized team', function() {
+            expect($teams.get(123)).toEqual(mockTeam);
         });
     });
 
-    describe('removing',function() {
-        it('should remove the provided id',function() {
-            expect($teams.teams).toEqual([mockTeam]);
-            $teams.remove(123);
-            expect($teams.teams).toEqual([]);
+    describe('_update',function() {
+        it('should throw an error if team is present twice',function() {
+            $teams._rawTeams = [rawMockTeam,rawMockTeam];
+            expect(function() {
+                $teams._update()
+            }).toThrow('duplicate team number 123');
         });
     });
-
 });
