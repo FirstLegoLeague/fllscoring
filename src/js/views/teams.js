@@ -18,6 +18,7 @@ define('views/teams',[
             $scope.editMode = false;
             $scope.teamNumberPattern = /^\d+$/;
             $scope.status = "Initializing...";
+            $scope.importMode = false;
 
             var initialized = null;
 
@@ -79,22 +80,16 @@ define('views/teams',[
             };
 
             $scope.$watch('importRaw',function(data) {
-                if (!data) {
-                    return;
-                }
                 parseData($scope.importRaw);
             });
 
             $scope.$watch('importHeader',function(data) {
-                if (!data) {
-                    return;
-                }
                 parseData($scope.importRaw);
             });
 
             function parseData(data) {
                 //parse raw import, split lines
-                var lines = data.split(/[\n\r]/);
+                var lines = data?data.split(/[\n\r]/):[];
                 if ($scope.importHeader) {
                     lines.shift();
                 }
@@ -109,6 +104,9 @@ define('views/teams',[
                 if (lines[0]) {
                     $scope.importNumberExample = lines[0][$scope.importNumberColumn -1];
                     $scope.importNameExample = lines[0][$scope.importNameColumn -1];
+                } else {
+                    $scope.importNumberExample = '';
+                    $scope.importNameExample = '';
                 }
 
                 $scope.importLines = lines;
