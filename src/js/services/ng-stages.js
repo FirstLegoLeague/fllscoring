@@ -71,7 +71,7 @@ define('services/ng-stages',[
                 log('stages using defaults');
                 self.add({ id: "practice", name: "Oefenrondes", rounds: 2 });
                 self.add({ id: "qualifying", name: "Voorrondes", rounds: 3 });
-                self.add({ id: "quarter", name: "Kwart finales", rounds: 0 });
+                self.add({ id: "quarter", name: "Kwartfinales", rounds: 0 });
                 self.add({ id: "semi", name: "Halve finales", rounds: 0 });
                 self.add({ id: "final", name: "Finale", rounds: 1 });
             });
