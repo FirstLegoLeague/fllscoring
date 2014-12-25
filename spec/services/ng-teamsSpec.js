@@ -71,7 +71,7 @@ describe('ng-teams',function() {
     describe('save',function() {
         it('should write teams to teams.json',function() {
             return $teams.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('teams.json',[savedMockTeam])
+                expect(fsMock.write).toHaveBeenCalledWith('teams.json',[savedMockTeam]);
             });
         });
 
@@ -109,7 +109,7 @@ describe('ng-teams',function() {
             expect($teams.teams).toEqual([mockTeam]);
             $teams.remove(42);
             expect($teams.teams).toEqual([mockTeam]);
-        })
+        });
     });
 
     describe('add',function() {
@@ -149,7 +149,7 @@ describe('ng-teams',function() {
         it('should throw an error if team is present twice',function() {
             $teams._rawTeams = [rawMockTeam,rawMockTeam];
             expect(function() {
-                $teams._update()
+                $teams._update();
             }).toThrow('duplicate team number 123');
         });
     });
