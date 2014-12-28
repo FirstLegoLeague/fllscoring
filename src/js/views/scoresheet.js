@@ -304,9 +304,6 @@ define('views/scoresheet',[
 
             $scope.selectTeamPop = function(team) {
                 $scope.team = team;
-            };
-
-            $scope.ok = function () {
                 $modalInstance.close($scope.team);
             };
 
@@ -323,17 +320,13 @@ define('views/scoresheet',[
             $scope.selectRoundPop = function(stage, round) {
                 $scope.stage = stage;
                 $scope.round = round;
+                log("after OK: " + $scope.round);
+                $modalInstance.close({"stage": $scope.stage, "round": $scope.round});
             };
 
             // function that should be in the lib:
             $scope.getNumber = function(num) {
                 return new Array(num);
-            };
-
-            $scope.ok = function () {
-                log("after OK: " + $scope.round);
-                $modalInstance.close({"stage": $scope.stage, "round": $scope.round});
-
             };
 
             $scope.cancel = function () {
