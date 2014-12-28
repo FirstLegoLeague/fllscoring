@@ -34,7 +34,7 @@ define('services/ng-challenge',[
                     }).fail(function() {
                         //temp: get from remote service
                         return $settings.init().then(function(settings) {
-                            var url = (settings.host||'')+'/'+fallBackChallenge;
+                            var url = (settings.host||'')+fallBackChallenge;
                             return $http.get(url,{
                                 transformResponse: function(d) {return d;}
                             });
