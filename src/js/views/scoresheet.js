@@ -7,6 +7,7 @@ define('views/scoresheet',[
     'services/ng-teams',
     'services/ng-stages',
     'services/ng-settings',
+    'services/ng-handshake',
     'directives/sigpad',
     'directives/spinner',
     'angular'
@@ -14,8 +15,8 @@ define('views/scoresheet',[
     var moduleName = 'scoresheet';
 
     return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$stages','$settings','$modal','$challenge','$window','$q','$teams',
-        function($scope,$fs,$stages,$settings,$modal,$challenge,$window,$q,$teams) {
+        '$scope','$fs','$stages','$settings','$challenge','$window','$q','$teams','$handshake',
+        function($scope,$fs,$stages,$settings,$challenge,$window,$q,$teams,$handshake) {
             log('init scoresheet ctrl');
 
             // Set up defaults
@@ -191,146 +192,94 @@ define('views/scoresheet',[
                 });
             };
 
-            /* Methods used by Modal windows */
-            $scope.chooseTeam = function(team) {
-                $scope.team = team;
-            };
-
-            $scope.$root.$on('chooseTeam',function(e,team) {
-                $scope.chooseTeam(team);
-            });
-
-            $scope.chooseStage = function(stage) {
-                $scope.stage = stage;
-            };
-
-            $scope.$root.$on('chooseStage',function(e,stage) {
-                $scope.chooseStage(stage);
-            });
-
-            $scope.chooseRound = function(round) {
-                $scope.round = round;
-            };
-
-            $scope.$root.$on('chooseRound',function(e,round) {
-                $scope.chooseRound(round);
-            });
-
             $scope.openDescriptionModal = function (size, mission) {
-
-                var modalInstance = $modal.open({
-                  templateUrl: 'descriptionModalContent.html',
-                  controller: 'DescriptionModalInstanceCtrl',
-                  size: size,
-                  resolve: {
-                    mission: function () {
-                      return mission;
-                    }
-                  }
-                });
-
-                modalInstance.result.then(function (selectedItem) {
-                  $scope.selected = selectedItem;
-                }, function () {
-                  log('Description dismissed at: ' + new Date());
-                });
-              };
-
+                $handshake.$emit('showDescription',mission);
+            };
 
             $scope.openTeamModal = function (size, teams) {
-
-                var modalInstance = $modal.open({
-
-
-                  templateUrl: 'teamModalContent.html',
-                  controller: 'TeamModalInstanceCtrl',
-                  size: size,
-                  resolve: {
-                    teams: function () {
-                      return teams;
+                $handshake.$emit('chooseTeam',teams).then(function(result) {
+                    if (result) {
+                        $scope.team = result.team;
                     }
-                  }
-                });
-
-                modalInstance.result.then(function (selectedTeam) {
-                    $scope.$root.$emit('chooseTeam',selectedTeam);
-                }, function () {
-                    log('Team select dismissed at: ' + new Date());
                 });
             };
 
             $scope.openRoundModal = function (size, stages) {
-
-                var modalInstance = $modal.open({
-
-                  templateUrl: 'roundModalContent.html',
-                  controller: 'RoundModalInstanceCtrl',
-                  size: size,
-                  resolve: {
-                    stages: function () {
-                      return stages;
+                $handshake.$emit('chooseRound',stages).then(function(result) {
+                    if (result) {
+                        $scope.stage = result.stage;
+                        $scope.round = result.round;
                     }
-                  }
-                });
-
-                modalInstance.result.then(function (result) {
-                    $scope.$root.$emit('chooseStage',result.stage);
-                    $scope.$root.$emit('chooseRound',result.round);
-                }, function () {
-                    log('Round select dismissed at: ' + new Date());
                 });
             };
 
         }
-    ]).controller('DescriptionModalInstanceCtrl',[
-        '$scope', '$modalInstance', 'mission',
-        function ($scope, $modalInstance, mission) {
+    ]).controller('DescriptionDialogController',[
+        '$scope', '$handshake',
+        function ($scope, $handshake) {
+            var defer;
 
-          $scope.mission = mission;
+            $handshake.$on('showDescription',function(e,mission) {
+                $scope.mission = mission;
+                $scope.dialogVisible = true;
+            });
 
-          $scope.ok = function () {
-            $modalInstance.close();
-          };
-
-          $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-          };
-        }
-    ]).controller('TeamModalInstanceCtrl',[
-        '$scope', '$modalInstance', 'teams',
-        function ($scope, $modalInstance, teams) {
-
-            $scope.teams = teams;
-
-            $scope.selectTeamPop = function(team) {
-                $scope.team = team;
-                $modalInstance.close($scope.team);
+            $scope.ok = function () {
+                $scope.dialogVisible = false;
             };
 
             $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
+                $scope.dialogVisible = false;
             };
         }
-    ]).controller('RoundModalInstanceCtrl',[
-        '$scope', '$modalInstance', 'stages',
-        function ($scope, $modalInstance, stages) {
+    ]).controller('TeamDialogController',[
+        '$scope', '$handshake',
+        function ($scope, $handshake) {
+            var defer;
 
-            $scope.stages = stages;
+            $handshake.$on('chooseTeam',function(e,teams) {
+                $scope.teams = teams;
+                $scope.dialogVisible = true;
+                defer = $handshake.defer();
+                return defer.promise;
+            });
 
-            $scope.selectRoundPop = function(stage, round) {
-                $scope.stage = stage;
-                $scope.round = round;
-                log("after OK: " + $scope.round);
-                $modalInstance.close({"stage": $scope.stage, "round": $scope.round});
+            $scope.selectTeamPop = function(team) {
+                $scope.dialogVisible = false;
+                defer.resolve({team:team});
             };
+
+            $scope.cancel = function () {
+                $scope.dialogVisible = false;
+                defer.resolve();
+            };
+        }
+    ]).controller('RoundDialogController',[
+        '$scope', '$handshake',
+        function ($scope, $handshake) {
+            var defer;
+
+            $handshake.$on('chooseRound',function(e,stages) {
+                $scope.stages = stages;
+                $scope.dialogVisible = true;
+                defer = $handshake.defer();
+                return defer.promise;
+            });
 
             // function that should be in the lib:
             $scope.getNumber = function(num) {
                 return new Array(num);
             };
 
+            $scope.selectRoundPop = function(stage, round) {
+                log("after OK: " + $scope.round);
+                $scope.dialogVisible = false;
+                defer.resolve({stage:stage, round:round});
+            };
+
             $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
+                $scope.dialogVisible = false;
+                defer.resolve();
             };
         }
     ]);
