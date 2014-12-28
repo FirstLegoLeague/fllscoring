@@ -24,6 +24,7 @@ module.exports = function(config) {
       'src/js/services/*.js',
       'src/js/views/*.js',
       'src/js/filters/*.js',
+      'src/js/controllers/*.js',
       'spec/mocks/*.js',
       'spec/**/*Spec.js'
     ],

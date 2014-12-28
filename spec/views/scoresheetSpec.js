@@ -1,7 +1,10 @@
 describe('scoresheet',function() {
 
     var module = factory('views/scoresheet',{
-        'services/log': logMock
+        'services/log': logMock,
+        'controllers/DescriptionDialogController': factory('controllers/DescriptionDialogController'),
+        'controllers/TeamDialogController': factory('controllers/TeamDialogController'),
+        'controllers/RoundDialogController': factory('controllers/RoundDialogController')
     });
 
     var $scope, controller;
@@ -14,6 +17,9 @@ describe('scoresheet',function() {
     var settingsMock;
 
     beforeEach(function() {
+        angular.mock.module('DescriptionDialog');
+        angular.mock.module('TeamDialog');
+        angular.mock.module('RoundDialog');
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
             settingsMock = createSettingsMock($q,{});

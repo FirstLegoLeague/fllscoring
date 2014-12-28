@@ -10,11 +10,19 @@ define('views/scoresheet',[
     'services/ng-handshake',
     'directives/sigpad',
     'directives/spinner',
+    'controllers/DescriptionDialogController',
+    'controllers/TeamDialogController',
+    'controllers/RoundDialogController',
     'angular'
 ], function(log, fs) {
     var moduleName = 'scoresheet';
+    var module = angular.module(moduleName, [
+        'DescriptionDialog',
+        'TeamDialog',
+        'RoundDialog'
+    ]);
 
-    return angular.module(moduleName, []).controller(moduleName + 'Ctrl', [
+    return module.controller(moduleName + 'Ctrl', [
         '$scope','$fs','$stages','$settings','$challenge','$window','$q','$teams','$handshake',
         function($scope,$fs,$stages,$settings,$challenge,$window,$q,$teams,$handshake) {
             log('init scoresheet ctrl');
@@ -213,74 +221,6 @@ define('views/scoresheet',[
                 });
             };
 
-        }
-    ]).controller('DescriptionDialogController',[
-        '$scope', '$handshake',
-        function ($scope, $handshake) {
-            var defer;
-
-            $handshake.$on('showDescription',function(e,mission) {
-                $scope.mission = mission;
-                $scope.dialogVisible = true;
-            });
-
-            $scope.ok = function () {
-                $scope.dialogVisible = false;
-            };
-
-            $scope.cancel = function () {
-                $scope.dialogVisible = false;
-            };
-        }
-    ]).controller('TeamDialogController',[
-        '$scope', '$handshake',
-        function ($scope, $handshake) {
-            var defer;
-
-            $handshake.$on('chooseTeam',function(e,teams) {
-                $scope.teams = teams;
-                $scope.dialogVisible = true;
-                defer = $handshake.defer();
-                return defer.promise;
-            });
-
-            $scope.selectTeamPop = function(team) {
-                $scope.dialogVisible = false;
-                defer.resolve({team:team});
-            };
-
-            $scope.cancel = function () {
-                $scope.dialogVisible = false;
-                defer.resolve();
-            };
-        }
-    ]).controller('RoundDialogController',[
-        '$scope', '$handshake',
-        function ($scope, $handshake) {
-            var defer;
-
-            $handshake.$on('chooseRound',function(e,stages) {
-                $scope.stages = stages;
-                $scope.dialogVisible = true;
-                defer = $handshake.defer();
-                return defer.promise;
-            });
-
-            // function that should be in the lib:
-            $scope.getNumber = function(num) {
-                return new Array(num);
-            };
-
-            $scope.selectRoundPop = function(stage, round) {
-                log("after OK: " + $scope.round);
-                $scope.dialogVisible = false;
-                defer.resolve({stage:stage, round:round});
-            };
-
-            $scope.cancel = function () {
-                $scope.dialogVisible = false;
-                defer.resolve();
-            };
         }
     ]);
 });
