@@ -23,7 +23,7 @@ describe('scoresheet',function() {
                 '$fs': fsMock,
                 '$settings': settingsMock,
                 '$stages': {},
-                '$modal': {},
+                '$handshake': {},
                 '$teams': {},
                 '$challenge': challengeMock,
                 '$window': {
@@ -45,13 +45,6 @@ describe('scoresheet',function() {
     describe('initialization',function() {
         it('should initialize',function() {
 
-        });
-    });
-
-    describe('chooseTeam', function() {
-        it('should set the team on the scope', function() {
-            $scope.chooseTeam(dummyTeam);
-            expect($scope.team).toBe(dummyTeam);
         });
     });
 
