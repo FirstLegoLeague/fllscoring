@@ -138,6 +138,19 @@ describe('teams', function() {
             });
         });
 
+        describe('cancelImport',function() {
+            beforeEach(function() {
+                $scope.importMode = true;
+                $scope.importLines = [[42,'FooBars']];
+                $scope.importNumberColumn = 1;
+                $scope.importNameColumn = 2;
+            });
+            it('should set import mode to false',function() {
+                $scope.cancelImport();
+                expect($scope.importMode).toBe(false);
+            });
+        });
+
         describe('parsing data',function() {
             it('should populate importLines',function() {
                 $scope.importLines = [];

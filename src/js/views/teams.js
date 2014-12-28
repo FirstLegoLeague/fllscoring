@@ -79,6 +79,10 @@ define('views/teams',[
                 });
             };
 
+            $scope.cancelImport = function() {
+                $scope.importMode = false;
+            };
+
             $scope.$watch('importRaw',function(data) {
                 parseData($scope.importRaw);
             });
