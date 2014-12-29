@@ -10,7 +10,7 @@ describe('DescriptionDialogController',function() {
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
             $scope = $rootScope.$new();
-            handshakeMock = createHandshakeMock();
+            handshakeMock = createHandshakeMock($q);
             controller = $controller('DescriptionDialogController', {
                 '$scope': $scope,
                 '$handshake': handshakeMock

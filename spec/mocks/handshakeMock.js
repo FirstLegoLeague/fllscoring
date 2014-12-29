@@ -5,7 +5,7 @@ var createHandshakeMock = function($q) {
         $on: jasmine.createSpy('handshake.on').andCallFake(function(e,cb) {
             handlers[e] = cb;
         }),
-        $emit: jasmine.createSpy('handshake.emit'),
+        $emit: jasmine.createSpy('handshake.emit').andReturn($q.when()),
         defer: jasmine.createSpy('handshake.defer').andCallFake(function() {
             promise = {
                 resolve: jasmine.createSpy('promise.resolve'),

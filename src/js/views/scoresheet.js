@@ -200,11 +200,11 @@ define('views/scoresheet',[
                 });
             };
 
-            $scope.openDescriptionModal = function (size, mission) {
+            $scope.openDescriptionModal = function (mission) {
                 $handshake.$emit('showDescription',mission);
             };
 
-            $scope.openTeamModal = function (size, teams) {
+            $scope.openTeamModal = function (teams) {
                 $handshake.$emit('chooseTeam',teams).then(function(result) {
                     if (result) {
                         $scope.team = result.team;
@@ -212,7 +212,7 @@ define('views/scoresheet',[
                 });
             };
 
-            $scope.openRoundModal = function (size, stages) {
+            $scope.openRoundModal = function (stages) {
                 $handshake.$emit('chooseRound',stages).then(function(result) {
                     if (result) {
                         $scope.stage = result.stage;

@@ -14,7 +14,7 @@ describe('scoresheet',function() {
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
     var fsMock = createFsMock({"settings.json": []});
-    var settingsMock;
+    var settingsMock, handshakeMock;
 
     beforeEach(function() {
         angular.mock.module('DescriptionDialog');
@@ -23,13 +23,14 @@ describe('scoresheet',function() {
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
             settingsMock = createSettingsMock($q,{});
+            handshakeMock = createHandshakeMock($q);
             $scope = $rootScope.$new();
             controller = $controller('scoresheetCtrl', {
                 '$scope': $scope,
                 '$fs': fsMock,
                 '$settings': settingsMock,
                 '$stages': {},
-                '$handshake': {},
+                '$handshake': handshakeMock,
                 '$teams': {},
                 '$challenge': challengeMock,
                 '$window': {
@@ -89,6 +90,27 @@ describe('scoresheet',function() {
                     score: 0
                 });
             });
+        });
+    });
+
+    describe('openDesciptionModal',function() {
+        it('should emit a showDescription handshake',function() {
+            $scope.openDescriptionModal('foo');
+            expect(handshakeMock.$emit).toHaveBeenCalledWith('showDescription','foo');
+        });
+    });
+
+    describe('openTeamModal',function() {
+        it('should emit a chooseTeam handshake',function() {
+            $scope.openTeamModal('foo');
+            expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
+        });
+    });
+
+    describe('openRoundModal',function() {
+        it('should emit a chooseRound handshake',function() {
+            $scope.openRoundModal('foo');
+            expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
         });
     });
 })
