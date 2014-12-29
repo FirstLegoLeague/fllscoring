@@ -1,68 +1,74 @@
-    <div class="fll-dialog" id="teamDialog" ng-controller="TeamDialogController" ng-show="dialogVisible">
-        <h1>
-            Select a team
-            <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
-        </h1>
-        <section>
-            <table class="table table-hover table-striped table-teams">
-                <thead>
-                    <tr>
-                        <th ng-click="sort='team.number';rev=true">#</th>
-                        <th ng-click="sort='team.name';rev=true">Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="team in teams" ng-click="selectTeamPop(team)">
-                        <td><h3>{{team.number}}</h3></td>
-                        <td>{{team.name}}
-                        <br />
-                        <small>{{team.affiliation}}, {{team.cityState}}</small>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+    <div class="fll-dialog-shim" ng-controller="TeamDialogController" ng-show="dialogVisible">
+        <div class="fll-dialog" id="teamDialog">
+            <h1>
+                Select a team
+                <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
+            </h1>
+            <section>
+                <table class="table table-hover table-striped table-teams">
+                    <thead>
+                        <tr>
+                            <th ng-click="sort='team.number';rev=true">#</th>
+                            <th ng-click="sort='team.name';rev=true">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="team in teams" ng-click="selectTeamPop(team)">
+                            <td><h3>{{team.number}}</h3></td>
+                            <td>{{team.name}}
+                            <br />
+                            <small>{{team.affiliation}}, {{team.cityState}}</small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
     </div>
 
-    <div class="fll-dialog" id="roundDialog" ng-controller="RoundDialogController" ng-show="dialogVisible">
-        <h1>
-            Select a round
-            <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
-        </h1>
-        <section>
-            <table class="table table-striped">
-                <tbody>
-                    <tr ng-repeat="stage in stages">
-                        <td>
-                            <h3>{{stage.name}}</h3>
-                        </td>
-                        <td>
-                            <div class="btn-group btn-group-justified">
-                                <div class="btn-group" >
-                                    <button
-                                        type="button"
-                                        class="btn btn-round"
-                                        ng-repeat="dummy in getNumber(stage.rounds) track by $index"
-                                        ng-click="selectRoundPop(stage, $index+1)"
-                                        ><div class="round-label">{{$index+1}}</div>
-                                    </button>
+    <div class="fll-dialog-shim" ng-controller="RoundDialogController" ng-show="dialogVisible">
+        <div class="fll-dialog" id="roundDialog">
+            <h1>
+                Select a round
+                <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
+            </h1>
+            <section>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr ng-repeat="stage in stages">
+                            <td>
+                                <h3>{{stage.name}}</h3>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-justified">
+                                    <div class="btn-group" >
+                                        <button
+                                            type="button"
+                                            class="btn btn-round"
+                                            ng-repeat="dummy in getNumber(stage.rounds) track by $index"
+                                            ng-click="selectRoundPop(stage, $index+1)"
+                                            ><div class="round-label">{{$index+1}}</div>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr ng-repeat-end>
-                </tbody>
-            </table>
-        </section>
+                            </td>
+                        </tr ng-repeat-end>
+                    </tbody>
+                </table>
+            </section>
+        </div>
     </div>
 
-    <div class="fll-dialog" id="descriptionDialog" ng-controller="DescriptionDialogController" ng-show="dialogVisible">
-        <h1>
-            {{mission.title}}
-            <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
-        </h1>
-        <section>
-            <div class="modal-body" ng-bind-html="mission.description">
-               {{mission.description}}
-            </div>
-        </section>
+    <div class="fll-dialog-shim" ng-controller="DescriptionDialogController" ng-show="dialogVisible">
+        <div class="fll-dialog" id="descriptionDialog">
+            <h1>
+                {{mission.title}}
+                <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
+            </h1>
+            <section>
+                <div class="modal-body" ng-bind-html="mission.description">
+                   {{mission.description}}
+                </div>
+            </section>
+        </div>
     </div>

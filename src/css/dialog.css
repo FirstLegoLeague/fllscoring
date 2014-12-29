@@ -1,3 +1,12 @@
+.fll-dialog-shim {
+    position: fixed;
+    z-index: 1999;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.6);
+}
 .fll-dialog {
     position: fixed;
     z-index: 2000;
@@ -11,7 +20,7 @@
     border: 1px solid rgba(0,0,0,0.3);
     background-color: white;
     border-radius: 6px;
-    box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.6);
     overflow: hidden;
 }
 
