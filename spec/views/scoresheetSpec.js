@@ -101,16 +101,42 @@ describe('scoresheet',function() {
     });
 
     describe('openTeamModal',function() {
-        it('should emit a chooseTeam handshake',function() {
+        it('should emit a chooseTeam handshake and return a team',function() {
+            var team = {};
+            handshakeMock.respond({
+                team: team
+            })
             $scope.openTeamModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
+            $scope.$digest();
+            expect($scope.team).toEqual(team);
+        });
+        it('should be ok when nothing is returned on cancel',function() {
+            $scope.openTeamModal('foo');
+            expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
+            $scope.$digest();
+            expect($scope.team).toEqual(undefined);
         });
     });
 
     describe('openRoundModal',function() {
-        it('should emit a chooseRound handshake',function() {
+        it('should emit a chooseRound handshake and return a stage and round',function() {
+            handshakeMock.respond({
+                stage: 'foo',
+                round: 'bar'
+            })
             $scope.openRoundModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
+            $scope.$digest();
+            expect($scope.stage).toEqual('foo');
+            expect($scope.round).toEqual('bar');
+        });
+        it('should be ok when nothing is returned on cancel',function() {
+            $scope.openRoundModal('foo');
+            expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
+            $scope.$digest();
+            expect($scope.stage).toEqual(undefined);
+            expect($scope.round).toEqual(undefined);
         });
     });
 })
