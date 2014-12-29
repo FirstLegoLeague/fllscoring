@@ -46,6 +46,11 @@
     left: 0;
 }
 
+/* don't display back arrow */
+.fll-dialog-back {
+    display: none;
+}
+
 
 /* small window dialog overrides */
 .smallWindow .fll-dialog {
@@ -57,4 +62,12 @@
     margin-top: 0;
     position: absolute;
     border: none;
+}
+
+/* display back arrow on fullscreen dialogs */
+.smallWindow .fll-dialog-back {
+    display: inline-block;
+}
+.smallWindow .fll-dialog-close {
+    display: none;
 }

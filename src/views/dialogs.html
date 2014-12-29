@@ -1,42 +1,45 @@
     <div class="fll-dialog-shim" ng-controller="TeamImportDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="teamImportDialog">
             <h1>
+                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
                 Import teams
-                <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
             </h1>
             <section>
-                <p>
-                    Paste a team list below
-                </p>
-                <p>
-                    <textarea name="" ng-model="importRaw"></textarea>
-                </p>
-                <p>
-                    <label>
-                        <input type="checkbox" ng-model="importHeader">
-                        Data contains header
-                    </label>
-                </p>
-                <p>
-                    Number column
-                    <input type="text" ng-model="importNumberColumn" size="3">
-                    ({{importNumberExample}})
-                </p>
-                <p>
-                    Name column
-                    <input type="text" ng-model="importNameColumn" size="3">
-                    ({{importNameExample}})
-                </p>
+                <div class="modal-body">
+                    <p>
+                        Paste a team list below
+                    </p>
+                    <p>
+                        <textarea name="" ng-model="importRaw"></textarea>
+                    </p>
+                    <p>
+                        <label>
+                            <input type="checkbox" ng-model="importHeader">
+                            Data contains header
+                        </label>
+                    </p>
+                    <p>
+                        Number column
+                        <input type="text" ng-model="importNumberColumn" size="3">
+                        ({{importNumberExample}})
+                    </p>
+                    <p>
+                        Name column
+                        <input type="text" ng-model="importNameColumn" size="3">
+                        ({{importNameExample}})
+                    </p>
 
-                <table>
-                    <tr ng-repeat="line in importLines">
-                        <td ng-repeat="field in line">
-                            {{field}}
-                        </td>
-                    </tr>
-                </table>
-                <button class="btn" ng-click="ok()">Ok</button>
-                <button class="btn" ng-click="cancel()">Cancel</button>
+                    <table>
+                        <tr ng-repeat="line in importLines">
+                            <td ng-repeat="field in line">
+                                {{field}}
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn" ng-click="ok()">Ok</button>
+                    <button class="btn" ng-click="cancel()">Cancel</button>
+                </div>
             </section>
         </div>
     </div>
@@ -44,8 +47,9 @@
     <div class="fll-dialog-shim" ng-controller="TeamDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="teamDialog">
             <h1>
+                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
                 Select a team
-                <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
             </h1>
             <section>
                 <table class="table table-hover table-striped table-teams">
@@ -72,8 +76,9 @@
     <div class="fll-dialog-shim" ng-controller="RoundDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="roundDialog">
             <h1>
+                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
                 Select a round
-                <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
             </h1>
             <section>
                 <table class="table table-striped">
@@ -105,8 +110,9 @@
     <div class="fll-dialog-shim" ng-controller="DescriptionDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="descriptionDialog">
             <h1>
+                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
                 {{mission.title}}
-                <button class="btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove" /></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
             </h1>
             <section>
                 <div class="modal-body" ng-bind-html="mission.description">
