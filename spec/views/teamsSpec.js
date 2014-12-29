@@ -1,10 +1,11 @@
 describe('teams', function() {
 
     var module = factory('views/teams', {
-        'services/log': logMock
+        'services/log': logMock,
+        'controllers/TeamImportDialogController': factory('controllers/TeamImportDialogController')
     });
 
-    var $scope, controller, $httpBackend, $teams;
+    var $scope, controller, $httpBackend, $teams, handshakeMock;
     var mockTeam = {
         name: 'foo',
         number: 123,
@@ -34,12 +35,14 @@ describe('teams', function() {
     describe('missing teams.json on storage',function() {
         beforeEach(function() {
             angular.mock.module(module.name);
-            angular.mock.inject(function($controller, $rootScope) {
+            angular.mock.inject(function($controller, $rootScope, $q) {
                 $scope = $rootScope.$new();
                 $teams = createTeamsMock([]);
+                handshakeMock = createHandshakeMock($q);
                 controller = $controller('teamsCtrl', {
                     '$scope': $scope,
-                    '$teams': $teams
+                    '$teams': $teams,
+                    '$handshake': handshakeMock
                 });
             });
             return $scope.init();
@@ -55,14 +58,17 @@ describe('teams', function() {
 
     describe('stored teams',function() {
         beforeEach(function() {
+            angular.mock.module('TeamImportDialog');
             angular.mock.module(module.name);
-            angular.mock.inject(function($controller, $rootScope, _$httpBackend_) {
+            angular.mock.inject(function($controller, $rootScope, _$httpBackend_,$q) {
                 $scope = $rootScope.$new();
                 $httpBackend = _$httpBackend_;
                 $teams = createTeamsMock([mockTeam]);
+                handshakeMock = createHandshakeMock($q);
                 controller = $controller('teamsCtrl', {
                     '$scope': $scope,
-                    '$teams': $teams
+                    '$teams': $teams,
+                    '$handshake': handshakeMock
                 });
             });
             return $scope.init();
@@ -105,86 +111,21 @@ describe('teams', function() {
         });
 
         describe('import',function() {
-            it('should set import mode to true and clear the importRaw field',function() {
-                $scope.importRaw = 'foo';
-                expect($scope.importMode).toBe(false);
-                $scope.import();
-                expect($scope.importMode).toBe(true);
-                expect($scope.importRaw).toBe('');
-            });
-        });
-
-        describe('finishImport',function() {
-            beforeEach(function() {
-                $scope.importMode = true;
-                $scope.importLines = [[42,'FooBars']];
-                $scope.importNumberColumn = 1;
-                $scope.importNameColumn = 2;
-            });
-            it('should set import mode to false',function() {
-                $scope.finishImport();
-                expect($scope.importMode).toBe(false);
-            });
-            it('should clear the teams',function() {
-                $scope.finishImport();
-                expect($teams.clear).toHaveBeenCalled();
-            });
-            it('should add the teams in the lines',function() {
-                $scope.finishImport();
-                expect($teams.add).toHaveBeenCalledWith({
-                    number: 42,
-                    name: 'FooBars'
+            it('should emit the importTeams handshake and add teams on result',function() {
+                handshakeMock.respond({
+                    teams: [{number:42,name:'foo'}]
                 });
-            });
-        });
-
-        describe('cancelImport',function() {
-            beforeEach(function() {
-                $scope.importMode = true;
-                $scope.importLines = [[42,'FooBars']];
-                $scope.importNumberColumn = 1;
-                $scope.importNameColumn = 2;
-            });
-            it('should set import mode to false',function() {
-                $scope.cancelImport();
-                expect($scope.importMode).toBe(false);
-            });
-        });
-
-        describe('parsing data',function() {
-            it('should populate importLines',function() {
-                $scope.importLines = [];
-                $scope.importRaw = '42\tFooBar\n7\tQuxMoo';
+                $scope.import();
+                expect(handshakeMock.$emit).toHaveBeenCalledWith('importTeams');
                 $scope.$digest();
-                expect($scope.importLines).toEqual([
-                    ['42','FooBar'],
-                    ['7','QuxMoo']
-                ]);
-                expect($scope.importNumberExample).toEqual('42');
-                expect($scope.importNameExample).toEqual('FooBar');
+                expect($teams.add).toHaveBeenCalledWith({number:42,name:'foo'});
             });
 
-            it('should skip the first line if it is a header',function() {
-                $scope.importLines = [];
-                $scope.importRaw = 'Number\tName\n7\tQuxMoo';
-                $scope.importHeader = true;
+            it('should be ok when no result is returned',function() {
+                $scope.import();
+                expect(handshakeMock.$emit).toHaveBeenCalledWith('importTeams');
                 $scope.$digest();
-                expect($scope.importLines).toEqual([
-                    ['7','QuxMoo']
-                ]);
-                expect($scope.importNumberExample).toEqual('7');
-                expect($scope.importNameExample).toEqual('QuxMoo');
-            });
-
-            it('should not populate example lines if no data given',function() {
-                $scope.importLines = [];
-                $scope.importNumberExample = 'numberExample';
-                $scope.importNameExample = 'nameExample';
-                $scope.importRaw = '';
-                $scope.$digest();
-                expect($scope.importLines).toEqual([]);
-                expect($scope.importNumberExample).toEqual('');
-                expect($scope.importNameExample).toEqual('');
+                expect($teams.add).not.toHaveBeenCalled();
             });
         });
 

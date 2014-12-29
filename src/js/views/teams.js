@@ -1,15 +1,19 @@
 define('views/teams',[
     'services/log',
     'services/ng-teams',
+    'services/ng-handshake',
+    'controllers/TeamImportDialogController',
     'angular'
 ], function(log) {
     var moduleName = 'teams';
 
-    return angular.module(moduleName, []).config(['$httpProvider', function($httpProvider) {
+    return angular.module(moduleName, [
+            'TeamImportDialog'
+        ]).config(['$httpProvider', function($httpProvider) {
             delete $httpProvider.defaults.headers.common["X-Requested-With"];
         }]).controller(moduleName + 'Ctrl', [
-        '$scope','$http','$q','$teams',
-        function($scope,$http,$q,$teams) {
+        '$scope','$http','$q','$teams','$handshake',
+        function($scope,$http,$q,$teams,$handshake) {
 
             log('init teams ctrl');
             $scope.log = log.get();
@@ -64,59 +68,18 @@ define('views/teams',[
             };
 
             $scope.import = function() {
-                $scope.importMode = true;
-                $scope.importRaw = '';
-            };
-
-            $scope.finishImport = function() {
-                $scope.importMode = false;
-                $teams.clear();
-                $scope.importLines.forEach(function(line) {
-                    $teams.add({
-                        number: line[$scope.importNumberColumn -1],
-                        name: line[$scope.importNameColumn -1]
-                    });
+                $handshake.$emit('importTeams').then(function(result) {
+                    if (result) {
+                        $teams.clear();
+                        result.teams.forEach(function(team) {
+                            $teams.add({
+                                number: team.number,
+                                name: team.name
+                            });
+                        });
+                    }
                 });
             };
-
-            $scope.cancelImport = function() {
-                $scope.importMode = false;
-            };
-
-            $scope.$watch('importRaw',function(data) {
-                parseData($scope.importRaw);
-            });
-
-            $scope.$watch('importHeader',function(data) {
-                parseData($scope.importRaw);
-            });
-
-            function parseData(data) {
-                //parse raw import, split lines
-                var lines = data?data.split(/[\n\r]/):[];
-                if ($scope.importHeader) {
-                    lines.shift();
-                }
-                lines = lines.map(function(line) {
-                    //split by tab character
-                    return line.split(/\t/);
-                });
-                //try to guess names and number columns
-                $scope.importNumberColumn = 1;
-                $scope.importNameColumn = 2;
-
-                if (lines[0]) {
-                    $scope.importNumberExample = lines[0][$scope.importNumberColumn -1];
-                    $scope.importNameExample = lines[0][$scope.importNameColumn -1];
-                } else {
-                    $scope.importNumberExample = '';
-                    $scope.importNameExample = '';
-                }
-
-                $scope.importLines = lines;
-            }
-
-
 
             $scope.selectTeam = function(team) {
                 $scope.setPage('scoresheet');

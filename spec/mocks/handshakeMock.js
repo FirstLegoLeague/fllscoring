@@ -1,11 +1,14 @@
 var createHandshakeMock = function($q) {
     var handlers = {};
     var promise;
+    var result;
     return {
         $on: jasmine.createSpy('handshake.on').andCallFake(function(e,cb) {
             handlers[e] = cb;
         }),
-        $emit: jasmine.createSpy('handshake.emit').andReturn($q.when()),
+        $emit: jasmine.createSpy('handshake.emit').andCallFake(function() {
+            return $q.when(result)
+        }),
         defer: jasmine.createSpy('handshake.defer').andCallFake(function() {
             promise = {
                 resolve: jasmine.createSpy('promise.resolve'),
@@ -21,6 +24,10 @@ var createHandshakeMock = function($q) {
         },
         getPromise: function() {
             return promise;
+        },
+        //sets the response after the emit it resolved
+        respond: function(res) {
+            result = res;
         }
     };
 };
