@@ -55,6 +55,81 @@ describe('scoresheet',function() {
         });
     });
 
+    describe('isSaveable',function() {
+        beforeEach(function() {
+            //setup happy situation
+            $scope.missions = [
+                {
+                    objectives: [
+                        {value: 1},
+                        {value: 2}
+                    ],
+                    errors: []
+                },{
+                    objectives: [],
+                    errors: []
+                }
+            ];
+            $scope.stage = 1;
+            $scope.round = 1;
+            $scope.team = 1;
+        });
+
+        it('should return true in the happy situation',function() {
+            expect($scope.isSaveable()).toBe(true);
+        });
+
+        it('should return false if missions not present',function() {
+            delete $scope.missions;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if stage is undefined',function() {
+            $scope.stage = undefined;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if stage is null',function() {
+            $scope.stage = null;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if round is undefined',function() {
+            $scope.round = undefined;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if round is null',function() {
+            $scope.round = null;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if team is undefined',function() {
+            $scope.team = undefined;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if team is null',function() {
+            $scope.team = null;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false when some missions have errors',function() {
+            $scope.missions[0].errors=['foo'];
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false when some missions have some objectives with undefined value',function() {
+            $scope.missions[0].objectives[0].value = undefined;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false when some missions have some objectives with null value',function() {
+            $scope.missions[0].objectives[0].value = null;
+            expect($scope.isSaveable()).toBe(false);
+        });
+    });
+
     describe('discard', function() {
         it('should discard form', function() {
             $scope.signature = "dummy";
@@ -105,7 +180,7 @@ describe('scoresheet',function() {
             var team = {};
             handshakeMock.respond({
                 team: team
-            })
+            });
             $scope.openTeamModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
             $scope.$digest();
@@ -124,7 +199,7 @@ describe('scoresheet',function() {
             handshakeMock.respond({
                 stage: 'foo',
                 round: 'bar'
-            })
+            });
             $scope.openRoundModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
             $scope.$digest();
@@ -139,4 +214,4 @@ describe('scoresheet',function() {
             expect($scope.round).toEqual(undefined);
         });
     });
-})
+});
