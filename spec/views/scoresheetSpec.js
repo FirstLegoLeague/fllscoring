@@ -57,6 +57,37 @@ describe('scoresheet',function() {
         });
     });
 
+    describe('score',function() {
+        it('should return undefined if there are no missions',function() {
+            $scope.missions = undefined;
+            expect($scope.score()).toBe(undefined);
+        });
+        it('should return the total result and add percentages to non percentage missions',function() {
+            $scope.missions = [
+                {
+                    result: 10,
+                    percentages: []
+                },{
+                    result: 40,
+                    percentages: [0.1,0.2]  //30% in total
+                }
+            ];
+            expect($scope.score()).toBe(53);
+        });
+        it('should round percentages up',function() {
+            $scope.missions = [
+                {
+                    result: 1,
+                    percentages: []
+                },{
+                    result: 4,
+                    percentages: [0.1,0.2]  //30% in total
+                }
+            ];
+            expect($scope.score()).toBe(6);
+        });
+    });
+
     describe('isSaveable',function() {
         beforeEach(function() {
             //setup happy situation
