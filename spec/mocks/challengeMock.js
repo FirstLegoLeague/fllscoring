@@ -1,4 +1,4 @@
-var challengeMock = (function() {
+var createChallengeMock = function() {
     var field = {
         title: 'test field',
         missions: [{
@@ -18,4 +18,4 @@ var challengeMock = (function() {
         load: function() { return Q.when(definition); },
         getDependencies: function() { return []; }, // todo
     };
-})();
+};

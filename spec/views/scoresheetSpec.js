@@ -14,7 +14,7 @@ describe('scoresheet',function() {
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
     var fsMock = createFsMock({"settings.json": []});
-    var settingsMock, handshakeMock;
+    var settingsMock, handshakeMock, challengeMock;
 
     beforeEach(function() {
         angular.mock.module('DescriptionDialog');
@@ -24,6 +24,7 @@ describe('scoresheet',function() {
         angular.mock.inject(function($controller,$rootScope,$q) {
             settingsMock = createSettingsMock($q,{});
             handshakeMock = createHandshakeMock($q);
+            challengeMock = createChallengeMock();
             $scope = $rootScope.$new();
             $window = {
                 Date: function() {
