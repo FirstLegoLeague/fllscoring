@@ -42,6 +42,7 @@ define([
 
             $scope.setPage = function(page) {
                 $scope.currentPage = page;
+                $('body').scrollTop(0);
             };
 
             $scope.setPlatform = function(platform) {
