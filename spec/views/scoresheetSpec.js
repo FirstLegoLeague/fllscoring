@@ -7,7 +7,7 @@ describe('scoresheet',function() {
         'controllers/RoundDialogController': factory('controllers/RoundDialogController')
     });
 
-    var $scope, controller;
+    var $scope, controller, $window;
     var dummyTeam =  {
         number: '123',
         name: 'foo'
@@ -25,6 +25,14 @@ describe('scoresheet',function() {
             settingsMock = createSettingsMock($q,{});
             handshakeMock = createHandshakeMock($q);
             $scope = $rootScope.$new();
+            $window = {
+                Date: function() {
+                    this.valueOf = function() {
+                        return 42;
+                    };
+                },
+                alert: jasmine.createSpy('alertSpy')
+            };
             controller = $controller('scoresheetCtrl', {
                 '$scope': $scope,
                 '$fs': fsMock,
@@ -33,13 +41,7 @@ describe('scoresheet',function() {
                 '$handshake': handshakeMock,
                 '$teams': {},
                 '$challenge': challengeMock,
-                '$window': {
-                    Date: function() {
-                        this.valueOf = function() {
-                            return 42;
-                        };
-                    }
-                }
+                '$window': $window
             });
         });
     });
@@ -71,8 +73,8 @@ describe('scoresheet',function() {
                 }
             ];
             $scope.stage = 1;
-            $scope.round = 1;
-            $scope.team = 1;
+            $scope.round = 2;
+            $scope.team = 3;
         });
 
         it('should return true in the happy situation',function() {
@@ -131,10 +133,34 @@ describe('scoresheet',function() {
     });
 
     describe('discard', function() {
-        it('should discard form', function() {
+        beforeEach(function() {
+            //setup some values
             $scope.signature = "dummy";
+            $scope.missions = [
+                {
+                    objectives: [
+                        {value: 1},
+                        {value: 2}
+                    ],
+                    errors: []
+                },{
+                    objectives: [],
+                    errors: []
+                }
+            ];
+            $scope.stage = 1;
+            $scope.round = 2;
+            $scope.team = 3;
+        });
+
+        it('should discard form signature', function() {
             $scope.discard();
             expect($scope.signature).toEqual(null);
+            expect($scope.team).toEqual(null);
+            expect($scope.stage).toEqual(null);
+            expect($scope.round).toEqual(null);
+            expect($scope.missions[0].objectives[0].value).toEqual(null);
+            expect($scope.missions[0].objectives[1].value).toEqual(null);
         });
     });
 
@@ -142,6 +168,7 @@ describe('scoresheet',function() {
         it('should not save when no team, stage or round is selected',function() {
             return $scope.save().catch(function() {
                 expect(fsMock.write).not.toHaveBeenCalled();
+                expect($window.alert).toHaveBeenCalledWith('no team selected, do so first');
             });
         });
         it('should save',function() {
@@ -164,6 +191,20 @@ describe('scoresheet',function() {
                     signature: [1,2,3,4],
                     score: 0
                 });
+                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
+            });
+        });
+        it('should alert a message if scoresheet cannot be saved', function() {
+            $scope.team = dummyTeam;
+            $scope.field = {};
+            $scope.stage = dummyStage;
+            $scope.round = 1;
+            $scope.settings = {
+                table: 3
+            };
+            fsMock.write.andReturn(Q.reject('argh'));
+            return $scope.save().then(function() {
+                expect($window.alert).toHaveBeenCalledWith('unable to write result');
             });
         });
     });
