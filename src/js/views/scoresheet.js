@@ -126,22 +126,50 @@ define('views/scoresheet',[
                 return bonusScore + restScore;
             };
 
+            //lists reasons why the scoresheet cannot be saved
+            $scope.preventSaveErrors = function() {
+                var list = [];
+                if (!$scope.missions) {return list;}
+
+                function empty(val) {
+                    return val === undefined || val === null;
+                }
+                function errors() {
+                    return $scope.missions.some(function(mission) {
+                        return !!mission.errors.length;
+                    });
+                }
+                function inComplete() {
+                    return $scope.missions.some(function(mission) {
+                        return mission.objectives.some(function(objective) {
+                            return empty(objective.value);
+                        });
+                    });
+                }
+
+                if (empty($scope.stage)) {
+                    list.push('No stage selected');
+                }
+                if (empty($scope.round)) {
+                    list.push('No round selected');
+                }
+                if (empty($scope.team)) {
+                    list.push('No team selected');
+                }
+                if (errors()) {
+                    list.push('Some missions have errors');
+                }
+                if (inComplete()) {
+                    list.push('Some missions are incomplete');
+                }
+
+                return list;
+            };
+
             $scope.isSaveable = function() {
                 if (!$scope.missions) {return false;}
 
-                var val =
-                    $scope.stage !== undefined && $scope.stage !== null &&
-                    $scope.round !== undefined && $scope.round !== null &&
-                    $scope.team !== undefined && $scope.team !== null &&
-                    // $scope.signature !== undefined && $scope.signature !== null &&
-                    $scope.missions.every(function(mission) {
-                        return mission.objectives.every(function(objective) {
-                          return objective.value !== undefined && objective.value !== null;
-                        }) && mission.errors.length === 0;
-                    });
-
-                // console.log("saveable " + val);
-                return val;
+                return !$scope.preventSaveErrors().length;
             };
 
             $scope.discard = function() {
