@@ -42,7 +42,6 @@ js/services/fs-pg.js
 js/services/fs-xhr.js
 js/services/log.js
 js/services/ng-challenge.js
-js/services/ng-connect.js
 js/services/ng-fs.js
 js/services/ng-scores.js
 js/services/ng-services.js
