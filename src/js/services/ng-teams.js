@@ -19,7 +19,7 @@ define('services/ng-teams',[
             this.teams = [];
 
             this._rawTeams = []; // teams as created by the user and persisted to storage, no auto-generated properties
-            this._teamsMap = Object.create(null); // id => team
+            this._teamsMap = {}; // id => team
 
             this._initialized = null; // Promise<void>
             this.init();

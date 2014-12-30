@@ -2,6 +2,7 @@ describe('teams', function() {
 
     var module = factory('views/teams', {
         'services/log': logMock,
+        'services/ng-throttle': factory('services/ng-throttle'),
         'controllers/TeamImportDialogController': factory('controllers/TeamImportDialogController')
     });
 
@@ -34,6 +35,7 @@ describe('teams', function() {
 
     describe('missing teams.json on storage',function() {
         beforeEach(function() {
+            angular.mock.module('services');
             angular.mock.module(module.name);
             angular.mock.inject(function($controller, $rootScope, $q) {
                 $scope = $rootScope.$new();
@@ -59,6 +61,7 @@ describe('teams', function() {
     describe('stored teams',function() {
         beforeEach(function() {
             angular.mock.module('TeamImportDialog');
+            angular.mock.module('services');
             angular.mock.module(module.name);
             angular.mock.inject(function($controller, $rootScope, _$httpBackend_,$q) {
                 $scope = $rootScope.$new();
@@ -181,6 +184,15 @@ describe('teams', function() {
                 $scope.teams = [mockTeam];
                 $scope.saveTeams();
                 expect($teams.save).toHaveBeenCalled();
+            });
+        });
+
+        describe('watching teams change',function() {
+            it('should save if teams change',function() {
+                $scope.saveTeams = jasmine.createSpy('saveTeams');
+                $scope.teams[0].name = 'newName';
+                $scope.$digest();
+                expect($scope.saveTeams).toHaveBeenCalled();
             });
         });
 

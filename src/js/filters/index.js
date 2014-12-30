@@ -19,7 +19,7 @@ define('filters/index',[
             }
             array.forEach(function(item,i) {
                 item[index] = i;
-            })
+            });
             return array;
         };
     });

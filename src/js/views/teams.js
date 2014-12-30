@@ -2,6 +2,7 @@ define('views/teams',[
     'services/log',
     'services/ng-teams',
     'services/ng-handshake',
+    'services/ng-throttle',
     'controllers/TeamImportDialogController',
     'angular'
 ], function(log) {
@@ -12,8 +13,8 @@ define('views/teams',[
         ]).config(['$httpProvider', function($httpProvider) {
             delete $httpProvider.defaults.headers.common["X-Requested-With"];
         }]).controller(moduleName + 'Ctrl', [
-        '$scope','$http','$q','$teams','$handshake',
-        function($scope,$http,$q,$teams,$handshake) {
+        '$scope','$http','$q','$teams','$handshake','$throttle',
+        function($scope,$http,$q,$teams,$handshake,$throttle) {
 
             log('init teams ctrl');
             $scope.log = log.get();
@@ -104,7 +105,7 @@ define('views/teams',[
                 return $scope.saveTeams();
             };
 
-            $scope.saveTeams = function() {
+            $scope.saveTeams = $throttle(function() {
                 $scope.saving = true;
                 // Teams used to be managed by the scope, but
                 // that's now moved to a service.
@@ -113,6 +114,8 @@ define('views/teams',[
                 // To make transition to the service smooth and quick,
                 // we simply copy the desired-teams-list, and (re-)add
                 // these to the teams service.
+
+                //TODO: this is a performance killer as it rebuilds the entire page on every save
                 var newTeams = $scope.teams.slice();
                 $teams.clear();
                 newTeams.forEach(function(team) {
@@ -120,8 +123,16 @@ define('views/teams',[
                 });
                 return $teams.save().finally(function() {
                     $scope.saving = false;
+                    $scope.needSave = false;
                 });
-            };
+            },5000);
+
+            $scope.$watch('teams',function(newValue, oldValue) {
+                if (!angular.equals(newValue,oldValue)) {
+                    $scope.needSave = true;
+                    $scope.saveTeams();
+                }
+            },true);
 
             $scope.toggleExtended = function(isCollapsed) {
                 if ($scope.editMode) {
