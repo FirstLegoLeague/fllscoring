@@ -1,5 +1,4 @@
 html,body {
-    overflow: hidden;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -9,15 +8,12 @@ body {
     font-family: 'latolight', 'Segoe UI','helvetica','Arial';
     font-size: 18px;
 }
-.tablewrapper {
-
-}
 
 h1 {
     font-family: 'latolight', 'Segoe UI Light','helvetica','Arial';
     color: dodgerblue;
     font-size: 32px;
-    padding: 0px 12px;
+    padding: 0 12px;
     font-weight: normal;
 }
 
@@ -68,43 +64,20 @@ table {
 /* small layout */
 @media screen and (max-width: 480px) {
     .viewMain {
-        transition: transform 0.2s;
-        -webkit-transition: -webkit-transform 0.2s;
-        width: 500%;
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
         margin-top: 79px;
     }
+
     .viewMain > div {
-        width: 20%;
-        height: 100%;
-        float: left;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        overflow-scrolling: touch;
+        display: none;
         padding-bottom: 40px;
-        position: relative;
     }
-    .viewMain.teams {
-        transform: translateX(0);
-        -webkit-transform: translateX(0);
-    }
-    .viewMain.scoresheet {
-        transform: translateX(-20%);
-        -webkit-transform: translateX(-20%);
-    }
-    .viewMain.scores {
-        transform: translateX(-40%);
-        -webkit-transform: translateX(-40%);
-    }
-    .viewMain.ranking {
-        transform: translateX(-60%);
-        -webkit-transform: translateX(-60%);
-    }
-    .viewMain.settings {
-        transform: translateX(-80%);
-        -webkit-transform: translateX(-80%);
+
+    .viewMain.teams .view-teams,
+    .viewMain.scoresheet .view-scoresheet,
+    .viewMain.scores .view-scores,
+    .viewMain.ranking .view-ranking,
+    .viewMain.settings .view-settings {
+        display: block;
     }
 
     .btn-enum {
@@ -127,22 +100,10 @@ table {
 /* medium layout */
 @media screen and (min-width: 481px) and (max-width: 1024px) {
     .viewMain {
-        position: absolute;
-        width: 100%;
-        top: 0px;
-        bottom: 0px;
         margin-top: 50px;
     }
     .viewMain > div {
         background-color: white;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        overflow-scrolling: touch;
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
         display: none;
         padding-bottom: 40px;
     }
@@ -157,10 +118,6 @@ table {
 
     .panel, #teams {
         padding: 5px;
-    }
-
-    .btn-enum {
-
     }
 
     #teams .table-teams {
@@ -179,22 +136,10 @@ table {
 /* large layout */
 @media screen and (min-width: 1025px) {
     .viewMain {
-        position: absolute;
-        width: 100%;
-        top: 0px;
-        bottom: 0px;
         margin-top: 50px;
     }
     .viewMain > div {
         background-color: white;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        overflow-scrolling: touch;
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
         padding: 0 10px;
         display: none;
         padding-bottom: 40px;
