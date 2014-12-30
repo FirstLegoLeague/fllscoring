@@ -97,13 +97,6 @@ define('views/scoresheet',[
 
             }
 
-            $scope.inc = function(objective,amount) {
-                objective.value = Math.min(objective.max||Number.Infinity,(objective.value||0)+(amount||1));
-            };
-            $scope.dec = function(objective,amount) {
-                objective.value = Math.max(objective.min||0,(objective.value||0)-(amount||1));
-            };
-
             $scope.score = function() {
                 if (!$scope.missions) {return;}
                 //step 1: sum all scores from missions without percentages
