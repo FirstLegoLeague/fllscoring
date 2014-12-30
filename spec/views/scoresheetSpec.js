@@ -22,7 +22,7 @@ describe('scoresheet',function() {
         angular.mock.module('RoundDialog');
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
-            settingsMock = createSettingsMock($q,{});
+            settingsMock = createSettingsMock($q,'settings');
             handshakeMock = createHandshakeMock($q);
             challengeMock = createChallengeMock();
             $scope = $rootScope.$new();
@@ -54,7 +54,93 @@ describe('scoresheet',function() {
 
     describe('initialization',function() {
         it('should initialize',function() {
+            expect($scope.settings).toEqual({});
+            expect($scope.missions).toEqual([]);
+            $scope.$digest();
+            expect($scope.settings).toEqual('settings');
+        });
+    });
 
+    describe('load',function() {
+        describe('processing',function() {
+            var field = 'foo';
+            var mission = {
+                score: [
+                    function() {return 1;},
+                    function() {return 2;}
+                ]
+            };
+            var objective = {
+                value: 4
+            };
+            var missions = [mission];
+            var objectiveIndex = {
+                'foo': objective
+            };
+            beforeEach(function() {
+                challengeMock.load.andReturn(Q.when({
+                    field: field,
+                    missions: missions,
+                    objectiveIndex: objectiveIndex
+                }));
+                challengeMock.getDependencies.andReturn(['foo']);
+            });
+            it('should set the field, missions and index',function() {
+                return $scope.load().then(function() {
+                    expect($scope.field).toBe(field);
+                    expect($scope.missions).toBe(missions);
+                    expect($scope.objectiveIndex).toBe(objectiveIndex);
+                });
+            });
+            it('should process the missions',function() {
+                return $scope.load().then(function() {
+                    expect(mission.errors).toEqual([]);
+                    expect(mission.percentages).toEqual([]);
+                });
+            });
+            it('should set a watcher to mission dependencies',function() {
+                return $scope.load().then(function() {
+                    expect(mission.result).toBe(3);
+                });
+            });
+            it('should not count an error, but log it to mission errors',function() {
+                var err = new Error('squeek');
+                mission.score = [
+                        function() {return 1;},
+                        function() {return err;}
+                ];
+                return $scope.load().then(function() {
+                    expect(mission.result).toBe(1);
+                    expect(mission.errors).toEqual([err]);
+                });
+            });
+            it('should not count a fraction, but treat as percentage',function() {
+                mission.score = [
+                        function() {return 1;},
+                        function() {return 0.5;}
+                ];
+                return $scope.load().then(function() {
+                    expect(mission.result).toBe(1);
+                    expect(mission.percentages).toEqual([0.5]);
+                });
+            });
+            it('should count undefined as 0',function() {
+                mission.score = [
+                        function() {return 1;},
+                        function() {return;}
+                ];
+                return $scope.load().then(function() {
+                    expect(mission.result).toBe(1);
+                });
+            });
+        });
+        it('should set an error message when loading fails',function() {
+            challengeMock.load.andReturn(Q.reject('squeek'));
+
+            return $scope.load().then(function() {
+                expect($scope.errorMessage).toBe('Could not load field, please configure host in settings');
+                expect($window.alert).toHaveBeenCalledWith('Could not load field, please configure host in settings');
+            });
         });
     });
 

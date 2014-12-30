@@ -15,7 +15,11 @@ var createChallengeMock = function() {
         objectiveIndex: {} // todo
     };
     return {
-        load: function() { return Q.when(definition); },
-        getDependencies: function() { return []; }, // todo
+        load: jasmine.createSpy('challenge.load').andCallFake(function() {
+            return Q.when(definition);
+        }),
+        getDependencies: jasmine.createSpy('challenge.getDependencies').andCallFake(function() {
+            return []; // todo
+        })
     };
 };

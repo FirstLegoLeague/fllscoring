@@ -38,23 +38,23 @@ define('views/scoresheet',[
 
             $settings.init().then(function(res) {
                 $scope.settings = res;
-                load();
+                return $scope.load();
             });
 
-            function load() {
-                $challenge.load($scope.settings.challenge).then(function(defs) {
+            $scope.load = function() {
+                return $challenge.load($scope.settings.challenge).then(function(defs) {
                     $scope.field = defs.field;
                     $scope.missions = defs.missions;
                     $scope.objectiveIndex = defs.objectiveIndex;
                     angular.forEach($scope.missions,process);
                     $scope.$apply();
-                }).fail(function() {
+                }).catch(function() {
                     //could not read field locally or remotely
                     $scope.errorMessage = 'Could not load field, please configure host in settings';
                     $scope.$apply();
-                    alert($scope.errorMessage);
+                    $window.alert($scope.errorMessage);
                 });
-            }
+            };
 
             function getObjectives(names) {
                 return names.map(function(dep) {
@@ -91,7 +91,7 @@ define('views/scoresheet',[
                             //do not count
                             return total;
                         }
-                        return total + res||0;
+                        return total + (res||0);
                     },0);
                 });
 
