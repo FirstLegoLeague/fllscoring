@@ -35,3 +35,5 @@ src/components/*/*
 !src/components/requirejs/require.js
 
 !src/components/signature-pad/jquery.signaturepad*.js
+
+!src/components/material-design-icons/sprites
