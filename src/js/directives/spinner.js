@@ -205,7 +205,7 @@ define('directives/spinner',[
                         '<span class="inner"></span>',
                         '<button class="prev"><i class="icon-caret-left"></i></button>',
                         '<button class="next"><i class="icon-caret-right"></i></button>',
-                    '</div>'
+                    '</span>'
                 ].join(''),
                 link: function($scope,$element,$attrs) {
                     var min,max,s;
