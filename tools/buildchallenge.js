@@ -129,7 +129,8 @@ function processFile(fn) {
         // console.log(missions);
         var jsm = {
             title: def['fll:challenge'].$.name,
-            missions: missions.map(parseMission)
+            missions: missions.map(parseMission),
+            strings: strings
         };
         var json = JSON.stringify(jsm,null,4);
         //replace funtion keys with actual function body
