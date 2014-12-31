@@ -30,6 +30,7 @@ define('views/scoresheet',[
             // Set up defaults
             $scope.settings = {};
             $scope.missions = [];
+            $scope.strings = [];
 
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
@@ -45,6 +46,7 @@ define('views/scoresheet',[
                 return $challenge.load($scope.settings.challenge).then(function(defs) {
                     $scope.field = defs.field;
                     $scope.missions = defs.missions;
+                    $scope.strings = defs.strings;
                     $scope.objectiveIndex = defs.objectiveIndex;
                     angular.forEach($scope.missions,process);
                     $scope.$apply();
@@ -54,6 +56,10 @@ define('views/scoresheet',[
                     $scope.$apply();
                     $window.alert($scope.errorMessage);
                 });
+            };
+
+            $scope.getString = function(key) {
+                return $scope.strings[key]||key;
             };
 
             function getObjectives(names) {

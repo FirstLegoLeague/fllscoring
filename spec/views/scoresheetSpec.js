@@ -144,6 +144,20 @@ describe('scoresheet',function() {
         });
     });
 
+    describe('getString',function() {
+        beforeEach(function() {
+            $scope.strings = {
+                foo:'bar'
+            };
+        });
+        it('should get a string from defined strings',function() {
+            expect($scope.getString('foo')).toBe('bar');
+        });
+        it('should return the key if string not found',function() {
+            expect($scope.getString('baz')).toBe('baz');
+        });
+    });
+
     describe('score',function() {
         it('should return undefined if there are no missions',function() {
             $scope.missions = undefined;

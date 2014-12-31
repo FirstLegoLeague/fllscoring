@@ -49,6 +49,7 @@ define('services/ng-challenge',[
                     return {
                         field: field,
                         missions: field.missions,
+                        strings: field.strings,
                         objectiveIndex: indexObjectives(field.missions)
                     };
                 }

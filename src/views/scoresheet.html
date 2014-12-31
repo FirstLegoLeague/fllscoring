@@ -48,8 +48,8 @@
                             <span class="field" ng-switch-when="yesno">
                                 {{objective.title}}
                                 <div class="btn-group">
-                                    <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">yes</label>
-                                    <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">no</label>
+                                    <label class="btn btn-enum" ng-model="objective.value" btn-radio="'yes'">{{getString('yes')}}</label>
+                                    <label class="btn btn-enum" ng-model="objective.value" btn-radio="'no'">{{getString('no')}}</label>
                                 </div>
                             </span>
                             <span class="field" ng-switch-when="number">
