@@ -61,10 +61,116 @@ table {
     }
 }
 
+/* app bar http://www.google.com/design/spec/layout/structure.html#structure-app-bar */
+@media screen {
+    .appbar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 64px;
+        line-height: 64px;
+        background-color: dodgerblue;
+        padding-left: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+        z-index: 1998;
+    }
+    .appbar button {
+        height: 48px;
+        width: 48px;
+        border: none;
+        padding: 12px;
+        background: none;
+        display: inline-block;
+        vertical-align: 3px;
+    }
+    .appbar button i {
+        font-size: 22px;
+        color: white;
+    }
+    .appbar h1 {
+        display: inline-block;
+        color: white;
+        text-transform: capitalize;
+    }
+}
+
+/* navigation drawer: http://www.google.com/design/spec/patterns/navigation-drawer.html */
+@media screen {
+    .drawer {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        /* The width of the side nav is equal to the width of the screen minus the height of the action bar */
+        max-width: -webkit-calc(100% - 64px);
+        max-width: calc(100% - 64px);
+        /* The maximum width of the nav drawer is 5 times the standard increment (56dp on mobile and 64dp on tablet). */
+        width: 320px;
+        background-color: white;
+        -webkit-transform: translate(-100%);
+        transform: translate(-100%);
+        -webkit-transition: -webkit-transform 0.2s;
+        transition: transform 0.2s;
+        z-index: 2000;
+        border-right: 1px solid rgba(0,0,0,0.14);
+    }
+    .drawer.visible {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+    }
+    .drawer .drawerLead {
+        /*height: 156px;*/
+        height: 64px;
+        /*background-color: red;*/
+        border-bottom: 1px solid rgba(0,0,0,0.14);
+    }
+    .drawerShim {
+        opacity: 0;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: 1999;
+        -webkit-transition: opacity 0.2s;
+        transition: opacity 0.2s;
+        pointer-events: none;
+    }
+    .drawerShim.visible {
+        opacity: 0.5;
+        pointer-events: inherit;
+    }
+    .drawer .nav {
+        margin-top: 8px;
+    }
+    .drawer .nav li {
+        height: 48px;
+        line-height: 48px;
+    }
+    .drawer .nav li a {
+        padding: 0 16px;
+        cursor: pointer;
+    }
+    .drawer .nav li i {
+        width: 24px;
+        margin-right: 32px;
+    }
+}
+
 /* small layout */
 @media screen and (max-width: 480px) {
+    .appbar {
+        height: 56px;
+    }
+    .drawer {
+        max-width: calc(100% - 56px);
+        width: 280px;
+    }
     .viewMain {
-        margin-top: 79px;
+        margin-top: 56px;
     }
 
     .viewMain > div {
@@ -99,8 +205,15 @@ table {
 
 /* medium layout */
 @media screen and (min-width: 481px) and (max-width: 1024px) {
+    .appbar {
+        height: 64px;
+    }
+    .drawer {
+        max-width: calc(100% - 64px);
+        width: 320px;
+    }
     .viewMain {
-        margin-top: 50px;
+        margin-top: 64px;
     }
     .viewMain > div {
         background-color: white;
@@ -135,8 +248,20 @@ table {
 
 /* large layout */
 @media screen and (min-width: 1025px) {
+    .appbar {
+        height: 64px;
+        padding-left: 272px;
+    }
+    .drawer {
+        max-width: calc(100% - 64px);
+        width: 320px;
+        -webkit-transform: translate(0);
+        transform: translate(0);
+        box-shadow: none;
+    }
     .viewMain {
-        margin-top: 50px;
+        margin-top: 64px;
+        margin-left: 320px;
     }
     .viewMain > div {
         background-color: white;

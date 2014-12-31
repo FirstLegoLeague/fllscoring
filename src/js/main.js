@@ -35,14 +35,24 @@ define([
             $scope.scoringPages = ['scoresheet','settings'];
             $scope.currentPage = $scope.pages[1];
             $scope.validationErrors = [];
+            $scope.drawerVisible = false;
 
             $scope.$on('validationError',function(e,validationErrors) {
                 $scope.validationErrors = validationErrors;
             });
 
+            $scope.toggleDrawer = function(set) {
+                if (set !== undefined) {
+                    $scope.drawerVisible = set;
+                } else {
+                    $scope.drawerVisible = !$scope.drawerVisible;
+                }
+            };
+
             $scope.setPage = function(page) {
                 $scope.currentPage = page;
                 $('body').scrollTop(0);
+                $scope.drawerVisible = false;
             };
 
             $scope.setPlatform = function(platform) {
