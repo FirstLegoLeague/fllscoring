@@ -20,7 +20,8 @@ describe('ng-scores',function() {
         stageId: "test",
         round: 1,
         score: 150,
-        originalScore: 150
+        originalScore: 150,
+        published: false
     };
     var mockStage;
     var mockScore;
@@ -444,7 +445,8 @@ describe('ng-scores',function() {
                             stageId: "test",
                             round: 1,
                             score: 456,
-                            originalScore: 456
+                            originalScore: 456,
+                            published: false
                         }],
                         sheets: ["sheet_1.json"]
                     }

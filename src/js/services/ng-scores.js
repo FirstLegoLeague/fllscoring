@@ -283,7 +283,8 @@ define('services/ng-scores',[
                 round: parseInt(entry.round, 10),
                 score: sanitizeScore(entry.score), // can be Number, null, "dnc", etc.
                 originalScore: parseInt(entry.originalScore !== undefined ? entry.originalScore : entry.score, 10),
-                edited: entry.edited !== undefined ? String(entry.edited) : undefined // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
+                edited: entry.edited !== undefined ? String(entry.edited) : undefined, // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
+                published: !!entry.published
             };
         }
 
@@ -433,6 +434,7 @@ define('services/ng-scores',[
                     score: _score.score,
                     originalScore: _score.originalScore,
                     edited: _score.edited,
+                    published: _score.published,
                     modified: false,
                     error: null
                 };

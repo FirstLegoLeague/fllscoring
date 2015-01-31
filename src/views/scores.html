@@ -57,6 +57,18 @@
                 <i class="icon-exclamation-sign" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}"></i>
             </td>
             <td>
+                <button class="btn"
+                    ng-if="!score.published"
+                    ng-click="publishScore(score.index)"
+                >
+                    Publish
+                </button>
+                <button class="btn"
+                    ng-if="score.published"
+                    ng-click="unpublishScore(score.index)"
+                >
+                    Unpublish
+                </button>
                 <button class="btn btn-default"
                     ng-if="!score.$editing"
                     ng-click="editScore(score.index)"

@@ -29,19 +29,35 @@ define('views/scores',[
                 score.$editing = true;
             };
 
+            $scope.publishScore = function(index) {
+                var score = $scores.scores[index];
+                score.published = true;
+                saveScore(score);
+            };
+
+            $scope.unpublishScore = function(index) {
+                var score = $scores.scores[index];
+                score.published = false;
+                saveScore(score);
+            };
+
             $scope.finishEditScore = function(index) {
                 // The score entry is edited 'inline', then used to
                 // replace the entry in the scores list and its storage.
                 // Because scores are always 'sanitized' before storing,
                 // the $editing flag is automatically discarded.
                 var score = $scores.scores[index];
+                saveScore(score);
+            };
+
+            function saveScore(score) {
                 try {
                     $scores.update(score.index, score);
                     $scores.save();
                 } catch(e) {
                     $window.alert("Error updating score: " + e);
                 }
-            };
+            }
 
             $scope.cancelEditScore = function() {
                 $scores._update();
