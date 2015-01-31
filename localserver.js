@@ -98,6 +98,35 @@ app.get('/challenge/:year', function(req, res) {
     });
 });
 
+//get scores by round
+app.get('/scores/:round',function(req,res) {
+    var path = __dirname + '/data/scores.json';
+    var round = parseInt(req.params.round,10);
+    fs.stat(path, function(err, stat) {
+        if (err) {
+            res.status(404).send('file not found');
+            return;
+        }
+        if (stat.isFile()) {
+            fs.readFile(path, function(err, data) {
+                if (err) {
+                    res.status(500).send('error reading file');
+                    return;
+                }
+                var result = JSON.parse(data);
+                var scores = result.scores;
+                console.log(round);
+                var scoresForRound = scores.filter(function(score) {
+                    return score.published && score.round === round;
+                });
+                res.json(scoresForRound);
+            });
+        } else {
+            res.status(500).send('error reading file');
+            return;
+        }
+    });
+});
 
 function writeFile(path, contents, cb) {
     var dir = dirname(path);
