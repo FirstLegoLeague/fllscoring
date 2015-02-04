@@ -157,6 +157,8 @@ table {
     .drawer .nav li i {
         width: 24px;
         margin-right: 32px;
+        display: inline-block;
+        width: 20px;
     }
 }
 
@@ -171,6 +173,7 @@ table {
     }
     .viewMain {
         margin-top: 56px;
+        overflow: hidden;
     }
 
     .viewMain > div {
@@ -214,6 +217,7 @@ table {
     }
     .viewMain {
         margin-top: 64px;
+        overflow: hidden;
     }
     .viewMain > div {
         background-color: white;
@@ -262,6 +266,7 @@ table {
     .viewMain {
         margin-top: 64px;
         margin-left: 320px;
+        overflow: hidden;
     }
     .viewMain > div {
         background-color: white;
