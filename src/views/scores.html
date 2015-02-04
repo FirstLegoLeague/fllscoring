@@ -10,6 +10,7 @@
                 <th ng-click="doSort('index',true)">#</th>
                 <th ng-click="doSort(['stage.index','-index'],false)">Stage</th>
                 <th ng-click="doSort(['stage.index','round','-index'],false)">Round</th>
+                <th ng-click="doSort('table',false)">Table</th>
                 <th ng-click="doSort('team.number',false)">Team</th>
                 <th ng-click="doSort('team.name',false)">Name</th>
                 <th ng-click="doSort('score',true)">Score</th>
@@ -33,7 +34,15 @@
                     {{score.round}}
                 </span>
                 <span ng-if="score.$editing">
-                    <input type="text" ng-model="score.round">
+                    <input style="width:50px" type="text" ng-model="score.round">
+                </span>
+            </td>
+            <td>
+                <span ng-if="!score.$editing">
+                    {{score.table}}
+                </span>
+                <span ng-if="score.$editing">
+                    <input style="width:50px" type="text" ng-model="score.table">
                 </span>
             </td>
             <td>
@@ -42,7 +51,7 @@
                     {{score.team.number}}
                 </span>
                 <span ng-if="score.$editing">
-                    <input type="text" ng-model="score.teamNumber">
+                    <input style="width:50px" type="text" ng-model="score.teamNumber">
                 </span>
             </td>
             <td>{{score.team.name}}</td>
@@ -52,7 +61,7 @@
                     {{score.score}}
                 </span>
                 <span ng-if="score.$editing">
-                    <input type="text" ng-model="score.score">
+                    <input style="width:50px" type="text" ng-model="score.score">
                 </span>
                 <i class="icon-exclamation-sign" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}"></i>
             </td>
