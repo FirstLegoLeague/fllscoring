@@ -17,6 +17,9 @@
                     <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
                     <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
                 </p>
+                <p style="padding-left: 15px">
+                    Table: <input ng-model="table" style="width:50px">
+                </p>
                 <div id="totalScore" ng-hide="settings.hideTotal">
                     Total score: {{score()}}
                 </div>
@@ -66,6 +69,9 @@
                     <p>
                         <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
                         <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
+                    </p>
+                    <p style="padding-left: 15px">
+                        Table: <input ng-model="table" style="width:50px">
                     </p>
                     <div id="totalScore" ng-hide="settings.hideTotal">
                         Total score: {{score()}}
