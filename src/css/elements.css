@@ -112,7 +112,7 @@ table {
         transform: translate(-100%);
         -webkit-transition: -webkit-transform 0.2s;
         transition: transform 0.2s;
-        z-index: 2000;
+        z-index: 1998;
         border-right: 1px solid rgba(0,0,0,0.14);
     }
     .drawer.visible {
