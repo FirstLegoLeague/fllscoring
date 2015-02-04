@@ -9,27 +9,14 @@
             <h1>{{field.title}}</h1>
             <section class="panel">
                 <h2>Team &amp; round</h2>
-                <table>
-                    <tr>
-                        <td>
-                            <button class="btn btn-select" ng-click="openTeamModal(teams)"><div class="icon-group"/> Team</button>
-                            <span ng-show="team">({{team.number}}) {{team.name}} </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
-                            <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-
-                        </td>
-                    </tr>
-                </table>
+                <p>
+                    <button class="btn btn-select" ng-click="openTeamModal(teams)"><div class="icon-group"/> Team</button>
+                    <span ng-show="team">({{team.number}}) {{team.name}} </span>
+                </p>
+                <p>
+                    <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
+                    <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
+                </p>
                 <div id="totalScore" ng-hide="settings.hideTotal">
                     Total score: {{score()}}
                 </div>
@@ -72,20 +59,14 @@
             </form><!-- END of scoresheetForm -->
             <section class="panel">
                 <h2>Team &amp; round</h2>
-                    <table>
-                        <tr>
-                            <td>
-                                <button class="btn btn-select" ng-click="openTeamModal(teams)"><div class="icon-group"/> Team</button>
-                                <span ng-show="team">({{team.number}}) {{team.name}} </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
-                                <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
-                            </td>
-                        </tr>
-                     </table>
+                    <p>
+                        <button class="btn btn-select" ng-click="openTeamModal(teams)"><div class="icon-group"/> Team</button>
+                        <span ng-show="team">({{team.number}}) {{team.name}} </span>
+                    </p>
+                    <p>
+                        <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
+                        <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
+                    </p>
                     <div id="totalScore" ng-hide="settings.hideTotal">
                         Total score: {{score()}}
                     </div>
