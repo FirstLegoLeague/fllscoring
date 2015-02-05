@@ -125,6 +125,8 @@ table {
         height: 64px;
         /*background-color: red;*/
         border-bottom: 1px solid rgba(0,0,0,0.14);
+        background-image: url('../img/colors.png');
+        background-position: center;
     }
     .drawerShim {
         opacity: 0;
@@ -262,6 +264,9 @@ table {
         -webkit-transform: translate(0);
         transform: translate(0);
         box-shadow: none;
+    }
+    .drawerShim {
+        display: none;
     }
     .viewMain {
         margin-top: 64px;
