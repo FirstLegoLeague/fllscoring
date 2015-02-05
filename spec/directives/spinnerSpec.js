@@ -1,4 +1,4 @@
-describe('spinner',function() {
+xdescribe('spinner',function() {
     var ngDirectives = factory('directives/ng-directives');
     var module = factory('directives/spinner',{
         'directives/ng-directives': ngDirectives

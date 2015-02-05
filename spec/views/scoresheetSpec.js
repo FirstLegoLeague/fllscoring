@@ -207,6 +207,7 @@ describe('scoresheet',function() {
             $scope.stage = 1;
             $scope.round = 2;
             $scope.team = 3;
+            $scope.table = 7;
         });
 
         it('should return empty in the happy situation',function() {
@@ -226,6 +227,16 @@ describe('scoresheet',function() {
         it('should return error if stage is null',function() {
             $scope.stage = null;
             expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
+        });
+
+        it('should return error if table is undefined',function() {
+            $scope.table = undefined;
+            expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
+        });
+
+        it('should return error if table is null',function() {
+            $scope.table = null;
+            expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
         });
 
         it('should return error if round is undefined',function() {
@@ -282,6 +293,7 @@ describe('scoresheet',function() {
             $scope.stage = 1;
             $scope.round = 2;
             $scope.team = 3;
+            $scope.table = 7;
         });
 
         it('should return true in the happy situation',function() {
@@ -300,6 +312,16 @@ describe('scoresheet',function() {
 
         it('should return false if stage is null',function() {
             $scope.stage = null;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if table is undefined',function() {
+            $scope.table = undefined;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if table is null',function() {
+            $scope.table = null;
             expect($scope.isSaveable()).toBe(false);
         });
 
@@ -383,6 +405,7 @@ describe('scoresheet',function() {
             $scope.field = {};
             $scope.stage = dummyStage;
             $scope.round = 1;
+            $scope.table = 7;
             $scope.settings = {
                 table: 3
             };
@@ -394,7 +417,7 @@ describe('scoresheet',function() {
                     team: dummyTeam,
                     stage: dummyStage,
                     round: 1,
-                    table: 3,
+                    table: 7,
                     signature: [1,2,3,4],
                     score: 0
                 });
