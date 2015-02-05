@@ -150,7 +150,6 @@ app.get('/scores/',function(req,res) {
         readFile(__dirname + '/data/scores.json').then(parseFile),
         readFile(__dirname + '/data/teams.json').then(parseFile).then(reduceToMap('number'))
     ]).spread(function(result,teams) {
-        console.log(teams)
         var published = result.scores.filter(filterPublished).reduce(function(rounds,score) {
             if (!rounds[score.round]) {
                 rounds[score.round] = [];
