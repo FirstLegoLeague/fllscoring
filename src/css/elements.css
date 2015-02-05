@@ -173,6 +173,9 @@ table {
         max-width: calc(100% - 56px);
         width: 280px;
     }
+    .drawer .drawerLead {
+        height: 56px;
+    }
     .viewMain {
         margin-top: 56px;
         overflow: hidden;
