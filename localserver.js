@@ -130,14 +130,46 @@ app.get('/challenge/:year', function(req, res) {
     }).catch(sendError(res)).done();
 });
 
+
+function filterPublished(score) {
+    return score.published;
+}
+
+function reduceToMap(key) {
+    return function(arr) {
+        return arr.reduce(function(map,record) {
+            map[record[key]] = record;
+            return map;
+        },{});
+    }
+}
+
+//get all, grouped by round
+app.get('/scores/',function(req,res) {
+    Q.all([
+        readFile(__dirname + '/data/scores.json').then(parseFile),
+        readFile(__dirname + '/data/teams.json').then(parseFile).then(reduceToMap('number'))
+    ]).spread(function(result,teams) {
+        console.log(teams)
+        var published = result.scores.filter(filterPublished).reduce(function(rounds,score) {
+            if (!rounds[score.round]) {
+                rounds[score.round] = [];
+            }
+            score.team = teams[score.teamNumber];
+            rounds[score.round].push(score);
+            return rounds;
+        },{});
+        res.json(published);
+    }).catch(sendError(res)).done();
+});
+
 //get scores by round
 app.get('/scores/:round',function(req,res) {
     var path = __dirname + '/data/scores.json';
     var round = parseInt(req.params.round,10);
 
     readFile(path).then(parseFile).then(function(result) {
-        var scores = result.scores;
-        var scoresForRound = scores.filter(function(score) {
+        var scoresForRound = result.scores.filter(filterPublished).filter(function(score) {
             return score.published && score.round === round;
         });
         res.json(scoresForRound);
