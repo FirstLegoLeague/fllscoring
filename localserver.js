@@ -27,6 +27,13 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.use(function(req, res, next) {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+});
+
 //set raw body as data arrives
 app.use(function(req, res, next) {
     var data = '';
