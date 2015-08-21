@@ -45,9 +45,10 @@ Run local
 
 This is mainly used for development.
 
-- `node localserver.js` then open [localhost:1390](http://localhost:1390)
+- `node localserver.js` then open [localhost:1390/nocache.html](http://localhost:1390/nocache.html)
     - to specify another port, use `node localserver.js -p 8000`
     - to add basic authentication, use `node localserver.js -u username:password`
+- note that we load `nocache.html` to circumvent the offline cache mechanism
 
 Testing
 -------
