@@ -49,11 +49,9 @@ define('views/scoresheet',[
                     $scope.strings = defs.strings;
                     $scope.objectiveIndex = defs.objectiveIndex;
                     angular.forEach($scope.missions,process);
-                    $scope.$apply();
                 }).catch(function() {
                     //could not read field locally or remotely
                     $scope.errorMessage = 'Could not load field, please configure host in settings';
-                    $scope.$apply();
                     $window.alert($scope.errorMessage);
                 });
             };
