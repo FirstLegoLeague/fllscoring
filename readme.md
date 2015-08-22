@@ -67,6 +67,8 @@ Building
 
 For the phonegap build, copy `pgbuildconfig.example.json` to `pgbuildconfig.json` and adjust your phonegap build credentials. You can create an account on [phonegap build](http://build.phonegap.com/). Also, make sure you you copy .cordova/config.example.json to .cordova/config.json and insert your application ID from phonegap build into it. The first time you build the app you must comment the app ID line out, it will generate one for you. Afterwards check the Phonegap build website for the generated app ID.
 
+NOTE: remove the comments in the copied file, as it is not valid JSON as it is.
+
 For iOS, see [Building for iOS](https://github.com/FirstLegoLeague/fllscoring/wiki/Building-for-iOS)
 
 (Only) when XML definition files have changed:

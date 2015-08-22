@@ -29,25 +29,26 @@ define('services/ng-challenge',[
                     var self = this;
                     //use non-angular fs to load plain javascript instead of json
                         // var field = field2;
-                    var url = 'challenge/'+challenge;
-                    return $http.get(url,{
-                        transformResponse: function(d) {return d;}
-                    }).then(function(response) {
-                        log('from loaded challenge from settings');
-                        return self.init(eval('('+response.data+')'));
-                    }).catch(function() {
-                        //temp: get from remote service
-                        return $settings.init().then(function(settings) {
+                    //temp: get from remote service
+                    return $settings.init().then(function(settings) {
+                        var url = (settings.host||'')+'challenge/'+challenge;
+                        return $http.get(url,{
+                            transformResponse: function(d) {return d;}
+                        }).then(function(response) {
+                            log('from loaded challenge from settings');
+                            return self.init(eval('('+response.data+')'));
+                        }).catch(function() {
+                            //temp: get from remote service
                             var url = (settings.host||'')+fallBackChallenge;
                             return $http.get(url,{
                                 transformResponse: function(d) {return d;}
+                            }).then(function(response) {
+                                log('loaded challenge from backup');
+                                return self.init(eval('('+response.data+')'));
                             });
-                        }).then(function(response) {
-                            log('loaded challenge from backup');
-                            return self.init(eval('('+response.data+')'));
+                        }).catch(function() {
+                            log('error getting field');
                         });
-                    }).catch(function() {
-                        log('error getting field');
                     });
                 },
                 init: function(field) {

@@ -1,4 +1,19 @@
-var pgbuildconfig = require('./pgbuildconfig.json');
+
+
+function getPhonegapConfig() {
+    var configPath = './pgbuildconfig.json';
+    var fs = require('fs');
+    if (fs.existsSync(configPath)) {
+        var pgbuildconfig = require(configPath);
+        return {
+            username: pgbuildconfig.username,
+            password: pgbuildconfig.password,
+            platforms: ['ios', 'android','wp8']
+        };
+    } else {
+        return {};
+    }
+}
 
 module.exports = function(grunt) {
 
@@ -49,11 +64,7 @@ module.exports = function(grunt) {
                     var pkg = grunt.file.readJSON('package.json');
                     return(pkg.name + '-' + pkg.version);
                 },
-                remote: {
-                    username: pgbuildconfig.username,
-                    password: pgbuildconfig.password,
-                    platforms: ['ios', 'android','wp8']
-                }
+                remote: getPhonegapConfig()
             }
         },
 

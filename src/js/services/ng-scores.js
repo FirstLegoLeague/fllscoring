@@ -403,21 +403,75 @@ define('services/ng-scores',[
             }
 
             var self = this;
-            var board = this.scoreboard;
+            var results = this.getRankings();
 
-            // Clear existing properties
-            this.scores.splice(0, this.scores.length); // clear without creating new object
+            // Update global scores without creating a new object
+            var scores = results.scores;
+            scores.unshift(0, this.scores.length);
+            this.scores.splice.apply(this.scores, scores);
+
+            // Update global scoreboard without creating a new object
+            var board = this.scoreboard;
             var k;
-            for (k in board) {
-                if (!board.hasOwnProperty(k)) {
+            for (k in this.scoreboard) {
+                if (!this.scoreboard.hasOwnProperty(k)) {
                     continue;
                 }
-                delete board[k];
+                delete this.scoreboard[k];
+            }
+            Object.keys(results.scoreboard).forEach(function(stageId) {
+                self.scoreboard[stageId] = results.scoreboard[stageId];
+            });
+
+            // Update validation errors (useful for views)
+            this.validationErrors.splice(0, this.validationErrors.length);
+            this.scores.forEach(function(score) {
+                if (score.error) {
+                    self.validationErrors.push(score.error);
+                }
+            });
+            $rootScope.$broadcast('validationError', this.validationErrors);
+        };
+
+        /**
+         * Compute scoreboard and sanitized/validated scores.
+         *
+         * Optionally, pass an object containing stageId => nrOfRoundsOrTrue mapping.
+         * E.g. { "practice": true, "qualifying": 2 }, which computes the ranking
+         * for all rounds in the practice stage, and the first 2 rounds of the
+         * qualifying stage.
+         *
+         * Resulting object contains `scores` and `scoreboard` properties.
+         * If no stages filter is passed, all scores will be output.
+         * If a stages filter is passed, only valid and relevant scores are
+         * output.
+         *
+         * @param  stages Optional object stageId => nrOfRoundsOrTrue
+         * @return Results object with validated scores and per-stage rankings
+         */
+        Scores.prototype.getRankings = function(stages) {
+            var self = this;
+            var results = {
+                scores: [], // List of sanitized scores
+                scoreboard: {}, // Sorted rankings for each stage
+            };
+
+            var haveFilter = !!stages;
+            if (!stages) {
+                stages = {};
+                $stages.stages.forEach(function(stage) {
+                    stages[stage.id] = true;
+                });
             }
 
-            // Create empty lists for each stage
-            $stages.stages.forEach(function(stage) {
-                board[stage.id] = [];
+            // Convert number of stages to take to a number (i.e. Infinity when
+            // e.g. `true` is passed)
+            // And create empty lists for each stage
+            var board = results.scoreboard;
+            Object.keys(stages).forEach(function(stage) {
+                var s = stages[stage];
+                stages[stage] = typeof s === "number" && s || s && Infinity || 0;
+                board[stage] = [];
             });
 
             // Walk all scores, and put them in the corresponding round of each stage.
@@ -441,7 +495,7 @@ define('services/ng-scores',[
                     modified: false,
                     error: null
                 };
-                self.scores.push(s);
+                results.scores.push(s);
 
                 // Mark score as modified if there have been changes to the
                 // original entry
@@ -482,6 +536,11 @@ define('services/ng-scores',[
                     return;
                 }
 
+                // Ignore score if filtered
+                if (haveFilter && s.round > stages[s.stageId]) {
+                    return;
+                }
+
                 // Find existing entry for this team, or create one
                 var bteam;
                 var i;
@@ -492,9 +551,10 @@ define('services/ng-scores',[
                     }
                 }
                 if (!bteam) {
-                    var initialScores = new Array(s.stage.rounds);
-                    var initialEntries = new Array(s.stage.rounds);
-                    for (i = 0; i < s.stage.rounds; i++) {
+                    var maxRounds = Math.min(s.stage.rounds, stages[s.stageId]);
+                    var initialScores = new Array(maxRounds);
+                    var initialEntries = new Array(maxRounds);
+                    for (i = 0; i < maxRounds; i++) {
                         initialScores[i] = null;
                         initialEntries[i] = null;
                     }
@@ -618,14 +678,14 @@ define('services/ng-scores',[
                 });
             }
 
-            // Update validation errors (useful for views)
-            this.validationErrors.splice(0, this.validationErrors.length);
-            this.scores.forEach(function(score) {
-                if (score.error) {
-                    self.validationErrors.push(score.error);
-                }
-            });
-            $rootScope.$broadcast('validationError', this.validationErrors);
+            // Filter scores if requested
+            if (haveFilter) {
+                results.scores = results.scores.filter(function(score) {
+                    return !score.error && stages[score.stageId] && score.round <= stages[score.stageId];
+                });
+            }
+
+            return results;
         };
 
         return new Scores();
