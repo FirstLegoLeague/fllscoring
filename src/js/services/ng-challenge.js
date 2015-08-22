@@ -29,9 +29,13 @@ define('services/ng-challenge',[
                     var self = this;
                     //use non-angular fs to load plain javascript instead of json
                         // var field = field2;
-                    return fs.read(challenge).then(function(defs) {
-                        return self.init(eval('('+defs+')'));
-                    }).fail(function() {
+                    var url = 'challenge/'+challenge;
+                    return $http.get(url,{
+                        transformResponse: function(d) {return d;}
+                    }).then(function(response) {
+                        log('from loaded challenge from settings');
+                        return self.init(eval('('+response.data+')'));
+                    }).catch(function() {
                         //temp: get from remote service
                         return $settings.init().then(function(settings) {
                             var url = (settings.host||'')+fallBackChallenge;
@@ -39,6 +43,7 @@ define('services/ng-challenge',[
                                 transformResponse: function(d) {return d;}
                             });
                         }).then(function(response) {
+                            log('loaded challenge from backup');
                             return self.init(eval('('+response.data+')'));
                         });
                     }).catch(function() {
