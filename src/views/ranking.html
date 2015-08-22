@@ -75,7 +75,80 @@
 
     <div ng-show="tab === 2">
 
-        <p>Henk!</p>
-
+        <p>Choose a stage</p>
+        <p>
+            <label for="">Stage</label>
+            <select data-ng-options="stage.name for stage in stages track by stage.id" data-ng-model="export.stage"></select>
+        </p>
+        <p>Choose a round</p>
+        <p>
+            <label for="">Rounds</label>
+            <select data-ng-options="getRoundLabel(round) for round in export.stage.$rounds" data-ng-model="export.round"></select>
+        </p>
+        <p>
+            <label for="prevRoundsCheck">Include previous rounds</label>
+            <input id="prevRoundsCheck" type="checkbox" ng-model="export.prevRounds" ng-disabled="true" />
+        </p>
+        <p>
+            <button class="btn" ng-click="exportScore(export)">
+                <i class="icon-ok"></i>
+                Export score
+            </button>
+        <p>
+            <a  href="{{exportdata}}" download="{{exportname}}" ng-show="exportvisible"><i class="icon-download-alt"></i>Export naar USB</a>
+            <div ng-hide="true">
+                <table
+                    id="scoreexport"
+                    class="table table-bordered table-striped"
+                    ng-if="stageselected.rounds > 0"
+                >
+                    <thead>
+                        <tr class="clickable">
+                            <th class="span1" ng-click="doSort(stageselected, 'rank',false)">
+                                <span style="float: left;">Rank</span>
+                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'rank')"></span>
+                            </th>
+                            <th class="span1" ng-click="doSort(stageselected, 'team.number',false)">
+                                <span style="float: left;">Team</span>
+                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'team.number')"></span>
+                            </th>
+                            <th class="span2" ng-click="doSort(stageselected, 'team.name',false)">
+                                <span style="float: left;">Name</span>
+                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'team.name')"></span>
+                            </th>
+                            <th class="span1" ng-if="stageselected.rounds > 1" ng-click="doSort(stageselected, 'highest',true)">
+                                <span style="float: left;">Highest</span>
+                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'highest')"></span>
+                            </th>
+                            <th class="span1" ng-if="stageselected.rounds == 1" ng-click="doSort(stageselected, 'highest',true)">
+                                <span style="float: left;">Score</span>
+                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'highest')"></span>
+                            </th>
+                            <th class="span1" ng-if="stageselected.rounds > 1" ng-repeat="round in stageselected.$rounds track by $index" ng-click="doSort(stageselected, 'scores['+$index+']',true)">
+                                <span style="float: left;">Round {{round}}</span>
+                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'scores['+$index+']')"></span>
+                            </th>
+                            <!-- padding cols -->
+                            <th class="span1 clearCell" ng-repeat="col in emptyCols(stageselected) track by $index"></th>
+                            <th class="span1 clearCell" ng-if="stageselected.rounds == 1" ></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in scoreboard[stageselected.id] | index | orderBy:stageselectedselected.sort:stageselected.rev track by item.team.number">
+                            <td>{{item.rank}}</td>
+                            <td>{{item.team.number}}</td>
+                            <td>{{item.team.name}}</td>
+                            <td>{{item.highest}}</td>
+                            <td ng-if="stageselected.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
+                            <!-- padding cols -->
+                            <td class="span1 clearCell" ng-repeat="col in emptyCols(stageselected) track by $index"></td>
+                            <td class="span1 clearCell" ng-if="stageselected.rounds == 1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </p>
     </div>
 </div>
+
+
