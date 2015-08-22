@@ -324,6 +324,37 @@ describe('ng-scores',function() {
             ]);
         });
 
+        it("should allow filtering rounds", function() {
+            fillScores([
+                { team: team1, stage: mockStage, round: 1, score: 10 },
+                { team: team1, stage: mockStage, round: 2, score: 20 },
+                { team: team1, stage: mockStage, round: 3, score: 30 },
+                { team: team2, stage: mockStage, round: 1, score: 30 },
+                { team: team2, stage: mockStage, round: 2, score: 10 },
+                { team: team2, stage: mockStage, round: 3, score: 20 },
+                { team: team3, stage: mockStage, round: 1, score: 30 },
+                { team: team3, stage: mockStage, round: 2, score: 0 },
+                { team: team3, stage: mockStage, round: 3, score: 20 },
+            ]);
+            var filtered = $scores.getRankings({
+                "test": 2
+            });
+            var result = filtered.scoreboard["test"].map(function(entry) {
+                return {
+                    rank: entry.rank,
+                    teamNumber: entry.team.number,
+                    scores: entry.scores
+                };
+            });
+            // Note: for equal ranks, teams are sorted according
+            // to (ascending) team id
+            expect(result).toEqual([
+                { rank: 1, teamNumber: team2.number, scores: [30, 10] },
+                { rank: 2, teamNumber: team3.number, scores: [30, 0] },
+                { rank: 3, teamNumber: team1.number, scores: [10, 20] },
+            ]);
+        });
+
         it("should ignore but warn about scores for unknown rounds / stages", function() {
             fillScores([
                 { team: team1, stage: { id: "foo" }, round: 1, score: 0 },
