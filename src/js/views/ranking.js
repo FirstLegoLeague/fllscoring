@@ -128,6 +128,10 @@ define('views/ranking',[
             // Generate new table and download page to wished location
             $scope.exportScore = function(params){
                 $scope.stageselected = params.stage;
+                $scope.export.rounds = Array.apply(null, Array(params.round)).map(function (_, i) {return i+1;});
+                var stageFilter = {};
+                stageFilter[params.stage.id] = params.round;
+                $scope.filterscoreboard = $scores.getRankings(stageFilter).scoreboard;
 
                 $timeout(function () {
 
