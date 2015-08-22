@@ -63,21 +63,23 @@ describe('scoresheet',function() {
 
     describe('load',function() {
         describe('processing',function() {
-            var field = 'foo';
-            var mission = {
-                score: [
-                    function() {return 1;},
-                    function() {return 2;}
-                ]
-            };
-            var objective = {
-                value: 4
-            };
-            var missions = [mission];
-            var objectiveIndex = {
-                'foo': objective
-            };
+            var field, mission, objective, missions, objectiveIndex;
+
             beforeEach(function() {
+                field = 'foo';
+                mission = {
+                    score: [
+                        function() {return 1;},
+                        function() {return 2;}
+                    ]
+                };
+                objective = {
+                    value: 4
+                };
+                missions = [mission];
+                objectiveIndex = {
+                    'foo': objective
+                };
                 challengeMock.load.andReturn(Q.when({
                     field: field,
                     missions: missions,
@@ -87,6 +89,7 @@ describe('scoresheet',function() {
             });
             it('should set the field, missions and index',function() {
                 return $scope.load().then(function() {
+                    $scope.$digest();
                     expect($scope.field).toBe(field);
                     expect($scope.missions).toBe(missions);
                     expect($scope.objectiveIndex).toBe(objectiveIndex);
@@ -94,12 +97,14 @@ describe('scoresheet',function() {
             });
             it('should process the missions',function() {
                 return $scope.load().then(function() {
+                    $scope.$digest();
                     expect(mission.errors).toEqual([]);
                     expect(mission.percentages).toEqual([]);
                 });
             });
             it('should set a watcher to mission dependencies',function() {
                 return $scope.load().then(function() {
+                    $scope.$digest();
                     expect(mission.result).toBe(3);
                 });
             });
@@ -110,6 +115,7 @@ describe('scoresheet',function() {
                         function() {return err;}
                 ];
                 return $scope.load().then(function() {
+                    $scope.$digest();
                     expect(mission.result).toBe(1);
                     expect(mission.errors).toEqual([err]);
                 });
@@ -120,6 +126,7 @@ describe('scoresheet',function() {
                         function() {return 0.5;}
                 ];
                 return $scope.load().then(function() {
+                    $scope.$digest();
                     expect(mission.result).toBe(1);
                     expect(mission.percentages).toEqual([0.5]);
                 });
@@ -130,6 +137,7 @@ describe('scoresheet',function() {
                         function() {return;}
                 ];
                 return $scope.load().then(function() {
+                    $scope.$digest();
                     expect(mission.result).toBe(1);
                 });
             });
