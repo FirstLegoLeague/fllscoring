@@ -14,6 +14,8 @@ define('views/ranking',[
             // temporary default sort values
             $scope.sort = 'rank';
             $scope.rev = false;
+            // initialize first tab
+            $scope.tab = 1;
 
             $scope.doSort = function(stage, col, defaultSort) {
                 if (stage.sort === undefined) {
