@@ -60,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="team in teams" ng-click="selectTeamPop(team)">
+                        <tr ng-repeat="team in teams | orderBy:settings.teamSort" ng-click="selectTeamPop(team)">
                             <td><h3>{{team.number}}</h3></td>
                             <td>{{team.name}}
                             <br />
