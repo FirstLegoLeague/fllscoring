@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/challenge.xsl"?>
+<fll:challenge
+    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2015" version="1" name="Trash Trek">
+
+    <strings language="en-US">
+
+        <string id="yes">                         Yes</string>
+        <string id="no">                          No</string>
+
+        <string id="usingrecycledmaterial-name">  Using recycled material</string>
+        <string id="usingrecycledmaterial-desc">  <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>Green Bins  containing at least one matching Yellow or Blue Bar, all  from the other team, is completely in your Safety.</li></ul>]]> </string>
+        <string id="containersself-desc">         Own containers</string>
+        <string id="containersother-desc">        Other teams' container</string>
+
+        <string id="methane-name">                Methane</string>
+        <string id="methane-desc">                <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>Methane is in the Truck’s engine compartment,  and/or the Factory’s Power Station.</li></ul><b>Method constraints or leniencies:</b><ul><li><b>LENIENCY:</b> Full/Exact nesting is not required.</li></ul>]]></string>
+        <string id="truck-desc">                  A methane is in the Truck's engine</string>
+        <string id="factory-desc">                A methane is in the Factory's Power Station</string>
+
+        <string id="transport-name">              Transport</string>
+        <string id="transport-desc">              <![CDATA[<b>Specific physical requirement, visible at the end of the match (Score one or both):</b><ul><li>The Truck supports all of the Yellow Bin’s weight.</li><li>The Yellow Bin is completely east of the Truck’s Guide.</li></ul>]]></string>
+        <string id="trucksupport-desc">           Truck supports all of the Yellow Bin’s weight</string>
+        <string id="truckeast-desc">              The Yellow Bin is completely east of the Truck’s Guide</string>
+
+        <string id="sortingblueyellow-name">      Sorting yellow/blue bars</string>
+        <string id="sortingblueyellow-desc">      <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>YELLOW/BLUE BARS ARE IN THEIR MATCHING GREEN BIN AND THE BIN (BINS SCORE INDEPENDENTLY) ...<ul><li> (*) is completely in the other team’s Safety, by way of your East Transfer.</li><li>is completely in your East Transfer Area and/or completely on your East Transfer.</li><li> (*) was never  completely in your East Transfer Area (all “Areas” are defined below).</li></ul></li></ul><b>Method constraints or leniencies:</b><ul><li><b>METHOD CONTRAINTS:</b> These require sequence/path as described, in addition to final positions.</li></ul>]]></string>
+        <string id="ineasttransfer-desc">         Bar in East Transfer Area</string>
+        <string id="anywhereelese-desc">          Never in East Transfer Area</string>
+
+        <string id="sortingblack-name">           Sorting black bars</string>
+        <string id="sortingblack-desc">           <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>BLACK BARS ARE (BARS SCORE INDEPENDENTLY)...:
+<ul><li>part of a scoring Flower Box, or in their original Setup position.</li><li>in their matching Green Bin, or in the Landfill Bin.</li><li>anywhere else.</li></ul></li></ul>
+<b>Method constraints or leniencies:</b><ul><li><b>METHOD CONSTRAINT:</b> Bars must only  enter Green Bins directly from the Sorter’s east chute or CAREERS BONUS.</li></ul>]]></string>
+        <string id="inflowerbox-desc">            Part of scoring Flower Box</string>
+        <string id="greenbinlandfill-desc">       In their matching Green Bin or in the Landfill Bin</string>
+        <string id="blackanywhere-desc">          Anywhere else (penalty) </string>
+
+        <string id="career-name">                 Careers </string>
+        <string id="career-desc">                 <![CDATA[<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>
+At least one Person is completely in the Sorter Area. <font color="red"><b>VALUE:</b> 60 PLUS THIS R10  LENIENCY BONUS:   TEAM TECHNICIAN S AND/OR THE REF (IF NEEDED/ASKED) ARE ALLOWED TO UNCLOG ANY WEST CHUTE BLOCKAGE BY HAND, AND/OR PUT MIS-SORTED BARS INTO THEIR CORRECT BIN, INCLUDING BARS THAT DIDN’T LAND IN ANY BIN.</font></li></ul><p>This is a fun, dynamic Model with a small but real error rate, which will be well understood by Tournament season.  So that we may all enjoy the Model, please use the R10 leniency for Model errors, handle with care when doing so, use “Benefit Of The Doubt” for hand errors, and use common sense and good will the whole time.</p>]]></string> 
+        <string id="careeryesno-desc">            At least one Person is in the Sorter Area</string>
+
+        <string id="scrapcars-name">          Scrap Cars</string>
+        <string id="scrapcars-desc">          <![CDATA[<b>Specific physical requirement, visible at the end of the match (Score only one way):</b><ul><li> (*) The Engine/Windshield unit is  installed in the unfolded Car in the proper space and direction</li><li>The Car is completely folded and completely in the East  Transfer Area.</li></ul><b>Method constraints or leniencies:</b><ul><li><b>LENIENCY:</b> Full/exact nesting is not required.</li><li><b>METHOD CONSTRAINT:</b> The Car must never cross into Safety, even partly.</li></ul>]]></string>
+        <string id="positioncar-desc">        The car is in the safety-zone</string>
+        <string id="scrapcarsyesno-desc">     The car is folded and in East Transfer Area</string>
+        <string id="engineinstalled-desc">    The engine is installed in the unfolded car in the proper space and direction</string>
+        <string id="carfolded-desc">          The car is completely folded and and completely in the East Transfer Area</string>
+        <string id="nonecarscrap">            The car was never in the safety zone</string>
+
+        <string id="cleanup-name">            Cleanup</string>
+        <string id="cleanup-desc">            <![CDATA[<b>Specific physical requirement, visible at the end of the match (Score any that apply):</b><ul><li>Plastic Bags are completely in Safety.</li><li> (*) Animals are completely in large circles which are completely empty of Plastic Bags.</li><li>The Chicken is completely in the small  circle.</li></ul><p> (*) The fish Food Scrap doesn’t count as an Animal.</p>]]></string>
+        <string id="bags-desc">               Platic Bags completely in Safety</string>
+        <string id="animals-desc">            Animals are completely in large circles which are empty of Plaic Bags</string>
+        <string id="chicken-desc">            The Chicken is completely in the small circle</string>
+
+        <string id="composting-name">         Composting</string>
+        <string id="composting-desc">         <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>The Compost is ejected, but not completely in Safety.</li><li>The Compost is completely in Safety.</li></ul>]]></string>
+        <string id="compostejected-desc">     The Compost is ejected, but not completely in safety.</string>
+        <string id="compostinsafety-desc">    The Compost is in Safety</string>
+
+        <string id="salvage-name">            Salvage</string>
+        <string id="salvage-desc">            <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>The Valuables are completely in Safety.</li></ul>]]></string>
+        <string id="valuablesinsafety-desc">  The Valuables are completely in Safety</string>
+
+        <string id="demolition-name">         Demolition</string>
+        <string id="demolition-desc">         <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>None of the Building’s twelve beams is left standing in Setup position.</li></ul>]]></string>
+        <string id="nobeamsstanding-desc">    None of the Building’s twelve beams is left standing in Setup position</string>
+
+        <string id="purchase-name">           Purchasing descisions</string>
+        <string id="purchase-desc">           <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>Toy Planes are completely in Safety.</li></ul>]]></string>
+        <string id="purchasing-desc">         Toy Planes are completely in Safety</string>
+
+        <string id="repurposing-name">        Repurposing</string>
+        <string id="repurposing-desc">        <![CDATA[<b>Specific physical requirement, visible at the end of the match:</b><ul><li>The Compost is perfectly nested inside one of the Packages from which a Toy Plane has been removed.  The Package is in original condition.</li></ul>]]></string>
+        <string id="compostinpackage-desc">   The Compost is perfectly nested inside one of the Packages</string>
+        <string id="originalcondition-desc">  The Package is in original condition</string>
+
+    </strings>
+
+    <!-- Do NOT edit below this line -->
+
+    <mission name="usingrecycledmaterial-name" description="usingrecycledmaterial-desc">
+        <objective-number id="containersself" description="containersself-desc" min="0" max="3" default="0" />
+        <objective-number id="containersother" description="containersother-desc" min="0" max="3" default="0" />
+        <score>
+            <indexes>
+                <index objective="containersself" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="60" /> </case>
+                <case> <index-ref value="2" /> <points amount="120" /> </case>
+                <case> <index-ref value="3" /> <points amount="180" /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="containersother" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="60" /> </case>
+                <case> <index-ref value="2" /> <points amount="120" /> </case>
+                <case> <index-ref value="3" /> <points amount="180" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="methane-name" description="methane-desc">
+        <objective-yesno id="truck" description="truck-desc" default="no" />
+        <objective-yesno id="factory" description="factory-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="truck" />
+                <index objective="factory" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="40"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="40" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="80" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="transport-name" description="transport-desc">
+        <objective-yesno id="trucksupport" description="trucksupport-desc" default="no" />
+        <objective-yesno id="truckeast" description="truckeast-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="trucksupport" />
+                <index objective="truckeast" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="no"  /> <index-ref value="yes" /> <points amount="60"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no"  /> <points amount="50" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="110" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="sortingblueyellow-name" description="sortingblueyellow-desc">
+        <objective-number id="ineasttransfer" description="ineasttransfer-desc" min="0" max="15" default="0" />
+        <objective-number id="anywhereelese" description="anywhereelese-desc" min="0" max="15" default="0" />
+        <score>
+            <indexes>
+                <index objective="ineasttransfer" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="7" /> </case>
+                <case> <index-ref value="2" /> <points amount="14" /> </case>
+                <case> <index-ref value="3" /> <points amount="21" /> </case>
+                <case> <index-ref value="4" /> <points amount="28" /> </case>
+                <case> <index-ref value="5" /> <points amount="35" /> </case>
+                <case> <index-ref value="6" /> <points amount="42" /> </case>
+                <case> <index-ref value="7" /> <points amount="49" /> </case>
+                <case> <index-ref value="8" /> <points amount="56" /> </case>
+                <case> <index-ref value="9" /> <points amount="63" /> </case>
+                <case> <index-ref value="10" /> <points amount="70" /> </case>
+                <case> <index-ref value="11" /> <points amount="77" /> </case>
+                <case> <index-ref value="12" /> <points amount="84" /> </case>
+                <case> <index-ref value="13" /> <points amount="91" /> </case>
+                <case> <index-ref value="14" /> <points amount="98" /> </case>
+                <case> <index-ref value="15" /> <points amount="105" /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="anywhereelese" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="6" /> </case>
+                <case> <index-ref value="2" /> <points amount="12" /> </case>
+                <case> <index-ref value="3" /> <points amount="18" /> </case>
+                <case> <index-ref value="4" /> <points amount="24" /> </case>
+                <case> <index-ref value="5" /> <points amount="30" /> </case>
+                <case> <index-ref value="6" /> <points amount="36" /> </case>
+                <case> <index-ref value="7" /> <points amount="42" /> </case>
+                <case> <index-ref value="8" /> <points amount="48" /> </case>
+                <case> <index-ref value="9" /> <points amount="54" /> </case>
+                <case> <index-ref value="10" /> <points amount="60" /> </case>
+                <case> <index-ref value="11" /> <points amount="66" /> </case>
+                <case> <index-ref value="12" /> <points amount="72" /> </case>
+                <case> <index-ref value="13" /> <points amount="78" /> </case>
+                <case> <index-ref value="14" /> <points amount="84" /> </case>
+                <case> <index-ref value="15" /> <points amount="90" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="sortingblack-name" description="sortingblack-desc">
+        <objective-number id="inflowerbox" description="inflowerbox-desc" min="0" max="12" default="0" />
+        <objective-number id="greenbinlandfill" description="greenbinlandfill-desc" min="0" max="12" default="0" />
+        <objective-number id="blackanywhere" description="blackanywhere-desc" min="0" max="12" default="0" />
+        <score>
+            <indexes>
+                <index objective="inflowerbox" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="7" /> </case>
+                <case> <index-ref value="2" /> <points amount="14" /> </case>
+                <case> <index-ref value="3" /> <points amount="21" /> </case>
+                <case> <index-ref value="4" /> <points amount="28" /> </case>
+                <case> <index-ref value="5" /> <points amount="35" /> </case>
+                <case> <index-ref value="6" /> <points amount="42" /> </case>
+                <case> <index-ref value="7" /> <points amount="49" /> </case>
+                <case> <index-ref value="8" /> <points amount="56" /> </case>
+                <case> <index-ref value="9" /> <points amount="63" /> </case>
+                <case> <index-ref value="10" /> <points amount="70" /> </case>
+                <case> <index-ref value="11" /> <points amount="77" /> </case>
+                <case> <index-ref value="12" /> <points amount="84" /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="greenbinlandfill" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="6" /> </case>
+                <case> <index-ref value="2" /> <points amount="12" /> </case>
+                <case> <index-ref value="3" /> <points amount="18" /> </case>
+                <case> <index-ref value="4" /> <points amount="24" /> </case>
+                <case> <index-ref value="5" /> <points amount="30" /> </case>
+                <case> <index-ref value="6" /> <points amount="36" /> </case>
+                <case> <index-ref value="7" /> <points amount="42" /> </case>
+                <case> <index-ref value="8" /> <points amount="48" /> </case>
+                <case> <index-ref value="9" /> <points amount="54" /> </case>
+                <case> <index-ref value="10" /> <points amount="60" /> </case>
+                <case> <index-ref value="11" /> <points amount="66" /> </case>
+                <case> <index-ref value="12" /> <points amount="72" /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="blackanywhere" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="-8" /> </case>
+                <case> <index-ref value="2" /> <points amount="-16" /> </case>
+                <case> <index-ref value="3" /> <points amount="-24" /> </case>
+                <case> <index-ref value="4" /> <points amount="-32" /> </case>
+                <case> <index-ref value="5" /> <points amount="-40" /> </case>
+                <case> <index-ref value="6" /> <points amount="-48" /> </case>
+                <case> <index-ref value="7" /> <points amount="-56" /> </case>
+                <case> <index-ref value="8" /> <points amount="-64" /> </case>
+                <case> <index-ref value="9" /> <points amount="-72" /> </case>
+                <case> <index-ref value="10" /> <points amount="-80" /> </case>
+                <case> <index-ref value="11" /> <points amount="-88" /> </case>
+                <case> <index-ref value="12" /> <points amount="-96" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="career-name" description="career-desc">
+        <objective-yesno id="career" description="careeryesno-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="career" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="60" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="scrapcars-name" description="scrapcars-desc">
+        <objective-enum id="positioncar" description="positioncar-desc" default="na">
+            <option name="engineinstalled" description="engineinstalled-desc" />
+            <option name="carfolded" description="carfolded-desc" />
+            <option name="none" description="nonecarscrap" />
+        </objective-enum>
+        <objective-yesno id="scrapcarsyesno" description="scrapcarsyesno-desc" default="no"  />
+        <score>
+            <indexes>
+                <index objective="positioncar" />
+                <index objective="scrapcarsyesno" />
+            </indexes>
+            <cases>
+                 <case> <index-ref value="engineinstalled" /> <index-ref value="no" />  <points amount="65"  /> </case>
+                 <case> <index-ref value="engineinstalled" /> <index-ref value="yes" />  <points amount="0"  /> </case>
+                 <case> <index-ref value="carfolded" /> <index-ref value="no" />  <points amount="50"  /> </case>
+                 <case> <index-ref value="carfolded" /> <index-ref value="yes" />  <points amount="0"  /> </case>
+                 <case> <index-ref value="none" /> <index-ref value="no" />  <points amount="0"  /> </case>
+                 <case> <index-ref value="none" /> <index-ref value="yes" />  <points amount="0"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="cleanup-name" description="cleanup-desc">
+        <objective-number id="bags" description="bags-desc" min="0" max="2" default="0" />
+        <objective-number id="animals" description="animals-desc" min="0" max="3" default="0" />
+        <objective-yesno id="chicken" description="chicken-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="bags" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="30" /> </case>
+                <case> <index-ref value="2" /> <points amount="60" /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="animals" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="20" /> </case>
+                <case> <index-ref value="2" /> <points amount="40" /> </case>
+                <case> <index-ref value="3" /> <points amount="60" /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="chicken" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="yes" /> <points amount="35"  /> </case>
+                <case> <index-ref value="no" /> <points amount="0" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="composting-name" description="composting-desc">
+        <objective-yesno id="compostejected" description="compostejected-desc" default="no" />
+        <objective-yesno id="compostinsafety" description="compostinsafety-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="compostejected" />
+                <index objective="compostinsafety" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="80"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <error message="compost-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <points amount="60"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <points amount="0" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="salvage-name" description="salvage-desc">
+        <objective-yesno id="valuablesinsafety" description="valuablesinsafety-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="valuablesinsafety" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="yes" />  <points amount="60"  /> </case>
+                <case> <index-ref value="no" />  <points amount="0"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="demolition-name" description="demolition-desc">
+        <objective-yesno id="nobeamsstanding" description="nobeamsstanding-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="nobeamsstanding" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="yes" />  <points amount="85"  /> </case>
+                <case> <index-ref value="no" />  <points amount="0"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="purchase-name" description="purchase-desc">
+        <objective-number id="purchasing" description="purchasing-desc" min="0" max="2" default="0" />
+        <score>
+            <indexes>
+                <index objective="purchasing" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="40" /> </case>
+                <case> <index-ref value="2" /> <points amount="80" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="repurposing-name" description="repurposing-desc">
+        <objective-yesno id="compostinpackage" description="compostinpackage-desc" default="no" />
+        <objective-yesno id="originalcondition" description="originalcondition-desc" default="no" />
+        <score>
+            <indexes>
+                <index objective="compostinpackage" />
+                <index objective="originalcondition" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="40"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <points amount="0" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+</fll:challenge>
