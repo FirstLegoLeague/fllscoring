@@ -8,7 +8,7 @@ define('services/ng-challenge',[
         '$http','$settings',
         function($http,$settings) {
             var mission;
-            var fallBackChallenge = 'challenge/2014_nl_NL-no-enum';
+            var fallBackChallenge = 'challenge/2015_nl_NL';
 
             function indexObjectives(missions) {
                 objs = {};
