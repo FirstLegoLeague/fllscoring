@@ -96,11 +96,59 @@
             </button>
         <p>
             <a  href="{{exportdata}}" download="{{exportname}}" ng-show="exportvisible"><i class="icon-download-alt"></i>Export naar USB</a>
-            <div ng-hide="true">
-                <table
-                    id="scoreexport"
-                    class="table table-bordered table-striped"
-                >
+            
+            <div ng-hide="true" id="scoreexport">
+            <style>
+                table{
+                
+                    background-color:white;
+                    width:95%;
+                    margin-left:auto; 
+                    margin-right:auto;
+                
+                }
+                #scoreexport{
+                    border:1px solid black;
+                    border-collapse:collapse;
+                }
+                td{
+                    border:1px solid blue;
+                    padding:9px;
+                    text-align:center;
+                }
+                th{
+                    text-align:center;
+                    border:1px dashed blue;
+                    padding:9px;
+                    
+                }
+            </style>
+            <script>
+                function runThroughHighscore(amount){
+                    TOTALAMOUNT = amount;   // Total amount of rows in the HighScore
+                    FLOWAMOUNT = 6;         // The amount of rows shown at the same time
+                    FIXEDSHOWNTOP = 1;      // The amount of scores always visible at top 
+                    TIMEFORFRAME1 = 4;      // Amount of seconds that the first page shows
+                    TIMETHROUGHFRAMES = 2;  // Amount of seconds that each scroll takes
+                    FADEATONEGO = 2;        // Amount of scores that move away and appear
+                    
+                    for(var x = FLOWAMOUNT; x<(TOTALAMOUNT);x++){
+                        document.getElementById('trrow'+x).style.visibility = 'hidden';             
+                    }   
+                    //alert(amount);
+                    setTimeout(testNext,(TIMEFORFRAME1*1000));
+                }
+                function testNext(){
+                    for(y=1;y<=FADEATONEGO;y++){
+                        document.getElementById('trrow'+FIXEDSHOWNTOP).remove();
+                        document.getElementById('trrow'+FLOWAMOUNT).style.visibility = 'visible';
+                        FIXEDSHOWNTOP++;
+                        FLOWAMOUNT++;
+                    }
+                    setTimeout(testNext,(TIMETHROUGHFRAMES*1000));  
+                }
+            </script>
+            <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="clickable">
                             <th class="span1" ng-click="doSort(stageselected, 'rank',false)">
@@ -120,7 +168,7 @@
                                 <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'highest')"></span>
                             </th>
                             <th class="span1" ng-if="export.round == 1" ng-click="doSort(stageselected, 'highest',true)">
-                                <span style="float: left;">Score</span>
+                                <span >Score</span>-->
                                 <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'highest')"></span>
                             </th>
                             <th class="span1" ng-if="export.round > 1" ng-repeat="round in export.rounds track by $index" ng-click="doSort(stageselected, 'scores['+$index+']',true)">
@@ -130,7 +178,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in filterscoreboard[stageselected.id] | index | orderBy:stageselectedselected.sort:stageselected.rev track by item.team.number">
+                        <tr ng-repeat="item in filterscoreboard[stageselected.id] | index | orderBy:stageselectedselected.sort:stageselected.rev track by item.team.number" id="trrow{{$index}}">
                             <td>{{item.rank}}</td>
                             <td>{{item.team.number}}</td>
                             <td>{{item.team.name}}</td>
