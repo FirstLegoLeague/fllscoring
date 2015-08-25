@@ -102,30 +102,21 @@
                     class="table table-bordered table-striped"
                 >
                     <thead>
-                        <tr class="clickable">
-                            <th class="span1" ng-click="doSort(stageselected, 'rank',false)">
+                        <tr>
+                            <th>
                                 <span style="float: left;">Rank</span>
-                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'rank')"></span>
                             </th>
-                            <th class="span1" ng-click="doSort(stageselected, 'team.number',false)">
+                            <th>
                                 <span style="float: left;">Team</span>
-                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'team.number')"></span>
                             </th>
-                            <th class="span2" ng-click="doSort(stageselected, 'team.name',false)">
+                            <th>
                                 <span style="float: left;">Name</span>
-                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'team.name')"></span>
                             </th>
-                            <th class="span1" ng-if="stageselected.rounds > 1" ng-click="doSort(stageselected, 'highest',true)">
+                            <th>
                                 <span style="float: left;">Highest</span>
-                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'highest')"></span>
                             </th>
-                            <th class="span1" ng-if="export.round == 1" ng-click="doSort(stageselected, 'highest',true)">
-                                <span style="float: left;">Score</span>
-                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'highest')"></span>
-                            </th>
-                            <th class="span1" ng-if="export.round > 1" ng-repeat="round in export.rounds track by $index" ng-click="doSort(stageselected, 'scores['+$index+']',true)">
+                            <th ng-if="export.round > 0" ng-repeat="round in export.rounds track by $index" >
                                 <span style="float: left;">Round {{round}}</span>
-                                <span style="float: right;" class="icon" ng-class="sortIcon(stageselected, 'scores['+$index+']')"></span>
                             </th>
                         </tr>
                     </thead>
@@ -134,8 +125,8 @@
                             <td>{{item.rank}}</td>
                             <td>{{item.team.number}}</td>
                             <td>{{item.team.name}}</td>
-                            <td>{{item.highest}}</td>
-                            <td ng-if="stageselected.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
+                            <td class="highscorecelll">{{item.highest}}</td>
+                            <td class="scorecell" ng-if="stageselected.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
                         </tr>
                     </tbody>
                 </table>
