@@ -16,6 +16,11 @@
             <input id="hideTotal" type="checkbox" ng-model="settings.hideTotal">
             <label for="hideTotal">Hide total score</label>
         </p>
+        <p>
+            <label for="teamSort">Sort teams by</label>
+            <input id="teamSortNumber" type="radio" ng-model="settings.teamSort" value="number">Team number<br>
+            <input id="teamSortName" type="radio" ng-model="settings.teamSort" value="name">Team name<br>
+        </p>
     </div>
     <div ng-show="tab === 2">
         <p class="pull-right">
