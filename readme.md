@@ -3,6 +3,8 @@
 [![Dependency Status](https://david-dm.org/FirstLegoLeague/fllscoring.png)](https://david-dm.org/FirstLegoLeague/fllscoring)
 [![devDependency Status](https://david-dm.org/FirstLegoLeague/fllscoring/dev-status.png)](https://david-dm.org/FirstLegoLeague/fllscoring#info=devDependencies)
 
+![en_US challenge screenshot](docs/user_interface/screenshots/26-8-2015_75711.png)
+
 FLL Scoring
 =============
 
