@@ -4,9 +4,15 @@ html, body {
     height: 100%;
     overflow: hidden;
 }
+body {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    overflow: auto;
+}
 
 #header {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     right: 0;
@@ -16,7 +22,7 @@ html, body {
 }
 
 #resize {
-    position: absolute;
+    position: fixed;
     left: 0;
     width: 64px;
     top: 192px;
