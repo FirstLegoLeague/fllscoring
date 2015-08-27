@@ -46,6 +46,52 @@ body {
     transition: all 0.5s;
 }
 
+#demoframe.phone {
+    width: 376px;
+    height: 666px;
+}
+
+#demoframe.tablet {
+    width: 613px;
+    height: 818px;
+}
+
+#demoframe.desktop {
+    height: calc(100% - 128px);
+    width: calc(100% - 128px);
+}
+
+.popupContainer {
+    position: absolute;
+    display: none;
+}
+
+.popupContainer.visible {
+    display: block;
+}
+
+.popupContainer .screen {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.2;
+}
+
+.popupContainer .dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    box-shadow: 0 8px 10px -5px rgba(0,0,0,.14),0 16px 24px 2px rgba(0,0,0,.098),0 6px 30px 5px rgba(0,0,0,.084);
+}
+
 h1 {
     font-family: 'latolight', 'Segoe UI Light','helvetica','Arial';
     color: white;
@@ -53,8 +99,23 @@ h1 {
     padding: 0 12px;
     font-weight: normal;
     margin: 10px 0;
+    font-weight: normal;
 }
 
 a {
     color: inherit;
+}
+
+/* phone stuff */
+@media (max-width: 479px) {
+    /* no menu */
+    #resize {
+        display: none;
+    }
+    #demoframe {
+        margin: 0;
+        margin-top: 64px;
+        height: calc(100% - 64px) !important;
+        width: 100% !important;
+    }
 }

@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLLScoring Demo</title>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://cdn.materialdesignicons.com/1.2.65/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="http://104.197.103.180:1390/fonts/lato.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,12 +13,19 @@
         <h1>FLL Scoring Demo App</h1>
     </div>
     <div id="resize">
-        <i class="material-icons" onclick="rescale('376px','666px')">phone_android</i>
-        <i class="material-icons" onclick="rescale('613px','818px')">tablet_android</i>
-        <i class="material-icons" onclick="rescale('calc(100% - 128px)','calc(100% - 128px)')">desktop_windows</i>
-        <a href="http://104.197.103.180:1390/"><i class="material-icons">open_in_browser</i></a>
+        <i class="mdi mdi-cellphone-android" onclick="rescale('phone')"></i>
+        <i class="mdi mdi-tablet-android" onclick="rescale('tablet')"></i>
+        <i class="mdi mdi-desktop-mac" onclick="rescale('desktop')"></i>
+        <a href="http://104.197.103.180:1390/"><i class="mdi mdi-open-in-app"></i></a>
+        <i class="mdi mdi-qrcode" onclick="openQr()"></i>
     </div>
     <iframe id="demoframe" src="http://104.197.103.180:1390/" frameborder="0"></iframe>
+    <div id="qr" class="popupContainer" onclick="closeQr()">
+        <div class="screen"></div>
+        <div class="dialog">
+            <img src="qr.png" alt="">
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>

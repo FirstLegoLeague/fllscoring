@@ -1,5 +1,13 @@
 var frame = document.getElementById('demoframe');
-function rescale(w,h) {
-    frame.style.width = w;
-    frame.style.height = h;
+var qr = document.getElementById('qr');
+function rescale(className) {
+    frame.className = className;
+}
+
+function openQr() {
+    qr.classList.add('visible');
+}
+
+function closeQr() {
+    qr.classList.remove('visible');
 }
