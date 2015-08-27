@@ -11,3 +11,6 @@ function openQr() {
 function closeQr() {
     qr.classList.remove('visible');
 }
+
+/* hide phone browser address bar */
+window.scrollTo(0,1);
