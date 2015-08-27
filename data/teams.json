@@ -1,0 +1,50 @@
+[
+    {
+        "affiliation": "",
+        "cityState": "Ducktown",
+        "coach1": "Scrooge McDuck",
+        "coach2": "Glittering Goldie",
+        "country": "USA",
+        "judgingGroup": "",
+        "name": "Ducktales",
+        "number": 1,
+        "pitLocation": "",
+        "translationNeeded": false
+    },
+    {
+        "affiliation": "",
+        "cityState": "Sewers of New York",
+        "coach1": "Splinter",
+        "coach2": "April O'Neil",
+        "country": "USA",
+        "judgingGroup": "",
+        "name": "The Turtles",
+        "number": 2,
+        "pitLocation": "",
+        "translationNeeded": false
+    },
+    {
+        "affiliation": "",
+        "cityState": "NCC-1701-D",
+        "coach1": "Jean-Luc Picard",
+        "coach2": "Deanna Troi",
+        "country": "The Federation",
+        "judgingGroup": "",
+        "name": "Trekkies",
+        "number": 3,
+        "pitLocation": "",
+        "translationNeeded": false
+    },
+    {
+        "affiliation": "",
+        "cityState": "Sea World",
+        "coach1": "Patrick",
+        "coach2": "Sandy",
+        "country": "USA",
+        "judgingGroup": "",
+        "name": "Squarepants",
+        "number": 4,
+        "pitLocation": "",
+        "translationNeeded": false
+    }
+]
