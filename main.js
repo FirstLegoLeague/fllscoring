@@ -1,5 +1,6 @@
 var frame = document.getElementById('demoframe');
 var qr = document.getElementById('qr');
+var disclaimer = document.getElementById('disclaimer');
 function rescale(className) {
     frame.className = className;
 }
@@ -21,7 +22,6 @@ function acceptDisclaimer(){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-	console.log("show me");
    showDisclaimer()
 }, false);
 /* hide phone browser address bar */

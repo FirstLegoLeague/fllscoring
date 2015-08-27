@@ -13,14 +13,15 @@
         <h1>FLL Scoring Demo App</h1>
     </div>
     <div id="resize">
-        <h3>Choose your form factor</h3>
+        <h3 class="content w1750">Choose your form factor</h3>
         <i class="mdi mdi-cellphone-android" onclick="rescale('phone')"></i>
         <i class="mdi mdi-tablet-android" onclick="rescale('tablet')"></i>
         <i class="mdi mdi-desktop-mac" onclick="rescale('desktop')"></i>
 
-        <h3>Use the QR...</h3><p>To open this page on your device</p>
+        <h3 class="content w1750">Use the QR...</h3>
+        <p class="content w1750">To open this page on your device</p>
         <i class="mdi mdi-qrcode" onclick="openQr()"></i>
-        <p>... or go fullscreen here</p>
+        <p class="content w1750">... or go fullscreen here</p>
         <a href="http://104.197.103.180:1390/"><i class="mdi mdi-open-in-app"></i></a>
     </div>
     <iframe id="demoframe" src="http://104.197.103.180:1390/" frameborder="0"></iframe>
@@ -33,6 +34,7 @@
     </div>
 
     <div id="disclaimer" class="bigPopup" onclick="acceptDisclaimer();">
+        <div class="screen"></div>
         <div class="dialog">
             <div class="dialogHeader">
             <h2>FLL Scoring Demo App</h2>
