@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FLLScoring Demo</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://104.197.103.180:1390/fonts/lato.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header">
+        <h1>FLL Scoring Demo App</h1>
+    </div>
+    <div id="resize">
+        <i class="material-icons" onclick="rescale('376px','666px')">phone_android</i>
+        <i class="material-icons" onclick="rescale('613px','818px')">tablet_android</i>
+        <i class="material-icons" onclick="rescale('calc(100% - 128px)','calc(100% - 128px)')">desktop_windows</i>
+    </div>
+    <iframe id="demoframe" src="http://104.197.103.180:1390/" frameborder="0"></iframe>
+    <script src="main.js"></script>
+</body>
+</html>
