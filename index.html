@@ -11,22 +11,42 @@
 <body>
     <div id="header">
         <h1>FLL Scoring Demo App</h1>
-        <p>Welcome to the demo-environment of the FLL scoring app developed by several Dutch FLL volunteers. This demo demonstrates several important features derivied from these <a href="https://github.com/FirstLegoLeague/fllscoring/blob/master/docs/proposal/Scoring%20System%20project%20proposal-v2.pdf"> requirements </a> including the responsive design, the generation of the scoring file from an <a href="https://github.com/FirstLegoLeague/fllscoring/blob/master/challenges/xml/2015_en_US.xml">XML file</a>, and options to communicate with other <a href="https://github.com/FirstLegoLeague">modules</a>. 
-        <b>DO NOT</b> use this page during live events: everyone can manipulate the data and the environment will be reset every 30 minutes. However, feel free to experiment and test. If you want your own copy to be used at events, provide some feedback or check out other cool modules (like this <a href="https://github.com/FirstLegoLeague/displaySystem">display system</a> visit our <a href="https://github.com/FirstLegoLeague/"></a>GitHub </a> </p>
     </div>
     <div id="resize">
+        <h3>Choose your form factor</h3>
         <i class="mdi mdi-cellphone-android" onclick="rescale('phone')"></i>
         <i class="mdi mdi-tablet-android" onclick="rescale('tablet')"></i>
         <i class="mdi mdi-desktop-mac" onclick="rescale('desktop')"></i>
-        <a href="http://104.197.103.180:1390/"><i class="mdi mdi-open-in-app"></i></a>
+
+        <h3>Use the QR...</h3><p>To open this page on your device</p>
         <i class="mdi mdi-qrcode" onclick="openQr()"></i>
+        <p>... or go fullscreen here</p>
+        <a href="http://104.197.103.180:1390/"><i class="mdi mdi-open-in-app"></i></a>
     </div>
     <iframe id="demoframe" src="http://104.197.103.180:1390/" frameborder="0"></iframe>
+
     <div id="qr" class="popupContainer" onclick="closeQr()">
         <div class="screen"></div>
         <div class="dialog">
             <img src="qr.png" alt="">
         </div>
+    </div>
+
+    <div id="disclaimer" class="bigPopup" onclick="acceptDisclaimer();">
+        <div class="dialog">
+            <div class="dialogHeader">
+            <h2>FLL Scoring Demo App</h2>
+            </div>
+            <div class="dialogBody">
+            <p>Welcome to the demo-environment of the FLL scoring app developed by several Dutch FLL volunteers.</p><p>This demo demonstrates several important features derivied from these <a href="https://github.com/FirstLegoLeague/fllscoring/blob/master/docs/proposal/Scoring%20System%20project%20proposal-v2.pdf"> requirements </a> including:</p>
+            <ul><li>a responsive design</li>
+            <li>the generation of the scoring file from an <a href="https://github.com/FirstLegoLeague/fllscoring/blob/master/challenges/xml/2015_en_US.xml">XML file</a></li>
+            <li>and options to communicate with other <a href="https://github.com/FirstLegoLeague">modules</a></li></ul>
+            <p><b>DO NOT</b></br>
+            use this page during live events: everyone can manipulate the data and the environment will be reset every 30 minutes.</p><p>However, feel free to experiment and test. If you want your own copy to use at your event, or if you like to give some feedback or check out other cool modules (like this <a href="https://github.com/FirstLegoLeague/displaySystem">display system</a>), feel free to visit our <a href="https://github.com/FirstLegoLeague/"></a>GitHub </a> </p>
+            <p>Have FUN!</p>
+            </div>
+            </div>
     </div>
     <script src="main.js"></script>
 </body>
