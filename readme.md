@@ -8,7 +8,9 @@
 FLL Scoring
 =============
 
-To have a look at what we are at, see [Testing](https://github.com/FirstLegoLeague/fllscoring/wiki/Testing). No guarantees.
+To have a look at what we are at:
+- see [Testing](https://github.com/FirstLegoLeague/fllscoring/wiki/Testing). No guarantees.
+- or check out our live [Live demo](http://firstlegoleague.github.io/fllscoring/). Even less guarantees. 
 
 Using
 ---------------
