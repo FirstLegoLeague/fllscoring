@@ -115,10 +115,6 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .dialogHeader {
-    position: relative;
-    left: 0;
-    top: 0;
-    right: 0;
     height: 60px;
     padding: 10px;
     background-color: #3F51B5;
