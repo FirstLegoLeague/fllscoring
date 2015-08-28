@@ -13,8 +13,9 @@ body {
 }
 
 p, h1, h2, h3, h4, h5 {
-    margin: 0;
+    margin: 16px 0;
     padding: 0;
+    font-weight: normal;
 }
 #header {
     position: fixed;
@@ -108,18 +109,21 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .dialogHeader {
-    height: 60px;
-    padding: 10px;
+    height: 64px;
+    line-height: 64px;
+    padding: 0 16px;
     background-color: #3F51B5;
     color: white;
     z-index: -1;
 }
+.dialogHeader h2 {
+    margin: 0;
+}
 .dialogBody {
-    padding: 10px;
+    padding: 16px;
 }
 .dialogBody p, .dialogBody h1, .dialogBody h2, .dialogBody h3, .dialogBody h4 {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 16px 0;
 }
 
 
