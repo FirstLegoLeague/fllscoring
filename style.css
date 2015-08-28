@@ -28,12 +28,14 @@ p, h1, h2, h3, h4, h5 {
 
 #resize {
     position: fixed;
-    left: 10px;
+    left: 0;
+    width: 64px;
     top: 192px;
     text-align: center;
     line-height: 64px;
 }
 #resize i {
+    display: inline-block;
     vertical-align: middle;
     padding: 10px;
     font-size: 32px;
@@ -145,13 +147,8 @@ a {
     text-decoration: none;
 }
 
-@media (max-width: 1450px){
-    #resize {display: none;}
-}
 @media (max-width: 1750px){
     .content.w1750 {display: none;}
-    #resize i {display: block;}
-
 }
 
 
