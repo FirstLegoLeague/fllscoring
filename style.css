@@ -140,9 +140,9 @@ a {
     text-decoration: none;
 }
 
-@media (max-width: 1750px){
+/*@media (max-width: 1750px){*/
     .content.w1750 {display: none;}
-}
+/*}*/
 
 
 /* phone stuff */
