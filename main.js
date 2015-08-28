@@ -21,8 +21,7 @@ function acceptDisclaimer(){
 	disclaimer.classList.remove('visible');
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-   showDisclaimer()
-}, false);
+showDisclaimer();
+
 /* hide phone browser address bar */
 window.scrollTo(0,1);
