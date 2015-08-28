@@ -119,13 +119,12 @@ p, h1, h2, h3, h4, h5 {
 .dialogHeader h2 {
     margin: 0;
 }
+.dialogHeader h2 i:first-child {
+    margin-right: 8px;
+}
 .dialogBody {
     padding: 16px;
 }
-.dialogBody p, .dialogBody h1, .dialogBody h2, .dialogBody h3, .dialogBody h4 {
-    margin: 16px 0;
-}
-
 
 h1 {
     color: white;
