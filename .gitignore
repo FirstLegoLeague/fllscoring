@@ -1,6 +1,7 @@
 node_modules/
 coverage/
-webkitbuilds/
+nw-builds/
+nw-cache/
 temp/
 pgbuildconfig.json
 .cordova/config.json

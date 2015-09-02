@@ -63,7 +63,7 @@ Testing
 Building
 --------
 
-- for a desktop build: `grunt nodewebkit`
+- for a desktop build: `grunt nwjs`
 - for a mobile build: `grunt phonegap`
  - to build only one of iOS or Android, use `grunt phonegap:ios` or `grunt phonegap:android` respectively
 
