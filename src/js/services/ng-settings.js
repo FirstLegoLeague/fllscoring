@@ -36,7 +36,6 @@ define('services/ng-settings',[
             var self = this;
             // this.clear();
             return $fs.read('settings.json').then(function(res) {
-                console.log(res);
                 self.settings = res;
                 return self.settings;
             }).catch(function(err) {

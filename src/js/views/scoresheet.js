@@ -190,7 +190,7 @@ define('views/scoresheet',[
                         delete objective["value"];
                     });
                 });
-                console.log('discard');
+                log('scoresheet discarded');
             };
 
             //saves mission scoresheet
