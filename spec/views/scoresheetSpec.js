@@ -388,6 +388,7 @@ describe('scoresheet',function() {
             $scope.stage = 1;
             $scope.round = 2;
             $scope.team = 3;
+            $scope.table = 7;
         });
 
         it('should clear form', function() {
@@ -396,6 +397,7 @@ describe('scoresheet',function() {
             expect($scope.team).toEqual(null);
             expect($scope.stage).toEqual(null);
             expect($scope.round).toEqual(null);
+            expect($scope.table).toEqual(null);
             expect($scope.missions[0].objectives[0].value).toEqual(null);
             expect($scope.missions[0].objectives[1].value).toEqual(null);
         });
@@ -414,13 +416,10 @@ describe('scoresheet',function() {
             $scope.stage = dummyStage;
             $scope.round = 1;
             $scope.table = 7;
-            $scope.settings = {
-                table: 3
-            };
             spyOn(Date,'valueOf').andReturn(42);
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(fsMock.write.mostRecentCall.args[0]).toEqual('scoresheets/score_3_123_42.json');
+                expect(fsMock.write.mostRecentCall.args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_42.json');
                 expect(fsMock.write.mostRecentCall.args[1]).toEqual({
                     team: dummyTeam,
                     stage: dummyStage,
@@ -437,9 +436,7 @@ describe('scoresheet',function() {
             $scope.field = {};
             $scope.stage = dummyStage;
             $scope.round = 1;
-            $scope.settings = {
-                table: 3
-            };
+            $scope.table = 7;
             fsMock.write.andReturn(Q.reject('argh'));
             return $scope.save().then(function() {
                 expect($window.alert).toHaveBeenCalledWith('unable to write result');

@@ -200,13 +200,6 @@ define('views/scoresheet',[
                     $window.alert('no team selected, do so first');
                     return $q.reject(new Error('no team selected, do so first'));
                 }
-                //todo:
-                var fn = [
-                    'score',
-                    $scope.settings.table,
-                    $scope.team.number,
-                    +(new $window.Date())
-                ].join('_')+'.json';
 
                 var data = angular.copy($scope.field);
                 data.team = $scope.team;
@@ -216,6 +209,15 @@ define('views/scoresheet',[
                 data.table = $scope.table;
                 data.signature = $scope.signature;
                 data.score = $scope.score();
+
+                var fn = [
+                    'score',
+                    data.stage.id,
+                    'round' + data.round,
+                    'table' + data.table,
+                    'team' + data.team.number,
+                    +(new $window.Date())
+                ].join('_')+'.json';
 
                 return $fs.write("scoresheets/" + fn,data).then(function() {
                     log('result saved');
