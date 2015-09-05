@@ -6,45 +6,40 @@ describe('fs-nw',function() {
             'idbstore': window.IDBStore
         },true);
         describe('reading',function() {
-            it('should read a test file',function(done) {
-                fs.write('foo/foo.txt','jsfd978sd').then(function() {
+            it('should read a test file',function() {
+                return fs.write('foo/foo.txt','jsfd978sd').then(function() {
                     return fs.read('foo/foo.txt');
                 }).then(function(data) {
                     expect(data).toBe('jsfd978sd');
-                }).fail(function(data) {
-                    console.log('fail',data);
                 }).then(function() {
-                    fs.remove('foo/foo.txt').then(done);
+                    return fs.remove('foo/foo.txt');
                 });
             });
         });
 
         describe('writing',function() {
-            it('should write a test file',function(done) {
-                fs.write('foo/foo.txt','jsfd978sd').then(function(data) {
+            it('should write a test file',function() {
+                return fs.write('foo/foo.txt','jsfd978sd').then(function(data) {
                     expect(data).toBe('foo/foo.txt');
-                }).fail(function(data) {
-                    console.log('fail',data);
                 }).then(function() {
-                    fs.remove('foo/foo.txt').then(done);
+                    return fs.remove('foo/foo.txt');
                 });
             });
         });
     });
 
     describe('failure creating store',function() {
+        var createError = new Error('cannot create store');
         var IDBStore = function(config) {
-            console.log('idbstore');
-            config.onError('cannot create store');
+            config.onError(createError);
         };
         var fs = factory('services/fs-nw',{
             'q':Q,
             'idbstore': IDBStore
         },true);
         it('fail store cannot be created',function() {
-            return fs.read('foo/quxmoo.txt').fail(function(err) {
-                console.log('foo');
-                expect(err).toBe('cannot create store');
+            return fs.read('foo/quxmoo.txt').catch(function(err) {
+                expect(err).toBe(createError);
             });
         });
     });
