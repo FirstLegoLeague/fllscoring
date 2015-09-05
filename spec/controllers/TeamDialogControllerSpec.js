@@ -4,18 +4,21 @@ describe('TeamDialogController',function() {
         'services/log': logMock,
     });
 
-    var $scope, controller, handshakeMock;
+    var $scope, controller, settingsMock, handshakeMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
             $scope = $rootScope.$new();
             handshakeMock = createHandshakeMock($q);
+            settingsMock = createSettingsMock($q, {});
             controller = $controller('TeamDialogController', {
                 '$scope': $scope,
+                '$settings': settingsMock,
                 '$handshake': handshakeMock
             });
         });
+        return settingsMock.init();
     });
 
     describe('handshake receive',function() {
