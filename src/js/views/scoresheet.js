@@ -179,7 +179,7 @@ define('views/scoresheet',[
                 return !$scope.preventSaveErrors().length;
             };
 
-            $scope.discard = function() {
+            $scope.clear = function() {
                 $scope.signature = null;
                 $scope.team = null;
                 $scope.stage = null;
@@ -190,7 +190,7 @@ define('views/scoresheet',[
                         delete objective["value"];
                     });
                 });
-                log('scoresheet discarded');
+                log('scoresheet cleared');
             };
 
             //saves mission scoresheet
@@ -219,7 +219,7 @@ define('views/scoresheet',[
 
                 return $fs.write("scoresheets/" + fn,data).then(function() {
                     log('result saved');
-                    $scope.discard();
+                    $scope.clear();
                     $window.alert('Thanks for submitting a score of ' +
                         data.score +
                         ' points for team (' + data.team.number + ') ' + data.team.name +
@@ -251,6 +251,8 @@ define('views/scoresheet',[
                 });
             };
 
+            // Initialize empty scoresheet (mostly uniqueId)
+            $scope.clear();
         }
     ]);
 });

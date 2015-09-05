@@ -369,7 +369,7 @@ describe('scoresheet',function() {
         });
     });
 
-    describe('discard', function() {
+    describe('clear', function() {
         beforeEach(function() {
             //setup some values
             $scope.signature = "dummy";
@@ -390,8 +390,8 @@ describe('scoresheet',function() {
             $scope.team = 3;
         });
 
-        it('should discard form signature', function() {
-            $scope.discard();
+        it('should clear form', function() {
+            $scope.clear();
             expect($scope.signature).toEqual(null);
             expect($scope.team).toEqual(null);
             expect($scope.stage).toEqual(null);
