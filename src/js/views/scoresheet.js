@@ -234,8 +234,8 @@ define('views/scoresheet',[
                 $handshake.$emit('showDescription',mission);
             };
 
-            $scope.openTeamModal = function (teams,settings) {
-                $handshake.$emit('chooseTeam',teams,settings).then(function(result) {
+            $scope.openTeamModal = function (teams) {
+                $handshake.$emit('chooseTeam',teams).then(function(result) {
                     if (result) {
                         $scope.team = result.team;
                     }
