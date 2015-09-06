@@ -135,7 +135,7 @@ define('views/ranking',[
 
                 $timeout(function () {
 
-                    var htmloutput = "<!DOCTYPE html><html><head><title>"+ params.stage.name + " " + params.round + "</title><style>table{background-color:green;}</style></head><body>";
+                    var htmloutput = "<!DOCTYPE html><html><head><title>"+ params.stage.name + " " + params.round + "</title></head><body id=\"bodyranking\">";
                     htmloutput += document.getElementById("scoreexport").innerHTML;
                     htmloutput += "<script>runThroughHighscore("+$scope.filterscoreboard[$scope.stageselected.id].length+");</script>";
                     htmloutput += "</body></html>";
