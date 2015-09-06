@@ -36,11 +36,20 @@ define('views/scoresheet',[
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;
 
-
             $settings.init().then(function(res) {
                 $scope.settings = res;
                 return $scope.load();
             });
+
+            function generateId() {
+                var max = 0x100000000; // 8 digits
+                // Add current time to prevent Math.random() generating the same
+                // sequence if it's seeded with a constant. Not sure this is
+                // really needed, but better safe than sorry...
+                var num = (Math.floor(Math.random() * max) + Date.now()) % max;
+                // Convert to nice hex representation with padded zeroes, then strip that initial 1.
+                return (num + max).toString(16).slice(1);
+            }
 
             $scope.load = function() {
                 return $challenge.load($scope.settings.challenge).then(function(defs) {
@@ -180,6 +189,7 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
+                $scope.uniqueId = generateId();
                 $scope.signature = null;
                 $scope.team = null;
                 $scope.stage = null;
@@ -202,6 +212,7 @@ define('views/scoresheet',[
                 }
 
                 var data = angular.copy($scope.field);
+                data.uniqueId = $scope.uniqueId;
                 data.team = $scope.team;
                 data.stage = $scope.stage;
                 data.round = $scope.round;
@@ -216,7 +227,7 @@ define('views/scoresheet',[
                     'round' + data.round,
                     'table' + data.table,
                     'team' + data.team.number,
-                    +(new $window.Date())
+                    data.uniqueId
                 ].join('_')+'.json';
 
                 return $fs.write("scoresheets/" + fn,data).then(function() {

@@ -392,7 +392,11 @@ describe('scoresheet',function() {
         });
 
         it('should clear form', function() {
+            var oldId = $scope.uniqueId;
             $scope.clear();
+            expect($scope.uniqueId).not.toEqual(oldId);
+            expect(typeof $scope.uniqueId).toEqual('string');
+            expect($scope.uniqueId.length).toEqual(8);
             expect($scope.signature).toEqual(null);
             expect($scope.team).toEqual(null);
             expect($scope.stage).toEqual(null);
@@ -411,16 +415,17 @@ describe('scoresheet',function() {
             });
         });
         it('should save',function() {
+            $scope.uniqueId = "abcdef01";
             $scope.team = dummyTeam;
             $scope.field = {};
             $scope.stage = dummyStage;
             $scope.round = 1;
             $scope.table = 7;
-            spyOn(Date,'valueOf').andReturn(42);
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(fsMock.write.mostRecentCall.args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_42.json');
+                expect(fsMock.write.mostRecentCall.args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_abcdef01.json');
                 expect(fsMock.write.mostRecentCall.args[1]).toEqual({
+                    uniqueId: "abcdef01",
                     team: dummyTeam,
                     stage: dummyStage,
                     round: 1,
@@ -437,9 +442,16 @@ describe('scoresheet',function() {
             $scope.stage = dummyStage;
             $scope.round = 1;
             $scope.table = 7;
+            var oldId = $scope.uniqueId;
             fsMock.write.andReturn(Q.reject('argh'));
             return $scope.save().then(function() {
                 expect($window.alert).toHaveBeenCalledWith('unable to write result');
+                var firstFilename = fsMock.write.mostRecentCall.args[0];
+                // verify that filename stays the same
+                function noop() {}
+                var secondFilename = fsMock.write.mostRecentCall.args[0];
+                $scope.save().then(noop, noop);
+                expect(secondFilename).toBe(firstFilename);
             });
         });
     });
