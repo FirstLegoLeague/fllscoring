@@ -97,67 +97,67 @@
         }]
     }, {
         "title": "Sorting yellow/blue bars",
-        "description": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>YELLOW/BLUE BARS ARE IN THEIR MATCHING GREEN BIN AND THE BIN (BINS SCORE INDEPENDENTLY) ...<ul><li> (*) is completely in the other team’s Safety, by way of your East Transfer.</li><li>is completely in your East Transfer Area and/or completely on your East Transfer.</li><li> (*) was never  completely in your East Transfer Area (all “Areas” are defined below).</li></ul></li></ul><b>Method constraints or leniencies:</b><ul><li><b>METHOD CONTRAINTS:</b> These require sequence/path as described, in addition to final positions.</li></ul>",
+        "description": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>YELLOW/BLUE BARS ARE IN THEIR MATCHING GREEN BIN AND THE BIN (BINS SCORE INDEPENDENTLY) ...<ul><li> (*) Per Bin (See M01) is completely in the other team’s Safety, by way of your West Transfer.</li><li>is completely in your West Transfer Area and/or completely on your West Transfer.</li><li> (*) was never  completely in your West Transfer Area (all “Areas” are defined below).</li></ul></li></ul><b>Method constraints or leniencies:</b><ul><li><b>METHOD CONTRAINTS:</b> These require sequence/path as described, in addition to final positions.</li></ul>",
         "objectives": [{
-            "id": "ineasttransfer",
-            "title": "Bar in East Transfer Area",
+            "id": "inwesttransfer",
+            "title": "Bar in West Transfer Area",
             "type": "number",
             "min": "0",
             "max": "15"
         }, {
             "id": "anywhereelese",
-            "title": "Never in East Transfer Area",
+            "title": "Never in West Transfer Area",
             "type": "number",
             "min": "0",
             "max": "15"
         }],
-        "score": [function(ineasttransfer) {
-            if (ineasttransfer === '0') {
+        "score": [function(inwesttransfer) {
+            if (inwesttransfer === '0') {
                 return 0
             }
-            if (ineasttransfer === '1') {
+            if (inwesttransfer === '1') {
                 return 7
             }
-            if (ineasttransfer === '2') {
+            if (inwesttransfer === '2') {
                 return 14
             }
-            if (ineasttransfer === '3') {
+            if (inwesttransfer === '3') {
                 return 21
             }
-            if (ineasttransfer === '4') {
+            if (inwesttransfer === '4') {
                 return 28
             }
-            if (ineasttransfer === '5') {
+            if (inwesttransfer === '5') {
                 return 35
             }
-            if (ineasttransfer === '6') {
+            if (inwesttransfer === '6') {
                 return 42
             }
-            if (ineasttransfer === '7') {
+            if (inwesttransfer === '7') {
                 return 49
             }
-            if (ineasttransfer === '8') {
+            if (inwesttransfer === '8') {
                 return 56
             }
-            if (ineasttransfer === '9') {
+            if (inwesttransfer === '9') {
                 return 63
             }
-            if (ineasttransfer === '10') {
+            if (inwesttransfer === '10') {
                 return 70
             }
-            if (ineasttransfer === '11') {
+            if (inwesttransfer === '11') {
                 return 77
             }
-            if (ineasttransfer === '12') {
+            if (inwesttransfer === '12') {
                 return 84
             }
-            if (ineasttransfer === '13') {
+            if (inwesttransfer === '13') {
                 return 91
             }
-            if (ineasttransfer === '14') {
+            if (inwesttransfer === '14') {
                 return 98
             }
-            if (ineasttransfer === '15') {
+            if (inwesttransfer === '15') {
                 return 105
             }
         }, function(anywhereelese) {
@@ -355,7 +355,7 @@
         }]
     }, {
         "title": "Careers",
-        "description": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nAt least one Person is completely in the Sorter Area. <font color=\"red\"><b>VALUE:</b> 60 PLUS THIS R10  LENIENCY BONUS:   TEAM TECHNICIAN S AND/OR THE REF (IF NEEDED/ASKED) ARE ALLOWED TO UNCLOG ANY WEST CHUTE BLOCKAGE BY HAND, AND/OR PUT MIS-SORTED BARS INTO THEIR CORRECT BIN, INCLUDING BARS THAT DIDN’T LAND IN ANY BIN.</font></li></ul><p>This is a fun, dynamic Model with a small but real error rate, which will be well understood by Tournament season.  So that we may all enjoy the Model, please use the R10 leniency for Model errors, handle with care when doing so, use “Benefit Of The Doubt” for hand errors, and use common sense and good will the whole time.</p>",
+        "description": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nAt least one Person is completely in the Sorter Area. <font color=\"red\"><b>VALUE:</b> 60 PLUS THIS R10  LENIENCY BONUS:   TEAM TECHNICIAN S AND/OR THE REF (IF NEEDED/ASKED) ARE ALLOWED TO UNCLOG ANY EAST CHUTE BLOCKAGE BY HAND, AND/OR PUT MIS-SORTED BARS INTO THEIR CORRECT BIN, INCLUDING BARS THAT DIDN’T LAND IN ANY BIN.</font></li></ul><p>This is a fun, dynamic Model with a small but real error rate, which will be well understood by Tournament season.  So that we may all enjoy the Model, please use the R10 leniency for Model errors, handle with care when doing so, use “Benefit Of The Doubt” for hand errors, and use common sense and good will the whole time.</p>",
         "objectives": [{
             "id": "career",
             "title": "At least one Person is in the Sorter Area",
@@ -584,16 +584,16 @@
         "trucksupport-desc": "Truck supports all of the Yellow Bin’s weight",
         "truckeast-desc": "The Yellow Bin is completely east of the Truck’s Guide",
         "sortingblueyellow-name": "Sorting yellow/blue bars",
-        "sortingblueyellow-desc": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>YELLOW/BLUE BARS ARE IN THEIR MATCHING GREEN BIN AND THE BIN (BINS SCORE INDEPENDENTLY) ...<ul><li> (*) is completely in the other team’s Safety, by way of your East Transfer.</li><li>is completely in your East Transfer Area and/or completely on your East Transfer.</li><li> (*) was never  completely in your East Transfer Area (all “Areas” are defined below).</li></ul></li></ul><b>Method constraints or leniencies:</b><ul><li><b>METHOD CONTRAINTS:</b> These require sequence/path as described, in addition to final positions.</li></ul>",
-        "ineasttransfer-desc": "Bar in East Transfer Area",
-        "anywhereelese-desc": "Never in East Transfer Area",
+        "sortingblueyellow-desc": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>YELLOW/BLUE BARS ARE IN THEIR MATCHING GREEN BIN AND THE BIN (BINS SCORE INDEPENDENTLY) ...<ul><li> (*) Per Bin (See M01) is completely in the other team’s Safety, by way of your West Transfer.</li><li>is completely in your West Transfer Area and/or completely on your West Transfer.</li><li> (*) was never  completely in your West Transfer Area (all “Areas” are defined below).</li></ul></li></ul><b>Method constraints or leniencies:</b><ul><li><b>METHOD CONTRAINTS:</b> These require sequence/path as described, in addition to final positions.</li></ul>",
+        "inwesttransfer-desc": "Bar in West Transfer Area",
+        "anywhereelese-desc": "Never in West Transfer Area",
         "sortingblack-name": "Sorting black bars",
         "sortingblack-desc": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>BLACK BARS ARE (BARS SCORE INDEPENDENTLY)...:\r\n<ul><li>part of a scoring Flower Box, or in their original Setup position.</li><li>in their matching Green Bin, or in the Landfill Bin.</li><li>anywhere else.</li></ul></li></ul>\r\n<b>Method constraints or leniencies:</b><ul><li><b>METHOD CONSTRAINT:</b> Bars must only  enter Green Bins directly from the Sorter’s east chute or CAREERS BONUS.</li></ul>",
         "inflowerbox-desc": "Part of scoring Flower Box",
         "greenbinlandfill-desc": "In their matching Green Bin or in the Landfill Bin",
         "blackanywhere-desc": "Anywhere else (penalty)",
         "career-name": "Careers",
-        "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nAt least one Person is completely in the Sorter Area. <font color=\"red\"><b>VALUE:</b> 60 PLUS THIS R10  LENIENCY BONUS:   TEAM TECHNICIAN S AND/OR THE REF (IF NEEDED/ASKED) ARE ALLOWED TO UNCLOG ANY WEST CHUTE BLOCKAGE BY HAND, AND/OR PUT MIS-SORTED BARS INTO THEIR CORRECT BIN, INCLUDING BARS THAT DIDN’T LAND IN ANY BIN.</font></li></ul><p>This is a fun, dynamic Model with a small but real error rate, which will be well understood by Tournament season.  So that we may all enjoy the Model, please use the R10 leniency for Model errors, handle with care when doing so, use “Benefit Of The Doubt” for hand errors, and use common sense and good will the whole time.</p>",
+        "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nAt least one Person is completely in the Sorter Area. <font color=\"red\"><b>VALUE:</b> 60 PLUS THIS R10  LENIENCY BONUS:   TEAM TECHNICIAN S AND/OR THE REF (IF NEEDED/ASKED) ARE ALLOWED TO UNCLOG ANY EAST CHUTE BLOCKAGE BY HAND, AND/OR PUT MIS-SORTED BARS INTO THEIR CORRECT BIN, INCLUDING BARS THAT DIDN’T LAND IN ANY BIN.</font></li></ul><p>This is a fun, dynamic Model with a small but real error rate, which will be well understood by Tournament season.  So that we may all enjoy the Model, please use the R10 leniency for Model errors, handle with care when doing so, use “Benefit Of The Doubt” for hand errors, and use common sense and good will the whole time.</p>",
         "careeryesno-desc": "At least one Person is in the Sorter Area",
         "scrapcars-name": "Scrap Cars",
         "scrapcars-desc": "<b>Specific physical requirement, visible at the end of the match (Score only one way):</b><ul><li> (*) The Engine/Windshield unit is  installed in the unfolded Car in the proper space and direction</li><li>The Car is completely folded and completely in the East  Transfer Area.</li></ul><b>Method constraints or leniencies:</b><ul><li><b>LENIENCY:</b> Full/exact nesting is not required.</li><li><b>METHOD CONSTRAINT:</b> The Car must never cross into Safety, even partly.</li></ul>",

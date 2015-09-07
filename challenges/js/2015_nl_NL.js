@@ -97,67 +97,67 @@
         }]
     }, {
         "title": "Sorteren gele/blauwe staven",
-        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie oostelijke “Transfer”.</li><li>Volledig in jullie oostelijke “Transfer”-gebied en/of volledig op jullie oostelijke “Transfer”.</li><li>Nooit volledig in het oostelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de oostelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
-            "id": "ineasttransfer",
-            "title": "Staaf bevind zich in oostelijke transfer",
+            "id": "inwesttransfer",
+            "title": "Staaf bevind zich in westelijke transfer",
             "type": "number",
             "min": "0",
             "max": "15"
         }, {
             "id": "anywhereelese",
-            "title": "Nooit in oostelijke transfer",
+            "title": "Nooit in westelijke transfer",
             "type": "number",
             "min": "0",
             "max": "15"
         }],
-        "score": [function(ineasttransfer) {
-            if (ineasttransfer === '0') {
+        "score": [function(inwesttransfer) {
+            if (inwesttransfer === '0') {
                 return 0
             }
-            if (ineasttransfer === '1') {
+            if (inwesttransfer === '1') {
                 return 7
             }
-            if (ineasttransfer === '2') {
+            if (inwesttransfer === '2') {
                 return 14
             }
-            if (ineasttransfer === '3') {
+            if (inwesttransfer === '3') {
                 return 21
             }
-            if (ineasttransfer === '4') {
+            if (inwesttransfer === '4') {
                 return 28
             }
-            if (ineasttransfer === '5') {
+            if (inwesttransfer === '5') {
                 return 35
             }
-            if (ineasttransfer === '6') {
+            if (inwesttransfer === '6') {
                 return 42
             }
-            if (ineasttransfer === '7') {
+            if (inwesttransfer === '7') {
                 return 49
             }
-            if (ineasttransfer === '8') {
+            if (inwesttransfer === '8') {
                 return 56
             }
-            if (ineasttransfer === '9') {
+            if (inwesttransfer === '9') {
                 return 63
             }
-            if (ineasttransfer === '10') {
+            if (inwesttransfer === '10') {
                 return 70
             }
-            if (ineasttransfer === '11') {
+            if (inwesttransfer === '11') {
                 return 77
             }
-            if (ineasttransfer === '12') {
+            if (inwesttransfer === '12') {
                 return 84
             }
-            if (ineasttransfer === '13') {
+            if (inwesttransfer === '13') {
                 return 91
             }
-            if (ineasttransfer === '14') {
+            if (inwesttransfer === '14') {
                 return 98
             }
-            if (ineasttransfer === '15') {
+            if (inwesttransfer === '15') {
                 return 105
             }
         }, function(anywhereelese) {
@@ -212,7 +212,7 @@
         }]
     }, {
         "title": "Sorteren zwarte staven",
-        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de oostelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inflowerbox",
             "title": "Onderdeel van een scorende bloempot",
@@ -355,7 +355,7 @@
         }]
     }, {
         "title": "Carierre",
-        "description": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de westelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
+        "description": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
         "objectives": [{
             "id": "career",
             "title": "Tenminste 1 persoon bevindt zich in het sorteergebied",
@@ -584,16 +584,16 @@
         "trucksupport-desc": "Vrachtwagen draagt het volledige gewicht van de gele container",
         "truckeast-desc": "De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen",
         "sortingblueyellow-name": "Sorteren gele/blauwe staven",
-        "sortingblueyellow-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie oostelijke “Transfer”.</li><li>Volledig in jullie oostelijke “Transfer”-gebied en/of volledig op jullie oostelijke “Transfer”.</li><li>Nooit volledig in het oostelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de oostelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
-        "ineasttransfer-desc": "Staaf bevind zich in oostelijke transfer",
-        "anywhereelese-desc": "Nooit in oostelijke transfer",
+        "sortingblueyellow-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "inwesttransfer-desc": "Staaf bevind zich in westelijke transfer",
+        "anywhereelese-desc": "Nooit in westelijke transfer",
         "sortingblack-name": "Sorteren zwarte staven",
-        "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de oostelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "inflowerbox-desc": "Onderdeel van een scorende bloempot",
         "greenbinlandfill-desc": "In de bijbehorende groene container, of in de vuilnisbelt-container",
         "blackanywhere-desc": "Ergens anders, waar dan ook (minpunten)",
         "career-name": "Carierre",
-        "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de westelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
+        "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
         "careeryesno-desc": "Tenminste 1 persoon bevindt zich in het sorteergebied",
         "scrapcars-name": "Sloopauto's",
         "scrapcars-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (voor één van beide opties worden punten toegekend):</b><ul><li>De voorruit en motor zijn geïnstalleerd in de ‘ongevouwen ’ auto op de juiste plek en in de juiste richting.</li><li>De auto is volledig opgevouwen en bevindt zich volledig in het  oostelijke “Transfer”-gebied.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing/vouwing niet nodig.</li><li><b>BEPERKING:</b> De auto mag zich nooit in “Safety” hebben bevonden, zelfs niet gedeeltelijk.</li></ul>",
