@@ -14,8 +14,15 @@ define('views/ranking',[
             // temporary default sort values
             $scope.sort = 'rank';
             $scope.rev = false;
+
+            // export settings
             $scope.export = {};
             $scope.export.prevRounds = true; // enable highscore
+            $scope.export.flowAmount = 10;         // The amount of rows shown at the same time
+            $scope.export.fixedShownTop = 3;      // The amount of scores always visible at top 
+            $scope.export.timeForFrame1 = 10;      // Amount of seconds that the first page shows
+            $scope.export.timeThroughFrames = 10;  // Amount of seconds that each scroll takes
+            $scope.export.fadeAtOneGo = 7;        // Amount of scores that move away and appear
             // initialize first tab
             $scope.tab = 1;
             $scope.scores = $scores;

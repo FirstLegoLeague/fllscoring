@@ -151,22 +151,29 @@
             </style>
             <script>
                 function runThroughHighscore(amount){
-                    TOTALAMOUNT = amount;   // Total amount of rows in the HighScore
-                    FLOWAMOUNT = 10;         // The amount of rows shown at the same time
-                    FIXEDSHOWNTOP = 3;      // The amount of scores always visible at top 
-                    TIMEFORFRAME1 = 10;      // Amount of seconds that the first page shows
-                    TIMETHROUGHFRAMES = 10;  // Amount of seconds that each scroll takes
-                    FADEATONEGO = 7;        // Amount of scores that move away and appear
+                    // Total amount of rows in the HighScore
+                    TOTALAMOUNT       = amount;
+                    // The amount of rows shown at the same time
+                    FLOWAMOUNT        = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.flowAmount;
+                    // The amount of scores always visible at top
+                    FIXEDSHOWNTOP     = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.fixedShownTop;
+                    // Amount of seconds that the first page shows       
+                    TIMEFORFRAME1     = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.timeForFrame1;
+                    // Amount of seconds that each scroll takes      
+                    TIMETHROUGHFRAMES = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.timeThroughFrames;
+                    // Amount of scores that move away and appear
+                    FADEATONEGO       = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.fadeAtOneGo;
+
                     for(var p = 0 ; p <= FIXEDSHOWNTOP -1 ; p++){
-                    document.getElementById('trrow'+p).className = 'top';             
+                    document.getElementById('trrow'+p).className = 'top';
                         
                     }
                     for(var q = FIXEDSHOWNTOP ; q <= TOTALAMOUNT -1 ; q++){
-                    document.getElementById('trrow'+q).className = 'all';             
+                    document.getElementById('trrow'+q).className = 'all';
                         
                     }
                     for(var x = FLOWAMOUNT; x<(TOTALAMOUNT);x++){
-                        document.getElementById('trrow'+x).style.visibility = 'hidden';             
+                        document.getElementById('trrow'+x).style.visibility = 'hidden';
                     }   
                     //alert(amount);
                     setTimeout(gotoNext,(TIMEFORFRAME1*1000));
