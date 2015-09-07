@@ -10,6 +10,8 @@ define('views/settings',[
         function($scope, $stages, $settings) {
             log('init settings ctrl');
             $scope.log = log.get();
+            // initialize first tab
+            $scope.tab = 1;
 
             $settings.init().then(function(res) {
                 $scope.settings = res;

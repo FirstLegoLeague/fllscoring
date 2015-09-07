@@ -19,8 +19,10 @@ Currently the scoring application can only be reliably used as a hosted service.
 
 - set up a server running nodejs [nodejs.org](http://nodejs.org)
 - [download the source](https://github.com/FirstLegoLeague/fllscoring/archive/master.zip) or clone the repository using git.
-- `npm install`
-- `node localserver.js` then open [localhost:1390](http://localhost:1390)
+- Open a command prompt and navigate to the directory where you cloned the repository or extracted the downloaded zip-file.
+- Execute the following command: `npm install`
+(this installs all dependencies. It's a neccesarry step for each install)
+- Run `node localserver.js` then open [localhost:1390](http://localhost:1390) in your browser
     - to specify another port, use `node localserver.js -p 8000`
     - to add basic authentication, use `node localserver.js -u username:password`
 

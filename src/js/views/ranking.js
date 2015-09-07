@@ -7,13 +7,20 @@ define('views/ranking',[
 ],function(log) {
     var moduleName = 'ranking';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl', [
-        '$scope', '$scores', '$stages',
-        function($scope, $scores, $stages) {
+        '$scope', '$scores', '$stages', '$timeout',
+        function($scope, $scores, $stages, $timeout) {
             log('init ranking ctrl');
 
             // temporary default sort values
             $scope.sort = 'rank';
             $scope.rev = false;
+            $scope.export = {};
+            $scope.export.prevRounds = true; // enable highscore
+            // initialize first tab
+            $scope.tab = 1;
+            $scope.scores = $scores;
+
+
 
             $scope.doSort = function(stage, col, defaultSort) {
                 if (stage.sort === undefined) {
@@ -114,6 +121,31 @@ define('views/ranking',[
 
             $scope.stages = $stages.stages;
             $scope.scoreboard = $scores.scoreboard;
+
+            $scope.getRoundLabel = function(round){
+                return "Round " + round;
+            };
+            // Generate new table and download page to wished location
+            $scope.exportScore = function(params){
+                $scope.stageselected = params.stage;
+                $scope.export.rounds = Array.apply(null, Array(params.round)).map(function (_, i) {return i+1;});
+                var stageFilter = {};
+                stageFilter[params.stage.id] = params.round;
+                $scope.filterscoreboard = $scores.getRankings(stageFilter).scoreboard;
+
+                $timeout(function () {
+
+                    var htmloutput = "<!DOCTYPE html><html><head><title>"+ params.stage.name + " " + params.round + "</title></head><body id=\"bodyranking\">";
+                    htmloutput += document.getElementById("scoreexport").innerHTML;
+                    htmloutput += "<script>runThroughHighscore("+$scope.filterscoreboard[$scope.stageselected.id].length+");</script>";
+                    htmloutput += "</body></html>";
+                    $scope.exportname = encodeURIComponent("RoundResults.html");
+                    $scope.exportdata = "data:text/csv;charset=utf-8," + encodeURIComponent(htmloutput);
+                    $scope.exportvisible = true; 
+
+                });
+            };
+
         }
     ]);
 });
