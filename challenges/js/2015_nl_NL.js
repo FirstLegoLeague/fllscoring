@@ -4,68 +4,53 @@
         "title": "Gerecycled materiaal gebruiken",
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
         "objectives": [{
-            "id": "containersself",
-            "title": "Eigen containers",
+            "id": "containers",
+            "title": "Containers met minimaal een gele of blauwe staaf van het andere team in safety",
             "type": "number",
             "min": "0",
-            "max": "3"
-        }, {
-            "id": "containersother",
-            "title": "Containers anderen",
-            "type": "number",
-            "min": "0",
-            "max": "3"
+            "max": "6"
         }],
-        "score": [function(containersself) {
-            if (containersself === '0') {
+        "score": [function(containers) {
+            if (containers === '0') {
                 return 0
             }
-            if (containersself === '1') {
+            if (containers === '1') {
                 return 60
             }
-            if (containersself === '2') {
+            if (containers === '2') {
                 return 120
             }
-            if (containersself === '3') {
+            if (containers === '3') {
                 return 180
             }
-        }, function(containersother) {
-            if (containersother === '0') {
-                return 0
+            if (containers === '4') {
+                return 240
             }
-            if (containersother === '1') {
-                return 60
+            if (containers === '5') {
+                return 300
             }
-            if (containersother === '2') {
-                return 120
-            }
-            if (containersother === '3') {
-                return 180
+            if (containers === '6') {
+                return 360
             }
         }]
     }, {
         "title": "Methaan",
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>",
         "objectives": [{
-            "id": "truck",
-            "title": "Er zit een methaan in de vrachtwagen",
-            "type": "yesno"
-        }, {
-            "id": "factory",
-            "title": "Er zit een methaan in de fabriek",
-            "type": "yesno"
+            "id": "truck_factory",
+            "title": "Aantal methaan in de vrachtwagen of fabriek",
+            "type": "number",
+            "min": "0",
+            "max": "2"
         }],
-        "score": [function(truck, factory) {
-            if (truck === 'no' && factory === 'no') {
+        "score": [function(truck_factory) {
+            if (truck_factory === '0') {
                 return 0
             }
-            if (truck === 'no' && factory === 'yes') {
+            if (truck_factory === '1') {
                 return 40
             }
-            if (truck === 'yes' && factory === 'no') {
-                return 40
-            }
-            if (truck === 'yes' && factory === 'yes') {
+            if (truck_factory === '2') {
                 return 80
             }
         }]
@@ -100,13 +85,13 @@
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inwesttransfer",
-            "title": "Staaf bevind zich in westelijke transfer",
+            "title": "Staven die zich in of op de westelijke transfer bevinden",
             "type": "number",
             "min": "0",
             "max": "15"
         }, {
             "id": "anywhereelese",
-            "title": "Nooit in westelijke transfer",
+            "title": "Staven die nooit in het westelijke transfergebied geweest zijn",
             "type": "number",
             "min": "0",
             "max": "15"
@@ -215,16 +200,16 @@
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inflowerbox",
-            "title": "Onderdeel van een scorende bloempot",
+            "title": "Staven onderdeel van een scorende bloempot of in startpositie",
             "type": "number",
             "min": "0",
-            "max": "12"
+            "max": "8"
         }, {
             "id": "greenbinlandfill",
-            "title": "In de bijbehorende groene container, of in de vuilnisbelt-container",
+            "title": "Staven in de bijbehorende groene container, of in de vuilnisbelt-container",
             "type": "number",
             "min": "0",
-            "max": "12"
+            "max": "8"
         }, {
             "id": "blackanywhere",
             "title": "Ergens anders, waar dan ook (minpunten)",
@@ -237,80 +222,56 @@
                 return 0
             }
             if (inflowerbox === '1') {
-                return 7
+                return 8
             }
             if (inflowerbox === '2') {
-                return 14
+                return 16
             }
             if (inflowerbox === '3') {
-                return 21
+                return 24
             }
             if (inflowerbox === '4') {
-                return 28
+                return 32
             }
             if (inflowerbox === '5') {
-                return 35
+                return 40
             }
             if (inflowerbox === '6') {
-                return 42
+                return 48
             }
             if (inflowerbox === '7') {
-                return 49
-            }
-            if (inflowerbox === '8') {
                 return 56
             }
-            if (inflowerbox === '9') {
-                return 63
-            }
-            if (inflowerbox === '10') {
-                return 70
-            }
-            if (inflowerbox === '11') {
-                return 77
-            }
-            if (inflowerbox === '12') {
-                return 84
+            if (inflowerbox === '8') {
+                return 64
             }
         }, function(greenbinlandfill) {
             if (greenbinlandfill === '0') {
                 return 0
             }
             if (greenbinlandfill === '1') {
-                return 6
+                return 3
             }
             if (greenbinlandfill === '2') {
-                return 12
+                return 6
             }
             if (greenbinlandfill === '3') {
-                return 18
+                return 9
             }
             if (greenbinlandfill === '4') {
-                return 24
+                return 12
             }
             if (greenbinlandfill === '5') {
-                return 30
+                return 15
             }
             if (greenbinlandfill === '6') {
-                return 36
+                return 18
             }
             if (greenbinlandfill === '7') {
-                return 42
+                return 21
             }
             if (greenbinlandfill === '8') {
-                return 48
-            }
-            if (greenbinlandfill === '9') {
-                return 54
-            }
-            if (greenbinlandfill === '10') {
-                return 60
-            }
-            if (greenbinlandfill === '11') {
-                return 66
-            }
-            if (greenbinlandfill === '12') {
-                return 72
+                return 24
             }
         }, function(blackanywhere) {
             if (blackanywhere === '0') {
@@ -573,24 +534,22 @@
         "no": "Nee",
         "usingrecycledmaterial-name": "Gerecycled materiaal gebruiken",
         "usingrecycledmaterial-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
-        "containersself-desc": "Eigen containers",
-        "containersother-desc": "Containers anderen",
+        "containers-desc": "Containers met minimaal een gele of blauwe staaf van het andere team in safety",
         "methane-name": "Methaan",
         "methane-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>",
-        "truck-desc": "Er zit een methaan in de vrachtwagen",
-        "factory-desc": "Er zit een methaan in de fabriek",
+        "truck-factory-desc": "Aantal methaan in de vrachtwagen of fabriek",
         "transport-name": "Vervoer",
         "transport-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (jullie kunnen één of beide missie volbrengen):</b><ul><li>Vrachtwagen draagt het volledige gewicht van de gele container.</li><li>De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen.</li></ul>",
         "trucksupport-desc": "Vrachtwagen draagt het volledige gewicht van de gele container",
         "truckeast-desc": "De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen",
         "sortingblueyellow-name": "Sorteren gele/blauwe staven",
         "sortingblueyellow-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
-        "inwesttransfer-desc": "Staaf bevind zich in westelijke transfer",
-        "anywhereelese-desc": "Nooit in westelijke transfer",
+        "inwesttransfer-desc": "Staven die zich in of op de westelijke transfer bevinden",
+        "anywhereelese-desc": "Staven die nooit in het westelijke transfergebied geweest zijn",
         "sortingblack-name": "Sorteren zwarte staven",
         "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
-        "inflowerbox-desc": "Onderdeel van een scorende bloempot",
-        "greenbinlandfill-desc": "In de bijbehorende groene container, of in de vuilnisbelt-container",
+        "inflowerbox-desc": "Staven onderdeel van een scorende bloempot of in startpositie",
+        "greenbinlandfill-desc": "Staven in de bijbehorende groene container, of in de vuilnisbelt-container",
         "blackanywhere-desc": "Ergens anders, waar dan ook (minpunten)",
         "career-name": "Carierre",
         "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
