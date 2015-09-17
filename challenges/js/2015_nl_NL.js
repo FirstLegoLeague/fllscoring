@@ -5,7 +5,7 @@
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
         "objectives": [{
             "id": "containers",
-            "title": "Aantal containers met minimaal een gele of blauwe staaf van het andere team in safety",
+            "title": "Aantal containers met minimaal een gele of blauwe staaf van het andere team in Safety",
             "type": "number",
             "min": "0",
             "max": "6"
@@ -514,7 +514,7 @@
         "no": "Nee",
         "usingrecycledmaterial-name": "M01 Gerecycled materiaal gebruiken",
         "usingrecycledmaterial-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
-        "containers-desc": "Aantal containers met minimaal een gele of blauwe staaf van het andere team in safety",
+        "containers-desc": "Aantal containers met minimaal een gele of blauwe staaf van het andere team in Safety",
         "methane-name": "M02 Methaan",
         "methane-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>",
         "truck-factory-desc": "Aantal methaan in de vrachtwagen en\\of de fabriek",

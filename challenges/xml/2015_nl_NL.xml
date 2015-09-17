@@ -10,7 +10,7 @@
 
         <string id="usingrecycledmaterial-name">  M01 Gerecycled materiaal gebruiken</string>
         <string id="usingrecycledmaterial-desc">  <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>]]> </string>
-        <string id="containers-desc">             Aantal containers met minimaal een gele of blauwe staaf van het andere team in safety</string>
+        <string id="containers-desc">             Aantal containers met minimaal een gele of blauwe staaf van het andere team in Safety</string>
 
         <string id="methane-name">                M02 Methaan</string>
         <string id="methane-desc">                <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>]]></string>
