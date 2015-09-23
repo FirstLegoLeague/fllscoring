@@ -14,7 +14,7 @@
 
         <string id="methane-name">                M02 Methaan</string>
         <string id="methane-desc">                <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>]]></string>
-        <string id="truck-factory-desc">          Aantal methaan in de vrachtwagen en\of de fabriek</string>
+        <string id="truck-factory-desc">          <![CDATA[Aantal methaan in de vrachtwagen en/of de fabriek]]></string>
 
         <string id="transport-name">              M03 Vervoer</string>
         <string id="transport-desc">              <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd (jullie kunnen één of beide missie volbrengen):</b><ul><li>Vrachtwagen draagt het volledige gewicht van de gele container.</li><li>De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen.</li></ul>]]></string>
@@ -42,9 +42,9 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
         <string id="scrapcars-name">          M06 Sloopauto's</string>
         <string id="scrapcars-desc">          <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd (voor één van beide opties worden punten toegekend):</b><ul><li>De voorruit en motor zijn geïnstalleerd in de ‘ongevouwen ’ auto op de juiste plek en in de juiste richting.</li><li>De auto is volledig opgevouwen en bevindt zich volledig in het  oostelijke “Transfer”-gebied.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing/vouwing niet nodig.</li><li><b>BEPERKING:</b> De auto mag zich nooit in “Safety” hebben bevonden, zelfs niet gedeeltelijk.</li></ul>]]></string>
         <string id="positioncar-desc">        De auto heeft zich nooit in Safety bevonden en ...</string>
-        <string id="scrapcarsyesno-desc">     is volledig opgevouwen, en is in het oostelijk transfergebied</string>
-        <string id="engineinstalled-desc">    is ongevouwen, en de motor is geinstalleerd in de juiste plek en richting</string>
-        <string id="carfolded-desc">          is volledig opgevouwen, en is in het oostelijk transfergebied</string>
+        <string id="scrapcarsyesno-desc">     opgevouwen en in oostelijke transfergebied</string>
+        <string id="engineinstalled-desc">    niet opgevouwen en motor is geïnstalleerd</string>
+        <string id="carfolded-desc">          opgevouwen en in oostelijke transfergebied</string>
         <string id="nonecarscrap">            (nvt)</string>
 
         <string id="cleanup-name">            M07 Schoonmaak</string>
@@ -82,7 +82,7 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
     <!-- Do NOT edit below this line -->
 
     <mission name="usingrecycledmaterial-name" description="usingrecycledmaterial-desc">
-        <objective-number id="containers" description="containers-desc" min="0" max="6" default="0" />
+        <objective-number id="containers" description="containers-desc" min="0" max="4" default="0" />
         <score>
             <indexes>
                 <index objective="containers" />
@@ -93,8 +93,6 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
                 <case> <index-ref value="2" /> <points amount="120" /> </case>
                 <case> <index-ref value="3" /> <points amount="180" /> </case>
                 <case> <index-ref value="4" /> <points amount="240" /> </case>
-                <case> <index-ref value="5" /> <points amount="300" /> </case>
-                <case> <index-ref value="6" /> <points amount="360" /> </case>
             </cases>
         </score>
     </mission>
@@ -131,8 +129,8 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
     </mission>
 
     <mission name="sortingblueyellow-name" description="sortingblueyellow-desc">
-        <objective-number id="inwesttransfer" description="inwesttransfer-desc" min="0" max="15" default="0" />
-        <objective-number id="anywhereelese" description="anywhereelese-desc" min="0" max="15" default="0" />
+        <objective-number id="inwesttransfer" description="inwesttransfer-desc" min="0" max="30" default="0" />
+        <objective-number id="anywhereelese" description="anywhereelese-desc" min="0" max="30" default="0" />
         <score>
             <indexes>
                 <index objective="inwesttransfer" />
@@ -154,6 +152,21 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
                 <case> <index-ref value="13" /> <points amount="91" /> </case>
                 <case> <index-ref value="14" /> <points amount="98" /> </case>
                 <case> <index-ref value="15" /> <points amount="105" /> </case>
+                <case> <index-ref value="16" /> <points amount="112" /> </case>
+                <case> <index-ref value="17" /> <points amount="119" /> </case>
+                <case> <index-ref value="18" /> <points amount="126" /> </case>
+                <case> <index-ref value="19" /> <points amount="133" /> </case>
+                <case> <index-ref value="20" /> <points amount="140" /> </case>
+                <case> <index-ref value="21" /> <points amount="147" /> </case>
+                <case> <index-ref value="22" /> <points amount="154" /> </case>
+                <case> <index-ref value="23" /> <points amount="161" /> </case>
+                <case> <index-ref value="24" /> <points amount="168" /> </case>
+                <case> <index-ref value="25" /> <points amount="175" /> </case>
+                <case> <index-ref value="26" /> <points amount="182" /> </case>
+                <case> <index-ref value="27" /> <points amount="189" /> </case>
+                <case> <index-ref value="28" /> <points amount="196" /> </case>
+                <case> <index-ref value="29" /> <points amount="203" /> </case>
+                <case> <index-ref value="30" /> <points amount="210" /> </case>
             </cases>
         </score>
         <score>
@@ -177,13 +190,28 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
                 <case> <index-ref value="13" /> <points amount="78" /> </case>
                 <case> <index-ref value="14" /> <points amount="84" /> </case>
                 <case> <index-ref value="15" /> <points amount="90" /> </case>
+                <case> <index-ref value="16" /> <points amount="96" /> </case>
+                <case> <index-ref value="17" /> <points amount="102" /> </case>
+                <case> <index-ref value="18" /> <points amount="108" /> </case>
+                <case> <index-ref value="19" /> <points amount="114" /> </case>
+                <case> <index-ref value="20" /> <points amount="120" /> </case>
+                <case> <index-ref value="21" /> <points amount="126" /> </case>
+                <case> <index-ref value="22" /> <points amount="132" /> </case>
+                <case> <index-ref value="23" /> <points amount="138" /> </case>
+                <case> <index-ref value="24" /> <points amount="144" /> </case>
+                <case> <index-ref value="25" /> <points amount="150" /> </case>
+                <case> <index-ref value="26" /> <points amount="156" /> </case>
+                <case> <index-ref value="27" /> <points amount="162" /> </case>
+                <case> <index-ref value="28" /> <points amount="168" /> </case>
+                <case> <index-ref value="29" /> <points amount="174" /> </case>
+                <case> <index-ref value="30" /> <points amount="180" /> </case>
             </cases>
         </score>
     </mission>
 
     <mission name="sortingblack-name" description="sortingblack-desc">
-        <objective-number id="inflowerbox" description="inflowerbox-desc" min="0" max="8" default="0" />
-        <objective-number id="greenbinlandfill" description="greenbinlandfill-desc" min="0" max="8" default="0" />
+        <objective-number id="inflowerbox" description="inflowerbox-desc" min="0" max="12" default="0" />
+        <objective-number id="greenbinlandfill" description="greenbinlandfill-desc" min="0" max="12" default="0" />
         <objective-number id="blackanywhere" description="blackanywhere-desc" min="0" max="12" default="0" />
         <score>
             <indexes>
@@ -199,6 +227,10 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
                 <case> <index-ref value="6" /> <points amount="48" /> </case>
                 <case> <index-ref value="7" /> <points amount="56" /> </case>
                 <case> <index-ref value="8" /> <points amount="64" /> </case>
+                <case> <index-ref value="9" /> <points amount="72" /> </case>
+                <case> <index-ref value="10" /> <points amount="80" /> </case>
+                <case> <index-ref value="11" /> <points amount="88" /> </case>
+                <case> <index-ref value="12" /> <points amount="96" /> </case>
             </cases>
         </score>
         <score>

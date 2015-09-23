@@ -8,7 +8,7 @@
             "title": "Aantal containers met minimaal een gele of blauwe staaf van het andere team in Safety",
             "type": "number",
             "min": "0",
-            "max": "6"
+            "max": "4"
         }],
         "score": [function(containers) {
             if (containers === '0') {
@@ -26,19 +26,13 @@
             if (containers === '4') {
                 return 240
             }
-            if (containers === '5') {
-                return 300
-            }
-            if (containers === '6') {
-                return 360
-            }
         }]
     }, {
         "title": "M02 Methaan",
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>",
         "objectives": [{
             "id": "truck_factory",
-            "title": "Aantal methaan in de vrachtwagen en\\of de fabriek",
+            "title": "Aantal methaan in de vrachtwagen en/of de fabriek",
             "type": "number",
             "min": "0",
             "max": "2"
@@ -88,13 +82,13 @@
             "title": "Aantal staven in de bijbehorende groene container (container is in of op jouw westelijke transfer)",
             "type": "number",
             "min": "0",
-            "max": "15"
+            "max": "30"
         }, {
             "id": "anywhereelese",
             "title": "Aantal staven in de bijbehorende groene container (staven zijn nooit in jouw westelijke transfergebied geweest)",
             "type": "number",
             "min": "0",
-            "max": "15"
+            "max": "30"
         }],
         "score": [function(inwesttransfer) {
             if (inwesttransfer === '0') {
@@ -145,6 +139,51 @@
             if (inwesttransfer === '15') {
                 return 105
             }
+            if (inwesttransfer === '16') {
+                return 112
+            }
+            if (inwesttransfer === '17') {
+                return 119
+            }
+            if (inwesttransfer === '18') {
+                return 126
+            }
+            if (inwesttransfer === '19') {
+                return 133
+            }
+            if (inwesttransfer === '20') {
+                return 140
+            }
+            if (inwesttransfer === '21') {
+                return 147
+            }
+            if (inwesttransfer === '22') {
+                return 154
+            }
+            if (inwesttransfer === '23') {
+                return 161
+            }
+            if (inwesttransfer === '24') {
+                return 168
+            }
+            if (inwesttransfer === '25') {
+                return 175
+            }
+            if (inwesttransfer === '26') {
+                return 182
+            }
+            if (inwesttransfer === '27') {
+                return 189
+            }
+            if (inwesttransfer === '28') {
+                return 196
+            }
+            if (inwesttransfer === '29') {
+                return 203
+            }
+            if (inwesttransfer === '30') {
+                return 210
+            }
         }, function(anywhereelese) {
             if (anywhereelese === '0') {
                 return 0
@@ -194,6 +233,51 @@
             if (anywhereelese === '15') {
                 return 90
             }
+            if (anywhereelese === '16') {
+                return 96
+            }
+            if (anywhereelese === '17') {
+                return 102
+            }
+            if (anywhereelese === '18') {
+                return 108
+            }
+            if (anywhereelese === '19') {
+                return 114
+            }
+            if (anywhereelese === '20') {
+                return 120
+            }
+            if (anywhereelese === '21') {
+                return 126
+            }
+            if (anywhereelese === '22') {
+                return 132
+            }
+            if (anywhereelese === '23') {
+                return 138
+            }
+            if (anywhereelese === '24') {
+                return 144
+            }
+            if (anywhereelese === '25') {
+                return 150
+            }
+            if (anywhereelese === '26') {
+                return 156
+            }
+            if (anywhereelese === '27') {
+                return 162
+            }
+            if (anywhereelese === '28') {
+                return 168
+            }
+            if (anywhereelese === '29') {
+                return 174
+            }
+            if (anywhereelese === '30') {
+                return 180
+            }
         }]
     }, {
         "title": "M04 Sorteren (zwarte staven)",
@@ -203,13 +287,13 @@
             "title": "Aantal staven in hun startpositie of onderdeel van een scorende bloempot",
             "type": "number",
             "min": "0",
-            "max": "8"
+            "max": "12"
         }, {
             "id": "greenbinlandfill",
             "title": "Aantal staven in de bijbehorende groene container, of in de vuilnisbelt-container",
             "type": "number",
             "min": "0",
-            "max": "8"
+            "max": "12"
         }, {
             "id": "blackanywhere",
             "title": "Aantal staven ergens anders, waar dan ook (minpunten)",
@@ -244,6 +328,18 @@
             }
             if (inflowerbox === '8') {
                 return 64
+            }
+            if (inflowerbox === '9') {
+                return 72
+            }
+            if (inflowerbox === '10') {
+                return 80
+            }
+            if (inflowerbox === '11') {
+                return 88
+            }
+            if (inflowerbox === '12') {
+                return 96
             }
         }, function(greenbinlandfill) {
             if (greenbinlandfill === '0') {
@@ -338,10 +434,10 @@
             "title": "De auto heeft zich nooit in Safety bevonden en ...",
             "options": [{
                 "value": "engineinstalled",
-                "title": "is ongevouwen, en de motor is geinstalleerd in de juiste plek en richting"
+                "title": "niet opgevouwen en motor is geïnstalleerd"
             }, {
                 "value": "carfolded",
-                "title": "is volledig opgevouwen, en is in het oostelijk transfergebied"
+                "title": "opgevouwen en in oostelijke transfergebied"
             }, {
                 "value": "none",
                 "title": "(nvt)"
@@ -517,7 +613,7 @@
         "containers-desc": "Aantal containers met minimaal een gele of blauwe staaf van het andere team in Safety",
         "methane-name": "M02 Methaan",
         "methane-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>",
-        "truck-factory-desc": "Aantal methaan in de vrachtwagen en\\of de fabriek",
+        "truck-factory-desc": "Aantal methaan in de vrachtwagen en/of de fabriek",
         "transport-name": "M03 Vervoer",
         "transport-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (jullie kunnen één of beide missie volbrengen):</b><ul><li>Vrachtwagen draagt het volledige gewicht van de gele container.</li><li>De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen.</li></ul>",
         "trucksupport-desc": "Vrachtwagen draagt het volledige gewicht van de gele container",
@@ -537,9 +633,9 @@
         "scrapcars-name": "M06 Sloopauto's",
         "scrapcars-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (voor één van beide opties worden punten toegekend):</b><ul><li>De voorruit en motor zijn geïnstalleerd in de ‘ongevouwen ’ auto op de juiste plek en in de juiste richting.</li><li>De auto is volledig opgevouwen en bevindt zich volledig in het  oostelijke “Transfer”-gebied.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing/vouwing niet nodig.</li><li><b>BEPERKING:</b> De auto mag zich nooit in “Safety” hebben bevonden, zelfs niet gedeeltelijk.</li></ul>",
         "positioncar-desc": "De auto heeft zich nooit in Safety bevonden en ...",
-        "scrapcarsyesno-desc": "is volledig opgevouwen, en is in het oostelijk transfergebied",
-        "engineinstalled-desc": "is ongevouwen, en de motor is geinstalleerd in de juiste plek en richting",
-        "carfolded-desc": "is volledig opgevouwen, en is in het oostelijk transfergebied",
+        "scrapcarsyesno-desc": "opgevouwen en in oostelijke transfergebied",
+        "engineinstalled-desc": "niet opgevouwen en motor is geïnstalleerd",
+        "carfolded-desc": "opgevouwen en in oostelijke transfergebied",
         "nonecarscrap": "(nvt)",
         "cleanup-name": "M07 Schoonmaak",
         "cleanup-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (punten voor elk voorwerp/dier dat aan de voorwaarden voldoet):</b><ul><li>Plastic tasjes bevinden zich volledig in “Safety”.</li><li>De dieren bevinden zich volledig in grote cirkels die volledig vrij zijn van plastic tasjes.</li><li>De kip bevindt zich volledig in de kleine cirkel.</li></ul><p>* De vis van het afvalvoedsel (bestemd voor de compostmissie (M08) telt niet als dier voor deze missie</p>",
