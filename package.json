@@ -4,6 +4,7 @@
   "description": "fll scoring application",
   "main": "index.js",
   "scripts": {
+    "start": "node localserver",
     "test": "./node_modules/.bin/karma start --single-run --browsers Firefox --reporters dots,coverage"
   },
   "repository": "",
