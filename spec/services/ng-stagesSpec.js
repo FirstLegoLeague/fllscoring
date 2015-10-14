@@ -71,9 +71,10 @@ describe('ng-stages',function() {
                 expect($stages.allStages).toEqual([
                     {index:0,id:"practice",name:"Oefenrondes",rounds:2,$rounds:[1,2]},
                     {index:1,id:"qualifying",name:"Voorrondes",rounds:3,$rounds:[1,2,3]},
-                    {index:2,id:"quarter",name:"Kwartfinales",rounds:0,$rounds:[]},
-                    {index:3,id:"semi",name:"Halve finales",rounds:0,$rounds:[]},
-                    {index:4,id:"final",name:"Finale",rounds:1,$rounds:[1]}
+                    {index:2,id:"eighth",name:"Achtste finales",rounds:0,$rounds:[]},
+                    {index:3,id:"quarter",name:"Kwartfinales",rounds:0,$rounds:[]},
+                    {index:4,id:"semi",name:"Halve finales",rounds:0,$rounds:[]},
+                    {index:5,id:"final",name:"Finale",rounds:1,$rounds:[1]}
                 ]);
             });
         });
