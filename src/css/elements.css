@@ -7,6 +7,7 @@ html,body {
 body {
     font-family: 'latolight', 'Segoe UI','helvetica','Arial';
     font-size: 18px;
+    background-color: white;
 }
 
 h1 {
@@ -164,6 +165,18 @@ table {
     }
 }
 
+
+/* main view */
+@media screen {
+    .viewMain {
+        overflow: hidden;
+    }
+    /* backgrounds */
+    .viewMain.scoresheet {
+        background-color: #FAFAFA;
+    }
+}
+
 /* small layout */
 @media screen and (max-width: 480px) {
     .appbar {
@@ -225,7 +238,6 @@ table {
         overflow: hidden;
     }
     .viewMain > div {
-        background-color: white;
         display: none;
         padding-bottom: 40px;
     }
@@ -277,7 +289,6 @@ table {
         overflow: hidden;
     }
     .viewMain > div {
-        background-color: white;
         padding: 0 10px;
         display: none;
         padding-bottom: 40px;

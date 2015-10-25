@@ -90,16 +90,17 @@
 	}
 
 	.card-header {
-		padding: 8px;
+		padding: 16px;
+		font-size: 24px;
 	}
 
 	.card-body {
-		padding: 8px;
+		padding: 16px;
 	}
 
 	.card-actions {
 		border-top: 1px solid rgba(0,0,0,.1);
-		padding: 8px;
+		padding: 16px;
 		overflow: auto;
 	}
 	.card-actions p {
