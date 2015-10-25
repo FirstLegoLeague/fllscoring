@@ -170,6 +170,7 @@ table {
 @media screen {
     .viewMain {
         overflow: hidden;
+        padding-top: 16px;
     }
     /* backgrounds */
     .viewMain.scoresheet {
