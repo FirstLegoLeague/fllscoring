@@ -27,13 +27,21 @@
             <input type="text" ng-model="settings.table">
         </p>
         <p>
-            <input id="hideTotal" type="checkbox" ng-model="settings.hideTotal">
-            <label for="hideTotal">Hide total score</label>
+            <label for="hideTotal">
+                <input id="hideTotal" type="checkbox" ng-model="settings.hideTotal">
+                Hide total score
+            </label>
         </p>
         <p>
             <label for="teamSort">Sort teams by</label>
-            <input id="teamSortNumber" type="radio" ng-model="settings.teamSort" value="number">Team number<br>
-            <input id="teamSortName" type="radio" ng-model="settings.teamSort" value="name">Team name<br>
+            <label for="teamSortNumber">
+                <input id="teamSortNumber" type="radio" ng-model="settings.teamSort" value="number">
+                Team number
+            </label>
+            <label for="teamSortName">
+                <input id="teamSortName" type="radio" ng-model="settings.teamSort" value="name">
+                Team name
+            </label>
         </p>
     </div>
     <div ng-show="tab === 2">
