@@ -5,14 +5,13 @@
     <h1>{{currentPage}}</h1>
 </div>
 <div ng-controller="settingsCtrl">
+    <button class="fab main-fab" ng-click="createStage()" ng-if="tab === 2">
+        +
+    </button>
     <p>
         <button class="btn" ng-click="save()">
             <i class="icon-ok"></i>
             Save settings
-        </button>
-        <button class="btn" ng-click="createStage()" ng-if="tab === 2">
-            <i class="icon-plus-sign-alt"></i>
-            Add new stage
         </button>
     </p>
     <ul class="nav nav-tabs nav-justified" role="tablist">
