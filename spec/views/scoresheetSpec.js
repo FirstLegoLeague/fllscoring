@@ -237,14 +237,28 @@ describe('scoresheet',function() {
             expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
         });
 
-        it('should return error if table is undefined',function() {
+        it('should return error if table is undefined and asked for',function() {
             $scope.table = undefined;
+            $scope.settings.askTable = true;
             expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
         });
 
-        it('should return error if table is null',function() {
+        it('should return error if table is null and asked for',function() {
             $scope.table = null;
+            $scope.settings.askTable = true;
             expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
+        });
+
+        it('should return error if referee is undefined and asked for',function() {
+            $scope.referee = undefined;
+            $scope.settings.askReferee = true;
+            expect($scope.preventSaveErrors()).toEqual(['No referee entered']);
+        });
+
+        it('should return error if referee is null and asked for',function() {
+            $scope.referee = null;
+            $scope.settings.askReferee = true;
+            expect($scope.preventSaveErrors()).toEqual(['No referee entered']);
         });
 
         it('should return error if round is undefined',function() {
@@ -323,13 +337,27 @@ describe('scoresheet',function() {
             expect($scope.isSaveable()).toBe(false);
         });
 
-        it('should return false if table is undefined',function() {
+        it('should return false if table is undefined and asked for',function() {
             $scope.table = undefined;
+            $scope.settings.askTable = true;
             expect($scope.isSaveable()).toBe(false);
         });
 
-        it('should return false if table is null',function() {
+        it('should return false if table is null and asked for',function() {
             $scope.table = null;
+            $scope.settings.askTable = true;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if referee is undefined and asked for',function() {
+            $scope.referee = undefined;
+            $scope.settings.askReferee = true;
+            expect($scope.isSaveable()).toBe(false);
+        });
+
+        it('should return false if referee is null and asked for',function() {
+            $scope.referee = null;
+            $scope.settings.askReferee = true;
             expect($scope.isSaveable()).toBe(false);
         });
 
@@ -421,6 +449,7 @@ describe('scoresheet',function() {
             $scope.stage = dummyStage;
             $scope.round = 1;
             $scope.table = 7;
+            $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
                 expect(fsMock.write.mostRecentCall.args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_abcdef01.json');
@@ -430,6 +459,7 @@ describe('scoresheet',function() {
                     stage: dummyStage,
                     round: 1,
                     table: 7,
+                    referee: 'foo',
                     signature: [1,2,3,4],
                     score: 0
                 });

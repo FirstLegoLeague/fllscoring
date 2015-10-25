@@ -23,8 +23,13 @@
                         <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
                         <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
                     </p>
-                    <p style="padding-left: 15px">
-                        Table: <input ng-model="table" style="width:50px">
+                    <p style="padding-left: 15px" ng-show="settings.askTable">
+                        Table:
+                        <select ng-model="table" ng-options="item.name as item.name for item in settings.tables"></select>
+                    </p>
+                    <p style="padding-left: 15px" ng-show="settings.askReferee">
+                        Referee:
+                        <select ng-model="referee" ng-options="item.name as item.name for item in settings.referees"></select>
                     </p>
                     <div id="totalScore" ng-hide="settings.hideTotal">
                         Total score: {{score()}}
@@ -81,8 +86,13 @@
                         <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
                         <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
                     </p>
-                    <p style="padding-left: 15px">
-                        Table: <input ng-model="table" style="width:50px">
+                    <p style="padding-left: 15px" ng-show="settings.askTable">
+                        Table:
+                        <select ng-model="table" ng-options="item.name as item.name for item in settings.tables"></select>
+                    </p>
+                    <p style="padding-left: 15px" ng-show="settings.askReferee">
+                        Referee:
+                        <select ng-model="referee" ng-options="item.name as item.name for item in settings.referees"></select>
                     </p>
                     <div id="totalScore" ng-hide="settings.hideTotal">
                         Total score: {{score()}}

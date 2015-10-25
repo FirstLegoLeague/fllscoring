@@ -70,7 +70,19 @@
                     </label>
                 </p>
                 <p>
-                    <label for="teamSort">Sort teams by</label>
+                    <label for="askTable">
+                        <input id="askTable" type="checkbox" ng-model="settings.askTable">
+                        Ask for table
+                    </label>
+                </p>
+                <p>
+                    <label for="askReferee">
+                        <input id="askReferee" type="checkbox" ng-model="settings.askReferee">
+                        Ask for referee
+                    </label>
+                </p>
+                <p>
+                    <label for="teamSort">Sort teams by:</label>
                     <label for="teamSortNumber">
                         <input id="teamSortNumber" type="radio" ng-model="settings.teamSort" value="number">
                         Team number

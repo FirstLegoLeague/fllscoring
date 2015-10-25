@@ -175,8 +175,11 @@ define('views/scoresheet',[
                 if (inComplete()) {
                     list.push('Some missions are incomplete');
                 }
-                if (!$scope.table) {
+                if ($scope.settings.askTable && !$scope.table) {
                     list.push('No table number entered');
+                }
+                if ($scope.settings.askReferee && !$scope.referee) {
+                    list.push('No referee entered');
                 }
 
                 return list;
@@ -195,6 +198,7 @@ define('views/scoresheet',[
                 $scope.stage = null;
                 $scope.round = null;
                 $scope.table = null;
+                $scope.referee = null;
                 $scope.missions.forEach(function(mission) {
                     mission.objectives.forEach(function(objective) {
                         delete objective["value"];
@@ -218,6 +222,7 @@ define('views/scoresheet',[
                 data.round = $scope.round;
                 // data.table = $scope.settings.table;
                 data.table = $scope.table;
+                data.referee = $scope.referee;
                 data.signature = $scope.signature;
                 data.score = $scope.score();
 

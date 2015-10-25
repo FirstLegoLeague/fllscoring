@@ -29,7 +29,10 @@ describe('settings', function() {
         it('should initialize', function() {
             //let $settings init
             $scope.$digest();
-            expect($scope.settings).toEqual({});
+            expect($scope.settings).toEqual({
+                tables: [],
+                referees: []
+            });
         });
 
     });
@@ -43,6 +46,22 @@ describe('settings', function() {
         xit('should initialize in editmode when no teams found on storage', function() {
             //TODO: check state after reading
         });
+    });
+
+    describe('addItem',function() {
+        it('should push an empty object to a collection',function() {
+            var coll = [];
+            $scope.addItem(coll);
+            expect(coll).toEqual([{}]);
+        })
+    });
+
+    describe('removeItem',function() {
+        it('should remove the given index from a collection',function() {
+            var coll = [1,2,3];
+            $scope.removeItem(coll,1);
+            expect(coll).toEqual([1,3]);
+        })
     });
 
     describe('saving',function() {

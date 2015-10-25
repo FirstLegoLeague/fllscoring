@@ -39,10 +39,16 @@ define('services/ng-settings',[
                 self.settings = res;
                 return self.settings;
             }).catch(function(err) {
+                var defaults = {
+                    tables: [{name:'Table 1'}],
+                    referees: [{name:'Head referee'}],
+                    askTable: true,
+                    askReferee: true
+                }
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
-                return $fs.write('settings.json',{}).then(function() {
-                    self.settings = {};
+                return $fs.write('settings.json',defaults).then(function() {
+                    self.settings = defaults;
                     return self.settings;
                 });
             }).catch(function(err) {
