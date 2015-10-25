@@ -34,7 +34,7 @@
             <form id="scoresheetForm" ng-submit="validateScoresheet()">
                 <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.error}">
 
-                    <div class="description" ng-click="openDescriptionModal(mission)"><div class="icon-question-sign"/></div>
+                    <div class="card-menu" ng-click="openDescriptionModal(mission)"><div class="icon-question-sign"/></div>
 
                     <h2 class="card-header">
                         {{mission.title}}
