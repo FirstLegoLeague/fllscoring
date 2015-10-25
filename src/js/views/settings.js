@@ -19,7 +19,16 @@ define('views/settings',[
 
             $settings.init().then(function(res) {
                 $scope.settings = res;
+                $scope.settings.tables = res.tables||[];
+                $scope.settings.referees = res.referees||[];
             });
+
+            $scope.addItem = function(collection) {
+                collection.push({});
+            };
+            $scope.removeItem = function(collection,index) {
+                collection.splice(index,1);
+            };
 
             $scope.save = function() {
                 return $q.all($settings.save(), saveStages());

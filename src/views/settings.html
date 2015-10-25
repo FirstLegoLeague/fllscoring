@@ -22,27 +22,66 @@
     </ul>
 
     <div ng-show="tab === 1">
-        <p>
-            <label for="">Table</label>
-            <input type="text" ng-model="settings.table">
-        </p>
-        <p>
-            <label for="hideTotal">
-                <input id="hideTotal" type="checkbox" ng-model="settings.hideTotal">
-                Hide total score
-            </label>
-        </p>
-        <p>
-            <label for="teamSort">Sort teams by</label>
-            <label for="teamSortNumber">
-                <input id="teamSortNumber" type="radio" ng-model="settings.teamSort" value="number">
-                Team number
-            </label>
-            <label for="teamSortName">
-                <input id="teamSortName" type="radio" ng-model="settings.teamSort" value="name">
-                Team name
-            </label>
-        </p>
+        <div class="card">
+            <h1 class="card-header">
+                Tables
+            </h1>
+            <div class="list">
+                <div ng-repeat="table in settings.tables" class="list-item">
+                    <p class="textfield nolabel">
+                        <input type="text" ng-model="table.name">
+                        <label for="">Name</label>
+                    </p>
+                    <span class="list-icon-right">
+                        <i class="icon-trash clickable" ng-click="removeItem(settings.tables,$index)"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="flat" ng-click="addItem(settings.tables)">New table</button>
+            </div>
+        </div>
+        <div class="card">
+            <h1 class="card-header">
+                Referees
+            </h1>
+            <div class="list">
+                <div ng-repeat="referee in settings.referees" class="list-item">
+                    <p class="textfield nolabel">
+                        <input type="text" ng-model="referee.name">
+                        <label for="">Name</label>
+                    </p>
+                    <span class="list-icon-right">
+                        <i class="icon-trash clickable" ng-click="removeItem(settings.referees,$index)"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="flat" ng-click="addItem(settings.referees)">New referee</button>
+            </div>
+        </div>
+        <div class="card">
+            <h1 class="card-header">Scoresheet</h1>
+            <div class="card-body">
+                <p>
+                    <label for="hideTotal">
+                        <input id="hideTotal" type="checkbox" ng-model="settings.hideTotal">
+                        Hide total score
+                    </label>
+                </p>
+                <p>
+                    <label for="teamSort">Sort teams by</label>
+                    <label for="teamSortNumber">
+                        <input id="teamSortNumber" type="radio" ng-model="settings.teamSort" value="number">
+                        Team number
+                    </label>
+                    <label for="teamSortName">
+                        <input id="teamSortName" type="radio" ng-model="settings.teamSort" value="name">
+                        Team name
+                    </label>
+                </p>
+            </div>
+        </div>
     </div>
     <div ng-show="tab === 2">
         <div ng-repeat="stage in allStages" class="card">
@@ -63,33 +102,39 @@
             </div>
             <div class="card-actions">
                 <p class="pull-left">
-                    <button class="btn" ng-click="removeStage(stage)">Remove stage</button>
+                    <button class="flat" ng-click="removeStage(stage)">Remove stage</button>
                 </p>
                 <p class="pull-right" >
-                    <button class="btn" ng-click="moveUp(stage)">Up</button>
-                    <button class="btn" ng-click="moveDown(stage)">Down</button>
+                    <button class="flat" ng-click="moveUp(stage)">Up</button>
+                    <button class="flat" ng-click="moveDown(stage)">Down</button>
                 </p>
             </div>
         </div>
     </div>
     <div ng-show="tab === 3">
         <p>
-            <label for="">Host</label>
-            <input type="text" ng-model="settings.host" />
+            
+            <span class="textfield">
+                <input type="text" ng-model="settings.host" />
+                <label for="">Host</label>
+            </span>
             shared host to get data from and save data to. E.g. 'http://www.example.com/'
         </p>
         <p>
-            <label for="">Message bus</label>
-            <input type="text" ng-model="settings.messageBus" />
+            
+            <span class="textfield">
+                <input type="text" ng-model="settings.messageBus" />
+                <label for="">Message bus</label>
+            </span>
             message bus endpoint for http POST
         </p>
         <p>
-            <label for="">Challenge</label>
-            <input type="text" ng-model="settings.challenge" />
+            
+            <span class="textfield">
+                <input type="text" ng-model="settings.challenge" />
+                <label for="">Challenge</label>
+            </span>
             currently the filename containing missions! E.g. '2015_nl_NL' (no file extension)
-        </p>
-        <p>
-
         </p>
     </div>
     <div ng-show="tab === 4">
