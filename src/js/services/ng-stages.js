@@ -107,6 +107,31 @@ define('services/ng-stages',[
             this._update();
         };
 
+        Stages.prototype.updateStage = function(stage) {
+            var rawStage = this._rawStages[stage.index];
+            if (rawStage) {
+                angular.extend(rawStage,stage);
+                this._update();
+            } else {
+                throw new Error("stage with " + stage.id + " cannot be found");
+            }
+        };
+
+        /**
+         * move stage by a specified amount of steps
+         * clipping to top or bottom of the list
+         */
+        Stages.prototype.moveStage = function(stage,steps) {
+            var oldIndex = stage.index;
+            var rawStage = this._rawStages[oldIndex];
+            //remove from the list
+            this._rawStages.splice(oldIndex,1);
+            //calculate insert position
+            var newIndex = Math.max(0,Math.min(this._rawStages.length,oldIndex + steps));
+            this._rawStages.splice(newIndex,0,rawStage);
+            this._update();
+        };
+
         /**
          * Return stage by id.
          * Note: returned reference is not guaranteed to

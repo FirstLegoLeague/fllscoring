@@ -125,3 +125,33 @@
             </section>
         </div>
     </div>
+
+    <div class="fll-dialog-shim" ng-controller="NewStageDialogController" ng-show="dialogVisible">
+        <div class="fll-dialog" id="newStageDialog">
+            <h1>
+                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
+                Create new Stage
+                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
+            </h1>
+            <section>
+                <div class="modal-body">
+                    <p class="textfield">
+                        <input type="text" ng-model="stage.id">
+                        <label for="">Id (unique)</label>
+                    </p>
+                    <p class="textfield">
+                        <input type="text" ng-model="stage.name">
+                        <label for="">Name</label>
+                    </p>
+                    <p class="textfield">
+                        <input type="number" min="0" ng-model="stage.rounds">
+                        <label for="">Rounds (0 to disable stage)</label>
+                    </p>
+                    <p>
+                        <button class="btn" ng-click="ok()">Ok</button>
+                        <button class="btn" ng-click="cancel()">Cancel</button>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>

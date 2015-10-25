@@ -8,6 +8,7 @@ function createStagesMock() {
     ];
     return {
         stages: stages,
+        allStages: stages,
         get: function(id) {
             var i;
             for (i = 0; i < stages.length; i++) {
@@ -16,6 +17,11 @@ function createStagesMock() {
                 }
             }
             throw new Error("unknown stage");
-        }
+        },
+        save: jasmine.createSpy('save'),
+        updateStage: jasmine.createSpy('updateStage'),
+        remove: jasmine.createSpy('remove'),
+        moveStage: jasmine.createSpy('moveStage'),
+        add: jasmine.createSpy('add')
     };
 }
