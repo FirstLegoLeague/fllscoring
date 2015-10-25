@@ -1,4 +1,10 @@
 <div ng-controller="scoresheetCtrl" id="scoresheet">
+    <div class="appbar">
+        <button ng-click="toggleDrawer()">
+            <i class="icon-reorder"></i>
+        </button>
+        <h1>{{field.title}}</h1>
+    </div>
     <div>
         <div ng-show="errorMessage">
             <p class="error">
@@ -6,7 +12,6 @@
             </p>
         </div>
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
-            <h1>{{field.title}}</h1>
             <section class="panel">
                 <h2>Team &amp; round</h2>
                 <p>
