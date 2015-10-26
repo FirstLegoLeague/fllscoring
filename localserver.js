@@ -4,10 +4,12 @@ var fs = require('fs');
 var Q = require('q');
 var mkdirp = require("mkdirp");
 var dirname = require('path').dirname;
+var resolve = require('path').resolve;
 var argv = require('minimist')(process.argv.slice(2));
 var port = argv.p||1390;
 var basicAuth = require('basic-auth-connect');
 var basicAuthCreds = argv.u;
+var datadir = argv.d||'data';
 
 app.use(express.static('src'));
 
@@ -47,6 +49,11 @@ app.use(function(req, res, next) {
         next();
     });
 });
+
+function getDataFilePath(path) {
+    var fullpath = resolve(__dirname,datadir,path);
+    return fullpath;
+}
 
 function readFile(path) {
     return Q.promise(function(resolve,reject) {
@@ -89,7 +96,7 @@ function sendError(res) {
 
 //reading the "file system"
 app.get(/^\/fs\/(.*)$/, function(req, res) {
-    var path = __dirname + '/data/' + req.params[0];
+    var path = getDataFilePath(req.params[0]);
     fs.stat(path, function(err, stat) {
         if (err) {
             res.status(404).send('file not found');
@@ -154,8 +161,8 @@ function reduceToMap(key) {
 //get all, grouped by round
 app.get('/scores/',function(req,res) {
     Q.all([
-        readFile(__dirname + '/data/scores.json').then(parseFile),
-        readFile(__dirname + '/data/teams.json').then(parseFile).then(reduceToMap('number'))
+        readFile(getDataFilePath('scores.json')).then(parseFile),
+        readFile(getDataFilePath('teams.json')).then(parseFile).then(reduceToMap('number'))
     ]).spread(function(result,teams) {
         var published = result.scores.filter(filterPublished).reduce(function(rounds,score) {
             if (!rounds[score.round]) {
@@ -171,7 +178,7 @@ app.get('/scores/',function(req,res) {
 
 //get scores by round
 app.get('/scores/:round',function(req,res) {
-    var path = __dirname + '/data/scores.json';
+    var path = getDataFilePath('scores.json');
     var round = parseInt(req.params.round,10);
 
     readFile(path).then(parseFile).then(function(result) {
@@ -184,7 +191,7 @@ app.get('/scores/:round',function(req,res) {
 
 //get the teams info
 app.get('/teams',function(req,res) {
-    var path = __dirname + '/data/teams.json';
+    var path = getDataFilePath('teams.json');
 
     readFile(path).then(parseFile).then(function(result) {
         res.json(result);
@@ -192,7 +199,7 @@ app.get('/teams',function(req,res) {
 });
 
 app.get('/teams/:nr',function(req,res) {
-    var path = __dirname + '/data/teams.json';
+    var path = getDataFilePath('teams.json');
 
     readFile(path).then(parseFile).then(function(result) {
         var team = result.filter(function(team) {
@@ -212,7 +219,7 @@ function writeFile(path, contents, cb) {
 
 // writing the "file system"
 app.post(/^\/fs\/(.*)$/, function(req, res) {
-    var path = __dirname + '/data/' + req.params[0];
+    var path = getDataFilePath(req.params[0]);
     writeFile(path, req.body, function(err) {
         if (err) {
             console.log(err);
@@ -224,7 +231,7 @@ app.post(/^\/fs\/(.*)$/, function(req, res) {
 
 // deleting in the "file system"
 app.delete(/^\/fs\/(.*)$/, function(req, res) {
-    var path = __dirname + '/data/' + req.params[0];
+    var path = getDataFilePath(req.params[0]);
     fs.unlink(path, function(err) {
         if (err) {
             res.status(500).send('error removing file');
