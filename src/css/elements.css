@@ -94,6 +94,11 @@ table {
         color: white;
         text-transform: capitalize;
     }
+    .appbar .appbar-actions {
+        position: absolute;
+        top: 6px;
+        right: 8px;
+    }
 }
 
 /* navigation drawer: http://www.google.com/design/spec/patterns/navigation-drawer.html */
@@ -164,7 +169,6 @@ table {
         width: 20px;
     }
 }
-
 
 /* main view */
 @media screen {
