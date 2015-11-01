@@ -1,9 +1,9 @@
 CACHE MANIFEST
-#2014-12-20 2200
+#2015-11-01 1145
 
 CACHE:
 index.html
-scoring.html
+admin.html
 views/main.html
 views/mainScoring.html
 views/ranking.html

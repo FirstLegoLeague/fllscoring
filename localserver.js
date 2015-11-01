@@ -189,6 +189,11 @@ app.get('/scores/:round',function(req,res) {
     }).catch(sendError(res)).done();
 });
 
+//serve admin page
+app.get('/admin',function(req,res) {
+    res.sendFile(resolve('src/admin.html'));
+});
+
 //get the teams info
 app.get('/teams',function(req,res) {
     var path = getDataFilePath('teams.json');
