@@ -1,7 +1,7 @@
 {
     "title": "Trash Trek",
     "missions": [{
-        "title": "M01/04 (V&A 11) Gerecycled materiaal gebruiken",
+        "title": "M01/04 Gerecycled materiaal gebruiken",
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
         "objectives": [{
             "id": "containers",
@@ -85,17 +85,17 @@
             }
         }]
     }, {
-        "title": "M04 (V&A 11) Sorteren (gele/blauwe staven)",
+        "title": "M04 Sorteren (gele/blauwe staven in bijbehorende groene container)",
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inwesttransfer",
-            "title": "Aantal van jouw staven in jouw bijbehorende groene container in/op jouw westelijke transfer",
+            "title": "Aantal van jouw staven in jouw container in/op jouw westelijke transfer",
             "type": "number",
             "min": "0",
             "max": "15"
         }, {
             "id": "anywhereelese",
-            "title": "Aantal van jouw staven, in jouw bijbehorende groene container, op jouw mat maar niet in/op jouw westelijke transfer",
+            "title": "Aantal van jouw staven, in jouw container, op jouw mat maar niet in/op jouw westelijke transfer",
             "type": "number",
             "min": "0",
             "max": "15"
@@ -200,23 +200,23 @@
             }
         }]
     }, {
-        "title": "M04 (V&A 11) Sorteren (zwarte staven)",
+        "title": "M04 Sorteren (zwarte staven)",
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inflowerbox",
-            "title": "Aantal staven in hun startpositie of onderdeel van een scorende bloempot",
+            "title": "Staven in hun startpositie of onderdeel van een scorende bloempot",
             "type": "number",
             "min": "0",
             "max": "12"
         }, {
             "id": "greenbinlandfill",
-            "title": "Aantal staven in de bijbehorende groene container, of in de vuilnisbelt-container",
+            "title": "Staven in de bijbehorende groene container, of in de vuilnisbelt-container",
             "type": "number",
             "min": "0",
             "max": "8"
         }, {
             "id": "blackanywhere",
-            "title": "Aantal staven ergens anders, waar dan ook (minpunten)",
+            "title": "Staven ergens anders, waar dan ook (minpunten)",
             "type": "number",
             "min": "0",
             "max": "12"
@@ -460,7 +460,7 @@
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De waardevolle materialen bevinden zich volledig in “Safety”.</li></ul>",
         "objectives": [{
             "id": "valuablesinsafety",
-            "title": "De waardevolle materialen zijn in Safety",
+            "title": "De waardevolle materialen zijn volledig in Safety",
             "type": "yesno"
         }],
         "score": [function(valuablesinsafety) {
@@ -492,7 +492,7 @@
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Speelgoedvliegtuigjes bevinden zich volledig in “Safety”.</li></ul>",
         "objectives": [{
             "id": "purchasing",
-            "title": "Aantal speelgoedvliegtuigjes die zich in Safety bevinden",
+            "title": "Aantal speelgoedvliegtuigjes die zich volledig in Safety bevinden",
             "type": "number",
             "min": "0",
             "max": "2"
@@ -528,7 +528,7 @@
     "strings": {
         "yes": "Ja",
         "no": "Nee",
-        "usingrecycledmaterial-name": "M01/04 (V&A 11) Gerecycled materiaal gebruiken",
+        "usingrecycledmaterial-name": "M01/04 Gerecycled materiaal gebruiken",
         "usingrecycledmaterial-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
         "containers-desc": "Aantal containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jouw Safety",
         "containers-other-desc": "Aantal containers van jou met minimaal een gele of blauwe staaf van jou in Safety van het andere team",
@@ -539,15 +539,15 @@
         "transport-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (jullie kunnen één of beide missie volbrengen):</b><ul><li>Vrachtwagen draagt het volledige gewicht van de gele container.</li><li>De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen.</li></ul>",
         "trucksupport-desc": "Vrachtwagen draagt het volledige gewicht van de gele container",
         "truckeast-desc": "De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen",
-        "sortingblueyellow-name": "M04 (V&A 11) Sorteren (gele/blauwe staven)",
+        "sortingblueyellow-name": "M04 Sorteren (gele/blauwe staven in bijbehorende groene container)",
         "sortingblueyellow-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
-        "inwesttransfer-desc": "Aantal van jouw staven in jouw bijbehorende groene container in/op jouw westelijke transfer",
-        "anywhereelese-desc": "Aantal van jouw staven, in jouw bijbehorende groene container, op jouw mat maar niet in/op jouw westelijke transfer",
-        "sortingblack-name": "M04 (V&A 11) Sorteren (zwarte staven)",
+        "inwesttransfer-desc": "Aantal van jouw staven in jouw container in/op jouw westelijke transfer",
+        "anywhereelese-desc": "Aantal van jouw staven, in jouw container, op jouw mat maar niet in/op jouw westelijke transfer",
+        "sortingblack-name": "M04 Sorteren (zwarte staven)",
         "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
-        "inflowerbox-desc": "Aantal staven in hun startpositie of onderdeel van een scorende bloempot",
-        "greenbinlandfill-desc": "Aantal staven in de bijbehorende groene container, of in de vuilnisbelt-container",
-        "blackanywhere-desc": "Aantal staven ergens anders, waar dan ook (minpunten)",
+        "inflowerbox-desc": "Staven in hun startpositie of onderdeel van een scorende bloempot",
+        "greenbinlandfill-desc": "Staven in de bijbehorende groene container, of in de vuilnisbelt-container",
+        "blackanywhere-desc": "Staven ergens anders, waar dan ook (minpunten)",
         "career-name": "M05 Carrières",
         "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
         "careeryesno-desc": "Tenminste 1 persoon bevindt zich in het sorteergebied",
@@ -571,13 +571,13 @@
         "compostejectedsafety-desc": "uitgestoten en in Safety",
         "salvage-name": "M09 Behoud",
         "salvage-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De waardevolle materialen bevinden zich volledig in “Safety”.</li></ul>",
-        "valuablesinsafety-desc": "De waardevolle materialen zijn in Safety",
+        "valuablesinsafety-desc": "De waardevolle materialen zijn volledig in Safety",
         "demolition-name": "M10 Sloopwerken",
         "demolition-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Geen enkele van de twaalf staven van het gebouw staan  nog rechtop in de startpositie.</li></ul>",
         "nobeamsstanding-desc": "Geen van de twaalf staven staan nog rechtop in de startpositie",
         "purchase-name": "M11 Aankoopbeslissing",
         "purchase-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Speelgoedvliegtuigjes bevinden zich volledig in “Safety”.</li></ul>",
-        "purchasing-desc": "Aantal speelgoedvliegtuigjes die zich in Safety bevinden",
+        "purchasing-desc": "Aantal speelgoedvliegtuigjes die zich volledig in Safety bevinden",
         "repurposing-name": "M12 Hergebruiken",
         "repurposing-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De compost bevindt zich volledig in één van de verpakkingen waaruit een speelgoedvliegtuigje is verwijderd. De verpakking is in originele staat.</li></ul>",
         "compostinpackage-desc": "De compost bevindt zich in een verpakking en de verpakking is in originele staat"
