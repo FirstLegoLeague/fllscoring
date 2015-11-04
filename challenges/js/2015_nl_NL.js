@@ -1,17 +1,17 @@
 {
-    "title": "Trash Trek",
+    "title": "TRASH TREK",
     "missions": [{
         "title": "M01/04 Gerecycled materiaal gebruiken",
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
         "objectives": [{
             "id": "containers",
-            "title": "Aantal containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jouw Safety",
+            "title": "Containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jullie Safety",
             "type": "number",
             "min": "0",
             "max": "2"
         }, {
             "id": "containers_other",
-            "title": "Aantal containers van jou met minimaal een gele of blauwe staaf van jou in Safety van het andere team",
+            "title": "Containers van jullie met minimaal een gele of blauwe staaf van jullie in Safety van het andere team",
             "type": "number",
             "min": "0",
             "max": "2"
@@ -89,13 +89,13 @@
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inwesttransfer",
-            "title": "Aantal van jouw staven in jouw container in/op jouw westelijke transfer",
+            "title": "Aantal van jullie staven in jullie container in/op jullie westelijke transfer",
             "type": "number",
             "min": "0",
             "max": "15"
         }, {
             "id": "anywhereelese",
-            "title": "Aantal van jouw staven, in jouw container, op jouw mat maar niet in/op jouw westelijke transfer",
+            "title": "Aantal van jullie staven, in jullie container, op jullie mat maar niet in/op jullie westelijke transfer",
             "type": "number",
             "min": "0",
             "max": "15"
@@ -354,10 +354,10 @@
             "title": "De auto is nooit in Safety geweest en is...",
             "options": [{
                 "value": "engineinstalled",
-                "title": "niet opgevouwen en motor is geïnstalleerd"
+                "title": "niet opgevouwen, motor is geïnstalleerd"
             }, {
                 "value": "carfolded",
-                "title": "opgevouwen en in oostelijk transfergebied"
+                "title": "opgevouwen, in oostelijk transfergebied"
             }, {
                 "value": "none",
                 "title": "anders"
@@ -530,8 +530,8 @@
         "no": "Nee",
         "usingrecycledmaterial-name": "M01/04 Gerecycled materiaal gebruiken",
         "usingrecycledmaterial-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>",
-        "containers-desc": "Aantal containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jouw Safety",
-        "containers-other-desc": "Aantal containers van jou met minimaal een gele of blauwe staaf van jou in Safety van het andere team",
+        "containers-desc": "Containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jullie Safety",
+        "containers-other-desc": "Containers van jullie met minimaal een gele of blauwe staaf van jullie in Safety van het andere team",
         "methane-name": "M02 Methaan",
         "methane-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>",
         "truck-factory-desc": "Aantal methaan in de vrachtwagen en/of de fabriek",
@@ -541,8 +541,8 @@
         "truckeast-desc": "De gele container bevindt zich volledig ten oosten van de geleider van de vrachtwagen",
         "sortingblueyellow-name": "M04 Sorteren (gele/blauwe staven in bijbehorende groene container)",
         "sortingblueyellow-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color=\"red\"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
-        "inwesttransfer-desc": "Aantal van jouw staven in jouw container in/op jouw westelijke transfer",
-        "anywhereelese-desc": "Aantal van jouw staven, in jouw container, op jouw mat maar niet in/op jouw westelijke transfer",
+        "inwesttransfer-desc": "Aantal van jullie staven in jullie container in/op jullie westelijke transfer",
+        "anywhereelese-desc": "Aantal van jullie staven, in jullie container, op jullie mat maar niet in/op jullie westelijke transfer",
         "sortingblack-name": "M04 Sorteren (zwarte staven)",
         "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "inflowerbox-desc": "Staven in hun startpositie of onderdeel van een scorende bloempot",
@@ -554,9 +554,9 @@
         "scrapcars-name": "M06 Sloopauto's",
         "scrapcars-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (voor één van beide opties worden punten toegekend):</b><ul><li>De voorruit en motor zijn geïnstalleerd in de ‘ongevouwen ’ auto op de juiste plek en in de juiste richting.</li><li>De auto is volledig opgevouwen en bevindt zich volledig in het  oostelijke “Transfer”-gebied.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing/vouwing niet nodig.</li><li><b>BEPERKING:</b> De auto mag zich nooit in “Safety” hebben bevonden, zelfs niet gedeeltelijk.</li></ul>",
         "positioncar-desc": "De auto is nooit in Safety geweest en is...",
-        "scrapcarsyesno-desc": "opgevouwen en in oostelijke transfergebied",
-        "engineinstalled-desc": "niet opgevouwen en motor is geïnstalleerd",
-        "carfolded-desc": "opgevouwen en in oostelijk transfergebied",
+        "scrapcarsyesno-desc": "opgevouwen, in oostelijke transfergebied",
+        "engineinstalled-desc": "niet opgevouwen, motor is geïnstalleerd",
+        "carfolded-desc": "opgevouwen, in oostelijk transfergebied",
         "nonecarscrap": "anders",
         "cleanup-name": "M07 Schoonmaak",
         "cleanup-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (punten voor elk voorwerp/dier dat aan de voorwaarden voldoet):</b><ul><li>Plastic tasjes bevinden zich volledig in “Safety”.</li><li>De dieren bevinden zich volledig in grote cirkels die volledig vrij zijn van plastic tasjes.</li><li>De kip bevindt zich volledig in de kleine cirkel.</li></ul><p>* De vis van het afvalvoedsel (bestemd voor de compostmissie (M08) telt niet als dier voor deze missie</p>",

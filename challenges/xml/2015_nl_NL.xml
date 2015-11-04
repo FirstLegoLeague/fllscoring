@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="../xsl/challenge.xsl"?>
 <fll:challenge
-    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2015" version="1" name="Trash Trek">
+    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2015" version="1" name="TRASH TREK">
 
     <strings language="nl-NL">
 
@@ -10,8 +10,8 @@
 
         <string id="usingrecycledmaterial-name">  <![CDATA[M01/04 Gerecycled materiaal gebruiken]]></string>
         <string id="usingrecycledmaterial-desc">  <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Groene containers bevatten tenminste één (1) overeenkomstige gele OF blauwe staaf van het andere team en bevindt zich volledig in jullie “Safety”.</li></ul>]]> </string>
-        <string id="containers-desc">             Aantal containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jouw Safety</string>
-        <string id="containers-other-desc">       Aantal containers van jou met minimaal een gele of blauwe staaf van jou in Safety van het andere team</string>
+        <string id="containers-desc">             Containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jullie Safety</string>
+        <string id="containers-other-desc">       Containers van jullie met minimaal een gele of blauwe staaf van jullie in Safety van het andere team</string>
 
         <string id="methane-name">                M02 Methaan</string>
         <string id="methane-desc">                <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Methaan bevindt zich in de motor van de vrachtwagen en/of in de energiecentrale van de fabriek.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing is niet nodig</li></ul>]]></string>
@@ -24,8 +24,8 @@
 
         <string id="sortingblueyellow-name">      <![CDATA[M04 Sorteren (gele/blauwe staven in bijbehorende groene container)]]></string>
         <string id="sortingblueyellow-desc">      <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Gele en/of blauwe staven bevinden zich in de bijbehorende groene container EN de container (containers scoren onafhankelijk van elkaar) bevindt zich:<ul><li>Volledig in de “Safety” van het andere team, d.m.v. van jullie westelijke “Transfer”. (<font color="red"><b>PUNTEN:</b> per container</font>)</li><li>Volledig in jullie westelijke “Transfer”-gebied en/of volledig op jullie westelijke “Transfer”.</li><li>Nooit volledig in het westelijke “Transfer”-gebied.</li></ul></li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>]]></string>
-        <string id="inwesttransfer-desc">         <![CDATA[Aantal van jouw staven in jouw container in/op jouw westelijke transfer]]></string>
-        <string id="anywhereelese-desc">          Aantal van jouw staven, in jouw container, op jouw mat maar niet in/op jouw westelijke transfer</string>
+        <string id="inwesttransfer-desc">         <![CDATA[Aantal van jullie staven in jullie container in/op jullie westelijke transfer]]></string>
+        <string id="anywhereelese-desc">          Aantal van jullie staven, in jullie container, op jullie mat maar niet in/op jullie westelijke transfer</string>
 
         <string id="sortingblack-name">           <![CDATA[M04 Sorteren (zwarte staven)]]></string>
         <string id="sortingblack-desc">           <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): 
@@ -42,10 +42,10 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
 
         <string id="scrapcars-name">          M06 Sloopauto's</string>
         <string id="scrapcars-desc">          <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd (voor één van beide opties worden punten toegekend):</b><ul><li>De voorruit en motor zijn geïnstalleerd in de ‘ongevouwen ’ auto op de juiste plek en in de juiste richting.</li><li>De auto is volledig opgevouwen en bevindt zich volledig in het  oostelijke “Transfer”-gebied.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing/vouwing niet nodig.</li><li><b>BEPERKING:</b> De auto mag zich nooit in “Safety” hebben bevonden, zelfs niet gedeeltelijk.</li></ul>]]></string>
-        <string id="positioncar-desc">        De auto is nooit in Safety geweest en is...</string>
-        <string id="scrapcarsyesno-desc">     opgevouwen en in oostelijke transfergebied</string>
-        <string id="engineinstalled-desc">    niet opgevouwen en motor is geïnstalleerd</string>
-        <string id="carfolded-desc">          opgevouwen en in oostelijk transfergebied</string>
+        <string id="positioncar-desc">        <![CDATA[De auto is nooit in Safety geweest en is...]]></string>
+        <string id="scrapcarsyesno-desc">     <![CDATA[opgevouwen, in oostelijke transfergebied]]></string>
+        <string id="engineinstalled-desc">    <![CDATA[niet opgevouwen, motor is geïnstalleerd]]></string>
+        <string id="carfolded-desc">          <![CDATA[opgevouwen, in oostelijk transfergebied]]></string>
         <string id="nonecarscrap">            anders</string>
 
         <string id="cleanup-name">            M07 Schoonmaak</string>

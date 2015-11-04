@@ -4,15 +4,19 @@
                     body {
                         font-family: verdana;
                         counter-reset: mission;
+                        margin: 0px;
                     }
                     .mission {
                         border: 1px solid silver;
                         border-radius: 4px;
-                        margin: 10px;
                         padding: 10px;
+                        margin-left: 0px;
+                        margin-right: 0px;
+                        margin-top: 5px;
+                        margin-bottom: 0px;
                         counter-increment: mission;
                     }
-                    .mission h2:before  {
+                    /*.mission h2:before  {
                         content: counter(mission);
                         border: 1px solid silver;
                         border-radius: 100px;
@@ -25,10 +29,11 @@
                         text-align: center;
                         margin-left: -25px;
                         margin-right: 10px;
-                    }
+                    }*/
                     .mission h2 {
                         font-size: inherit;
                         margin: 0;
+                        margin-bottom: 5px;
                     }
                     .objective {
                         overflow: auto;
@@ -57,9 +62,9 @@
       <div class="mission">
          <h2>            Reverse Engineering</h2>
          
-         <div class="objective"><span class="desc">                 Mand in de basis</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">                 Mand in de basis</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
-         <div class="objective"><span class="desc">              Jullie model ligt in de basis en is ‘identiek’</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">              Jullie model ligt in de basis en is ‘identiek’</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -79,7 +84,7 @@
       <div class="mission">
          <h2>                  Deuren openen</h2>
          
-         <div class="objective"><span class="desc">               Deur geopend door de hendel omlaag te drukken </span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">               Deur geopend door de hendel omlaag te drukken </span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -120,9 +125,9 @@
       <div class="mission">
          <h2>             Stagelopen</h2>
          
-         <div class="objective"><span class="desc">             Model getoond aan de scheidsrechter</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">             Model getoond aan de scheidsrechter</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
-         <div class="objective"><span class="desc">         Raakt de cirkel, niet in de basis en poppetjes verbonden</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">         Raakt de cirkel, niet in de basis en poppetjes verbonden</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -142,9 +147,9 @@
       <div class="mission">
          <h2>                 Zoekmachine</h2>
          
-         <div class="objective"><span class="desc">              Alleen de schuif heeft het wiel 1+ keer rondgedraaid</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">              Alleen de schuif heeft het wiel 1+ keer rondgedraaid</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
-         <div class="objective"><span class="desc">             Alleen de juiste lus is verwijderd</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">             Alleen de juiste lus is verwijderd</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -164,9 +169,9 @@
       <div class="mission">
          <h2>                 Sport</h2>
          
-         <div class="objective"><span class="desc">               Schot genomen vanuit positie Noord-Oost van de lijn </span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">               Schot genomen vanuit positie Noord-Oost van de lijn </span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
-         <div class="objective"><span class="desc">             Bal raakt de mat in het doel aan het eind van de wedstrijd</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">             Bal raakt de mat in het doel aan het eind van de wedstrijd</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -186,9 +191,9 @@
       <div class="mission">
          <h2>            Robotwedstrijden</h2>
          
-         <div class="objective"><span class="desc">         Alleen het robotelement is geïnstalleerd in de robotarm</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">         Alleen het robotelement is geïnstalleerd in de robotarm</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
-         <div class="objective"><span class="desc">        Lus raakt de robotarm niet aan</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">        Lus raakt de robotarm niet aan</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -208,7 +213,7 @@
       <div class="mission">
          <h2>                 Gebruik de juiste zintuigen en leerstijlen</h2>
          
-         <div class="objective"><span class="desc">             Lus raakt het model niet aan</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">             Lus raakt het model niet aan</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -225,7 +230,7 @@
       <div class="mission">
          <h2>             Leren/communiceren op afstand</h2>
          
-         <div class="objective"><span class="desc">             Scheids zag de robot de schuif verplaatsen</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">             Scheids zag de robot de schuif verplaatsen</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -243,10 +248,10 @@
          <h2>             Outside the Box denken</h2>
          
          <div class="objective"><span class="desc">                 Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is
-               naar boven gericht</span><span class="values"><span>Yes</span><span>No</span></span></div>
+               naar boven gericht</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          <div class="objective"><span class="desc">               Idee-model raakt de doos niet, Doos niet in basis geweest, Lamp is
-               naar beneden gericht</span><span class="values"><span>Yes</span><span>No</span></span></div>
+               naar beneden gericht</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -266,7 +271,7 @@
       <div class="mission">
          <h2>              Gemeenschappelijk leren</h2>
          
-         <div class="objective"><span class="desc">          Lus raakt het model niet aan</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">          Lus raakt het model niet aan</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -283,7 +288,7 @@
       <div class="mission">
          <h2>                  Cloud toegang</h2>
          
-         <div class="objective"><span class="desc">               SD card staat omhoog omdat de juiste "key" is ingebracht</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">               SD card staat omhoog omdat de juiste "key" is ingebracht</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          
@@ -300,7 +305,7 @@
       <div class="mission">
          <h2>             Betrokkenheid</h2>
          
-         <div class="objective"><span class="desc">           Gele gedeelte is naar het zuiden verplaatst</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">           Gele gedeelte is naar het zuiden verplaatst</span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          <div class="objective"><span class="desc">       Aangewezen kleur</span><span class="values"><span>                          NVT</span><span>                      Rood 10%</span><span>                   Oranje 16%</span><span>                    Groen 22%</span><span>                     Blauw 28%</span><span>                      Rood 34%</span><span>                     Blauw 40%</span><span>                    Groen 46%</span><span>                   Oranje 52%</span><span>                      Rood 58%</span></span></div>
          
@@ -481,7 +486,7 @@
       <div class="mission">
          <h2>    Flexibiliteit</h2>
          
-         <div class="objective"><span class="desc">          Model is 90 graden tegen de klok in gedraaid   </span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">          Model is 90 graden tegen de klok in gedraaid   </span><span class="values"><span>                         Ja</span><span>                          Nee</span></span></div>
          
          
          

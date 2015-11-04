@@ -4,15 +4,19 @@
                     body {
                         font-family: verdana;
                         counter-reset: mission;
+                        margin: 0px;
                     }
                     .mission {
                         border: 1px solid silver;
                         border-radius: 4px;
-                        margin: 10px;
                         padding: 10px;
+                        margin-left: 0px;
+                        margin-right: 0px;
+                        margin-top: 5px;
+                        margin-bottom: 0px;
                         counter-increment: mission;
                     }
-                    .mission h2:before  {
+                    /*.mission h2:before  {
                         content: counter(mission);
                         border: 1px solid silver;
                         border-radius: 100px;
@@ -25,10 +29,11 @@
                         text-align: center;
                         margin-left: -25px;
                         margin-right: 10px;
-                    }
+                    }*/
                     .mission h2 {
                         font-size: inherit;
                         margin: 0;
+                        margin-bottom: 5px;
                     }
                     .objective {
                         overflow: auto;
@@ -89,9 +94,9 @@
       <div class="mission">
          <h2>                Methane</h2>
          
-         <div class="objective"><span class="desc">                  A methane is in the Truck's engine</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">                  A methane is in the Truck's engine</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
-         <div class="objective"><span class="desc">                A methane is in the Factory's Power Station</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">                A methane is in the Factory's Power Station</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -111,9 +116,9 @@
       <div class="mission">
          <h2>              Transport</h2>
          
-         <div class="objective"><span class="desc">           Truck supports all of the Yellow Bin’s weight</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">           Truck supports all of the Yellow Bin’s weight</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
-         <div class="objective"><span class="desc">              The Yellow Bin is completely east of the Truck’s Guide</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">              The Yellow Bin is completely east of the Truck’s Guide</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -261,7 +266,7 @@
       <div class="mission">
          <h2>                 Careers </h2>
          
-         <div class="objective"><span class="desc">            At least one Person is in the Sorter Area</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">            At least one Person is in the Sorter Area</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -280,7 +285,7 @@
          
          <div class="objective"><span class="desc">        The car is in the safety-zone</span><span class="values"><span>    The engine is installed in the unfolded car in the proper space and direction</span><span>          The car is completely folded and and completely in the East Transfer Area</span><span>            The car was never in the safety zone</span></span></div>
          
-         <div class="objective"><span class="desc">     The car is folded and in East Transfer Area</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">     The car is folded and in East Transfer Area</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -306,7 +311,7 @@
          
          <div class="objective"><span class="desc">            Animals are completely in large circles which are empty of Plaic Bags</span><span class="values"><span>0</span><span>1</span><span>2</span><span>3</span></span></div>
          
-         <div class="objective"><span class="desc">            The Chicken is completely in the small circle</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">            The Chicken is completely in the small circle</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -344,9 +349,9 @@
       <div class="mission">
          <h2>         Composting</h2>
          
-         <div class="objective"><span class="desc">     The Compost is ejected, but not completely in safety.</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">     The Compost is ejected, but not completely in safety.</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
-         <div class="objective"><span class="desc">    The Compost is in Safety</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">    The Compost is in Safety</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -366,7 +371,7 @@
       <div class="mission">
          <h2>            Salvage</h2>
          
-         <div class="objective"><span class="desc">  The Valuables are completely in Safety</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">  The Valuables are completely in Safety</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -383,7 +388,7 @@
       <div class="mission">
          <h2>         Demolition</h2>
          
-         <div class="objective"><span class="desc">    None of the Building’s twelve beams is left standing in Setup position</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">    None of the Building’s twelve beams is left standing in Setup position</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
@@ -418,9 +423,9 @@
       <div class="mission">
          <h2>        Repurposing</h2>
          
-         <div class="objective"><span class="desc">   The Compost is perfectly nested inside one of the Packages</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">   The Compost is perfectly nested inside one of the Packages</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
-         <div class="objective"><span class="desc">  The Package is in original condition</span><span class="values"><span>Yes</span><span>No</span></span></div>
+         <div class="objective"><span class="desc">  The Package is in original condition</span><span class="values"><span>                         Yes</span><span>                          No</span></span></div>
          
          
          
