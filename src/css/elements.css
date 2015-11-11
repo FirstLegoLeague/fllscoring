@@ -186,6 +186,9 @@ table {
 @media screen and (max-width: 480px) {
     .appbar {
         height: 56px;
+        line-height: 56px;
+        margin-bottom: 10px;
+        position: static;
     }
     .drawer {
         max-width: calc(100% - 56px);
@@ -195,7 +198,8 @@ table {
         height: 56px;
     }
     .viewMain {
-        margin-top: 56px;
+        margin-top: 0px;
+        padding-top: 0px;
         overflow: hidden;
     }
 
