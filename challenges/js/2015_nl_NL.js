@@ -335,7 +335,7 @@
         "description": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
         "objectives": [{
             "id": "career",
-            "title": "Tenminste 1 persoon bevindt zich in het sorteergebied",
+            "title": "Ten minste 1 persoon bevindt zich in het sorteergebied",
             "type": "yesno"
         }],
         "score": [function(career) {
@@ -380,13 +380,13 @@
         "description": "<b>De zichtbare situatie aan het einde van de wedstrijd (punten voor elk voorwerp/dier dat aan de voorwaarden voldoet):</b><ul><li>Plastic tasjes bevinden zich volledig in “Safety”.</li><li>De dieren bevinden zich volledig in grote cirkels die volledig vrij zijn van plastic tasjes.</li><li>De kip bevindt zich volledig in de kleine cirkel.</li></ul><p>* De vis van het afvalvoedsel (bestemd voor de compostmissie (M08) telt niet als dier voor deze missie</p>",
         "objectives": [{
             "id": "bags",
-            "title": "Plastic tasjes die zich in Safety bevinden",
+            "title": "Aantal plastic tasjes die zich in Safety bevinden",
             "type": "number",
             "min": "0",
             "max": "2"
         }, {
             "id": "animals",
-            "title": "Dieren die zich in een cirkel bevinden die vrij is van plastic tasjes",
+            "title": "Aantal dieren die zich in een cirkel bevinden die vrij is van plastic tasjes",
             "type": "number",
             "min": "0",
             "max": "3"
@@ -550,7 +550,7 @@
         "blackanywhere-desc": "Staven ergens anders, waar dan ook (minpunten)",
         "career-name": "M05 Carrières",
         "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
-        "careeryesno-desc": "Tenminste 1 persoon bevindt zich in het sorteergebied",
+        "careeryesno-desc": "Ten minste 1 persoon bevindt zich in het sorteergebied",
         "scrapcars-name": "M06 Sloopauto's",
         "scrapcars-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (voor één van beide opties worden punten toegekend):</b><ul><li>De voorruit en motor zijn geïnstalleerd in de ‘ongevouwen ’ auto op de juiste plek en in de juiste richting.</li><li>De auto is volledig opgevouwen en bevindt zich volledig in het  oostelijke “Transfer”-gebied.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing/vouwing niet nodig.</li><li><b>BEPERKING:</b> De auto mag zich nooit in “Safety” hebben bevonden, zelfs niet gedeeltelijk.</li></ul>",
         "positioncar-desc": "De auto is nooit in Safety geweest en is...",
@@ -560,8 +560,8 @@
         "nonecarscrap": "anders",
         "cleanup-name": "M07 Schoonmaak",
         "cleanup-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (punten voor elk voorwerp/dier dat aan de voorwaarden voldoet):</b><ul><li>Plastic tasjes bevinden zich volledig in “Safety”.</li><li>De dieren bevinden zich volledig in grote cirkels die volledig vrij zijn van plastic tasjes.</li><li>De kip bevindt zich volledig in de kleine cirkel.</li></ul><p>* De vis van het afvalvoedsel (bestemd voor de compostmissie (M08) telt niet als dier voor deze missie</p>",
-        "bags-desc": "Plastic tasjes die zich in Safety bevinden",
-        "animals-desc": "Dieren die zich in een cirkel bevinden die vrij is van plastic tasjes",
+        "bags-desc": "Aantal plastic tasjes die zich in Safety bevinden",
+        "animals-desc": "Aantal dieren die zich in een cirkel bevinden die vrij is van plastic tasjes",
         "chicken-desc": "De kip bevindt zich in de kleine cirkel",
         "composting-name": "M08 Composteren",
         "compostingmission-desc": "De compost is...",
