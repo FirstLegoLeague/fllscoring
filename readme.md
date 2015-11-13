@@ -32,6 +32,13 @@ In the near future, we plan to have "ready to go" software available as:
 - app, for iOS, Android and windows
 - a hosted service, as described above
 
+Contributing
+---------------
+
+To contribute to this repository, please make a fork, make your changes and submit a pull request.
+
+This way of work allows us to maintain proper code quality, which is important when working with a large amount of people on the same project. Feel free to join the discussion on the [issues page](https://github.com/FirstLegoLeague/fllscoring/issues)
+
 Development
 ---------------
 
