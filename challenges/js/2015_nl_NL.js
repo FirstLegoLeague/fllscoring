@@ -26,14 +26,14 @@
             if (containers === '2') {
                 return 120
             }
-        }, function(containers) {
-            if (containers === '0') {
+        }, function(containers_other) {
+            if (containers_other === '0') {
                 return 0
             }
-            if (containers === '1') {
+            if (containers_other === '1') {
                 return 60
             }
-            if (containers === '2') {
+            if (containers_other === '2') {
                 return 120
             }
         }]

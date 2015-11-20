@@ -97,7 +97,7 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
         </score>
         <score>
             <indexes>
-                <index objective="containers" />
+                <index objective="containers-other" />
             </indexes>
             <cases>
                 <case> <index-ref value="0" /> <points amount="0"  /> </case>
