@@ -31,7 +31,7 @@
                     {{score.stage.name}}
                 </span>
                 <span ng-if="score.$editing">
-                    <select ng-model="score.stageId" ng-options="stage.id as stage.name for stage in stages"></select>
+                    <select ng-model="score.stageId" ng-options="stage.id as stage.name for stage in stages" style="width: 130px"></select>
                 </span>
             </td>
             <td>
