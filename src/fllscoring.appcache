@@ -31,8 +31,16 @@ fonts/lato-reg-webfont.ttf
 fonts/lato-reg-webfont.woff
 fonts/lato.css
 
+img/colors4.png
+
 js/config.js
 js/main.js
+js/controllers/DescriptionDialogController.js
+js/controllers/ExportRankingDialogController.js
+js/controllers/NewStageDialogController.js
+js/controllers/RoundDialogController.js
+js/controllers/TeamDialogController.js
+js/controllers/TeamImportDialogController.js
 js/directives/ng-directives.js
 js/directives/really.js
 js/directives/sigpad.js
@@ -70,6 +78,11 @@ components/bootstrap-css/css/bootstrap.min.css
 #components/bootstrap-css/fonts/glyphicons-halflings-regular.woff
 #components/bootstrap-css/fonts/glyphicons-halflings-regular.ttf
 components/font-awesome/css/font-awesome.min.css
+components/font-awesome/font/fontawesome-webfont.eot
+components/font-awesome/font/fontawesome-webfont.svg
+components/font-awesome/font/fontawesome-webfont.ttf
+components/font-awesome/font/fontawesome-webfont.woff
+components/idbwrapper/idbstore.js
 components/jquery/jquery.min.js
 components/q/q.js
 components/requirejs/require.js
