@@ -12,12 +12,26 @@ define('controllers/NewStageDialogController',[
 
             $handshake.$on('newStage',function(e) {
                 $scope.dialogVisible = true;
+                $scope.generateId = true; // automatically generate ID from name?
                 $scope.stage = {
                     rounds: 1
                 };
                 defer = $handshake.defer();
                 return defer.promise;
             });
+
+            $scope.nameChanged = function() {
+                if ($scope.generateId && typeof $scope.stage.name === 'string') {
+                    var name = $scope.stage.name;
+                    // Convert e.g. 'Some - Text' to 'some_text'
+                    var id = name.toLowerCase().replace(' ', '_').replace(/[^a-z0-9_]/g, '').replace(/_+/g, '_');
+                    $scope.stage.id = id;
+                }
+            };
+
+            $scope.idChanged = function() {
+                $scope.generateId = false;
+            };
 
             $scope.ok = function() {
                 $scope.dialogVisible = false;

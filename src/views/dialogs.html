@@ -136,12 +136,12 @@
             <section>
                 <div class="modal-body">
                     <p class="textfield">
-                        <input type="text" ng-model="stage.id">
-                        <label for="">Id (unique)</label>
+                        <input type="text" ng-model="stage.name" ng-change="nameChanged()">
+                        <label for="">Name</label>
                     </p>
                     <p class="textfield">
-                        <input type="text" ng-model="stage.name">
-                        <label for="">Name</label>
+                        <input type="text" ng-model="stage.id" ng-change="idChanged()">
+                        <label for="">Id (unique)</label>
                     </p>
                     <p class="textfield">
                         <input type="number" min="0" ng-model="stage.rounds">
