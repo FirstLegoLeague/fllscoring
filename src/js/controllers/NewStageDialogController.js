@@ -24,7 +24,7 @@ define('controllers/NewStageDialogController',[
                 if ($scope.generateId && typeof $scope.stage.name === 'string') {
                     var name = $scope.stage.name;
                     // Convert e.g. 'Some - Text' to 'some_text'
-                    var id = name.toLowerCase().replace(' ', '_').replace(/[^a-z0-9_]/g, '').replace(/_+/g, '_');
+                    var id = name.toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '').replace(/_+/g, '_');
                     $scope.stage.id = id;
                 }
             };

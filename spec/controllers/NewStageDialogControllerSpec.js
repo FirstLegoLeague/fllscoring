@@ -23,6 +23,37 @@ describe('NewStageDialogController',function() {
             handshakeMock.fire('newStage');
             expect($scope.stage).toEqual({rounds:1});
             expect($scope.dialogVisible).toBe(true);
+            expect($scope.generateId).toBe(true);
+        });
+    });
+
+    describe('nameChanged',function() {
+        it('should generate an id if id is not manually set',function() {
+            $scope.generateId = true;
+            $scope.stage.name = 'foo';
+            expect($scope.stage.id).toBeUndefined();
+            $scope.nameChanged();
+            expect($scope.stage.id).toBe('foo');
+        });
+        it('should not generate an id if id is manually set',function() {
+            $scope.generateId = false;
+            $scope.stage.name = 'foo';
+            expect($scope.stage.id).toBeUndefined();
+            $scope.nameChanged();
+            expect($scope.stage.id).toBeUndefined();
+        });
+        it('should create underscores for spaces and remove anything not valid as id',function() {
+            $scope.generateId = true;
+            $scope.stage.name = 'foo bar %&!baz[]//?';
+            $scope.nameChanged();
+            expect($scope.stage.id).toBe('foo_bar_baz');
+        });
+    });
+
+    describe('idChanged',function() {
+        it('should set the generateId flag to false as id is manually provided',function() {
+            $scope.idChanged();
+            expect($scope.generateId).toBe(false);
         });
     });
 
