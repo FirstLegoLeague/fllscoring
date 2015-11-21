@@ -9,6 +9,7 @@ describe('ng-scores',function() {
     var $scores;
     var $stages;
     var $teams;
+    var $q;
     var dummyTeam =  {
         number: 123,
         name: 'foo'
@@ -38,10 +39,11 @@ describe('ng-scores',function() {
         angular.mock.module(function($provide) {
             $provide.value('$fs', fsMock);
         });
-        angular.mock.inject(["$scores", "$stages", "$teams", function(_$scores_, _$stages_, _$teams_) {
+        angular.mock.inject(["$scores", "$stages", "$teams", "$q", function(_$scores_, _$stages_, _$teams_,_$q_) {
             $scores = _$scores_;
             $stages = _$stages_;
             $teams = _$teams_;
+            $q = _$q_;
         }]);
 
         return $stages.init().then(function() {
@@ -482,6 +484,17 @@ describe('ng-scores',function() {
                         sheets: ["sheet_1.json"]
                     }
                 );
+            });
+        });
+
+        describe('clicking the button twice should not poll twice (#172)',function() {
+            it('should not add the same sheet twice',function() {
+                return $q.all([
+                    $scores.pollSheets(),
+                    $scores.pollSheets()
+                ]).then(function() {
+                    expect($scores.scores.length).toEqual(1);
+                });
             });
         });
 
