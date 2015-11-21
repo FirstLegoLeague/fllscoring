@@ -129,6 +129,7 @@ define('services/ng-scores',[
 
             this._updating = 0;
             this._initialized = null; // Promise<void>
+            this._pollingSheets = null; // Promise<void>
             this.init();
         }
 
@@ -339,7 +340,12 @@ define('services/ng-scores',[
          */
         Scores.prototype.pollSheets = function() {
             var self = this;
-            return $fs.list("scoresheets/").catch(function(err) {
+            // Prevent (accidentally) performing the check in parallel
+            if (self._pollingSheets) {
+                return self._pollingSheets;
+            }
+
+            self._pollingSheets = $fs.list("scoresheets/").catch(function(err) {
                 // Ignore the fact that there are no sheets at all yet
                 if (err.status === 404) {
                     return [];
@@ -394,7 +400,10 @@ define('services/ng-scores',[
                         return self.save();
                     }
                 });
+            }).finally(function() {
+                self._pollingSheets = null;
             });
+            return self._pollingSheets;
         };
 
         Scores.prototype._update = function() {
