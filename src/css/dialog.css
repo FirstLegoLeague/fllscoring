@@ -35,6 +35,14 @@
     padding: 9px 15px;
     border-bottom: 1px solid #eee;
     height: 30px;
+    white-space: nowrap;
+}
+
+.fll-dialog h1 .header-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: calc(100% - 50px);
 }
 
 .fll-dialog section {
