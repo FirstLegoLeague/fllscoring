@@ -1,9 +1,10 @@
 CACHE MANIFEST
-#2015-11-20 0800
+#2015-11-21 2000
 
 CACHE:
 index.html
 admin.html
+views/dialogs.html
 views/main.html
 views/mainScoring.html
 views/ranking.html
@@ -12,8 +13,10 @@ views/scoresheet.html
 views/settings.html
 views/teams.html
 
+css/dialog.css
 css/elements.css
 css/main.css
+css/material.css
 css/scoresheet.css
 css/spinner.css
 css/teams.css
@@ -43,11 +46,14 @@ js/services/fs-xhr.js
 js/services/log.js
 js/services/ng-challenge.js
 js/services/ng-fs.js
+js/services/ng-handshake.js
+js/services/ng-message.js
 js/services/ng-scores.js
 js/services/ng-services.js
 js/services/ng-settings.js
 js/services/ng-stages.js
 js/services/ng-teams.js
+js/services/ng-throttle.js
 js/tests/fsTest.js
 js/tests/indexedDBTest.js
 js/views/ranking.js
