@@ -114,6 +114,34 @@ describe('ng-stages',function() {
                 $stages.add(mockStage);
             }).toThrow();
         });
+        it('should reject a stage without an id, name, or rounds',function() {
+            $stages.clear();
+            $stages.add({ id: "foo", name: "bar", rounds: 0 });
+            expect(function() {
+                $stages.add(null);
+            }).toThrow();
+            expect(function() {
+                $stages.add("meh");
+            }).toThrow();
+            expect(function() {
+                $stages.add({ id: "foo", name: "bar" });
+            }).toThrow();
+            expect(function() {
+                $stages.add({ id: "foo", rounds: 0 });
+            }).toThrow();
+            expect(function() {
+                $stages.add({ name: "bar", rounds: 0 });
+            }).toThrow();
+        });
+        it('should reject a stage with non-string id or name',function() {
+            $stages.clear();
+            expect(function() {
+                $stages.add({ id: 1, name: "bar" });
+            }).toThrow();
+            expect(function() {
+                $stages.add({ id: "foo", name: 2 });
+            }).toThrow();
+        });
         it('should maintain existing stages and allStages arrays', function() {
             $stages.clear();
             var allStages = $stages.allStages;

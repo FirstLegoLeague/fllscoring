@@ -94,8 +94,20 @@ define('services/ng-stages',[
          * @param stage Example: { id: "qualifying", name: "Voorrondes", rounds: 2 }
          */
         Stages.prototype.add = function(stage) {
+            if (typeof stage !== "object") {
+                throw new Error("cannot add stage: object expected");
+            }
+            if (typeof stage.id !== "string") {
+                throw new Error("cannot add stage: invalid or missing id");
+            }
+            if (typeof stage.name !== "string") {
+                throw new Error("cannot add stage: invalid or missing name");
+            }
+            if (typeof stage.rounds !== "number") {
+                throw new Error("cannot add stage: invalid or missing rounds");
+            }
             if (stage.id in this._stagesMap) {
-                throw new Error("duplicate stage id " + stage.id);
+                throw new Error("cannot add stage: duplicate stage id " + stage.id);
             }
             // Push a copy of the object, to prevent user from messing it up later,
             // and to aid in in-code documentation
