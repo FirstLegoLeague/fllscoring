@@ -54,4 +54,28 @@ describe('NewStageDialogController',function() {
             expect(handshakeMock.getPromise().resolve).toHaveBeenCalled();
         });
     });
+
+    describe('stageDefValid',function() {
+        it('should return false if id not filled in',function() {
+            $scope.stage = {
+                id: '',
+                name: 'foo'
+            };
+            expect($scope.stageDefValid()).toBe(false);
+        });
+        it('should return false if name not filled in',function() {
+            $scope.stage = {
+                id: 'foo',
+                name: ''
+            };
+            expect($scope.stageDefValid()).toBe(false);
+        });
+        it('should return true if name and id present not filled in',function() {
+            $scope.stage = {
+                id: 'foo',
+                name: 'foo'
+            };
+            expect($scope.stageDefValid()).toBe(true);
+        });
+    })
 });

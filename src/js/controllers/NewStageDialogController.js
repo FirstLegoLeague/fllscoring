@@ -42,6 +42,10 @@ define('controllers/NewStageDialogController',[
                 $scope.dialogVisible = false;
                 defer.resolve();
             };
+
+            $scope.stageDefValid = function() {
+                return !!($scope.stage.id && $scope.stage.name);
+            };
         }
     ]);
 });
