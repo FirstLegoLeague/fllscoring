@@ -148,7 +148,7 @@
                         <label for="">Rounds (0 to disable stage)</label>
                     </p>
                     <p>
-                        <button class="btn" ng-click="ok()">Ok</button>
+                        <button class="btn" ng-click="ok()" ng-disabled="!(stage.id &amp;&amp; stage.name)">Ok</button>
                         <button class="btn" ng-click="cancel()">Cancel</button>
                     </p>
                 </div>
