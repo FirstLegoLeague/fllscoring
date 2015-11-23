@@ -145,14 +145,15 @@ define('views/scoresheet',[
                 return bonusScore + restScore;
             };
 
+            function empty(val) {
+                return val === undefined || val === null;
+            }
+
             //lists reasons why the scoresheet cannot be saved
             $scope.preventSaveErrors = function() {
-                var list = [];
-                if (!$scope.missions) {return list;}
+                var list = $scope.teamRoundErrors();
+                if (!$scope.missions) {return [];}
 
-                function empty(val) {
-                    return val === undefined || val === null;
-                }
                 function errors() {
                     return $scope.missions.some(function(mission) {
                         return !!mission.errors.length;
@@ -166,6 +167,18 @@ define('views/scoresheet',[
                     });
                 }
 
+                if (errors()) {
+                    list.push('Some missions have errors');
+                }
+                if (inComplete()) {
+                    list.push('Some missions are incomplete');
+                }
+
+                return list;
+            };
+
+            $scope.teamRoundErrors = function() {
+                var list = [];
                 if (empty($scope.stage)) {
                     list.push('No stage selected');
                 }
@@ -174,12 +187,6 @@ define('views/scoresheet',[
                 }
                 if (empty($scope.team)) {
                     list.push('No team selected');
-                }
-                if (errors()) {
-                    list.push('Some missions have errors');
-                }
-                if (inComplete()) {
-                    list.push('Some missions are incomplete');
                 }
                 if ($scope.settings.askTable && !$scope.table) {
                     list.push('No table number entered');
@@ -190,6 +197,10 @@ define('views/scoresheet',[
 
                 return list;
             };
+
+            $scope.teamRoundOk = function() {
+                return !$scope.teamRoundErrors().length;
+            }
 
             $scope.isSaveable = function() {
                 if (!$scope.missions) {return false;}

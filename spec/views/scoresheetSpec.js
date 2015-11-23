@@ -313,6 +313,91 @@ describe('scoresheet',function() {
         });
     });
 
+    describe('teamRoundOk',function() {
+        beforeEach(function() {
+            //setup happy situation
+            $scope.missions = [
+                {
+                    objectives: [
+                        {value: 1},
+                        {value: 2}
+                    ],
+                    errors: []
+                },{
+                    objectives: [],
+                    errors: []
+                }
+            ];
+            $scope.stage = 1;
+            $scope.round = 2;
+            $scope.team = 3;
+            $scope.table = 7;
+        });
+
+        it('should return true in the happy situation',function() {
+            expect($scope.teamRoundOk()).toEqual(true);
+        });
+
+        it('should return true if missions not present',function() {
+            delete $scope.missions;
+            expect($scope.teamRoundOk()).toEqual(true);
+        });
+
+        it('should return false if stage is undefined',function() {
+            $scope.stage = undefined;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if stage is null',function() {
+            $scope.stage = null;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if table is undefined and asked for',function() {
+            $scope.table = undefined;
+            $scope.settings.askTable = true;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if table is null and asked for',function() {
+            $scope.table = null;
+            $scope.settings.askTable = true;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if referee is undefined and asked for',function() {
+            $scope.referee = undefined;
+            $scope.settings.askReferee = true;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if referee is null and asked for',function() {
+            $scope.referee = null;
+            $scope.settings.askReferee = true;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if round is undefined',function() {
+            $scope.round = undefined;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if round is null',function() {
+            $scope.round = null;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if team is undefined',function() {
+            $scope.team = undefined;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+
+        it('should return false if team is null',function() {
+            $scope.team = null;
+            expect($scope.teamRoundOk()).toEqual(false);
+        });
+    })
+
     describe('isSaveable',function() {
         beforeEach(function() {
             //setup happy situation
