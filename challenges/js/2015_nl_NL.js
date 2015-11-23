@@ -201,7 +201,7 @@
         }]
     }, {
         "title": "M04 Sorteren (zwarte staven)",
-        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren):\r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inflowerbox",
             "title": "Staven in hun startpositie of onderdeel van een scorende bloempot",
@@ -221,113 +221,4569 @@
             "min": "0",
             "max": "12"
         }],
-        "score": [function(inflowerbox) {
-            if (inflowerbox === '0') {
-                return 0
+        "score": [function(inflowerbox, greenbinlandfill, blackanywhere) {
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '1') {
-                return 8
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '2') {
-                return 16
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '3') {
-                return 24
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '4') {
-                return 32
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '5') {
-                return 40
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '6') {
-                return 48
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '7') {
-                return 56
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '8') {
-                return 64
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '9') {
-                return 72
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '10') {
-                return 80
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '11') {
-                return 88
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (inflowerbox === '12') {
-                return 96
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return -96
             }
-        }, function(greenbinlandfill) {
-            if (greenbinlandfill === '0') {
-                return 0
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '1') {
-                return 3
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '2') {
-                return 6
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '3') {
-                return 9
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '4') {
-                return 12
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '5') {
-                return 15
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '6') {
-                return 18
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '7') {
-                return 21
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (greenbinlandfill === '8') {
-                return 24
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-        }, function(blackanywhere) {
-            if (blackanywhere === '0') {
-                return 0
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '1') {
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return -85
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return -74
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return -63
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return -52
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return -41
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return -30
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return -19
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '4') {
                 return -8
             }
-            if (blackanywhere === '2') {
-                return -16
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '3') {
-                return -24
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '4') {
-                return -32
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '5') {
-                return -40
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '6') {
-                return -48
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '7') {
-                return -56
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '8') {
-                return -64
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '9') {
-                return -72
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '10') {
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '11') {
                 return -80
             }
-            if (blackanywhere === '11') {
-                return -88
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
-            if (blackanywhere === '12') {
-                return -96
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return -69
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return -58
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return -47
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return -36
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return -25
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return -14
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return -3
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return 8
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return -64
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return -53
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return -42
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return -31
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return -20
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return -9
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return 2
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return 13
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return 24
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return -48
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return -37
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return -26
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return -15
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return -4
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return 7
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return 18
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return 29
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return 40
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return -32
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return -21
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return -10
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return 1
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return 12
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return 23
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return 34
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return 45
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return 56
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return -16
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return -5
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return 6
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return 17
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return 28
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return 39
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return 50
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return 61
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return 0
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return 11
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return 22
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return 33
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return 44
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return 55
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return 66
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return 16
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return 27
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return 38
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return 49
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return 60
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return 71
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return 32
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return 43
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return 54
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return 65
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return 76
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return 48
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return 59
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return 70
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return 81
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return 64
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return 75
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return 86
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return 80
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return 91
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return 96
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("Het aantal zwarte staven moet optellen tot 12.")
             }
         }]
     }, {
@@ -544,10 +5000,11 @@
         "inwesttransfer-desc": "Aantal van jullie staven in jullie container in/op jullie westelijke transfer",
         "anywhereelese-desc": "Aantal van jullie staven, in jullie container, op jullie mat maar niet in/op jullie westelijke transfer",
         "sortingblack-name": "M04 Sorteren (zwarte staven)",
-        "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren): \r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren):\r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "inflowerbox-desc": "Staven in hun startpositie of onderdeel van een scorende bloempot",
         "greenbinlandfill-desc": "Staven in de bijbehorende groene container, of in de vuilnisbelt-container",
         "blackanywhere-desc": "Staven ergens anders, waar dan ook (minpunten)",
+        "sortingblack-error": "Het aantal zwarte staven moet optellen tot 12.",
         "career-name": "M05 Carrières",
         "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
         "careeryesno-desc": "Ten minste 1 persoon bevindt zich in het sorteergebied",
