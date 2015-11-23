@@ -81,6 +81,7 @@ define('views/scoresheet',[
                 },[]);
                 mission.errors = [];
                 mission.percentages = [];
+                mission.completed = false;
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
@@ -89,10 +90,12 @@ define('views/scoresheet',[
                 },function(newValue) {
                     mission.errors = [];
                     mission.percentages = [];
-                    mission.result = mission.score.reduce(function(total,score) {
+                    mission.completedObjectives = [];
+                    mission.result = mission.score.reduce(function(total,score,i) {
                         var deps = $challenge.getDependencies(score);
                         var vars = getObjectives(deps);
                         var res = score.apply(null,vars);
+                        mission.completedObjectives[i] = (res !== undefined);
                         if (res instanceof Error) {
                             mission.errors.push(res);
                             //do not count this bit
@@ -106,6 +109,9 @@ define('views/scoresheet',[
                         }
                         return total + (res||0);
                     },0);
+                    mission.completed = mission.completedObjectives.every(function(objectCompleted) {
+                        return objectCompleted;
+                    });
                 });
 
             }

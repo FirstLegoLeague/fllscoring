@@ -108,6 +108,22 @@ describe('scoresheet',function() {
                     expect(mission.result).toBe(3);
                 });
             });
+            it('should be completed',function() {
+                return $scope.load().then(function() {
+                    $scope.$digest();
+                    expect(mission.completed).toBe(true);
+                });
+            });
+            it('should not be completed if some scores are undefined',function() {
+                mission.score = [
+                        function() {return 1;},
+                        function() {return undefined;}
+                ];
+                return $scope.load().then(function() {
+                    $scope.$digest();
+                    expect(mission.completed).toBe(false);
+                });
+            });
             it('should not count an error, but log it to mission errors',function() {
                 var err = new Error('squeek');
                 mission.score = [
