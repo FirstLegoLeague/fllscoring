@@ -100,6 +100,24 @@
     font-weight: bold;
 }
 
+.card h2::before {
+    display: inline-block;
+    width: 24px;
+    content: ' ';
+}
+.card.ok h2::before {
+    content: '✔ ';
+    color: green;
+}
+.card.error h2::before {
+    content: '✘ ';
+    color: crimson;
+}
+.card-actions.error {
+    background-color: crimson;
+    color: white;
+}
+
 .missions .field {
     display: block;
     text-align: left;

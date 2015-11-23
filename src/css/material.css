@@ -166,19 +166,6 @@
     .card-actions p {
         margin: 0;
     }
-
-    .card.ok h2::before {
-        content: '✔ ';
-        color: green;
-    }
-    .card.error h2::before {
-        content: '✘ ';
-        color: crimson;
-    }
-    .card-actions.error {
-        background-color: crimson;
-        color: white;
-    }
 }
 
 /* lists */
