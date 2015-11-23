@@ -166,6 +166,10 @@
     .card-actions p {
         margin: 0;
     }
+    .card-actions.error {
+        background-color: crimson;
+        color: white;
+    }
 }
 
 /* lists */

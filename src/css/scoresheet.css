@@ -100,14 +100,6 @@
     font-weight: bold;
 }
 
-.missions .error {
-    background-color: crimson;
-    color: white;
-	display: block;
-	padding: 3px;
-	
-}
-
 .missions .field {
     display: block;
     text-align: left;

@@ -68,10 +68,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div ng-show="mission.errors" ng-repeat="error in mission.errors" class="error">
-                            <div class="icon-warning-sign"></div>
-                            {{error.message}}
-                        </div>
+                    </div>
+                    <div ng-show="mission.errors" ng-repeat="error in mission.errors" class="error card-actions">
+                        <div class="icon-warning-sign"></div>
+                        {{error.message}}
                     </div>
                 </section>
             </form><!-- END of scoresheetForm -->
