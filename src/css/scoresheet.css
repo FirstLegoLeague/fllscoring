@@ -78,34 +78,22 @@
     text-align: right;
 }
 
-.panel {
-    margin-bottom: 20px;
-    background-color: #E5EDF0;
-    background-color: rgba(128,128,128,0.1);
-    color: MidnightBlue;
-    padding: 10px;
+.card h2::before {
+    display: inline-block;
+    width: 24px;
+    content: ' ';
 }
-.panel h2 {
-    font-size: 20px;
-    font-weight: normal;
-    text-align: left;
-    padding: 4px 10px;
-    margin: 0;
-    line-height: 24px;
-    overflow: auto;
+.card.ok h2::before {
+    content: '✔ ';
+    color: green;
 }
-
-.panel h2 .result {
-    float: right;
-    font-weight: bold;
+.card.error h2::before {
+    content: '✘ ';
+    color: crimson;
 }
-
-.missions .error {
+.card-actions.error {
     background-color: crimson;
     color: white;
-	display: block;
-	padding: 3px;
-	
 }
 
 .missions .field {
