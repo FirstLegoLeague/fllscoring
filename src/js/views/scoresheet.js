@@ -81,6 +81,7 @@ define('views/scoresheet',[
                 },[]);
                 mission.errors = [];
                 mission.percentages = [];
+                mission.completed = false;
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
@@ -89,10 +90,12 @@ define('views/scoresheet',[
                 },function(newValue) {
                     mission.errors = [];
                     mission.percentages = [];
-                    mission.result = mission.score.reduce(function(total,score) {
+                    mission.completedObjectives = [];
+                    mission.result = mission.score.reduce(function(total,score,i) {
                         var deps = $challenge.getDependencies(score);
                         var vars = getObjectives(deps);
                         var res = score.apply(null,vars);
+                        mission.completedObjectives[i] = (res !== undefined);
                         if (res instanceof Error) {
                             mission.errors.push(res);
                             //do not count this bit
@@ -106,6 +109,9 @@ define('views/scoresheet',[
                         }
                         return total + (res||0);
                     },0);
+                    mission.completed = mission.completedObjectives.every(function(objectCompleted) {
+                        return objectCompleted;
+                    });
                 });
 
             }
@@ -139,14 +145,15 @@ define('views/scoresheet',[
                 return bonusScore + restScore;
             };
 
+            function empty(val) {
+                return val === undefined || val === null;
+            }
+
             //lists reasons why the scoresheet cannot be saved
             $scope.preventSaveErrors = function() {
-                var list = [];
-                if (!$scope.missions) {return list;}
+                var list = $scope.teamRoundErrors();
+                if (!$scope.missions) {return [];}
 
-                function empty(val) {
-                    return val === undefined || val === null;
-                }
                 function errors() {
                     return $scope.missions.some(function(mission) {
                         return !!mission.errors.length;
@@ -160,6 +167,18 @@ define('views/scoresheet',[
                     });
                 }
 
+                if (errors()) {
+                    list.push('Some missions have errors');
+                }
+                if (inComplete()) {
+                    list.push('Some missions are incomplete');
+                }
+
+                return list;
+            };
+
+            $scope.teamRoundErrors = function() {
+                var list = [];
                 if (empty($scope.stage)) {
                     list.push('No stage selected');
                 }
@@ -168,12 +187,6 @@ define('views/scoresheet',[
                 }
                 if (empty($scope.team)) {
                     list.push('No team selected');
-                }
-                if (errors()) {
-                    list.push('Some missions have errors');
-                }
-                if (inComplete()) {
-                    list.push('Some missions are incomplete');
                 }
                 if ($scope.settings.askTable && !$scope.table) {
                     list.push('No table number entered');
@@ -184,6 +197,10 @@ define('views/scoresheet',[
 
                 return list;
             };
+
+            $scope.teamRoundOk = function() {
+                return !$scope.teamRoundErrors().length;
+            }
 
             $scope.isSaveable = function() {
                 if (!$scope.missions) {return false;}
