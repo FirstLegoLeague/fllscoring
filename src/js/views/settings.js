@@ -38,13 +38,11 @@ define('views/settings',[
                 //update all stages
                 var stages = angular.copy($scope.allStages);
                 $stages.clear();
-                stages.forEach($scope.addStage);
+                stages.forEach(function(stage) {
+                    return $stages.add(stage);
+                });
                 return $stages.save();
             };
-
-            $scope.addStage = function(stage) {
-                return $stages.add(stage);
-            }
 
             $scope.removeStage = function(stage) {
                 return $stages.remove(stage.id);
