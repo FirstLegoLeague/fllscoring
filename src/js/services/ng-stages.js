@@ -119,16 +119,6 @@ define('services/ng-stages',[
             this._update();
         };
 
-        Stages.prototype.updateStage = function(stage) {
-            var rawStage = this._rawStages[stage.index];
-            if (rawStage) {
-                angular.extend(rawStage,stage);
-                this._update();
-            } else {
-                throw new Error("stage with " + stage.id + " cannot be found");
-            }
-        };
-
         /**
          * move stage by a specified amount of steps
          * clipping to top or bottom of the list
