@@ -31,6 +31,8 @@ define('views/scoresheet',[
             $scope.settings = {};
             $scope.missions = [];
             $scope.strings = [];
+            $scope.table = null;
+            $scope.referee = null;
 
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
@@ -214,8 +216,6 @@ define('views/scoresheet',[
                 $scope.team = null;
                 $scope.stage = null;
                 $scope.round = null;
-                $scope.table = null;
-                $scope.referee = null;
                 $scope.missions.forEach(function(mission) {
                     mission.objectives.forEach(function(objective) {
                         delete objective["value"];

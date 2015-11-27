@@ -58,6 +58,8 @@ describe('scoresheet',function() {
             expect($scope.missions).toEqual([]);
             $scope.$digest();
             expect($scope.settings).toEqual('settings');
+            expect($scope.referee).toEqual(null);
+            expect($scope.table).toEqual(null);
         });
     });
 
@@ -518,6 +520,7 @@ describe('scoresheet',function() {
             $scope.round = 2;
             $scope.team = 3;
             $scope.table = 7;
+            $scope.referee = 'piet';
         });
 
         it('should clear form', function() {
@@ -530,9 +533,11 @@ describe('scoresheet',function() {
             expect($scope.team).toEqual(null);
             expect($scope.stage).toEqual(null);
             expect($scope.round).toEqual(null);
-            expect($scope.table).toEqual(null);
             expect($scope.missions[0].objectives[0].value).toEqual(null);
             expect($scope.missions[0].objectives[1].value).toEqual(null);
+            //table should not clear
+            expect($scope.table).toEqual(7);
+            expect($scope.referee).toEqual('piet');
         });
     });
 
