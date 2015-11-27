@@ -19,9 +19,9 @@ function createStagesMock() {
             throw new Error("unknown stage");
         },
         save: jasmine.createSpy('save'),
-        updateStage: jasmine.createSpy('updateStage'),
         remove: jasmine.createSpy('remove'),
         moveStage: jasmine.createSpy('moveStage'),
-        add: jasmine.createSpy('add')
+        add: jasmine.createSpy('add'),
+        clear: jasmine.createSpy('clear')
     };
 }

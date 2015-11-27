@@ -155,26 +155,6 @@ describe('ng-stages',function() {
         });
     });
 
-    describe('updateStage',function() {
-        it('should update the raw stages with the given stage',function() {
-            //change mockStage
-            mockStageSanitized.rounds = 4;
-            //$rounds not yet updated
-            expect(mockStageSanitized.$rounds).toEqual([1,2]);
-            $stages.updateStage(mockStageSanitized);
-            //updated
-            expect($stages.allStages).toEqual([
-                {index:0,id:"practice",name:"Oefenrondes",rounds:4,$rounds:[1,2,3,4]}
-            ]);
-        });
-        it('should throw an error if the stage is not found',function() {
-            function doit() {
-                $stages.updateStage({id:'foo'});
-            }
-            expect(doit).toThrow();
-        })
-    });
-
     describe('moveStage',function() {
         beforeEach(function() {
             //setup two stages
