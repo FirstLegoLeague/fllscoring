@@ -9,16 +9,53 @@ define('services/ng-message',[
     "use strict";
 
     return module.service('$message',[
-        '$http','$settings',
-        function($http,$settings) {
+        '$http','$settings','$q',
+        function($http,$settings,$q) {
+            var ws;
+
+            function init() {
+                if (ws) {
+                    return $q.when(ws);
+                }
+                return $settings.init().then(function(settings) {
+                    if (!(settings.mhub && settings.node)) {
+                        throw new Error('no message bus configured');
+                    }
+                    var def = $q.defer();
+                    ws = new WebSocket(settings.mhub);
+                    ws.node = settings.node;
+                    ws.onopen = function() {
+                        ws.send(JSON.stringify({
+                            type: "subscribe",
+                            node: settings.node
+                        }));
+                        def.resolve(ws);
+                    };
+                    ws.onerror = function(e){
+                        log("socket error", e);
+                    };
+                    ws.onclose = function() {
+                        log("socket close");
+                    };
+                    ws.onmessage = function(msg) {
+                        log("socket message",msg);
+                        // var data = JSON.parse(msg.data);
+                        // handleMessage(data);
+                    };
+                    return def.promise;
+                });
+            }
+
 
             return {
-                send: function(msg) {
-                    return $settings.init().then(function(settings) {
-                        if (settings.messageBus) {
-                            var url = settings.messageBus;
-                            return $http.post(url,msg);
-                        }
+                send: function(topic,data) {
+                    return init().then(function(ws) {
+                        ws.send(JSON.stringify({
+                            type: "publish",
+                            node: ws.node,
+                            topic: topic,
+                            data: data
+                        }));
                     });
                 }
             };

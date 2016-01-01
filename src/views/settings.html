@@ -130,15 +130,23 @@
                 <input type="text" ng-model="settings.host" />
                 <label for="">Host</label>
             </span>
-            shared host to get data from and save data to. E.g. 'http://www.example.com/'
+            shared host to get data from and save data to. E.g. 'http://localhost:1390/'
         </p>
         <p>
             
             <span class="textfield">
-                <input type="text" ng-model="settings.messageBus" />
-                <label for="">Message bus</label>
+                <input type="text" ng-model="settings.mhub" />
+                <label for="">MHub server</label>
             </span>
-            message bus endpoint for http POST
+            MHub server to send messages to. E.g. 'ws://localhost:13900/'
+        </p>
+        <p>
+            
+            <span class="textfield">
+                <input type="text" ng-model="settings.node" />
+                <label for="">MHub node</label>
+            </span>
+            MHub server node to subscribe to. E.g. 'scoring'
         </p>
         <p>
             
