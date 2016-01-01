@@ -12,7 +12,16 @@
     </div>
 
     <div ng-repeat="stage in stages">
-        <a class="pull-right" style="margin-top: 1em;" href="{{csvdata[stage.id]}}" download="{{csvname[stage.id]}}"><i class="icon-download-alt"></i> Export</a>
+        <p class="pull-right" style="margin-top: 1em;">
+            <a  href="{{csvdata[stage.id]}}" download="{{csvname[stage.id]}}">
+                <i class="icon-download-alt"></i>
+                Export
+            </a>
+            <a ng-click="broadcastRanking(stage)">
+                <i class="icon-bullhorn"></i>
+                Broadcast
+            </a>
+        </p>
         <h1 ng-if="stage.rounds > 0">
             <span class="icon" style="cursor: pointer;" ng-class="{
                 'icon-caret-down':!stage.$collapsed,
