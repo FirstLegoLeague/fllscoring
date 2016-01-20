@@ -225,7 +225,6 @@ define('views/scoresheet',[
             };
 
             //saves mission scoresheet
-            //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
             $scope.save = function() {
                 if (!$scope.team || !$scope.stage || !$scope.round) {
                     $window.alert('no team selected, do so first');
