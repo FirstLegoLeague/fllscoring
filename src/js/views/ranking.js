@@ -4,13 +4,14 @@ define('views/ranking',[
     'services/log',
     'services/ng-scores',
     'services/ng-handshake',
+    'services/ng-message',
     'controllers/ExportRankingDialogController',
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
     return angular.module(moduleName,['ExportRankingDialog']).controller(moduleName+'Ctrl', [
-        '$scope', '$scores', '$stages','$handshake',
-        function($scope, $scores, $stages, $handshake) {
+        '$scope', '$scores', '$stages','$handshake','$message',
+        function($scope, $scores, $stages, $handshake, $message) {
             log('init ranking ctrl');
 
             // temporary default sort values
@@ -24,6 +25,22 @@ define('views/ranking',[
                     scores: $scope.scores,
                     stages: $scope.stages
                 });
+            };
+
+            //TODO: this is a very specific message tailored to display system.
+            //we want less contract here
+            $scope.broadcastRanking = function(stage) {
+                var data = {
+                    data: $scope.scoreboard[stage.id].map(function(item) {
+                        return [
+                            item.rank,
+                            item.team.name,
+                            item.highest
+                        ];
+                    }),
+                    header: stage.name
+                };
+                $message.send('list:setArray',data);
             };
 
             $scope.doSort = function(stage, col, defaultSort) {

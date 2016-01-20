@@ -122,7 +122,7 @@ Basically, it allows users to legally copy, distribute and modify software. This
 Charge a fee to distribute the software.
 * If you want to charge someone to provide the software, set it up on their website or do anything else related to it, you can do so. But, you must give them a copy of the GNU GPL, which basically tells them that they could probably get the software elsewhere for free. Best to be up front about that, and about why you’re charging them.
 * If you want to add or remove functionality, go ahead. If you want to use a portion of the code in another project, you can. The only catch is that the other project must also be released under the GPL. Ideally we would want you to share your improvements back with us on this GitHub.
-* We welcome your feedback but please remember that this software comes with no guarantees. We are dedicated volunteer and experiences software developpers and will do our best make sure we make a valuable and reliable contribution to the community. However the use of this software is at your own risk.
+* We welcome your feedback but please remember that this software comes with no guarantees. We are dedicated volunteer and experienced software developers and will do our best make sure we make a valuable and reliable contribution to the community. However the use of this software is at your own risk.
 
 Authors
 --------

@@ -67,8 +67,11 @@ describe('settings', function() {
     describe('saving',function() {
         it('should write to the file system',function() {
             $scope.settings = 'data';
+            $scope.allStages = [1,2,3];
             $scope.save();
             expect(settingsMock.save).toHaveBeenCalledWith();
+            expect(stagesMock.clear).toHaveBeenCalled();
+            expect(stagesMock.add).toHaveBeenCalled();
             expect(stagesMock.save).toHaveBeenCalledWith();
         });
     });

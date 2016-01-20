@@ -12,7 +12,7 @@
             </p>
         </div>
         <div class="missions" ng-style="{borderLeftColor:teamColor()}">
-            <section class="card">
+            <section class="card" ng-class="{ok:teamRoundOk()}">
                 <h2 class="card-header">Team &amp; round</h2>
                 <div class="card-body">
                     <p>
@@ -37,7 +37,7 @@
                 </div>
             </section>
             <form id="scoresheetForm" ng-submit="validateScoresheet()">
-                <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.error}">
+                <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.errors.length, ok:mission.completed}">
 
                     <div class="card-menu" ng-click="openDescriptionModal(mission)"><div class="icon-question-sign"/></div>
 
@@ -68,14 +68,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div ng-show="mission.errors" ng-repeat="error in mission.errors" class="error">
-                            <div class="icon-warning-sign"></div>
-                            {{error.message}}
-                        </div>
+                    </div>
+                    <div ng-repeat="error in mission.errors" class="error card-actions">
+                        <div class="icon-warning-sign"></div>
+                        {{error.message}}
                     </div>
                 </section>
             </form><!-- END of scoresheetForm -->
-            <section class="card">
+            <section class="card" ng-class="{ok:teamRoundOk()}">
                 <h2 class="card-header">Team &amp; round</h2>
                 <div class="card-body">
                     <p>
@@ -100,7 +100,7 @@
                 </div>
             </section>
 
-            <section class="card">
+            <section class="card" ng-class="{ok:signature}">
                 <h2 class="card-header">
                     Team signature
                     <button class="btn pull-right btn-warning" ng-click="signature=null"><div  class="icon-eraser"/> Clear signature</button>
