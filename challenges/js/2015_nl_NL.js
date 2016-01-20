@@ -6,15 +6,31 @@
         "objectives": [{
             "id": "containers",
             "title": "Containers van het andere team met minimaal een gele of blauwe staaf van het andere team in jullie Safety",
-            "type": "number",
-            "min": "0",
-            "max": "2"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }, {
             "id": "containers_other",
             "title": "Containers van jullie met minimaal een gele of blauwe staaf van jullie in Safety van het andere team",
-            "type": "number",
-            "min": "0",
-            "max": "2"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }],
         "score": [function(containers) {
             if (containers === '0') {
@@ -43,9 +59,17 @@
         "objectives": [{
             "id": "truck_factory",
             "title": "Aantal methaan in de vrachtwagen en/of de fabriek",
-            "type": "number",
-            "min": "0",
-            "max": "2"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }],
         "score": [function(truck_factory) {
             if (truck_factory === '0') {
@@ -4837,15 +4861,34 @@
         "objectives": [{
             "id": "bags",
             "title": "Aantal plastic tasjes die zich in Safety bevinden",
-            "type": "number",
-            "min": "0",
-            "max": "2"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }, {
             "id": "animals",
             "title": "Aantal dieren die zich in een cirkel bevinden die vrij is van plastic tasjes",
-            "type": "number",
-            "min": "0",
-            "max": "3"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }, {
+                "value": "3",
+                "title": "3"
+            }],
+            "type": "enum"
         }, {
             "id": "chicken",
             "title": "De kip bevindt zich in de kleine cirkel",
@@ -4949,9 +4992,17 @@
         "objectives": [{
             "id": "purchasing",
             "title": "Aantal speelgoedvliegtuigjes die zich volledig in Safety bevinden",
-            "type": "number",
-            "min": "0",
-            "max": "2"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }],
         "score": [function(purchasing) {
             if (purchasing === '0') {

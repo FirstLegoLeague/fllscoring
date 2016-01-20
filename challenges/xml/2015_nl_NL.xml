@@ -58,7 +58,7 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
         <string id="composting-name">         M08 Composteren</string>
         <string id="compostingmission-desc">  De compost is...</string>
         <string id="composting-desc">         <![CDATA[<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>De compost is uitgestoten, maar bevindt zich niet volledig in “Safety”.</li><li>De compost bevindt zich volledig in “Veiligheid”.</li></ul>]]></string>
-        <string id="nonecompostejected-desc"> niet uitgestoten</string>>
+        <string id="nonecompostejected-desc"> niet uitgestoten</string>
         <string id="compostejected-desc">     uitgestoten maar niet in Safety</string>
         <string id="compostejectedsafety-desc">
                                               uitgestoten en in Safety</string>
@@ -84,8 +84,16 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
     <!-- Do NOT edit below this line -->
 
     <mission name="usingrecycledmaterial-name" description="usingrecycledmaterial-desc">
-        <objective-number id="containers" description="containers-desc" min="0" max="2" default="0" />
-        <objective-number id="containers-other" description="containers-other-desc" min="0" max="2" default="0" />
+        <objective-enum id="containers" description="containers-desc" default="0">
+            <option name="0" description="0" />
+            <option name="1" description="1" />
+            <option name="2" description="2" />
+        </objective-enum>
+        <objective-enum id="containers-other" description="containers-other-desc" default="0">
+            <option name="0" description="0" />
+            <option name="1" description="1" />
+            <option name="2" description="2" />
+        </objective-enum>
         <score>
             <indexes>
                 <index objective="containers" />
@@ -109,7 +117,11 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
     </mission>
 
     <mission name="methane-name" description="methane-desc">
-        <objective-number id="truck-factory" description="truck-factory-desc" min="0" max="2" default="0" />
+        <objective-enum id="truck-factory" description="truck-factory-desc" default="0">
+            <option name="0" description="0" />
+            <option name="1" description="1" />
+            <option name="2" description="2" />
+        </objective-enum>
         <score>
             <indexes>
                 <index objective="truck-factory" />
@@ -1758,8 +1770,17 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
     </mission>
 
     <mission name="cleanup-name" description="cleanup-desc">
-        <objective-number id="bags" description="bags-desc" min="0" max="2" default="0" />
-        <objective-number id="animals" description="animals-desc" min="0" max="3" default="0" />
+        <objective-enum id="bags" description="bags-desc" default="0">
+            <option name="0" description="0" />
+            <option name="1" description="1" />
+            <option name="2" description="2" />
+        </objective-enum>
+        <objective-enum id="animals" description="animals-desc" default="0">
+            <option name="0" description="0" />
+            <option name="1" description="1" />
+            <option name="2" description="2" />
+            <option name="3" description="3" />
+        </objective-enum>
         <objective-yesno id="chicken" description="chicken-desc" default="no" />
         <score>
             <indexes>
@@ -1838,7 +1859,11 @@ Tenminste één persoon bevindt zich volledig in het sorteergebied. <font color=
     </mission>
 
     <mission name="purchase-name" description="purchase-desc">
-        <objective-number id="purchasing" description="purchasing-desc" min="0" max="2" default="0" />
+        <objective-enum id="purchasing" description="purchasing-desc" default="0">
+            <option name="0" description="0" />
+            <option name="1" description="1" />
+            <option name="2" description="2" />
+        </objective-enum>
         <score>
             <indexes>
                 <index objective="purchasing" />

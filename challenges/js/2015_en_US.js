@@ -4,68 +4,81 @@
         "title": "Using recycled material",
         "description": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>Green Bins  containing at least one matching Yellow or Blue Bar, all  from the other team, is completely in your Safety.</li></ul>",
         "objectives": [{
-            "id": "containersself",
+            "id": "containers",
             "title": "Own containers",
-            "type": "number",
-            "min": "0",
-            "max": "3"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }, {
-            "id": "containersother",
+            "id": "containers_other",
             "title": "Other teams' container",
-            "type": "number",
-            "min": "0",
-            "max": "3"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }],
-        "score": [function(containersself) {
-            if (containersself === '0') {
+        "score": [function(containers) {
+            if (containers === '0') {
                 return 0
             }
-            if (containersself === '1') {
+            if (containers === '1') {
                 return 60
             }
-            if (containersself === '2') {
+            if (containers === '2') {
                 return 120
             }
-            if (containersself === '3') {
-                return 180
-            }
-        }, function(containersother) {
-            if (containersother === '0') {
+        }, function(containers_other) {
+            if (containers_other === '0') {
                 return 0
             }
-            if (containersother === '1') {
+            if (containers_other === '1') {
                 return 60
             }
-            if (containersother === '2') {
+            if (containers_other === '2') {
                 return 120
-            }
-            if (containersother === '3') {
-                return 180
             }
         }]
     }, {
         "title": "Methane",
         "description": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>Methane is in the Truck’s engine compartment,  and/or the Factory’s Power Station.</li></ul><b>Method constraints or leniencies:</b><ul><li><b>LENIENCY:</b> Full/Exact nesting is not required.</li></ul>",
         "objectives": [{
-            "id": "truck",
-            "title": "A methane is in the Truck's engine",
-            "type": "yesno"
-        }, {
-            "id": "factory",
-            "title": "A methane is in the Factory's Power Station",
-            "type": "yesno"
+            "id": "truck_factory",
+            "title": "Methane in the Truck's engine or the Factory's Power Station",
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }],
-        "score": [function(truck, factory) {
-            if (truck === 'no' && factory === 'no') {
+        "score": [function(truck_factory) {
+            if (truck_factory === '0') {
                 return 0
             }
-            if (truck === 'no' && factory === 'yes') {
+            if (truck_factory === '1') {
                 return 40
             }
-            if (truck === 'yes' && factory === 'no') {
-                return 40
-            }
-            if (truck === 'yes' && factory === 'yes') {
+            if (truck_factory === '2') {
                 return 80
             }
         }]
@@ -224,7 +237,7 @@
             "title": "In their matching Green Bin or in the Landfill Bin",
             "type": "number",
             "min": "0",
-            "max": "12"
+            "max": "8"
         }, {
             "id": "blackanywhere",
             "title": "Anywhere else (penalty)",
@@ -232,125 +245,4569 @@
             "min": "0",
             "max": "12"
         }],
-        "score": [function(inflowerbox) {
-            if (inflowerbox === '0') {
-                return 0
+        "score": [function(inflowerbox, greenbinlandfill, blackanywhere) {
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '1') {
-                return 7
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '2') {
-                return 14
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '3') {
-                return 21
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '4') {
-                return 28
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '5') {
-                return 35
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '6') {
-                return 42
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '7') {
-                return 49
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '8') {
-                return 56
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '9') {
-                return 63
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '10') {
-                return 70
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '11') {
-                return 77
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
             }
-            if (inflowerbox === '12') {
-                return 84
+            if (inflowerbox === '0' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return -96
             }
-        }, function(greenbinlandfill) {
-            if (greenbinlandfill === '0') {
-                return 0
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '1') {
-                return 6
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '2') {
-                return 12
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '3') {
-                return 18
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '4') {
-                return 24
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '5') {
-                return 30
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '6') {
-                return 36
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '7') {
-                return 42
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '8') {
-                return 48
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '9') {
-                return 54
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '10') {
-                return 60
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
             }
-            if (greenbinlandfill === '11') {
-                return 66
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return -85
             }
-            if (greenbinlandfill === '12') {
-                return 72
+            if (inflowerbox === '0' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
             }
-        }, function(blackanywhere) {
-            if (blackanywhere === '0') {
-                return 0
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '1') {
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return -74
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return -63
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return -52
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return -41
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return -30
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return -19
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '4') {
                 return -8
             }
-            if (blackanywhere === '2') {
-                return -16
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '3') {
-                return -24
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '4') {
-                return -32
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '5') {
-                return -40
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '6') {
-                return -48
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '7') {
-                return -56
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '8') {
-                return -64
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '9') {
-                return -72
+            if (inflowerbox === '0' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '10') {
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '11') {
                 return -80
             }
-            if (blackanywhere === '11') {
-                return -88
+            if (inflowerbox === '1' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
             }
-            if (blackanywhere === '12') {
-                return -96
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return -69
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return -58
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return -47
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return -36
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return -25
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return -14
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return -3
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return 8
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '1' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return -64
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return -53
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return -42
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return -31
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return -20
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return -9
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return 2
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return 13
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return 24
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '2' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return -48
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return -37
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return -26
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return -15
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return -4
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return 7
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return 18
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return 29
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return 40
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '3' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return -32
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return -21
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return -10
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return 1
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return 12
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return 23
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return 34
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return 45
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return 56
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '4' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return -16
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return -5
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return 6
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return 17
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return 28
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return 39
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return 50
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return 61
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '5' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return 0
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return 11
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return 22
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return 33
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return 44
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return 55
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return 66
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '6' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return 16
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return 27
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return 38
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return 49
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return 60
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return 71
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '7' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return 32
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return 43
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return 54
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return 65
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return 76
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '8' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return 48
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return 59
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return 70
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return 81
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '9' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return 64
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return 75
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return 86
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '10' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return 80
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return 91
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '11' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '0') {
+                return 96
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '0' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '1' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '2' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '3' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '4' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '5' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '6' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '7' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '0') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '1') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '2') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '3') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '4') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '5') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '6') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '7') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '8') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '9') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '10') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '11') {
+                return new Error("sortingblack-error")
+            }
+            if (inflowerbox === '12' && greenbinlandfill === '8' && blackanywhere === '12') {
+                return new Error("sortingblack-error")
             }
         }]
     }, {
@@ -386,28 +4843,15 @@
                 "title": "The car was never in the safety zone"
             }],
             "type": "enum"
-        }, {
-            "id": "scrapcarsyesno",
-            "title": "The car is folded and in East Transfer Area",
-            "type": "yesno"
         }],
-        "score": [function(positioncar, scrapcarsyesno) {
-            if (positioncar === 'engineinstalled' && scrapcarsyesno === 'no') {
+        "score": [function(positioncar) {
+            if (positioncar === 'engineinstalled') {
                 return 65
             }
-            if (positioncar === 'engineinstalled' && scrapcarsyesno === 'yes') {
-                return 0
-            }
-            if (positioncar === 'carfolded' && scrapcarsyesno === 'no') {
+            if (positioncar === 'carfolded') {
                 return 50
             }
-            if (positioncar === 'carfolded' && scrapcarsyesno === 'yes') {
-                return 0
-            }
-            if (positioncar === 'none' && scrapcarsyesno === 'no') {
-                return 0
-            }
-            if (positioncar === 'none' && scrapcarsyesno === 'yes') {
+            if (positioncar === 'none') {
                 return 0
             }
         }]
@@ -417,15 +4861,34 @@
         "objectives": [{
             "id": "bags",
             "title": "Platic Bags completely in Safety",
-            "type": "number",
-            "min": "0",
-            "max": "2"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }, {
             "id": "animals",
             "title": "Animals are completely in large circles which are empty of Plaic Bags",
-            "type": "number",
-            "min": "0",
-            "max": "3"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }, {
+                "value": "3",
+                "title": "3"
+            }],
+            "type": "enum"
         }, {
             "id": "chicken",
             "title": "The Chicken is completely in the small circle",
@@ -467,25 +4930,28 @@
         "description": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>The Compost is ejected, but not completely in Safety.</li><li>The Compost is completely in Safety.</li></ul>",
         "objectives": [{
             "id": "compostejected",
-            "title": "The Compost is ejected, but not completely in safety.",
-            "type": "yesno"
-        }, {
-            "id": "compostinsafety",
-            "title": "The Compost is in Safety",
-            "type": "yesno"
+            "title": "The Compost is...",
+            "options": [{
+                "value": "compostejectedsafety",
+                "title": "in Safety"
+            }, {
+                "value": "compostejected",
+                "title": "ejected, but not completely in safety."
+            }, {
+                "value": "none",
+                "title": "not ejected"
+            }],
+            "type": "enum"
         }],
-        "score": [function(compostejected, compostinsafety) {
-            if (compostejected === 'yes' && compostinsafety === 'yes') {
-                return 80
+        "score": [function(compostejected) {
+            if (compostejected === 'none') {
+                return 0
             }
-            if (compostejected === 'no' && compostinsafety === 'yes') {
-                return new Error("compost-error")
-            }
-            if (compostejected === 'yes' && compostinsafety === 'no') {
+            if (compostejected === 'compostejected') {
                 return 60
             }
-            if (compostejected === 'no' && compostinsafety === 'no') {
-                return 0
+            if (compostejected === 'compostejectedsafety') {
+                return 80
             }
         }]
     }, {
@@ -526,9 +4992,17 @@
         "objectives": [{
             "id": "purchasing",
             "title": "Toy Planes are completely in Safety",
-            "type": "number",
-            "min": "0",
-            "max": "2"
+            "options": [{
+                "value": "0",
+                "title": "0"
+            }, {
+                "value": "1",
+                "title": "1"
+            }, {
+                "value": "2",
+                "title": "2"
+            }],
+            "type": "enum"
         }],
         "score": [function(purchasing) {
             if (purchasing === '0') {
@@ -548,22 +5022,12 @@
             "id": "compostinpackage",
             "title": "The Compost is perfectly nested inside one of the Packages",
             "type": "yesno"
-        }, {
-            "id": "originalcondition",
-            "title": "The Package is in original condition",
-            "type": "yesno"
         }],
-        "score": [function(compostinpackage, originalcondition) {
-            if (compostinpackage === 'yes' && originalcondition === 'yes') {
+        "score": [function(compostinpackage) {
+            if (compostinpackage === 'yes') {
                 return 40
             }
-            if (compostinpackage === 'no' && originalcondition === 'yes') {
-                return 0
-            }
-            if (compostinpackage === 'yes' && originalcondition === 'no') {
-                return 0
-            }
-            if (compostinpackage === 'no' && originalcondition === 'no') {
+            if (compostinpackage === 'no') {
                 return 0
             }
         }]
@@ -573,12 +5037,11 @@
         "no": "No",
         "usingrecycledmaterial-name": "Using recycled material",
         "usingrecycledmaterial-desc": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>Green Bins  containing at least one matching Yellow or Blue Bar, all  from the other team, is completely in your Safety.</li></ul>",
-        "containersself-desc": "Own containers",
-        "containersother-desc": "Other teams' container",
+        "containers-desc": "Own containers",
+        "containers-other-desc": "Other teams' container",
         "methane-name": "Methane",
         "methane-desc": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>Methane is in the Truck’s engine compartment,  and/or the Factory’s Power Station.</li></ul><b>Method constraints or leniencies:</b><ul><li><b>LENIENCY:</b> Full/Exact nesting is not required.</li></ul>",
-        "truck-desc": "A methane is in the Truck's engine",
-        "factory-desc": "A methane is in the Factory's Power Station",
+        "truck-factory-desc": "Methane in the Truck's engine or the Factory's Power Station",
         "transport-name": "Transport",
         "transport-desc": "<b>Specific physical requirement, visible at the end of the match (Score one or both):</b><ul><li>The Truck supports all of the Yellow Bin’s weight.</li><li>The Yellow Bin is completely east of the Truck’s Guide.</li></ul>",
         "trucksupport-desc": "Truck supports all of the Yellow Bin’s weight",
@@ -609,8 +5072,10 @@
         "chicken-desc": "The Chicken is completely in the small circle",
         "composting-name": "Composting",
         "composting-desc": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>The Compost is ejected, but not completely in Safety.</li><li>The Compost is completely in Safety.</li></ul>",
-        "compostejected-desc": "The Compost is ejected, but not completely in safety.",
-        "compostinsafety-desc": "The Compost is in Safety",
+        "compostingmission-desc": "The Compost is...",
+        "compostejected-desc": "ejected, but not completely in safety.",
+        "compostejectedsafety-desc": "in Safety",
+        "nonecompostejected-desc": "not ejected",
         "salvage-name": "Salvage",
         "salvage-desc": "<b>Specific physical requirement, visible at the end of the match:</b><ul><li>The Valuables are completely in Safety.</li></ul>",
         "valuablesinsafety-desc": "The Valuables are completely in Safety",
