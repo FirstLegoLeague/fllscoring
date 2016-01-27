@@ -225,7 +225,7 @@
         }]
     }, {
         "title": "M04 Sorteren (zwarte staven)",
-        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren):\r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "description": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren):\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "objectives": [{
             "id": "inflowerbox",
             "title": "Staven in hun startpositie of onderdeel van een scorende bloempot",
@@ -4812,7 +4812,7 @@
         }]
     }, {
         "title": "M05 Carrières",
-        "description": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
+        "description": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
         "objectives": [{
             "id": "career",
             "title": "Ten minste 1 persoon bevindt zich in het sorteergebied",
@@ -5051,13 +5051,13 @@
         "inwesttransfer-desc": "Aantal van jullie staven in jullie container in/op jullie westelijke transfer",
         "anywhereelese-desc": "Aantal van jullie staven, in jullie container, op jullie mat maar niet in/op jullie westelijke transfer",
         "sortingblack-name": "M04 Sorteren (zwarte staven)",
-        "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren):\r\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\r\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
+        "sortingblack-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd:</b><ul><li>Zwarte staven bevinden zich (alle staven kunnen individueel punten scoren):\n<ul><li>Onderdeel van een scorende bloempot, of bevinden zich in de originele startpositie.</li><li>In de bijbehorende groene container, of in de vuilnisbelt-container.</li><li>Ergens anders (waar dan ook).</li></ul></li></ul>\n<b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>BEPERKING:</b> De staven mogen alleen rechtstreeks via de westelijke helling van de sorteermachine in de containers terechtkomen, of d.m.v. de Carrière bonus (M05).</li></ul>",
         "inflowerbox-desc": "Staven in hun startpositie of onderdeel van een scorende bloempot",
         "greenbinlandfill-desc": "Staven in de bijbehorende groene container, of in de vuilnisbelt-container",
         "blackanywhere-desc": "Staven ergens anders, waar dan ook (minpunten)",
         "sortingblack-error": "Het aantal zwarte staven moet optellen tot 12.",
         "career-name": "M05 Carrières",
-        "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\r\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
+        "career-desc": "<b>De zichtbare situatie tijdens de wedstrijd, wanneer nodig:</b><ul><li>\nTenminste één persoon bevindt zich volledig in het sorteergebied. <font color=\"red\"><b>PUNTEN:</b> 60 + de uitzondering op regel R10: De “Techneuten” van het team en/of de scheidsrechter mogen de sorteermachine met de hand verstoppingen op de oostelijke lopende band herstellen en/of verkeerd gesorteerde staven in de juiste containers plaatsen, inclusief staven die in geen enkele container terecht zijn gekomen.</font></li></ul>",
         "careeryesno-desc": "Ten minste 1 persoon bevindt zich in het sorteergebied",
         "scrapcars-name": "M06 Sloopauto's",
         "scrapcars-desc": "<b>De zichtbare situatie aan het einde van de wedstrijd (voor één van beide opties worden punten toegekend):</b><ul><li>De voorruit en motor zijn geïnstalleerd in de ‘ongevouwen ’ auto op de juiste plek en in de juiste richting.</li><li>De auto is volledig opgevouwen en bevindt zich volledig in het  oostelijke “Transfer”-gebied.</li></ul><b>Vereiste methode, berperkingen en versoepelingen:</b><ul><li><b>VERSOEPELING:</b> Volledige/exacte plaatsing/vouwing niet nodig.</li><li><b>BEPERKING:</b> De auto mag zich nooit in “Safety” hebben bevonden, zelfs niet gedeeltelijk.</li></ul>",
