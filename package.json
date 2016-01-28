@@ -7,9 +7,12 @@
     "start": "node localserver",
     "test": "./node_modules/.bin/karma start --single-run --browsers Firefox --reporters dots,coverage"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FirstLegoLeague/fllscoring.git"
+  },
   "author": "rikkert@rikkertkoppes.com",
-  "license": "BSD",
+  "license": "GPL-2.0",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-compress": "~0.5.2",
@@ -23,8 +26,7 @@
     "karma-coverage": "^0.2.4",
     "phantomjs": "~1.9.11",
     "saxon-stream2": "0.0.1",
-    "grunt-http-server": "~1.0.0",
-    "q": "~1.0.1"
+    "grunt-http-server": "~1.0.0"
   },
   "dependencies": {
     "basic-auth-connect": "~1.0.0",
