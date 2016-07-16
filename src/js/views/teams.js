@@ -128,10 +128,8 @@ define('views/teams',[
             },5000);
 
             $scope.$watch('teams',function(newValue, oldValue) {
-                if (!angular.equals(newValue,oldValue)) {
-                    $scope.needSave = true;
-                    $scope.saveTeams();
-                }
+                $scope.needSave = true;
+                $scope.saveTeams();
             },true);
 
             $scope.toggleExtended = function(isCollapsed) {

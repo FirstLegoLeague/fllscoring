@@ -22,7 +22,9 @@ describe('ng-scores',function() {
         round: 1,
         score: 150,
         originalScore: 150,
-        published: false
+        published: false,
+        edited: undefined,
+        table: undefined
     };
     var mockStage;
     var mockScore;
@@ -363,9 +365,9 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 0, score: 0 },
                 { team: team1, stage: mockStage, round: 4, score: 0 },
             ], true);
-            expect($scores.scores[0].error).toBeInstanceOf($scores.UnknownStageError);
-            expect($scores.scores[1].error).toBeInstanceOf($scores.UnknownRoundError);
-            expect($scores.scores[2].error).toBeInstanceOf($scores.UnknownRoundError);
+            expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownStageError));
+            expect($scores.scores[1].error).toEqual(jasmine.any($scores.UnknownRoundError));
+            expect($scores.scores[2].error).toEqual(jasmine.any($scores.UnknownRoundError));
             expect(board["test"].length).toEqual(0);
             expect($scores.validationErrors.length).toEqual(3);
         });
@@ -380,7 +382,7 @@ describe('ng-scores',function() {
                 { team: team2, stage: mockStage, round: 3, score: 10000 },
             ], true);
             $scores.scores.forEach(function(score) {
-                expect(score.error).toBeInstanceOf($scores.InvalidScoreError);
+                expect(score.error).toEqual(jasmine.any($scores.InvalidScoreError));
             });
             expect(board["test"].length).toEqual(0);
             expect($scores.validationErrors.length).toEqual(6);
@@ -391,7 +393,7 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 1, score: 10 },
                 { team: team1, stage: mockStage, round: 1, score: 20 },
             ], true);
-            expect($scores.scores[1].error).toBeInstanceOf($scores.DuplicateScoreError);
+            expect($scores.scores[1].error).toEqual(jasmine.any($scores.DuplicateScoreError));
             expect(board["test"][0].highest).toEqual(10);
             expect($scores.validationErrors.length).toBeGreaterThan(0);
         });
@@ -401,7 +403,7 @@ describe('ng-scores',function() {
             fillScores([
                 { team: team1, stage: mockStage, round: 1, score: 10 },
             ], true);
-            expect($scores.scores[0].error).toBeInstanceOf($scores.UnknownTeamError);
+            expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownTeamError));
             expect($scores.validationErrors.length).toEqual(1);
         });
 
@@ -479,7 +481,9 @@ describe('ng-scores',function() {
                             round: 1,
                             score: 456,
                             originalScore: 456,
-                            published: false
+                            published: false,
+                            edited: undefined,
+                            table: undefined,
                         }],
                         sheets: ["sheet_1.json"]
                     }

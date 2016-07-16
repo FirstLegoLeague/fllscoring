@@ -579,14 +579,15 @@ describe('scoresheet',function() {
             $scope.round = 1;
             $scope.table = 7;
             var oldId = $scope.uniqueId;
-            fsMock.write.and.returnValue(Q.reject('argh'));
-            return $scope.save().then(function() {
-                expect($window.alert).toHaveBeenCalledWith('unable to write result');
-                var firstFilename = fsMock.write.calls.mostRecent().args[0];
+            fsMock.write.and.returnValue(Q.reject(new Error('argh')));
+            var firstFilename;
+            return $scope.save().catch(function() {
+                expect($window.alert).toHaveBeenCalledWith('Error submitting score: Error: argh');
+                firstFilename = fsMock.write.calls.mostRecent().args[0];
                 // verify that filename stays the same
-                function noop() {}
+                return $scope.save();
+            }).catch(function() {
                 var secondFilename = fsMock.write.calls.mostRecent().args[0];
-                $scope.save().then(noop, noop);
                 expect(secondFilename).toBe(firstFilename);
             });
         });

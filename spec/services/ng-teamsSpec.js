@@ -150,7 +150,7 @@ describe('ng-teams',function() {
             $teams._rawTeams = [rawMockTeam,rawMockTeam];
             expect(function() {
                 $teams._update();
-            }).toThrow('duplicate team number 123');
+            }).toThrowError('duplicate team number 123');
         });
     });
 });

@@ -189,7 +189,7 @@ describe('ng-stages',function() {
             $stages._rawStages = [mockStage,mockStage];
             expect(function() {
                 $stages._update();
-            }).toThrow('duplicate stage id practice');
+            }).toThrowError('duplicate stage id practice');
         });
     });
 });

@@ -260,7 +260,7 @@ define('views/scoresheet',[
                         ' in ' + data.stage.name + ' ' + data.round + '.'
                     );
                 }, function(err) {
-                    $window.alert('Error submitting score: ' + JSON.stringify(err));
+                    $window.alert('Error submitting score: ' + String(err));
                     throw err;
                 });
             };
