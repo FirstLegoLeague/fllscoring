@@ -531,7 +531,7 @@ define('services/ng-scores',[
                 // If a team did not play in a round, there will simply be no
                 // entry in scores.
                 if (!(
-                    typeof s.score === "number" && s.score >= -1000 && s.score <= 1000 ||
+                    typeof s.score === "number" && s.score > -Infinity && s.score < Infinity ||
                     s.score === "dnc" ||
                     s.score === "dsq"
                 )) {

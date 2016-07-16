@@ -379,13 +379,12 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 3, score: Infinity },
                 { team: team2, stage: mockStage, round: 1, score: {} },
                 { team: team2, stage: mockStage, round: 2, score: true },
-                { team: team2, stage: mockStage, round: 3, score: 10000 },
             ], true);
             $scores.scores.forEach(function(score) {
                 expect(score.error).toEqual(jasmine.any($scores.InvalidScoreError));
             });
             expect(board["test"].length).toEqual(0);
-            expect($scores.validationErrors.length).toEqual(6);
+            expect($scores.validationErrors.length).toEqual(5);
         });
 
         it("should ignore but warn about duplicate score", function() {
