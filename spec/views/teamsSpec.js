@@ -98,7 +98,7 @@ describe('teams', function() {
                         mockRemoteTeam
                     ]);
                 $scope.load();
-                $scope.saveTeams = jasmine.createSpy('saveTeamsSpy').andReturn(Q.when());
+                $scope.saveTeams = jasmine.createSpy('saveTeamsSpy').and.returnValue(Q.when());
                 $httpBackend.flush();
                 expect($teams.clear).toHaveBeenCalled();
                 expect($scope.saveTeams).toHaveBeenCalled();
@@ -140,7 +140,7 @@ describe('teams', function() {
                 $scope.selectTeam(team);
                 expect($scope.setPage).toHaveBeenCalledWith('scoresheet');
                 expect(eventSpy).toHaveBeenCalled();
-                expect(eventSpy.mostRecentCall.args[1]).toBe(team);
+                expect(eventSpy.calls.mostRecent().args[1]).toBe(team);
             });
         });
 
@@ -153,7 +153,7 @@ describe('teams', function() {
 
         describe('addTeam', function() {
             it('should add the newTeam from scope to the teams list and blank the new team and save it', function() {
-                $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
+                $scope.saveTeams = jasmine.createSpy('saveTeams').and.returnValue(Q.when());
                 $scope.newTeam = mockTeam;
                 $scope.addTeam();
                 expect($teams.add).toHaveBeenCalledWith(mockTeam);
@@ -161,7 +161,7 @@ describe('teams', function() {
                 expect($scope.saveTeams).toHaveBeenCalled();
             });
             it('should not add a team when data is incomplete', function() {
-                $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
+                $scope.saveTeams = jasmine.createSpy('saveTeams').and.returnValue(Q.when());
                 $scope.newTeam = {foo:'bar'};
                 $scope.addTeam();
                 expect($teams.add).not.toHaveBeenCalled();
@@ -172,7 +172,7 @@ describe('teams', function() {
 
         describe('removeTeam', function() {
             it('should remove the team with the given index', function() {
-                $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
+                $scope.saveTeams = jasmine.createSpy('saveTeams').and.returnValue(Q.when());
                 $scope.removeTeam(123);
                 expect($teams.remove).toHaveBeenCalledWith(123);
                 expect($scope.saveTeams).toHaveBeenCalled();

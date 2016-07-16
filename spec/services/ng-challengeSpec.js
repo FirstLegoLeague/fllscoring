@@ -40,7 +40,7 @@ describe('ng-challenge',function() {
         it('should load, then init',function(done) {
             $httpBackend.when('GET','challenge/foo')
                 .respond(JSON.stringify(dummyChallenge));
-            challenge.init = jasmine.createSpy('init').andReturn(42);
+            challenge.init = jasmine.createSpy('init').and.returnValue(42);
             challenge.load('foo').then(function() {
                 expect(challenge.init).toHaveBeenCalledWith(dummyChallenge);
                 done();

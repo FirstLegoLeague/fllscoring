@@ -19,7 +19,7 @@ describe('sigpad',function() {
     beforeEach(function() {
         //mock out jquery sigpad
         regenerateSpy = jasmine.createSpy('sigpadRegenerate');
-        $.fn.signaturePad = jasmine.createSpy('sigpadSpy').andCallFake(function(def) {
+        $.fn.signaturePad = jasmine.createSpy('sigpadSpy').and.callFake(function(def) {
             drawEnd = function(data) {
                 def.onDrawEnd.apply({
                     getSignature: function() {

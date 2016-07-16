@@ -26,10 +26,11 @@
     function getAsyncRunner(desc, runner, timeout) {
         "use strict";
         timeout = timeout || jasmine.getEnv().defaultTimeoutInterval || 5000;
-        return function asyncRunner() {
+        return function asyncRunner(reallyDone) {
             // Provide a function to be called when asynchronous runner
             // is ready.
             var runnerDone = false;
+
             function done(err) {
                 if (runnerDone) {
                     throw new Error("jasmine done callback called more than once");
@@ -48,13 +49,15 @@
                 if (rejections.length > 0) {
                     throw new Error("unhandled Promise rejections:\n  " + rejections.join(",\n  "));
                 }
+
+                reallyDone();
             }
 
             // Run runner
             var async = false;
             if (runner.length > 0) {
                 // Runner uses explicit done callback
-                runner.call(this,done);
+                runner.call(this, done);
                 async = true;
             } else {
                 // Runner may be synchronous, or return a promise
@@ -63,7 +66,9 @@
                     // Runner returned a promise.
                     // Wait for it to be resolved or rejected.
                     async = true;
-                    var lastPromise = result.then(function() { done(); }, done);
+                    var lastPromise = result.then(function() {
+                        done();
+                    }, done);
                     //thow any other exceptions (if Q)
                     if (lastPromise.done) {
                         lastPromise.done();
@@ -78,10 +83,17 @@
                 angular.mock.inject(["$rootScope", function(_$rootScope_) {
                     $rootScope = _$rootScope_;
                 }]);
-                waitsFor(function() {
+
+                function pump() {
                     $rootScope.$digest();
-                    return runnerDone;
-                }, desc, timeout);
+                    if (!runnerDone) {
+                        setTimeout(pump, 0);
+                    }
+                }
+                setTimeout(pump, 0);
+                // waitsFor(function() {
+                //     return runnerDone;
+                // }, desc, timeout);
             } else {
                 done();
             }
@@ -90,20 +102,20 @@
 
     function makeAsyncDesc(jasmineFunction) {
         var original = jasmineFunction;
-        return function (desc, runner, timeout) {
+        return function(desc, runner, timeout) {
             original(desc, getAsyncRunner(desc, runner, timeout));
         };
     }
 
     function makeAsyncNoDesc(jasmineFunction, name) {
         var original = jasmineFunction;
-        return function (runner, timeout) {
+        return function(runner, timeout) {
             original(getAsyncRunner(name, runner, timeout));
         };
     }
 
     it = makeAsyncDesc(it);
-    iit = makeAsyncDesc(iit);
+    // iit = makeAsyncDesc(iit);
     beforeEach = makeAsyncNoDesc(beforeEach, "beforeEach");
     afterEach = makeAsyncNoDesc(afterEach, "afterEach");
 

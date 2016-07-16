@@ -15,10 +15,10 @@ var createChallengeMock = function() {
         objectiveIndex: {} // todo
     };
     return {
-        load: jasmine.createSpy('challenge.load').andCallFake(function() {
+        load: jasmine.createSpy('challenge.load').and.callFake(function() {
             return Q.when(definition);
         }),
-        getDependencies: jasmine.createSpy('challenge.getDependencies').andCallFake(function() {
+        getDependencies: jasmine.createSpy('challenge.getDependencies').and.callFake(function() {
             return []; // todo
         })
     };

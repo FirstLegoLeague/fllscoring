@@ -4,7 +4,7 @@
 //
 // Code from: https://gist.github.com/heat/3625555
 beforeEach(function() {
-    this.addMatchers({
+    jasmine.addMatchers({
         toBeInstanceOf: function(expectedInstance) {
             var actual = this.actual;
             var notText = this.isNot ? " not" : "";

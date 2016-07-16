@@ -76,7 +76,7 @@ describe('ng-teams',function() {
         });
 
         it('should log an error if writing fails',function() {
-            fsMock.write.andReturn(Q.reject('foo'));
+            fsMock.write.and.returnValue(Q.reject('foo'));
             return $teams.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('teams write error','foo');
             });
@@ -91,7 +91,7 @@ describe('ng-teams',function() {
         });
 
         it('should log an error if loading fails',function() {
-            fsMock.read.andReturn(Q.reject('foo'));
+            fsMock.read.and.returnValue(Q.reject('foo'));
             return $teams.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('teams read error','foo');
             });

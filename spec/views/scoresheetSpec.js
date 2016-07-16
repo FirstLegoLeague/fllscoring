@@ -82,12 +82,12 @@ describe('scoresheet',function() {
                 objectiveIndex = {
                     'foo': objective
                 };
-                challengeMock.load.andReturn(Q.when({
+                challengeMock.load.and.returnValue(Q.when({
                     field: field,
                     missions: missions,
                     objectiveIndex: objectiveIndex
                 }));
-                challengeMock.getDependencies.andReturn(['foo']);
+                challengeMock.getDependencies.and.returnValue(['foo']);
             });
             it('should set the field, missions and index',function() {
                 return $scope.load().then(function() {
@@ -161,7 +161,7 @@ describe('scoresheet',function() {
             });
         });
         it('should set an error message when loading fails',function() {
-            challengeMock.load.andReturn(Q.reject('squeek'));
+            challengeMock.load.and.returnValue(Q.reject('squeek'));
 
             return $scope.load().then(function() {
                 expect($scope.errorMessage).toBe('Could not load field, please configure host in settings');
@@ -533,8 +533,8 @@ describe('scoresheet',function() {
             expect($scope.team).toEqual(null);
             expect($scope.stage).toEqual(null);
             expect($scope.round).toEqual(null);
-            expect($scope.missions[0].objectives[0].value).toEqual(null);
-            expect($scope.missions[0].objectives[1].value).toEqual(null);
+            expect($scope.missions[0].objectives[0].value).toBeUndefined();
+            expect($scope.missions[0].objectives[1].value).toBeUndefined();
             //table should not clear
             expect($scope.table).toEqual(7);
             expect($scope.referee).toEqual('piet');
@@ -558,8 +558,8 @@ describe('scoresheet',function() {
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(fsMock.write.mostRecentCall.args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_abcdef01.json');
-                expect(fsMock.write.mostRecentCall.args[1]).toEqual({
+                expect(fsMock.write.calls.mostRecent().args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_abcdef01.json');
+                expect(fsMock.write.calls.mostRecent().args[1]).toEqual({
                     uniqueId: "abcdef01",
                     team: dummyTeam,
                     stage: dummyStage,
@@ -579,13 +579,13 @@ describe('scoresheet',function() {
             $scope.round = 1;
             $scope.table = 7;
             var oldId = $scope.uniqueId;
-            fsMock.write.andReturn(Q.reject('argh'));
+            fsMock.write.and.returnValue(Q.reject('argh'));
             return $scope.save().then(function() {
                 expect($window.alert).toHaveBeenCalledWith('unable to write result');
-                var firstFilename = fsMock.write.mostRecentCall.args[0];
+                var firstFilename = fsMock.write.calls.mostRecent().args[0];
                 // verify that filename stays the same
                 function noop() {}
-                var secondFilename = fsMock.write.mostRecentCall.args[0];
+                var secondFilename = fsMock.write.calls.mostRecent().args[0];
                 $scope.save().then(noop, noop);
                 expect(secondFilename).toBe(firstFilename);
             });
@@ -611,10 +611,11 @@ describe('scoresheet',function() {
             expect($scope.team).toEqual(team);
         });
         it('should be ok when nothing is returned on cancel',function() {
+            handshakeMock.respond();
             $scope.openTeamModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
             $scope.$digest();
-            expect($scope.team).toEqual(undefined);
+            expect($scope.team).toEqual(null);
         });
     });
 
@@ -631,11 +632,12 @@ describe('scoresheet',function() {
             expect($scope.round).toEqual('bar');
         });
         it('should be ok when nothing is returned on cancel',function() {
+            handshakeMock.respond();
             $scope.openRoundModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
             $scope.$digest();
-            expect($scope.stage).toEqual(undefined);
-            expect($scope.round).toEqual(undefined);
+            expect($scope.stage).toEqual(null);
+            expect($scope.round).toEqual(null);
         });
     });
 });

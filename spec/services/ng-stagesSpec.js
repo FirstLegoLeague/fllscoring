@@ -53,7 +53,7 @@ describe('ng-stages',function() {
             });
         });
         it('should log an error if writing fails',function() {
-            fsMock.write.andReturn(Q.reject('aargh'));
+            fsMock.write.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
             });
@@ -67,13 +67,13 @@ describe('ng-stages',function() {
             });
         });
         it('should log an error if reading fails',function() {
-            fsMock.read.andReturn(Q.reject('squeek'));
+            fsMock.read.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages read error','squeek');
             });
         });
         it('should initialize with default stages if reading fails',function() {
-            fsMock.read.andReturn(Q.reject('squeek'));
+            fsMock.read.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages using defaults');
                 expect($stages.allStages).toEqual([
