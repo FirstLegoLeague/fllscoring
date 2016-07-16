@@ -76,6 +76,13 @@
                 }
             }
 
+            function pump() {
+                $rootScope.$digest();
+                if (!runnerDone) {
+                    setTimeout(pump, 0);
+                }
+            }
+
             // In case of async runner, tell Jasmine to wait for it
             if (async) {
                 // Obtain $rootScope to allow pumping digest loop
@@ -84,12 +91,6 @@
                     $rootScope = _$rootScope_;
                 }]);
 
-                function pump() {
-                    $rootScope.$digest();
-                    if (!runnerDone) {
-                        setTimeout(pump, 0);
-                    }
-                }
                 setTimeout(pump, 0);
                 // waitsFor(function() {
                 //     return runnerDone;
