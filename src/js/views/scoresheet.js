@@ -259,8 +259,9 @@ define('views/scoresheet',[
                         ' points for team (' + data.team.number + ') ' + data.team.name +
                         ' in ' + data.stage.name + ' ' + data.round + '.'
                     );
-                },function() {
-                    $window.alert('unable to write result');
+                }, function(err) {
+                    $window.alert('Error submitting score: ' + JSON.stringify(err));
+                    throw err;
                 });
             };
 
