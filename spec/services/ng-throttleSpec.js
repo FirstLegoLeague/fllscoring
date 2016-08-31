@@ -27,9 +27,9 @@ describe('ng-throttle',function() {
         f('foo');
         f('foo');
         f('foo');
-        expect(spy.calls.length).toBe(1);
+        expect(spy.calls.count()).toBe(1);
         $timeout.flush();
-        expect(spy.calls.length).toBe(2);
+        expect(spy.calls.count()).toBe(2);
     });
 
     it('should not call the leading edge if that option is given',function() {
@@ -40,21 +40,21 @@ describe('ng-throttle',function() {
         f('foo');
         f('foo');
         f('foo');
-        expect(spy.calls.length).toBe(0);
+        expect(spy.calls.count()).toBe(0);
         $timeout.flush();
-        expect(spy.calls.length).toBe(1);
+        expect(spy.calls.count()).toBe(1);
     });
 
     it('should even work when the throttled function invokes the throttle again',function() {
         var spy = jasmine.createSpy('spy');
         var f = $throttle(spy,1000);
-        spy.andCallFake(f);
+        spy.and.callFake(f);
         f('foo');
         f('foo');
         f('foo');
-        expect(spy.calls.length).toBe(1);
+        expect(spy.calls.count()).toBe(1);
         $timeout.flush();
-        expect(spy.calls.length).toBe(2);
+        expect(spy.calls.count()).toBe(2);
     });
 
     it('should even work when the throttled function invokes the throttle again',function() {
@@ -62,12 +62,12 @@ describe('ng-throttle',function() {
         var f = $throttle(spy,1000,{
             leading: false
         });
-        spy.andCallFake(f);
+        spy.and.callFake(f);
         f('foo');
         f('foo');
         f('foo');
-        expect(spy.calls.length).toBe(0);
+        expect(spy.calls.count()).toBe(0);
         $timeout.flush();
-        expect(spy.calls.length).toBe(1);
+        expect(spy.calls.count()).toBe(1);
     });
 });

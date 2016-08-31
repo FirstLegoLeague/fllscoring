@@ -74,6 +74,11 @@ describe('teams', function() {
                     '$handshake': handshakeMock
                 });
             });
+            // Let initialization finish completely, in order to start with a
+            // clean slate of the spies
+            $scope.$digest();
+            $teams.add.calls.reset();
+            $teams.clear.calls.reset();
             return $scope.init();
         });
 
@@ -98,7 +103,7 @@ describe('teams', function() {
                         mockRemoteTeam
                     ]);
                 $scope.load();
-                $scope.saveTeams = jasmine.createSpy('saveTeamsSpy').andReturn(Q.when());
+                $scope.saveTeams = jasmine.createSpy('saveTeamsSpy').and.returnValue(Q.when());
                 $httpBackend.flush();
                 expect($teams.clear).toHaveBeenCalled();
                 expect($scope.saveTeams).toHaveBeenCalled();
@@ -140,7 +145,7 @@ describe('teams', function() {
                 $scope.selectTeam(team);
                 expect($scope.setPage).toHaveBeenCalledWith('scoresheet');
                 expect(eventSpy).toHaveBeenCalled();
-                expect(eventSpy.mostRecentCall.args[1]).toBe(team);
+                expect(eventSpy.calls.mostRecent().args[1]).toBe(team);
             });
         });
 
@@ -153,37 +158,42 @@ describe('teams', function() {
 
         describe('addTeam', function() {
             it('should add the newTeam from scope to the teams list and blank the new team and save it', function() {
-                $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
+                $scope.saveTeams = jasmine.createSpy('saveTeams').and.returnValue(Q.when());
                 $scope.newTeam = mockTeam;
-                $scope.addTeam();
-                expect($teams.add).toHaveBeenCalledWith(mockTeam);
-                expect($scope.newTeam).toEqual({});
-                expect($scope.saveTeams).toHaveBeenCalled();
+                return $scope.addTeam().then(function() {
+                    expect($teams.add).toHaveBeenCalledWith(mockTeam);
+                    expect($scope.newTeam).toEqual({});
+                    expect($scope.saveTeams).toHaveBeenCalled();
+                });
             });
             it('should not add a team when data is incomplete', function() {
-                $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
+                $scope.saveTeams = jasmine.createSpy('saveTeams').and.returnValue(Q.when());
                 $scope.newTeam = {foo:'bar'};
-                $scope.addTeam();
-                expect($teams.add).not.toHaveBeenCalled();
-                expect($scope.newTeam).toEqual({foo:'bar'});
-                expect($scope.saveTeams).not.toHaveBeenCalled();
+                return $scope.addTeam().catch(function(err) {
+                    expect(err).toEqual(jasmine.any(Error));
+                    expect($teams.add).not.toHaveBeenCalled();
+                    expect($scope.newTeam).toEqual({foo:'bar'});
+                    expect($scope.saveTeams).not.toHaveBeenCalled();
+                });
             });
         });
 
         describe('removeTeam', function() {
             it('should remove the team with the given index', function() {
-                $scope.saveTeams = jasmine.createSpy('saveTeams').andReturn(Q.when());
-                $scope.removeTeam(123);
-                expect($teams.remove).toHaveBeenCalledWith(123);
-                expect($scope.saveTeams).toHaveBeenCalled();
+                $scope.saveTeams = jasmine.createSpy('saveTeams').and.returnValue(Q.when());
+                return $scope.removeTeam(123).then(function() {
+                    expect($teams.remove).toHaveBeenCalledWith(123);
+                    expect($scope.saveTeams).toHaveBeenCalled();
+                });
             });
         });
 
         describe('saveTeams', function() {
             it('should call $teams.save', function() {
                 $scope.teams = [mockTeam];
-                $scope.saveTeams();
-                expect($teams.save).toHaveBeenCalled();
+                return $scope.saveTeams().then(function() {
+                    expect($teams.save).toHaveBeenCalled();
+                });
             });
         });
 
