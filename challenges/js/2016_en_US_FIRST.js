@@ -98,7 +98,7 @@
             "title": "Pairs of Identical Animals completely on same side",
             "type": "number",
             "min": "0",
-            "max": "10"
+            "max": "5"
         }],
         "score": [function(conservation) {
             if (conservation === '0') {
@@ -118,21 +118,6 @@
             }
             if (conservation === '5') {
                 return 100
-            }
-            if (conservation === '6') {
-                return 120
-            }
-            if (conservation === '7') {
-                return 140
-            }
-            if (conservation === '8') {
-                return 160
-            }
-            if (conservation === '9') {
-                return 180
-            }
-            if (conservation === '10') {
-                return 200
             }
         }]
     }, {
@@ -314,7 +299,7 @@
                 return 30
             }
             if (training3 === '7') {
-                return 40
+                return 35
             }
         }]
     }, {
