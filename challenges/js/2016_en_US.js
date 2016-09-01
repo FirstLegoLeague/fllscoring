@@ -1,45 +1,67 @@
 {
-    "title": "TRASH TREK",
+    "title": "ANIMAL ALLIES",
     "missions": [{
         "title": "M01 Shark Shipment",
         "description": "Move the Shark to her new home not touching her tank's walls.",
         "objectives": [{
             "id": "target",
-            "title": "After launch, nothing touced the Shark but the Tank. Tank and Shark are ...",
+            "title": "Shark and take are completely in Target",
             "options": [{
                 "value": "2",
-                "title": "in Target 2"
+                "title": "T2"
             }, {
                 "value": "1",
-                "title": "in Target 1"
+                "title": "T1"
             }, {
                 "value": "0",
-                "title": "elsewhere"
+                "title": "None"
             }],
             "type": "enum"
         }, {
             "id": "bonus",
-            "title": "Shark is touching only Tank floor",
+            "title": "Shark touching only tank floor (NOT wall)",
+            "type": "yesno"
+        }, {
+            "id": "malus",
+            "title": "Nothing touched the Shark except the tank",
             "type": "yesno"
         }],
-        "score": [function(target, bonus) {
-            if (target === '0' && bonus === 'no') {
+        "score": [function(target, bonus, malus) {
+            if (target === '0' && bonus === 'no' && malus === 'yes') {
                 return 0
             }
-            if (target === '1' && bonus === 'no') {
+            if (target === '1' && bonus === 'no' && malus === 'yes') {
                 return 7
             }
-            if (target === '2' && bonus === 'no') {
+            if (target === '2' && bonus === 'no' && malus === 'yes') {
                 return 10
             }
-            if (target === '0' && bonus === 'yes') {
+            if (target === '0' && bonus === 'yes' && malus === 'yes') {
                 return 0
             }
-            if (target === '1' && bonus === 'yes') {
+            if (target === '1' && bonus === 'yes' && malus === 'yes') {
                 return 27
             }
-            if (target === '2' && bonus === 'yes') {
+            if (target === '2' && bonus === 'yes' && malus === 'yes') {
                 return 30
+            }
+            if (target === '0' && bonus === 'no' && malus === 'no') {
+                return 0
+            }
+            if (target === '1' && bonus === 'no' && malus === 'no') {
+                return 0
+            }
+            if (target === '2' && bonus === 'no' && malus === 'no') {
+                return 0
+            }
+            if (target === '0' && bonus === 'yes' && malus === 'no') {
+                return 0
+            }
+            if (target === '1' && bonus === 'yes' && malus === 'no') {
+                return 0
+            }
+            if (target === '2' && bonus === 'yes' && malus === 'no') {
+                return 0
             }
         }]
     }, {
@@ -47,15 +69,25 @@
         "description": "Drive past the visually impaired man, and the dog will do her job.",
         "objectives": [{
             "id": "dog",
-            "title": "The Warning Fence is down",
+            "title": "Warning Fence is down",
+            "type": "yesno"
+        }, {
+            "id": "dog_malus",
+            "title": "Robot completely crossed fence from West, between barriers",
             "type": "yesno"
         }],
-        "score": [function(dog) {
-            if (dog === 'no') {
+        "score": [function(dog, dog_malus) {
+            if (dog === 'no' && dog_malus === 'yes') {
                 return 0
             }
-            if (dog === 'yes') {
+            if (dog === 'yes' && dog_malus === 'yes') {
                 return 15
+            }
+            if (dog === 'no' && dog_malus === 'no') {
+                return 0
+            }
+            if (dog === 'yes' && dog_malus === 'no') {
+                return 0
             }
         }]
     }, {
@@ -63,10 +95,10 @@
         "description": "During the Match, participating Robots make the trays switch places.  A switch is officially successful when the red axle causes the system to stop.  Robots then have the option of removing the received animal and replacing it with a different animal for switching.  The Referee resets the red axle.",
         "objectives": [{
             "id": "conservation",
-            "title": "Two identical animals are completely on the same Side (of either Field, through rotation)",
+            "title": "Pairs of Identical Animals completely on same side",
             "type": "number",
             "min": "0",
-            "max": "10"
+            "max": "5"
         }],
         "score": [function(conservation) {
             if (conservation === '0') {
@@ -87,28 +119,13 @@
             if (conservation === '5') {
                 return 100
             }
-            if (conservation === '6') {
-                return 120
-            }
-            if (conservation === '7') {
-                return 140
-            }
-            if (conservation === '8') {
-                return 160
-            }
-            if (conservation === '9') {
-                return 180
-            }
-            if (conservation === '10') {
-                return 200
-            }
         }]
     }, {
         "title": "M04 Feeding",
         "description": "Deliver food from the Refrigerator to Target Animal Areas.",
         "objectives": [{
             "id": "feeding",
-            "title": "Pieces of Food that are completely in a Target Area (only matching ones in an Area)",
+            "title": "Pieces of food completely in Animal Areas (only one colour per Area)",
             "type": "number",
             "min": "0",
             "max": "8"
@@ -147,11 +164,11 @@
         "description": "Test our ability to mimic the Gecko's �stickiness� by placing the White (mechanical) Gecko on the Biomimicry Wall, and/or by seeing if the Robot itself can get onto the wall.",
         "objectives": [{
             "id": "gecko",
-            "title": "The Biomimicry Wall completely supports all the weight of the White Gecko",
+            "title": "Wall supports complete weight of White Gecko",
             "type": "yesno"
         }, {
             "id": "robot",
-            "title": "The Biomimicry Wall completely supports all the weight of the Robot",
+            "title": "Wall supports complete weight of Robot",
             "type": "yesno"
         }],
         "score": [function(gecko) {
@@ -170,116 +187,29 @@
             }
         }]
     }, {
-        "title": "M06-M13-M14 Milk",
+        "title": "M06 Milking Automation",
         "description": "Guide the cow into the machine, then spin the machine until Milk comes out. If you spin too far, Manure also comes out!",
         "objectives": [{
-            "id": "milk",
-            "title": "Milk and Manure... (only by the red lever)",
-            "options": [{
-                "value": "2",
-                "title": "Milk has rolled out, but not Manure"
-            }, {
-                "value": "1",
-                "title": "have all rolled out"
-            }, {
-                "value": "0",
-                "title": "other"
-            }],
-            "type": "enum"
+            "id": "milk1",
+            "title": "All Milk has rolled out",
+            "type": "yesno"
         }, {
-            "id": "milk_ramp",
-            "title": "All three Milk are...",
-            "options": [{
-                "value": "3",
-                "title": "supported by Ramp, touching Ramp as only things and standing"
-            }, {
-                "value": "2",
-                "title": "supported by Ramp and touching Ramp as only things"
-            }, {
-                "value": "1",
-                "title": "supported by Ramp"
-            }, {
-                "value": "0",
-                "title": "not supported by Ramp"
-            }],
-            "type": "enum"
-        }, {
-            "id": "milk_base",
-            "title": "All three Milk are completely in Base",
+            "id": "milk2",
+            "title": "All Manure has rolled out",
             "type": "yesno"
         }],
-        "score": [function(milk, milk_base, milk_ramp) {
-            if (milk === '0' && milk_base === 'no' && milk_ramp === '0') {
+        "score": [function(milk1, milk2) {
+            if (milk1 === 'no' && milk2 === 'no') {
                 return 0
             }
-            if (milk === '1' && milk_base === 'no' && milk_ramp === '0') {
-                return 15
+            if (milk1 === 'no' && milk2 === 'yes') {
+                return 0
             }
-            if (milk === '2' && milk_base === 'no' && milk_ramp === '0') {
+            if (milk1 === 'yes' && milk2 === 'no') {
                 return 20
             }
-            if (milk === '0' && milk_base === 'yes' && milk_ramp === '0') {
-                return 1
-            }
-            if (milk === '1' && milk_base === 'yes' && milk_ramp === '0') {
-                return 16
-            }
-            if (milk === '2' && milk_base === 'yes' && milk_ramp === '0') {
-                return 21
-            }
-            if (milk === '0' && milk_base === 'no' && milk_ramp === '1') {
-                return 2
-            }
-            if (milk === '1' && milk_base === 'no' && milk_ramp === '1') {
-                return 17
-            }
-            if (milk === '2' && milk_base === 'no' && milk_ramp === '1') {
-                return 22
-            }
-            if (milk === '0' && milk_base === 'yes' && milk_ramp === '1') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '1' && milk_base === 'yes' && milk_ramp === '1') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '2' && milk_base === 'yes' && milk_ramp === '1') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '0' && milk_base === 'no' && milk_ramp === '2') {
-                return 3
-            }
-            if (milk === '1' && milk_base === 'no' && milk_ramp === '2') {
-                return 18
-            }
-            if (milk === '2' && milk_base === 'no' && milk_ramp === '2') {
-                return 23
-            }
-            if (milk === '0' && milk_base === 'yes' && milk_ramp === '2') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '1' && milk_base === 'yes' && milk_ramp === '2') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '2' && milk_base === 'yes' && milk_ramp === '2') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '0' && milk_base === 'no' && milk_ramp === '3') {
-                return 4
-            }
-            if (milk === '1' && milk_base === 'no' && milk_ramp === '3') {
-                return 19
-            }
-            if (milk === '2' && milk_base === 'no' && milk_ramp === '3') {
-                return 24
-            }
-            if (milk === '0' && milk_base === 'yes' && milk_ramp === '3') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '1' && milk_base === 'yes' && milk_ramp === '3') {
-                return new Error("The three Milk cannot be in multiple places")
-            }
-            if (milk === '2' && milk_base === 'yes' && milk_ramp === '3') {
-                return new Error("The three Milk cannot be in multiple places")
+            if (milk1 === 'yes' && milk2 === 'yes') {
+                return 15
             }
         }]
     }, {
@@ -287,7 +217,7 @@
         "description": "Convert the Panda�s scene from facility care and observation to open wilderness.",
         "objectives": [{
             "id": "panda",
-            "title": "The slider looks fully open clockwise",
+            "title": "Slider appears fully opened clockwise",
             "type": "yesno"
         }],
         "score": [function(panda) {
@@ -303,7 +233,7 @@
         "description": "Go get the camera and bring it to Base.",
         "objectives": [{
             "id": "camera",
-            "title": "The Camera is completely in Base",
+            "title": "Camera is completely in Base",
             "type": "yesno"
         }],
         "score": [function(camera) {
@@ -319,15 +249,15 @@
         "description": "Move the Dog & Trainer, Zoologist, and/or Manure Samples to the Training & Research Area.",
         "objectives": [{
             "id": "training1",
-            "title": "The Dog & Trainer are completely in the Training & Research Area",
+            "title": "Dog & Trainer completely in Training/Research Area",
             "type": "yesno"
         }, {
             "id": "training2",
-            "title": "The Zoologist is completely in the Training & Research Area",
+            "title": "Zoologist completely in Training/Research Area",
             "type": "yesno"
         }, {
             "id": "training3",
-            "title": "Disk-shaped Manure Samples completely in the Training & Research Area",
+            "title": "Manure completely in Training/Research Area",
             "type": "number",
             "min": "0",
             "max": "7"
@@ -369,7 +299,7 @@
                 return 30
             }
             if (training3 === '7') {
-                return 40
+                return 35
             }
         }]
     }, {
@@ -377,28 +307,25 @@
         "description": "Place the Bee on the Beehive and get the Honey out.",
         "objectives": [{
             "id": "bee",
-            "title": "The Bee and the Honey are...",
-            "options": [{
-                "value": "2",
-                "title": "on the Beehive and in Base"
-            }, {
-                "value": "1",
-                "title": "on and outside the Beehive"
-            }, {
-                "value": "0",
-                "title": "elsewhere"
-            }],
-            "type": "enum"
+            "title": "Bee is on Beehive with NO Honey in Beehive",
+            "type": "yesno"
+        }, {
+            "id": "bee1",
+            "title": "Bee is on Beehive and Honey is completely in Base",
+            "type": "yesno"
         }],
-        "score": [function(bee) {
-            if (bee === '0') {
+        "score": [function(bee, bee1) {
+            if (bee === 'no' && bee1 === 'no') {
                 return 0
             }
-            if (bee === '1') {
+            if (bee === 'yes' && bee1 === 'no') {
                 return 12
             }
-            if (bee === '2') {
+            if (bee === 'no' && bee1 === 'yes') {
                 return 15
+            }
+            if (bee === 'yes' && bee1 === 'yes') {
+                return new Error("Choose one of the two options")
             }
         }]
     }, {
@@ -406,28 +333,25 @@
         "description": "Fit the Prosthesis where the legs of the Pet (Our Little Friend) should be, and send the Pet to its place on the farm.",
         "objectives": [{
             "id": "prosthesis",
-            "title": "The Prosthesis is...",
-            "options": [{
-                "value": "2",
-                "title": "fitted and in Farm Area"
-            }, {
-                "value": "1",
-                "title": "fitted"
-            }, {
-                "value": "0",
-                "title": "not fitted"
-            }],
-            "type": "enum"
+            "title": "Prosthesis fitted to Pet, NOT held by Ref",
+            "type": "yesno"
+        }, {
+            "id": "prosthesis0",
+            "title": "Prosthesis fitted to Pet and completely in Farm Target",
+            "type": "yesno"
         }],
-        "score": [function(prosthesis) {
-            if (prosthesis === '0') {
+        "score": [function(prosthesis, prosthesis0) {
+            if (prosthesis === 'no' && prosthesis0 === 'no') {
                 return 0
             }
-            if (prosthesis === '1') {
+            if (prosthesis === 'no' && prosthesis0 === 'yes') {
                 return 9
             }
-            if (prosthesis === '2') {
+            if (prosthesis === 'yes' && prosthesis0 === 'no') {
                 return 15
+            }
+            if (prosthesis === 'yes' && prosthesis0 === 'yes') {
+                return new Error("Choose one of the two options")
             }
         }]
     }, {
@@ -435,7 +359,7 @@
         "description": "The Seal is completely in Base and not broken",
         "objectives": [{
             "id": "seal",
-            "title": "The Seal is completely in Base and not broken",
+            "title": "Seal is completely in Base, NOT broken",
             "type": "yesno"
         }],
         "score": [function(seal) {
@@ -447,11 +371,72 @@
             }
         }]
     }, {
+        "title": "M13 Milk in Base",
+        "description": "-",
+        "objectives": [{
+            "id": "milkBase",
+            "title": "All three Milk are completely in Base",
+            "type": "yesno"
+        }],
+        "score": [function(milkBase) {
+            if (milkBase === 'no') {
+                return 0
+            }
+            if (milkBase === 'yes') {
+                return 1
+            }
+        }]
+    }, {
+        "title": "M14 Milk on Ramp",
+        "description": "-",
+        "objectives": [{
+            "id": "milkRamp",
+            "title": "Select option that best fits",
+            "options": [{
+                "value": "1",
+                "title": "All three milk supported by Ramp"
+            }, {
+                "value": "2",
+                "title": "+ only things supported by & touching Ramp"
+            }, {
+                "value": "3",
+                "title": "+ standing"
+            }],
+            "type": "enum"
+        }],
+        "score": [function(milkRamp) {
+            if (milkRamp === '1') {
+                return 2
+            }
+            if (milkRamp === '2') {
+                return 3
+            }
+            if (milkRamp === '3') {
+                return 4
+            }
+        }]
+    }, {
+        "title": "M15 All Samples",
+        "description": "-",
+        "objectives": [{
+            "id": "samples",
+            "title": "All seven Manure Samples completely in Training/Research Area",
+            "type": "yesno"
+        }],
+        "score": [function(samples) {
+            if (samples === 'no') {
+                return 0
+            }
+            if (samples === 'yes') {
+                return 5
+            }
+        }]
+    }, {
         "title": "Penalties",
         "description": "Penalties given",
         "objectives": [{
             "id": "penalties",
-            "title": "Penalties given",
+            "title": "Number of Manure samples in the white triangle area",
             "options": [{
                 "value": "5",
                 "title": "5"
@@ -499,65 +484,68 @@
         "no": "No",
         "sharkshipment-name": "M01 Shark Shipment",
         "sharkshipment-desc": "Move the Shark to her new home not touching her tank's walls.",
-        "sharkshipment-scoring": "After launch, nothing touced the Shark but the Tank. Tank and Shark are ...",
-        "sharkshipment-scoring-target0": "elsewhere",
-        "sharkshipment-scoring-target1": "in Target 1",
-        "sharkshipment-scoring-target2": "in Target 2",
-        "sharkshipment-scoring2": "Shark is touching only Tank floor",
+        "sharkshipment-scoring": "Shark and take are completely in Target",
+        "sharkshipment-scoring-target0": "None",
+        "sharkshipment-scoring-target1": "T1",
+        "sharkshipment-scoring-target2": "T2",
+        "sharkshipment-scoring2": "Shark touching only tank floor (NOT wall)",
+        "sharkshipment-scoring3": "Nothing touched the Shark except the tank",
         "dog-name": "M02 Service Dog Action",
         "dog-desc": "Drive past the visually impaired man, and the dog will do her job.",
-        "dog-scoring": "The Warning Fence is down",
+        "dog-scoring": "Warning Fence is down",
+        "dog-scoring2": "Robot completely crossed fence from West, between barriers",
         "conservation-name": "M03 Conservation",
         "conservation-desc": "During the Match, participating Robots make the trays switch places.  A switch is officially successful when the red axle causes the system to stop.  Robots then have the option of removing the received animal and replacing it with a different animal for switching.  The Referee resets the red axle.",
-        "conservation-scoring": "Two identical animals are completely on the same Side (of either Field, through rotation)",
+        "conservation-scoring": "Pairs of Identical Animals completely on same side",
         "feeding-name": "M04 Feeding",
         "feeding-desc": "Deliver food from the Refrigerator to Target Animal Areas.",
-        "feeding-scoring": "Pieces of Food that are completely in a Target Area (only matching ones in an Area)",
+        "feeding-scoring": "Pieces of food completely in Animal Areas (only one colour per Area)",
         "biomimicry-name": "M05 Biomimicry",
         "biomimicry-desc": "Test our ability to mimic the Gecko's �stickiness� by placing the White (mechanical) Gecko on the Biomimicry Wall, and/or by seeing if the Robot itself can get onto the wall.",
-        "biomimicry-scoring1": "The Biomimicry Wall completely supports all the weight of the White Gecko",
-        "biomimicry-scoring2": "The Biomimicry Wall completely supports all the weight of the Robot",
-        "milk-name": "M06-M13-M14 Milk",
+        "biomimicry-scoring1": "Wall supports complete weight of White Gecko",
+        "biomimicry-scoring2": "Wall supports complete weight of Robot",
+        "milk-name": "M06 Milking Automation",
         "milk-desc": "Guide the cow into the machine, then spin the machine until Milk comes out. If you spin too far, Manure also comes out!",
-        "milk-scoring": "Milk and Manure... (only by the red lever)",
-        "milk-scoring-milkmanure": "have all rolled out",
-        "milk-scoring-milk": "Milk has rolled out, but not Manure",
-        "milk-scoring-nothing": "other",
-        "milk-base-scoring": "All three Milk are completely in Base",
-        "milk-ramp-scoring": "All three Milk are...",
-        "milk-ramp-scoring-0": "not supported by Ramp",
-        "milk-ramp-scoring-1": "supported by Ramp",
-        "milk-ramp-scoring-2": "supported by Ramp and touching Ramp as only things",
-        "milk-ramp-scoring-3": "supported by Ramp, touching Ramp as only things and standing",
-        "milk-error": "The three Milk cannot be in multiple places",
+        "milk-scoring": "All Milk has rolled out",
+        "milk-scoring2": "All Manure has rolled out",
         "panda-name": "M07 Panda Release",
         "panda-desc": "Convert the Panda�s scene from facility care and observation to open wilderness.",
-        "panda-scoring": "The slider looks fully open clockwise",
+        "panda-scoring": "Slider appears fully opened clockwise",
         "camera-name": "M08 Camera Recovery",
         "camera-desc": "Go get the camera and bring it to Base.",
-        "camera-scoring": "The Camera is completely in Base",
+        "camera-scoring": "Camera is completely in Base",
         "training-name": "M09-M15 Training and Research",
         "training-desc": "Move the Dog & Trainer, Zoologist, and/or Manure Samples to the Training & Research Area.",
-        "training-scoring-1": "The Dog & Trainer are completely in the Training & Research Area",
-        "training-scoring-2": "The Zoologist is completely in the Training & Research Area",
-        "training-scoring-3": "Disk-shaped Manure Samples completely in the Training & Research Area",
+        "training-scoring-1": "Dog & Trainer completely in Training/Research Area",
+        "training-scoring-2": "Zoologist completely in Training/Research Area",
+        "training-scoring-3": "Manure completely in Training/Research Area",
         "bee-name": "M10 Bee Keeping",
         "bee-desc": "Place the Bee on the Beehive and get the Honey out.",
-        "bee-scoring": "The Bee and the Honey are...",
-        "bee-scoring-0": "elsewhere",
-        "bee-scoring-1": "on and outside the Beehive",
-        "bee-scoring-2": "on the Beehive and in Base",
+        "bee-scoring": "Bee is on Beehive with NO Honey in Beehive",
+        "bee-scoring1": "Bee is on Beehive and Honey is completely in Base",
+        "bee-error": "Choose one of the two options",
         "prosthesis-name": "M11 Prosthesis",
         "prosthesis-desc": "Fit the Prosthesis where the legs of the Pet (Our Little Friend) should be, and send the Pet to its place on the farm.",
-        "prosthesis-scoring": "The Prosthesis is...",
-        "prosthesis-scoring-0": "not fitted",
-        "prosthesis-scoring-1": "fitted",
-        "prosthesis-scoring-2": "fitted and in Farm Area",
+        "prosthesis-scoring": "Prosthesis fitted to Pet, NOT held by Ref",
+        "prosthesis-scoring-0": "Prosthesis fitted to Pet and completely in Farm Target",
+        "prosthesis-error": "Choose one of the two options",
         "seal-name": "M12 Seal in Base",
         "seal-desc": "The Seal is completely in Base and not broken",
-        "seal-scoring": "The Seal is completely in Base and not broken",
+        "seal-scoring": "Seal is completely in Base, NOT broken",
+        "milkBase-name": "M13 Milk in Base",
+        "milkBase-desc": "-",
+        "milkBase-scoring": "All three Milk are completely in Base",
+        "milkRamp-name": "M14 Milk on Ramp",
+        "milkRamp-desc": "-",
+        "milkRamp-scoring": "Select option that best fits",
+        "milkRamp-scoring-1": "All three milk supported by Ramp",
+        "milkRamp-scoring-2": "+ only things supported by & touching Ramp",
+        "milkRamp-scoring-3": "+ standing",
+        "samples-name": "M15 All Samples",
+        "samples-desc": "-",
+        "samples-scoring": "All seven Manure Samples completely in Training/Research Area",
         "penalties-name": "Penalties",
         "penalties-desc": "Penalties given",
-        "penalties-scoring": "Penalties given"
+        "penalties-scoring": "Number of Manure samples in the white triangle area"
     }
 }
