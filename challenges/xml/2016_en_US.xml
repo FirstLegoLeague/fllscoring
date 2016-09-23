@@ -379,12 +379,12 @@
     
     <mission name="penalties-name" description="penalties-desc">
         <objective-enum id="penalties" description="penalties-scoring" default="0">
-            <option name="5" description="5" />
-            <option name="4" description="4" />
-            <option name="3" description="3" />
-            <option name="2" description="2" />
-            <option name="1" description="1" />
             <option name="0" description="0" />
+            <option name="1" description="1" />
+            <option name="2" description="2" />
+            <option name="3" description="3" />
+            <option name="4" description="4" />
+            <option name="5" description="5" />
         </objective-enum>
         <score>
             <indexes>

@@ -444,23 +444,23 @@
             "id": "penalties",
             "title": "Number of Manure samples in the white triangle area",
             "options": [{
-                "value": "5",
-                "title": "5"
-            }, {
-                "value": "4",
-                "title": "4"
-            }, {
-                "value": "3",
-                "title": "3"
-            }, {
-                "value": "2",
-                "title": "2"
+                "value": "0",
+                "title": "0"
             }, {
                 "value": "1",
                 "title": "1"
             }, {
-                "value": "0",
-                "title": "0"
+                "value": "2",
+                "title": "2"
+            }, {
+                "value": "3",
+                "title": "3"
+            }, {
+                "value": "4",
+                "title": "4"
+            }, {
+                "value": "5",
+                "title": "5"
             }],
             "type": "enum"
         }],
