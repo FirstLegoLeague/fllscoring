@@ -4,7 +4,7 @@
     xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2016" version="1" name="ANIMAL ALLIES">
 
     <strings language="nl-NL">
-
+    
         <string id="yes">                           ja</string>
         <string id="no">                            nee</string>
 
@@ -18,7 +18,7 @@
 
         <string id="dog-name">                      M02 Hulphond in actie</string>
         <string id="dog-desc">                      <![CDATA[Rijd langs de visueel beperkte man, zodat de hond haar werk doet.]]></string>
-        <string id="dog-scoring">                   [Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barri&#232;res)</string>
+        <string id="dog-scoring">                   Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barri&#232;res)</string>
 
         <string id="conservation-name">             M03 Dierenbescherming</string>
         <string id="conservation-desc">             <![CDATA[Werk samen met het andere team om dezelfde dieren te herenigen. Elk paar

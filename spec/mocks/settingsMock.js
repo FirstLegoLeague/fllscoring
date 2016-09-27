@@ -1,7 +1,7 @@
 function createSettingsMock($q, settings) {
     return {
         settings: settings,
-        init: jasmine.createSpy('settingsInitSpy').andReturn($q.when(settings)),
-        save: jasmine.createSpy('settingsSaveSpy').andReturn($q.when())
+        init: jasmine.createSpy('settingsInitSpy').and.returnValue($q.when(settings)),
+        save: jasmine.createSpy('settingsSaveSpy').and.returnValue($q.when())
     };
 }

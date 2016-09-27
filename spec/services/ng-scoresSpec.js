@@ -22,7 +22,9 @@ describe('ng-scores',function() {
         round: 1,
         score: 150,
         originalScore: 150,
-        published: false
+        published: false,
+        edited: undefined,
+        table: undefined
     };
     var mockStage;
     var mockScore;
@@ -107,7 +109,7 @@ describe('ng-scores',function() {
         });
 
         it('should log an error if writing fails',function() {
-            fsMock.write.andReturn(Q.reject('write err'));
+            fsMock.write.and.returnValue(Q.reject('write err'));
             return $scores.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('scores write error','write err');
             });
@@ -123,7 +125,7 @@ describe('ng-scores',function() {
         });
 
         it('should log an error if loading fails',function() {
-            fsMock.read.andReturn(Q.reject('read err'));
+            fsMock.read.and.returnValue(Q.reject('read err'));
             return $scores.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('scores read error','read err');
             });
@@ -219,13 +221,13 @@ describe('ng-scores',function() {
             var f = function() {
                 $scores.update(-1,mockScore);
             };
-            expect(f).toThrow('unknown score index: -1');
+            expect(f).toThrowError('unknown score index: -1');
         });
         it('should throw an error if a score out of range is edited',function() {
             var f = function() {
                 $scores.update(1,mockScore);
             };
-            expect(f).toThrow('unknown score index: 1');
+            expect(f).toThrowError('unknown score index: 1');
         });
     });
 
@@ -363,9 +365,9 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 0, score: 0 },
                 { team: team1, stage: mockStage, round: 4, score: 0 },
             ], true);
-            expect($scores.scores[0].error).toBeInstanceOf($scores.UnknownStageError);
-            expect($scores.scores[1].error).toBeInstanceOf($scores.UnknownRoundError);
-            expect($scores.scores[2].error).toBeInstanceOf($scores.UnknownRoundError);
+            expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownStageError));
+            expect($scores.scores[1].error).toEqual(jasmine.any($scores.UnknownRoundError));
+            expect($scores.scores[2].error).toEqual(jasmine.any($scores.UnknownRoundError));
             expect(board["test"].length).toEqual(0);
             expect($scores.validationErrors.length).toEqual(3);
         });
@@ -377,13 +379,12 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 3, score: Infinity },
                 { team: team2, stage: mockStage, round: 1, score: {} },
                 { team: team2, stage: mockStage, round: 2, score: true },
-                { team: team2, stage: mockStage, round: 3, score: 10000 },
             ], true);
             $scores.scores.forEach(function(score) {
-                expect(score.error).toBeInstanceOf($scores.InvalidScoreError);
+                expect(score.error).toEqual(jasmine.any($scores.InvalidScoreError));
             });
             expect(board["test"].length).toEqual(0);
-            expect($scores.validationErrors.length).toEqual(6);
+            expect($scores.validationErrors.length).toEqual(5);
         });
 
         it("should ignore but warn about duplicate score", function() {
@@ -391,7 +392,7 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 1, score: 10 },
                 { team: team1, stage: mockStage, round: 1, score: 20 },
             ], true);
-            expect($scores.scores[1].error).toBeInstanceOf($scores.DuplicateScoreError);
+            expect($scores.scores[1].error).toEqual(jasmine.any($scores.DuplicateScoreError));
             expect(board["test"][0].highest).toEqual(10);
             expect($scores.validationErrors.length).toBeGreaterThan(0);
         });
@@ -401,7 +402,7 @@ describe('ng-scores',function() {
             fillScores([
                 { team: team1, stage: mockStage, round: 1, score: 10 },
             ], true);
-            expect($scores.scores[0].error).toBeInstanceOf($scores.UnknownTeamError);
+            expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownTeamError));
             expect($scores.validationErrors.length).toEqual(1);
         });
 
@@ -479,7 +480,9 @@ describe('ng-scores',function() {
                             round: 1,
                             score: 456,
                             originalScore: 456,
-                            published: false
+                            published: false,
+                            edited: undefined,
+                            table: undefined,
                         }],
                         sheets: ["sheet_1.json"]
                     }
@@ -500,7 +503,7 @@ describe('ng-scores',function() {
 
         describe('error recovery',function() {
             it('should continue with no sheets when a 404 is returned',function() {
-                fsMock.list.andReturn(Q.reject({status:404}));
+                fsMock.list.and.returnValue(Q.reject({status:404}));
                 $scores.save = jasmine.createSpy('save');
                 return $scores.pollSheets().then(function() {
                     expect(fsMock.write).not.toHaveBeenCalled();
@@ -509,21 +512,21 @@ describe('ng-scores',function() {
             });
 
             it('throw an error if an http error is received',function() {
-                fsMock.list.andReturn(Q.reject({status:500,responseText:'server error',statusText:'foo'}));
+                fsMock.list.and.returnValue(Q.reject({status:500,responseText:'server error',statusText:'foo'}));
                 return $scores.pollSheets().catch(function(err) {
                     expect(err.message).toEqual('error 500 (foo): server error');
                 });
             });
 
             it('should rethrow the error if something just goes wrong',function() {
-                fsMock.list.andReturn(Q.reject(new Error('squeek')));
+                fsMock.list.and.returnValue(Q.reject(new Error('squeek')));
                 return $scores.pollSheets().catch(function(err) {
                     expect(err.message).toEqual('squeek');
                 });
             });
 
             it('should throw an unknown error if strange stuff is returned',function() {
-                fsMock.list.andReturn(Q.reject('darn'));
+                fsMock.list.and.returnValue(Q.reject('darn'));
                 return $scores.pollSheets().catch(function(err) {
                     expect(err.message).toEqual('unknown error: darn');
                 });

@@ -3,13 +3,13 @@ var createHandshakeMock = function($q) {
     var promise;
     var result;
     return {
-        $on: jasmine.createSpy('handshake.on').andCallFake(function(e,cb) {
+        $on: jasmine.createSpy('handshake.on').and.callFake(function(e,cb) {
             handlers[e] = cb;
         }),
-        $emit: jasmine.createSpy('handshake.emit').andCallFake(function() {
+        $emit: jasmine.createSpy('handshake.emit').and.callFake(function() {
             return $q.when(result)
         }),
-        defer: jasmine.createSpy('handshake.defer').andCallFake(function() {
+        defer: jasmine.createSpy('handshake.defer').and.callFake(function() {
             promise = {
                 resolve: jasmine.createSpy('promise.resolve'),
                 reject: jasmine.createSpy('promise.reject')

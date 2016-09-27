@@ -18,7 +18,8 @@
         <li role="presentation" ng-class="{active:tab===1}"><a href ng-click="tab = 1">Tables &amp; Referees</a></li>
         <li role="presentation" ng-class="{active:tab===2}"><a href ng-click="tab = 2">Rounds &amp; Stages</a></li>
         <li role="presentation" ng-class="{active:tab===3}"><a href ng-click="tab = 3">Challenge</a></li>
-        <li role="presentation" ng-class="{active:tab===4}"><a href ng-click="tab = 4">Log</a></li>
+        <li role="presentation" ng-class="{active:tab===4}"><a href ng-click="tab = 4">Messaging</a></li>
+        <li role="presentation" ng-class="{active:tab===5}"><a href ng-click="tab = 5">Log</a></li>
     </ul>
 
     <div ng-show="tab === 1">
@@ -125,7 +126,7 @@
     </div>
     <div ng-show="tab === 3">
         <p>
-            
+
             <span class="textfield">
                 <input type="text" ng-model="settings.host" />
                 <label for="">Host</label>
@@ -133,7 +134,23 @@
             shared host to get data from and save data to. E.g. 'http://localhost:1390/'
         </p>
         <p>
-            
+
+            <span class="textfield">
+                <input type="text" ng-model="settings.challenge" />
+                <label for="">Challenge</label>
+            </span>
+            currently the filename containing missions! E.g. '2016_en_US' (no file extension)
+        </p>
+    </div>
+    <div ng-show="tab === 4">
+        <p>
+            <span class="textfield">
+                <input type="checkbox" ng-model="settings.mhubEnabled" />
+                <label for="">Enable messaging</label>
+            </span>
+            Enable publishing of scores and rankings, live updates to the score keeping lists, etc.
+        </p>
+        <p>
             <span class="textfield">
                 <input type="text" ng-model="settings.mhub" />
                 <label for="">MHub server</label>
@@ -141,23 +158,14 @@
             MHub server to send messages to. E.g. 'ws://localhost:13900/'
         </p>
         <p>
-            
             <span class="textfield">
                 <input type="text" ng-model="settings.node" />
                 <label for="">MHub node</label>
             </span>
-            MHub server node to subscribe to. E.g. 'scoring'
-        </p>
-        <p>
-            
-            <span class="textfield">
-                <input type="text" ng-model="settings.challenge" />
-                <label for="">Challenge</label>
-            </span>
-            currently the filename containing missions! E.g. '2015_nl_NL' (no file extension)
+            MHub server node to subscribe and publish to. E.g. 'scoring'
         </p>
     </div>
-    <div ng-show="tab === 4">
+    <div ng-show="tab === 5">
         <h1 >Log</h1>
 
         <pre>

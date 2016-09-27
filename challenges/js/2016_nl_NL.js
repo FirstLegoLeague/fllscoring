@@ -47,7 +47,7 @@
         "description": "Rijd langs de visueel beperkte man, zodat de hond haar werk doet.",
         "objectives": [{
             "id": "dog",
-            "title": "[Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barrières)",
+            "title": "Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barrières)",
             "type": "yesno"
         }],
         "score": [function(dog) {
@@ -466,7 +466,7 @@
         "sharkshipment-scoring2": "De haai raakt alleen de bodem van de tank aan",
         "dog-name": "M02 Hulphond in actie",
         "dog-desc": "Rijd langs de visueel beperkte man, zodat de hond haar werk doet.",
-        "dog-scoring": "[Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barrières)",
+        "dog-scoring": "Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barrières)",
         "conservation-name": "M03 Dierenbescherming",
         "conservation-desc": "Werk samen met het andere team om dezelfde dieren te herenigen. Elk paar\r\ndieren levert voor BEIDE teams punten op, ongeacht wie er aan de hereniging\r\nheeft bijgedragen.",
         "conservation-scoring": "Aantal paren identieke dieren volledig aan dezelfde kant (op beide velden, door draaiing)",

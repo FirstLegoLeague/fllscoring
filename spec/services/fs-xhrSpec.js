@@ -10,9 +10,9 @@ describe('fs-xhr',function() {
     }
 
     var fakeJQuery = {
-        get: jasmine.createSpy('jqget').andReturn(createJQPromise('get')),
-        post: jasmine.createSpy('jqpost').andReturn(createJQPromise('post')),
-        ajax: jasmine.createSpy('jqajax').andReturn(createJQPromise('ajax'))
+        get: jasmine.createSpy('jqget').and.returnValue(createJQPromise('get')),
+        post: jasmine.createSpy('jqpost').and.returnValue(createJQPromise('post')),
+        ajax: jasmine.createSpy('jqajax').and.returnValue(createJQPromise('ajax'))
     };
 
     var fs = factory('services/fs-xhr',{
@@ -40,7 +40,7 @@ describe('fs-xhr',function() {
             });
         });
         it('should fail on xhr exception',function() {
-            fakeJQuery.get.andReturn(createJQPromise(Q.reject(new Error('foo'))));
+            fakeJQuery.get.and.returnValue(createJQPromise(Q.reject(new Error('foo'))));
             return fs.read('foo.txt').catch(function(err) {
                 expect(fakeJQuery.get).toHaveBeenCalledWith('fs/foo.txt');
                 expect(err.message).toBe('foo');
@@ -56,7 +56,7 @@ describe('fs-xhr',function() {
             });
         });
         it('should fail on xhr exception',function() {
-            fakeJQuery.post.andReturn(createJQPromise(Q.reject(new Error('foo'))));
+            fakeJQuery.post.and.returnValue(createJQPromise(Q.reject(new Error('foo'))));
             return fs.write('foo.txt','bar').catch(function(err) {
                 expect(fakeJQuery.post).toHaveBeenCalledWith('fs/foo.txt','bar');
                 expect(err.message).toBe('foo');
@@ -74,7 +74,7 @@ describe('fs-xhr',function() {
             });
         });
         it('should fail on xhr exception',function() {
-            fakeJQuery.ajax.andReturn(createJQPromise(Q.reject(new Error('foo'))));
+            fakeJQuery.ajax.and.returnValue(createJQPromise(Q.reject(new Error('foo'))));
             return fs.remove('foo.txt','bar').catch(function(err) {
                 expect(fakeJQuery.ajax).toHaveBeenCalledWith('fs/foo.txt',{
                     type: 'DELETE'
