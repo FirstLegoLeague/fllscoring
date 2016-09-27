@@ -143,7 +143,7 @@
     </mission>
 
     <mission name="conservation-name" description="conservation-desc">
-        <objective-number id="conservation" description="conservation-scoring" min="0" max="5" default="0" />
+        <objective-number id="conservation" description="conservation-scoring" min="0" max="6" default="0" />
         <score>
             <indexes>
                 <index objective="conservation" />
@@ -155,6 +155,7 @@
                 <case> <index-ref value="3" /> <points amount="60"  /> </case>
                 <case> <index-ref value="4" /> <points amount="80"  /> </case>
                 <case> <index-ref value="5" /> <points amount="100"  /> </case>
+                <case> <index-ref value="6" /> <points amount="120"  /> </case>
             </cases>
         </score>
     </mission>

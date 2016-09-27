@@ -66,7 +66,7 @@
             "title": "Aantal paren identieke dieren volledig aan dezelfde kant (op beide velden, door draaiing)",
             "type": "number",
             "min": "0",
-            "max": "10"
+            "max": "6"
         }],
         "score": [function(conservation) {
             if (conservation === '0') {
@@ -89,18 +89,6 @@
             }
             if (conservation === '6') {
                 return 120
-            }
-            if (conservation === '7') {
-                return 140
-            }
-            if (conservation === '8') {
-                return 160
-            }
-            if (conservation === '9') {
-                return 180
-            }
-            if (conservation === '10') {
-                return 200
             }
         }]
     }, {
