@@ -5,7 +5,7 @@
         "description": "Verplaats de haai naar haar nieuwe thuis, zonder dat ze de wanden van de tank aanraakt.",
         "objectives": [{
             "id": "target",
-            "title": "Na een (her)start heeft niets de haai meer aangeraakt, behalve de tank. De tank en de haai zijn...",
+            "title": "Na een (her)start heeft niets de haai aangeraakt, behalve de tank. De tank en de haai zijn...",
             "options": [{
                 "value": "2",
                 "title": "in gebied 2"
@@ -47,7 +47,7 @@
         "description": "Rijd langs de visueel beperkte man, zodat de hond haar werk doet.",
         "objectives": [{
             "id": "dog",
-            "title": "Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barri�res)",
+            "title": "Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barrières)",
             "type": "yesno"
         }],
         "score": [function(dog) {
@@ -63,10 +63,10 @@
         "description": "Werk samen met het andere team om dezelfde dieren te herenigen. Elk paar\r\ndieren levert voor BEIDE teams punten op, ongeacht wie er aan de hereniging\r\nheeft bijgedragen.",
         "objectives": [{
             "id": "conservation",
-            "title": "Aantal paren gelijke dieren  volledig aan dezelfde kant (door draaiing)",
+            "title": "Aantal paren identieke dieren volledig aan dezelfde kant (op beide velden, door draaiing)",
             "type": "number",
             "min": "0",
-            "max": "10"
+            "max": "6"
         }],
         "score": [function(conservation) {
             if (conservation === '0') {
@@ -90,25 +90,13 @@
             if (conservation === '6') {
                 return 120
             }
-            if (conservation === '7') {
-                return 140
-            }
-            if (conservation === '8') {
-                return 160
-            }
-            if (conservation === '9') {
-                return 180
-            }
-            if (conservation === '10') {
-                return 200
-            }
         }]
     }, {
         "title": "M04 Voeren",
         "description": "Breng voedsel van de Koelkast naar de Dierengebieden.",
         "objectives": [{
             "id": "feeding",
-            "title": "Aantal stukken voedsel volledig in een Dierengebied (in een gebied hetzelfde)",
+            "title": "Aantal stukken voedsel volledig in een Dierengebied (alleen bijbehorende in een gebied)",
             "type": "number",
             "min": "0",
             "max": "8"
@@ -352,7 +340,7 @@
             "title": "De bij en de honing zijn respectievelijk...",
             "options": [{
                 "value": "2",
-                "title": "op en volledig in de basis"
+                "title": "op de bijenkorf en volledig in de basis"
             }, {
                 "value": "1",
                 "title": "op en buiten de bijenkorf"
@@ -419,7 +407,7 @@
             }
         }]
     }, {
-        "title": "Monsters",
+        "title": "Strafpunten (monsters)",
         "description": "Gegeven strafpunten",
         "objectives": [{
             "id": "penalties",
@@ -467,24 +455,24 @@
         }]
     }],
     "strings": {
-        "yes": "Ja",
-        "no": "Nee",
+        "yes": "ja",
+        "no": "nee",
         "sharkshipment-name": "M01 Haaienvervoer",
         "sharkshipment-desc": "Verplaats de haai naar haar nieuwe thuis, zonder dat ze de wanden van de tank aanraakt.",
-        "sharkshipment-scoring": "Na een (her)start heeft niets de haai meer aangeraakt, behalve de tank. De tank en de haai zijn...",
+        "sharkshipment-scoring": "Na een (her)start heeft niets de haai aangeraakt, behalve de tank. De tank en de haai zijn...",
         "sharkshipment-scoring-target0": "anders",
         "sharkshipment-scoring-target1": "in gebied 1",
         "sharkshipment-scoring-target2": "in gebied 2",
         "sharkshipment-scoring2": "De haai raakt alleen de bodem van de tank aan",
         "dog-name": "M02 Hulphond in actie",
         "dog-desc": "Rijd langs de visueel beperkte man, zodat de hond haar werk doet.",
-        "dog-scoring": "Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barri�res)",
+        "dog-scoring": "Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barrières)",
         "conservation-name": "M03 Dierenbescherming",
         "conservation-desc": "Werk samen met het andere team om dezelfde dieren te herenigen. Elk paar\r\ndieren levert voor BEIDE teams punten op, ongeacht wie er aan de hereniging\r\nheeft bijgedragen.",
-        "conservation-scoring": "Aantal paren gelijke dieren  volledig aan dezelfde kant (door draaiing)",
+        "conservation-scoring": "Aantal paren identieke dieren volledig aan dezelfde kant (op beide velden, door draaiing)",
         "feeding-name": "M04 Voeren",
         "feeding-desc": "Breng voedsel van de Koelkast naar de Dierengebieden.",
-        "feeding-scoring": "Aantal stukken voedsel volledig in een Dierengebied (in een gebied hetzelfde)",
+        "feeding-scoring": "Aantal stukken voedsel volledig in een Dierengebied (alleen bijbehorende in een gebied)",
         "biomimicry-name": "M05 Biomimicry",
         "biomimicry-desc": "TTest of wij de �plakkerigheid� van de gekko kunnen namaken door de witte (mechanische) gekko aan de biomimicry muur te hangen en/of te onderzoeken of de robot zelf aan de muur kan hangen.",
         "biomimicry-scoring1": "De biomimicry muur draagt het volledige gewicht van de witte gekko",
@@ -517,7 +505,7 @@
         "bee-scoring": "De bij en de honing zijn respectievelijk...",
         "bee-scoring-0": "anders",
         "bee-scoring-1": "op en buiten de bijenkorf",
-        "bee-scoring-2": "op en volledig in de basis",
+        "bee-scoring-2": "op de bijenkorf en volledig in de basis",
         "prosthesis-name": "M11 Prothese",
         "prosthesis-desc": "Bevestig de prothese waar de poten van het huisdier (onze kleine vriend) zouden moeten zitten, en verplaats het huisdier naar zijn plaats op de boerderij.",
         "prosthesis-scoring": "De prothese is...",
@@ -527,7 +515,7 @@
         "seal-name": "M12 Zeehond in de basis",
         "seal-desc": "De zeehond is volledig in de basis en is niet beschadigd.",
         "seal-scoring": "De zeehond is volledig in de basis en is niet beschadigd",
-        "penalties-name": "Monsters",
+        "penalties-name": "Strafpunten (monsters)",
         "penalties-desc": "Gegeven strafpunten",
         "penalties-scoring": "Gegeven strafpunten"
     }

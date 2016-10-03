@@ -4,13 +4,13 @@
     xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2016" version="1" name="ANIMAL ALLIES">
 
     <strings language="nl-NL">
-
-        <string id="yes">                           Ja</string>
-        <string id="no">                            Nee</string>
+    
+        <string id="yes">                           ja</string>
+        <string id="no">                            nee</string>
 
         <string id="sharkshipment-name">            M01 Haaienvervoer</string>
         <string id="sharkshipment-desc">            <![CDATA[Verplaats de haai naar haar nieuwe thuis, zonder dat ze de wanden van de tank aanraakt.]]></string>
-        <string id="sharkshipment-scoring">         Na een (her)start heeft niets de haai meer aangeraakt, behalve de tank. De tank en de haai zijn...</string>
+        <string id="sharkshipment-scoring">         Na een (her)start heeft niets de haai aangeraakt, behalve de tank. De tank en de haai zijn...</string>
         <string id="sharkshipment-scoring-target0"> anders</string>
         <string id="sharkshipment-scoring-target1"> in gebied 1</string>
         <string id="sharkshipment-scoring-target2"> in gebied 2</string>
@@ -18,17 +18,17 @@
 
         <string id="dog-name">                      M02 Hulphond in actie</string>
         <string id="dog-desc">                      <![CDATA[Rijd langs de visueel beperkte man, zodat de hond haar werk doet.]]></string>
-        <string id="dog-scoring">                   <![CDATA[Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barrières)]]></string>
+        <string id="dog-scoring">                   Het waarschuwingshek is omlaag (door robot uit het westen, tussen de barri&#232;res)</string>
 
         <string id="conservation-name">             M03 Dierenbescherming</string>
         <string id="conservation-desc">             <![CDATA[Werk samen met het andere team om dezelfde dieren te herenigen. Elk paar
 dieren levert voor BEIDE teams punten op, ongeacht wie er aan de hereniging
 heeft bijgedragen.]]></string>
-        <string id="conservation-scoring">          Aantal paren gelijke dieren  volledig aan dezelfde kant (door draaiing)</string>
+        <string id="conservation-scoring">          Aantal paren identieke dieren volledig aan dezelfde kant (op beide velden, door draaiing)</string>
 
         <string id="feeding-name">                  M04 Voeren</string>
         <string id="feeding-desc">                  <![CDATA[Breng voedsel van de Koelkast naar de Dierengebieden.]]></string>
-        <string id="feeding-scoring">               Aantal stukken voedsel volledig in een Dierengebied (in een gebied hetzelfde)</string>
+        <string id="feeding-scoring">               Aantal stukken voedsel volledig in een Dierengebied (alleen bijbehorende in een gebied)</string>
 
         <string id="biomimicry-name">               M05 Biomimicry</string>
         <string id="biomimicry-desc">               <![CDATA[TTest of wij de “plakkerigheid” van de gekko kunnen namaken door de witte (mechanische) gekko aan de biomimicry muur te hangen en/of te onderzoeken of de robot zelf aan de muur kan hangen.]]></string>
@@ -67,7 +67,7 @@ heeft bijgedragen.]]></string>
         <string id="bee-scoring">                   De bij en de honing zijn respectievelijk...</string>
         <string id="bee-scoring-0">                 anders</string>
         <string id="bee-scoring-1">                 op en buiten de bijenkorf</string>
-        <string id="bee-scoring-2">                 op en volledig in de basis</string>
+        <string id="bee-scoring-2">                 op de bijenkorf en volledig in de basis</string>
         
         <string id="prosthesis-name">               M11 Prothese</string>
         <string id="prosthesis-desc">               <![CDATA[Bevestig de prothese waar de poten van het huisdier (onze kleine vriend) zouden moeten zitten, en verplaats het huisdier naar zijn plaats op de boerderij.]]></string>
@@ -80,7 +80,7 @@ heeft bijgedragen.]]></string>
         <string id="seal-desc">                     <![CDATA[De zeehond is volledig in de basis en is niet beschadigd.]]></string>
         <string id="seal-scoring">                  De zeehond is volledig in de basis en is niet beschadigd</string>
         
-        <string id="penalties-name">                Monsters</string>
+        <string id="penalties-name">                Strafpunten (monsters)</string>
         <string id="penalties-desc">                <![CDATA[Gegeven strafpunten]]></string>
         <string id="penalties-scoring">             Gegeven strafpunten</string>
 
@@ -125,7 +125,7 @@ heeft bijgedragen.]]></string>
     </mission>
 
     <mission name="conservation-name" description="conservation-desc">
-        <objective-number id="conservation" description="conservation-scoring" min="0" max="10" default="0" />
+        <objective-number id="conservation" description="conservation-scoring" min="0" max="6" default="0" />
         <score>
             <indexes>
                 <index objective="conservation" />
@@ -138,10 +138,6 @@ heeft bijgedragen.]]></string>
                 <case> <index-ref value="4" /> <points amount="80"  /> </case>
                 <case> <index-ref value="5" /> <points amount="100"  /> </case>
                 <case> <index-ref value="6" /> <points amount="120"  /> </case>
-                <case> <index-ref value="7" /> <points amount="140"  /> </case>
-                <case> <index-ref value="8" /> <points amount="160"  /> </case>
-                <case> <index-ref value="9" /> <points amount="180"  /> </case>
-                <case> <index-ref value="10" /> <points amount="200"  /> </case>
             </cases>
         </score>
     </mission>
