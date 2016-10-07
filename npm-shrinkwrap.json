@@ -25,9 +25,9 @@
               }
             },
             "negotiator": {
-              "version": "0.4.9",
-              "from": "https://registry.npmjs.org/negotiator/-/negotiator-0.4.9.tgz",
-              "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-0.4.9.tgz"
+              "version": "0.6.1",
+              "from": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz",
+              "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz"
             }
           }
         },
