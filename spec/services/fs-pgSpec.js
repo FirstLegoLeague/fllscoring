@@ -24,7 +24,7 @@ describe('fs-pg',function() {
             FileReader.instance = this;
         };
         FileWriter = function() {
-            this.write = jasmine.createSpy('FileWriter.write').andCallFake(function() {
+            this.write = jasmine.createSpy('FileWriter.write').and.callFake(function() {
                 this.onwriteend({});
             });
             FileWriter.instance = this;
@@ -52,7 +52,7 @@ describe('fs-pg',function() {
             this.root = new DirectoryEntry();
         };
         window.FileReader = FileReader;
-        window.requestFileSystem = jasmine.createSpy('fs').andCallFake(function(a,b,success,err) {
+        window.requestFileSystem = jasmine.createSpy('fs').and.callFake(function(a,b,success,err) {
             success(new FileSystem());
         });
     });
@@ -81,7 +81,7 @@ describe('fs-pg',function() {
             });
         });
         it('should fail when there is an error in filesystem',function() {
-            window.requestFileSystem = jasmine.createSpy('fs').andCallFake(function(a,b,success,err) {
+            window.requestFileSystem = jasmine.createSpy('fs').and.callFake(function(a,b,success,err) {
                 err('no fs');
             });
             return fs.read('foo.txt').catch(function(err) {
@@ -107,7 +107,7 @@ describe('fs-pg',function() {
             });
         });
         it('should fail when there is an error on writing',function() {
-            window.requestFileSystem = jasmine.createSpy('fs').andCallFake(function(a,b,success,err) {
+            window.requestFileSystem = jasmine.createSpy('fs').and.callFake(function(a,b,success,err) {
                 err('no fs');
             });
             return fs.write('foo.txt','bar').catch(function(err) {

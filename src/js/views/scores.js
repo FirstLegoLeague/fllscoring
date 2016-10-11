@@ -65,7 +65,7 @@ define('views/scores',[
 
             $scope.pollSheets = function() {
                 return $scores.pollSheets().catch(function(err) {
-                    console.log("pollSheets() failed", err);
+                    log("pollSheets() failed", err);
                     $window.alert("failed to poll sheets: " + err);
                 });
             };

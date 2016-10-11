@@ -71,6 +71,7 @@ define('services/ng-stages',[
                 log('stages using defaults');
                 self.add({ id: "practice", name: "Oefenrondes", rounds: 2 });
                 self.add({ id: "qualifying", name: "Voorrondes", rounds: 3 });
+                self.add({ id: "eighth", name: "Achtste finales", rounds: 0 });
                 self.add({ id: "quarter", name: "Kwartfinales", rounds: 0 });
                 self.add({ id: "semi", name: "Halve finales", rounds: 0 });
                 self.add({ id: "final", name: "Finale", rounds: 1 });
@@ -93,8 +94,20 @@ define('services/ng-stages',[
          * @param stage Example: { id: "qualifying", name: "Voorrondes", rounds: 2 }
          */
         Stages.prototype.add = function(stage) {
+            if (typeof stage !== "object") {
+                throw new Error("cannot add stage: object expected");
+            }
+            if (typeof stage.id !== "string") {
+                throw new Error("cannot add stage: invalid or missing id");
+            }
+            if (typeof stage.name !== "string") {
+                throw new Error("cannot add stage: invalid or missing name");
+            }
+            if (typeof stage.rounds !== "number") {
+                throw new Error("cannot add stage: invalid or missing rounds");
+            }
             if (stage.id in this._stagesMap) {
-                throw new Error("duplicate stage id " + stage.id);
+                throw new Error("cannot add stage: duplicate stage id " + stage.id);
             }
             // Push a copy of the object, to prevent user from messing it up later,
             // and to aid in in-code documentation
@@ -103,6 +116,21 @@ define('services/ng-stages',[
                 name: String(stage.name),
                 rounds: parseInt(stage.rounds, 10),
             });
+            this._update();
+        };
+
+        /**
+         * move stage by a specified amount of steps
+         * clipping to top or bottom of the list
+         */
+        Stages.prototype.moveStage = function(stage,steps) {
+            var oldIndex = stage.index;
+            var rawStage = this._rawStages[oldIndex];
+            //remove from the list
+            this._rawStages.splice(oldIndex,1);
+            //calculate insert position
+            var newIndex = Math.max(0,Math.min(this._rawStages.length,oldIndex + steps));
+            this._rawStages.splice(newIndex,0,rawStage);
             this._update();
         };
 

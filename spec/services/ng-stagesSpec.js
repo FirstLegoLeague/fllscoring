@@ -10,11 +10,19 @@ describe('ng-stages',function() {
     var $rootScope;
     var $stages;
     var $q;
-    var mockStage = { id: "practice", name: "Oefenrondes", rounds: 2 };
-    var mockStageSanitized = { index: 0, id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] };
-    var unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
-    var unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
+    var mockStage;
+    var mockStageSanitized;
+    var unusedMockStage;
+    var unusedMockStageSanitized;
     var fsMock;
+
+    //initialize
+    beforeEach(function() {
+        mockStage = { id: "practice", name: "Oefenrondes", rounds: 2 };
+        mockStageSanitized = { index: 0, id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] };
+        unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
+        unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
+    })
 
     beforeEach(function() {
         fsMock = createFsMock({"stages.json": [mockStage]});
@@ -45,7 +53,7 @@ describe('ng-stages',function() {
             });
         });
         it('should log an error if writing fails',function() {
-            fsMock.write.andReturn(Q.reject('aargh'));
+            fsMock.write.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
             });
@@ -59,21 +67,22 @@ describe('ng-stages',function() {
             });
         });
         it('should log an error if reading fails',function() {
-            fsMock.read.andReturn(Q.reject('squeek'));
+            fsMock.read.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages read error','squeek');
             });
         });
         it('should initialize with default stages if reading fails',function() {
-            fsMock.read.andReturn(Q.reject('squeek'));
+            fsMock.read.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages using defaults');
                 expect($stages.allStages).toEqual([
                     {index:0,id:"practice",name:"Oefenrondes",rounds:2,$rounds:[1,2]},
                     {index:1,id:"qualifying",name:"Voorrondes",rounds:3,$rounds:[1,2,3]},
-                    {index:2,id:"quarter",name:"Kwartfinales",rounds:0,$rounds:[]},
-                    {index:3,id:"semi",name:"Halve finales",rounds:0,$rounds:[]},
-                    {index:4,id:"final",name:"Finale",rounds:1,$rounds:[1]}
+                    {index:2,id:"eighth",name:"Achtste finales",rounds:0,$rounds:[]},
+                    {index:3,id:"quarter",name:"Kwartfinales",rounds:0,$rounds:[]},
+                    {index:4,id:"semi",name:"Halve finales",rounds:0,$rounds:[]},
+                    {index:5,id:"final",name:"Finale",rounds:1,$rounds:[1]}
                 ]);
             });
         });
@@ -105,6 +114,34 @@ describe('ng-stages',function() {
                 $stages.add(mockStage);
             }).toThrow();
         });
+        it('should reject a stage without an id, name, or rounds',function() {
+            $stages.clear();
+            $stages.add({ id: "foo", name: "bar", rounds: 0 });
+            expect(function() {
+                $stages.add(null);
+            }).toThrow();
+            expect(function() {
+                $stages.add("meh");
+            }).toThrow();
+            expect(function() {
+                $stages.add({ id: "foo", name: "bar" });
+            }).toThrow();
+            expect(function() {
+                $stages.add({ id: "foo", rounds: 0 });
+            }).toThrow();
+            expect(function() {
+                $stages.add({ name: "bar", rounds: 0 });
+            }).toThrow();
+        });
+        it('should reject a stage with non-string id or name',function() {
+            $stages.clear();
+            expect(function() {
+                $stages.add({ id: 1, name: "bar" });
+            }).toThrow();
+            expect(function() {
+                $stages.add({ id: "foo", name: 2 });
+            }).toThrow();
+        });
         it('should maintain existing stages and allStages arrays', function() {
             $stages.clear();
             var allStages = $stages.allStages;
@@ -115,6 +152,29 @@ describe('ng-stages',function() {
             $stages.add(unusedMockStage);
             expect(allStages).toEqual([mockStageSanitized, unusedMockStageSanitized]);
             expect(stages).toEqual([mockStageSanitized]);
+        });
+    });
+
+    describe('moveStage',function() {
+        beforeEach(function() {
+            //setup two stages
+            $stages.clear();
+            $stages.add(mockStage);
+            $stages.add(unusedMockStage);
+        })
+        it('move down 1 step',function() {
+            $stages.moveStage(mockStageSanitized,1);
+            expect($stages.allStages).toEqual([
+                { index: 0, id: "unused", name: "Foobar", rounds: 0, $rounds: [] },
+                {index:1,id:"practice",name:"Oefenrondes",rounds:2,$rounds:[1,2]}
+            ]);
+        });
+        it('move up 1 step',function() {
+            $stages.moveStage(unusedMockStageSanitized,-1);
+            expect($stages.allStages).toEqual([
+                { index: 0, id: "unused", name: "Foobar", rounds: 0, $rounds: [] },
+                {index:1,id:"practice",name:"Oefenrondes",rounds:2,$rounds:[1,2]}
+            ]);
         });
     });
 
@@ -129,7 +189,7 @@ describe('ng-stages',function() {
             $stages._rawStages = [mockStage,mockStage];
             expect(function() {
                 $stages._update();
-            }).toThrow('duplicate stage id practice');
+            }).toThrowError('duplicate stage id practice');
         });
     });
 });

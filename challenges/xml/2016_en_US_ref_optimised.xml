@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/challenge.xsl"?>
+<fll:challenge
+    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2015" version="1" name="ANIMAL ALLIES">
+
+    <strings language="nl-NL">
+
+        <string id="yes">                           Yes</string>
+        <string id="no">                            No</string>
+
+        <string id="sharkshipment-name">            M01 Shark Shipment</string>
+        <string id="sharkshipment-desc">            <![CDATA[Move the Shark to her new home not touching her tank's walls.]]></string>
+        <string id="sharkshipment-scoring">         After launch, nothing touced the Shark but the Tank. Tank and Shark are ...</string>
+        <string id="sharkshipment-scoring-target0"> elsewhere</string>
+        <string id="sharkshipment-scoring-target1"> in Target 1</string>
+        <string id="sharkshipment-scoring-target2"> in Target 2</string>
+        <string id="sharkshipment-scoring2">        Shark is touching only Tank floor</string>
+
+        <string id="dog-name">                      M02 Service Dog Action</string>
+        <string id="dog-desc">                      <![CDATA[Drive past the visually impaired man, and the dog will do her job.]]></string>
+        <string id="dog-scoring">                   The Warning Fence is down</string>
+
+        <string id="conservation-name">             M03 Conservation</string>
+        <string id="conservation-desc">             <![CDATA[During the Match, participating Robots make the trays switch places.  A switch is officially successful when the red axle causes the system to stop.  Robots then have the option of removing the received animal and replacing it with a different animal for switching.  The Referee resets the red axle.]]></string>
+        <string id="conservation-scoring">          Two identical animals are completely on the same Side (of either Field, through rotation)</string>
+
+        <string id="feeding-name">                  M04 Feeding</string>
+        <string id="feeding-desc">                  <![CDATA[Deliver food from the Refrigerator to Target Animal Areas.]]></string>
+        <string id="feeding-scoring">               Pieces of Food that are completely in a Target Area (only matching ones in an Area)</string>
+
+        <string id="biomimicry-name">               M05 Biomimicry</string>
+        <string id="biomimicry-desc">               <![CDATA[Test our ability to mimic the Gecko's “stickiness” by placing the White (mechanical) Gecko on the Biomimicry Wall, and/or by seeing if the Robot itself can get onto the wall.]]></string>
+        <string id="biomimicry-scoring1">           The Biomimicry Wall completely supports all the weight of the White Gecko</string>
+        <string id="biomimicry-scoring2">           The Biomimicry Wall completely supports all the weight of the Robot</string>
+        
+        <string id="milk-name">                     M06-M13-M14 Milk</string>
+        <string id="milk-desc">                     <![CDATA[Guide the cow into the machine, then spin the machine until Milk comes out. If you spin too far, Manure also comes out!]]></string>
+        <string id="milk-scoring">                  Milk and Manure... (only by the red lever)</string>
+        <string id="milk-scoring-milkmanure">       have all rolled out</string>
+        <string id="milk-scoring-milk">             Milk has rolled out, but not Manure</string>
+        <string id="milk-scoring-nothing">          other</string>
+        <string id="milk-base-scoring">             All three Milk are completely in Base</string>
+        <string id="milk-ramp-scoring">             All three Milk are...</string>
+        <string id="milk-ramp-scoring-0">           not supported by Ramp</string>
+        <string id="milk-ramp-scoring-1">           supported by Ramp</string>
+        <string id="milk-ramp-scoring-2">           supported by Ramp and touching Ramp as only things</string>
+        <string id="milk-ramp-scoring-3">           supported by Ramp, touching Ramp as only things and standing</string>
+        <string id="milk-error">                    The three Milk cannot be in multiple places</string>
+        
+        <string id="panda-name">                    M07 Panda Release</string>
+        <string id="panda-desc">                    <![CDATA[Convert the Panda’s scene from facility care and observation to open wilderness.]]></string>
+        <string id="panda-scoring">                 The slider looks fully open clockwise</string>
+        
+        <string id="camera-name">                   M08 Camera Recovery</string>
+        <string id="camera-desc">                   <![CDATA[Go get the camera and bring it to Base.]]></string>
+        <string id="camera-scoring">                The Camera is completely in Base</string>
+        
+        <string id="training-name">                 M09-M15 Training and Research</string>
+        <string id="training-desc">                 <![CDATA[Move the Dog & Trainer, Zoologist, and/or Manure Samples to the Training & Research Area.]]></string>
+        <string id="training-scoring-1">            <![CDATA[The Dog & Trainer are completely in the Training & Research Area]]></string>
+        <string id="training-scoring-2">            <![CDATA[The Zoologist is completely in the Training & Research Area]]></string>
+        <string id="training-scoring-3">            <![CDATA[Disk-shaped Manure Samples completely in the Training & Research Area]]></string>
+        
+        <string id="bee-name">                      M10 Bee Keeping</string>
+        <string id="bee-desc">                      <![CDATA[Place the Bee on the Beehive and get the Honey out.]]></string>
+        <string id="bee-scoring">                   The Bee and the Honey are...</string>
+        <string id="bee-scoring-0">                 elsewhere</string>
+        <string id="bee-scoring-1">                 on and outside the Beehive</string>
+        <string id="bee-scoring-2">                 on the Beehive and in Base</string>
+        
+        <string id="prosthesis-name">               M11 Prosthesis</string>
+        <string id="prosthesis-desc">               <![CDATA[Fit the Prosthesis where the legs of the Pet (Our Little Friend) should be, and send the Pet to its place on the farm.]]></string>
+        <string id="prosthesis-scoring">            The Prosthesis is...</string>
+        <string id="prosthesis-scoring-0">          not fitted</string>
+        <string id="prosthesis-scoring-1">          fitted</string>
+        <string id="prosthesis-scoring-2">          fitted and in Farm Area</string>
+        
+        <string id="seal-name">                     M12 Seal in Base</string>
+        <string id="seal-desc">                     <![CDATA[The Seal is completely in Base and not broken]]></string>
+        <string id="seal-scoring">                  The Seal is completely in Base and not broken</string>
+        
+        <string id="penalties-name">                Penalties</string>
+        <string id="penalties-desc">                <![CDATA[Penalties given]]></string>
+        <string id="penalties-scoring">             Penalties given</string>
+
+    </strings>
+
+    <!-- Do NOT edit below this line -->
+
+    <mission name="sharkshipment-name" description="sharkshipment-desc">
+        <objective-enum id="target" description="sharkshipment-scoring" default="0">
+            <option name="2" description="sharkshipment-scoring-target2" />
+            <option name="1" description="sharkshipment-scoring-target1" />
+            <option name="0" description="sharkshipment-scoring-target0" />
+        </objective-enum>
+        <objective-yesno id="bonus" description="sharkshipment-scoring2" default="no" />
+        <score>
+            <indexes>
+                <index objective="target" />
+                <index objective="bonus" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <index-ref value="no" /> <points amount="0" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="no" /> <points amount="7" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="no" /> <points amount="10" /> </case>
+                <case> <index-ref value="0" /> <index-ref value="yes" /> <points amount="0" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="yes" /> <points amount="27" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="yes" /> <points amount="30" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="dog-name" description="dog-desc">
+        <objective-yesno id="dog" description="dog-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="dog" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="15"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="conservation-name" description="conservation-desc">
+        <objective-number id="conservation" description="conservation-scoring" min="0" max="6" default="0" />
+        <score>
+            <indexes>
+                <index objective="conservation" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="20"  /> </case>
+                <case> <index-ref value="2" /> <points amount="40"  /> </case>
+                <case> <index-ref value="3" /> <points amount="60"  /> </case>
+                <case> <index-ref value="4" /> <points amount="80"  /> </case>
+                <case> <index-ref value="5" /> <points amount="100"  /> </case>
+                <case> <index-ref value="6" /> <points amount="120"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="feeding-name" description="feeding-desc">
+        <objective-number id="feeding" description="feeding-scoring" min="0" max="8" default="0" />
+        <score>
+            <indexes>
+                <index objective="feeding" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="10"  /> </case>
+                <case> <index-ref value="2" /> <points amount="20"  /> </case>
+                <case> <index-ref value="3" /> <points amount="30"  /> </case>
+                <case> <index-ref value="4" /> <points amount="40"  /> </case>
+                <case> <index-ref value="5" /> <points amount="50"  /> </case>
+                <case> <index-ref value="6" /> <points amount="60"  /> </case>
+                <case> <index-ref value="7" /> <points amount="70"  /> </case>
+                <case> <index-ref value="8" /> <points amount="80"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="biomimicry-name" description="biomimicry-desc">
+        <objective-yesno id="gecko" description="biomimicry-scoring1" default="no" />
+        <objective-yesno id="robot" description="biomimicry-scoring2" default="no" />
+        <score>
+            <indexes>
+                <index objective="gecko" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="15"  /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="robot" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="32"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="milk-name" description="milk-desc">
+        <objective-enum id="milk" description="milk-scoring" default="0">
+            <option name="2" description="milk-scoring-milk" />
+            <option name="1" description="milk-scoring-milkmanure" />
+            <option name="0" description="milk-scoring-nothing" />
+        </objective-enum>
+        <objective-yesno id="milk-base" description="milk-base-scoring" default="no" />
+        <objective-enum id="milk-ramp" description="milk-ramp-scoring" default="0">
+            <option name="3" description="milk-ramp-scoring-3" />
+            <option name="2" description="milk-ramp-scoring-2" />
+            <option name="1" description="milk-ramp-scoring-1" />
+            <option name="0" description="milk-ramp-scoring-0" />
+        </objective-enum>
+        <score>
+            <indexes>
+                <index objective="milk" />
+                <index objective="milk-base" />
+                <index objective="milk-ramp" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <index-ref value="no"  /> <index-ref value="0" /> <points amount="0"  />  </case>
+                <case> <index-ref value="1" /> <index-ref value="no"  /> <index-ref value="0" /> <points amount="15"  /> </case>
+                <case> <index-ref value="2" /> <index-ref value="no"  /> <index-ref value="0" /> <points amount="20"  /> </case>
+                <case> <index-ref value="0" /> <index-ref value="yes"  /> <index-ref value="0" /> <points amount="1"  /> </case>
+                <case> <index-ref value="1" /> <index-ref value="yes"  /> <index-ref value="0" /> <points amount="16"  /> </case>
+                <case> <index-ref value="2" /> <index-ref value="yes"  /> <index-ref value="0" /> <points amount="21"  /> </case>
+                <case> <index-ref value="0" /> <index-ref value="no"  /> <index-ref value="1" /> <points amount="2"  />  </case>
+                <case> <index-ref value="1" /> <index-ref value="no"  /> <index-ref value="1" /> <points amount="17"  /> </case>
+                <case> <index-ref value="2" /> <index-ref value="no"  /> <index-ref value="1" /> <points amount="22"  /> </case>
+                <case> <index-ref value="0" /> <index-ref value="yes"  /> <index-ref value="1" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="yes"  /> <index-ref value="1" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="yes"  /> <index-ref value="1" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="0" /> <index-ref value="no"  /> <index-ref value="2" /> <points amount="3"  />  </case>
+                <case> <index-ref value="1" /> <index-ref value="no"  /> <index-ref value="2" /> <points amount="18"  /> </case>
+                <case> <index-ref value="2" /> <index-ref value="no"  /> <index-ref value="2" /> <points amount="23"  /> </case>
+                <case> <index-ref value="0" /> <index-ref value="yes"  /> <index-ref value="2" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="yes"  /> <index-ref value="2" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="yes"  /> <index-ref value="2" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="0" /> <index-ref value="no"  /> <index-ref value="3" /> <points amount="4"  />  </case>
+                <case> <index-ref value="1" /> <index-ref value="no"  /> <index-ref value="3" /> <points amount="19"  /> </case>
+                <case> <index-ref value="2" /> <index-ref value="no"  /> <index-ref value="3" /> <points amount="24"  /> </case>
+                <case> <index-ref value="0" /> <index-ref value="yes"  /> <index-ref value="3" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="yes"  /> <index-ref value="3" /> <error message="milk-error" /> </case>
+                <case> <index-ref value="2" /> <index-ref value="yes"  /> <index-ref value="3" /> <error message="milk-error" /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="panda-name" description="panda-desc">
+        <objective-yesno id="panda" description="panda-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="panda" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="10"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="camera-name" description="camera-desc">
+        <objective-yesno id="camera" description="camera-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="camera" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="15"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="training-name" description="training-desc">
+        <objective-yesno id="training1" description="training-scoring-1" default="no" />
+        <objective-yesno id="training2" description="training-scoring-2" default="no" />
+        <objective-number id="training3" description="training-scoring-3" min="0" max="7" default="0" />
+        <score>
+            <indexes>
+                <index objective="training1" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="12"  /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="training2" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="15"  /> </case>
+            </cases>
+        </score>
+        <score>
+            <indexes>
+                <index objective="training3" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="1"  /> <points amount="5"  /> </case>
+                <case> <index-ref value="2"  /> <points amount="10"  /> </case>
+                <case> <index-ref value="3"  /> <points amount="15"  /> </case>
+                <case> <index-ref value="4"  /> <points amount="20"  /> </case>
+                <case> <index-ref value="5"  /> <points amount="25"  /> </case>
+                <case> <index-ref value="6"  /> <points amount="30"  /> </case>
+                <case> <index-ref value="7"  /> <points amount="40"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="bee-name" description="bee-desc">
+        <objective-enum id="bee" description="bee-scoring" default="0">
+            <option name="2" description="bee-scoring-2" />
+            <option name="1" description="bee-scoring-1" />
+            <option name="0" description="bee-scoring-0" />
+        </objective-enum>
+        <score>
+            <indexes>
+                <index objective="bee" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="12"  /> </case>
+                <case> <index-ref value="2" /> <points amount="15"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="prosthesis-name" description="prosthesis-desc">
+        <objective-enum id="prosthesis" description="prosthesis-scoring" default="0">
+            <option name="2" description="prosthesis-scoring-2" />
+            <option name="1" description="prosthesis-scoring-1" />
+            <option name="0" description="prosthesis-scoring-0" />
+        </objective-enum>
+        <score>
+            <indexes>
+                <index objective="prosthesis" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="9"  /> </case>
+                <case> <index-ref value="2" /> <points amount="15"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="seal-name" description="seal-desc">
+        <objective-yesno id="seal" description="seal-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="seal" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="1"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="penalties-name" description="penalties-desc">
+        <objective-enum id="penalties" description="penalties-scoring" default="0">
+            <option name="5" description="5" />
+            <option name="4" description="4" />
+            <option name="3" description="3" />
+            <option name="2" description="2" />
+            <option name="1" description="1" />
+            <option name="0" description="0" />
+        </objective-enum>
+        <score>
+            <indexes>
+                <index objective="penalties" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="-6"  /> </case>
+                <case> <index-ref value="2" /> <points amount="-12"  /> </case>
+                <case> <index-ref value="3" /> <points amount="-18"  /> </case>
+                <case> <index-ref value="4" /> <points amount="-24"  /> </case>
+                <case> <index-ref value="5" /> <points amount="-30"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+</fll:challenge>

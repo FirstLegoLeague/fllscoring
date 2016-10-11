@@ -42,17 +42,23 @@ describe('ng-settings',function() {
                 done();
             });
         });
-        it('should write an empty settings file if the file is not there',function() {
-            fsMock.read.andReturn($q.reject('no file'));
-            fsMock.write.andReturn($q.when());
+        it('should write a default settings file if the file is not there',function() {
+            var defaults = {
+                tables: [{name:'Table 1'}],
+                referees: [{name:'Head referee'}],
+                askTable: true,
+                askReferee: true
+            }
+            fsMock.read.and.returnValue($q.reject('no file'));
+            fsMock.write.and.returnValue($q.when());
             $settings.load();
             $rootScope.$digest();
-            expect(fsMock.write).toHaveBeenCalledWith('settings.json',{});
-            expect($settings.settings).toEqual({});
+            expect(fsMock.write).toHaveBeenCalledWith('settings.json',defaults);
+            expect($settings.settings).toEqual(defaults);
         });
         it('should just create local settings if no file could be created',function() {
-            fsMock.read.andReturn($q.reject('no file'));
-            fsMock.write.andReturn($q.reject('write error'));
+            fsMock.read.and.returnValue($q.reject('no file'));
+            fsMock.write.and.returnValue($q.reject('write error'));
             $settings.load();
             $rootScope.$digest();
             expect($settings.settings).toEqual({});

@@ -34,4 +34,16 @@ describe('indexFilter',function() {
             murk: 1
         }]);
     });
+
+    describe('testing with non-array arguments',function() {
+        it('should work with strings',function() {
+            expect(index('foo')).toEqual('foo');
+        });
+        it('should work with numbers',function() {
+            expect(index(42)).toEqual(42);
+        });
+        it('should work with undefined',function() {
+            expect(index(undefined)).toBeUndefined();
+        });
+    });
 });

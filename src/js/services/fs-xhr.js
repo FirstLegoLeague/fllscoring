@@ -1,5 +1,5 @@
 define('services/fs-xhr',['q','jquery'],function(Q,$) {
-    var baseurl = '/fs/';
+    var baseurl = 'fs/';
 
     function xhrget() {
         return $.get.apply($.get,arguments);

@@ -1,10 +1,15 @@
-<div ng-controller="teamsCtrl" id="teams">
+<div class="appbar">
+    <button ng-click="toggleDrawer()">
+        <i class="icon-reorder"></i>
+    </button>
     <h1>
-        Teams
-        <small ng-show="needSave">Not saved</small>
-        <small ng-hide="needSave">Saved</small>
+        {{currentPage}}
+        <span ng-show="needSave">(Not saved)</span>
+        <span ng-hide="needSave">(Saved)</span>
         <i ng-show="saving" class="icon-save"></i>
     </h1>
+</div>
+<div ng-controller="teamsCtrl" id="teams">
     <form class="form-inline form-new-team" name="newTeamForm" ng-show="editMode">
         <span class="control-group" ng-class="{error:!newTeamForm.newTeamNumber.$valid}">
             <label class="control-label">

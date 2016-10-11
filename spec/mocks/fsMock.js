@@ -18,13 +18,13 @@ var createFsMock = function(mockFiles, mockDirs) {
         _setDirs: function(newMockDirs) {
             mockDirs = newMockDirs;
         },
-        read: jasmine.createSpy('fsReadSpy').andCallFake(function(filename) {
+        read: jasmine.createSpy('fsReadSpy').and.callFake(function(filename) {
             if (!(filename in mockFiles)) {
                 return Q.reject(new Error("unknown file: " + filename));
             }
             return Q.when(angular.copy(mockFiles[filename]));
         }),
-        list: jasmine.createSpy('fsListSpy').andCallFake(function(dirname) {
+        list: jasmine.createSpy('fsListSpy').and.callFake(function(dirname) {
             // Strip trailing slash
             if (dirname[dirname.length - 1] === "/") {
                 dirname = dirname.slice(0, -1);
@@ -34,10 +34,10 @@ var createFsMock = function(mockFiles, mockDirs) {
             }
             return Q.when(angular.copy(mockDirs[dirname]));
         }),
-        write: jasmine.createSpy('fsWriteSpy').andCallFake(function() {
+        write: jasmine.createSpy('fsWriteSpy').and.callFake(function() {
             return Q.when(true);
         }),
-        remove: jasmine.createSpy('fsRemoveSpy').andCallFake(function() {
+        remove: jasmine.createSpy('fsRemoveSpy').and.callFake(function() {
             return Q.when(true);
         })
     };

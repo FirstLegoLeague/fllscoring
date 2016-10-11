@@ -8,7 +8,10 @@ define('services/ng-challenge',[
         '$http','$settings',
         function($http,$settings) {
             var mission;
-            var fallBackChallenge = 'challenge/2014_nl_NL-no-enum';
+            var settings;
+            var baseUrl = ''; // loaded from settings
+            var fallBackChallenge = '2016_en_US';
+            var self;
 
             function indexObjectives(missions) {
                 objs = {};
@@ -20,35 +23,35 @@ define('services/ng-challenge',[
                 return objs;
             }
 
-            return {
+            function getChallenge(challengeName) {
+                var url = baseUrl+'challenge/'+challengeName;
+                return $http.get(url,{
+                    transformResponse: function(d) {return d;}
+                }).then(function(response) {
+                    log('challenge \''+challengeName+'\' loaded');
+                    return self.init(eval('('+response.data+')'));
+                });
+            }
+
+            self = {
                 getDependencies: function(fn) {
                     var deps = fn.toString().match(/^function\s*\((.*?)\)/)[1];
                     return deps?deps.split(/\s*,\s*/):[];
                 },
                 load: function(challenge) {
-                    var self = this;
                     //use non-angular fs to load plain javascript instead of json
                         // var field = field2;
                     //temp: get from remote service
                     return $settings.init().then(function(settings) {
-                        var url = (settings.host||'')+'challenge/'+challenge;
-                        return $http.get(url,{
-                            transformResponse: function(d) {return d;}
-                        }).then(function(response) {
-                            log('from loaded challenge from settings');
-                            return self.init(eval('('+response.data+')'));
-                        }).catch(function() {
-                            //temp: get from remote service
-                            var url = (settings.host||'')+fallBackChallenge;
-                            return $http.get(url,{
-                                transformResponse: function(d) {return d;}
-                            }).then(function(response) {
-                                log('loaded challenge from backup');
-                                return self.init(eval('('+response.data+')'));
+                        baseUrl = (settings.host||'');
+                        if (challenge) {
+                            return getChallenge(challenge).catch(function(err) {
+                                log('error loading challenge from \''+challenge+'\':', err);
+                                return getChallenge(fallBackChallenge);
                             });
-                        }).catch(function() {
-                            log('error getting field');
-                        });
+                        } else {
+                            return getChallenge(fallBackChallenge);
+                        }
                     });
                 },
                 init: function(field) {
@@ -60,6 +63,7 @@ define('services/ng-challenge',[
                     };
                 }
             };
+            return self;
         }
     ]);
 });

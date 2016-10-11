@@ -31,16 +31,27 @@ define('views/scoresheet',[
             $scope.settings = {};
             $scope.missions = [];
             $scope.strings = [];
+            $scope.table = null;
+            $scope.referee = null;
 
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;
 
-
             $settings.init().then(function(res) {
                 $scope.settings = res;
                 return $scope.load();
             });
+
+            function generateId() {
+                var max = 0x100000000; // 8 digits
+                // Add current time to prevent Math.random() generating the same
+                // sequence if it's seeded with a constant. Not sure this is
+                // really needed, but better safe than sorry...
+                var num = (Math.floor(Math.random() * max) + Date.now()) % max;
+                // Convert to nice hex representation with padded zeroes, then strip that initial 1.
+                return (num + max).toString(16).slice(1);
+            }
 
             $scope.load = function() {
                 return $challenge.load($scope.settings.challenge).then(function(defs) {
@@ -72,6 +83,7 @@ define('views/scoresheet',[
                 },[]);
                 mission.errors = [];
                 mission.percentages = [];
+                mission.completed = false;
                 //addd watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
@@ -80,10 +92,12 @@ define('views/scoresheet',[
                 },function(newValue) {
                     mission.errors = [];
                     mission.percentages = [];
-                    mission.result = mission.score.reduce(function(total,score) {
+                    mission.completedObjectives = [];
+                    mission.result = mission.score.reduce(function(total,score,i) {
                         var deps = $challenge.getDependencies(score);
                         var vars = getObjectives(deps);
                         var res = score.apply(null,vars);
+                        mission.completedObjectives[i] = (res !== undefined);
                         if (res instanceof Error) {
                             mission.errors.push(res);
                             //do not count this bit
@@ -97,6 +111,9 @@ define('views/scoresheet',[
                         }
                         return total + (res||0);
                     },0);
+                    mission.completed = mission.completedObjectives.every(function(objectCompleted) {
+                        return objectCompleted;
+                    });
                 });
 
             }
@@ -130,14 +147,15 @@ define('views/scoresheet',[
                 return bonusScore + restScore;
             };
 
+            function empty(val) {
+                return val === undefined || val === null;
+            }
+
             //lists reasons why the scoresheet cannot be saved
             $scope.preventSaveErrors = function() {
-                var list = [];
-                if (!$scope.missions) {return list;}
+                var list = $scope.teamRoundErrors();
+                if (!$scope.missions) {return [];}
 
-                function empty(val) {
-                    return val === undefined || val === null;
-                }
                 function errors() {
                     return $scope.missions.some(function(mission) {
                         return !!mission.errors.length;
@@ -151,6 +169,18 @@ define('views/scoresheet',[
                     });
                 }
 
+                if (errors()) {
+                    list.push('Some missions have errors');
+                }
+                if (inComplete()) {
+                    list.push('Some missions are incomplete');
+                }
+
+                return list;
+            };
+
+            $scope.teamRoundErrors = function() {
+                var list = [];
                 if (empty($scope.stage)) {
                     list.push('No stage selected');
                 }
@@ -160,18 +190,19 @@ define('views/scoresheet',[
                 if (empty($scope.team)) {
                     list.push('No team selected');
                 }
-                if (errors()) {
-                    list.push('Some missions have errors');
-                }
-                if (inComplete()) {
-                    list.push('Some missions are incomplete');
-                }
-                if (!$scope.table) {
+                if ($scope.settings.askTable && !$scope.table) {
                     list.push('No table number entered');
+                }
+                if ($scope.settings.askReferee && !$scope.referee) {
+                    list.push('No referee entered');
                 }
 
                 return list;
             };
+
+            $scope.teamRoundOk = function() {
+                return !$scope.teamRoundErrors().length;
+            }
 
             $scope.isSaveable = function() {
                 if (!$scope.missions) {return false;}
@@ -179,54 +210,58 @@ define('views/scoresheet',[
                 return !$scope.preventSaveErrors().length;
             };
 
-            $scope.discard = function() {
+            $scope.clear = function() {
+                $scope.uniqueId = generateId();
                 $scope.signature = null;
                 $scope.team = null;
                 $scope.stage = null;
                 $scope.round = null;
-                $scope.table = null;
                 $scope.missions.forEach(function(mission) {
                     mission.objectives.forEach(function(objective) {
                         delete objective["value"];
                     });
                 });
-                console.log('discard');
+                log('scoresheet cleared');
             };
 
             //saves mission scoresheet
-            //take into account a key: https://github.com/FirstLegoLeague/fllscoring/issues/5#issuecomment-26030045
             $scope.save = function() {
                 if (!$scope.team || !$scope.stage || !$scope.round) {
                     $window.alert('no team selected, do so first');
                     return $q.reject(new Error('no team selected, do so first'));
                 }
-                //todo:
-                var fn = [
-                    'score',
-                    $scope.settings.table,
-                    $scope.team.number,
-                    +(new $window.Date())
-                ].join('_')+'.json';
 
                 var data = angular.copy($scope.field);
+                data.uniqueId = $scope.uniqueId;
                 data.team = $scope.team;
                 data.stage = $scope.stage;
                 data.round = $scope.round;
                 // data.table = $scope.settings.table;
                 data.table = $scope.table;
+                data.referee = $scope.referee;
                 data.signature = $scope.signature;
                 data.score = $scope.score();
 
+                var fn = [
+                    'score',
+                    data.stage.id,
+                    'round' + data.round,
+                    'table' + data.table,
+                    'team' + data.team.number,
+                    data.uniqueId
+                ].join('_')+'.json';
+
                 return $fs.write("scoresheets/" + fn,data).then(function() {
                     log('result saved');
-                    $scope.discard();
+                    $scope.clear();
                     $window.alert('Thanks for submitting a score of ' +
                         data.score +
                         ' points for team (' + data.team.number + ') ' + data.team.name +
                         ' in ' + data.stage.name + ' ' + data.round + '.'
                     );
-                },function() {
-                    $window.alert('unable to write result');
+                }, function(err) {
+                    $window.alert('Error submitting score: ' + String(err));
+                    throw err;
                 });
             };
 
@@ -234,8 +269,8 @@ define('views/scoresheet',[
                 $handshake.$emit('showDescription',mission);
             };
 
-            $scope.openTeamModal = function (teams,settings) {
-                $handshake.$emit('chooseTeam',teams,settings).then(function(result) {
+            $scope.openTeamModal = function (teams) {
+                $handshake.$emit('chooseTeam',teams).then(function(result) {
                     if (result) {
                         $scope.team = result.team;
                     }
@@ -251,6 +286,8 @@ define('views/scoresheet',[
                 });
             };
 
+            // Initialize empty scoresheet (mostly uniqueId)
+            $scope.clear();
         }
     ]);
 });

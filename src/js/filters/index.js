@@ -14,6 +14,10 @@ define('filters/index',[
 ],function(module) {
     return module.filter('index', function () {
         return function (array, index) {
+            //bail out if not an array-like structure
+            if (!(array && array.forEach)) {
+                return array;
+            }
             if (!index) {
                 index = 'index';
             }

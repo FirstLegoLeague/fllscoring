@@ -1,0 +1,189 @@
+/* fab */
+@media screen {
+    .fab {
+        z-index: 1991;
+        line-height: 56px;
+        min-width: 0;
+        width: 56px;
+        height: 56px;
+        vertical-align: middle;
+        border-radius: 50%;
+        background-clip: padding-box;
+        overflow: hidden;
+        transition: .2s linear;
+        transition-property: background-color,box-shadow;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+        border: none;
+        background: #6AEF4E;
+        font-size: 24px;
+    }
+    .main-fab {
+        position: fixed;
+        top: 36px;
+        right: 40px;
+    }
+}
+
+/* input fields */
+@media screen {
+    .textfield {
+        position: relative;
+        font-size: 16px;
+        display: inline-block;
+        box-sizing: border-box;
+        width: 300px;
+        max-width: 100%;
+        margin: 0;
+        padding: 20px 0px 0px;
+    }
+    .textfield input {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+        display: block;
+        font-size: 16px;
+        margin: 0;
+        padding: 4px 0;
+        width: 100%;
+        background: 0 0;
+        text-align: left;
+        color: inherit;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    .textfield label {
+        bottom: 0;
+        color: rgba(0,0,0,.26);
+        font-size: 16px;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+        position: absolute;
+        display: block;
+        top: 24px;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: left;
+        margin: 0;
+
+        /* dirty */
+        color: #1E90FF;
+        font-size: 12px;
+        top: 4px;
+    }
+    .textfield.nolabel {
+        padding: 0;
+    }
+    .textfield.nolabel label {
+        visibility: hidden;
+    }
+
+    .textfield input:focus {
+        box-shadow: none;
+        /*border-color: #1E90FF;
+        border-width: 2px;*/
+    }
+
+    .textfield label::after {
+        background-color: #1E90FF;
+        bottom: 0px;
+        content: '';
+        height: 2px;
+        left: 45%;
+        position: absolute;
+        -webkit-transition-duration: .2s;
+        transition-duration: .2s;
+        -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+        transition-timing-function: cubic-bezier(.4,0,.2,1);
+        visibility: hidden;
+        width: 10px;
+    }
+
+    .textfield input:focus + label::after {
+        visibility: visible;
+        left: 0%;
+        width: 100%;
+    }
+}
+
+/* buttons */
+@media screen {
+    button.flat {
+        padding: 8px;
+        border: none;
+        background: none;
+        text-transform: uppercase;
+        box-shadow: none;
+    }
+    button.flat:focus {
+        background: #DDDDDD;
+        box-shadow: none;
+        outline: none;
+    }
+    button.flat:hover {
+        background: #DDDDDD;
+        box-shadow: none;
+    }
+    button.flat:active {
+        background: #CCCCCC;
+        box-shadow: none;
+    }
+}
+
+/* cards */
+@media screen {
+    .card {
+        border-radius: 2px;
+        background: #fff;
+        border-color: rgba(117,117,117,1);
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+        margin: 16px 0px;
+        position: relative;
+    }
+
+    .card-header {
+        padding: 16px;
+        font-size: 24px;
+        line-height: 24px;
+        margin: 0;
+    }
+    .card-menu {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        font-size: 24px;
+    }
+
+    .card-body {
+        padding: 16px;
+    }
+
+    .card-actions {
+        border-top: 1px solid rgba(0,0,0,.1);
+        padding: 16px;
+        overflow: auto;
+    }
+    .card-actions p {
+        margin: 0;
+    }
+}
+
+/* lists */
+@media screen {
+    .list {
+
+    }
+
+    .list-item {
+        padding: 16px;
+        font-size: 16px;
+        /*border-bottom: 1px solid rgba(0,0,0,.1);*/
+    }
+    .list-item:hover {
+        background-color: #EEE;
+    }
+    .list-icon-right {
+        float: right;
+
+    }
+}

@@ -95,10 +95,10 @@ describe('scores', function() {
             expect(scoresMock.save).toHaveBeenCalled();
         });
         it('should alert if an error is thrown from scores',function() {
-            scoresMock.update.andThrow('update error');
+            scoresMock.update.and.throwError('update error');
             $scope.editScore(0);
             $scope.finishEditScore(0);
-            expect($window.alert).toHaveBeenCalledWith('Error updating score: update error');
+            expect($window.alert).toHaveBeenCalledWith('Error updating score: Error: update error');
         });
     });
 
@@ -117,7 +117,7 @@ describe('scores', function() {
         });
 
         it('should alert on fail',function() {
-            scoresMock.pollSheets.andReturn($q.reject(new Error('foo')));
+            scoresMock.pollSheets.and.returnValue($q.reject(new Error('foo')));
             $scope.pollSheets();
             expect(scoresMock.pollSheets).toHaveBeenCalled();
             $scope.$digest();

@@ -1,0 +1,3 @@
+var createMessageMock = function() {
+	return {};
+}

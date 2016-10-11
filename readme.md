@@ -3,10 +3,14 @@
 [![Dependency Status](https://david-dm.org/FirstLegoLeague/fllscoring.png)](https://david-dm.org/FirstLegoLeague/fllscoring)
 [![devDependency Status](https://david-dm.org/FirstLegoLeague/fllscoring/dev-status.png)](https://david-dm.org/FirstLegoLeague/fllscoring#info=devDependencies)
 
+![en_US challenge screenshot](docs/user_interface/screenshots/26-8-2015_75711.png)
+
 FLL Scoring
 =============
 
-To have a look at what we are at, see [Testing](https://github.com/FirstLegoLeague/fllscoring/wiki/Testing). No guarantees.
+To have a look at what we are at:
+- see [Testing](https://github.com/FirstLegoLeague/fllscoring/wiki/Testing). No guarantees.
+- or check out our live [Live demo](http://firstlegoleague.github.io/fllscoring/). Even less guarantees. 
 
 Using
 ---------------
@@ -27,6 +31,13 @@ In the near future, we plan to have "ready to go" software available as:
 - executable, for Windows, Mac OS and Linux
 - app, for iOS, Android and windows
 - a hosted service, as described above
+
+Contributing
+---------------
+
+To contribute to this repository, please make a fork, make your changes and submit a pull request.
+
+This way of work allows us to maintain proper code quality, which is important when working with a large amount of people on the same project. Feel free to join the discussion on the [issues page](https://github.com/FirstLegoLeague/fllscoring/issues)
 
 Development
 ---------------
@@ -50,6 +61,7 @@ This is mainly used for development.
 - `node localserver.js` then open [localhost:1390/nocache.html](http://localhost:1390/nocache.html)
     - to specify another port, use `node localserver.js -p 8000`
     - to add basic authentication, use `node localserver.js -u username:password`
+    - to specify a data dir use `node localserver -d datadir` Relative paths are relative to the localserver script. Absolute paths are, well, absolute. Defaults to `data`
 - note that we load `nocache.html` to circumvent the offline cache mechanism
 
 Testing
@@ -61,7 +73,7 @@ Testing
 Building
 --------
 
-- for a desktop build: `grunt nodewebkit`
+- for a desktop build: `grunt nwjs`
 - for a mobile build: `grunt phonegap`
  - to build only one of iOS or Android, use `grunt phonegap:ios` or `grunt phonegap:android` respectively
 
@@ -110,7 +122,7 @@ Basically, it allows users to legally copy, distribute and modify software. This
 Charge a fee to distribute the software.
 * If you want to charge someone to provide the software, set it up on their website or do anything else related to it, you can do so. But, you must give them a copy of the GNU GPL, which basically tells them that they could probably get the software elsewhere for free. Best to be up front about that, and about why you’re charging them.
 * If you want to add or remove functionality, go ahead. If you want to use a portion of the code in another project, you can. The only catch is that the other project must also be released under the GPL. Ideally we would want you to share your improvements back with us on this GitHub.
-* We welcome your feedback but please remember that this software comes with no guarantees. We are dedicated volunteer and experiences software developpers and will do our best make sure we make a valuable and reliable contribution to the community. However the use of this software is at your own risk.
+* We welcome your feedback but please remember that this software comes with no guarantees. We are dedicated volunteer and experienced software developers and will do our best make sure we make a valuable and reliable contribution to the community. However the use of this software is at your own risk.
 
 Authors
 --------

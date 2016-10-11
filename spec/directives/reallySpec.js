@@ -28,7 +28,7 @@ describe('really',function() {
                     fll-really-message="foo"
                 ></div>
             */}))($rootScope);
-            windowMock.confirm.andReturn(true);
+            windowMock.confirm.and.returnValue(true);
             el.click();
             expect(windowMock.confirm).toHaveBeenCalledWith('foo');
             expect($rootScope.clickSpy).toHaveBeenCalled();
@@ -42,7 +42,7 @@ describe('really',function() {
                     fll-really-message="foo"
                 ></div>
             */}))($rootScope);
-            windowMock.confirm.andReturn(false);
+            windowMock.confirm.and.returnValue(false);
             el.click();
             expect(windowMock.confirm).toHaveBeenCalledWith('foo');
             expect($rootScope.clickSpy).not.toHaveBeenCalled();

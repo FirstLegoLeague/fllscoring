@@ -19,13 +19,12 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        nodewebkit: {
+        nwjs: { // nw.js, formerly known as "node-webkit"
             options: {
-                webkit_src: './webkitbuilds', // Where the build version of my node-webkit app is saved
-                mac: true, // We want to build it for mac
-                win: true, // We want to build it for win
-                linux32: false, // We don't need linux32
-                linux64: false // We don't need linux64
+                buildDir: './nw-builds', // output folder for nwjs apps
+                cacheDir: './nw-cache',
+                platforms: ['win', 'osx64', 'linux'],
+                version: 'v0.12.0' // nwjs version to use
             },
             src: ['./src/**/*'] // Your node-wekit app
         },
@@ -129,7 +128,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-node-webkit-builder');
+    grunt.loadNpmTasks('grunt-nw-builder');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-http-server');

@@ -10,15 +10,19 @@
                     body {
                         font-family: verdana;
                         counter-reset: mission;
+                        margin: 0px;
                     }
                     .mission {
                         border: 1px solid silver;
                         border-radius: 4px;
-                        margin: 10px;
                         padding: 10px;
+                        margin-left: 0px;
+                        margin-right: 0px;
+                        margin-top: 5px;
+                        margin-bottom: 0px;
                         counter-increment: mission;
                     }
-                    .mission h2:before  {
+                    /*.mission h2:before  {
                         content: counter(mission);
                         border: 1px solid silver;
                         border-radius: 100px;
@@ -31,10 +35,11 @@
                         text-align: center;
                         margin-left: -25px;
                         margin-right: 10px;
-                    }
+                    }*/
                     .mission h2 {
                         font-size: inherit;
                         margin: 0;
+                        margin-bottom: 5px;
                     }
                     .objective {
                         overflow: auto;
@@ -110,8 +115,8 @@
                 <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
             </span>
             <span class="values">
-                <span>Yes</span>
-                <span>No</span>
+                <span><xsl:value-of select="/fll:challenge/strings/string[@id='yes']"/></span>
+                <span><xsl:value-of select="/fll:challenge/strings/string[@id='no']"/></span>
             </span>
         </div>
     </xsl:template>

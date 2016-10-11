@@ -1,7 +1,8 @@
 describe('ranking', function() {
 
     var module = factory('views/ranking', {
-        'services/log': logMock
+        'services/log': logMock,
+        'controllers/ExportRankingDialogController': factory('controllers/ExportRankingDialogController')
     });
 
     var $scope, controller;
@@ -9,18 +10,22 @@ describe('ranking', function() {
         number: '123',
         name: 'foo'
     };
-    var fsMock, stagesMock, scoresMock;
+    var fsMock, stagesMock, scoresMock, handshakeMock, messageMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope,$q) {
             $scope = $rootScope.$new();
             scoresMock = createScoresMock($q);
+            handshakeMock = createHandshakeMock($q);
             stagesMock = createStagesMock();
+            messageMock = createMessageMock();
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
                 '$scores': scoresMock,
                 '$stages': stagesMock,
+                '$handshake': handshakeMock,
+                '$message': messageMock
             });
         });
     });
@@ -31,6 +36,16 @@ describe('ranking', function() {
             expect($scope.rev).toEqual(false);
             expect($scope.csvdata).toEqual({});
             expect($scope.csvname).toEqual({});
+        });
+    });
+
+    describe('exportRanking',function() {
+        it('should emit a exportRanking handshake',function() {
+            $scope.exportRanking();
+            expect(handshakeMock.$emit).toHaveBeenCalledWith('exportRanking',{
+                scores: $scope.scores,
+                stages: $scope.stages
+            });
         });
     });
 
@@ -157,6 +172,12 @@ describe('ranking', function() {
             $scope.scoreboard = 'foo';
             $scope.$digest();
             expect($scope.rebuildCSV).toHaveBeenCalledWith(scoresMock.scoreboard);
+        });
+    });
+
+    describe('getRoundLabel',function() {
+        it('should create a label for rounds',function() {
+            expect($scope.getRoundLabel(4)).toEqual('Round 4');
         });
     });
 });

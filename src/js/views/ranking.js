@@ -3,24 +3,45 @@
 define('views/ranking',[
     'services/log',
     'services/ng-scores',
+    'services/ng-handshake',
+    'services/ng-message',
+    'controllers/ExportRankingDialogController',
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
-    return angular.module(moduleName,[]).controller(moduleName+'Ctrl', [
-        '$scope', '$scores', '$stages', '$timeout',
-        function($scope, $scores, $stages, $timeout) {
+    return angular.module(moduleName,['ExportRankingDialog']).controller(moduleName+'Ctrl', [
+        '$scope', '$scores', '$stages','$handshake','$message',
+        function($scope, $scores, $stages, $handshake, $message) {
             log('init ranking ctrl');
 
             // temporary default sort values
             $scope.sort = 'rank';
             $scope.rev = false;
-            $scope.export = {};
-            $scope.export.prevRounds = true; // enable highscore
-            // initialize first tab
-            $scope.tab = 1;
+
             $scope.scores = $scores;
 
+            $scope.exportRanking = function() {
+                $handshake.$emit('exportRanking',{
+                    scores: $scope.scores,
+                    stages: $scope.stages
+                });
+            };
 
+            //TODO: this is a very specific message tailored to display system.
+            //we want less contract here
+            $scope.broadcastRanking = function(stage) {
+                var data = {
+                    data: $scope.scoreboard[stage.id].map(function(item) {
+                        return [
+                            item.rank,
+                            item.team.name,
+                            item.highest
+                        ];
+                    }),
+                    header: stage.name
+                };
+                $message.send('list:setArray',data);
+            };
 
             $scope.doSort = function(stage, col, defaultSort) {
                 if (stage.sort === undefined) {
@@ -125,26 +146,7 @@ define('views/ranking',[
             $scope.getRoundLabel = function(round){
                 return "Round " + round;
             };
-            // Generate new table and download page to wished location
-            $scope.exportScore = function(params){
-                $scope.stageselected = params.stage;
-                $scope.export.rounds = Array.apply(null, Array(params.round)).map(function (_, i) {return i+1;});
-                var stageFilter = {};
-                stageFilter[params.stage.id] = params.round;
-                $scope.filterscoreboard = $scores.getRankings(stageFilter).scoreboard;
-
-                $timeout(function () {
-
-                    var htmloutput = "<!DOCTYPE html><html><head><title>"+ params.stage.name + " " + params.round + "</title></head><body id=\"bodyranking\">";
-                    htmloutput += document.getElementById("scoreexport").innerHTML;
-                    htmloutput += "<script>runThroughHighscore("+$scope.filterscoreboard[$scope.stageselected.id].length+");</script>";
-                    htmloutput += "</body></html>";
-                    $scope.exportname = encodeURIComponent("RoundResults.html");
-                    $scope.exportdata = "data:text/csv;charset=utf-8," + encodeURIComponent(htmloutput);
-                    $scope.exportvisible = true; 
-
-                });
-            };
+            
 
         }
     ]);
