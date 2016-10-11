@@ -44,7 +44,7 @@ Development
 
 Prerequisites
 
-- nodejs [nodejs.org](http://nodejs.org). Make sure you have a recent version (>.10)
+- nodejs [nodejs.org](http://nodejs.org). Make sure you have a recent version (>6) to get npm version >3.
 - grunt (`npm install -g grunt-cli`)
 
 Steps
