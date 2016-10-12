@@ -36,13 +36,13 @@
     border-bottom: 1px solid #eee;
     height: 30px;
     white-space: nowrap;
+    display: flex;
 }
 
 .fll-dialog h1 .header-text {
     overflow: hidden;
     text-overflow: ellipsis;
-    display: inline-block;
-    max-width: calc(100% - 50px);
+    flex: 1;
 }
 
 .fll-dialog section {
