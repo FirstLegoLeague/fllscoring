@@ -1,7 +1,7 @@
 <div ng-controller="scoresheetCtrl" id="scoresheet">
     <div class="appbar">
         <button ng-click="toggleDrawer()">
-            <i class="icon-reorder"></i>
+            <i class="material-icons">menu</i>
         </button>
         <h1>{{field.title}}</h1>
     </div>
@@ -16,11 +16,11 @@
                 <h2 class="card-header">Team &amp; round</h2>
                 <div class="card-body">
                     <p>
-                        <button class="btn btn-select" ng-click="openTeamModal(teams)"><div class="icon-group"/> Team</button>
+                        <button class="btn btn-select" ng-click="openTeamModal(teams)"><i class="material-icons">people</i> Team</button>
                         <span ng-show="team">({{team.number}}) {{team.name}} </span>
                     </p>
                     <p>
-                        <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
+                        <button class="btn btn-select" ng-click="openRoundModal(stages)"><i class="material-icons">label</i> Stage &amp; round</button>
                         <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
                     </p>
                     <p style="padding-left: 15px" ng-show="settings.askTable">
@@ -39,7 +39,7 @@
             <form id="scoresheetForm" ng-submit="validateScoresheet()">
                 <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.errors.length, ok:mission.completed}">
 
-                    <div class="card-menu" ng-click="openDescriptionModal(mission)"><div class="icon-question-sign"/></div>
+                    <div class="card-menu" ng-click="openDescriptionModal(mission)"><i class="material-icons">info_outline</i></div>
 
                     <h2 class="card-header">
                         {{mission.title}}
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div ng-repeat="error in mission.errors" class="error card-actions">
-                        <div class="icon-warning-sign"></div>
+                        <i class="material-icons">warning</i>
                         {{error.message}}
                     </div>
                 </section>
@@ -79,11 +79,11 @@
                 <h2 class="card-header">Team &amp; round</h2>
                 <div class="card-body">
                     <p>
-                        <button class="btn btn-select" ng-click="openTeamModal(teams)"><div class="icon-group"/> Team</button>
+                        <button class="btn btn-select" ng-click="openTeamModal(teams)"><i class="material-icons">people</i> Team</button>
                         <span ng-show="team">({{team.number}}) {{team.name}} </span>
                     </p>
                     <p>
-                        <button class="btn btn-select" ng-click="openRoundModal(stages)"><div class="icon-tag"/> Stage &amp; round</button>
+                        <button class="btn btn-select" ng-click="openRoundModal(stages)"><i class="material-icons">label</i> Stage &amp; round</button>
                         <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
                     </p>
                     <p style="padding-left: 15px" ng-show="settings.askTable">
@@ -103,14 +103,14 @@
             <section class="card" ng-class="{ok:signature}">
                 <h2 class="card-header">
                     Team signature
-                    <button class="btn pull-right btn-warning" ng-click="signature=null"><div  class="icon-eraser"/> Clear signature</button>
+                    <button class="btn pull-right btn-warning" ng-click="signature=null"><i class="material-icons">clear</i> Clear signature</button>
                 </h2>
                 <div fll-sigpad ng-model="signature"></div>
             </section>
 
             <section class="card">
                 <p ng-repeat="error in preventSaveErrors()">
-                    <span class="icon-warning-sign"></span>
+                    <i class="material-icons">warning</i>
                     {{error}}
                 </p>
             </section>
@@ -118,8 +118,8 @@
 
 
         <div>
-            <button class="btn btn-danger" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="clear()"><div class="icon-remove"/> Discard</button>
-            <button class="btn btn-success" id="save" ng-disabled="!isSaveable()" ng-click="save()"><div class="icon-ok"/> Save</button>
+            <button class="btn btn-danger" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="clear()"><i class="material-icons">clear</i> Discard</button>
+            <button class="btn btn-success" id="save" ng-disabled="!isSaveable()" ng-click="save()"><i class="material-icons">check</i> Save</button>
         </div>
 
     </div>

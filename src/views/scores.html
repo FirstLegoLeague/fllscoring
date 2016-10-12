@@ -1,12 +1,12 @@
 <div class="appbar">
     <button ng-click="toggleDrawer()">
-        <i class="icon-reorder"></i>
+        <i class="material-icons">menu</i>
     </button>
     <h1>{{currentPage}}</h1>
 </div>
 <div ng-controller="scoresCtrl">
-    <button class="btn" ng-click="pollSheets()"><i class="icon-repeat"></i> Check for new scores</button>
-    <button class="btn" ng-click="refresh()"><i class="icon-repeat"></i> Refresh scores</button>
+    <button class="btn" ng-click="pollSheets()"><i class="material-icons">refresh</i> Check for new scores</button>
+    <button class="btn" ng-click="refresh()"><i class="material-icons">refresh</i> Refresh scores</button>
     <br />
     <br />
     <p>Showing {{scores.length}} scores.</p>
@@ -26,7 +26,7 @@
         <tr ng-repeat="score in scores | index | orderBy:sort:rev track by score.index" ng-class="{error: score.error, warning: score.modified && !score.error}">
             <td>{{score.index + 1}}</td>
             <td>
-                <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}"></i>
+                <i class="material-icons" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
                     {{score.stage.name}}
                 </span>
@@ -35,7 +35,7 @@
                 </span>
             </td>
             <td>
-                <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownRoundError'" title="{{score.error.message}}"></i>
+                <i class="material-icons" ng-show="score.error.name == 'UnknownRoundError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
                     {{score.round}}
                 </span>
@@ -52,7 +52,7 @@
                 </span>
             </td>
             <td>
-                <i class="icon-exclamation-sign" ng-show="score.error.name == 'UnknownTeamError'" title="{{score.error.message}}"></i>
+                <i class="material-icons" ng-show="score.error.name == 'UnknownTeamError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
                     {{score.team.number}}
                 </span>
@@ -62,14 +62,14 @@
             </td>
             <td>{{score.team.name}}</td>
             <td>
-                <i class="icon-exclamation-sign" ng-show="score.error.name == 'InvalidScoreError'" title="{{score.error.message}}"></i>
+                <i class="material-icons" ng-show="score.error.name == 'InvalidScoreError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
                     {{score.score}}
                 </span>
                 <span ng-if="score.$editing">
                     <input style="width:50px" type="text" ng-model="score.score">
                 </span>
-                <i class="icon-exclamation-sign" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}"></i>
+                <i class="material-icons" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}">error</i>
             </td>
             <td>
                 <button class="btn"
@@ -88,20 +88,20 @@
                     ng-if="!score.$editing"
                     ng-click="editScore(score.index)"
                 >
-                    <i class="icon-pencil"></i>
+                    <i class="material-icons">mode_edit</i>
                     Edit
                 </button>
                 <button class="btn btn-default"
                     ng-if="score.$editing"
                     ng-click="finishEditScore(score.index)"
                 >
-                    <i class="icon-pencil"></i>
+                    <i class="material-icons">mode_edit</i>
                     Save
                 </button>
                 <button class="btn btn-danger"
                     ng-if="!score.$editing"
                     fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
-                    <i class="icon-trash"></i>
+                    <i class="material-icons">delete</i>
                     Delete
                 </button>
                 <button class="btn btn-default"
