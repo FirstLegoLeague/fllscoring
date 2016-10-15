@@ -1,12 +1,12 @@
 <div class="appbar">
     <button ng-click="toggleDrawer()">
-        <i class="icon-reorder"></i>
+        <i class="material-icons">menu</i>
     </button>
     <h1>
         {{currentPage}}
         <span ng-show="needSave">(Not saved)</span>
         <span ng-hide="needSave">(Saved)</span>
-        <i ng-show="saving" class="icon-save"></i>
+        <i ng-show="saving" class="material-icons">save</i>
     </h1>
 </div>
 <div ng-controller="teamsCtrl" id="teams">
@@ -27,15 +27,15 @@
     </form>
     <p class="pull-right">
         <button class="btn" ng-click="import()">
-            <i class="icon-plus-sign-alt"></i>
+            <i class="material-icons">add</i>
             Import
         </button>
         <button class="btn" ng-click="load()">
-            <i class="icon-cloud-download"></i>
+            <i class="material-icons">cloud_download</i>
             Load
         </button>
         <button ng-class="{active:editMode}" class="btn" ng-click="editMode=!editMode;saveTeams()">
-            <i class="icon-edit"></i> Edit
+            <i class="material-icons">mode_edit</i> Edit
         </button>
     </p>
     <div class="alert alert-info" ng-show="status">
@@ -70,7 +70,7 @@
                 <td>{{team.coach2}}</td>
                 <td>{{team.judgingGroup}}</td>
                 <td>{{team.pitLocation}}</td>
-                <td><i ng-show="team.translationNeeded===true" class="icon-ok"></i></td>
+                <td><i ng-show="team.translationNeeded===true" class="material-icons">check</i></td>
             </tr>
             <tr ng-show="editMode" ng-repeat="team in teams | orderBy:sort:rev" track by team.number>
                 <td><input type="text" ng-model=team.number class="team-number"></td>
@@ -85,7 +85,7 @@
                 <td><input type="checkbox" ng-model=team.translationNeeded></td>
                 <td>
                     <span ng-show="editMode">
-                        <i class="icon-trash clickable" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam(team.number)"></i>
+                        <i class="material-icons clickable" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam(team.number)">delete</i>
                     </span>
                 </td>
             </tr>
@@ -131,7 +131,7 @@
                 </div>
                 <div>
                     <span class="title">Translation needed</span>
-                    <span ng-show="!editMode &amp;&amp; team.translationNeeded===true"><i class="icon-ok"></i></span>
+                    <span ng-show="!editMode &amp;&amp; team.translationNeeded===true"><i class="material-icons">check</i></span>
                     <input ng-show="editMode" type="checkbox" ng-model="team.translationNeeded">
                 </div>
             </div>

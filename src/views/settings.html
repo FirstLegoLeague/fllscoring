@@ -1,6 +1,6 @@
 <div class="appbar">
     <button ng-click="toggleDrawer()">
-        <i class="icon-reorder"></i>
+        <i class="material-icons">menu</i>
     </button>
     <h1>{{currentPage}}</h1>
 </div>
@@ -10,7 +10,7 @@
     </button>
     <p>
         <button class="btn" ng-click="save()">
-            <i class="icon-ok"></i>
+            <i class="material-icons">check</i>
             Save settings
         </button>
     </p>
@@ -34,7 +34,7 @@
                         <label for="">Name</label>
                     </p>
                     <span class="list-icon-right">
-                        <i class="icon-trash clickable" ng-click="removeItem(settings.tables,$index)"></i>
+                        <i class="material-icons clickable" ng-click="removeItem(settings.tables,$index)">delete</i>
                     </span>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <label for="">Name</label>
                     </p>
                     <span class="list-icon-right">
-                        <i class="icon-trash clickable" ng-click="removeItem(settings.referees,$index)"></i>
+                        <i class="material-icons clickable" ng-click="removeItem(settings.referees,$index)">delete</i>
                     </span>
                 </div>
             </div>
@@ -174,7 +174,7 @@
     </div>
     <p>
         <button class="btn" ng-click="save()">
-            <i class="icon-ok"></i>
+            <i class="material-icons">check</i>
             Save settings
         </button>
     </p>

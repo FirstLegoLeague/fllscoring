@@ -22,7 +22,7 @@ if (slaveMode) {
     });
 }
 
-app.use(express.static('src'));
+app.use(express.static(resolve(__dirname,'src')));
 
 //set up basic authentication
 if (basicAuthCreds) {
@@ -62,7 +62,7 @@ app.use(function(req, res, next) {
 });
 
 function getDataFilePath(path) {
-    var fullpath = resolve(__dirname,datadir,path);
+    var fullpath = resolve(dirname(process.argv[1]),datadir,path);
     return fullpath;
 }
 

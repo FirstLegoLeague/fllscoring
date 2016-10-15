@@ -1,9 +1,9 @@
     <div class="fll-dialog-shim" ng-controller="TeamImportDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="teamImportDialog">
             <h1>
-                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
+                <div class="fll-dialog-back material-icons" ng-click="cancel()">arrow_back</div>
                 <span class="header-text">Import teams</span>
-                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog" ng-click="cancel()"><div class="material-icons">close</div></button>
             </h1>
             <section>
                 <div class="modal-body">
@@ -47,10 +47,10 @@
     <div class="fll-dialog-shim" ng-controller="TeamDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="teamDialog">
             <h1>
-                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
+                <div class="fll-dialog-back material-icons" ng-click="cancel()">arrow_back</div>
                 <span class="header-text">Select a team</span>
-                <p class="pull-right">
-                    <button class="fll-dialog-close btn btn-danger btn-dialog" ng-click="cancel()"><i class="icon-remove"></i></button>
+                <p>
+                    <button class="fll-dialog-close btn btn-danger btn-dialog" ng-click="cancel()"><div class="material-icons">close</div></button>
                     <button class="btn btn-default btn-dialog" ng-click="settings.teamSort='name';settings.save()" ng-hide="settings.teamSort=='name'">Sort by name</button>
                     <button class="btn btn-default btn-dialog" ng-click="settings.teamSort='number';settings.save()" ng-hide="settings.teamSort=='number'">Sort by number</button>
                 </p>
@@ -80,9 +80,9 @@
     <div class="fll-dialog-shim" ng-controller="RoundDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="roundDialog">
             <h1>
-                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
+                <div class="fll-dialog-back material-icons" ng-click="cancel()">arrow_back</div>
                 <span class="header-text">Select a round</span>
-                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog" ng-click="cancel()"><div class="material-icons">close</div></button>
             </h1>
             <section>
                 <table class="table table-striped">
@@ -114,9 +114,9 @@
     <div class="fll-dialog-shim" ng-controller="DescriptionDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="descriptionDialog">
             <h1>
-                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
+                <div class="fll-dialog-back material-icons" ng-click="cancel()">arrow_back</div>
                 <span class="header-text">{{mission.title}}</span>
-                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog" ng-click="cancel()"><div class="material-icons">close</div></button>
             </h1>
             <section>
                 <div class="modal-body" ng-bind-html="mission.description">
@@ -129,9 +129,9 @@
     <div class="fll-dialog-shim" ng-controller="NewStageDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="newStageDialog">
             <h1>
-                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
+                <div class="fll-dialog-back material-icons" ng-click="cancel()">arrow_back</div>
                 <span class="header-text">Create new Stage</span>
-                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog" ng-click="cancel()"><div class="material-icons">close</div></button>
             </h1>
             <section>
                 <div class="modal-body">
@@ -159,9 +159,9 @@
     <div class="fll-dialog-shim" ng-controller="ExportRankingDialogController" ng-show="dialogVisible">
         <div class="fll-dialog" id="ExportRankingDialog">
             <h1>
-                <div class="fll-dialog-back icon-arrow-left pull-left" ng-click="cancel()"></div>
+                <div class="fll-dialog-back material-icons" ng-click="cancel()">arrow_back</div>
                 <span class="header-text">Export ranking to standalone file</span>
-                <button class="fll-dialog-close btn btn-danger btn-dialog pull-right" ng-click="cancel()"><div class="icon-remove"></div></button>
+                <button class="fll-dialog-close btn btn-danger btn-dialog" ng-click="cancel()"><div class="material-icons">close</div></button>
             </h1>
             <section>
                 <div class="modal-body">
@@ -181,11 +181,11 @@
                     </p>
                     <p>
                         <button class="btn" ng-click="exportScore(export)">
-                            <i class="icon-ok"></i>
+                            <i class="material-icons">check</i>
                             Export score
                         </button>
                     <p>
-                        <a  href="{{exportdata}}" download="{{exportname}}" ng-show="exportvisible"><i class="icon-download-alt"></i>Export naar USB</a>
+                        <a  href="{{exportdata}}" download="{{exportname}}" ng-show="exportvisible"><i class="material-icons">file_download</i> Export naar USB</a>
                         
                         <div ng-hide="true" id="scoreexport">
                             <style>
