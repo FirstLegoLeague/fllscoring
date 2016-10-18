@@ -24,9 +24,6 @@ src/components/*/*
 !src/components/bootstrap-css/img
 !src/components/bootstrap-css/js
 
-!src/components/font-awesome/css
-!src/components/font-awesome/font
-
 !src/components/idbwrapper/idbstore*.js
 
 !src/components/jquery/jquery*.js
