@@ -202,7 +202,7 @@ app.get('/scores/:round',function(req,res) {
 
 //serve admin page
 app.get('/admin',function(req,res) {
-    res.sendFile(resolve('src/admin.html'));
+    res.sendFile(resolve(__dirname+'/src/admin.html'));
 });
 
 //get the teams info
