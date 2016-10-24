@@ -203,8 +203,8 @@ define('directives/spinner',[
                             '<span ng-repeat="n in numbers">{{n}}</span>',
                         '</span>',
                         '<span class="inner"></span>',
-                        '<button class="prev"><i class="icon-caret-left"></i></button>',
-                        '<button class="next"><i class="icon-caret-right"></i></button>',
+                        '<button class="prev"><i class="material-icons">keyboard_arrow_left</i></button>',
+                        '<button class="next"><i class="material-icons">keyboard_arrow_right</i></button>',
                     '</span>'
                 ].join(''),
                 link: function($scope,$element,$attrs) {
