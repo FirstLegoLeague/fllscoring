@@ -258,4 +258,5 @@ app.delete(/^\/fs\/(.*)$/, function(req, res) {
 
 app.listen(port, function() {
     console.log('Listening on port ', port);
+    console.log('open browser to http://localhost:'+port+'/');
 });
