@@ -26,6 +26,19 @@ define('views/settings',[
             $scope.addItem = function(collection) {
                 collection.push({});
             };
+            //specialized adding for tables, finds a number in the name and adds 1 to it
+            $scope.addTable = function() {
+                var collection = $scope.settings.tables;
+                var last = collection[collection.length-1];
+                var number = last && last.name && last.name.match(/\d+/);
+                if (number) {
+                    collection.push({
+                        name: last.name.replace(number,parseInt(number,10)+1)
+                    });
+                } else {
+                    collection.push({});
+                }
+            }
             $scope.removeItem = function(collection,index) {
                 collection.splice(index,1);
             };
