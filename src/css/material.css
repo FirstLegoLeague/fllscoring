@@ -111,6 +111,7 @@
     button.flat {
         padding: 8px;
         border: none;
+        border-radius: 3px;
         background: none;
         text-transform: uppercase;
         box-shadow: none;
@@ -127,6 +128,27 @@
     button.flat:active {
         background: #CCCCCC;
         box-shadow: none;
+    }
+
+
+    button.raised {
+        padding: 8px;
+        border: none;
+        border-radius: 3px;
+        background: none;
+        text-transform: uppercase;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    }
+    button.raised:focus {
+        background: #DDDDDD;
+        outline: none;
+    }
+    button.raised:hover {
+        background: #DDDDDD;
+    }
+    button.raised:active {
+        background: #CCCCCC;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,.4);
     }
 }
 

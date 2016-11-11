@@ -77,11 +77,6 @@ components/angular-touch/angular-touch.min.js
 components/bootstrap-css/css/bootstrap.min.css
 #components/bootstrap-css/fonts/glyphicons-halflings-regular.woff
 #components/bootstrap-css/fonts/glyphicons-halflings-regular.ttf
-components/font-awesome/css/font-awesome.min.css
-components/font-awesome/font/fontawesome-webfont.eot
-components/font-awesome/font/fontawesome-webfont.svg
-components/font-awesome/font/fontawesome-webfont.ttf
-components/font-awesome/font/fontawesome-webfont.woff
 components/idbwrapper/idbstore.js
 components/jquery/jquery.min.js
 components/q/q.js
