@@ -43,7 +43,9 @@ define('services/ng-settings',[
                     tables: [{name:'Table 1'}],
                     referees: [{name:'Head referee'}],
                     askTable: true,
-                    askReferee: true
+                    askReferee: true,
+                    mhub: 'ws://localhost:13900',
+                    node: 'default'
                 }
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
