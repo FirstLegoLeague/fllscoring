@@ -47,7 +47,10 @@ describe('ng-settings',function() {
                 tables: [{name:'Table 1'}],
                 referees: [{name:'Head referee'}],
                 askTable: true,
-                askReferee: true
+                askReferee: true,
+                mhub: 'ws://localhost:13900',
+                node: 'default'
+
             }
             fsMock.read.and.returnValue($q.reject('no file'));
             fsMock.write.and.returnValue($q.when());
