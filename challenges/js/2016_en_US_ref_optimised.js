@@ -357,7 +357,7 @@
                 return 30
             }
             if (training3 === '7') {
-                return 40
+                return 35
             }
         }]
     }, {
@@ -432,6 +432,22 @@
             }
             if (seal === 'yes') {
                 return 1
+            }
+        }]
+    }, {
+        "title": "M15 All Samples",
+        "description": "-",
+        "objectives": [{
+            "id": "samples",
+            "title": "All seven Manure Samples completely in Training/Research Area",
+            "type": "yesno"
+        }],
+        "score": [function(samples) {
+            if (samples === 'no') {
+                return 0
+            }
+            if (samples === 'yes') {
+                return 5
             }
         }]
     }, {
@@ -544,6 +560,9 @@
         "seal-name": "M12 Seal in Base",
         "seal-desc": "The Seal is completely in Base and not broken",
         "seal-scoring": "The Seal is completely in Base and not broken",
+        "samples-name": "M15 All Samples",
+        "samples-desc": "-",
+        "samples-scoring": "All seven Manure Samples completely in Training/Research Area",
         "penalties-name": "Penalties",
         "penalties-desc": "Penalties given",
         "penalties-scoring": "Penalties given"

@@ -329,7 +329,7 @@
                 return 30
             }
             if (training3 === '7') {
-                return 40
+                return 35
             }
         }]
     }, {
@@ -404,6 +404,22 @@
             }
             if (seal === 'yes') {
                 return 1
+            }
+        }]
+    }, {
+        "title": "M15 Alle mestmonsters",
+        "description": "-",
+        "objectives": [{
+            "id": "samples",
+            "title": "Alle zeven de mestmonsters zijn in het Trainings- en onderzoeksgebied",
+            "type": "yesno"
+        }],
+        "score": [function(samples) {
+            if (samples === 'no') {
+                return 0
+            }
+            if (samples === 'yes') {
+                return 5
             }
         }]
     }, {
@@ -515,6 +531,9 @@
         "seal-name": "M12 Zeehond in de basis",
         "seal-desc": "De zeehond is volledig in de basis en is niet beschadigd.",
         "seal-scoring": "De zeehond is volledig in de basis en is niet beschadigd",
+        "samples-name": "M15 Alle mestmonsters",
+        "samples-desc": "-",
+        "samples-scoring": "Alle zeven de mestmonsters zijn in het Trainings- en onderzoeksgebied",
         "penalties-name": "Strafpunten (monsters)",
         "penalties-desc": "Gegeven strafpunten",
         "penalties-scoring": "Gegeven strafpunten"

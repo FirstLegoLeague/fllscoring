@@ -280,7 +280,7 @@
                 <case> <index-ref value="4"  /> <points amount="20"  /> </case>
                 <case> <index-ref value="5"  /> <points amount="25"  /> </case>
                 <case> <index-ref value="6"  /> <points amount="30"  /> </case>
-                <case> <index-ref value="7"  /> <points amount="40"  /> </case>
+                <case> <index-ref value="7"  /> <points amount="35"  /> </case>
             </cases>
         </score>
     </mission>

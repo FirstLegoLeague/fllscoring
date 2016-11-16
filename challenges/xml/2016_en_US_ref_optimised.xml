@@ -79,6 +79,10 @@
         <string id="seal-desc">                     <![CDATA[The Seal is completely in Base and not broken]]></string>
         <string id="seal-scoring">                  The Seal is completely in Base and not broken</string>
         
+        <string id="samples-name">                  M15 All Samples</string>
+        <string id="samples-desc">                  <![CDATA[-]]></string>
+        <string id="samples-scoring">               All seven Manure Samples completely in Training/Research Area</string>
+        
         <string id="penalties-name">                Penalties</string>
         <string id="penalties-desc">                <![CDATA[Penalties given]]></string>
         <string id="penalties-scoring">             Penalties given</string>
@@ -292,7 +296,7 @@
                 <case> <index-ref value="4"  /> <points amount="20"  /> </case>
                 <case> <index-ref value="5"  /> <points amount="25"  /> </case>
                 <case> <index-ref value="6"  /> <points amount="30"  /> </case>
-                <case> <index-ref value="7"  /> <points amount="40"  /> </case>
+                <case> <index-ref value="7"  /> <points amount="35"  /> </case>
             </cases>
         </score>
     </mission>
@@ -342,6 +346,19 @@
             <cases>
                 <case> <index-ref value="no"  /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes"  /> <points amount="1"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="samples-name" description="samples-desc">
+        <objective-yesno id="samples" description="samples-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="samples" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="5"  /> </case>
             </cases>
         </score>
     </mission>

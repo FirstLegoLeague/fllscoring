@@ -80,6 +80,10 @@ heeft bijgedragen.]]></string>
         <string id="seal-desc">                     <![CDATA[De zeehond is volledig in de basis en is niet beschadigd.]]></string>
         <string id="seal-scoring">                  De zeehond is volledig in de basis en is niet beschadigd</string>
         
+        <string id="samples-name">                  M15 Alle mestmonsters</string>
+        <string id="samples-desc">                  <![CDATA[-]]></string>
+        <string id="samples-scoring">               Alle zeven de mestmonsters zijn in het Trainings- en onderzoeksgebied</string>
+        
         <string id="penalties-name">                Strafpunten (monsters)</string>
         <string id="penalties-desc">                <![CDATA[Gegeven strafpunten]]></string>
         <string id="penalties-scoring">             Gegeven strafpunten</string>
@@ -283,7 +287,7 @@ heeft bijgedragen.]]></string>
                 <case> <index-ref value="4"  /> <points amount="20"  /> </case>
                 <case> <index-ref value="5"  /> <points amount="25"  /> </case>
                 <case> <index-ref value="6"  /> <points amount="30"  /> </case>
-                <case> <index-ref value="7"  /> <points amount="40"  /> </case>
+                <case> <index-ref value="7"  /> <points amount="35"  /> </case>
             </cases>
         </score>
     </mission>
@@ -333,6 +337,19 @@ heeft bijgedragen.]]></string>
             <cases>
                 <case> <index-ref value="no"  /> <points amount="0"  /> </case>
                 <case> <index-ref value="yes"  /> <points amount="1"  /> </case>
+            </cases>
+        </score>
+    </mission>
+    
+    <mission name="samples-name" description="samples-desc">
+        <objective-yesno id="samples" description="samples-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="samples" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no"  /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes"  /> <points amount="5"  /> </case>
             </cases>
         </score>
     </mission>
