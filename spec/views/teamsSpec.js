@@ -95,7 +95,10 @@ describe('teams', function() {
                 expect($scope.newTeam).toEqual({});
                 expect($scope.editMode).toBe(false);
             });
-
+            it('should not unnecessarily save teams', function() {
+                $scope.$digest();
+                expect($teams.save).not.toHaveBeenCalled();
+            });
         });
 
         describe('load', function() {
