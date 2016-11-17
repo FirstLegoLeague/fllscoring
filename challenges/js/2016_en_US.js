@@ -302,7 +302,7 @@
                 return 30
             }
             if (training3 === '7') {
-                return 40
+                return 35
             }
         }]
     }, {
