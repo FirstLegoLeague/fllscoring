@@ -26,11 +26,10 @@ define([
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
     angular.module('main',[]).controller('mainCtrl',[
-        '$scope',
-        function($scope) {
+        '$scope','$window',
+        function($scope, $window) {
             log('init main ctrl');
-            $scope.mainView = 'views/main.html';
-            $scope.scoringView = 'views/mainScoring.html';
+            $scope.drawer = 'views/drowar';
             $scope.pages = ['teams','scoresheet','scores','ranking','settings'];
             $scope.scoringPages = ['scoresheet','settings'];
             $scope.currentPage = $scope.pages[1];
@@ -61,9 +60,9 @@ define([
 
             $scope.containerClass = function(w,h) {
                 w = w();
-                if (w<=480) {
+                if (w <= 480) {
                     return $scope.platform + ' smallWindow';
-                } else if (w<=1024) {
+                } else if (w <= 1024) {
                     return $scope.platform + ' mediumWindow';
                 } else {
                     return $scope.platform + ' largeWindow';

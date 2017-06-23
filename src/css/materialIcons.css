@@ -3,7 +3,7 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/materialIcons.woff2) format('woff2');
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(/fonts/materialIcons.woff2) format('woff2');
 }
 
 .material-icons {
@@ -23,4 +23,3 @@
   -moz-font-feature-settings: 'liga';
   -moz-osx-font-smoothing: grayscale;
 }
-
