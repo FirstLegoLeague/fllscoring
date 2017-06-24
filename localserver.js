@@ -9,14 +9,16 @@ var configs = [require('./server_modules/slave_mode')];
 
 var middlewareLayers = [express.static(fileSystem.resolve('/src')),
                         function(req, res, next) { console.log(req.originalUrl); next(); },
+                        require('cookie-parser')(),
                         require('./server_modules/sessions').middleware,
                         require('./server_modules/auth').basic(args.basicAuthCreds),
                         require('./server_modules/cors').middleware,
                         require('./server_modules/cache').middleware,
                         require('./server_modules/body_builder').middleware];
 
-var routers = [fileSystem,
-                views,
+var routers = [views,
+                fileSystem,
+                require('./server_modules/sessions'),
                 require('./server_modules/teams'),
                 require('./server_modules/scores'),
                 require('./server_modules/challenges')];

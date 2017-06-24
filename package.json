@@ -31,6 +31,7 @@
   "dependencies": {
     "basic-auth-connect": "~1.0.0",
     "express": "^4.10.4",
+    "mustache-express": "^1.2.4",
     "js-beautify": "^1.5.4",
     "minimist": "^1.1.0",
     "mkdirp": "~0.5.0",
