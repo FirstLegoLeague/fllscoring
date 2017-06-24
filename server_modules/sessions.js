@@ -15,7 +15,6 @@ exports.middleware = session(config);
 exports.route = function(app) {
 
 	app.get('/session', function(req, res) {
-		console.log("session=" + Object.keys(req.session));
 		res.json(req.session);
 	})
 
