@@ -2,7 +2,9 @@
     <button ng-click="toggleDrawer()">
         <i class="material-icons">menu</i>
     </button>
-    <h1>{{currentPage}}</h1>
+    <h1>
+        {{currentPage.title}}
+    </h1>
 </div>
 <div ng-controller="scoresCtrl">
     <button class="raised" ng-click="pollSheets()"><i class="material-icons">refresh</i> Check for new scores</button>

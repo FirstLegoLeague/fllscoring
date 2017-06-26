@@ -6,11 +6,17 @@ define('services/session',[
 		'$http',
 		function($http) {
 	
+		var eventListeners = [];
 		var session = {};
+
 		$http.get('/session').then(function(response) {
-			for(var key in response) {
-				session[key] = response[key];
+			for(var key in response.data) {
+				session[key] = response.data[key];
 			}
+
+			eventListeners.forEach(function(eventListener) {
+				eventListener();
+			});
 		});
 
 	    return {
@@ -19,6 +25,11 @@ define('services/session',[
 		    },
 		    keys: function() {
 		    	return Object.keys(session);
+		    },
+		    onload: function(func) {
+		    	if(typeof func === 'function') {
+		    		eventListeners.push(func);
+		    	}
 		    }
 		};
 

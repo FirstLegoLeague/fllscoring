@@ -35,23 +35,25 @@ define([
             $scope.validationErrors = [];
             $scope.drawerVisible = false;
 
-            $scope.user = session.get('user');
-            if($scope.user === 'admin') {
-                $scope.pages = [
-                    { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
-                    { name: 'teams', title: 'Teams', icon: 'people' },
-                    { name: 'scores', title: 'Scorekeeping', icon: 'list' },
-                    { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
-                    { name: 'settings', title: 'Settings', icon: 'settings' }
-                ];
-            } else {
-                $scope.pages = [
-                    { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
-                    { name: 'settings', title: 'Settings', icon: 'settings' }
-                ];
-            }
+            session.onload(function() {
+                $scope.user = session.get('user');
+                if($scope.user === 'admin') {
+                    $scope.pages = [
+                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
+                        { name: 'teams', title: 'Teams', icon: 'people' },
+                        { name: 'scores', title: 'Scorekeeping', icon: 'list' },
+                        { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
+                        { name: 'settings', title: 'Settings', icon: 'settings' }
+                    ];
+                } else {
+                    $scope.pages = [
+                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
+                        { name: 'settings', title: 'Settings', icon: 'settings' }
+                    ];
+                }
 
-            $scope.currentPage = $scope.pages[0];
+                $scope.currentPage = $scope.pages[0];
+            })
 
             $scope.$on('validationError',function(e,validationErrors) {
                 $scope.validationErrors = validationErrors;
