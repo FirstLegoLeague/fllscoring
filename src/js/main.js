@@ -15,6 +15,7 @@ define([
     'tests/indexedDBTest',
     'angular-bootstrap',
     'angular-touch',
+    'angular-cookies',
     'angular-sanitize',
     'angular'
 ],function(log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
@@ -27,8 +28,8 @@ define([
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
     angular.module('main',[]).controller('mainCtrl',[
-        '$scope', 'session',
-        function($scope, session) {
+        '$scope', 'session', '$cookies',
+        function($scope, session ,$cookies) {
             log('init main ctrl');
             $scope.drawer = 'views/drawer.html';
             $scope.scoringPages = ['scoresheet','settings'];
@@ -52,7 +53,7 @@ define([
                     ];
                 }
 
-                $scope.currentPage = $scope.pages[0];
+                $scope.currentPage = $cookies['page'] || $scope.pages[0];
             })
 
             $scope.$on('validationError',function(e,validationErrors) {
@@ -69,6 +70,7 @@ define([
 
             $scope.setPage = function(page) {
                 $scope.currentPage = page;
+                $cookies['page'] = page;
                 $('body').scrollTop(0);
                 $scope.drawerVisible = false;
             };
@@ -100,6 +102,7 @@ define([
         'ui.bootstrap',
         'ngSanitize',
         'ngTouch',
+        'ngCookies',
         settings.name,
         teams.name,
         scoresheet.name,
