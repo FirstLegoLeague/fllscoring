@@ -30,17 +30,30 @@ define('views/ranking',[
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
             $scope.broadcastRanking = function(stage) {
-                var data = {
-                    data: $scope.scoreboard[stage.id].map(function(item) {
-                        return [
-                            item.rank,
-                            item.team.name,
-                            item.highest
-                        ];
+                // Send generic ranking info on bus, but filter it down a bit
+                // to not include Angular-injected stuff (yuk), but also omit
+                // the full scoresheets and their validation results etc.
+                // Having it spelled out exactly also helps to have some kind of
+                // 'interface' defined to the outside world.
+                var rankingMessage = {
+                    stage: {
+                        id: stage.id,
+                        name: stage.name,
+                        rounds: stage.rounds,
+                    },
+                    ranking: $scope.scoreboard[stage.id].map(function (item) {
+                        return {
+                            rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
+                            team: {
+                                number: item.team.number,
+                                name: item.team.name,
+                            },
+                            scores: item.scores,
+                            highest: item.highest,
+                        };
                     }),
-                    header: stage.name
                 };
-                $message.send('list:setArray',data);
+                $message.send('scores:ranking', rankingMessage);
             };
 
             $scope.doSort = function(stage, col, defaultSort) {
