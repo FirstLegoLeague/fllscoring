@@ -6,7 +6,7 @@ var utils = require('./utils');
 var args = require('./args');
 
 function getDataFilePath(file) {
-    return exports.resolve(path.dirname(process.argv[1]/*TODO change this to user the args module*/), args.data, file);
+    return path.resolve(path.dirname(process.argv[1]), args.datadir, file);
 }
 
 function parseFile(data) {

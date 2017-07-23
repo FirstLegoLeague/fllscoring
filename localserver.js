@@ -8,7 +8,6 @@ var views = require('./server_modules/views');
 var configs = [require('./server_modules/slave_mode')];
 
 var middlewareLayers = [express.static(fileSystem.resolve('/src')),
-                        require('cookie-parser')(),
                         require('./server_modules/sessions').middleware,
                         require('./server_modules/auth').basic(args.basicAuthCreds),
                         require('./server_modules/cors').middleware,

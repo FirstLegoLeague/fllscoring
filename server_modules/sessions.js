@@ -5,7 +5,7 @@ var MemoryStore = session.MemoryStore;
 
 var config = {
 	store: new MemoryStore, 
-	secret: 'some-kind-of-secret-g492p8j2498gnqe9n92-8fj-938f',
+	secret: 'secret-' + require('uuid/v4')(),
 	resave: true,
 	saveUninitialized: true
 };

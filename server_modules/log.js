@@ -1,7 +1,7 @@
 exports.middleware = function(req, res, next) {
 
 	req.log = function(level, message) {
-		console.log(level + ' - ' + Date.now().toString() + ': ' + message);
+		console.log(level + ' - ' + Date.now().toLocaleString() + ': ' + message);
 	};
 
 	['debug', 'info', 'warn', 'error', 'fatal'].forEach(function(level) {
