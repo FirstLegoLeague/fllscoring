@@ -25,7 +25,7 @@ function parseFile(data) {
 }
 
 exports.resolve = function(file) {
-    return path.resolve(file);
+    return path.resolve(absoluteFile(file));
 };
 
 exports.readFile = function(file) {
