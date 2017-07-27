@@ -6,8 +6,8 @@ define('views/scores',[
 ],function(log) {
     var moduleName = 'scores';
     return angular.module(moduleName,['filters']).controller(moduleName+'Ctrl',[
-        '$scope', '$scores','$teams','$stages','$window',
-        function($scope,$scores,$teams,$stages,$window) {
+        '$scope','$settings','$scores','$teams','$stages','$window',
+        function($scope,$settings,$scores,$teams,$stages,$window) {
             log('init scores ctrl');
 
             $scope.sort = 'index';

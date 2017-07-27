@@ -127,6 +127,11 @@ define('services/ng-scores',[
             this._initialized = null; // Promise<void>
             this._pollingSheets = null; // Promise<void>
             this.init();
+
+            $message.on('scores:new', function(message) {
+                self.add(message.data);
+                self.save();
+            });
         }
 
         /**
