@@ -5,6 +5,10 @@ var path = require('path')
 var utils = require('./utils');
 var args = require('./args');
 
+function absoluteFile(file) {
+	return (file[0] === '/' ? utils.root : '') + file;
+}
+
 function getDataFilePath(file) {
     return path.resolve(path.dirname(process.argv[1]), args.datadir, file);
 }
@@ -21,16 +25,11 @@ function parseFile(data) {
 }
 
 exports.resolve = function(file) {
-	if(file[0] === '/') {
-		file = utils.root + file;
-	}
 	return path.resolve(file);
 };
 
 exports.readFile = function(file) {
-	if(file[0] === '/') {
-		file = utils.root + file;
-	}
+	file = absoluteFile(file);
 
     return Q.promise(function(resolve,reject) {
         fs.exists(file,function(exists) {
@@ -58,6 +57,8 @@ exports.parseDataFile = function(file) {
 };
 
 exports.writeFile = function(file, contents, cb) {
+	file = absoluteFile(file);
+
     var dir = path.dirname(file);
     mkdirp(dir, function(err) {
         if (err) return cb(err);
