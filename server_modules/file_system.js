@@ -5,8 +5,8 @@ var path = require('path')
 var utils = require('./utils');
 var args = require('./args');
 
-function absoluteFile(file) {
-    return (file[0] === '/' ? utils.root : '') + file;
+function absolutePath(file) {
+    return path.resolve(path.dirname(process.argv[1]), file);
 }
 
 function getDataFilePath(file) {
@@ -25,11 +25,11 @@ function parseFile(data) {
 }
 
 exports.resolve = function(file) {
-    return path.resolve(absoluteFile(file));
+    return path.resolve(absolutePath(file));
 };
 
 exports.readFile = function(file) {
-    file = absoluteFile(file);
+    file = absolutePath(file);
 
     return Q.promise(function(resolve,reject) {
         fs.exists(file,function(exists) {
@@ -57,7 +57,7 @@ exports.parseDataFile = function(file) {
 };
 
 exports.writeFile = function(file, contents, cb) {
-    file = absoluteFile(file);
+    file = absolutePath(file);
 
     var dir = path.dirname(file);
     mkdirp(dir, function(err) {
