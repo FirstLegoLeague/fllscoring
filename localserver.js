@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var utils = require('./server_modules/utils');
 var fileSystem = require('./server_modules/file_system');
-var path = require('path');
 var args = require('./server_modules/args');
 var views = require('./server_modules/views');
 

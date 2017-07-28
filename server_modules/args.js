@@ -4,4 +4,3 @@ exports.port = argv.p || 1390;
 exports.basicAuthCreds = argv.u;
 exports.datadir = argv.d || 'data';
 exports.slaveMode = argv.s || false;
-exports.redisPort = argv.r || 13903;

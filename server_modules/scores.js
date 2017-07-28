@@ -1,5 +1,6 @@
 var utils = require('./utils');
 var fileSystem = require('./file_system');
+var Q = require('q');
 
 function filterPublished(score) {
     return score.published;
@@ -19,8 +20,8 @@ exports.route = function(app) {
     //get all, grouped by round
     app.get('/scores/',function(req,res) {
         Q.all([
-            fileSystem.parseDataFile('scores.json'),
-            fileSystem.parseDataFile('teams.json').then(reduceToMap('number'))
+            fileSystem.readJsonFile(fileSystem.getDataFilePath('scores.json')),
+            fileSystem.readJsonFile(fileSystem.getDataFilePath('teams.json')).then(reduceToMap('number'))
         ]).spread(function(result,teams) {
             var published = result.scores.filter(filterPublished).reduce(function(rounds,score) {
                 if (!rounds[score.round]) {
@@ -38,7 +39,7 @@ exports.route = function(app) {
     app.get('/scores/:round',function(req,res) {
         var round = parseInt(req.params.round,10);
 
-        fileSystem.parseDataFile('scores.json').then(function(result) {
+        fileSystem.readJsonFile(fileSystem.getDataFilePath('scores.json')).then(function(result) {
             var scoresForRound = result.scores.filter(filterPublished).filter(function(score) {
                 return score.published && score.round === round;
             });
