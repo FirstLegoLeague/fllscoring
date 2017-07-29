@@ -179,6 +179,11 @@ table {
 button .material-icons {
 }
 
+.auto-broadcast-selected {
+    background: #005580;
+    color: white;
+}
+
 /* main view */
 @media screen {
     .viewMain {
