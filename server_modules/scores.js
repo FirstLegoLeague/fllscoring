@@ -1,3 +1,4 @@
+var lockfile = require('lockfile');
 var utils = require('./utils');
 var fileSystem = require('./file_system');
 var Q = require('q');
@@ -39,9 +40,22 @@ function summery(scoresheet) {
 function changeScores(callback) {
     var path = fileSystem.getDataFilePath('scores.json');
     return fileSystem.readJsonFile(path)
+    .then(function(data) {
+        return data;
+    }, function() {
+        return { version:2, scores: [] };
+    })
     .then(callback)
     .then(function(scores) {
-        fileSystem.writeFile(path, JSON.stringify(scores));
+        lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
+            if(err) throw err;
+
+            fileSystem.writeFile(path, JSON.stringify(scores));
+
+            lockfile.unlock('scores.json.lock', function(err) {
+                if(err) throw err;
+            });
+        });
         return scores;
     });
 }
@@ -78,22 +92,19 @@ exports.route = function(app) {
         }).catch(utils.sendError(res)).done();
     });
 
-    //get scores by round
+    //save a new score
     app.post('/scores/create',function(req,res) {
         var scoresheet = JSON.parse(req.body).scoresheet;
         var score = summery(scoresheet);
 
-        fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body)
-        .then(changeScores(function(result) {
-                result.scores[score.id] = score;
-                return result;
-            }))
+        changeScores(function(result) {
+            result.scores.push(score);
+            return result;
+        })
+        .then(fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body))
         .then(function(scores) {
             res.json(scores).end();
-        }).catch(function(err) {
-            log.error("error writing score summery {0}".format(err));
-            res.status(500).send('error writing score summery');
-        });
+        }).catch(utils.sendError(res));
 
     });
 
