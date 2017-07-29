@@ -6,6 +6,7 @@ define('services/ng-scores',[
     'services/ng-services',
     'services/log',
     'services/ng-fs',
+    'services/ng-message',
     'services/ng-stages'
 ],function(module,log) {
     "use strict";
@@ -15,8 +16,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 2;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$http',
-        function($rootScope, $fs, $stages, $q, $teams, $http) {
+        ['$rootScope', '$fs', '$stages', '$message', '$q', '$teams', '$http',
+        function($rootScope, $fs, $stages, $message, $q, $teams, $http) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -128,9 +129,8 @@ define('services/ng-scores',[
             this._pollingSheets = null; // Promise<void>
             this.init();
 
-            $message.on('scores:new', function(message) {
-                self.add(message.data);
-                self.save();
+            $message.on('scores:reload', function(message) {
+                self.load();
             });
         }
 
@@ -257,6 +257,7 @@ define('services/ng-scores',[
         Scores.prototype.create = function(scoresheet) {
             var self = this;
             return $http.post('/scores/create', { scoresheet: scoresheet }).then(function(res) {
+                $message.send('scores:reload');
                 self.load(res.data);
             });
         };
@@ -264,6 +265,7 @@ define('services/ng-scores',[
         Scores.prototype.delete = function(score) {
             var self = this;
             return $http.post('/scores/delete/' + score.id).then(function(res) {
+                $message.send('scores:reload');
                 self.load(res.data);
             });
         };
@@ -272,6 +274,7 @@ define('services/ng-scores',[
             score.edited = (new Date()).toString();
             var self = this;
             return $http.post('/scores/update/' + score.id, score).then(function(res) {
+                $message.send('scores:reload');
                 self.load(res.data);
             });
         };
