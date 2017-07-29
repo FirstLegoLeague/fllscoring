@@ -28,16 +28,20 @@ define('views/scores',[
                 score.$editing = true;
             };
 
-            $scope.publishScore = function(index) {
-                var score = $scores.scores[index];
-                score.published = true;
-                saveScore(score);
+            $scope.publishScore = function(score) {
+                try {
+                    $score.publish(score, true);
+                } catch(e) {
+                    $window.alert("Error updating score: " + e);
+                }
             };
 
-            $scope.unpublishScore = function(index) {
-                var score = $scores.scores[index];
-                score.published = false;
-                saveScore(score);
+            $scope.unpublishScore = function(score) {
+                try {
+                    $score.publish(score, false);
+                } catch(e) {
+                    $window.alert("Error updating score: " + e);
+                }
             };
 
             $scope.finishEditScore = function(index) {

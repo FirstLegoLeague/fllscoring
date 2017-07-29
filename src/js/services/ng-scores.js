@@ -259,6 +259,9 @@ define('services/ng-scores',[
             return $http.post('/scores/create', { scoresheet: scoresheet }).then(function(res) {
                 $message.send('scores:reload');
                 self.load(res.data);
+                if($settings.autoPublish) {
+                    self.publish(scoresheet.uniqueId, true);
+                }
             });
         };
 
@@ -277,6 +280,11 @@ define('services/ng-scores',[
                 $message.send('scores:reload');
                 self.load(res.data);
             });
+        };
+
+        Scores.prototype.publish = function(score, published) {
+            score.published = published;
+            this.save(score);
         };
 
         /**
