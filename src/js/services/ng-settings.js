@@ -45,7 +45,7 @@ define('services/ng-settings',[
                     askTable: true,
                     askReferee: true,
                     mhub: 'ws://localhost:13900',
-                    node: 'default'
+                    node: 'default',
                     autoBroadcast: true,
                     autoPublish: true
                 }
