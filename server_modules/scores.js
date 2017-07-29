@@ -15,6 +15,37 @@ function reduceToMap(key) {
     }
 }
 
+function summery(scoresheet) {
+    var fn = [
+        'score',
+        scoresheet.stage.id,
+        'round' + scoresheet.round,
+        'table' + scoresheet.table,
+        'team' + scoresheet.team.number,
+        scoresheet.uniqueId
+    ].join('_')+'.json';
+
+    return {
+        id: scoresheet.uniqueId,
+        file: fn,
+        teamNumber: scoresheet.teamNumber !== undefined ? scoresheet.teamNumber : scoresheet.team.number,
+        stageId: scoresheet.stageId !== undefined ? scoresheet.stageId : scoresheet.stage.id,
+        round: scoresheet.round,
+        score: scoresheet.score,
+        table: scoresheet.table
+    };
+}
+
+function changeScores(callback) {
+    var path = fileSystem.getDataFilePath('scores.json');
+    return fileSystem.readJsonFile(path)
+    .then(callback)
+    .then(function(scores) {
+        fileSystem.writeFile(path, JSON.stringify(scores));
+        return scores;
+    });
+}
+
 exports.route = function(app) {
 
     //get all, grouped by round
@@ -46,5 +77,47 @@ exports.route = function(app) {
             res.json(scoresForRound);
         }).catch(utils.sendError(res)).done();
     });
+
+    //get scores by round
+    app.post('/scores/create',function(req,res) {
+        var scoresheet = JSON.parse(req.body).scoresheet;
+        var score = summery(scoresheet);
+
+        fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body)
+        .then(changeScores(function(result) {
+                result.scores[score.id] = score;
+                return result;
+            }))
+        .then(function(scores) {
+            res.json(scores).end();
+        }).catch(function(err) {
+            log.error("error writing score summery {0}".format(err));
+            res.status(500).send('error writing score summery');
+        });
+
+    });
+
+    //delete a score at an id
+    app.post('/scores/delete/:id',function(req,res) {
+        changeScores(function(result) {
+            result.scores = result.scores.filter((score) => score.id !== req.params.id);
+            return result;
+        }).then(function(scores) {
+            res.json(scores).end();
+        }).catch(utils.sendError(res)).done();
+    });
+
+    //edit a score at an id
+    app.post('/scores/update/:id',function(req,res) {
+        var score = JSON.parse(req.body);
+        changeScores(function(result) {
+            var index = result.scores.findIndex((score) => score.id === req.params.id);
+            result.scores[index] = score;
+            return result;
+        }).then(function(scores) {
+            res.json(scores).end();
+        }).catch(utils.sendError(res)).done();
+    });
+
 
 };
