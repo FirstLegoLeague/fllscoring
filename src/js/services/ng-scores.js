@@ -15,8 +15,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 2;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams',
-        function($rootScope, $fs, $stages, $q, $teams) {
+        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$http',
+        function($rootScope, $fs, $stages, $q, $teams, $http) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -123,10 +123,6 @@ define('services/ng-scores',[
 
             this._rawScores = [];
 
-            // Internal map of which scoresheets have already been
-            // processed.
-            this._sheets = {};
-
             this._updating = 0;
             this._initialized = null; // Promise<void>
             this._pollingSheets = null; // Promise<void>
@@ -162,28 +158,14 @@ define('services/ng-scores',[
             this._update();
         };
 
-        Scores.prototype.save = function() {
-            var data = {
-                version: 2,
-                scores: this._rawScores,
-                sheets: Object.keys(this._sheets),
-            };
-            return $fs.write('scores.json', data).then(function() {
-                log('scores saved');
-            }, function(err) {
-                log('scores write error', err);
-            });
-        };
-
-        Scores.prototype.load = function() {
+        Scores.prototype.load = function(scores) {
             var self = this;
-            return $fs.read('scores.json').then(function(res) {
+            var processScores = function(res) {
                 self.beginupdate();
                 try {
                     // Determine scores file version
                     var scores;
                     var version;
-                    var sheetNames = [];
                     if (res.version === undefined) {
                         // 'Legacy' storage, all scores stored directly
                         // as an array
@@ -194,123 +176,27 @@ define('services/ng-scores',[
                         // and an explicit version identifier.
                         version = res.version;
                         scores = res.scores;
-                        sheetNames = res.sheets;
                     }
                     if (version > SCORES_VERSION) {
                         throw new Error(format("unknown scores version {0}, (expected {1})", version, SCORES_VERSION));
                     }
                     self.clear();
                     scores.forEach(function(score) {
-                        self.add(score);
+                        self._rawScores.push(score);
                     });
-                    self._sheets = {};
-                    sheetNames.forEach(function(name) { self._sheets[name] = true; });
                     log("scores loaded, version " + version);
                 } finally {
                     self.endupdate();
                 }
-            }, function(err) {
-                log('scores read error', err);
-            });
-        };
-
-        Scores.prototype.remove = function(index) {
-            // TODO: this function used to remove an associated
-            // score sheet file.
-            // However, as creating that scoresheet was not
-            // the concern of this class, I (Martin) decided
-            // that removing it should not be its concern either.
-            // Note that e.g. the clear() method also did not
-            // remove 'obsolete' scoresheet files.
-            // Additionally note that a scoresheet may be the digital
-            // representation of a 'physical' scoresheet, something
-            // with a signature even, and may indeed be a very different
-            // beast than 'merely' a score entry.
-            this._rawScores.splice(index, 1);
-            this._update();
-        };
-
-        /**
-         * Convert 'dirty' score value to correct type used during score
-         * computations etc.
-         * Valid inputs are fixed strings like "dnc" (Did Not Compete) and
-         * "dnq" (Did Not Qualify) in any combination of upper/lower case,
-         * null (dummy entry, maybe because score was removed) and numbers
-         * (also as strings). Empty string is converted to null.
-         * Invalid input is simply returned (and later marked as invalid
-         * during scoreboard computation).
-         */
-        function sanitizeScore(score) {
-            // Passthrough for already valid inputs
-            if (typeof score === "number")
-                return score;
-            switch (score) {
-                case "dnc":
-                case "dsq":
-                case null:
-                    return score;
-            }
-            // Accept numbers stored as strings
-            var n = parseInt(score, 10);
-            if (String(n) === score)
-                return n;
-            // Try to convert some spellings of accepted strings
-            if (typeof score === "string") {
-                var s = score.toLowerCase();
-                switch (s) {
-                    case "dnc":
-                    case "dsq":
-                        return s;
-                    case "":
-                        return null;
-                }
-            }
-            // Pass through the rest
-            log("Warning: invalid score " + score);
-            return score;
-        }
-
-        /**
-         * Convert 'dirty' input score entry to a representation that we can store
-         * on a filesystem. This means e.g. not storing denormalized version of
-         * team and stage, but only their ID's. Additionally, forces values to be
-         * of the right type where possible.
-         */
-        function sanitizeEntry(entry) {
-            return {
-                file: (entry.file !== undefined && entry.file !== null) ? String(entry.file) : "",
-                teamNumber: parseInt((entry.teamNumber !== undefined) ? entry.teamNumber : entry.team.number, 10),
-                stageId: String((entry.stageId !== undefined) ? entry.stageId : entry.stage.id),
-                round: parseInt(entry.round, 10),
-                score: sanitizeScore(entry.score), // can be Number, null, "dnc", etc.
-                originalScore: parseInt(entry.originalScore !== undefined ? entry.originalScore : entry.score, 10),
-                edited: entry.edited !== undefined ? String(entry.edited) : undefined, // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
-                published: !!entry.published,
-                table: entry.table
             };
-        }
 
-        Scores.prototype.add = function(score) {
-            // Create a copy of the score, in case the
-            // original score is being modified...
-            this._rawScores.push(sanitizeEntry(score));
-            this._update();
-        };
-
-        /**
-         * Update score at given index.
-         * This differs from e.g. remove(index); add(score); in that
-         * it ensures that only allowed changes are made, and marks the
-         * the score as modified.
-         */
-        Scores.prototype.update = function(index, score) {
-            if (index < 0 || index >= this._rawScores.length) {
-                throw new RangeError("unknown score index: " + index);
+            if(scores) {
+                return processScores(scores);
+            } else {
+                return $fs.read('scores.json').then(processScores, function(err) {
+                    log('scores read error', err);
+                });
             }
-            var newScore = sanitizeEntry(score);
-            newScore.edited = (new Date()).toString();
-            this._rawScores.splice(index, 1, newScore);
-            this._update();
         };
 
         Scores.prototype.beginupdate = function() {
@@ -325,85 +211,6 @@ define('services/ng-scores',[
             if (this._updating === 0) {
                 this._update();
             }
-        };
-
-        /**
-         * Poll storage for any new score sheets.
-         * Ignore already processed sheets, add a new score entry for each
-         * new sheet.
-         * FIXME: this is a temporary hack to get basic multi-user scoring
-         * working very quickly. Functionality like this should be moved to
-         * a server-instance and/or be distributed. The reason for integrating
-         * it directly in $scores for now, is that this reduces the change of
-         * having the state of processed sheets getting out of sync with the
-         * list of scores.
-         */
-        Scores.prototype.pollSheets = function() {
-            var self = this;
-            // Prevent (accidentally) performing the check in parallel
-            if (self._pollingSheets) {
-                return self._pollingSheets;
-            }
-
-            self._pollingSheets = $fs.list("scoresheets/").catch(function(err) {
-                // Ignore the fact that there are no sheets at all yet
-                if (err.status === 404) {
-                    return [];
-                }
-                // Convert to 'normal' errors in case of XHR response
-                if (err.status && err.responseText) {
-                    throw new Error(format("error {0} ({1}): {2}",
-                        err.status, err.statusText,
-                        err.responseText
-                    ));
-                }
-                // Otherwise, pass the error on
-                if (err instanceof Error) {
-                    throw err;
-                }
-                // Fallback
-                throw new Error("unknown error: " + String(err));
-            }).then(function(filenames) {
-                var promises = [];
-                // Walk over all sheets, find the 'new' ones
-                filenames.forEach(function(filename) {
-                    if (filename in self._sheets) {
-                        return;
-                    }
-                    // Retrieve the new sheet
-                    var p = $fs.read("scoresheets/" + filename).then(function(sheet) {
-                        // Convert to score entry and add to list
-                        var score = {
-                            file: filename,
-                            teamNumber: sheet.teamNumber !== undefined ? sheet.teamNumber : sheet.team.number,
-                            stageId: sheet.stageId !== undefined ? sheet.stageId : sheet.stage.id,
-                            round: sheet.round,
-                            score: sheet.score,
-                            table: sheet.table
-                        };
-                        self.add(score);
-                        // Mark as processed
-                        self._sheets[filename] = true;
-                        log(format("Added new scoresheet: stage {0}, round {1}, team {2}, score {3}",
-                            score.stageId, score.round, score.teamNumber, score.score
-                        ));
-                    });
-                    promises.push(p);
-                });
-                // Make sure to wait for all sheets to be processed
-                // before resolving the promise.
-                return $q.all(promises).finally(function() {
-                    // Always save scores if there was work to do,
-                    // even in case of errors, as some scores may still
-                    // have been added successfully.
-                    if (promises.length > 0) {
-                        return self.save();
-                    }
-                });
-            }).finally(function() {
-                self._pollingSheets = null;
-            });
-            return self._pollingSheets;
         };
 
         Scores.prototype._update = function() {
@@ -440,6 +247,28 @@ define('services/ng-scores',[
                 }
             });
             $rootScope.$broadcast('validationError', this.validationErrors);
+        };
+
+        Scores.prototype.create = function(scoresheet) {
+            var self = this;
+            return $http.post('/scores/create', { scoresheet: scoresheet }).then(function(res) {
+                self.load(res.data);
+            });
+        };
+
+        Scores.prototype.delete = function(score) {
+            var self = this;
+            return $http.post('/scores/delete/' + score.id).then(function(res) {
+                self.load(res.data);
+            });
+        };
+
+        Scores.prototype.update = function(score) {
+            score.edited = (new Date()).toString();
+            var self = this;
+            return $http.post('/scores/update/' + score.id, score).then(function(res) {
+                self.load(res.data);
+            });
         };
 
         /**
@@ -489,21 +318,12 @@ define('services/ng-scores',[
             this._rawScores.forEach(function(_score) {
                 // Create a copy of the score, such that we can add
                 // additional info
-                var s = {
-                    file: _score.file,
-                    teamNumber: _score.teamNumber,
-                    team: $teams.get(_score.teamNumber),
-                    stageId: _score.stageId,
-                    stage: $stages.get(_score.stageId),
-                    round: _score.round,
-                    score: _score.score,
-                    originalScore: _score.originalScore,
-                    edited: _score.edited,
-                    published: _score.published,
-                    table: _score.table,
-                    modified: false,
-                    error: null
-                };
+                var s = angular.copy(_score);
+                s.stage = $stages.get(_score.stageId);
+                s.team = $teams.get(_score.teamNumber);
+                s.modified = false;
+                s.error = null;
+
                 results.scores.push(s);
 
                 // Mark score as modified if there have been changes to the

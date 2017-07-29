@@ -23,8 +23,8 @@ define('views/scoresheet',[
     ]);
 
     return module.controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$stages','$settings','$challenge','$window','$q','$teams','$handshake',
-        function($scope,$fs,$stages,$settings,$challenge,$window,$q,$teams,$handshake) {
+        '$scope','$fs','$stages','$scores','$settings','$challenge','$window','$q','$teams','$handshake',
+        function($scope,$fs,$stages,$scores,$settings,$challenge,$window,$q,$teams,$handshake) {
             log('init scoresheet ctrl');
 
             // Set up defaults
@@ -242,16 +242,7 @@ define('views/scoresheet',[
                 data.signature = $scope.signature;
                 data.score = $scope.score();
 
-                var fn = [
-                    'score',
-                    data.stage.id,
-                    'round' + data.round,
-                    'table' + data.table,
-                    'team' + data.team.number,
-                    data.uniqueId
-                ].join('_')+'.json';
-
-                return $fs.write("scoresheets/" + fn,data).then(function() {
+                return $scores.create(data).then(function() {
                     log('result saved');
                     $scope.clear();
                     $window.alert('Thanks for submitting a score of ' +
