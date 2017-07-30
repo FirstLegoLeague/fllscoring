@@ -16,8 +16,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 2;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$message', '$q', '$teams', '$http',
-        function($rootScope, $fs, $stages, $message, $q, $teams, $http) {
+        ['$rootScope', '$fs', '$settings', '$stages', '$message', '$q', '$teams', '$http',
+        function($rootScope, $fs, $settings, $stages, $message, $q, $teams, $http) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -270,6 +270,9 @@ define('services/ng-scores',[
             return $http.post('/scores/delete/' + score.id).then(function(res) {
                 $message.send('scores:reload');
                 self.load(res.data);
+                if($settings.autoBroadcastStageId) {
+                    this.broadcast();
+                }
             });
         };
 
@@ -279,15 +282,15 @@ define('services/ng-scores',[
             return $http.post('/scores/update/' + score.id, score).then(function(res) {
                 $message.send('scores:reload');
                 self.load(res.data);
+                if($settings.autoBroadcastStageId) {
+                    this.broadcast();
+                }
             });
         };
 
         Scores.prototype.publish = function(score, published) {
             score.published = published;
-            this.save(score);
-            if($settings.autoBroadcastStageId) {
-                this.broadcast();
-            }
+            this.update(score);
         };
 
         Scores.prototype.broadcast = function(stage) {

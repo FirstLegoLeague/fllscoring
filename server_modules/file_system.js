@@ -58,7 +58,7 @@ exports.writeFile = function(file, contents) {
             if (err) return reject(err);
             fs.writeFile(file, contents, resolve);
         });
-    })
+    });
 };
 
 exports.readJsonFile = function(file) {

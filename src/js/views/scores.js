@@ -30,7 +30,7 @@ define('views/scores',[
 
             $scope.publishScore = function(score) {
                 try {
-                    $score.publish(score, true);
+                    $scores.publish(score, true);
                 } catch(e) {
                     $window.alert("Error updating score: " + e);
                 }
@@ -38,7 +38,7 @@ define('views/scores',[
 
             $scope.unpublishScore = function(score) {
                 try {
-                    $score.publish(score, false);
+                    $scores.publish(score, false);
                 } catch(e) {
                     $window.alert("Error updating score: " + e);
                 }
