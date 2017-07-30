@@ -7,10 +7,6 @@
     </h1>
 </div>
 <div ng-controller="scoresCtrl">
-    <button class="raised" ng-click="pollSheets()"><i class="material-icons">refresh</i> Check for new scores</button>
-    <button class="raised" ng-click="refresh()"><i class="material-icons">refresh</i> Refresh scores</button>
-    <br />
-    <br />
     <p>Showing {{scores.length}} scores.</p>
     <table class="table table-bordered table-striped">
         <thead>
@@ -76,13 +72,13 @@
             <td>
                 <button class="btn"
                     ng-if="!score.published"
-                    ng-click="publishScore(score.index)"
+                    ng-click="publishScore(score)"
                 >
                     Publish
                 </button>
                 <button class="btn"
                     ng-if="score.published"
-                    ng-click="unpublishScore(score.index)"
+                    ng-click="unpublishScore(score)"
                 >
                     Unpublish
                 </button>
@@ -102,7 +98,7 @@
                 </button>
                 <button class="btn btn-danger"
                     ng-if="!score.$editing"
-                    fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
+                    fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="deleteScore(score)">
                     <i class="material-icons">delete</i>
                     Delete
                 </button>

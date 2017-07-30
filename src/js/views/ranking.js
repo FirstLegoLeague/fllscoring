@@ -10,8 +10,8 @@ define('views/ranking',[
 ],function(log) {
     var moduleName = 'ranking';
     return angular.module(moduleName,['ExportRankingDialog']).controller(moduleName+'Ctrl', [
-        '$scope', '$scores', '$stages','$handshake','$message',
-        function($scope, $scores, $stages, $handshake, $message) {
+        '$scope', '$settings', '$scores', '$stages','$handshake','$message',
+        function($scope, $settings, $scores, $stages, $handshake, $message) {
             log('init ranking ctrl');
 
             // temporary default sort values
@@ -19,6 +19,10 @@ define('views/ranking',[
             $scope.rev = false;
 
             $scope.scores = $scores;
+
+            $settings.init().then(function(res) {
+                $scope.settings = res;
+            });
 
             $scope.exportRanking = function() {
                 $handshake.$emit('exportRanking',{
@@ -30,30 +34,7 @@ define('views/ranking',[
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
             $scope.broadcastRanking = function(stage) {
-                // Send generic ranking info on bus, but filter it down a bit
-                // to not include Angular-injected stuff (yuk), but also omit
-                // the full scoresheets and their validation results etc.
-                // Having it spelled out exactly also helps to have some kind of
-                // 'interface' defined to the outside world.
-                var rankingMessage = {
-                    stage: {
-                        id: stage.id,
-                        name: stage.name,
-                        rounds: stage.rounds,
-                    },
-                    ranking: $scope.scoreboard[stage.id].map(function (item) {
-                        return {
-                            rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
-                            team: {
-                                number: item.team.number,
-                                name: item.team.name,
-                            },
-                            scores: item.scores,
-                            highest: item.highest,
-                        };
-                    }),
-                };
-                $message.send('scores:ranking', rankingMessage);
+                $scores.broadcast(stage);
             };
 
             $scope.doSort = function(stage, col, defaultSort) {
@@ -88,6 +69,16 @@ define('views/ranking',[
 
             $scope.toggle = function(stage) {
                 stage.$collapsed = !stage.$collapsed;
+            };
+
+            $scope.selectForAutoBroadcast = function(stage) {
+                if($settings.autoBroadcastStageId === stage.id) {
+                    $settings.autoBroadcastStageId = false;
+                } else {
+                    $settings.autoBroadcastStageId = stage.id;
+                }
+                $scope.settings.autoBroadcastStageId = $settings.autoBroadcastStageId;
+                $settings.save();
             };
 
             $scope.maxRounds = function() {
@@ -159,7 +150,7 @@ define('views/ranking',[
             $scope.getRoundLabel = function(round){
                 return "Round " + round;
             };
-            
+
 
         }
     ]);

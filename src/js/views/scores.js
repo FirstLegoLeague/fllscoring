@@ -5,9 +5,9 @@ define('views/scores',[
     'angular'
 ],function(log) {
     var moduleName = 'scores';
-    return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$scores','$teams','$stages','$window',
-        function($scope,$scores,$teams,$stages,$window) {
+    return angular.module(moduleName,['filters']).controller(moduleName+'Ctrl',[
+        '$scope','$settings','$scores','$teams','$stages','$window',
+        function($scope,$settings,$scores,$teams,$stages,$window) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
@@ -20,25 +20,28 @@ define('views/scores',[
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
-            $scope.removeScore = function(index) {
-                $scores.remove(index);
-                return $scores.save();
+            $scope.deleteScore = function(score) {
+                $scores.delete(score);
             };
             $scope.editScore = function(index) {
                 var score = $scores.scores[index];
                 score.$editing = true;
             };
 
-            $scope.publishScore = function(index) {
-                var score = $scores.scores[index];
-                score.published = true;
-                saveScore(score);
+            $scope.publishScore = function(score) {
+                try {
+                    $scores.publish(score, true);
+                } catch(e) {
+                    $window.alert("Error updating score: " + e);
+                }
             };
 
-            $scope.unpublishScore = function(index) {
-                var score = $scores.scores[index];
-                score.published = false;
-                saveScore(score);
+            $scope.unpublishScore = function(score) {
+                try {
+                    $scores.publish(score, false);
+                } catch(e) {
+                    $window.alert("Error updating score: " + e);
+                }
             };
 
             $scope.finishEditScore = function(index) {
@@ -52,8 +55,7 @@ define('views/scores',[
 
             function saveScore(score) {
                 try {
-                    $scores.update(score.index, score);
-                    $scores.save();
+                    $scores.update(score);
                 } catch(e) {
                     $window.alert("Error updating score: " + e);
                 }
@@ -61,13 +63,6 @@ define('views/scores',[
 
             $scope.cancelEditScore = function() {
                 $scores._update();
-            };
-
-            $scope.pollSheets = function() {
-                return $scores.pollSheets().catch(function(err) {
-                    log("pollSheets() failed", err);
-                    $window.alert("failed to poll sheets: " + err);
-                });
             };
 
             $scope.refresh = function() {

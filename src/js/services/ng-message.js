@@ -12,6 +12,7 @@ define('services/ng-message',[
         '$http','$settings','$q',
         function($http,$settings,$q) {
             var ws;
+            var listeners = [];
 
             function init() {
                 if (ws) {
@@ -38,9 +39,13 @@ define('services/ng-message',[
                         log("socket close");
                     };
                     ws.onmessage = function(msg) {
-                        log("socket message",msg);
-                        // var data = JSON.parse(msg.data);
-                        // handleMessage(data);
+                        // log("socket message",msg);
+                        var data = JSON.parse(msg.data);
+                        listeners.forEach(function(listener) {
+                            if(data.topic === listener.topic) {
+                                listener.handler(data, msg);
+                            }
+                        });
                     };
                     return def.promise;
                 });
@@ -56,6 +61,11 @@ define('services/ng-message',[
                             topic: topic,
                             data: data
                         }));
+                    });
+                },
+                on: function(topic, messageHandler) {
+                    return init().then(function(ws) {
+                        listeners.push({ topic: topic, handler: messageHandler });
                     });
                 }
             };

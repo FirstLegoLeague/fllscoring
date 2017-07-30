@@ -45,7 +45,9 @@ define('services/ng-settings',[
                     askTable: true,
                     askReferee: true,
                     mhub: 'ws://localhost:13900',
-                    node: 'default'
+                    node: 'default',
+                    autoBroadcastStageId: false,
+                    autoPublish: true
                 }
                 //create settings file if not there
                 log('settings read error, trying to create file', err);

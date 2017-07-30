@@ -22,6 +22,7 @@
         <li role="presentation" ng-class="{active:tab===3}"><a href ng-click="tab = 3">Challenge</a></li>
         <li role="presentation" ng-class="{active:tab===4}"><a href ng-click="tab = 4">Messaging</a></li>
         <li role="presentation" ng-class="{active:tab===5}"><a href ng-click="tab = 5">Log</a></li>
+        <li role="presentation" ng-class="{active:tab===6}"><a href ng-click="tab = 6">Advanced</a></li>
     </ul>
 
     <div ng-show="tab === 1">
@@ -173,6 +174,22 @@
         <pre>
             <code ng-repeat="line in log track by $index">{{line}}<br></code>
         </pre>
+    </div>
+    <div ng-show="tab === 6">
+        <h1 >Advanced</h1>
+
+        <div class="card">
+            <h1 class="card-header">Score processing</h1>
+            <div class="card-body">
+                <p>
+                    <span class="textfield">
+                        <input type="checkbox" ng-model="settings.autoPublish" />
+                        <label for="">Automatic publishing</label>
+                    </span>
+                    Enable scores to publish (approve) automatically upon scoresheet submission.
+                </p>
+            </div>
+        </div>
     </div>
     <p>
         <button class="raised" ng-click="save()">

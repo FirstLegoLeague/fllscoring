@@ -9,6 +9,7 @@ var require = {
         'angular': '../components/angular/angular.min',
         'angular-sanitize': '../components/angular-sanitize/angular-sanitize.min',
         'angular-touch': '../components/angular-touch/angular-touch.min',
+        'angular-cookies': '../components/angular-cookies/angular-cookies',
         'angular-bootstrap': '../components/angular-bootstrap/ui-bootstrap-tpls',
         'idbstore':'../components/idbwrapper/idbstore',
         'signaturepad':'../components/signature-pad/jquery.signaturepad.min'
@@ -27,6 +28,9 @@ var require = {
             deps: ['angular']
         },
         'angular-sanitize': {
+            deps: ['angular']
+        },
+        'angular-cookies': {
             deps: ['angular']
         }
     }

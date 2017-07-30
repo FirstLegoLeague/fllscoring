@@ -21,6 +21,10 @@
                 <i class="material-icons">publish</i>
                 Broadcast
             </a>
+            <a ng-click="selectForAutoBroadcast(stage)" ng-class="(settings.autoBroadcastStageId === stage.id) ? 'auto-broadcast-selected' : ''">
+                <i class="material-icons">sync</i>
+                Auto-broadcast
+            </a>
         </p>
         <h1 ng-if="stage.rounds > 0">
 
