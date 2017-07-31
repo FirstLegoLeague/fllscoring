@@ -32,7 +32,6 @@ define([
         function($scope, session ,$cookies) {
             log('init main ctrl');
             $scope.drawer = 'views/drawer.html';
-            $scope.scoringPages = ['scoresheet','settings'];
             $scope.validationErrors = [];
             $scope.drawerVisible = false;
 
@@ -53,7 +52,7 @@ define([
                     ];
                 }
 
-                $scope.currentPage = $cookies['page'] || $scope.pages[0];
+                $scope.currentPage = $scope.pages.filter(page => page.name === $cookies['page'])[0] || $scope.pages[0];
             })
 
             $scope.$on('validationError',function(e,validationErrors) {
@@ -70,7 +69,7 @@ define([
 
             $scope.setPage = function(page) {
                 $scope.currentPage = page;
-                $cookies['page'] = page;
+                $cookies['page'] = page.name;
                 $('body').scrollTop(0);
                 $scope.drawerVisible = false;
             };
