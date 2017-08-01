@@ -16,6 +16,7 @@ define([
     'angular-bootstrap',
     'angular-touch',
     'angular-sanitize',
+    'angular-storage',
     'angular'
 ],function(log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
