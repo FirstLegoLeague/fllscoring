@@ -16,7 +16,7 @@ function reduceToMap(key) {
     }
 }
 
-function summery(scoresheet) {
+function summary(scoresheet) {
     var fn = [
         'score',
         scoresheet.stage.id,
@@ -95,7 +95,7 @@ exports.route = function(app) {
     //save a new score
     app.post('/scores/create',function(req,res) {
         var scoresheet = JSON.parse(req.body).scoresheet;
-        var score = summery(scoresheet);
+        var score = summary(scoresheet);
 
         changeScores(function(result) {
             result.scores.push(score);
