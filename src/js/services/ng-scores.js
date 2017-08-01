@@ -15,8 +15,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 2;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$http',
-        function($rootScope, $fs, $stages, $q, $teams, $http) {
+        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$http', '$localStorage',
+        function($rootScope, $fs, $stages, $q, $teams, $http, $localStorage) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -253,6 +253,9 @@ define('services/ng-scores',[
             var self = this;
             return $http.post('/scores/create', { scoresheet: scoresheet }).then(function(res) {
                 self.load(res.data);
+                self.sendLocalStoredScoresheets();
+            }, function() {
+                self.storeScoresheetLocaly(scoresheet);
             });
         };
 
@@ -268,6 +271,38 @@ define('services/ng-scores',[
             var self = this;
             return $http.post('/scores/update/' + score.id, score).then(function(res) {
                 self.load(res.data);
+            });
+        };
+
+        Scores.prototype.storeScoresheetLocaly = function(scoresheet) {
+            $localStorage[`scoresheet_${Date.now()}`] = JSON.stringify(scoresheet);
+        };
+
+        Scores.prototype.sendLocalStoredScoresheets = function() {
+            if(this._sendingLocalStoredScoresheets) return;
+            this._sendingLocalStoredScoresheets = true;
+
+            var self = this;
+            let promises = [];
+
+            for(let key in $localStorage) {
+                var _break = false;
+
+                if(key.startsWith('scoresheet_')) {
+                    let scoresheet = JSON.parse($localStorage[key]);
+
+                    let promise = self.create(scoresheet).then(function() {
+                        delete $localStorage[key];
+                    }, function() {
+                        _break = true;
+                    });
+
+                    promises.push(promise);
+                }
+                if(_break)  break;
+            }
+            $q.all(promises).then(function() {
+                self._sendingLocalStoredScoresheets = false;
             });
         };
 
