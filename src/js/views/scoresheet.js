@@ -242,14 +242,19 @@ define('views/scoresheet',[
                 data.signature = $scope.signature;
                 data.score = $scope.score();
 
-                return $scores.create(data).then(function() {
-                    log('result saved');
+                return $scores.create(data).then(function(success) {
+                    log('result saved: ');
                     $scope.clear();
-                    $window.alert('Thanks for submitting a score of ' +
-                        data.score +
-                        ' points for team (' + data.team.number + ') ' + data.team.name +
-                        ' in ' + data.stage.name + ' ' + data.round + '.'
-                    );
+                    message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
+                        ` ${data.team.name} in ${data.stage.name} ${data.round}.`;
+                    if(!success) {
+                        message += `
+Notice: the score could not be submitted. ` +
+                            `This might be caused by poor network conditions. ` +
+                            `The score is thereafore save on your device, and will be sent when it's possible.` +
+                            'Current number of scores waiting to be sent: ${$scores.pendings()}'
+                    }
+                    $window.alert(message);
                 }, function(err) {
                     $window.alert('Error submitting score: ' + String(err));
                     throw err;

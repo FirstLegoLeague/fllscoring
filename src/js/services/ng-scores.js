@@ -254,8 +254,10 @@ define('services/ng-scores',[
             return $http.post('/scores/create', { scoresheet: scoresheet }).then(function(res) {
                 self.load(res.data);
                 self.sendLocalStoredScoresheets();
+                return true;
             }, function() {
                 self.storeScoresheetLocaly(scoresheet);
+                return false;
             });
         };
 
@@ -304,6 +306,10 @@ define('services/ng-scores',[
             $q.all(promises).then(function() {
                 self._sendingLocalStoredScoresheets = false;
             });
+        };
+
+        Scores.prototype.pendings = function() {
+            return Object.keys($localStorage).filter((k) => k.startsWith('scoresheet_')).length
         };
 
         /**
