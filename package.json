@@ -1,6 +1,6 @@
 {
-  "name": "fllscoring",
-  "version": "0.3.0",
+  "name": "@first-lego-league/fllscoring",
+  "version": "0.3.2",
   "description": "fll scoring application",
   "main": "index.js",
   "scripts": {
