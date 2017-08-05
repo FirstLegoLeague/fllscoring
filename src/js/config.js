@@ -10,6 +10,7 @@ var require = {
         'angular-sanitize': '../components/angular-sanitize/angular-sanitize.min',
         'angular-touch': '../components/angular-touch/angular-touch.min',
         'angular-bootstrap': '../components/angular-bootstrap/ui-bootstrap-tpls',
+        'angular-common': '../components/angular-common/angular-common',
         'idbstore':'../components/idbwrapper/idbstore',
         'signaturepad':'../components/signature-pad/jquery.signaturepad.min'
     },
@@ -27,6 +28,9 @@ var require = {
             deps: ['angular']
         },
         'angular-sanitize': {
+            deps: ['angular']
+        },
+        'angular-common': {
             deps: ['angular']
         }
     }

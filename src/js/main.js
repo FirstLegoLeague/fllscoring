@@ -14,6 +14,7 @@ define([
     'tests/fsTest',
     'tests/indexedDBTest',
     'angular-bootstrap',
+    'angular-common',
     'angular-touch',
     'angular-sanitize',
     'angular'
