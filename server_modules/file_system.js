@@ -60,7 +60,7 @@ exports.writeFile = function(file, contents) {
             if (err) return reject(err);
             fs.writeFile(file, contents, function(err) {
                 if(err) return reject(err);
-                resolve(file);
+                resolve();
             });
         });
     });
