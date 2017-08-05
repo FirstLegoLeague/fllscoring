@@ -58,7 +58,10 @@ exports.writeFile = function(file, contents) {
         var dir = path.dirname(file);
         mkdirp(dir, function(err) {
             if (err) return reject(err);
-            fs.writeFile(file, contents, resolve);
+            fs.writeFile(file, contents, function(err) {
+                if(err) return reject(err);
+                resolve(file);
+            });
         });
     });
 };
