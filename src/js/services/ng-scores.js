@@ -253,10 +253,13 @@ define('services/ng-scores',[
             var self = this;
             return $http.post('/scores/create', { scoresheet: scoresheet }).then(function(res) {
                 self.load(res.data);
-                self.sendLocalStoredScoresheets();
+                self.sendSavedActionsToServer();
                 return true;
             }, function() {
-                self.storeScoresheetLocaly(scoresheet);
+                self.actAheadOfServer({
+                    type: 'create',
+                    params: [scoresheet]
+                });
                 return false;
             });
         };
@@ -276,13 +279,13 @@ define('services/ng-scores',[
             });
         };
 
-        Scores.prototype.storeScoresheetLocaly = function(scoresheet) {
-            $localStorage[`scoresheet_${Date.now()}`] = JSON.stringify(scoresheet);
+        Scores.prototype.actAheadOfServer = function(action) {
+            $localStorage[`action_${Date.now()}`] = JSON.stringify(action);
         };
 
-        Scores.prototype.sendLocalStoredScoresheets = function() {
-            if(this._sendingLocalStoredScoresheets) return;
-            this._sendingLocalStoredScoresheets = true;
+        Scores.prototype.sendSavedActionsToServer = function() {
+            if(this._sendingSavedActionsToServer) return;
+            this._sendingSavedActionsToServer = true;
 
             var self = this;
             let promises = [];
@@ -290,10 +293,10 @@ define('services/ng-scores',[
             for(let key in $localStorage) {
                 var _break = false;
 
-                if(key.startsWith('scoresheet_')) {
-                    let scoresheet = JSON.parse($localStorage[key]);
+                if(key.startsWith('action_')) {
+                    let action = JSON.parse($localStorage[key]);
 
-                    let promise = self.create(scoresheet).then(function() {
+                    let promise = self[action.type].call(self, action.params).then(function() {
                         delete $localStorage[key];
                     }, function() {
                         _break = true;
@@ -304,7 +307,7 @@ define('services/ng-scores',[
                 if(_break)  break;
             }
             $q.all(promises).then(function() {
-                self._sendingLocalStoredScoresheets = false;
+                self._sendingSavedActionsToServer = false;
             });
         };
 
