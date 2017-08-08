@@ -268,6 +268,11 @@ define('services/ng-scores',[
             var self = this;
             return $http.post('/scores/delete/' + score.id).then(function(res) {
                 self.load(res.data);
+            }, function() {
+                self.actAheadOfServer({
+                    type: 'delete',
+                    params: [score]
+                });
             });
         };
 
@@ -276,6 +281,11 @@ define('services/ng-scores',[
             var self = this;
             return $http.post('/scores/update/' + score.id, score).then(function(res) {
                 self.load(res.data);
+            }, function(){
+                self.actAheadOfServer({
+                    type: 'update',
+                    params: [score]
+                })
             });
         };
 
