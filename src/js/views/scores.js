@@ -13,8 +13,10 @@ define('views/scores',[
             $scope.sort = 'index';
             $scope.rev = true;
 
-            $scope.scores = $scores.scores;
-            $scope.stages = $stages.stages;
+            $scores.init().then(function() {
+                $scope.scores = $scores.scores;
+                $scope.stages = $stages.stages;
+            })
 
             $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;

@@ -25,11 +25,12 @@ define('services/ng-rankings',[
             }
 
             function multigroup(arr, funcs) {
-                let currFunc = funcs.shift();
+                let currFunc = funcs[0];
                 let result = group(arr, currFunc);
-                if(funcs.length > 0) {
+                if(funcs.length > 1) {
+                    let slicedFuncs = funcs.slice(1);
                     for(let key in result) {
-                        result[key] = multigroup(result[key], funcs);
+                        result[key] = multigroup(result[key], slicedFuncs);
                     }
                 }
                 return result;
@@ -43,8 +44,8 @@ define('services/ng-rankings',[
                 this.team = team;
                 this.stage = stage;
 
-                this.scores = new Array(stage.rounds).map((u,i) => {
-                    let score = rank.filter(score => score.round === i)[0];
+                this.scores = new Array(stage.rounds).fill('score').map((u,i) => {
+                    let score = rank.filter(score => score.round === (i + 1))[0];
                     return score ? score.score : 0;
                 });
 
@@ -59,12 +60,13 @@ define('services/ng-rankings',[
                         let teams = $teams.teams;
                         let stages = $stages.stages;
                         let ranks = multigroup(scores, [score => score.stageId, score => score.teamNumber]);
-                        return stages.map(function(stage) {
+                        let stageRanks = {};
+                        stages.forEach(function(stage) {
                             let rankNumber = 0;
                             let lastHighest = null;
 
                             // Mapping to Rank objects
-                            return teams.map(function(team) {
+                            stageRanks[stage.id] = teams.map(function(team) {
                                 return new Rank(((ranks[stage.id] || {})[team.number] || []), team, stage);
                             })
 
@@ -82,6 +84,7 @@ define('services/ng-rankings',[
                             });
 
                         });
+                        return stageRanks;
                     });
                 }
             };

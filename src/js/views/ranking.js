@@ -20,6 +20,13 @@ define('views/ranking',[
 
             $scope.scores = $scores;
 
+            $scores.init().then(function() {
+                $scope.stages = $stages.stages;
+                return $scores.getRankings();
+            }).then(function(scoreboard) {
+                $scope.scoreboard = scoreboard;
+            });
+
             $scope.exportRanking = function() {
                 $handshake.$emit('exportRanking',{
                     scores: $scope.scores,
@@ -153,13 +160,10 @@ define('views/ranking',[
                 $scope.rebuildCSV($scores.scoreboard);
             }, true);
 
-            $scope.stages = $stages.stages;
-            $scope.scoreboard = $scores.scoreboard;
-
             $scope.getRoundLabel = function(round){
                 return "Round " + round;
             };
-            
+
 
         }
     ]);

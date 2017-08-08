@@ -77,22 +77,21 @@ define('services/ng-scores',[
          * @returns Promise<void> that is resolved when init is complete.
          */
         Scores.prototype.init = function() {
-            if(this._initialized)   return;
+            if(!this._initialized) {
+                var self = this;
+                this._initialized = $stages.init()
+                    .then(function() {
+                        // Stages got defined, rebuild scoreboard
+                        // before waiting until scores are loaded,
+                        // as some views may e.g. iterate over all
+                        // available stages in the scoreboard already.
+                        self._update();
 
-            var self = this;
-            this._initialized = $stages.init()
-                .then(function() {
-                    // Stages got defined, rebuild scoreboard
-                    // before waiting until scores are loaded,
-                    // as some views may e.g. iterate over all
-                    // available stages in the scoreboard already.
-                    self._update();
-
-                    return $teams.init();
-                }).then(function() {
-                    return self.load();
-                });
-
+                        return $teams.init();
+                    }).then(function() {
+                        return self.load();
+                    });
+            }
             return this._initialized;
         };
 
@@ -158,8 +157,10 @@ define('services/ng-scores',[
             if (this._updating > 0) {
                 return;
             }
-            this.scorebaord = this.getRankings();
-            $rootScope.$broadcast('validationError', this.validationErrors);
+            var self = this;
+            this.getRankings().then(function() {
+                $rootScope.$broadcast('validationError', self.validationErrors);
+            });
         };
 
         Scores.prototype.create = function(scoresheet) {
@@ -207,11 +208,17 @@ define('services/ng-scores',[
         Scores.prototype.getRankings = function() {
             this.validationErrors = $validation.validate(this.scores);
 
+            var self = this;
             if(this.validationErrors.length === 0) {
-                this.scoreboard = $rankings.calculate(this.scores);
+                return $rankings.calculate(this.scores).then(function(scoreboard) {
+                    self.scoreboard = scoreboard;
+                    return scoreboard;
+                });
+            } else {
+                return new Promise(function(resolve) {
+                    resolve(self.scoreboard);
+                });
             }
-
-            return this.scorebaord;
         };
 
         Scores.prototype.pendingActions = function() {

@@ -64,16 +64,18 @@ define('services/ng-validation',[
 
             return {
                 validate: function(scores, stages, teams) {
+                    var errors = [];
                     scores.forEach(function(score) {
                         validators: for(var i = 0; i < VALIDATORS.legnth; i++) {
                             var validator = VALIDATORS[i]
                             if(!validator.validate(score, stages, teams, scores)) {
                                 score.error = validator.error(score, stages, teams, scores);
+                                errors.push(score.error);
                                 break validators;
                             }
                         }
                     });
-                    return scores;
+                    return errors;
                 }
             };
 

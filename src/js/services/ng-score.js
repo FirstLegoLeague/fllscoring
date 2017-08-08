@@ -43,7 +43,7 @@ define('services/ng-score',[
                 }) (this, entry);
 
                 this.isZero = function() {
-                    return isNan(this.score) || this.score === 0;
+                    return isNaN(this.score) || this.score === 0;
                 };
 
             }

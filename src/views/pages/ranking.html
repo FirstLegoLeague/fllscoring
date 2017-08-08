@@ -69,11 +69,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in scoreboard[stage.id] | index | orderBy:stage.sort:stage.rev track by item.team.number">
+                    <tr ng-repeat="item in scoreboard[stage.id]">
                         <td>{{item.rank}}</td>
                         <td>{{item.team.number}}</td>
                         <td>{{item.team.name}}</td>
-                        <td>{{item.highest}}</td>
+                        <td>{{item.highest.score}}</td>
                         <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
                         <!-- padding cols -->
                         <td class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></td>
