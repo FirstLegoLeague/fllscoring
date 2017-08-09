@@ -13,6 +13,8 @@ define('services/ng-rankings',[
         ['$stages','$teams', '$score',
         function($stages, $teams, $score) {
 
+            const EMPTY = '---';
+
             function group(arr, func) {
                 return arr.reduce((groups, item) => {
                     let key = func(item);
@@ -46,10 +48,10 @@ define('services/ng-rankings',[
 
                 this.scores = new Array(stage.rounds).fill('score').map((u,i) => {
                     let score = rank.filter(score => score.round === (i + 1))[0];
-                    return score ? score.score : 0;
+                    return score ? score.score : EMPTY;
                 });
 
-                this.highest = rank.sort($score.compare)[0];
+                this.highest = rank.sort($score.compare)[0] || EMPTY;
             }
 
             return {
@@ -62,7 +64,7 @@ define('services/ng-rankings',[
                         let ranks = multigroup(scores, [score => score.stageId, score => score.teamNumber]);
                         let stageRanks = {};
                         stages.forEach(function(stage) {
-                            let rankNumber = 0;
+                            let rankNumber = 1;
                             let lastHighest = null;
 
                             // Mapping to Rank objects
