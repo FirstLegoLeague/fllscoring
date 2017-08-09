@@ -36,7 +36,7 @@ define('services/ng-score',[
 
                 //Adding the data from the entry, snitizing it if needed.
                 (function(score, entry) {
-                    let sanitized = entry.id ? entry : sanitize(entry);
+                    let sanitized = sanitize(entry);
                     for(var key in sanitized) {
                         score[key] = sanitized[key];
                     }

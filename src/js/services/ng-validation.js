@@ -13,63 +13,62 @@ define('services/ng-validation',[
         function($stages, $teams) {
 
             const VALIDATORS = [{
-                validate: (score, stages) => !stages.hasOwnProperty(score.stageId),
+                validate: (score) => $stages.get(score.stageId),
                 error:(score) => {
                     return {
                         name: 'UnknownStageError',
                         stageId: score.stageId,
-                        message: `unknown stage '${String(this.stageId)}'`
+                        message: `unknown stage '${String(score.stageId)}'`
                     };
                 }
             }, {
-                validate: (score, stages) => score.round >= 1 && score.round <= stages[score.stageId].rounds,
+                validate: (score) => score.round >= 1 && score.round <= $stages.get(score.stageId).rounds,
                 error: (score) => {
                     return {
                         name: 'UnknownRoundError',
                         round: score.round,
-                        message: `unknown round '${String(this.round)}'`
+                        message: `unknown round '${String(score.round)}'`
                     };
                 }
             }, {
-                validate: (score) => typeof score.score === "undefined" ||
-                        typeof score.score === "number" && score.score > -Infinity && score.score < Infinity,
+                validate: (score) => isFinite(score.score),
                 error: (score) => {
                     return {
                         name: 'InvalidScoreError',
                         score: score.score,
-                        message: `invalid score '${String(score)}'`
+                        message: `invalid score '${String(score.score)}'`
                     };
                 }
             }, {
-                validate: (score, stages, teams) => teams.filter((team) => team.number === score.team.number).length === 1,
+                validate: (score) => $teams.get(score.teamNumber),
                 error: (score) => {
                     return {
                         name: 'UnknownTeamError',
-                        team: score.team,
-                        message: `invalid team '${String(this.team)}'`
+                        team: score.teamNumber,
+                        message: `invalid team '${String(score.teamNumber)}'`
                     };
                 }
             }, {
-                validate: (score, stages, teams, scores) => scores.filter((s) => s.team === score.team && s.stageId === score.stageId && s.round === score.roun).length === 1,
+                validate: (score, scores) => scores.filter((s) => s.teamNumber === score.teamNumber && s.stageId === score.stageId && s.round === score.round).length === 1,
                 error: (score, stages) => {
                     return {
                         name: 'DuplicateScoreError',
                         team: score.team,
-                        stage: stages[score.stageId],
+                        stage: score.stageId,
                         round: score.round,
-                        message: `duplicate score for team '${this.team.name}' (${String(this.team.number)}), stage ${this.stage.name}, round ${this.round}`
+                        message: `duplicate score for team '${score.team.name}' (${String(score.team.number)}), stage ${score.stage.name}, round ${score.round}`
                     };
                 }
             }];
 
             return {
-                validate: function(scores, stages, teams) {
+                validate: function(scores) {
                     var errors = [];
                     scores.forEach(function(score) {
-                        validators: for(var i = 0; i < VALIDATORS.legnth; i++) {
+                        validators: for(var i = 0; i < VALIDATORS.length; i++) {
                             var validator = VALIDATORS[i]
-                            if(!validator.validate(score, stages, teams, scores)) {
-                                score.error = validator.error(score, stages, teams, scores);
+                            if(!validator.validate(score, scores)) {
+                                score.error = validator.error(score, scores);
                                 errors.push(score.error);
                                 break validators;
                             }

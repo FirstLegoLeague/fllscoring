@@ -222,7 +222,7 @@ define('views/scoresheet',[
                 }
 
                 var data = angular.copy($scope.field);
-                data.scoreEntry = $scope.scoreEntry;
+                data.scoreEntry = new $score($scope.scoreEntry);
                 data.team = $scope.scoreEntry.team;
                 data.stage = $scope.scoreEntry.stage;
                 data.round = $scope.scoreEntry.round;

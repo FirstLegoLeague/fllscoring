@@ -168,10 +168,6 @@ define('services/ng-scores',[
 
             var score = scoresheet.scoreEntry;
             delete scoresheet.scoreEntry;
-            score.teamNumber = score.team.number;
-            delete score.team;
-            score.stageId = score.stage.id;
-            delete score.stage;
 
             return new Promise(function(resolve, reject) {
                 $http.post('/scores/create', { scoresheet: scoresheet, score: score }).then(function(res) {
