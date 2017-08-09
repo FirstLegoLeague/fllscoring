@@ -49,13 +49,18 @@ exports.readFile = function(file) {
     });
 };
 
-exports.writeFile = function(file, contents, cb) {
+exports.writeFile = function(file, contents) {
     file = exports.resolve(file);
 
-    var dir = path.dirname(file);
-    mkdirp(dir, function(err) {
-        if (err) return cb(err);
-        fs.writeFile(file, contents, cb);
+    return Q.promise(function(resolve, reject) {
+        var dir = path.dirname(file);
+        mkdirp(dir, function(err) {
+            if (err) return reject(err);
+            fs.writeFile(file, contents, function(err) {
+                if(err) return reject(err);
+                resolve();
+            });
+        });
     });
 };
 
@@ -108,11 +113,7 @@ exports.route = function(app) {
     // writing the "file system"
     app.post(/^\/fs\/(.*)$/, function(req, res) {
         var file = exports.getDataFilePath(req.params[0]);
-        exports.writeFile(file, req.body, function(err) {
-            if (err) {
-                log.error(`error writing file ${err}`);
-                res.status(500).send('error writing file');
-            }
+        exports.writeFile(file, req.body).then(function() {
             res.status(200).end();
         }).catch(function(err) {
             utils.sendError({ status: 500, message: `error writing file ${file}` })
