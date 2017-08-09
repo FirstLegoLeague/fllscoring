@@ -26,6 +26,12 @@ define('views/scores',[
                 $scope.stages = $stages.stages;
             })
 
+            $scope.$watch(function() {
+                return $scores.scores;
+            }, function() {
+                $scope.scores = enrich($scores.scores);
+            });
+
             $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
@@ -33,29 +39,26 @@ define('views/scores',[
             $scope.deleteScore = function(score) {
                 $scores.delete(score);
             };
-            $scope.editScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.editScore = function(score) {
                 score.$editing = true;
             };
 
-            $scope.publishScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.publishScore = function(score) {
                 score.published = true;
                 saveScore(score);
             };
 
-            $scope.unpublishScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.unpublishScore = function(score) {
                 score.published = false;
                 saveScore(score);
             };
 
-            $scope.finishEditScore = function(index) {
+            $scope.finishEditScore = function(score) {
                 // The score entry is edited 'inline', then used to
                 // replace the entry in the scores list and its storage.
                 // Because scores are always 'sanitized' before storing,
                 // the $editing flag is automatically discarded.
-                var score = $scores.scores[index];
+                score.$editing = false;
                 saveScore(score);
             };
 
@@ -67,8 +70,8 @@ define('views/scores',[
                 }
             }
 
-            $scope.cancelEditScore = function() {
-                $scores._update();
+            $scope.cancelEditScore = function(score) {
+                score.$editing = false;
             };
 
             $scope.refresh = function() {

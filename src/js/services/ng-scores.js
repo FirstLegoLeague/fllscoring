@@ -101,7 +101,7 @@ define('services/ng-scores',[
             this._update();
         };
 
-        Scores.prototype.load = function(scores) {
+        Scores.prototype.load = function(data) {
             var self = this;
             var processScores = function(res) {
                 self.beginupdate();
@@ -130,8 +130,8 @@ define('services/ng-scores',[
                 }
             };
 
-            if(scores) {
-                return processScores(scores);
+            if(data) {
+                return processScores(data);
             } else {
                 return $fs.read('scores.json').then(processScores, function(err) {
                     log('scores read error', err);
@@ -165,8 +165,14 @@ define('services/ng-scores',[
 
         Scores.prototype.create = function(scoresheet) {
             var self = this;
+
             var score = scoresheet.scoreEntry;
             delete scoresheet.scoreEntry;
+            score.teamNumber = score.team.number;
+            delete score.team;
+            score.stageId = score.stage.id;
+            delete score.stage;
+
             return new Promise(function(resolve, reject) {
                 $http.post('/scores/create', { scoresheet: scoresheet, score: score }).then(function(res) {
                     self.load(res.data);
