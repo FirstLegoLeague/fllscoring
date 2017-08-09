@@ -91,7 +91,8 @@ exports.route = function(app) {
     //delete a score at an id
     app.post('/scores/delete/:id',function(req,res) {
         changeScores(function(result) {
-            result.scores = result.scores.filter((score) => score.id !== req.params.id);
+            var index = result.scores.findIndex((score) => score.id === req.params.id);
+            result.scores.splice(index, 1);
             return result;
         }).then(function(scores) {
             res.json(scores).end();
@@ -103,7 +104,8 @@ exports.route = function(app) {
         var score = JSON.parse(req.body);
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
-            result.scores[index] = score;
+            result.scores.splice(index, 1);
+            result.scores.push(score);
             return result;
         }).then(function(scores) {
             res.json(scores).end();
