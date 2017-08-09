@@ -13,6 +13,7 @@ define('services/ng-message',[
         function($http,$settings,$q) {
             var ws;
             var listeners = [];
+            var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
 
             function init() {
                 if (ws) {
@@ -41,11 +42,18 @@ define('services/ng-message',[
                     ws.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
                         var topic = data.topic;
+
+                        msg.from = data.data._token;
+                        msg.fromMe = data.data._token === token;
+                        delete data.data._token;
+                        if(Object.keys(data).length === 0)
+                            delete data.data;
+
                         listeners.filter((listener) => {
                             return (typeof(listener.topic) === 'string' && topic === listener.topic) ||
                             (listener.topic instanceof RegExp && topic.matches(listener.topic));
                         }).forEach(function(listener) {
-                            listener.handler(data);
+                            listener.handler(data, msg);
                         });
                     };
                     return def.promise;
@@ -56,6 +64,8 @@ define('services/ng-message',[
             return {
                 send: function(topic,data) {
                     return init().then(function(ws) {
+                        data = data || {};
+                        data._token = token;
                         ws.send(JSON.stringify({
                             type: "publish",
                             node: ws.node,
@@ -65,7 +75,7 @@ define('services/ng-message',[
                     });
                 },
                 on: function(topic, handler) {
-                    handlers.push({ topic: topic, handler: handler });
+                    listeners.push({ topic: topic, handler: handler });
                 }
             };
         }
