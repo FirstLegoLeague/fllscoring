@@ -19,15 +19,15 @@
                 <div class="card-body">
                     <p>
                         <button class="raised" ng-click="openTeamModal(teams)"><i class="material-icons">people</i> Team</button>
-                        <span ng-show="team">({{team.number}}) {{team.name}} </span>
+                        <span ng-show="scoreEntry.team">({{scoreEntry.team.number}}) {{scoreEntry.team.name}} </span>
                     </p>
                     <p>
                         <button class="raised" ng-click="openRoundModal(stages)"><i class="material-icons">label</i> Stage &amp; round</button>
-                        <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
+                        <span ng-show="scoreEntry.stage">{{scoreEntry.stage.name}}:</span> <span ng-show="scoreEntry.round">{{scoreEntry.round}}</span>
                     </p>
                     <p style="padding-left: 15px" ng-show="settings.askTable">
                         Table:
-                        <select ng-model="table" ng-options="item.name as item.name for item in settings.tables"></select>
+                        <select ng-model="scoreEntry.table" ng-options="item.name as item.name for item in settings.tables"></select>
                     </p>
                     <p style="padding-left: 15px" ng-show="settings.askReferee">
                         Referee:
@@ -82,15 +82,15 @@
                 <div class="card-body">
                     <p>
                         <button class="raised" ng-click="openTeamModal(teams)"><i class="material-icons">people</i> Team</button>
-                        <span ng-show="team">({{team.number}}) {{team.name}} </span>
+                        <span ng-show="scoreEntry.team">({{scoreEntry.team.number}}) {{scoreEntry.team.name}} </span>
                     </p>
                     <p>
                         <button class="raised" ng-click="openRoundModal(stages)"><i class="material-icons">label</i> Stage &amp; round</button>
-                        <span ng-show="stage">{{stage.name}}:</span> <span ng-show="round">{{round}}</span>
+                        <span ng-show="scoreEntry.stage">{{scoreEntry.stage.name}}:</span> <span ng-show="scoreEntry.round">{{scoreEntry.round}}</span>
                     </p>
                     <p style="padding-left: 15px" ng-show="settings.askTable">
                         Table:
-                        <select ng-model="table" ng-options="item.name as item.name for item in settings.tables"></select>
+                        <select ng-model="scoreEntry.table" ng-options="item.name as item.name for item in settings.tables"></select>
                     </p>
                     <p style="padding-left: 15px" ng-show="settings.askReferee">
                         Referee:

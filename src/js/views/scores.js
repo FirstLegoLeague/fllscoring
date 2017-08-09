@@ -13,8 +13,16 @@ define('views/scores',[
             $scope.sort = 'index';
             $scope.rev = true;
 
+            function enrich(scores) {
+                return scores.map(score => {
+                    score.team = $teams.get(score.teamNumber);
+                    score.stage = $stages.get(score.stageId);
+                    return score;
+                });
+            }
+
             $scores.init().then(function() {
-                $scope.scores = $scores.scores;
+                $scope.scores = enrich($scores.scores);
                 $scope.stages = $stages.stages;
             })
 

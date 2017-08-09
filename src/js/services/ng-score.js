@@ -9,20 +9,20 @@ define('services/ng-score',[
     return module.factory('$score',
         [function() {
 
-            function santize(entry) {
+            function sanitize(entry) {
                 // Calculating the unique ID for this sanitized score.
                 // The uid is an 8-hex-digit combination of
                 // The current date and a random number.
                 let max = 0x100000000, //The max uid in the range
                     num = (Math.floor(Math.random() * max) + Date.now()) % max, // The numeric form of the uid
                     // The string uid, by adding the max value and then removing it we make sure the stringification of the number
-                    id = (num + max).toString(16).slice(1);
+                    uniqueId = (num + max).toString(16).slice(1);
 
                 return {
                     id: uniqueId,
                     file: Boolean(entry.file) ? String(entry.file) : '',
-                    teamNumber: Number(entry.teamNumber || entry.team.number),
-                    stageId: String(entry.stageId || entry.stage.id),
+                    teamNumber: Number(entry.teamNumber || (entry.team ? entry.team.number : 0)),
+                    stageId: String(entry.stageId || (entry.stage ? entry.stage.id : '')),
                     round: Number(entry.round),
                     score: isFinite(entry.score) ? Number(entry.score) : undefined,
                     originalScore: Number(entry.originalScore || entry.score),
@@ -36,7 +36,7 @@ define('services/ng-score',[
 
                 //Adding the data from the entry, snitizing it if needed.
                 (function(score, entry) {
-                    let sanitized = entry.id ? entry : Score.sanitize(entry);
+                    let sanitized = entry.id ? entry : sanitize(entry);
                     for(var key in sanitized) {
                         score[key] = sanitized[key];
                     }
@@ -47,6 +47,18 @@ define('services/ng-score',[
                 };
 
             }
+
+            Score.prototype.calcFilename = function() {
+                this.file =  [
+                    'score',
+                    this.stageId,
+                    'round' + this.round,
+                    'table' + this.table,
+                    'team' + this.teamNumber,
+                    this.id
+                ].join('_')+'.json';
+                return this.file;
+            };
 
             Score.compare = function(score1, score2) {
                 if(!(score1 instanceof Score) || !(score2 instanceof Score)) {

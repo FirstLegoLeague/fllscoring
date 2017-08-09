@@ -7,7 +7,7 @@ define('services/ng-independence',[
 ],function(module) {
     "use strict";
 
-    return module.service('$independence', ['$localStorage', function($localStorage) {
+    return module.service('$independence', ['$q','$localStorage', function($q,$localStorage) {
         function IndependentActionStroage() {}
 
 
@@ -38,6 +38,8 @@ define('services/ng-independence',[
                 }
                 if(_break)  break;
             }
+            if(promises.length === 0)   return;
+
             $q.all(promises).then(function() {
                 self._sendingSavedActionsToServer = false;
             });

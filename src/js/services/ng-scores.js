@@ -165,16 +165,21 @@ define('services/ng-scores',[
 
         Scores.prototype.create = function(scoresheet) {
             var self = this;
-            return $http.post('/scores/create', { scoresheet: scoresheet }).then(function(res) {
-                self.load(res.data);
-                $independence.sendSavedActionsToServer();
-                return true;
-            }, function() {
-                $independence.actAheadOfServer({
-                    type: 'create',
-                    params: [scoresheet]
+            var score = scoresheet.scoreEntry;
+            delete scoresheet.scoreEntry;
+            return new Promise(function(resolve, reject) {
+                $http.post('/scores/create', { scoresheet: scoresheet, score: score }).then(function(res) {
+                    self.load(res.data);
+                    $independence.sendSavedActionsToServer();
+                    resolve();
+                }, function() {
+                    $independence.actAheadOfServer({
+                        type: 'create',
+                        params: [scoresheet]
+                    });
+                    scores.scores.push(score);
+                    reject();
                 });
-                return false;
             });
         };
 
@@ -188,6 +193,7 @@ define('services/ng-scores',[
                     type: 'delete',
                     params: [score]
                 });
+                self.scores.splice(self.socres.findIndex(s => s.id === score.id), 1);
             });
         };
 
@@ -201,7 +207,9 @@ define('services/ng-scores',[
                 $independence.actAheadOfServer({
                     type: 'update',
                     params: [score]
-                })
+                });
+                let index = self.socres.findIndex(s => s.id === score.id);
+                self.scores[index] = score;
             });
         };
 

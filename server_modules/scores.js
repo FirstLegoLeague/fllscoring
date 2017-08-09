@@ -16,27 +16,6 @@ function reduceToMap(key) {
     }
 }
 
-function summary(scoresheet) {
-    var fn = [
-        'score',
-        scoresheet.stage.id,
-        'round' + scoresheet.round,
-        'table' + scoresheet.table,
-        'team' + scoresheet.team.number,
-        scoresheet.uniqueId
-    ].join('_')+'.json';
-
-    return {
-        id: scoresheet.uniqueId,
-        file: fn,
-        teamNumber: scoresheet.teamNumber !== undefined ? scoresheet.teamNumber : scoresheet.team.number,
-        stageId: scoresheet.stageId !== undefined ? scoresheet.stageId : scoresheet.stage.id,
-        round: scoresheet.round,
-        score: scoresheet.score,
-        table: scoresheet.table
-    };
-}
-
 function changeScores(callback) {
     var path = fileSystem.getDataFilePath('scores.json');
     return fileSystem.readJsonFile(path)
@@ -94,8 +73,9 @@ exports.route = function(app) {
 
     //save a new score
     app.post('/scores/create',function(req,res) {
-        var scoresheet = JSON.parse(req.body).scoresheet;
-        var score = summary(scoresheet);
+        var body = JSON.parse(req.body);
+        var scoresheet = body.scoresheet;
+        var score = body.score;
 
         changeScores(function(result) {
             result.scores.push(score);
