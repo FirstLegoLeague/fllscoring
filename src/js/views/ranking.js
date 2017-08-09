@@ -20,11 +20,20 @@ define('views/ranking',[
 
             $scope.scores = $scores;
 
+            function format(scoreboard) {
+                let result = {};
+                for(let stageId in scoreboard) {
+                    let stage = scoreboard[stageId];
+                    result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== rank.empty).length);
+                }
+                return result;
+            }
+
             $scores.init().then(function() {
                 $scope.stages = $stages.stages;
                 return $scores.getRankings();
             }).then(function(scoreboard) {
-                $scope.scoreboard = scoreboard;
+                $scope.scoreboard = format(scoreboard);
             });
 
             $scope.exportRanking = function() {
@@ -143,7 +152,7 @@ define('views/ranking',[
                             entry.rank,
                             entry.team.number,
                             entry.team.name,
-                            entry.highest,
+                            entry.highest.score,
                         ].concat(entry.scores);
                     });
                     var header = ["Rank", "Team Number", "Team Name", "Highest"];
