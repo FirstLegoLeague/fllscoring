@@ -177,11 +177,11 @@ define('services/ng-scores',[
             return new Promise(function(resolve, reject) {
                 $http.post('/scores/create', { scoresheet: scoresheet, score: score }).then(function(res) {
                     self.load(res.data);
-                    $independence.sendSavedActionsToServer();
+                    $independence.sendSavedActionsToServer('scores', self);
                     $message.send('scores:reload');
                     resolve();
                 }, function() {
-                    $independence.actAheadOfServer({
+                    $independence.actAheadOfServer('scores',{
                         type: 'create',
                         params: [scoresheet]
                     });
@@ -195,10 +195,10 @@ define('services/ng-scores',[
             var self = this;
             return $http.post('/scores/delete/' + score.id).then(function(res) {
                 self.load(res.data);
-                $independence.sendSavedActionsToServer();
+                $independence.sendSavedActionsToServer('scores', self);
                 $message.send('scores:reload');
             }, function() {
-                $independence.actAheadOfServer({
+                $independence.actAheadOfServer('scores',{
                     type: 'delete',
                     params: [score]
                 });
@@ -211,10 +211,10 @@ define('services/ng-scores',[
             var self = this;
             return $http.post('/scores/update/' + score.id, score).then(function(res) {
                 self.load(res.data);
-                $independence.sendSavedActionsToServer();
+                $independence.sendSavedActionsToServer('scores', self);
                 $message.send('scores:reload');
             }, function(){
-                $independence.actAheadOfServer({
+                $independence.actAheadOfServer('scores',{
                     type: 'update',
                     params: [score]
                 });

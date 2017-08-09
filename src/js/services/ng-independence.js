@@ -10,7 +10,6 @@ define('services/ng-independence',[
     return module.service('$independence', ['$q','$localStorage', function($q,$localStorage) {
         function IndependentActionStroage() {}
 
-
         IndependentActionStroage.prototype.actAheadOfServer = function(key, action) {
             $localStorage[`action_${key}_${Date.now()}`] = JSON.stringify(action);
         };
