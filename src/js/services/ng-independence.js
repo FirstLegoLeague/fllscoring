@@ -7,14 +7,15 @@ define('services/ng-independence',[
 ],function(module) {
     "use strict";
 
-    return module.service('$independence', ['$q','$localStorage', function($q,$localStorage) {
+    return module.service('$independence', ['$q','$localStorage', '$http',
+    function($q,$localStorage,$http) {
         function IndependentActionStroage() {}
 
-        IndependentActionStroage.prototype.actAheadOfServer = function(key, action) {
-            $localStorage[`action_${key}_${Date.now()}`] = JSON.stringify(action);
-        };
+        function actAheadOfServer(token, url, data) {
+            $localStorage[`action_${token}_${Date.now()}`] = JSON.stringify({ url: url, data: data });
+        }
 
-        IndependentActionStroage.prototype.sendSavedActionsToServer = function(target, key) {
+        IndependentActionStroage.prototype.sendSavedActionsToServer = function(token) {
             if(this._sendingSavedActionsToServer) return;
             this._sendingSavedActionsToServer = true;
 
@@ -24,10 +25,10 @@ define('services/ng-independence',[
             for(let key in $localStorage) {
                 var _break = false;
 
-                if(key.startsWith(`action_${key}`)) {
+                if(key.startsWith(`action_${token}`)) {
                     let action = JSON.parse($localStorage[key]);
 
-                    let promise = target[action.type].call(target, action.params).then(function() {
+                    let promise = self.act(key, action.url, action.data).then(function() {
                         delete $localStorage[key];
                     }, function() {
                         _break = true;
@@ -37,10 +38,29 @@ define('services/ng-independence',[
                 }
                 if(_break)  break;
             }
-            if(promises.length === 0)   return;
+            if(promises.length === 0) {
+                self._sendingSavedActionsToServer = false;
+                return;
+            }
 
             $q.all(promises).then(function() {
                 self._sendingSavedActionsToServer = false;
+            });
+        };
+
+        IndependentActionStroage.prototype.act = function(token, url, data, fallback) {
+            var self = this;
+            return new Promise(function(resolve, reject) {
+                $http.post(url, data).then(function(res) {
+                    resolve(res);
+                    self.sendSavedActionsToServer(token);
+                }, function(err) {
+                    reject(err);
+                    actAheadOfServer(token, url, data);
+                    if(fallback) {
+                        fallback();
+                    }
+                })
             });
         };
 

@@ -20,8 +20,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 2;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$message', '$teams', '$http', '$independence', '$rankings', '$validation', '$score',
-        function($rootScope, $fs, $stages, $message, $teams, $http, $independence, $rankings, $validation, $score) {
+        ['$rootScope', '$fs', '$stages', '$message', '$teams','$independence', '$rankings', '$validation', '$score',
+        function($rootScope, $fs, $stages, $message, $teams, $independence, $rankings, $validation, $score) {
 
         /* Main Scores class */
 
@@ -168,59 +168,36 @@ define('services/ng-scores',[
             });
         };
 
+        Scores.prototype.acceptScores = function(res) {
+            this.load(res.data);
+            $message.send('scores:reload');
+        }
+
         Scores.prototype.create = function(scoresheet) {
             var self = this;
 
             var score = scoresheet.scoreEntry;
             delete scoresheet.scoreEntry;
 
-            return new Promise(function(resolve, reject) {
-                $http.post('/scores/create', { scoresheet: scoresheet, score: score }).then(function(res) {
-                    self.load(res.data);
-                    $independence.sendSavedActionsToServer('scores', self);
-                    $message.send('scores:reload');
-                    resolve();
-                }, function() {
-                    $independence.actAheadOfServer('scores',{
-                        type: 'create',
-                        params: [scoresheet]
-                    });
-                    scores.scores.push(score);
-                    reject();
-                });
-            });
+            return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
+                scores.scores.push(score);
+            })
+            .then((res) => self.acceptScores(res));
         };
 
         Scores.prototype.delete = function(score) {
             var self = this;
-            return $http.post('/scores/delete/' + score.id).then(function(res) {
-                self.load(res.data);
-                $independence.sendSavedActionsToServer('scores', self);
-                $message.send('scores:reload');
-            }, function() {
-                $independence.actAheadOfServer('scores',{
-                    type: 'delete',
-                    params: [score]
-                });
-                self.scores.splice(self.socres.findIndex(s => s.id === score.id), 1);
-            });
+            $independence.act('scores','/scores/delete/' + score.id, {}, function() {
+                self.scores.splice(self.scores.findIndex(s => s.id === score.id), 1);
+            }).then((res) => self.acceptScores(res));
         };
 
         Scores.prototype.update = function(score) {
             score.edited = (new Date()).toString();
             var self = this;
-            return $http.post('/scores/update/' + score.id, score).then(function(res) {
-                self.load(res.data);
-                $independence.sendSavedActionsToServer('scores', self);
-                $message.send('scores:reload');
-            }, function(){
-                $independence.actAheadOfServer('scores',{
-                    type: 'update',
-                    params: [score]
-                });
-                let index = self.socres.findIndex(s => s.id === score.id);
-                self.scores[index] = score;
-            });
+            return $independence.act('scores','/scores/update/' + score.id, score, function() {
+                self.scores[self.scores.findIndex(s => s.id === score.id)] = score;
+            }).then((res) => self.acceptScores(res));
         };
 
         Scores.prototype.getRankings = function() {
