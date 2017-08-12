@@ -9,7 +9,7 @@ var configs = [require('./server_modules/slave_mode')];
 
 var middlewareLayers = [express.static(fileSystem.resolve('src')),
                         require('./server_modules/sessions').middleware,
-                        require('./server_modules/auth').basic(args.basicAuthCreds),
+                        require('./server_modules/auth').middleware,
                         require('./server_modules/cors').middleware,
                         require('./server_modules/cache').middleware,
                         require('./server_modules/body_builder').middleware,

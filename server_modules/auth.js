@@ -1,16 +1,19 @@
-var utils = require('./utils');
-var basicAuthCreds = utils.basicAuthCreds;
+var passport = require('passport');
+var Strategy = require('passport-http').DigestStrategy;
 
-exports.basic = function() {
-    if(!basicAuthCreds) {
-        return function(req, res, next) {
-            next();
-        };
+passport.use(new Strategy({ qop: 'auth' },
+    function(username, cb) {
+        db.users.findByUsername(username, function(err, user) {
+        if (err) { return cb(err); }
+        if (!user) { return cb(null, false); }
+        return cb(null, user, user.password);
+    })
+}));
+
+exports.middleware = function(req, res, next) {
+    if(req.user || req.path.endsWith('/login')) {
+        next();
+    } else {
+        res.redirect('/login');
     }
-
-    var basicAuth = require('basic-auth-connect');
-    var pair = basicAuthCreds.split(':');
-    var user = pair[0];
-    var pass = pair[1];
-    return basicAuth(user, pass);
 };
