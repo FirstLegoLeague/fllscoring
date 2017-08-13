@@ -42,12 +42,10 @@ exports.route = function(app) {
         res.sendFile(fileSystem.resolve('login.html'));
     });
 
-    app.post('/login', function(req, res, next) {
-        req.user = passport.authenticate('local', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })(req, res, next);
-    });
+    app.post('/login', passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }));
 
 }
 

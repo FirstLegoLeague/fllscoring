@@ -36,7 +36,7 @@ define([
             $scope.drawerVisible = false;
 
             session.onload(function() {
-                $scope.user = session.get('user');
+                $scope.user = session.get('passport').user;
                 if($scope.user === 'admin') {
                     $scope.pages = [
                         { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
