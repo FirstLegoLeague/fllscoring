@@ -11,5 +11,13 @@ module.exports = {
         username: 'admin',
         password: 'admin',
         pages: ['scoresheet','teams','scores','ranking','settings']
+    }, {
+        username: 'ref',
+        password: 'ref',
+        pages: ['scoresheet']
+    }, {
+        username: 'scorekeeper',
+        password: 'scorekeeper',
+        pages: ['scoresheet','scores','ranking']
     }]
 };
