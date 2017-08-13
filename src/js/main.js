@@ -30,6 +30,15 @@ define([
         '$scope', 'session',
         function($scope, session) {
             log('init main ctrl');
+
+            const PAGES = [
+                { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
+                { name: 'teams', title: 'Teams', icon: 'people' },
+                { name: 'scores', title: 'Scorekeeping', icon: 'list' },
+                { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
+                { name: 'settings', title: 'Settings', icon: 'settings' }
+            ];
+
             $scope.drawer = 'views/drawer.html';
             $scope.scoringPages = ['scoresheet','settings'];
             $scope.validationErrors = [];
@@ -37,21 +46,7 @@ define([
 
             session.onload(function() {
                 $scope.user = session.get('passport').user;
-                if($scope.user.username === 'admin') {
-                    $scope.pages = [
-                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
-                        { name: 'teams', title: 'Teams', icon: 'people' },
-                        { name: 'scores', title: 'Scorekeeping', icon: 'list' },
-                        { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
-                        { name: 'settings', title: 'Settings', icon: 'settings' }
-                    ];
-                } else {
-                    $scope.pages = [
-                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
-                        { name: 'settings', title: 'Settings', icon: 'settings' }
-                    ];
-                }
-
+                $scope.pages = PAGES.filter(page => $scope.user.pages.includes(page.name));
                 $scope.currentPage = $scope.pages[0];
             })
 

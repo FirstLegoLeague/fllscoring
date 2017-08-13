@@ -9,6 +9,7 @@ module.exports = {
           "./challenges"],
     users: [{
         username: 'admin',
-        password: 'admin'
+        password: 'admin',
+        pages: ['scoresheet','teams','scores','ranking','settings']
     }]
 };
