@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <form action="/login" method="post">
-      <div class="field">
-        <label>Username:</label>
-        <input type="text" name="username" />
-        <br/>
-      </div>
-      <div class="field">
-        <label>Password:</label>
-        <input type="password" name="password" />
-      </div>
-      <div class="field">
-        <input type="submit" value="Submit" />
-      </div>
-    </form>
-  </body>
+<head>
+	<title>FLL scoring - Login</title>
+</head>
+
+<body>
+<style>
+body {
+	min-height: 100vh;
+	background-color: dodgerblue;
+}
+form {
+	margin: 1em auto;
+	width: 30%;
+}
+.field {
+	font-family: sans-serif;
+    padding: 0.2em 0;
+}
+.field label {
+	color: white;
+	font-weight: bold;
+}
+.field input {
+    border: none;
+    border-radius: 1em;
+    text-indent: 1em;
+    font-size: 14px;
+}
+.field button {
+ 	color: dodgerblue;
+	font-weight: bold;
+    border: none;
+    border-radius: 1em;
+    font-size: 14px;
+    width: 40%;
+    margin: 0.2em 0;
+}
+</style>
+	<form action="/login" method="post">
+  		<div class="field">
+	        <label>Username:</label>
+	        <input type="text" name="username" />
+    	</div>
+		<div class="field">
+    		<label>Password:</label>
+    		<input type="password" name="password" />
+  		</div>
+			<div class="field">
+			<button>Submit</button>
+			</div>
+	</form>
+</body>
 </html>
