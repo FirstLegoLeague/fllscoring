@@ -13,12 +13,18 @@ passport.use(new Strategy(function(username, password, done) {
 }));
 
 passport.serializeUser(function(user, done) {
-    done(null, user.username);
+    var serializedUser = {};
+    for(var key in user) {
+        if(key !== 'password') {
+            serializedUser[key] = user[key];
+        }
+    }
+    done(null, serializedUser);
 });
 
-passport.deserializeUser(function(username, done) {
-    var user = users.filter(user => user.username === username)[0];
-    done(null, user);
+passport.deserializeUser(function(user, done) {
+    var deserializedUser = users.filter(u => user.username === u.username)[0]
+    done(null, deserializedUser);
 });
 
 exports.initialize = function() {

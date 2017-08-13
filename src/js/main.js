@@ -37,7 +37,7 @@ define([
 
             session.onload(function() {
                 $scope.user = session.get('passport').user;
-                if($scope.user === 'admin') {
+                if($scope.user.username === 'admin') {
                     $scope.pages = [
                         { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
                         { name: 'teams', title: 'Teams', icon: 'people' },
