@@ -1,11 +1,14 @@
 "use strict";
 
 module.exports = {
-  scripts: "./src/**/*.js",
-  assets: ["./src/**/*",
+    scripts: "./src/**/*.js",
+    assets: ["./src/**/*",
            "./challenges/**/*"],
-  dirs:  ["./src",
+    dirs:  ["./src",
           "./src/data",
-          "./challenges"]
-
+          "./challenges"],
+    users: [{
+        username: 'admin',
+        password: 'admin'
+    }]
 };

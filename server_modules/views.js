@@ -6,8 +6,4 @@ exports.route = function(app) {
         res.sendFile(fileSystem.resolve('index.html'));
     });
 
-    app.get('/login',function(req,res) {
-        res.sendFile(fileSystem.resolve('login.html'));
-    });
-
 };

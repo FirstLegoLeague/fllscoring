@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html manifest="fllscoring.appcache">
-    <head>
-        <meta charset="utf-8" />
-        <title>FLL Scoring - login</title>
-    </head>
-    <body>
-<h1>Login</h1>
-    </body>
+<html>
+  <body>
+    <form action="/login" method="post">
+      <div class="field">
+        <label>Username:</label>
+        <input type="text" name="username" />
+        <br/>
+      </div>
+      <div class="field">
+        <label>Password:</label>
+        <input type="password" name="password" />
+      </div>
+      <div class="field">
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+  </body>
 </html>
