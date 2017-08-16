@@ -50,7 +50,9 @@ define('services/ng-rankings',[
 
                             // Mapping to Rank objects
                             stageRanks[stage.id] = teams.map(function(team) {
-                                return new Rank(((ranks[stage.id] || {})[team.number] || []), team, stage);
+                                let stage = ranks[stage.id] || {};
+                                let rank = stage[team.number] || [];
+                                return new Rank(rank, team, stage);
                             })
 
                             // Sorting by the highest score
