@@ -1,5 +1,7 @@
 /**
- * This is a service that searches for errors in the scores before ranking
+ * This is the object representation of a score.
+ * It currently contains only the score's summary, but the goal is for it to
+ * fully contain the score from creation to saving, editing and deleting.
  */
 define('services/ng-score',[
     'services/ng-services'
@@ -22,6 +24,10 @@ define('services/ng-score',[
                 return (num + max).toString(16).slice(1);
             }
 
+            // This function is meant to make sure the score is set according to
+            // the correct structure in order to save it.
+            // score that doesn't match the fields in this function,
+            // cannot be saved in the scores summery.
             function sanitize(entry) {
                 return {
                     id: entry.id || generateUniqueId(),
