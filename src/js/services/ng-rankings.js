@@ -5,38 +5,16 @@ define('services/ng-rankings',[
     'services/ng-services',
     'services/ng-stages',
     'services/ng-teams',
-    'services/ng-score'
+    'services/ng-score',
+    'services/ng-groups'
 ],function(module) {
     "use strict";
 
     return module.service('$rankings',
-        ['$stages','$teams', '$score',
-        function($stages, $teams, $score) {
+        ['$stages','$teams','$score','$groups',
+        function($stages, $teams, $score, $groups) {
 
             const EMPTY = '---';
-
-            function group(arr, func) {
-                return arr.reduce((groups, item) => {
-                    let key = func(item);
-                    if(!groups.hasOwnProperty(key)) {
-                        groups[key] = [];
-                    }
-                    groups[key].push(item);
-                    return groups;
-                }, {});
-            }
-
-            function multigroup(arr, funcs) {
-                let currFunc = funcs[0];
-                let result = group(arr, currFunc);
-                if(funcs.length > 1) {
-                    let slicedFuncs = funcs.slice(1);
-                    for(let key in result) {
-                        result[key] = multigroup(result[key], slicedFuncs);
-                    }
-                }
-                return result;
-            }
 
             function compareRanks(rank1, rank2) {
                 let sortedRank1Scores = rank1
@@ -62,7 +40,7 @@ define('services/ng-rankings',[
                     }).then(function() {
                         let teams = $teams.teams;
                         let stages = $stages.stages;
-                        let ranks = multigroup(scores, [score => score.stageId, score => score.teamNumber]);
+                        let ranks = $groups.multigroup(scores, [score => score.stageId, score => score.teamNumber]);
                         let stageRanks = {};
                         stages.forEach(function(stage) {
                             let rankNumber = 1;
