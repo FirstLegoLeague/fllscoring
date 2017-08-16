@@ -115,8 +115,7 @@ exports.route = function(app) {
             if(index === -1) {
                 throw new Exception(`Could not find score with id ${req.params.id}`);
             }
-            result.scores.splice(index, 1);
-            result.scores.push(score);
+            result.scores[index] = score;
             return result;
         }).then(function(scores) {
             res.json(scores).end();
