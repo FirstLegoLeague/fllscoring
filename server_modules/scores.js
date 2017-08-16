@@ -82,11 +82,11 @@ exports.route = function(app) {
         var scoresheet = body.scoresheet;
         var score = body.score;
 
-        changeScores(function(result) {
+        fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body)
+        .then(changeScores(function(result) {
             result.scores.push(score);
             return result;
-        })
-        .then(fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body))
+        }))
         .then(function(scores) {
             res.json(scores).end();
         }).catch(utils.sendError(res));
