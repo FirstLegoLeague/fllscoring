@@ -14,8 +14,6 @@ define('services/ng-rankings',[
         ['$stages','$teams','$score','$groups',
         function($stages, $teams, $score, $groups) {
 
-            const EMPTY = '---';
-
             function Rank(rank, team, stage) {
                 this.team = team;
                 this.stage = stage;
@@ -23,11 +21,19 @@ define('services/ng-rankings',[
 
                 this.scores = new Array(stage.rounds).fill('score').map((u,i) => {
                     let score = rank.filter(score => score.round === (i + 1))[0];
-                    return score ? score.score : EMPTY;
+                    return score ? score.score : undefined;
                 });
-
-                this.highest = rank.sort($score.compare)[0] || EMPTY;
+                this.ordered = rank.sort($score.compare)
+                this.highest = this.oredered[0];
             }
+
+            Rank.compare = function(rank1, rank2) {
+                for(var i = 0; i < rank1.ordered.length && i < rank2.ordered.length; i++) {
+                    let comparation = rank1.ordered[i] - rank2.oredered[i];
+                    if(comparation !== 0) return comparation;
+                }
+                return 0;
+            };
 
             return {
                 calculate: function(scores) {
@@ -48,7 +54,7 @@ define('services/ng-rankings',[
                             })
 
                             // Sorting by the highest score
-                            .sort((rank1, rank2) => rank1.highest - rank2.highest)
+                            .sort(Rank.compare)
 
                             // Adding rank number
                             .map((rank) => {
