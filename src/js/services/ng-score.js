@@ -9,17 +9,22 @@ define('services/ng-score',[
     return module.factory('$score',
         [function() {
 
-            function sanitize(entry) {
-                // Calculating the unique ID for this sanitized score.
-                // The uid is an 8-hex-digit combination of
-                // The current date and a random number.
-                let max = 0x100000000, //The max uid in the range
-                    num = (Math.floor(Math.random() * max) + Date.now()) % max, // The numeric form of the uid
-                    // The string uid, by adding the max value and then removing it we make sure the stringification of the number
-                    uniqueId = (num + max).toString(16).slice(1);
 
+            // Calculating the unique ID for this sanitized score.
+            // The uid is an 8-hex-digit combination of
+            // The current date and a random number.
+            function generateUniqueId() {
+                //The max uid in the range
+                let max = 0x100000000;
+                // The numeric form of the uid
+                let num = (Math.floor(Math.random() * max) + Date.now()) % max;
+                // The string uid, by adding the max value and then removing it we make sure the stringification of the number
+                return (num + max).toString(16).slice(1);
+            }
+
+            function sanitize(entry) {
                 return {
-                    id: uniqueId,
+                    id: entry.id || generateUniqueId(),
                     file: Boolean(entry.file) ? String(entry.file) : '',
                     teamNumber: Number(entry.teamNumber || (entry.team ? entry.team.number : 0)),
                     stageId: String(entry.stageId || (entry.stage ? entry.stage.id : '')),
