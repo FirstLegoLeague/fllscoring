@@ -97,6 +97,9 @@ exports.route = function(app) {
     app.post('/scores/delete/:id',function(req,res) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
+            if(index === -1) {
+                throw new Exception(`Could not find score with id ${req.params.id}`);
+            }
             result.scores.splice(index, 1);
             return result;
         }).then(function(scores) {
@@ -109,6 +112,9 @@ exports.route = function(app) {
         var score = JSON.parse(req.body);
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
+            if(index === -1) {
+                throw new Exception(`Could not find score with id ${req.params.id}`);
+            }
             result.scores.splice(index, 1);
             result.scores.push(score);
             return result;
