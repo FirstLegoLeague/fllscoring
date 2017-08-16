@@ -16,27 +16,32 @@ function reduceToMap(key) {
     }
 }
 
-function changeScores(callback) {
+function changeScores(action) {
     var path = fileSystem.getDataFilePath('scores.json');
-    return fileSystem.readJsonFile(path)
-    .then(function(data) {
-        return data;
-    }, function() {
-        return { version:2, scores: [] };
-    })
-    .then(callback)
-    .then(function(scores) {
-        lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
-            if(err) throw err;
+    var promise;
 
+    lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
+        if(err) throw err;
+
+        promise = fileSystem.readJsonFile(path)
+        .then(function(data) {
+            return data;
+        })
+        .catch(function() {
+            return { version:2, scores: [] };
+        })
+        .then(action)
+        .then(function(scores) {
             fileSystem.writeFile(path, JSON.stringify(scores));
 
             lockfile.unlock('scores.json.lock', function(err) {
                 if(err) throw err;
             });
+            return scores;
         });
-        return scores;
     });
+
+    return promise;
 }
 
 exports.route = function(app) {
