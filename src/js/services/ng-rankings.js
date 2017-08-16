@@ -18,10 +18,11 @@ define('services/ng-rankings',[
                 this.team = team;
                 this.stage = stage;
 
-                this.scores = new Array(stage.rounds).fill('score').map((u,i) => {
-                    let score = rank.filter(score => score.round === (i + 1))[0];
-                    return score ? score.score : undefined;
-                });
+                this.scores = [];
+                for(let i = 0; i < stage.rounds; i++) {
+                    this.scores[i] = rank.filter(score => score.round === (i + 1))[0];
+                }
+
                 this.ordered = rank.sort($score.compare)
                 this.highest = this.oredered[0];
             }
