@@ -29,7 +29,7 @@ define('services/ng-rankings',[
 
             Rank.compare = function(rank1, rank2) {
                 for(var i = 0; i < rank1.ordered.length && i < rank2.ordered.length; i++) {
-                    let comparation = rank1.ordered[i] - rank2.oredered[i];
+                    let comparation = $score.compare(rank1.ordered[i], rank2.oredered[i];)
                     if(comparation !== 0) return comparation;
                 }
                 return 0;
