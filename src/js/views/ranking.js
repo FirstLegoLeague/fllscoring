@@ -24,7 +24,7 @@ define('views/ranking',[
                 let result = {};
                 for(let stageId in scoreboard) {
                     let stage = scoreboard[stageId];
-                    result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== rank.empty).length);
+                    result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== undefined).length);
                 }
                 return result;
             }

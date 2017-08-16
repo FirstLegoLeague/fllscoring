@@ -17,7 +17,6 @@ define('services/ng-rankings',[
             function Rank(rank, team, stage) {
                 this.team = team;
                 this.stage = stage;
-                this.empty = EMPTY;
 
                 this.scores = new Array(stage.rounds).fill('score').map((u,i) => {
                     let score = rank.filter(score => score.round === (i + 1))[0];
