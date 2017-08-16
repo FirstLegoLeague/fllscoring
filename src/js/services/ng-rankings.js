@@ -16,10 +16,6 @@ define('services/ng-rankings',[
 
             const EMPTY = '---';
 
-            function compareRanks(rank1, rank2) {
-                let sortedRank1Scores = rank1
-            }
-
             function Rank(rank, team, stage) {
                 this.team = team;
                 this.stage = stage;
