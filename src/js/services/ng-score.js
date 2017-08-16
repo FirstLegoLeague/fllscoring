@@ -53,10 +53,6 @@ define('services/ng-score',[
                     }
                 }) (this, entry);
 
-                this.isZero = function() {
-                    return isNaN(this.score) || this.score === 0;
-                };
-
             }
 
             Score.prototype.calcFilename = function() {
@@ -72,23 +68,7 @@ define('services/ng-score',[
             };
 
             Score.compare = function(score1, score2) {
-                if(!(score1 instanceof Score) || !(score2 instanceof Score)) {
-                    throw new TypeError(`cannot compare scores ${score1} and ${score2}`);
-                }
-
-                const SCORE_2_BIGGER = 1;
-                const SCORE_1_BIGGER = -1;
-                const EQUAL = 0;
-
-                if(score1.score === score2.score) {
-                    return EQUAL;
-                } else if(score1.isZero()) {
-                    return SCORE_2_BIGGER;
-                } else if(score2.isZero()) {
-                    return SCORE_1_BIGGER;
-                } else {
-                    return (score1.score > score2.score) ? SCORE_1_BIGGER : SCORE_2_BIGGER;
-                }
+                return score1.score - score2.score;
             }
 
             return Score;
