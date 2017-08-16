@@ -75,13 +75,13 @@ exports.route = function(app) {
         var file = exports.getDataFilePath(req.params[0]);
         fs.stat(file, function(err, stat) {
             if (err) {
-                utils.sendError({ status: 404, message: `file not found ${file}` })
+                utils.sendError(res, { status: 404, message: `file not found ${file}` })
                 return;
             }
             if (stat.isFile()) {
                 fs.readFile(file, function(err, data) {
                     if (err) {
-                        utils.sendError({ status: 500, message: `error reading file ${file}` })
+                        utils.sendError(res, { status: 500, message: `error reading file ${file}` })
                         return;
                     }
                     res.send(data);
@@ -89,7 +89,7 @@ exports.route = function(app) {
             } else if (stat.isDirectory()) {
                 fs.readdir(file, function(err, filenames) {
                     if (err) {
-                        utils.sendError({ status: 500, message: `error reading dir ${file}` })
+                        utils.sendError(res, { status: 500, message: `error reading dir ${file}` })
                         return;
                     }
                     // FIXME: this doesn't work for filenames containing
@@ -98,13 +98,13 @@ exports.route = function(app) {
                         return name.indexOf("\n") >= 0;
                     });
                     if (hasNewline) {
-                        utils.sendError({ status: 500, message: `invalid filename(s) ${filenames.join(', ')}` })
+                        utils.sendError(res, { status: 500, message: `invalid filename(s) ${filenames.join(', ')}` })
                         return;
                     }
                     res.send(filenames.join('\n'));
                 });
             } else {
-                utils.sendError({ status: 500, message: `error reading file ${file}` })
+                utils.sendError(res, { status: 500, message: `error reading file ${file}` })
                 return;
             }
         });
@@ -116,7 +116,7 @@ exports.route = function(app) {
         exports.writeFile(file, req.body).then(function() {
             res.status(200).end();
         }).catch(function(err) {
-            utils.sendError({ status: 500, message: `error writing file ${file}` })
+            utils.sendError(res, { status: 500, message: `error writing file ${file}` })
         });
     });
 
@@ -125,7 +125,7 @@ exports.route = function(app) {
         var file = exports.getDataFilePath(req.params[0]);
         fs.unlink(file, function(err) {
             if (err) {
-                utils.sendError({ status: 500, message: `error removing file ${file}` })
+                utils.sendError(res, { status: 500, message: `error removing file ${file}` })
             }
             res.status(200).end();
         });
