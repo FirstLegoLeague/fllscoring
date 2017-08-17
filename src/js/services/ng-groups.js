@@ -38,11 +38,11 @@ define('services/ng-groups',[
             */
             Groups.prototype.multigroup = function(arr, funcs) {
                 let currFunc = funcs[0];
-                let result = group(arr, currFunc);
+                let result = this.group(arr, currFunc);
                 if(funcs.length > 1) {
                     let slicedFuncs = funcs.slice(1);
                     for(let key in result) {
-                        result[key] = multigroup(result[key], slicedFuncs);
+                        result[key] = this.multigroup(result[key], slicedFuncs);
                     }
                 }
                 return result;

@@ -24,12 +24,12 @@ define('services/ng-rankings',[
                 }
 
                 this.ordered = rank.sort($score.compare)
-                this.highest = this.oredered[0];
+                this.highest = this.ordered[0];
             }
 
             Rank.compare = function(rank1, rank2) {
                 for(var i = 0; i < rank1.ordered.length && i < rank2.ordered.length; i++) {
-                    let comparation = $score.compare(rank1.ordered[i], rank2.oredered[i];)
+                    let comparation = $score.compare(rank1.ordered[i], rank2.ordered[i]);
                     if(comparation !== 0) return comparation;
                 }
                 return 0;
@@ -50,9 +50,9 @@ define('services/ng-rankings',[
 
                             // Mapping to Rank objects
                             stageRanks[stage.id] = teams.map(function(team) {
-                                let stage = ranks[stage.id] || {};
-                                let rank = stage[team.number] || [];
-                                return new Rank(rank, team, stage);
+                                let stageRank = ranks[stage.id] || {};
+                                let teamRank = stageRank[team.number] || [];
+                                return new Rank(teamRank, team, stage);
                             })
 
                             // Sorting by the highest score

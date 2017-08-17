@@ -211,7 +211,6 @@ define('views/scoresheet',[
                     });
                 });
                 log('scoresheet cleared');
-                $scope.$apply()
             };
 
             //saves mission scoresheet
