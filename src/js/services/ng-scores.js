@@ -102,7 +102,7 @@ define('services/ng-scores',[
 
 
         Scores.prototype.clear = function() {
-            this._rawScores = [];
+            this.scores = [];
             this._update();
         };
 

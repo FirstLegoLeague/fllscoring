@@ -245,7 +245,7 @@ define('views/scoresheet',[
 Notice: the score could not be sent to the server. ` +
                             `This might be caused by poor network conditions. ` +
                             `The score is thereafore save on your device, and will be sent when it's possible.` +
-                            'Current number of scores actions waiting to be sent: ${$scores.pendingActions()}'
+                            `Current number of scores actions waiting to be sent: ${$scores.pendingActions()}`
                     $window.alert(message);
                     throw err;
                 });
