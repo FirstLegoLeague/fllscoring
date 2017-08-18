@@ -27,7 +27,7 @@ define('services/ng-groups',[
                     groups[key].push(item);
                     return groups;
                 }, {});
-            }
+            };
 
             /**
             /* Runs the group(arr, func) on an array recursively.
@@ -46,7 +46,7 @@ define('services/ng-groups',[
                     }
                 }
                 return result;
-            }
+            };
 
             return new Groups();
 
