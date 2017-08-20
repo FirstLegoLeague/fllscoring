@@ -20,7 +20,7 @@ src/components/*/*
 !src/components/angular-touch/angular*.js
 !src/components/angular-touch/angular*.map
 !src/components/angular-bootstrap/*.js
-!src/components/angular-local-storage/*.js
+!src/components/angular-storage/*.js
 
 !src/components/bootstrap-css/css
 !src/components/bootstrap-css/img

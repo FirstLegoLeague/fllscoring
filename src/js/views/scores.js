@@ -5,7 +5,7 @@ define('views/scores',[
     'angular'
 ],function(log) {
     var moduleName = 'scores';
-    return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
+    return angular.module(moduleName,['filters']).controller(moduleName+'Ctrl',[
         '$scope', '$scores','$teams','$stages','$window',
         function($scope,$scores,$teams,$stages,$window) {
             log('init scores ctrl');
