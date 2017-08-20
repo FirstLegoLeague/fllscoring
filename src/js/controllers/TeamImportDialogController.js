@@ -17,7 +17,7 @@ define('controllers/TeamImportDialogController', [
                 }
                 lines = lines.map(function (line) {
                     if ($scope.useCustomDelimiter) {
-                        return line.split($scope.delimiterCharacter);
+                        return line.split($scope.delimiter);
                     }
                     //split by tab character
                     return line.split(/\t/);
@@ -49,7 +49,7 @@ define('controllers/TeamImportDialogController', [
                 parseData($scope.importRaw)
             });
 
-            $scope.$watch('delimiterCharacter', function (data) {
+            $scope.$watch('delimiter', function (data) {
                 parseData($scope.importRaw)
             });
 
