@@ -23,8 +23,8 @@ define('views/scoresheet',[
     ]);
 
     return module.controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$stages','$settings','$challenge','$window','$q','$teams','$handshake',
-        function($scope,$fs,$stages,$settings,$challenge,$window,$q,$teams,$handshake) {
+        '$scope','$fs','$stages','$settings','$challenge','$window','$q','$teams','$handshake', '$scores',
+        function($scope,$fs,$stages,$settings,$challenge,$window,$q,$teams,$handshake, $scores) {
             log('init scoresheet ctrl');
 
             // Set up defaults
@@ -283,6 +283,24 @@ define('views/scoresheet',[
                         $scope.stage = result.stage;
                         $scope.round = result.round;
                     }
+                });
+            };
+
+            $scope.loadScoresheet = function (score) {
+                $scores.loadScoresheet(score).then(function (result) {
+                    $scope.missions.forEach(function (mission) {
+                        var filledMission = result.missions.find(function (e) {return e.title === mission.title});
+                        mission.objectives.forEach(function (objective, index) {
+                            objective["value"] = filledMission.objectives[index]["value"];
+                        });
+                    });
+                    $scope.uniqueId = generateId();
+                    $scope.signature = result.signature;
+                    $scope.team = result.team;
+                    $scope.stage = result.stage;
+                    $scope.round = result.round;
+                    $scope.table = result.table;
+                    $scope.referee = result.referee;
                 });
             };
 
