@@ -38,30 +38,30 @@
                 ng-if="stage.rounds > 0"
             >
                 <thead>
-                    <tr class="clickable">
+                    <tr class="clickable sortable">
                         <th class="span1" ng-click="doSort(stage, 'rank',false)">
-                            <span style="float: left;">Rank</span>
-                            <i style="float: right" class="material-icons">{{sortIcon(stage, 'rank')}}</i>
+                            <span>Rank</span>
+                            <i class="material-icons">{{sortIcon(stage, 'rank')}}</i>
                         </th>
                         <th class="span1" ng-click="doSort(stage, 'team.number',false)">
-                            <span style="float: left;">Team</span>
-                             <i style="float: right" class="material-icons">{{sortIcon(stage, 'team.number')}}</i>
+                            <span>Team</span>
+                             <i class="material-icons">{{sortIcon(stage, 'team.number')}}</i>
                         </th>
                         <th class="span2" ng-click="doSort(stage, 'team.name',false)">
-                            <span style="float: left;">Name</span>
-                             <i style="float: right" class="material-icons">{{sortIcon(stage, 'team.name')}}</i>
+                            <span>Name</span>
+                             <i class="material-icons">{{sortIcon(stage, 'team.name')}}</i>
                         </th>
                         <th class="span1" ng-if="stage.rounds > 1" ng-click="doSort(stage, 'highest',true)">
-                            <span style="float: left;">Highest</span>
-                             <i style="float: right" class="material-icons">{{sortIcon(stage, 'highest')}}</i>
+                            <span>Highest</span>
+                             <i class="material-icons">{{sortIcon(stage, 'highest')}}</i>
                         </th>
                         <th class="span1" ng-if="stage.rounds == 1" ng-click="doSort(stage, 'highest',true)">
-                            <span style="float: left;">Score</span>
-                             <i style="float: right" class="material-icons">{{sortIcon(stage, 'highest')}}</i>
+                            <span>Score</span>
+                             <i class="material-icons">{{sortIcon(stage, 'highest')}}</i>
                         </th>
                         <th class="span1" ng-if="stage.rounds > 1" ng-repeat="round in stage.$rounds track by $index" ng-click="doSort(stage, 'scores['+$index+']',true)">
-                            <span style="float: left;">Round {{round}}</span>
-                             <i style="float: right" class="material-icons">{{sortIcon(stage, 'scores['+$index+']')}}</i>
+                            <span>Round {{round}}</span>
+                             <i class="material-icons">{{sortIcon(stage, 'scores['+$index+']')}}</i>
                         </th>
                         <!-- padding cols -->
                         <th class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></th>
