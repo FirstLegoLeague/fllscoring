@@ -2,7 +2,7 @@
 // Generated on Wed Sep 11 2013 20:50:28 GMT+0200 (W. Europe Daylight Time)
 
 module.exports = function(config) {
-  var config = {
+  var configuration = {
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -96,8 +96,8 @@ module.exports = function(config) {
   };
 
   if(process.env.TRAVIS) {
-    config.browsers = ['Chrome_travis_ci'];
+    configuration.browsers = ['Chrome_travis_ci'];
   }
 
-  config.set();
+  config.set(configuration);
 };
