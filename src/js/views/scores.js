@@ -20,6 +20,18 @@ define('views/scores',[
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
+
+            $scope.sortIcon = function(col){
+                if(String($scope.sort)!== String(col)){//col and $scope.sort can be arrays, and so this is a quick and dirty way to check for equality
+                    return '';
+                }
+                if ($scope.rev) {
+                    return 'arrow_drop_down';
+                } else {
+                    return 'arrow_drop_up';
+                }
+            };
+
             $scope.removeScore = function(index) {
                 $scores.remove(index);
                 return $scores.save();

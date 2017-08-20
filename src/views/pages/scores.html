@@ -14,19 +14,40 @@
     <p>Showing {{scores.length}} scores.</p>
     <table class="table table-bordered table-striped">
         <thead>
-            <tr>
-                <th ng-click="doSort('index',true)">#</th>
-                <th ng-click="doSort(['stage.index','-index'],false)">Stage</th>
-                <th ng-click="doSort(['stage.index','round','-index'],false)">Round</th>
-                <th ng-click="doSort('table',false)">Table</th>
-                <th ng-click="doSort('team.number',false)">Team</th>
-                <th ng-click="doSort('team.name',false)">Name</th>
-                <th ng-click="doSort('score',true)">Score</th>
+            <tr class="clickable">
+                <th class="span1" ng-click="doSort('index',true)">
+                    <span style="float: left"># </span>
+                    <i style="float: right" class="material-icons">{{sortIcon('index')}}</i>
+                </th>
+                <th class="span3" ng-click="doSort(['stage.index','-index'],false)">
+                    <span style="float: left">Stage </span>
+                    <i style="float: right" class="material-icons">{{sortIcon(['stage.index','-index'])}}</i>
+                </th>
+                <th class="span2" ng-click="doSort(['stage.index','round','-index'],false)">
+                    <span style="float: left">Round </span>
+                    <i style="float: right" class="material-icons">{{sortIcon(['stage.index','round','-index'])}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('table',false)">
+                    <span style="float: left">Table </span>
+                    <i style="float: right" class="material-icons">{{sortIcon('table')}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('team.number',false)">
+                    <span style="float: left">Team </span>
+                    <i style="float: right" class="material-icons">{{sortIcon('team.number')}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('team.name',false)">
+                    <span style="float: left">Name </span>
+                    <i style="float: right" class="material-icons">{{sortIcon('team.name')}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('score',true)">
+                    <span style="float: left">Score </span>
+                    <i style="float: right" class="material-icons">{{sortIcon('score')}}</i>
+                </th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tr ng-repeat="score in scores | index | orderBy:sort:rev track by score.index" ng-class="{error: score.error, warning: score.modified && !score.error}">
-            <td>{{score.index + 1}}</td>
+        <tr ng-repeat="score in scores | orderBy:sort:rev track by $index" ng-class="{error: score.error, warning: score.modified && !score.error}">
+            <td>{{$index + 1}}</td>
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
