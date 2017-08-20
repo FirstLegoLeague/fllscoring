@@ -194,7 +194,6 @@ define('services/ng-scores',[
                         // and an explicit version identifier.
                         version = res.version;
                         scores = res.scores;
-                        sheetNames = res.sheets;
                     }
                     if (version > SCORES_VERSION) {
                         throw new Error(format("unknown scores version {0}, (expected {1})", version, SCORES_VERSION));
@@ -203,8 +202,6 @@ define('services/ng-scores',[
                     scores.forEach(function(score) {
                         self.add(score);
                     });
-                    self._sheets = {};
-                    sheetNames.forEach(function(name) { self._sheets[name] = true; });
                     log("scores loaded, version " + version);
                 } finally {
                     self.endupdate();
@@ -212,6 +209,10 @@ define('services/ng-scores',[
             }, function(err) {
                 log('scores read error', err);
             });
+        };
+
+        Scores.prototype.loadScoresheet = function (score) {
+            return $fs.read("scoresheets/"+score.file)
         };
 
         Scores.prototype.remove = function(index) {
