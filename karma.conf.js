@@ -90,8 +90,10 @@ module.exports = function(config) {
     singleRun: false,
 
     customLaunchers: {
-        Chrome_travis_ci: 'Chrome',
-        flags: ['--no sandbox']
+        Chrome_travis_ci: {
+            base: 'Chrome',
+            flags: ['--no-sandbox']
+        }
     }
   };
 
