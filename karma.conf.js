@@ -2,7 +2,7 @@
 // Generated on Wed Sep 11 2013 20:50:28 GMT+0200 (W. Europe Daylight Time)
 
 module.exports = function(config) {
-  var configuration = {
+  config.set({
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -89,17 +89,5 @@ module.exports = function(config) {
     // if true, it capture browsers, run tests and exit
     singleRun: false,
 
-    customLaunchers: {
-        Chrome_travis_ci: {
-            base: 'Chrome',
-            flags: ['--no-sandbox']
-        }
-    }
-  };
-
-  // if(process.env.TRAVIS) {
-  //   configuration.browsers = ['Chrome_travis_ci'];
-  // }
-
-  config.set(configuration);
+  });
 };
