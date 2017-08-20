@@ -1,21 +1,24 @@
-define('controllers/TeamImportDialogController',[
+define('controllers/TeamImportDialogController', [
     'services/ng-handshake',
     'angular'
-], function() {
+], function () {
     var moduleName = 'TeamImportDialog';
 
-    return angular.module(moduleName, []).controller('TeamImportDialogController',[
+    return angular.module(moduleName, []).controller('TeamImportDialogController', [
         '$scope', '$handshake',
         function ($scope, $handshake) {
             var defer;
 
             function parseData(data) {
                 //parse raw import, split lines
-                var lines = data?data.split(/[\n\r]/):[];
+                var lines = data ? data.split(/[\n\r]/) : [];
                 if ($scope.importHeader) {
                     lines.shift();
                 }
-                lines = lines.map(function(line) {
+                lines = lines.map(function (line) {
+                    if ($scope.useCustomDelimiter) {
+                        return line.split($scope.delimiterCharacter);
+                    }
                     //split by tab character
                     return line.split(/\t/);
                 });
@@ -24,8 +27,8 @@ define('controllers/TeamImportDialogController',[
                 $scope.importNameColumn = 2;
 
                 if (lines[0]) {
-                    $scope.importNumberExample = lines[0][$scope.importNumberColumn -1];
-                    $scope.importNameExample = lines[0][$scope.importNameColumn -1];
+                    $scope.importNumberExample = lines[0][$scope.importNumberColumn - 1];
+                    $scope.importNameExample = lines[0][$scope.importNameColumn - 1];
                 } else {
                     $scope.importNumberExample = '';
                     $scope.importNameExample = '';
@@ -34,29 +37,38 @@ define('controllers/TeamImportDialogController',[
                 $scope.importLines = lines;
             }
 
-            $scope.$watch('importRaw',function(data) {
+            $scope.$watch('importRaw', function (data) {
                 parseData($scope.importRaw);
             });
 
-            $scope.$watch('importHeader',function(data) {
+            $scope.$watch('importHeader', function (data) {
                 parseData($scope.importRaw);
             });
 
-            $handshake.$on('importTeams',function(e) {
+            $scope.$watch('useCustomDelimiter', function (data) {
+                parseData($scope.importRaw)
+            });
+
+            $scope.$watch('delimiterCharacter', function (data) {
+                parseData($scope.importRaw)
+            });
+
+
+            $handshake.$on('importTeams', function (e) {
                 $scope.dialogVisible = true;
                 defer = $handshake.defer();
                 return defer.promise;
             });
 
-            $scope.ok = function() {
+            $scope.ok = function () {
                 $scope.dialogVisible = false;
-                var teams = $scope.importLines.map(function(line) {
+                var teams = $scope.importLines.map(function (line) {
                     return {
-                        number: line[$scope.importNumberColumn -1],
-                        name: line[$scope.importNameColumn -1]
+                        number: line[$scope.importNumberColumn - 1],
+                        name: line[$scope.importNameColumn - 1]
                     };
                 });
-                defer.resolve({teams:teams});
+                defer.resolve({teams: teams});
             };
 
             $scope.cancel = function () {
