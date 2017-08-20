@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 0.10
+  - "node"
 before_install:
   - "npm i -g bower karma-cli"
 before_script:
