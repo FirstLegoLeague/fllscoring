@@ -1,4 +1,5 @@
 var fileSystem = require('./file_system');
+var autorize = require('./auth').authorize;
 
 exports.route = function(app) {
 
