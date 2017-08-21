@@ -227,6 +227,7 @@ define('views/scoresheet',[
             };
 
             $scope.saveEdit = function () {
+                $scope.setPage($scope.pages.find(function (p) {return p.name === "scores"}));//When you finish editing a scoresheet, it returns you to the scores view
                 $scores.remove($scope.scores.findIndex(function (s) { return s === $scope.editedScore }));
                 return $scores.loadScoresheet($scope.editedScore).then(function (result) {
                     result.missions.forEach(function (mission, i) {
