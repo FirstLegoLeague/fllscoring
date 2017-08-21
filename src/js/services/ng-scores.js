@@ -214,6 +214,10 @@ define('services/ng-scores',[
             });
         };
 
+        Scores.prototype.loadScoresheet = function (score) {
+            return $fs.read("scoresheets/"+score.file)
+        };
+
         Scores.prototype.remove = function(index) {
             // TODO: this function used to remove an associated
             // score sheet file.

@@ -14,19 +14,40 @@
     <p>Showing {{scores.length}} scores.</p>
     <table class="table table-bordered table-striped">
         <thead>
-            <tr>
-                <th ng-click="doSort('index',true)">#</th>
-                <th ng-click="doSort(['stage.index','-index'],false)">Stage</th>
-                <th ng-click="doSort(['stage.index','round','-index'],false)">Round</th>
-                <th ng-click="doSort('table',false)">Table</th>
-                <th ng-click="doSort('team.number',false)">Team</th>
-                <th ng-click="doSort('team.name',false)">Name</th>
-                <th ng-click="doSort('score',true)">Score</th>
+            <tr class="clickable sortable">
+                <th class="span1" ng-click="doSort('index',true)">
+                    <span ># </span>
+                    <i  class="material-icons">{{sortIcon('index')}}</i>
+                </th>
+                <th class="span3" ng-click="doSort(['stage.index','-index'],false)">
+                    <span >Stage </span>
+                    <i class="material-icons">{{sortIcon(['stage.index','-index'])}}</i>
+                </th>
+                <th class="span2" ng-click="doSort(['stage.index','round','-index'],false)">
+                    <span >Round </span>
+                    <i class="material-icons">{{sortIcon(['stage.index','round','-index'])}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('table',false)">
+                    <span >Table </span>
+                    <i class="material-icons">{{sortIcon('table')}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('team.number',false)">
+                    <span >Team </span>
+                    <i class="material-icons">{{sortIcon('team.number')}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('team.name',false)">
+                    <span >Name </span>
+                    <i class="material-icons">{{sortIcon('team.name')}}</i>
+                </th>
+                <th class="span2" ng-click="doSort('score',true)">
+                    <span >Score </span>
+                    <i class="material-icons">{{sortIcon('score')}}</i>
+                </th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tr ng-repeat="score in scores | index | orderBy:sort:rev track by score.index" ng-class="{error: score.error, warning: score.modified && !score.error}">
-            <td>{{score.index + 1}}</td>
+        <tr ng-repeat="score in scores | orderBy:sort:rev track by $index" ng-class="{error: score.error, warning: score.modified && !score.error}">
+            <td>{{$index + 1}}</td>
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
@@ -76,41 +97,45 @@
             <td>
                 <button class="btn"
                     ng-if="!score.published"
-                    ng-click="publishScore(score.index)"
+                    ng-click="publishScore($index)"
                 >
                     Publish
                 </button>
                 <button class="btn"
                     ng-if="score.published"
-                    ng-click="unpublishScore(score.index)"
+                    ng-click="unpublishScore($index)"
                 >
                     Unpublish
                 </button>
                 <button class="btn btn-default"
                     ng-if="!score.$editing"
-                    ng-click="editScore(score.index)"
+                    ng-click="editScore($index)"
                 >
                     <i class="material-icons">mode_edit</i>
                     Edit
                 </button>
                 <button class="btn btn-default"
                     ng-if="score.$editing"
-                    ng-click="finishEditScore(score.index)"
+                    ng-click="finishEditScore($index)"
                 >
                     <i class="material-icons">mode_edit</i>
                     Save
                 </button>
                 <button class="btn btn-danger"
                     ng-if="!score.$editing"
-                    fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
+                    fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore($index)">
                     <i class="material-icons">delete</i>
                     Delete
                 </button>
                 <button class="btn btn-default"
                     ng-if="score.$editing"
-                    ng-click="cancelEditScore(score.index)"
+                    ng-click="cancelEditScore($index)"
                 >
                     Cancel
+                </button>
+                <button class="btn btn-default" ng-click="editScoresheet(score)">
+                    <i class="material-icons">format_align_justify</i>
+                    Edit Scoresheet
                 </button>
 
             </td>
