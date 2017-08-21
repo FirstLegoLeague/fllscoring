@@ -6,8 +6,8 @@ define('views/scores',[
 ],function(log) {
     var moduleName = 'scores';
     return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$scores','$teams','$stages','$window',
-        function($scope,$scores,$teams,$stages,$window) {
+        '$scope', '$scores','$teams','$stages','$window', '$rootScope',
+        function($scope,$scores,$teams,$stages,$window, $rootScope) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
@@ -82,9 +82,23 @@ define('views/scores',[
                 });
             };
 
+            $scope.editScoresheet = function (score) {
+                log(format("Editing scoresheet: stage {0}, round {1}, team {2}, score {3}", score.stageId, score.round, score.teamNumber, score.score));
+                $scope.setPage($scope.pages.find(function (p) {return p.name === "scoresheet"}));
+                $rootScope.$broadcast("editScoresheet", score)
+            };
+
             $scope.refresh = function() {
                 $scores.load();
             };
         }
     ]);
 });
+
+function format(/* fmt, args... */) {
+    var args = Array.prototype.slice.call(arguments);
+    var fmt = args.shift();
+    return fmt.replace(/{(\d+)}/g, function (match, number) {
+        return args[number] !== undefined  ? args[number] : match;
+    });
+}

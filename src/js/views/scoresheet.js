@@ -317,6 +317,10 @@ define('views/scoresheet',[
                 });
             };
 
+            $scope.$on("editScoresheet", function (e, score) {
+                $scope.loadScoresheet(score);
+            });
+
             // Initialize empty scoresheet (mostly uniqueId)
             $scope.clear();
         }
