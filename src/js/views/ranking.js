@@ -5,11 +5,10 @@ define('views/ranking',[
     'services/ng-scores',
     'services/ng-handshake',
     'services/ng-message',
-    'controllers/ExportRankingDialogController',
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
-    return angular.module(moduleName,['ExportRankingDialog']).controller(moduleName+'Ctrl', [
+    return angular.module(moduleName,[]).controller(moduleName+'Ctrl', [
         '$scope', '$scores', '$stages','$handshake','$message',
         function($scope, $scores, $stages, $handshake, $message) {
             log('init ranking ctrl');
