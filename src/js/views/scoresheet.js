@@ -295,6 +295,7 @@ define('views/scoresheet',[
             };
 
             $scope.loadScoresheet = function (score) {
+                log(format("Editing scoresheet: stage {0}, round {1}, team {2}, score {3}", score.stageId, score.round, score.teamNumber, score.score));
                 $scope.editedScore = score;
                 $scores.loadScoresheet(score).then(function (result) {
                     $scope.missions.forEach(function (mission) {
@@ -322,3 +323,11 @@ define('views/scoresheet',[
         }
     ]);
 });
+
+function format(/* fmt, args... */) {
+    var args = Array.prototype.slice.call(arguments);
+    var fmt = args.shift();
+    return fmt.replace(/{(\d+)}/g, function (match, number) {
+        return args[number] !== undefined  ? args[number] : match;
+    });
+}

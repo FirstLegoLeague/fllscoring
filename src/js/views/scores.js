@@ -83,7 +83,6 @@ define('views/scores',[
             };
 
             $scope.editScoresheet = function (score) {
-                log(format("Editing scoresheet: stage {0}, round {1}, team {2}, score {3}", score.stageId, score.round, score.teamNumber, score.score));
                 $scope.setPage($scope.pages.find(function (p) {return p.name === "scoresheet"}));
                 $rootScope.$broadcast("editScoresheet", score)
             };
@@ -95,10 +94,3 @@ define('views/scores',[
     ]);
 });
 
-function format(/* fmt, args... */) {
-    var args = Array.prototype.slice.call(arguments);
-    var fmt = args.shift();
-    return fmt.replace(/{(\d+)}/g, function (match, number) {
-        return args[number] !== undefined  ? args[number] : match;
-    });
-}
