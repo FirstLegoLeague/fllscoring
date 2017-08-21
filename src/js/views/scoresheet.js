@@ -226,7 +226,6 @@ define('views/scoresheet',[
                 log('scoresheet cleared');
             };
 
-            //wraps the __save function- if we were editing a scoresheet, it will delete the old one before saving normally
             $scope.saveEdit = function () {
                 $scores.remove($scope.scores.findIndex(function (s) { return s === $scope.editedScore }));
                 return $scores.loadScoresheet($scope.editedScore).then(function (result) {
