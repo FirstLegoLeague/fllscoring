@@ -240,11 +240,11 @@ define('views/scoresheet',[
                                 } else {
                                     changedValue = changedMission.objectives[i]["value"];
                                 }
-                                log(format("Changed value of objective {0} to {1}", objective.title, changedValue));
+                                log(`Changed value of objective ${objective.title} to ${changedValue}`);
                             }
                         });
                     });
-                    result.team.number !== $scope.team.number ? log(format("changed team to ({0}) {1}", $scope.team.number, $scope.team.name)) : void(0);
+                    result.team.number !== $scope.team.number ? log(`changed team to (${$scope.team.number}) ${$scope.team.name}`) : void(0);
                     result.stage.id !== $scope.stage.id ? log("changed stage to " + $scope.stage.name) : void(0);
                     result.round !== $scope.round ? log("changed round to " + $scope.round) : void(0);
                     result.table !== $scope.table ? log("changed table to " + $scope.table) : void(0);
@@ -315,7 +315,7 @@ define('views/scoresheet',[
             };
 
             $scope.loadScoresheet = function (score) {
-                log(format("Editing scoresheet: stage {0}, round {1}, team {2}, score {3}", score.stageId, score.round, score.teamNumber, score.score));
+                log(`Editing scoresheet: stage ${score.stageId}, round ${score.round}, team ${score.teamNumber}, score ${score.score}`);
                 $scope.editedScore = score;
                 $scores.loadScoresheet(score).then(function (result) {
                     $scope.missions.forEach(function (mission) {
@@ -343,11 +343,3 @@ define('views/scoresheet',[
         }
     ]);
 });
-
-function format(/* fmt, args... */) {
-    var args = Array.prototype.slice.call(arguments);
-    var fmt = args.shift();
-    return fmt.replace(/{(\d+)}/g, function (match, number) {
-        return args[number] !== undefined  ? args[number] : match;
-    });
-}
