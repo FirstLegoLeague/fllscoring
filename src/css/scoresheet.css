@@ -8,7 +8,7 @@
 	float: left;
 	align: left;
 	font-size: 100%;
-	
+
 }
 .round-label{
 	float: center;
@@ -53,7 +53,7 @@
     text-align: left;
 	margin: 0px 15px;
 	min-height: 30px;
-	
+
 }
 
 .btn-enum:hover, .btn-enum:focus, .btn:hover, .btn:focus {
@@ -66,7 +66,7 @@
 	font-weight: bold;
 }
 
-#save, #submit {
+.save, #submit {
     float: right;
 }
 

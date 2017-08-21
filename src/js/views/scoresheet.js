@@ -227,17 +227,13 @@ define('views/scoresheet',[
             };
 
             //wraps the __save function- if we were editing a scoresheet, it will delete the old one before saving normally
-            $scope.save = function () {
-                if ($scope.editedScore) {
-                    $scores.remove($scope.scores.findIndex(function (s) { return s === $scope.editedScore }));
-                    return $scores.save().then($scope.__save());
-                } else {
-                    return $scope.__save()
-                }
+            $scope.saveEdit = function () {
+                $scores.remove($scope.scores.findIndex(function (s) { return s === $scope.editedScore }));
+                return $scores.save().then($scope.save());
             };
 
             //saves mission scoresheet
-            $scope.__save = function() {
+            $scope.save = function() {
                 if (!$scope.team || !$scope.stage || !$scope.round) {
                     $window.alert('no team selected, do so first');
                     return $q.reject(new Error('no team selected, do so first'));
