@@ -229,7 +229,27 @@ define('views/scoresheet',[
             //wraps the __save function- if we were editing a scoresheet, it will delete the old one before saving normally
             $scope.saveEdit = function () {
                 $scores.remove($scope.scores.findIndex(function (s) { return s === $scope.editedScore }));
-                return $scores.save().then($scope.save());
+                return $scores.loadScoresheet($scope.editedScore).then(function (result) {
+                    result.missions.forEach(function (mission, i) {
+                        var changedMission = $scope.missions.find(function (e) {return e.title === mission.title});
+                        mission.objectives.forEach(function (objective, i) {
+                            if(objective["value"] !== changedMission.objectives[i]["value"]){
+                                var changedValue;
+                                if(objective.options){
+                                    changedValue = objective.options.find(function (o) {return o.value === changedMission.objectives[i]["value"]}).title;
+                                } else {
+                                    changedValue = changedMission.objectives[i]["value"];
+                                }
+                                log(format("Changed value of objective {0} to {1}", objective.title, changedValue));
+                            }
+                        });
+                    });
+                    result.team.number !== $scope.team.number ? log(format("changed team to ({0}) {1}", $scope.team.number, $scope.team.name)) : void(0);
+                    result.stage.id !== $scope.stage.id ? log("changed stage to " + $scope.stage.name) : void(0);
+                    result.round !== $scope.round ? log("changed round to " + $scope.round) : void(0);
+                    result.table !== $scope.table ? log("changed table to " + $scope.table) : void(0);
+                    result.referee !== $scope.referee ? log("changed referee to " + $scope.referee) : void(0);
+                }).then($scores.save()).then($scope.save());
             };
 
             //saves mission scoresheet
