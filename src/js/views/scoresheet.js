@@ -37,6 +37,7 @@ define('views/scoresheet',[
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;
+            $scope.scores = $scores.scores;
 
             $settings.init().then(function(res) {
                 $scope.settings = res;
@@ -211,6 +212,7 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
+                $scope.editedScore = null;
                 $scope.uniqueId = generateId();
                 $scope.signature = null;
                 $scope.team = null;
@@ -224,8 +226,18 @@ define('views/scoresheet',[
                 log('scoresheet cleared');
             };
 
+            //wraps the __save function- if we were editing a scoresheet, it will delete the old one before saving normally
+            $scope.save = function () {
+                if ($scope.editedScore) {
+                    $scores.remove($scope.scores.findIndex(function (s) { return s === $scope.editedScore }));
+                    return $scores.save().then($scope.__save());
+                } else {
+                    return $scope.__save()
+                }
+            };
+
             //saves mission scoresheet
-            $scope.save = function() {
+            $scope.__save = function() {
                 if (!$scope.team || !$scope.stage || !$scope.round) {
                     $window.alert('no team selected, do so first');
                     return $q.reject(new Error('no team selected, do so first'));
@@ -287,6 +299,7 @@ define('views/scoresheet',[
             };
 
             $scope.loadScoresheet = function (score) {
+                $scope.editedScore = score;
                 $scores.loadScoresheet(score).then(function (result) {
                     $scope.missions.forEach(function (mission) {
                         var filledMission = result.missions.find(function (e) {return e.title === mission.title});
