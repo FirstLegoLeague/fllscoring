@@ -70,15 +70,15 @@ define('views/ranking',[
                 var icon = '';
                 if (stage.sort == col) {
                     if (stage.rev){
-                        icon = 'arrow_drop_down';
+                        icon = 'icon-sort-down';
                     } else {
-                        icon = 'arrow_drop_up';
+                        icon = 'icon-sort-up';
                     }
                 } else if (stage.sort === undefined && col == $scope.sort) {
                     if (stage.rev === undefined && $scope.rev) {
-                        icon = 'arrow_drop_down';
+                        icon = 'icon-sort-down';
                     } else {
-                        icon = 'arrow_drop_up';
+                        icon = 'icon-sort-up';
                     }
                 } else {
                     icon = ''; // no icon if column is not sorted
@@ -159,7 +159,7 @@ define('views/ranking',[
             $scope.getRoundLabel = function(round){
                 return "Round " + round;
             };
-
+            
 
         }
     ]);
