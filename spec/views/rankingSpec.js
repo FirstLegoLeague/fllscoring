@@ -79,7 +79,7 @@ describe('ranking', function() {
                 sort: 'foo'
             };
             expect($scope.sortIcon(stage)).toEqual('');
-            expect($scope.sortIcon(stage,'foo')).toEqual('icon-sort-up');
+            expect($scope.sortIcon(stage,'foo')).toEqual('arrow_drop_up');
         });
         it('should give the up icon when col is sorted in reverse',function() {
             var stage = {
@@ -87,15 +87,15 @@ describe('ranking', function() {
                 rev: true
             };
             expect($scope.sortIcon(stage)).toEqual('');
-            expect($scope.sortIcon(stage,'foo')).toEqual('icon-sort-down');
+            expect($scope.sortIcon(stage,'foo')).toEqual('arrow_drop_down');
         });
 
         //default sort order stuff, needs a bit of refactoring
         it('should report a default sorting for any stage',function() {
             var stage = {};
-            expect($scope.sortIcon(stage,'rank')).toEqual('icon-sort-up');
+            expect($scope.sortIcon(stage,'rank')).toEqual('arrow_drop_up');
             $scope.rev = true;
-            expect($scope.sortIcon(stage,'rank')).toEqual('icon-sort-down');
+            expect($scope.sortIcon(stage,'rank')).toEqual('arrow_drop_down');
         });
     });
 

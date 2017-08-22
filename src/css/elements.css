@@ -327,3 +327,11 @@ button .material-icons {
         display: none !important;
     }
 }
+
+.sortable span{
+    float: left;
+}
+
+.sortable i{
+    float: right;
+}

@@ -20,6 +20,18 @@ define('views/scores',[
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
+
+            $scope.sortIcon = function(col){
+                if(!angular.equals($scope.sort, col)){
+                    return '';
+                }
+                if ($scope.rev) {
+                    return 'arrow_drop_down';
+                } else {
+                    return 'arrow_drop_up';
+                }
+            };
+
             $scope.removeScore = function(index) {
                 $scores.remove(index);
                 return $scores.save();
