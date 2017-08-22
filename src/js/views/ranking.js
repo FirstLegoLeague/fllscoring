@@ -113,7 +113,7 @@ define('views/ranking',[
                 var string = "";
                 var settings = $settings.settings;
                 array.forEach(function (row) {
-                    row = row.map(String);
+                    row = row.map((elem) => elem || elem === 0 ? String(elem) : "");
                     string = string.concat(settings.lineStartString ? String(settings.lineStartString) : "");
                     string = string.concat(row.join(settings.separatorString ? String(settings.separatorString) : ""));
                     string = string.concat((settings.lineEndString ? String(settings.lineEndString) : "") + "\r\n");
