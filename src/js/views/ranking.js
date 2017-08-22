@@ -116,7 +116,7 @@ define('views/ranking',[
                     row = row.map(String);
                     string = string.concat(settings.lineStartString ? String(settings.lineStartString) : "");
                     string = string.concat(row.join(settings.separatorString ? String(settings.separatorString) : ""));
-                    string = string.concat((settings.lineEndString ? String(settings.lineEndString) : "") + "\n");
+                    string = string.concat((settings.lineEndString ? String(settings.lineEndString) : "") + "\r\n");
                 });
                 return string;
             };
