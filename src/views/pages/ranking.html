@@ -10,7 +10,7 @@
 
     <div ng-repeat="stage in stages">
         <p class="pull-right" style="margin-top: 1em;">
-            <a  href="{{csvdata[stage.id]}}" download="{{csvname[stage.id]}}">
+            <a href="{{exportFiles[stage.id]}}" download="{{'ranking_'+stage.id+'.csv'}}">
                 <i class="material-icons">file_download</i>
                 Export
             </a>
