@@ -10,7 +10,7 @@ describe('ranking', function() {
         number: '123',
         name: 'foo'
     };
-    var fsMock, stagesMock, scoresMock, handshakeMock, messageMock;
+    var fsMock, stagesMock, scoresMock, handshakeMock, messageMock, settingsMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -18,24 +18,30 @@ describe('ranking', function() {
             $scope = $rootScope.$new();
             scoresMock = createScoresMock($q);
             handshakeMock = createHandshakeMock($q);
-            stagesMock = createStagesMock();
+            stagesMock = createStagesMock($q);
             messageMock = createMessageMock();
+            var settings = {};
+            settings.lineStartString = "\"";
+            settings.lineEndString = "\"";
+            settings.separatorString = "\",\"";
+            settingsMock = createSettingsMock($q, settings);
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
                 '$scores': scoresMock,
                 '$stages': stagesMock,
                 '$handshake': handshakeMock,
-                '$message': messageMock
+                '$message': messageMock,
+                '$settings': settingsMock,
             });
         });
+        $scope.$digest();//resolves all init promises, etc.
     });
 
     describe('initialization', function() {
         it('should initialize', function() {
             expect($scope.sort).toEqual('rank');
             expect($scope.rev).toEqual(false);
-            expect($scope.csvdata).toEqual({});
-            expect($scope.csvname).toEqual({});
+            expect($scope.exportFiles).toEqual({});
         });
     });
 
@@ -134,45 +140,53 @@ describe('ranking', function() {
         });
     });
 
-    describe('rebuildCSV',function() {
-        it('should generate CSV data and filenames',function() {
-            expect($scope.csvname).toEqual({});
-            expect($scope.csvdata).toEqual({});
-            $scope.rebuildCSV({
+    describe('buildExportFiles',function() {
+        it('should generate export files',function() {
+            expect($scope.exportFiles).toEqual({});
+
+            $scope.scoreboard = {
                 'qualifying': [
                     { rank: 1, team: { name: "foo", number: 123 }, highest: 10, scores: [0, 10, 5] },
                     { rank: 1, team: { name: "\"bar\"", number: 456 }, highest: 10, scores: [10, 0, 5] }
                 ]
-            });
-            expect($scope.csvname["qualifying"]).toEqual("ranking_qualifying.csv");
-            expect($scope.csvdata["qualifying"]).toEqual("data:text/csv;charset=utf-8," + encodeURIComponent([
-                '"Rank","Team Number","Team Name","Highest","Round 1","Round 2","Round 3"',
+            };
+            $scope.buildExportFiles();
+            expect($scope.exportFiles["qualifying"]).toEqual("data:text/csv;charset=utf-8," + encodeURIComponent([
                 '"1","123","foo","10","0","10","5"',
-                '"1","456","""bar""","10","10","0","5"',
-            ].join("\r\n")));
+                '"1","456",""bar"","10","10","0","5"', //new format doesn't replace every quotation mark with two
+            ].join("\r\n").concat("\r\n")));//new format ends in a newline
         });
         it('should not skip empty values, but include as empty string',function() {
-            $scope.rebuildCSV({
+            $scope.scoreboard = {
                 'qualifying': [
                     { team: { name: "foo", number: 123 }, highest: 10, scores: [0, 10, 5] },
                     { team: { name: "\"bar\"", number: 456 }, highest: 10, scores: [10, 0, 5] }
                 ]
-            });
-            expect($scope.csvdata["qualifying"]).toEqual("data:text/csv;charset=utf-8," + encodeURIComponent([
-                '"Rank","Team Number","Team Name","Highest","Round 1","Round 2","Round 3"',
+            };
+            $scope.$digest();
+            expect($scope.exportFiles["qualifying"]).toEqual("data:text/csv;charset=utf-8," + encodeURIComponent([
                 '"","123","foo","10","0","10","5"',
-                '"","456","""bar""","10","10","0","5"',
-            ].join("\r\n")));
+                '"","456",""bar"","10","10","0","5"', //new format doesn't replace every quotation mark with two
+            ].join("\r\n").concat("\r\n")));//new format ends in a newline
         });
     });
 
     describe('scoreboard watcher',function() {
-        it('should rebuild the csv when the scoreboard changes',function() {
-            $scope.rebuildCSV = jasmine.createSpy('rebuildCSV');
+        it('should rebuild the export files when the scoreboard changes',function() {
+            $scope.buildExportFiles = jasmine.createSpy('buildExportFiles');
             $scope.scoreboard = 'foo';
             $scope.$digest();
-            expect($scope.rebuildCSV).toHaveBeenCalledWith(scoresMock.scoreboard);
+            expect($scope.buildExportFiles).toHaveBeenCalled();
         });
+    });
+
+    describe('settings watcher', function () {
+        it('should rebuild the export files when the settings change', function () {
+            $scope.buildExportFiles = jasmine.createSpy('buildExportFiles');
+            $scope.settings.bla = "fo";
+            $scope.$digest();
+            expect($scope.buildExportFiles).toHaveBeenCalled();
+        })
     });
 
     describe('getRoundLabel',function() {
