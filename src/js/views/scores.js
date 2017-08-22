@@ -22,7 +22,7 @@ define('views/scores',[
             };
 
             $scope.sortIcon = function(col){
-                if(String($scope.sort)!== String(col)){//col and $scope.sort can be arrays, and so this is a quick and dirty way to check for equality
+                if(!angular.equals($scope.sort, col)){
                     return '';
                 }
                 if ($scope.rev) {
