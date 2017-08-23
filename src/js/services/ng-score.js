@@ -68,7 +68,7 @@ define('services/ng-score',[
             };
 
             Score.compare = function(score1, score2) {
-                return score1.score - score2.score;
+                return score2.score - score1.score;
             }
 
             return Score;
