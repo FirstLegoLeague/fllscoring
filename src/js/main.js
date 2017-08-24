@@ -1,6 +1,6 @@
 define([
     'services/log',
-    'services/session',
+    'services/ng-session',
     'views/settings',
     'views/teams',
     'views/scoresheet',
@@ -28,16 +28,16 @@ define([
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
     angular.module('main',[]).controller('mainCtrl',[
-        '$scope', 'session',
-        function($scope, session) {
+        '$scope', '$session',
+        function($scope, $session) {
             log('init main ctrl');
             $scope.drawer = 'views/drawer.html';
             $scope.scoringPages = ['scoresheet','settings'];
             $scope.validationErrors = [];
             $scope.drawerVisible = false;
 
-            session.onload(function() {
-                $scope.user = session.get('user');
+            $session.onload(function() {
+                $scope.user = $session.get('user');
                 if($scope.user === 'admin') {
                     $scope.pages = [
                         { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
