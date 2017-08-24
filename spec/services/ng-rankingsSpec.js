@@ -252,10 +252,10 @@ describe('ng-rankings',function() {
                 Object.keys(mockRankings).forEach(stageId => {
                     Object.keys(mockRankings[stageId]).forEach(teamRank => {
                         Object.keys(mockRankings[stageId][teamRank]).forEach(property => {
-                            if(typeof(mockRankings[stageId][teamRank][property]) === 'object')
-                                var mock = jasmine.objectContaining(mockRankings[stageId][teamRank][property]);
-                            else
-                                var mock = rankings[stageId][teamRank][property]
+                            var mock = rankings[stageId][teamRank][property];
+                            if(typeof(mock) === 'object') {
+                                mock = jasmine.objectContaining(mock);
+                            }
                             expect(rankings[stageId][teamRank][property]).toEqual(mock);
                         });
                     });
