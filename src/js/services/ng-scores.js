@@ -126,7 +126,7 @@ define('services/ng-scores',[
                         scores = res.scores;
                     }
                     if (version > SCORES_VERSION) {
-                        throw new Error(format("unknown scores version {0}, (expected {1})", version, SCORES_VERSION));
+                        throw new Error(`unknown scores version ${version}, (expected ${SCORES_VERSION})`);
                     }
                     self.scores = scores.map(score => new $score(score));
                     log("scores loaded, version " + version);
@@ -180,14 +180,14 @@ define('services/ng-scores',[
             delete scoresheet.scoreEntry;
 
             return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
-                scores.scores.push(score);
+                self.scores.push(score);
             })
             .then((res) => self.acceptScores(res));
         };
 
         Scores.prototype.delete = function(score) {
             var self = this;
-            $independence.act('scores','/scores/delete/' + score.id, {}, function() {
+            return $independence.act('scores','/scores/delete/' + score.id, {}, function() {
                 self.scores.splice(self.scores.findIndex(s => s.id === score.id), 1);
             }).then((res) => self.acceptScores(res));
         };

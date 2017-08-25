@@ -1,8 +1,11 @@
 describe('ng-rankings',function() {
     var ngServices = factory('services/ng-services');
-    var module = factory('services/ng-rankings',{
+    var module = factory('services/ng-rankings', {
         'services/ng-services': ngServices,
-        'services/log': logMock
+        'services/log': logMock,
+        'services/ng-groups': factory('services/ng-groups', {
+            'services/ng-services': ngServices
+        })
     });
 
     var $rankings;

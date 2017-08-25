@@ -9,6 +9,7 @@ function createStagesMock() {
     return {
         stages: stages,
         allStages: stages,
+        init: jasmine.createSpy('save').and.returnValue(Q.when()),
         get: function(id) {
             var i;
             for (i = 0; i < stages.length; i++) {
