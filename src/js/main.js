@@ -36,7 +36,7 @@ define([
             $scope.validationErrors = [];
             $scope.drawerVisible = false;
 
-            $session.onload(function() {
+            $session.load().then(function() {
                 $scope.user = $session.get('user');
                 if($scope.user === 'admin') {
                     $scope.pages = [
