@@ -22,7 +22,6 @@ define('services/fs-xhr',['q','jquery'],function(Q,$) {
             if(data.statusText === "error"){ //status text given when server is inaccessible
                 alert("Server is inaccessible!")
             }
-            console.log(data);
             def.reject(data);
         });
 
