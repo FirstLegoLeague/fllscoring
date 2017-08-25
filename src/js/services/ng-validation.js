@@ -49,14 +49,21 @@ define('services/ng-validation',[
                     };
                 }
             }, {
-                validate: (score, scores) => scores.filter((s) => s.teamNumber === score.teamNumber && s.stageId === score.stageId && s.round === score.round).length === 1,
+                validate: (score, scores) => {
+                    for(var i = 0; i < scores.length && scores[i] !== score; i++) {
+                        if(score.stageId === scores[i].stageId && score.round === scores[i].round && score.teamNumber === scores[i].teamNumber) {
+                            return false;
+                        }
+                    }
+                    return true;
+                },
                 error: (score, stages) => {
                     return {
                         name: 'DuplicateScoreError',
-                        team: score.team,
+                        team: score.teamNumber,
                         stage: score.stageId,
                         round: score.round,
-                        message: `duplicate score for team '${score.team.name}' (${String(score.team.number)}), stage ${score.stage.name}, round ${score.round}`
+                        message: `duplicate score for team #'${score.teamName}', stage ${score.stageId}, round ${score.round}`
                     };
                 }
             }];
