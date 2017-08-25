@@ -55,24 +55,6 @@ describe('ExportRankingDialogController',function() {
         });
     });
 
-    // Not working because of the move into promises.
-    // describe('exportScore',function() {
-    //     it('should create a dataurl of export data',function() {
-    //         $scope.exportScore({
-    //             stage: {id: "1"},
-    //             round: 3
-    //         });
-    //         expect($scope.stageselected).toEqual({id: "1"});
-    //         expect($scope.export.rounds).toEqual([1,2,3]);
-
-    //         $timeout.flush();
-
-    //         expect($scope.exportname).toEqual('RoundResults.html');
-    //         expect($scope.exportvisible).toBe(true);
-    //         expect($scope.exportdata.substr(0,40)).toEqual('data:text/html;charset=utf-8,%3C!DOCTYPE')
-    //     });
-    // });
-
     describe('cancel',function() {
         it('should hide the dialog',function() {
             handshakeMock.fire('exportRanking',{},{});
