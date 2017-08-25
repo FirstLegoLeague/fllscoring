@@ -11,9 +11,7 @@ define('services/session',[
 	    return {
             load: function() {
                 return $http.get('/session').then(function(response) {
-                    for(var key in response.data) {
-                        session[key] = response.data[key];
-                    }
+                    session = response.data;
                     return session;
                 });
             },
