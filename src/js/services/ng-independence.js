@@ -15,6 +15,18 @@ define('services/ng-independence',[
             $localStorage[`action_${token}_${Date.now()}`] = JSON.stringify({ url: url, data: data });
         }
 
+        IndependentActionStroage.prototype.act = function(token, url, data, fallback) {
+            var self = this;
+            return $http.post(url, data).then(function(res) {
+                self.sendSavedActionsToServer(token);
+            }, function(err) {
+                actAheadOfServer(token, url, data);
+                if(fallback) {
+                    fallback();
+                }
+            });
+        };
+
         IndependentActionStroage.prototype.sendSavedActionsToServer = function(token) {
             if(this._sendingSavedActionsToServer) return;
             this._sendingSavedActionsToServer = true;
@@ -45,22 +57,6 @@ define('services/ng-independence',[
 
             $q.all(promises).then(function() {
                 self._sendingSavedActionsToServer = false;
-            });
-        };
-
-        IndependentActionStroage.prototype.act = function(token, url, data, fallback) {
-            var self = this;
-            return new Promise(function(resolve, reject) {
-                $http.post(url, data).then(function(res) {
-                    resolve(res);
-                    self.sendSavedActionsToServer(token);
-                }, function(err) {
-                    reject(err);
-                    actAheadOfServer(token, url, data);
-                    if(fallback) {
-                        fallback();
-                    }
-                })
             });
         };
 
