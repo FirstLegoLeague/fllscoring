@@ -9,7 +9,6 @@ function createScoresMock(scoreboard) {
             score: 2,
             id: 'g5f23ysu'
         }],
-        init: jasmine.createSpy('scoreInitSpy').and.returnValue($q.when()),
         scoreboard: scoreboard,
         init: jasmine.createSpy('scoresInit').and.returnValue(new Promise(function(res, rej) {
             res();
