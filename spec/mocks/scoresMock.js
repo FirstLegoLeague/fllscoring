@@ -8,6 +8,7 @@ function createScoresMock($q,scoreboard) {
             score: 2,
             index: 1
         }],
+        init: jasmine.createSpy('scoreInitSpy').and.returnValue($q.when()),
         scoreboard: scoreboard,
         remove: jasmine.createSpy('scoreRemoveSpy'),
         load: jasmine.createSpy('scoreLoadSpy'),
