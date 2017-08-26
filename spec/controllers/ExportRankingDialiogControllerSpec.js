@@ -16,7 +16,7 @@ describe('ExportRankingDialogController',function() {
             $timeout = _$timeout_;
             scoresMock = createScoresMock($q,fakeScoreboard);
             handshakeMock = createHandshakeMock($q);
-            stagesMock = createStagesMock();
+            stagesMock = createStagesMock($q);
             controller = $controller('ExportRankingDialogController', {
                 '$scope': $scope,
                 '$scores': scoresMock,

@@ -14,7 +14,7 @@ describe('scores', function() {
             $q = _$q_;
             scoresMock = createScoresMock($q);
             teamsMock = createTeamsMock();
-            stagesMock = createStagesMock();
+            stagesMock = createStagesMock($q);
             controller = $controller('scoresCtrl', {
                 '$scope': $scope,
                 '$scores': scoresMock,
