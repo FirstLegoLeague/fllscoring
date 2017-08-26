@@ -131,4 +131,25 @@ describe('scores', function() {
             expect(scoresMock.load).toHaveBeenCalled();
         });
     });
+
+    describe('sortIcon',function() {
+        it('should give the up icon when col is sorted',function() {
+            $scope.sort = 'foo';
+            expect($scope.sortIcon('bla')).toEqual('');
+            expect($scope.sortIcon('foo')).toEqual('arrow_drop_down');
+        });
+        it('should give the up icon when col is sorted in reverse', function () {
+            $scope.sort = 'foo';
+            $scope.rev = true;
+            expect($scope.sortIcon('bla')).toEqual('');
+            expect($scope.sortIcon('foo')).toEqual('arrow_drop_down');
+        });
+
+        //default sort order stuff, needs a bit of refactoring
+        it('should report a default sorting for any stage',function() {
+            expect($scope.sortIcon('index')).toEqual('arrow_drop_down');
+            $scope.rev = false;
+            expect($scope.sortIcon('index')).toEqual('arrow_drop_up');
+        });
+    });
 });
