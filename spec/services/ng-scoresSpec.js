@@ -91,9 +91,11 @@ describe('ng-scores',function() {
 
     describe('clear',function() {
         it('should clear the scores',function() {
-            expect(filteredScores()).toEqual([mockScore]);
-            $scores.clear();
-            expect(filteredScores()).toEqual([]);
+            $scores.load().then(function() {
+                expect(filteredScores()).toEqual([mockScore]);
+                $scores.clear();
+                expect(filteredScores()).toEqual([]);
+            });
         });
     });
 
