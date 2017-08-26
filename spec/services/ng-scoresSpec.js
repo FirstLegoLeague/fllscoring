@@ -42,7 +42,7 @@ describe('ng-scores',function() {
         table: undefined
     };
 
-    var mockScores = { version: 2, scores: [rawScore] };
+    var mockScores = { version: 3, scores: [rawScore] };
 
     var fsMock= createFsMock({
         "scores.json": mockScores,
@@ -111,13 +111,8 @@ describe('ng-scores',function() {
             expect($scores.load).toHaveBeenCalled();
         });
 
-        it('can accept backwards compatiale response', function(){
-            $scores.load([rawScore]);
-            expect($scores.scores.length).toBe(1);
-        });
-
         it('throws an error if it revcieves an unkown version', function(){
-            expect(() => $scores.load({ version: 3 })).toThrow(new Error('unknown scores version 3, (expected 2)'));
+            expect(() => $scores.load({ version: 4 })).toThrow(new Error('unsupported scores version 4, (expected 3)'));
         });
     });
 

@@ -27,7 +27,7 @@ function changeScores(action) {
                 return data;
             })
             .catch(function() {
-                return { version:2, scores: [] };
+                return { version:3, scores: [] };
             })
             .then(action)
             .then(function(scores) {
