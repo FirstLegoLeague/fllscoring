@@ -18,30 +18,28 @@ function reduceToMap(key) {
 
 function changeScores(action) {
     var path = fileSystem.getDataFilePath('scores.json');
-    var promise;
+    return new Promise(function(res, rej) {
+        lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
+            if(err) rej(err);
 
-    lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
-        if(err) throw err;
+            promise = fileSystem.readJsonFile(path)
+            .then(function(data) {
+                return data;
+            })
+            .catch(function() {
+                return { version:2, scores: [] };
+            })
+            .then(action)
+            .then(function(scores) {
+                fileSystem.writeFile(path, JSON.stringify(scores));
 
-        promise = fileSystem.readJsonFile(path)
-        .then(function(data) {
-            return data;
-        })
-        .catch(function() {
-            return { version:2, scores: [] };
-        })
-        .then(action)
-        .then(function(scores) {
-            fileSystem.writeFile(path, JSON.stringify(scores));
-
-            lockfile.unlock('scores.json.lock', function(err) {
-                if(err) throw err;
-            });
-            return scores;
+                lockfile.unlock('scores.json.lock', function(err) {
+                    if(err) rej(err);
+                });
+                return scores;
+            }).then(res).catch(rej);
         });
     });
-
-    return promise;
 }
 
 exports.route = function(app) {
@@ -104,7 +102,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(err => utils.sendError(res, err));
     });
 
     //edit a score at an id
@@ -119,7 +117,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(err => utils.sendError(res, err));
     });
 
 
