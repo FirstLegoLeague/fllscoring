@@ -51,9 +51,9 @@
                             <span>Name</span>
                              <i class="material-icons">{{sortIcon(stage, 'team.name')}}</i>
                         </th>
-                        <th class="span1" ng-if="stage.rounds > 1" ng-click="doSort(stage, 'highest',true)">
+                        <th class="span1" ng-if="stage.rounds > 1" ng-click="doSort(stage, 'highest.score',true)">
                             <span>Highest</span>
-                             <i class="material-icons">{{sortIcon(stage, 'highest')}}</i>
+                             <i class="material-icons">{{sortIcon(stage, 'highest.score')}}</i>
                         </th>
                         <th class="span1" ng-if="stage.rounds == 1" ng-click="doSort(stage, 'highest',true)">
                             <span>Score</span>
