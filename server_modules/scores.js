@@ -96,7 +96,7 @@ exports.route = function(app) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
-                throw new Exception(`Could not find score with id ${req.params.id}`);
+                throw new Error(`Could not find score with id ${req.params.id}`);
             }
             result.scores.splice(index, 1);
             return result;
@@ -111,7 +111,7 @@ exports.route = function(app) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
-                throw new Exception(`Could not find score with id ${req.params.id}`);
+                throw new Error(`Could not find score with id ${req.params.id}`);
             }
             result.scores[index] = score;
             return result;
