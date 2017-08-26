@@ -66,24 +66,14 @@ define('views/ranking',[
             };
 
             $scope.sortIcon = function(stage, col){
-                // got into trouble with a default sort order here...
-                var icon = '';
-                if (stage.sort == col) {
-                    if (stage.rev){
-                        icon = 'arrow_drop_down';
-                    } else {
-                        icon = 'arrow_drop_up';
-                    }
-                } else if (stage.sort === undefined && col == $scope.sort) {
-                    if (stage.rev === undefined && $scope.rev) {
-                        icon = 'arrow_drop_down';
-                    } else {
-                        icon = 'arrow_drop_up';
-                    }
-                } else {
-                    icon = ''; // no icon if column is not sorted
+                if(!angular.equals(stage.sort, col)){
+                    return '';
                 }
-                return icon;
+                if (stage.rev) {
+                    return 'arrow_drop_down';
+                } else {
+                    return 'arrow_drop_up';
+                }
             };
 
             $scope.toggle = function(stage) {
