@@ -1,7 +1,8 @@
 describe('indexFilter',function() {
     var ngFilters = factory('filters/ng-filters');
     var module = factory('filters/index',{
-        'filters/ng-filters': ngFilters
+        'filters/ng-filters': ngFilters,
+        'services/log': logMock
     });
 
     var index;
