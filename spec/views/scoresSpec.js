@@ -12,7 +12,7 @@ describe('scores', function() {
             $scope = $rootScope.$new();
             $window = _$window_;
             $q = _$q_;
-            scoresMock = createScoresMock($q);
+            scoresMock = createScoresMock();
             teamsMock = createTeamsMock();
             stagesMock = createStagesMock();
             controller = $controller('scoresCtrl', {
@@ -29,7 +29,6 @@ describe('scores', function() {
         it('should initialize', function() {
             expect($scope.sort).toEqual('index');
             expect($scope.rev).toEqual(true);
-            expect($scope.scores).toEqual(scoresMock.scores);
         });
     });
 
@@ -58,77 +57,59 @@ describe('scores', function() {
 
     describe('removeScore',function() {
         it('should remove a score',function() {
-            $scope.removeScore(1);
-            expect(scoresMock.remove).toHaveBeenCalledWith(1);
-            expect(scoresMock.save).toHaveBeenCalledWith();
+            var score = { id: 'afg1jkhg' };
+            $scope.deleteScore(score);
+            expect(scoresMock.delete).toHaveBeenCalledWith(score);
         });
     });
 
     describe('editScore',function() {
         it('should edit a score',function() {
-            $scope.editScore(0);
-            expect($scope.scores[0].$editing).toBe(true);
+            var score = { id: 'afg1jkhg' };
+            $scope.editScore(score);
+            expect(score.$editing).toBe(true);
         });
     });
 
     describe('publishScore',function() {
         it('should publish a score and save it',function() {
-            $scope.publishScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: true});
-            expect(scoresMock.save).toHaveBeenCalled();
+            var id = 'afg1jkhg';
+            $scope.publishScore({ id: id });
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: true});
         });
     });
 
     describe('unpublishScore',function() {
         it('should unpublish a score and save it',function() {
-            $scope.unpublishScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: false});
-            expect(scoresMock.save).toHaveBeenCalled();
+            var id = 'afg1jkhg';
+            $scope.unpublishScore({ id: id });
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: false });
         });
     });
 
     describe('finishEditScore',function() {
         it('should call update and save',function() {
-            $scope.editScore(0);
-            $scope.finishEditScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, $editing: true});
-            expect(scoresMock.save).toHaveBeenCalled();
+            var score = { id: 'afg1jkhg' };
+            $scope.editScore(score);
+            $scope.finishEditScore(score);
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: 'afg1jkhg', $editing: false });
         });
         it('should alert if an error is thrown from scores',function() {
             scoresMock.update.and.throwError('update error');
-            $scope.editScore(0);
-            $scope.finishEditScore(0);
+            var score = { id: 'afg1jkhg' };
+            $scope.editScore(score);
+            $scope.finishEditScore(score);
             expect($window.alert).toHaveBeenCalledWith('Error updating score: Error: update error');
         });
     });
 
     describe('cancelEditScore',function() {
-        it('should call _update to reset the scores',function() {
-            $scope.editScore(0);
-            $scope.cancelEditScore();
-            expect(scoresMock._update).toHaveBeenCalled();
+        it('should cancel the score edit scores',function() {
+            var score = { id: 'afg1jkhg' };
+            $scope.editScore(score);
+            $scope.cancelEditScore(score);
+            expect(score.$editing).toBe(false);
         });
     });
 
-    describe('pollSheets',function() {
-        xit('should call pollSheets of scores',function() {
-            $scope.pollSheets();
-            expect(scoresMock.pollSheets).toHaveBeenCalled();
-        });
-
-        it('should alert on fail',function() {
-            scoresMock.pollSheets.and.returnValue($q.reject(new Error('foo')));
-            $scope.pollSheets();
-            expect(scoresMock.pollSheets).toHaveBeenCalled();
-            $scope.$digest();
-            expect($window.alert).toHaveBeenCalledWith('failed to poll sheets: Error: foo');
-        });
-    });
-
-    describe('refresh',function() {
-        it('should call load of scores',function() {
-            $scope.refresh();
-            expect(scoresMock.load).toHaveBeenCalled();
-        });
-    });
 });
