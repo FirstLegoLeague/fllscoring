@@ -14,10 +14,6 @@ define('views/ranking',[
         function($scope, $scores, $stages, $handshake, $message) {
             log('init ranking ctrl');
 
-            // temporary default sort values
-            $scope.sort = 'rank';
-            $scope.rev = false;
-
             $scope.scores = $scores;
 
             $scope.exportRanking = function() {
@@ -143,7 +139,13 @@ define('views/ranking',[
                 $scope.rebuildCSV($scores.scoreboard);
             }, true);
 
-            $scope.stages = $stages.stages;
+            $stages.init().then(function () {
+                $scope.stages = $stages.stages;
+                $scope.stages.forEach(function (stage) {
+                    stage.sort = 'rank';
+                    stage.rev = false;
+                })
+            });
             $scope.scoreboard = $scores.scoreboard;
 
             $scope.getRoundLabel = function(round){
