@@ -13,7 +13,8 @@ define('views/scores',[
             $scope.sort = 'index';
             $scope.rev = true;
 
-            $scope.scores = $scores.scores;
+            $scope.scores = [];
+            $scores.init().then(() => $scope.scores = $scores.scores);
             $scope.stages = $stages.stages;
 
             $scope.doSort = function(col, defaultSort) {
