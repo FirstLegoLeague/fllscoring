@@ -19,6 +19,7 @@ define('services/ng-independence',[
             var self = this;
             return $http.post(url, data).then(function(res) {
                 self.sendSavedActionsToServer(token);
+                return res;
             }, function(err) {
                 actAheadOfServer(token, url, data);
                 if(fallback) {

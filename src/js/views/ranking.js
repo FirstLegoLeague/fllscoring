@@ -152,7 +152,7 @@ define('views/ranking',[
                             entry.rank,
                             entry.team.number,
                             entry.team.name,
-                            entry.highest.score,
+                            entry.highest ? entry.highest.score : undefined,
                         ].concat(entry.scores);
                     });
                     var header = ["Rank", "Team Number", "Team Name", "Highest"];
