@@ -18,7 +18,7 @@ describe('ranking', function() {
             $scope = $rootScope.$new();
             scoresMock = createScoresMock();
             handshakeMock = createHandshakeMock($q);
-            stagesMock = createStagesMock($q);
+            stagesMock = createStagesMock();
             messageMock = createMessageMock();
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
