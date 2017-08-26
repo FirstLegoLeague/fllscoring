@@ -37,5 +37,5 @@ routers.forEach(function(router) {
 
 app.listen(args.port, function() {
     console.log('Listening on port ', args.port);
-    console.log('open browser to http://localhost:{0}/'.format(args.port));
+    console.log(`open browser to http://localhost:${args.port}/`);
 });
