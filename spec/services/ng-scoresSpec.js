@@ -83,8 +83,10 @@ describe('ng-scores',function() {
 
     describe('init',function() {
         it('should load mock score initially',function() {
+            $scores._initialized = false;
+            $scores.load = jasmine.createSpy('scoresLoad');
             $scores.init().then(function() {
-                expect(filteredScores()).toEqual([mockScore]);
+                expect($scores.load).toHaveBeenCalled();
             });
         });
     });
@@ -120,9 +122,8 @@ describe('ng-scores',function() {
         });
 
         it('can accept backwards compatiale response', function(){
-            $scores.load([rawScore]).then(function() {
-                expect($scores.scores.length).toBe(1);
-            });
+            $scores.load([rawScore]);
+            expect($scores.scores.length).toBe(1);
         });
 
         it('throws an error if it revcieves an unkown version', function(){
