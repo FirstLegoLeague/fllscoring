@@ -25,12 +25,15 @@ define('views/ranking',[
                 return result;
             }
 
-            $scores.init().then(function() {
+            $stages.init().then(function () {
                 $scope.stages = $stages.stages;
                 $scope.stages.forEach(function (stage) {
                     stage.sort = 'rank';
                     stage.rev = false;
-                })
+                });
+            });
+
+            $scores.init().then(function() {
                 return $scores.getRankings();
             }).then(function(scoreboard) {
                 $scope.scoreboard = format(scoreboard);
