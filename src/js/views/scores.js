@@ -1,13 +1,13 @@
-define('views/scores',[
+define('views/scores', [
     'services/log',
     'services/ng-scores',
     'directives/really',
     'angular'
-],function(log) {
+], function (log) {
     var moduleName = 'scores';
-    return angular.module(moduleName,['filters']).controller(moduleName+'Ctrl',[
-        '$scope', '$scores','$teams','$stages','$window',
-        function($scope,$scores,$teams,$stages,$window) {
+    return angular.module(moduleName, ['filters']).controller(moduleName + 'Ctrl', [
+        '$scope', '$scores', '$teams', '$stages', '$window',
+        function ($scope, $scores, $teams, $stages, $window) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
@@ -53,45 +53,43 @@ define('views/scores',[
                 $scores.delete(score);
             };
 
-            $scope.editScore = function (index) {
-                $scope.editScore = function (score) {
-                    score.$editing = true;
-                };
+            $scope.editScore = function (score) {
+                score.$editing = true;
+            };
 
-                $scope.publishScore = function (score) {
-                    score.published = true;
-                    saveScore(score);
-                };
+            $scope.publishScore = function (score) {
+                score.published = true;
+                saveScore(score);
+            };
 
-                $scope.unpublishScore = function (score) {
-                    score.published = false;
-                    saveScore(score);
-                };
+            $scope.unpublishScore = function (score) {
+                score.published = false;
+                saveScore(score);
+            };
 
-                $scope.finishEditScore = function (score) {
-                    // The score entry is edited 'inline', then used to
-                    // replace the entry in the scores list and its storage.
-                    // Because scores are always 'sanitized' before storing,
-                    // the $editing flag is automatically discarded.
-                    score.$editing = false;
-                    saveScore(score);
-                };
+            $scope.finishEditScore = function (score) {
+                // The score entry is edited 'inline', then used to
+                // replace the entry in the scores list and its storage.
+                // Because scores are always 'sanitized' before storing,
+                // the $editing flag is automatically discarded.
+                score.$editing = false;
+                saveScore(score);
+            };
 
-                function saveScore(score) {
-                    try {
-                        $scores.update(score);
-                    } catch (e) {
-                        $window.alert("Error updating score: " + e);
-                    }
+            function saveScore(score) {
+                try {
+                    $scores.update(score);
+                } catch (e) {
+                    $window.alert("Error updating score: " + e);
                 }
-
-                $scope.cancelEditScore = function (score) {
-                    score.$editing = false;
-                };
-
-                $scope.refresh = function () {
-                    $scores.load();
-                };
             }
+
+            $scope.cancelEditScore = function (score) {
+                score.$editing = false;
+            };
+
+            $scope.refresh = function () {
+                $scores.load();
+            };
         }]);
 });
