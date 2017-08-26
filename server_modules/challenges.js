@@ -5,7 +5,7 @@ exports.route = function(app) {
 
     //get challenges over xhr, for hosted service
     app.get('/challenge/:year', function(req, res) {
-        var file = fileSystem.resolve('challenges/js/{0}.js'.format(req.params.year));
+        var file = fileSystem.resolve(`challenges/js/${req.params.year}.js`);
 
         res.header('Content-Type','text/plain');
         res.sendFile(file);

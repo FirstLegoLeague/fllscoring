@@ -309,8 +309,8 @@
                                         <td>{{item.rank}}</td>
                                         <td>{{item.team.number}}</td>
                                         <td><b>{{item.team.name}}</b></td>
-                                        <td class="highscorecelll">{{item.highest}}</td>
-                                        <td class="scorecell" ng-if="stageselected.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
+                                        <td class="highscorecelll">{{item.highest.score}}</td>
+                                        <td class="scorecell" ng-if="stageselected.rounds > 1" ng-repeat="score in export.scores track by $index">{{score.score}}</td>
                                     </tr>
                                 </tbody>
                             </table>

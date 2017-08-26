@@ -16,6 +16,26 @@ define('views/ranking',[
 
             $scope.scores = $scores;
 
+            function format(scoreboard) {
+                let result = {};
+                for(let stageId in scoreboard) {
+                    let stage = scoreboard[stageId];
+                    result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== undefined).length);
+                }
+                return result;
+            }
+
+            $scores.init().then(function() {
+                $scope.stages = $stages.stages;
+                $scope.stages.forEach(function (stage) {
+                    stage.sort = 'rank';
+                    stage.rev = false;
+                })
+                return $scores.getRankings();
+            }).then(function(scoreboard) {
+                $scope.scoreboard = format(scoreboard);
+            });
+
             $scope.exportRanking = function() {
                 $handshake.$emit('exportRanking',{
                     scores: $scope.scores,
@@ -122,7 +142,7 @@ define('views/ranking',[
                             entry.rank,
                             entry.team.number,
                             entry.team.name,
-                            entry.highest,
+                            entry.highest ? entry.highest.score : undefined,
                         ].concat(entry.scores);
                     });
                     var header = ["Rank", "Team Number", "Team Name", "Highest"];
@@ -138,15 +158,6 @@ define('views/ranking',[
             $scope.$watch("scoreboard", function() {
                 $scope.rebuildCSV($scores.scoreboard);
             }, true);
-
-            $stages.init().then(function () {
-                $scope.stages = $stages.stages;
-                $scope.stages.forEach(function (stage) {
-                    stage.sort = 'rank';
-                    stage.rev = false;
-                })
-            });
-            $scope.scoreboard = $scores.scoreboard;
 
             $scope.getRoundLabel = function(round){
                 return "Round " + round;

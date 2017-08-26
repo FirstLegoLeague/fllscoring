@@ -1,23 +1,29 @@
-function createScoresMock($q,scoreboard) {
+function createScoresMock(scoreboard) {
     scoreboard = scoreboard || {};
     return {
         scores: [{
             score: 1,
-            index: 0
+            id: 'afg1jkhg',
+            table: 7
         },{
             score: 2,
-            index: 1
+            id: 'g5f23ysu'
         }],
         init: jasmine.createSpy('scoreInitSpy').and.returnValue($q.when()),
         scoreboard: scoreboard,
-        remove: jasmine.createSpy('scoreRemoveSpy'),
+        init: jasmine.createSpy('scoresInit').and.returnValue(new Promise(function(res, rej) {
+            res();
+        })),
         load: jasmine.createSpy('scoreLoadSpy'),
-        pollSheets: jasmine.createSpy('scorePollSheetsSpy').and.returnValue($q.when()),
+        create: jasmine.createSpy('scoreCreateSpy').and.returnValue(new Promise(function(res, rej) {
+            res();
+        })),
+        delete: jasmine.createSpy('scoreDeleteSpy'),
         update: jasmine.createSpy('scoreUpdateSpy'),
         _update: jasmine.createSpy('score_UpdateSpy'),
-        save: jasmine.createSpy('scoreSaveSpy'),
-        getRankings: jasmine.createSpy('getRankings').and.returnValue({
-            scoreboard: scoreboard
-        })
+        getRankings: jasmine.createSpy('getRankings').and.returnValue(new Promise(function(res, rej) {
+            res(scoreboard);
+        })),
+        pendingActions: jasmine.createSpy('scorePendingActionsSpy').and.returnValue(1)
     };
 }

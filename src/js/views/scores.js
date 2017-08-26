@@ -5,7 +5,7 @@ define('views/scores',[
     'angular'
 ],function(log) {
     var moduleName = 'scores';
-    return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
+    return angular.module(moduleName,['filters']).controller(moduleName+'Ctrl',[
         '$scope', '$scores','$teams','$stages','$window',
         function($scope,$scores,$teams,$stages,$window) {
             log('init scores ctrl');
@@ -13,17 +13,33 @@ define('views/scores',[
             $scope.sort = 'index';
             $scope.rev = true;
 
-            $scope.scores = [];
-            $scores.init().then(() => $scope.scores = $scores.scores);
-            $scope.stages = $stages.stages;
+            function enrich(scores) {
+                return scores.map(score => {
+                    score.team = $teams.get(score.teamNumber);
+                    score.stage = $stages.get(score.stageId);
+                    return score;
+                });
+            }
 
-            $scope.doSort = function(col, defaultSort) {
+            $scope.scores = [];
+            $scores.init().then(function () {
+                $scope.scores = enrich($scores.scores);
+                $scope.stages = $stages.stages;
+            });
+
+            $scope.$watch(function () {
+                return $scores.scores;
+            }, function () {
+                $scope.scores = enrich($scores.scores);
+            });
+
+            $scope.doSort = function (col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
 
-            $scope.sortIcon = function(col){
-                if(!angular.equals($scope.sort, col)){
+            $scope.sortIcon = function (col) {
+                if (!angular.equals($scope.sort, col)) {
                     return '';
                 }
                 if ($scope.rev) {
@@ -33,59 +49,49 @@ define('views/scores',[
                 }
             };
 
-            $scope.removeScore = function(index) {
-                $scores.remove(index);
-                return $scores.save();
-            };
-            $scope.editScore = function(index) {
-                var score = $scores.scores[index];
-                score.$editing = true;
+            $scope.deleteScore = function (score) {
+                $scores.delete(score);
             };
 
-            $scope.publishScore = function(index) {
-                var score = $scores.scores[index];
-                score.published = true;
-                saveScore(score);
-            };
+            $scope.editScore = function (index) {
+                $scope.editScore = function (score) {
+                    score.$editing = true;
+                };
 
-            $scope.unpublishScore = function(index) {
-                var score = $scores.scores[index];
-                score.published = false;
-                saveScore(score);
-            };
+                $scope.publishScore = function (score) {
+                    score.published = true;
+                    saveScore(score);
+                };
 
-            $scope.finishEditScore = function(index) {
-                // The score entry is edited 'inline', then used to
-                // replace the entry in the scores list and its storage.
-                // Because scores are always 'sanitized' before storing,
-                // the $editing flag is automatically discarded.
-                var score = $scores.scores[index];
-                saveScore(score);
-            };
+                $scope.unpublishScore = function (score) {
+                    score.published = false;
+                    saveScore(score);
+                };
 
-            function saveScore(score) {
-                try {
-                    $scores.update(score.index, score);
-                    $scores.save();
-                } catch(e) {
-                    $window.alert("Error updating score: " + e);
+                $scope.finishEditScore = function (score) {
+                    // The score entry is edited 'inline', then used to
+                    // replace the entry in the scores list and its storage.
+                    // Because scores are always 'sanitized' before storing,
+                    // the $editing flag is automatically discarded.
+                    score.$editing = false;
+                    saveScore(score);
+                };
+
+                function saveScore(score) {
+                    try {
+                        $scores.update(score);
+                    } catch (e) {
+                        $window.alert("Error updating score: " + e);
+                    }
                 }
+
+                $scope.cancelEditScore = function (score) {
+                    score.$editing = false;
+                };
+
+                $scope.refresh = function () {
+                    $scores.load();
+                };
             }
-
-            $scope.cancelEditScore = function() {
-                $scores._update();
-            };
-
-            $scope.pollSheets = function() {
-                return $scores.pollSheets().catch(function(err) {
-                    log("pollSheets() failed", err);
-                    $window.alert("failed to poll sheets: " + err);
-                });
-            };
-
-            $scope.refresh = function() {
-                $scores.load();
-            };
-        }
-    ]);
+        }]);
 });

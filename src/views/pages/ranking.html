@@ -73,8 +73,8 @@
                         <td>{{item.rank}}</td>
                         <td>{{item.team.number}}</td>
                         <td>{{item.team.name}}</td>
-                        <td>{{item.highest}}</td>
-                        <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score}}</td>
+                        <td>{{item.highest.score}}</td>
+                        <td ng-if="stage.rounds > 1" ng-repeat="score in item.scores track by $index">{{score.score}}</td>
                         <!-- padding cols -->
                         <td class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></td>
                         <td class="span1 clearCell" ng-if="stage.rounds == 1"></td>

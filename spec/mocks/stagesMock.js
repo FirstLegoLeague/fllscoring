@@ -1,4 +1,4 @@
-function createStagesMock($q) {
+function createStagesMock() {
     var stages = [
         { id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] },
         { id: "qualifying", name: "Voorrondes", rounds: 3, $rounds: [1, 2, 3] },
@@ -9,7 +9,7 @@ function createStagesMock($q) {
     return {
         stages: stages,
         allStages: stages,
-        init: jasmine.createSpy('stagesInitSpy').and.returnValue($q.when()),
+        init: jasmine.createSpy('save').and.returnValue(Q.when()),
         get: function(id) {
             var i;
             for (i = 0; i < stages.length; i++) {
@@ -17,7 +17,7 @@ function createStagesMock($q) {
                     return stages[i];
                 }
             }
-            throw new Error("unknown stage");
+            return undefined;
         },
         save: jasmine.createSpy('save'),
         remove: jasmine.createSpy('remove'),

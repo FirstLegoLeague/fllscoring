@@ -7,7 +7,7 @@ exports.route = function(app) {
     app.get('/teams',function(req,res) {
         fileSystem.readJsonFile(fileSystem.getDataFilePath('teams.json')).then(function(result) {
             res.json(result);
-        }).catch(utils.sendError(res)).done();
+        }).catch(err => utils.sendError(res, err)).done();
     });
 
     app.get('/teams/:nr',function(req,res) {
@@ -16,7 +16,7 @@ exports.route = function(app) {
                 return team.number == req.params.nr;
             })[0];
             res.json(team);
-        }).catch(utils.sendError(res)).done();
+        }).catch(err => utils.sendError(res, err)).done();
     });
 
 };
