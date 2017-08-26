@@ -186,20 +186,20 @@
                         </button>
                     <p>
                         <a  href="{{exportdata}}" download="{{exportname}}" ng-show="exportvisible"><i class="material-icons">file_download</i> Export naar USB</a>
-                        
+
                         <div ng-hide="true" id="scoreexport">
                             <style>
                                 #bodyranking{
-                                    background-color:#DEDEDE; 
+                                    background-color:#DEDEDE;
                                     background-repeat:no-repeat;
                                 }
-                                #rankingtable{     
+                                #rankingtable{
                                     font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, sans-serif;
                                     text-align:center;
                                     width:95%;
-                                    margin-left:auto; 
+                                    margin-left:auto;
                                     margin-right:auto;
-                                
+
                                 }
                                 #scoreexport{
                                     border:1px solid black;
@@ -219,7 +219,7 @@
                                     color:white;
                                     font-size:x-large;
                                     white-space:nowrap;
-                                    
+
                                 }
                                 .top{
                                     background-color:silver;
@@ -229,7 +229,7 @@
                                     background-color:rgba(255, 255, 255, 0.8);
 
                                 }
-                                .out{  
+                                .out{
                                     opacity: 0;
                                     -webkit-transition: opacity 2s ease-in;
                                     -moz-transition: opacity 2s ease-in;
@@ -246,24 +246,24 @@
                                     FLOWAMOUNT        = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.flowAmount;
                                     // The amount of scores always visible at top
                                     FIXEDSHOWNTOP     = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.fixedShownTop;
-                                    // Amount of seconds that the first page shows       
+                                    // Amount of seconds that the first page shows
                                     TIMEFORFRAME1     = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.timeForFrame1;
-                                    // Amount of seconds that each scroll takes      
+                                    // Amount of seconds that each scroll takes
                                     TIMETHROUGHFRAMES = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.timeThroughFrames;
                                     // Amount of scores that move away and appear
                                     FADEATONEGO       = angular.element(document.querySelector('[ng-controller="rankingCtrl"]')).scope().export.fadeAtOneGo;
 
                                     for(var p = 0 ; p <= FIXEDSHOWNTOP -1 ; p++){
                                     document.getElementById('trrow'+p).className = 'top';
-                                        
+
                                     }
                                     for(var q = FIXEDSHOWNTOP ; q <= TOTALAMOUNT -1 ; q++){
                                     document.getElementById('trrow'+q).className = 'all';
-                                        
+
                                     }
                                     for(var x = FLOWAMOUNT; x<(TOTALAMOUNT);x++){
                                         document.getElementById('trrow'+x).style.visibility = 'hidden';
-                                    }   
+                                    }
                                     //alert(amount);
                                     setTimeout(gotoNext,(TIMEFORFRAME1*1000));
                                 }
@@ -305,7 +305,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="item in filterscoreboard[stageselected.id] | index | orderBy:stageselectedselected.sort:stageselected.rev track by item.team.number" id="trrow{{$index}}">
+                                    <tr ng-repeat="item in filterscoreboard[stageselected.id] | orderBy:stageselectedselected.sort:stageselected.rev track by item.team.number" id="trrow{{$index}}">
                                         <td>{{item.rank}}</td>
                                         <td>{{item.team.number}}</td>
                                         <td><b>{{item.team.name}}</b></td>
