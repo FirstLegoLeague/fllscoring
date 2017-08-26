@@ -46,8 +46,8 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tr ng-repeat="score in scores | orderBy:sort:rev track by $index" ng-class="{error: score.error, warning: score.modified && !score.error}">
-            <td>{{$index + 1}}</td>
+        <tr ng-repeat="score in scores | index | orderBy:sort:rev track by score.index" ng-class="{error: score.error, warning: score.modified && !score.error}">
+            <td>{{score.index + 1}}</td>
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
