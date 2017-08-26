@@ -18,7 +18,7 @@ define([
     'angular-sanitize',
     'angular-storage',
     'angular'
-],function(log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
+],function(log,session,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
     log('device ready');
 
@@ -49,7 +49,7 @@ define([
                 $scope.user = session.get('passport').user;
                 $scope.pages = PAGES.filter(page => $scope.user.pages.includes(page.name));
                 $scope.currentPage = $scope.pages[0];
-            })
+            });
 
             $scope.$on('validationError',function(e,validationErrors) {
                 $scope.validationErrors = validationErrors;

@@ -63,7 +63,7 @@ define('services/ng-validation',[
                         team: score.teamNumber,
                         stage: score.stageId,
                         round: score.round,
-                        message: `duplicate score for team #'${score.teamName}', stage ${score.stageId}, round ${score.round}`
+                        message: `duplicate score for team #${score.teamNumber}, ${score.stageId}, round ${score.round}`
                     };
                 }
             }];

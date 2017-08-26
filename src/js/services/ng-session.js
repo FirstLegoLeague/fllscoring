@@ -1,4 +1,4 @@
-define('services/session',[
+define('services/ng-session',[
 	'services/ng-services',
 ], function(module) {
 

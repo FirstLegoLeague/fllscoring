@@ -1,6 +1,6 @@
 describe('ng-session',function() {
     var ngServices = factory('services/ng-services');
-    var module = factory('services/session',{
+    var module = factory('services/ng-session',{
         'services/ng-services': ngServices
     });
 
