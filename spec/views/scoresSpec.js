@@ -23,6 +23,7 @@ describe('scores', function() {
             });
         });
         $window.alert = jasmine.createSpy('alertSpy');
+        $scope.$digest();//resolve all initialization promises
     });
 
     describe('initialization', function() {
