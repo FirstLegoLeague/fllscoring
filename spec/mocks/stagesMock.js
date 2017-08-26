@@ -1,4 +1,4 @@
-function createStagesMock() {
+function createStagesMock($q) {
     var stages = [
         { id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] },
         { id: "qualifying", name: "Voorrondes", rounds: 3, $rounds: [1, 2, 3] },
@@ -9,6 +9,7 @@ function createStagesMock() {
     return {
         stages: stages,
         allStages: stages,
+        init: jasmine.createSpy('stagesInitSpy').and.returnValue($q.when()),
         get: function(id) {
             var i;
             for (i = 0; i < stages.length; i++) {
