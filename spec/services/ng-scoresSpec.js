@@ -81,16 +81,6 @@ describe('ng-scores',function() {
         });
     }
 
-    describe('init',function() {
-        it('should load mock score initially',function() {
-            $scores._initialized = false;
-            $scores.load = jasmine.createSpy('scoresLoad');
-            $scores.init().then(function() {
-                expect($scores.load).toHaveBeenCalled();
-            });
-        });
-    });
-
     describe('clear',function() {
         it('should clear the scores',function() {
             $scores.load().then(function() {
