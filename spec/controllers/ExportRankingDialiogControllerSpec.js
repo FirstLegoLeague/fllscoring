@@ -14,9 +14,9 @@ describe('ExportRankingDialogController',function() {
         angular.mock.inject(function($controller,$rootScope,$q,_$timeout_) {
             $scope = $rootScope.$new();
             $timeout = _$timeout_;
-            scoresMock = createScoresMock($q,fakeScoreboard);
+            scoresMock = createScoresMock(fakeScoreboard);
             handshakeMock = createHandshakeMock($q);
-            stagesMock = createStagesMock();
+            stagesMock = createStagesMock($q);
             controller = $controller('ExportRankingDialogController', {
                 '$scope': $scope,
                 '$scores': scoresMock,
@@ -52,24 +52,6 @@ describe('ExportRankingDialogController',function() {
 
             });
             expect($scope.dialogVisible).toBe(true);
-        });
-    });
-
-    describe('exportScore',function() {
-        it('should create a dataurl of export data',function() {
-            $scope.exportScore({
-                stage: {id: "1"},
-                round: 3
-            });
-            expect($scope.stageselected).toEqual({id: "1"});
-            expect($scope.export.rounds).toEqual([1,2,3]);
-            expect($scope.filterscoreboard).toEqual(fakeScoreboard);
-
-            $timeout.flush();
-
-            expect($scope.exportname).toEqual('RoundResults.html');
-            expect($scope.exportvisible).toBe(true);
-            expect($scope.exportdata.substr(0,40)).toEqual('data:text/html;charset=utf-8,%3C!DOCTYPE')
         });
     });
 

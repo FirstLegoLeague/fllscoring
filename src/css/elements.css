@@ -18,6 +18,13 @@ h1 {
     font-weight: normal;
 }
 
+h3 {
+    font-family: 'latolight', 'Segoe UI Light','helvetica','Arial';
+    font-size: 20px;
+    padding: 0 7px;
+    font-weight: normal;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -94,6 +101,13 @@ table {
         color: white;
         text-transform: capitalize;
     }
+
+    .appbar h3 {
+        display: inline-block;
+        color: black;
+        float: right;
+    }
+
     .appbar .appbar-actions {
         position: absolute;
         top: 6px;
@@ -326,4 +340,12 @@ button .material-icons {
     .largeLayoutHide {
         display: none !important;
     }
+}
+
+.sortable span{
+    float: left;
+}
+
+.sortable i{
+    float: right;
 }

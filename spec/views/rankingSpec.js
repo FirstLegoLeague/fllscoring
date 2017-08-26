@@ -16,7 +16,7 @@ describe('ranking', function() {
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope,$q) {
             $scope = $rootScope.$new();
-            scoresMock = createScoresMock($q);
+            scoresMock = createScoresMock();
             handshakeMock = createHandshakeMock($q);
             stagesMock = createStagesMock();
             messageMock = createMessageMock();
@@ -32,8 +32,6 @@ describe('ranking', function() {
 
     describe('initialization', function() {
         it('should initialize', function() {
-            expect($scope.sort).toEqual('rank');
-            expect($scope.rev).toEqual(false);
             expect($scope.csvdata).toEqual({});
             expect($scope.csvname).toEqual({});
         });
@@ -79,7 +77,7 @@ describe('ranking', function() {
                 sort: 'foo'
             };
             expect($scope.sortIcon(stage)).toEqual('');
-            expect($scope.sortIcon(stage,'foo')).toEqual('icon-sort-up');
+            expect($scope.sortIcon(stage,'foo')).toEqual('arrow_drop_up');
         });
         it('should give the up icon when col is sorted in reverse',function() {
             var stage = {
@@ -87,15 +85,15 @@ describe('ranking', function() {
                 rev: true
             };
             expect($scope.sortIcon(stage)).toEqual('');
-            expect($scope.sortIcon(stage,'foo')).toEqual('icon-sort-down');
+            expect($scope.sortIcon(stage,'foo')).toEqual('arrow_drop_down');
         });
 
         //default sort order stuff, needs a bit of refactoring
         it('should report a default sorting for any stage',function() {
-            var stage = {};
-            expect($scope.sortIcon(stage,'rank')).toEqual('icon-sort-up');
-            $scope.rev = true;
-            expect($scope.sortIcon(stage,'rank')).toEqual('icon-sort-down');
+            $scope.$digest();//resolve all promises
+            $scope.stages.forEach(function (stage) {
+                expect($scope.sortIcon(stage,'rank')).toEqual('arrow_drop_up');
+            });
         });
     });
 
@@ -140,8 +138,8 @@ describe('ranking', function() {
             expect($scope.csvdata).toEqual({});
             $scope.rebuildCSV({
                 'qualifying': [
-                    { rank: 1, team: { name: "foo", number: 123 }, highest: 10, scores: [0, 10, 5] },
-                    { rank: 1, team: { name: "\"bar\"", number: 456 }, highest: 10, scores: [10, 0, 5] }
+                    { rank: 1, team: { name: "foo", number: 123 }, highest: { score: 10 }, scores: [0, 10, 5] },
+                    { rank: 1, team: { name: "\"bar\"", number: 456 }, highest: { score: 10 }, scores: [10, 0, 5] }
                 ]
             });
             expect($scope.csvname["qualifying"]).toEqual("ranking_qualifying.csv");
@@ -154,8 +152,8 @@ describe('ranking', function() {
         it('should not skip empty values, but include as empty string',function() {
             $scope.rebuildCSV({
                 'qualifying': [
-                    { team: { name: "foo", number: 123 }, highest: 10, scores: [0, 10, 5] },
-                    { team: { name: "\"bar\"", number: 456 }, highest: 10, scores: [10, 0, 5] }
+                    { team: { name: "foo", number: 123 }, highest: { score: 10 }, scores: [0, 10, 5] },
+                    { team: { name: "\"bar\"", number: 456 }, highest: { score: 10 }, scores: [10, 0, 5] }
                 ]
             });
             expect($scope.csvdata["qualifying"]).toEqual("data:text/csv;charset=utf-8," + encodeURIComponent([
