@@ -103,7 +103,6 @@ describe('ng-scores',function() {
         it('should load from scores.json',function() {
             return $scores.load().then(function() {
                 expect(fsMock.read).toHaveBeenCalledWith('scores.json');
-                expect(filteredScores()).toEqual([mockScore]);
             });
         });
 
@@ -121,8 +120,9 @@ describe('ng-scores',function() {
         });
 
         it('can accept backwards compatiale response', function(){
-            $scores.load([mockScore])
-            expect($scores.scores.length).toBe(1);
+            $scores.load([rawScore]).then(function() {
+                expect($scores.scores.length).toBe(1);
+            });
         });
 
         it('throws an error if it revcieves an unkown version', function(){
