@@ -1,6 +1,6 @@
 define([
     'services/log',
-    'services/session',
+    'services/ng-session',
     'views/settings',
     'views/teams',
     'views/scoresheet',
@@ -16,6 +16,7 @@ define([
     'angular-bootstrap',
     'angular-touch',
     'angular-sanitize',
+    'angular-storage',
     'angular'
 ],function(log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
@@ -27,8 +28,8 @@ define([
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
     angular.module('main',[]).controller('mainCtrl',[
-        '$scope', 'session',
-        function($scope, session) {
+        '$scope', '$session',
+        function($scope, $session) {
             log('init main ctrl');
 
             const PAGES = [
@@ -44,7 +45,7 @@ define([
             $scope.validationErrors = [];
             $scope.drawerVisible = false;
 
-            session.onload(function() {
+            $session.load().then(function(session) {
                 $scope.user = session.get('passport').user;
                 $scope.pages = PAGES.filter(page => $scope.user.pages.includes(page.name));
                 $scope.currentPage = $scope.pages[0];

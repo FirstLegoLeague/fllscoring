@@ -12,7 +12,7 @@ exports.middleware = function(req, res, next) {
 
     req.log = exports.log;
 
-    req.log.debug('Starting {0} {1}'.format(req.method, req.originalUrl));
+    req.log.debug(`Starting ${req.method} ${req.originalUrl}`);
 
     next();
 
