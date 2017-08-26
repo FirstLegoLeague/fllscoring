@@ -13,7 +13,11 @@ describe('scores', function() {
             $window = _$window_;
             $q = _$q_;
             scoresMock = createScoresMock();
-            teamsMock = createTeamsMock();
+            teamsMock = createTeamsMock([
+                {number: 132},
+                {number: 2581},
+                {number: 445}
+            ]);
             stagesMock = createStagesMock();
             controller = $controller('scoresCtrl', {
                 '$scope': $scope,
