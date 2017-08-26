@@ -18,7 +18,7 @@ describe('ranking', function() {
             $scope = $rootScope.$new();
             scoresMock = createScoresMock($q);
             handshakeMock = createHandshakeMock($q);
-            stagesMock = createStagesMock();
+            stagesMock = createStagesMock($q);
             messageMock = createMessageMock();
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
@@ -32,8 +32,6 @@ describe('ranking', function() {
 
     describe('initialization', function() {
         it('should initialize', function() {
-            expect($scope.sort).toEqual('rank');
-            expect($scope.rev).toEqual(false);
             expect($scope.csvdata).toEqual({});
             expect($scope.csvname).toEqual({});
         });
@@ -92,10 +90,10 @@ describe('ranking', function() {
 
         //default sort order stuff, needs a bit of refactoring
         it('should report a default sorting for any stage',function() {
-            var stage = {};
-            expect($scope.sortIcon(stage,'rank')).toEqual('arrow_drop_up');
-            $scope.rev = true;
-            expect($scope.sortIcon(stage,'rank')).toEqual('arrow_drop_down');
+            $scope.$digest();//resolve all promises
+            $scope.stages.forEach(function (stage) {
+                expect($scope.sortIcon(stage,'rank')).toEqual('arrow_drop_up');
+            });
         });
     });
 
