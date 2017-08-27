@@ -57,7 +57,7 @@ define('views/ranking',[
                         name: stage.name,
                         rounds: stage.rounds,
                     },
-                    ranking: $scope.scoreboard[stage.id].map(function (item) {
+                    ranking: $scores.scoreboard[stage.id].map(function (item) {
                         return {
                             rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
                             team: {
