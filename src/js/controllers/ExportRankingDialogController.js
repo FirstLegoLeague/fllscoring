@@ -35,7 +35,7 @@ define('controllers/ExportRankingDialogController',[
                 $scope.export.rounds = Array.apply(null, Array(params.round)).map(function (_, i) {return i+1;});
                 var stageFilter = {};
                 stageFilter[params.stage.id] = params.round;
-                $scores.getRankings().then(function(rankings) {
+                return $scores.getRankings().then(function(rankings) {
                     $scope.filterscoreboard = rankings;
 
                     $timeout(function () {

@@ -41,13 +41,11 @@ define('services/ng-message',[
                     };
                     ws.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
+                        var headers = JSON.parse(msg.headers);
                         var topic = data.topic;
 
-                        msg.from = data.data._token;
-                        msg.fromMe = data.data._token === token;
-                        delete data.data._token;
-                        if(Object.keys(data).length === 0)
-                            delete data.data;
+                        msg.from = headers["scoring-token"];;
+                        msg.fromMe = msg.from === token;
 
                         listeners.filter((listener) => {
                             return (typeof(listener.topic) === 'string' && topic === listener.topic) ||
@@ -65,12 +63,12 @@ define('services/ng-message',[
                 send: function(topic,data) {
                     return init().then(function(ws) {
                         data = data || {};
-                        data._token = token;
                         ws.send(JSON.stringify({
                             type: "publish",
                             node: ws.node,
                             topic: topic,
-                            data: data
+                            data: data,
+                            headers: { "scoring-token": token }
                         }));
                     });
                 },
