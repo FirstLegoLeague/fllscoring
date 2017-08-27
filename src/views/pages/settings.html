@@ -21,7 +21,8 @@
         <li role="presentation" ng-class="{active:tab===2}"><a href ng-click="tab = 2">Rounds &amp; Stages</a></li>
         <li role="presentation" ng-class="{active:tab===3}"><a href ng-click="tab = 3">Challenge</a></li>
         <li role="presentation" ng-class="{active:tab===4}"><a href ng-click="tab = 4">Messaging</a></li>
-        <li role="presentation" ng-class="{active:tab===5}"><a href ng-click="tab = 5">Log</a></li>
+        <li role="presentation" ng-class="{active:tab===5}"><a href ng-click="tab = 5">Publishing & Broadcasting</a></li>
+        <li role="presentation" ng-class="{active:tab===6}"><a href ng-click="tab = 6">Log</a></li>
     </ul>
 
     <div ng-show="tab === 1">
@@ -168,6 +169,24 @@
         </p>
     </div>
     <div ng-show="tab === 5">
+            <div class="card">
+                <div class="card-body">
+                    <p>
+                        <label for="autoBroadcast">
+                            <input id="autoBroadcast" type="checkbox" ng-model="settings.autoBroadcast">
+                            Auto Broadcast
+                        </label>
+                    </p>
+                    <p>
+                        <label for="autoPublish">
+                            <input id="autoPublish" type="checkbox" ng-model="settings.autoPublish">
+                            Auto Publish
+                        </label>
+                    </p>
+                </div>
+        </div>
+    </div>
+    <div ng-show="tab === 6">
         <h1 >Log</h1>
 
         <pre>
