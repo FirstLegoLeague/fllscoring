@@ -203,6 +203,7 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
+                $scope.editingScore = false;
                 var table = $scope.scoreEntry ? $scope.scoreEntry.table : undefined;
                 $scope.scoreEntry = new $score({ table: table });
                 $scope.signature = null;
@@ -216,9 +217,9 @@ define('views/scoresheet',[
 
             $scope.saveEdit = function () {
                 $scope.setPage($scope.pages.find(function (p) {return p.name === "scores"}));//When you finish editing a scoresheet, it returns you to the scores view
-                $scores.remove($scope.scores.findIndex(function (s) { return s === $scope.editedScore }));
-                return $scores.loadScoresheet($scope.editedScore).then(function (result) {
-                    result.missions.forEach(function (mission, i) {
+                $scores.delete($scope.scoreEntry);
+                return $scores.loadScoresheet($scope.scoreEntry).then(function (result) {
+                    result.missions.forEach(function (mission) {
                         var changedMission = $scope.missions.find(function (e) {return e.title === mission.title});
                         mission.objectives.forEach(function (objective, i) {
                             if(objective["value"] !== changedMission.objectives[i]["value"]){
@@ -232,12 +233,13 @@ define('views/scoresheet',[
                             }
                         });
                     });
-                    result.team.number !== $scope.team.number ? log(`changed team to (${$scope.team.number}) ${$scope.team.name}`) : void(0);
-                    result.stage.id !== $scope.stage.id ? log("changed stage to " + $scope.stage.name) : void(0);
-                    result.round !== $scope.round ? log("changed round to " + $scope.round) : void(0);
-                    result.table !== $scope.table ? log("changed table to " + $scope.table) : void(0);
+                    result.team.number !== $scope.scoreEntry.team.number ? log(`changed team to (${$scope.scoreEntry.team.number}) ${$scope.scoreEntry.team.name}`) : void(0);
+                    result.stage.id !== $scope.scoreEntry.stage.id ? log("changed stage to " + $scope.scoreEntry.stage.name) : void(0);
+                    result.round !== $scope.scoreEntry.round ? log("changed round to " + $scope.scoreEntry.round) : void(0);
+                    result.table !== $scope.scoreEntry.table ? log("changed table to " + $scope.scoreEntry.table) : void(0);
                     result.referee !== $scope.referee ? log("changed referee to " + $scope.referee) : void(0);
-                }).then($scores.save()).then($scope.save());
+                    $scope.save()
+                });
             };
 
             //saves mission scoresheet
@@ -301,21 +303,17 @@ Notice: the score could not be sent to the server. ` +
 
             $scope.loadScoresheet = function (score) {
                 log(`Editing scoresheet: stage ${score.stageId}, round ${score.round}, team ${score.teamNumber}, score ${score.score}`);
-                $scope.editedScore = score;
+                $scope.editingScore = true;
+                $scope.scoreEntry = score;
                 $scores.loadScoresheet(score).then(function (result) {
+                    $scope.signature = result.signature;
+                    $scope.referee = result.referee;
                     $scope.missions.forEach(function (mission) {
                         var filledMission = result.missions.find(function (e) {return e.title === mission.title});
                         mission.objectives.forEach(function (objective, index) {
                             objective["value"] = filledMission.objectives[index]["value"];
                         });
                     });
-                    $scope.uniqueId = generateId();
-                    $scope.signature = result.signature;
-                    $scope.team = result.team;
-                    $scope.stage = result.stage;
-                    $scope.round = result.round;
-                    $scope.table = result.table;
-                    $scope.referee = result.referee;
                 });
             };
 
