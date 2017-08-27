@@ -17,7 +17,7 @@ define('services/ng-scores',[
 
     // Current file version for scores.
     // Increment when adding/removing 'features' to stored scores.
-    var SCORES_VERSION = 2;
+    var SCORES_VERSION = 3;
 
     return module.service('$scores',
         ['$rootScope', '$fs', '$stages', '$message', '$teams','$independence', '$rankings', '$validation', '$score',
@@ -112,23 +112,13 @@ define('services/ng-scores',[
                 self.beginupdate();
                 try {
                     // Determine scores file version
-                    var scores;
-                    var version;
-                    if (res.version === undefined) {
-                        // 'Legacy' storage, all scores stored directly
-                        // as an array
-                        scores = res;
-                        version = 1;
-                    } else {
-                        // New style storage, scores in a property,
-                        // and an explicit version identifier.
-                        version = res.version;
-                        scores = res.scores;
+                    // And throw an exception if it is not supported
+                    var version = res.version || 1;
+                    if (version !== SCORES_VERSION) {
+                        throw new Error(`unsupported scores version ${version}, (expected ${SCORES_VERSION})`);
                     }
-                    if (version > SCORES_VERSION) {
-                        throw new Error(`unknown scores version ${version}, (expected ${SCORES_VERSION})`);
-                    }
-                    self.scores = scores.map(score => new $score(score));
+
+                    self.scores = res.scores.map(score => new $score(score));
                     log("scores loaded, version " + version);
                 } finally {
                     self.endupdate();
@@ -200,12 +190,12 @@ define('services/ng-scores',[
             }).then((res) => self.acceptScores(res));
         };
 
-        Scores.prototype.getRankings = function() {
+        Scores.prototype.getRankings = function(filter) {
             this.validationErrors = $validation.validate(this.scores);
 
             var self = this;
             if(this.validationErrors.length === 0) {
-                return $rankings.calculate(this.scores).then(function(scoreboard) {
+                return $rankings.calculate(this.scores, filter).then(function(scoreboard) {
                     self.scoreboard = scoreboard;
                     return scoreboard;
                 });

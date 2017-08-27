@@ -266,6 +266,14 @@ describe('ng-rankings',function() {
             });
         });
 
+        it('shuold only return filtered rounds if filter exists', function() {
+            var filter = {};
+            filter[stagesMock.stages[1].id] = 1;
+            $rankings.calculate(mockScores, filter).then(function(rankings) {
+                expect(rankings[stagesMock.stages[1].id][0].scores.length).toEqual(1);
+            });
+        });
+
     })
 
 });

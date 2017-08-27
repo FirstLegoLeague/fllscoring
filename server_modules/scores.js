@@ -16,27 +16,34 @@ function reduceToMap(key) {
     }
 }
 
+// This function is meant to lock the ability to change the scores.json file, using lockfile and a promise chain
 function changeScores(action) {
-    var path = fileSystem.getDataFilePath('scores.json');
     return new Promise(function(res, rej) {
+        var path = fileSystem.getDataFilePath('scores.json');
         lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
             if(err) rej(err);
 
-            promise = fileSystem.readJsonFile(path)
-            .then(function(data) {
-                return data;
-            })
-            .catch(function() {
-                return { version:2, scores: [] };
+            fileSystem.readJsonFile(path)
+            .catch(function(err) {
+                if(err.message === 'file not found') {
+                    return { version:3, scores: [] };
+                } else {
+                    throw err;
+                }
             })
             .then(action)
             .then(function(scores) {
-                fileSystem.writeFile(path, JSON.stringify(scores));
-
-                lockfile.unlock('scores.json.lock', function(err) {
-                    if(err) rej(err);
+                return fileSystem.writeFile(path, JSON.stringify(scores)).then(function() {
+                    lockfile.unlock('scores.json.lock', function(err) {
+                        if(err) rej(err);
+                    });
+                    return scores;
+                }).catch(function() {
+                    lockfile.unlock('scores.json.lock', function(err) {
+                        if(err) rej(err);
+                    });
+                    return scores;
                 });
-                return scores;
             }).then(res).catch(rej);
         });
     });
@@ -95,7 +102,7 @@ exports.route = function(app) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
-                throw new Exception(`Could not find score with id ${req.params.id}`);
+                throw new Error(`Could not find score with id ${req.params.id}`);
             }
             result.scores.splice(index, 1);
             return result;
@@ -110,7 +117,7 @@ exports.route = function(app) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
-                throw new Exception(`Could not find score with id ${req.params.id}`);
+                throw new Error(`Could not find score with id ${req.params.id}`);
             }
             result.scores[index] = score;
             return result;
