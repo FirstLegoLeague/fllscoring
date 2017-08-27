@@ -37,6 +37,7 @@ define('services/ng-rankings',[
 
             return {
                 calculate: function(scores) {
+                    scores = scores.filter(score => score.published);
                     return $teams.init().then(function() {
                         return $stages.init();
                     }).then(function() {
