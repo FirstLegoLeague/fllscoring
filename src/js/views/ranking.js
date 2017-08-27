@@ -32,7 +32,7 @@ define('views/ranking',[
             $scope.$watch(function() {
                 return $scores.scoreboard;
             }, function () {
-                $scope.scoreboard = format($scores.scoreboard)
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
 
             $scores.init().then(function() {
