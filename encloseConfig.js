@@ -10,14 +10,17 @@ module.exports = {
     users: [{
         username: 'admin',
         password: 'admin',
-        pages: ['scoresheet','teams','scores','ranking','settings']
+        pages: ['scoresheet','teams','scores','ranking','settings'],
+        mhubPassword: 'adpass'
     }, {
         username: 'ref',
         password: 'ref',
-        pages: ['scoresheet']
+        pages: ['scoresheet'],
+        mhubPassword: 'refpass'
     }, {
         username: 'scorekeeper',
         password: 'scorekeeper',
-        pages: ['scoresheet','scores','ranking']
+        pages: ['scoresheet','scores','ranking'],
+        mhubPassword: 'skpass'
     }]
 };
