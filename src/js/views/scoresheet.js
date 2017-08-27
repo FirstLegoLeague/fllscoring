@@ -229,6 +229,7 @@ define('views/scoresheet',[
                 data.referee = $scope.referee;
                 data.signature = $scope.signature;
                 data.scoreEntry.score = $scope.score();
+                data.scoreEntry.published = $settings.settings.autoPublish || false;
                 data.scoreEntry.calcFilename();
 
                 return $scores.create(data).then(function() {
