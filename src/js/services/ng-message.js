@@ -62,6 +62,7 @@ define('services/ng-message',[
 
 
             return {
+                init: init,
                 send: function(topic,data) {
                     return init().then(function(ws) {
                         data = data || {};
