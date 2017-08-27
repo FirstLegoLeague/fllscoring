@@ -76,11 +76,10 @@ exports.route = function(app) {
 
     //save a new score
     app.post('/scores/create',function(req,res) {
-        var body = JSON.parse(req.body);
-        var scoresheet = body.scoresheet;
-        var score = body.score;
+        var scoresheet = req.body.scoresheet;
+        var score = req.body.score;
 
-        fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body)
+        fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), scoresheet)
         .then(changeScores(function(result) {
             result.scores.push(score);
             return result;
@@ -107,7 +106,7 @@ exports.route = function(app) {
 
     //edit a score at an id
     app.post('/scores/update/:id',function(req,res) {
-        var score = JSON.parse(req.body);
+        var score = req.body;
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
