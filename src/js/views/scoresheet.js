@@ -238,6 +238,7 @@ define('views/scoresheet',[
                     result.round !== $scope.scoreEntry.round ? log("changed round to " + $scope.scoreEntry.round) : void(0);
                     result.table !== $scope.scoreEntry.table ? log("changed table to " + $scope.scoreEntry.table) : void(0);
                     result.referee !== $scope.referee ? log("changed referee to " + $scope.referee) : void(0);
+                    $scope.scoreEntry.id = $score.generateUniqueId();//This is a different score after being edited, so it has a different id
                     $scope.save()
                 });
             };
