@@ -474,6 +474,7 @@ describe('scoresheet',function() {
                         team: dummyTeam,
                         stage: dummyStage,
                         round: 1,
+                        published: false,
                         calcFilename: fileName
                     },
                     team: dummyTeam,
