@@ -9,8 +9,8 @@ define('services/ng-message',[
     "use strict";
 
     return module.service('$message',[
-        '$http','$settings','$q',
-        function($http,$settings,$q) {
+        '$http','$settings','$session','$q',
+        function($http,$settings,$session,$q) {
             var ws;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
@@ -19,7 +19,7 @@ define('services/ng-message',[
                 if (ws) {
                     return $q.when(ws);
                 }
-                return $settings.init().then(function(settings) {
+                return $session.load().then(() => $settings.init()).then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
                         throw new Error('no message bus configured');
                     }
@@ -30,6 +30,13 @@ define('services/ng-message',[
                         ws.send(JSON.stringify({
                             type: "subscribe",
                             node: settings.node
+                        }));
+
+                        ws.send(JSON.stringify({
+                            type: "login",
+                            node: settings.node,
+                            username: $session.get('passport').user.username,
+                            password: $session.get('passport').user.mhubPassword
                         }));
                         def.resolve(ws);
                     };
