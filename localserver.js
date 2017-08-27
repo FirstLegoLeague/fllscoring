@@ -5,12 +5,14 @@ var fileSystem = require('./server_modules/file_system');
 var args = require('./server_modules/args');
 var views = require('./server_modules/views');
 var auth = require('./server_modules/auth');
+var bodyParser = require('body-parser');
 
 var configs = [require('./server_modules/slave_mode')];
 
 var middlewareLayers = [express.static(fileSystem.resolve('src')),
                         require('cookie-parser')(),
-                        require('body-parser').urlencoded({ extended: true }),
+                        bodyParser.urlencoded({ extended: true }),
+                        bodyParser.json(),
                         require('./server_modules/sessions').middleware,
                         auth.initialize(),
                         auth.session(),
@@ -18,8 +20,7 @@ var middlewareLayers = [express.static(fileSystem.resolve('src')),
                         require('./server_modules/cors').middleware,
                         require('./server_modules/cache').middleware,
                         require('./server_modules/log').middleware];
-// ,
-//                         require('./server_modules/body_builder').middleware
+
 var routers = [views,
                 auth,
                 fileSystem,
