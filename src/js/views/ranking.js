@@ -172,6 +172,10 @@ define('views/ranking',[
                 $scope.rebuildCSV($scores.scoreboard);
             }, true);
 
+            $scope.$watch(() => $scores.scoreboard, function () {
+                $scope.scoreboard = format($scores.scoreboard)
+            }, true);
+
             $scope.getRoundLabel = function(round){
                 return "Round " + round;
             };
