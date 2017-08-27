@@ -37,7 +37,7 @@ define('views/ranking',[
             }).then(function(scoreboard) {
                 $scope.scoreboard = format(scoreboard);
                 $message.init().then(function () {
-                    $scope.$watch(() => scoreboard, function () {
+                    $scope.$watch(() => $scores.scoreboard, function () {
                         if ($settings.settings.autoBroadcast) {
                             log('auto-broadcasting');
                             $stages.stages.forEach($scope.broadcastRanking)
