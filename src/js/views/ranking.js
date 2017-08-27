@@ -5,13 +5,14 @@ define('views/ranking',[
     'services/ng-scores',
     'services/ng-handshake',
     'services/ng-message',
+    'services/ng-settings',
     'controllers/ExportRankingDialogController',
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
     return angular.module(moduleName,['ExportRankingDialog']).controller(moduleName+'Ctrl', [
-        '$scope', '$scores', '$stages','$handshake','$message',
-        function($scope, $scores, $stages, $handshake, $message) {
+        '$scope', '$scores', '$stages','$handshake','$message', '$settings',
+        function($scope, $scores, $stages, $handshake, $message, $settings) {
             log('init ranking ctrl');
 
             // temporary default sort values
@@ -29,11 +30,20 @@ define('views/ranking',[
                 return result;
             }
 
+            $settings.init();
             $scores.init().then(function() {
                 $scope.stages = $stages.stages;
                 return $scores.getRankings();
             }).then(function(scoreboard) {
                 $scope.scoreboard = format(scoreboard);
+                $message.init().then(function () {
+                    $scope.$watch(() => scoreboard, function () {
+                        if ($settings.settings.autoBroadcast) {
+                            log('auto-broadcasting');
+                            $stages.stages.forEach($scope.broadcastRanking)
+                        }
+                    }, true);
+                });
             });
 
             $scope.exportRanking = function() {
