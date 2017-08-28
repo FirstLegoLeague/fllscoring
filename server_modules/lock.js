@@ -20,8 +20,6 @@ module.exports = function(filename, options) {
     };
 
     this.unlock = function() {
-        var self = this;
-
         return new Promise(function(resolve, reject) {
             lockfile.unlock('scores.json.lock', function(err) {
                 if(err){
