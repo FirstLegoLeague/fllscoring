@@ -13,13 +13,14 @@ describe('ng-independence',function() {
 
     beforeEach(function() {
         angular.mock.module(module.name);
-        localstorageMock = {};
         angular.mock.module(function($provide) {
             $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$independence", function(_$independence_) {
             $independence = _$independence_;
         }]);
+
+        localStorage.clear();
     });
 
     describe('act', function() {
@@ -52,7 +53,7 @@ describe('ng-independence',function() {
 
         it('doesn\'t call localstorage if the action was successful', function() {
             $independence.act(token, successUrl, data, fallback);
-            expect(Object.keys(localstorageMock).length).toBe(0);
+            expect(Object.keys(localStorage).length).toBe(0);
         });
 
         it('doesn\'t call sendSavedActionsToServer if the action failed', function() {
@@ -69,7 +70,7 @@ describe('ng-independence',function() {
 
         it('calls localstorage if the action was successful', function() {
             $independence.act(token, successUrl, data, fallback).then(function() {}, function() {
-                expect(Object.keys(localstorageMock).length).toBe(1);
+                expect(Object.keys(localStorage).length).toBe(1);
             });
         });
     });
