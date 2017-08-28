@@ -1,6 +1,7 @@
 var Lock = require('./lock');
 var utils = require('./utils');
 var fileSystem = require('./file_system');
+var log = require('./log');
 var Q = require('q');
 
 function filterPublished(score) {
@@ -42,6 +43,7 @@ function changeScores(action) {
             throw err;
         }
     })
+    .then(acceptOldVersions)
     .then(action)
     .then(scores => {
         return fileSystem.writeFile(path, JSON.stringify(scores))
@@ -53,6 +55,33 @@ function changeScores(action) {
             return scores;
         });
     });
+}
+
+/**
+ * If the scores are of old version, this will replace them with a new verions.
+ * This is for backward compatibility
+*/
+function acceptOldVersions(scores) {
+    let id = require('uuid/v4');
+
+    if(scors.verion === undefined) {
+        scores.forEach(score => score.id = id())
+        return {
+            version: 3,
+            scores: scores
+        }
+
+    } else if(scores.version === 3) {
+        return scores;
+
+    } else if(scores.version === 2) {
+        scores.scores.forEach(score => score.id = id())
+        scores.version = 3;
+        return scores;
+
+    } else {
+        throw new Error('Unkown scores version');
+    }
 }
 
 exports.route = function(app) {
