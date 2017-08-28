@@ -1,5 +1,5 @@
-var utils = require('./utils');
-var basicAuthCreds = utils.basicAuthCreds;
+var args = require('./args');
+var basicAuthCreds = args.basicAuthCreds;
 
 exports.basic = function() {
     if(!basicAuthCreds) {
