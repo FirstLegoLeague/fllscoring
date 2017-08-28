@@ -3,6 +3,7 @@ var utils = require('./utils');
 var fileSystem = require('./file_system');
 var log = require('./log');
 var Q = require('q');
+var id = require('uuid/v4');
 
 function filterPublished(score) {
     return score.published;
@@ -62,9 +63,7 @@ function changeScores(action) {
  * This is for backward compatibility
 */
 function acceptOldVersions(scores) {
-    let id = require('uuid/v4');
-
-    if(scors.verion === undefined) {
+    if(typeof(scores.verion) === 'undefined') {
         scores.forEach(score => score.id = id())
         return {
             version: 3,
