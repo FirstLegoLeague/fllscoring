@@ -1,6 +1,15 @@
 
 /**
- * This is a service that can calculate the rankings.
+ * This is a service that can group an array using a function.
+ * It exposes two functions: one is group(arr, func), which groups arr into groups by the result of the func on each item
+ * Ther other is multigroup(arr,func) which groups arr recursivly, each time grouping each
+ * group of the last result using the next funciton in funs array.
+ *
+ * For example:
+ * group(["a","b","ab","ba"], (str) => str[0])
+ * // returns { "a": ["a", "ab"], "b": ["b","ba"] }
+ * multigroup(["ac","bc","ab","ba", "bca"], [(str) => str[0],(str) => str[1]])
+ * // returns { "a": { "b": ["ab"], "c": ["ac"] }, "b": { "a": ["ba"], "c": ["bc","bca"] } }
  */
 define('services/ng-groups',[
     'services/ng-services'

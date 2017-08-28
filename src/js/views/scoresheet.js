@@ -232,7 +232,7 @@ define('views/scoresheet',[
                 data.scoreEntry.calcFilename();
 
                 return $scores.create(data).then(function() {
-                    log('result saved: ');
+                    log('result saved');
                     $scope.clear();
                     message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
                         ` ${data.team.name} in ${data.stage.name} ${data.round}.`;

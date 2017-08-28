@@ -1,4 +1,4 @@
-var lockfile = require('lockfile');
+var Lock = require('./lock');
 var utils = require('./utils');
 var fileSystem = require('./file_system');
 var Q = require('q');
@@ -16,35 +16,37 @@ function reduceToMap(key) {
     }
 }
 
-// This function is meant to lock the ability to change the scores.json file, using lockfile and a promise chain
+/**
+ * Atomically change scores file.
+ * Action callback is called with the current contents of the scores file, and is expected
+ * to return the new contents (or a Promise for it).
+ * A lock is acquired and held during the entire operation.
+ * @param action Callback that receives current scores.json object, must return new contents (or Promise for it)
+ * @return Promise for updated scores object
+ */
 function changeScores(action) {
-    return new Promise(function(res, rej) {
-        var path = fileSystem.getDataFilePath('scores.json');
-        lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
-            if(err) rej(err);
+    var path = fileSystem.getDataFilePath('scores.json');
+    var lock = new Lock('scores.json.lock', { retries: 5, retryWait: 100 });
 
-            fileSystem.readJsonFile(path)
-            .catch(function(err) {
-                if(err.message === 'file not found') {
-                    return { version:3, scores: [] };
-                } else {
-                    throw err;
-                }
-            })
-            .then(action)
-            .then(function(scores) {
-                return fileSystem.writeFile(path, JSON.stringify(scores)).then(function() {
-                    lockfile.unlock('scores.json.lock', function(err) {
-                        if(err) rej(err);
-                    });
-                    return scores;
-                }).catch(function() {
-                    lockfile.unlock('scores.json.lock', function(err) {
-                        if(err) rej(err);
-                    });
-                    return scores;
-                });
-            }).then(res).catch(rej);
+    return lock.lock()
+    .then(() => fileSystem.readJsonFile(path))
+    .catch((err) => { //Ignoring all file not found errors, and just returning empty scores.json
+        if(err.message === 'file not found') {
+            return { version:3, scores: [] };
+        } else {
+            throw err;
+        }
+    })
+    .then(action)
+    .then(scores => {
+        //Using nested promise here in order to give the last promise function access to scores
+        return fileSystem.writeFile(path, JSON.stringify(scores))
+        .then(() => {
+            return lock.unlock();
+        }).catch((err) => {
+            return lock.unlock();
+        }).then(function() {
+            return scores;
         });
     });
 }
