@@ -9,8 +9,6 @@ describe('ng-independence',function() {
             '/success': {}
         }
     });
-    var localstorageMock;
-
     var $independence;
 
     beforeEach(function() {
@@ -18,7 +16,6 @@ describe('ng-independence',function() {
         localstorageMock = {};
         angular.mock.module(function($provide) {
             $provide.value('$http', httpMock);
-            $provide.value('$localstorage', localstorageMock);
         });
         angular.mock.inject(["$independence", function(_$independence_) {
             $independence = _$independence_;
