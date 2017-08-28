@@ -11,20 +11,22 @@ define('services/ng-message',[
     return module.service('$message',[
         '$http','$settings','$q',
         function($http,$settings,$q) {
-            var ws;
+            var promise;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
 
             function init() {
-                if (ws) {
-                    return $q.when(ws);
+                if (promise) {
+                    return promise;
                 }
+                var def = $q.defer();
+                promise = def.promise;
                 return $settings.init().then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
                         throw new Error('no message bus configured');
                     }
-                    var def = $q.defer();
-                    ws = new WebSocket(settings.mhub);
+
+                    var ws = new WebSocket(settings.mhub);
                     ws.node = settings.node;
                     ws.onopen = function() {
                         ws.send(JSON.stringify({
@@ -56,13 +58,12 @@ define('services/ng-message',[
                             listener.handler(data, msg);
                         });
                     };
-                    return def.promise;
+                    return promise;
                 });
             }
 
 
             return {
-                init: init,
                 send: function(topic,data) {
                     return init().then(function(ws) {
                         data = data || {};
