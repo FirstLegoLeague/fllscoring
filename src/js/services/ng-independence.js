@@ -11,8 +11,8 @@ define('services/ng-independence',[
     function($q,$localStorage,$http) {
         function IndependentActionStroage() {}
 
-        function actAheadOfServer(token, url, data) {
-            $localStorage[`action_${token}_${Date.now()}`] = JSON.stringify({ url: url, data: data });
+        function actAheadOfServer(key, url, data) {
+            $localStorage[`action_${key}_${Date.now()}`] = JSON.stringify({ url: url, data: data });
         }
 
         IndependentActionStroage.prototype.act = function(token, url, data, fallback) {
@@ -61,8 +61,8 @@ define('services/ng-independence',[
             });
         };
 
-        IndependentActionStroage.prototype.pendingActions = function(key) {
-            return Object.keys($localStorage).filter((k) => k.startsWith(`action_${key}`)).length
+        IndependentActionStroage.prototype.pendingActions = function(token) {
+            return Object.keys($localStorage).filter((k) => k.startsWith(`action_${token}`)).length;
         };
 
         return new IndependentActionStroage();
