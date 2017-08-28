@@ -35,7 +35,7 @@ define('views/ranking',[
                 $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
 
-            $scores.init().then(function() {
+            $scores.init().then(() => $stages.init()).then(function() {
                 $scope.stages = $stages.stages;
                 return $scores.getRankings();
             });
