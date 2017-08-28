@@ -10,6 +10,7 @@ define('services/ng-scores',[
     'services/ng-teams',
     'services/ng-independence',
     'services/ng-rankings',
+    'services/ng-settings',
     'services/ng-validation',
     'services/ng-score'
 ],function(module,log) {
@@ -20,8 +21,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 3;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$message', '$teams','$independence', '$rankings', '$validation', '$score',
-        function($rootScope, $fs, $stages, $message, $teams, $independence, $rankings, $validation, $score) {
+        ['$rootScope', '$fs', '$stages', '$message', '$teams','$independence', '$rankings', '$validation', '$score', '$settings',
+        function($rootScope, $fs, $stages, $message, $teams, $independence, $rankings, $validation, $score, $settings) {
 
         /* Main Scores class */
 
@@ -106,6 +107,38 @@ define('services/ng-scores',[
             this._update();
         };
 
+        function removeEmptyRanks(scoreboard) {
+            let result = {};
+            for (let stageId in scoreboard) {
+                let stage = scoreboard[stageId];
+                result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== undefined).length);
+            }
+            return result;
+        }
+
+        Scores.prototype.broadcastRanking = function (stage) {
+            var  self = this;
+            var rankingMessage = {
+                stage: {
+                    id: stage.id,
+                    name: stage.name,
+                    rounds: stage.rounds,
+                },
+                ranking: removeEmptyRanks(self.scoreboard)[stage.id].map(function (item) {
+                    return {
+                        rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
+                        team: {
+                            number: item.team.number,
+                            name: item.team.name,
+                        },
+                        scores: item.scores,
+                        highest: item.highest,
+                    };
+                }),
+            };
+            $message.send('scores:ranking', rankingMessage);
+        };
+
         Scores.prototype.load = function(data) {
             var self = this;
             var processScores = function(res) {
@@ -158,7 +191,15 @@ define('services/ng-scores',[
             });
         };
 
-        Scores.prototype.acceptScores = function(res) {
+        Scores.prototype.acceptScores = function(res, tryAutoBroadcast) {
+            var self = this;
+            var stageID = $settings.settings.autoBroadcastStage;
+            if ($settings.settings.autoBroadcast && stageID && tryAutoBroadcast) {
+                self.getRankings().then(function () {//scoreboard has to be created for the ranking to be broadcasted
+                    log('auto-broadcasting stage ' + stageID);
+                    self.broadcastRanking($stages.get(stageID));
+                });
+            }
             this.load(res.data);
             $message.send('scores:reload');
         }
@@ -172,22 +213,24 @@ define('services/ng-scores',[
             return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
                 self.scores.push(score);
             })
-            .then((res) => self.acceptScores(res));
+            .then((res) => self.acceptScores(res, score.published));
         };
 
         Scores.prototype.delete = function(score) {
             var self = this;
             return $independence.act('scores','/scores/delete/' + score.id, {}, function() {
                 self.scores.splice(self.scores.findIndex(s => s.id === score.id), 1);
-            }).then((res) => self.acceptScores(res));
+            }).then((res) => self.acceptScores(res, score.published));
         };
 
         Scores.prototype.update = function(score) {
+            var wasPublished = score.wasPublished;
+            delete  score.wasPublished;
             score.edited = (new Date()).toString();
             var self = this;
             return $independence.act('scores','/scores/update/' + score.id, score, function() {
                 self.scores[self.scores.findIndex(s => s.id === score.id)] = score;
-            }).then((res) => self.acceptScores(res));
+            }).then((res) => self.acceptScores(res, wasPublished || score.published));
         };
 
         Scores.prototype.getRankings = function() {
