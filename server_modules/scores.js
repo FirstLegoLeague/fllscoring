@@ -97,6 +97,9 @@ exports.route = function(app) {
 
         fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body)
         .then(changeScores(function(result) {
+            if(typeof(score.id) === 'undefined') {
+                score.id = id();
+            }
             result.scores.push(score);
             return result;
         }))
