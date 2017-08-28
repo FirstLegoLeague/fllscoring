@@ -10,7 +10,7 @@ module.exports = function(filename, options) {
 
         return new Promise(function(resolve, reject) {
                 lockfile.lock('scores.json.lock', self.options, function(err) {
-                if(err) {
+                if(err !err.startsWith('EEXIST')) {
                     reject(err);
                 }
 
@@ -22,7 +22,7 @@ module.exports = function(filename, options) {
     this.unlock = function() {
         return new Promise(function(resolve, reject) {
             lockfile.unlock('scores.json.lock', function(err) {
-                if(err){
+                if(err && !err.startsWith('EEXIST')){
                     reject(err);
                 }
 
