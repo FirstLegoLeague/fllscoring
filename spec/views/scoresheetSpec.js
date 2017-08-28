@@ -13,6 +13,7 @@ describe('scoresheet',function() {
         name: 'foo'
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
+    var dummySettings = {bla: 'blu'};
     var fsMock = createFsMock({"settings.json": []});
     var settingsMock, handshakeMock, challengeMock;
 
@@ -22,7 +23,7 @@ describe('scoresheet',function() {
         angular.mock.module('RoundDialog');
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
-            settingsMock = createSettingsMock($q,{bla:'blu'});
+            settingsMock = createSettingsMock($q, dummySettings);
             handshakeMock = createHandshakeMock($q);
             challengeMock = createChallengeMock();
             scoresMock = createScoresMock();
@@ -60,7 +61,7 @@ describe('scoresheet',function() {
             expect($scope.settings).toEqual({});
             expect($scope.missions).toEqual([]);
             $scope.$digest();
-            expect($scope.settings).toEqual({bla:'blu'});
+            expect($scope.settings).toEqual(dummySettings);
             expect($scope.referee).toEqual(null);
             expect($scope.scoreEntry.table).toEqual(7);
         });
