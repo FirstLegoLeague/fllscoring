@@ -174,8 +174,14 @@
                     <p>
                         <label for="autoBroadcast">
                             <input id="autoBroadcast" type="checkbox" ng-model="settings.autoBroadcast">
-                            Auto Broadcast
+                            Auto Broadcast:
                         </label>
+                        <select ng-model="settings.autoBroadcastStage">
+                            <option ng-repeat="stage in allStages | filter : {rounds : '!0'} track by stage.id" value="{{stage.id}}">
+                                {{stage.name}}
+                            </option>
+                        </select>
+                        <span>{{settings.autoBroadcastStage}}</span>
                     </p>
                     <p>
                         <label for="autoPublish">
