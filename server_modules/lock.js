@@ -6,25 +6,29 @@ module.exports = function(filename, options) {
     this.options = options || {};
 
     this.lock = function() {
+        var self = this;
+
         return new Promise(function(resolve, reject) {
-            lockfile.lock('scores.json.lock', this.options, function(err) {
+                lockfile.lock('scores.json.lock', self.options, function(err) {
                 if(err) {
-                    rej(err);
+                    reject(err);
                 }
 
-                res();
+                resolve();
             });
         });
     };
 
     this.unlock = function() {
+        var self = this;
+
         return new Promise(function(resolve, reject) {
-            lockfile.unlock('scores.json.lock', this.options, function(err) {
+            lockfile.unlock('scores.json.lock', function(err) {
                 if(err){
-                    rej(err);
+                    reject(err);
                 }
 
-                res();
+                resolve();
             });
         });
     };

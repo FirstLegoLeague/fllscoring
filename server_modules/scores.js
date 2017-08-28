@@ -28,18 +28,22 @@ function changeScores(action) {
     var path = fileSystem.getDataFilePath('scores.json');
     var lock = new Lock('scores.json.lock', { retries: 5, retryWait: 100 });
 
+    console.log(lock.options);
+
     return lock.lock()
     .then(() => fileSystem.readJsonFile(path))
     .catch((err) => { //Ignoring all file not found errors, and just returning empty scores.json
+        console.log("catching");
         if(err.message === 'file not found') {
+            console.log("hells yeah!");
             return { version:3, scores: [] };
         } else {
+            console.log("ho no! " + err.message);
             throw err;
         }
     })
     .then(action)
     .then(scores => {
-        //Using nested promise here in order to give the last promise function access to scores
         return fileSystem.writeFile(path, JSON.stringify(scores))
         .then(() => {
             return lock.unlock();
@@ -96,7 +100,7 @@ exports.route = function(app) {
         }))
         .then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+        }).catch(err => utils.sendError(res, err)).done();
 
     });
 
@@ -111,7 +115,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+        }).catch(err => utils.sendError(res, err)).done();
     });
 
     //edit a score at an id
@@ -126,7 +130,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+        }).catch(err => utils.sendError(res, err)).done();
     });
 
 
