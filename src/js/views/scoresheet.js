@@ -172,16 +172,16 @@ define('views/scoresheet',[
 
             $scope.teamRoundErrors = function() {
                 var list = [];
-                if (empty($scope.scoreEntry.stage)) {
+                if (empty($scope.stage)) {
                     list.push('No stage selected');
                 }
-                if (empty($scope.scoreEntry.round)) {
+                if (empty($scope.round)) {
                     list.push('No round selected');
                 }
-                if (empty($scope.scoreEntry.team)) {
+                if (empty($scope.team)) {
                     list.push('No team selected');
                 }
-                if ($scope.settings.askTable && !$scope.scoreEntry.table) {
+                if ($scope.settings.askTable && !$scope.table) {
                     list.push('No table number entered');
                 }
                 if ($scope.settings.askReferee && !$scope.referee) {
@@ -202,8 +202,9 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
-                var table = $scope.scoreEntry ? $scope.scoreEntry.table : undefined;
-                $scope.scoreEntry = new $score({ table: table });
+                $scope.team = undefined;
+                $scope.stage = undefined;
+                $scope.round = undefined;
                 $scope.signature = null;
                 $scope.missions.forEach(function(mission) {
                     mission.objectives.forEach(function(objective) {
@@ -215,33 +216,33 @@ define('views/scoresheet',[
 
             //saves mission scoresheet
             $scope.save = function() {
-                if (!$scope.scoreEntry.team || !$scope.scoreEntry.stage || !$scope.scoreEntry.round) {
+                if (!$scope.team || !$scope.stage || !$scope.round) {
                     $window.alert('no team selected, do so first');
                     return $q.reject(new Error('no team selected, do so first'));
                 }
+                var scoresheet = angular.copy($scope.field);
+                scoresheet.stage = $scope.stage;
+                scoresheet.round = $scope.round;
+                scoresheet.team = $scope.team;
+                scoresheet.table = $scope.table;
+                scoresheet.referee = $scope.referee;
+                scoresheet.signature = $scope.signature;
 
-                var data = angular.copy($scope.field);
-                data.scoreEntry = new $score($scope.scoreEntry);
-                data.team = $scope.scoreEntry.team;
-                data.stage = $scope.scoreEntry.stage;
-                data.round = $scope.scoreEntry.round;
-                data.table = $scope.scoreEntry.table;
-                data.referee = $scope.referee;
-                data.signature = $scope.signature;
-                data.scoreEntry.score = $scope.score();
-                data.scoreEntry.calcFilename();
+                scoresheet.score = $scope.score();
+                var score = $score(scoresheet);
+                score.calcFilename();
 
-                return $scores.create(data).then(function() {
+                return $scores.create(scoresheet, score).then(function() {
                     log('result saved');
                     $scope.clear();
-                    message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
-                        ` ${data.team.name} in ${data.stage.name} ${data.round}.`;
+                    message = `Thanks for submitting a score of ${scoresheet.score} points for team (${scoresheet.team.number})` +
+                        ` ${scoresheet.team.name} in ${scoresheet.stage.name} ${scoresheet.round}.`;
                     $window.alert(message);
                 }).catch(function(err) {
                     log(`Error: ${err}`);
                     $scope.clear();
-                    message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
-                        ` ${data.team.name} in ${data.stage.name} ${data.round}.` + `
+                    message = `Thanks for submitting a score of ${scoresheet.score} points for team (${scoresheet.team.number})` +
+                        ` ${scoresheet.team.name} in ${scoresheet.stage.name} ${scoresheet.round}.` + `
 Notice: the score could not be sent to the server. ` +
                             `This might be caused by poor network conditions. ` +
                             `The score is thereafore save on your device, and will be sent when it's possible.` +
@@ -258,7 +259,7 @@ Notice: the score could not be sent to the server. ` +
             $scope.openTeamModal = function (teams) {
                 $handshake.$emit('chooseTeam',teams).then(function(result) {
                     if (result) {
-                        $scope.scoreEntry.team = result.team;
+                        $scope.team = result.team;
                     }
                 });
             };
@@ -266,8 +267,8 @@ Notice: the score could not be sent to the server. ` +
             $scope.openRoundModal = function (stages) {
                 $handshake.$emit('chooseRound',stages).then(function(result) {
                     if (result) {
-                        $scope.scoreEntry.stage = result.stage;
-                        $scope.scoreEntry.round = result.round;
+                        $scope.stage = result.stage;
+                        $scope.round = result.round;
                     }
                 });
             };

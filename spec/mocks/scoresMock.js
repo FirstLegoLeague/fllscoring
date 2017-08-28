@@ -3,8 +3,7 @@ function createScoresMock(scoreboard) {
     return {
         scores: [{
             score: 1,
-            id: 'afg1jkhg',
-            table: 7
+            id: 'afg1jkhg'
         },{
             score: 2,
             id: 'g5f23ysu'

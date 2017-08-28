@@ -163,11 +163,8 @@ define('services/ng-scores',[
             $message.send('scores:reload');
         }
 
-        Scores.prototype.create = function(scoresheet) {
+        Scores.prototype.create = function(scoresheet, score) {
             var self = this;
-
-            var score = scoresheet.scoreEntry;
-            delete scoresheet.scoreEntry;
 
             return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
                 self.scores.push(score);

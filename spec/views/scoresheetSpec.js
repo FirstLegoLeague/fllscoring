@@ -26,6 +26,7 @@ describe('scoresheet',function() {
             handshakeMock = createHandshakeMock($q);
             challengeMock = createChallengeMock();
             scoresMock = createScoresMock();
+            scoresMock.scores[0].calcFilename = () => { this.filename = 'filename'; }
             $scope = $rootScope.$new();
             $window = {
                 Date: function() {
@@ -62,7 +63,7 @@ describe('scoresheet',function() {
             $scope.$digest();
             expect($scope.settings).toEqual('settings');
             expect($scope.referee).toEqual(null);
-            expect($scope.scoreEntry.table).toEqual(7);
+            expect($scope.table).toEqual(undefined);
         });
     });
 
@@ -126,12 +127,10 @@ describe('scoresheet',function() {
                     errors: []
                 }
             ];
-            $scope.scoreEntry = {
-                stage: 1,
-                round: 2,
-                table: 7,
-                team: 3
-            };
+            $scope.stage = 1;
+            $scope.round = 2;
+            $scope.table = 7;
+            $scope.team = 3;
             $scope.referee = 6;
         });
 
@@ -145,23 +144,23 @@ describe('scoresheet',function() {
         });
 
         it('should return error if stage is undefined',function() {
-            $scope.scoreEntry.stage = undefined;
+            $scope.stage = undefined;
             expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
         });
 
         it('should return error if stage is null',function() {
-            $scope.scoreEntry.stage = null;
+            $scope.stage = null;
             expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
         });
 
         it('should return error if table is undefined and asked for',function() {
-            $scope.scoreEntry.table = undefined;
+            $scope.table = undefined;
             $scope.settings.askTable = true;
             expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
         });
 
         it('should return error if table is null and asked for',function() {
-            $scope.scoreEntry.table = null;
+            $scope.table = null;
             $scope.settings.askTable = true;
             expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
         });
@@ -179,22 +178,22 @@ describe('scoresheet',function() {
         });
 
         it('should return error if round is undefined',function() {
-            $scope.scoreEntry.round = undefined;
+            $scope.round = undefined;
             expect($scope.preventSaveErrors()).toEqual(['No round selected']);
         });
 
         it('should return error if round is null',function() {
-            $scope.scoreEntry.round = null;
+            $scope.round = null;
             expect($scope.preventSaveErrors()).toEqual(['No round selected']);
         });
 
         it('should return error if team is undefined',function() {
-            $scope.scoreEntry.team = undefined;
+            $scope.team = undefined;
             expect($scope.preventSaveErrors()).toEqual(['No team selected']);
         });
 
         it('should return error if team is null',function() {
-            $scope.scoreEntry.team = null;
+            $scope.team = null;
             expect($scope.preventSaveErrors()).toEqual(['No team selected']);
         });
 
@@ -229,12 +228,10 @@ describe('scoresheet',function() {
                     errors: []
                 }
             ];
-            $scope.scoreEntry = {
-                stage: 1,
-                round: 2,
-                table: 7,
-                team: 3
-            };
+            $scope.stage = 1;
+            $scope.round = 2;
+            $scope.table = 7;
+            $scope.team = 3;
             $scope.referee = 6;
         });
 
@@ -248,23 +245,23 @@ describe('scoresheet',function() {
         });
 
         it('should return false if stage is undefined',function() {
-            $scope.scoreEntry.stage = undefined;
+            $scope.stage = undefined;
             expect($scope.teamRoundOk()).toEqual(false);
         });
 
         it('should return false if stage is null',function() {
-            $scope.scoreEntry.stage = null;
+            $scope.stage = null;
             expect($scope.teamRoundOk()).toEqual(false);
         });
 
         it('should return false if table is undefined and asked for',function() {
-            $scope.scoreEntry.table = undefined;
+            $scope.table = undefined;
             $scope.settings.askTable = true;
             expect($scope.teamRoundOk()).toEqual(false);
         });
 
         it('should return false if table is null and asked for',function() {
-            $scope.scoreEntry.table = null;
+            $scope.table = null;
             $scope.settings.askTable = true;
             expect($scope.teamRoundOk()).toEqual(false);
         });
@@ -282,22 +279,22 @@ describe('scoresheet',function() {
         });
 
         it('should return false if round is undefined',function() {
-            $scope.scoreEntry.round = undefined;
+            $scope.round = undefined;
             expect($scope.teamRoundOk()).toEqual(false);
         });
 
         it('should return false if round is null',function() {
-            $scope.scoreEntry.round = null;
+            $scope.round = null;
             expect($scope.teamRoundOk()).toEqual(false);
         });
 
         it('should return false if team is undefined',function() {
-            $scope.scoreEntry.team = undefined;
+            $scope.team = undefined;
             expect($scope.teamRoundOk()).toEqual(false);
         });
 
         it('should return false if team is null',function() {
-            $scope.scoreEntry.team = null;
+            $scope.team = null;
             expect($scope.teamRoundOk()).toEqual(false);
         });
     })
@@ -317,12 +314,10 @@ describe('scoresheet',function() {
                     errors: []
                 }
             ];
-            $scope.scoreEntry = {
-                stage: 1,
-                round: 2,
-                table: 7,
-                team: 3
-            };
+            $scope.stage = 1;
+            $scope.round = 2;
+            $scope.table = 7;
+            $scope.team = 3;
             $scope.referee = 6;
         });
 
@@ -336,23 +331,23 @@ describe('scoresheet',function() {
         });
 
         it('should return false if stage is undefined',function() {
-            $scope.scoreEntry.stage = undefined;
+            $scope.stage = undefined;
             expect($scope.isSaveable()).toBe(false);
         });
 
         it('should return false if stage is null',function() {
-            $scope.scoreEntry.stage = null;
+            $scope.stage = null;
             expect($scope.isSaveable()).toBe(false);
         });
 
         it('should return false if table is undefined and asked for',function() {
-            $scope.scoreEntry.table = undefined;
+            $scope.table = undefined;
             $scope.settings.askTable = true;
             expect($scope.isSaveable()).toBe(false);
         });
 
         it('should return false if table is null and asked for',function() {
-            $scope.scoreEntry.table = null;
+            $scope.table = null;
             $scope.settings.askTable = true;
             expect($scope.isSaveable()).toBe(false);
         });
@@ -370,22 +365,22 @@ describe('scoresheet',function() {
         });
 
         it('should return false if round is undefined',function() {
-            $scope.scoreEntry.round = undefined;
+            $scope.round = undefined;
             expect($scope.isSaveable()).toBe(false);
         });
 
         it('should return false if round is null',function() {
-            $scope.scoreEntry.round = null;
+            $scope.round = null;
             expect($scope.isSaveable()).toBe(false);
         });
 
         it('should return false if team is undefined',function() {
-            $scope.scoreEntry.team = undefined;
+            $scope.team = undefined;
             expect($scope.isSaveable()).toBe(false);
         });
 
         it('should return false if team is null',function() {
-            $scope.scoreEntry.team = null;
+            $scope.team = null;
             expect($scope.isSaveable()).toBe(false);
         });
 
@@ -420,29 +415,23 @@ describe('scoresheet',function() {
                     errors: []
                 }
             ];
-            $scope.scoreEntry = {
-                stage: 1,
-                round: 2,
-                table: 7,
-                team: 3
-            };
+            $scope.stage = 1;
+            $scope.round = 2;
+            $scope.table = 7;
+            $scope.team = 3;
             $scope.referee = 'piet';
         });
 
         it('should clear form', function() {
-            var oldId = $scope.scoreEntry.id;
             $scope.clear();
-            expect($scope.scoreEntry.id).not.toEqual(oldId);
-            expect(typeof $scope.scoreEntry.id).toEqual('string');
-            expect($scope.scoreEntry.id.length).toEqual(8);
             expect($scope.signature).toEqual(null);
-            expect($scope.scoreEntry.team).toEqual(undefined);
-            expect($scope.scoreEntry.stage).toEqual(undefined);
-            expect($scope.scoreEntry.round).toEqual(undefined);
+            expect($scope.team).toBeUndefined();
+            expect($scope.stage).toBeUndefined();
+            expect($scope.round).toBeUndefined();
             expect($scope.missions[0].objectives[0].value).toBeUndefined();
             expect($scope.missions[0].objectives[1].value).toBeUndefined();
             //table should not clear
-            expect($scope.scoreEntry.table).toEqual(7);
+            expect($scope.table).toEqual(7);
             expect($scope.referee).toEqual('piet');
         });
     });
@@ -455,49 +444,38 @@ describe('scoresheet',function() {
             });
         });
         it('should save',function() {
-            $scope.scoreEntry.id = "abcdef01";
-            $scope.scoreEntry.team = dummyTeam;
+            $scope.team = dummyTeam;
             $scope.field = {};
-            $scope.scoreEntry.stage = dummyStage;
-            $scope.scoreEntry.round = 1;
-            $scope.scoreEntry.table = 7;
-            var fileName = () => 'filename.json';
-            $scope.scoreEntry.calcFilename = fileName;
+            $scope.stage = dummyStage;
+            $scope.round = 1;
+            $scope.table = 7;
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
                 expect(scoresMock.create).toHaveBeenCalledWith({
-                    scoreEntry: {
-                        score: 0,
-                        id: 'abcdef01',
-                        table: 7,
-                        team: dummyTeam,
-                        stage: dummyStage,
-                        round: 1,
-                        calcFilename: fileName
-                    },
+                    score: 0,
                     team: dummyTeam,
                     stage: dummyStage,
                     round: 1,
                     table: 7,
                     referee: 'foo',
                     signature: [ 1, 2, 3, 4 ]
-                });
-                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.');
+                }, scoresMock.scores[0]);
+                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
             });
         });
         it('should alert a message if scoresheet cannot be saved', function() {
-            $scope.scoreEntry.team = dummyTeam;
+            $scope.team = dummyTeam;
             $scope.field = {};
-            $scope.scoreEntry.stage = dummyStage;
+            $scope.stage = dummyStage;
             var fileName = () => 'filename.json';
-            $scope.scoreEntry.calcFilename = fileName;
-            $scope.scoreEntry.round = 1;
-            $scope.scoreEntry.table = 7;
+            $scope.calcFilename = fileName;
+            $scope.round = 1;
+            $scope.table = 7;
             var oldId = $scope.uniqueId;
             scoresMock.create.and.returnValue(Q.reject(new Error('argh')));
             return $scope.save().catch(function() {
-                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.
+                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.
 Notice: the score could not be sent to the server. This might be caused by poor network conditions. The score is thereafore save on your device, and will be sent when it's possible.Current number of scores actions waiting to be sent: 1`);
             });
         });
@@ -519,14 +497,14 @@ Notice: the score could not be sent to the server. This might be caused by poor 
             $scope.openTeamModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
             $scope.$digest();
-            expect($scope.scoreEntry.team).toEqual(team);
+            expect($scope.team).toEqual(team);
         });
         it('should be ok when nothing is returned on cancel',function() {
             handshakeMock.respond();
             $scope.openTeamModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
             $scope.$digest();
-            expect($scope.scoreEntry.team).toEqual(undefined);
+            expect($scope.team).toEqual(undefined);
         });
     });
 
@@ -539,16 +517,16 @@ Notice: the score could not be sent to the server. This might be caused by poor 
             $scope.openRoundModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
             $scope.$digest();
-            expect($scope.scoreEntry.stage).toEqual('foo');
-            expect($scope.scoreEntry.round).toEqual('bar');
+            expect($scope.stage).toEqual('foo');
+            expect($scope.round).toEqual('bar');
         });
         it('should be ok when nothing is returned on cancel',function() {
             handshakeMock.respond();
             $scope.openRoundModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
             $scope.$digest();
-            expect($scope.scoreEntry.stage).toEqual(undefined);
-            expect($scope.scoreEntry.round).toEqual(undefined);
+            expect($scope.stage).toEqual(undefined);
+            expect($scope.round).toEqual(undefined);
         });
     });
 });
