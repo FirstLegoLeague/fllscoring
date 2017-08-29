@@ -145,6 +145,37 @@ describe('ng-scores',function() {
             $scores.acceptScores([mockScore]);
             expect(messageMock.send).toHaveBeenCalledWith('scores:reload');
         });
+
+        it('should try to auto-broadcast if call and settings permit', function () {
+            $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
+            settingsMock.settings.autoBroadcast = true;
+            var autoBroadcastStage = stagesMock.stages[0];
+            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            $scores.acceptScores({data: mockScores}, true);
+            $scores.getRankings().then(() => expect($scores.broadcastRanking).toHaveBeenCalledWith(autoBroadcastStage))
+        });
+
+        it('should not try to auto-broadcast if call permits and settings do not', function () {
+            $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
+            settingsMock.settings.autoBroadcast = false;
+            var autoBroadcastStage = stagesMock.stages[0];
+            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            $scores.acceptScores({data: mockScores}, true);
+            $scores.getRankings().then(() => expect($scores.broadcastRanking).not.toHaveBeenCalled());
+
+            settingsMock.settings.autoBroadcastStage = undefined;
+            settingsMock.settings.autoBroadcast = true;
+            $scores.getRankings().then(() => expect($scores.broadcastRanking).not.toHaveBeenCalled());
+        })
+
+        it('should not try to auto-broadcast if call does not permit and settings do', function () {
+            $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
+            settingsMock.settings.autoBroadcast = true;
+            var autoBroadcastStage = stagesMock.stages[0];
+            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            $scores.acceptScores({data: mockScores}, false);
+            $scores.getRankings().then(() => expect($scores.broadcastRanking).not.toHaveBeenCalled());
+        })
     });
 
     describe('create', function() {
