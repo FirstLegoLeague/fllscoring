@@ -47,6 +47,7 @@ describe('ng-scores',function() {
     var fsMock= createFsMock({
         "scores.json": mockScores,
     });
+    var settingsMock = createSettingsMock(Q, {});
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -58,6 +59,7 @@ describe('ng-scores',function() {
             $provide.value('$independence', independenceMock);
             $provide.value('$rankings', rankingsMock);
             $provide.value('$validation', validationMock);
+            $provide.value('$settings', settingsMock);
         });
         angular.mock.inject(["$scores", "$score", "$q", function(_$scores_, _$score_,_$q_) {
             $scores = _$scores_;
