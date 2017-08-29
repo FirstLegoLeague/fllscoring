@@ -11,16 +11,16 @@ define('services/ng-message',[
     return module.service('$message',[
         '$http','$settings','$q',
         function($http,$settings,$q) {
-            var promise;
+            var isInitializedPromise;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
 
             function init() {
-                if (promise) {
-                    return promise;
+                if (isInitializedPromise) {
+                    return isInitializedPromise;
                 }
                 var def = $q.defer();
-                promise = def.promise;
+                isInitializedPromise = def.promise;
                 return $settings.init().then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
                         throw new Error('no message bus configured');
@@ -58,7 +58,7 @@ define('services/ng-message',[
                             listener.handler(data, msg);
                         });
                     };
-                    return promise;
+                    return isInitializedPromise;
                 });
             }
 
