@@ -1,7 +1,7 @@
 var Lock = require('./lock');
 var utils = require('./utils');
 var fileSystem = require('./file_system');
-var log = require('./log');
+var log = require('./log').log;
 var Q = require('q');
 var id = require('uuid/v4');
 
@@ -146,6 +146,7 @@ exports.route = function(app) {
 
 changeScores(function(scores) {
     if(typeof(scores.version) === 'undefined') {
+        log.warn('Deprecated scores version. Updating to version 3.')
         scores.forEach(score => score.id = id())
         return {
             version: 3,
@@ -156,6 +157,7 @@ changeScores(function(scores) {
         return scores;
 
     } else if(scores.version === 2) {
+        log.warn('Deprecated scores version. Updating to version 3.');
         scores.scores.forEach(score => score.id = id())
         scores.version = 3;
         return scores;
