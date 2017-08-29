@@ -97,6 +97,23 @@
                 </p>
             </div>
         </div>
+        <div class="card">
+            <h1 class="card-header">Score Export Format</h1>
+            <div class="card-body">
+                <p class="textfield">
+                    <input id="lineStartString" type="text" ng-model="settings.lineStartString" value="">
+                    <label for="lineStartString">String at start of line</label>
+                </p>
+                <p class="textfield">
+                    <input id="separatorString" type="text" ng-model="settings.separatorString" value=",">
+                    <label for="separatorString">Separator String</label>
+                </p>
+                <p class="textfield">
+                    <input id="lineEndString" type="text" ng-model="settings.lineEndString" value="">
+                    <label for="lineEndString">String at end of line</label>
+                </p>
+            </div>
+        </div>
     </div>
     <div ng-show="tab === 2">
         <div ng-repeat="stage in allStages" class="card">
@@ -119,7 +136,7 @@
                 <p class="pull-left">
                     <button class="flat" ng-click="removeStage(stage)">Remove stage</button>
                 </p>
-                <p class="pull-right" >
+                <p class="pull-right">
                     <button class="flat" ng-click="moveUp(stage)">Up</button>
                     <button class="flat" ng-click="moveDown(stage)">Down</button>
                 </p>
@@ -130,7 +147,7 @@
         <p>
 
             <span class="textfield">
-                <input type="text" ng-model="settings.host" />
+                <input type="text" ng-model="settings.host"/>
                 <label for="">Host</label>
             </span>
             shared host to get data from and save data to. E.g. 'http://localhost:1390/'
@@ -138,7 +155,7 @@
         <p>
 
             <span class="textfield">
-                <input type="text" ng-model="settings.challenge" />
+                <input type="text" ng-model="settings.challenge"/>
                 <label for="">Challenge</label>
             </span>
             currently the filename containing missions! E.g. '2017_en_US' (no file extension)
@@ -147,28 +164,28 @@
     <div ng-show="tab === 4">
         <p>
             <span class="textfield">
-                <input type="checkbox" ng-model="settings.mhubEnabled" />
+                <input type="checkbox" ng-model="settings.mhubEnabled"/>
                 <label for="">Enable messaging</label>
             </span>
             Enable publishing of scores and rankings, live updates to the score keeping lists, etc.
         </p>
         <p>
             <span class="textfield">
-                <input type="text" ng-model="settings.mhub" />
+                <input type="text" ng-model="settings.mhub"/>
                 <label for="">MHub server</label>
             </span>
             MHub server to send messages to. E.g. 'ws://localhost:13900/'
         </p>
         <p>
             <span class="textfield">
-                <input type="text" ng-model="settings.node" />
+                <input type="text" ng-model="settings.node"/>
                 <label for="">MHub node</label>
             </span>
             MHub server node to subscribe and publish to. E.g. 'scoring'
         </p>
     </div>
     <div ng-show="tab === 5">
-        <h1 >Log</h1>
+        <h1>Log</h1>
 
         <pre>
             <code ng-repeat="line in log track by $index">{{line}}<br></code>
