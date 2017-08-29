@@ -47,7 +47,7 @@ define('views/ranking',[
 
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
-            $scope.broadcastRanking = $scores.broadcastRanking;
+            $scope.broadcastRanking = (stage) =>  $scores.broadcastRanking(stage);
 
             $scope.doSort = function(stage, col, defaultSort) {
                 if (stage.sort === undefined) {
