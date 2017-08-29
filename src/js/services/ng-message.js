@@ -75,6 +75,7 @@ define('services/ng-message',[
                     });
                 },
                 on: function(topic, handler) {
+                    init();
                     listeners.push({ topic: topic, handler: handler });
                 }
             };
