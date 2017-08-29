@@ -152,7 +152,7 @@ describe('ng-scores',function() {
             var autoBroadcastStage = stagesMock.stages[0];
             settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
             $scores.acceptScores({data: mockScores}, true);
-            $scores.getRankings().then(() => expect($scores.broadcastRanking).toHaveBeenCalledWith(autoBroadcastStage))
+            expect($scores.broadcastRanking).toHaveBeenCalledWith(autoBroadcastStage)
         });
 
         it('should not try to auto-broadcast if call permits and settings do not', function () {
@@ -161,11 +161,11 @@ describe('ng-scores',function() {
             var autoBroadcastStage = stagesMock.stages[0];
             settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
             $scores.acceptScores({data: mockScores}, true);
-            $scores.getRankings().then(() => expect($scores.broadcastRanking).not.toHaveBeenCalled());
+            expect($scores.broadcastRanking).not.toHaveBeenCalled();
 
             settingsMock.settings.autoBroadcastStage = undefined;
             settingsMock.settings.autoBroadcast = true;
-            $scores.getRankings().then(() => expect($scores.broadcastRanking).not.toHaveBeenCalled());
+            expect($scores.broadcastRanking).not.toHaveBeenCalled();
         })
 
         it('should not try to auto-broadcast if call does not permit and settings do', function () {
@@ -174,7 +174,7 @@ describe('ng-scores',function() {
             var autoBroadcastStage = stagesMock.stages[0];
             settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
             $scores.acceptScores({data: mockScores}, false);
-            $scores.getRankings().then(() => expect($scores.broadcastRanking).not.toHaveBeenCalled());
+            expect($scores.broadcastRanking).not.toHaveBeenCalled();
         })
     });
 
