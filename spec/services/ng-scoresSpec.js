@@ -18,7 +18,6 @@ describe('ng-scores',function() {
     ]);
     var messageMock = createMessageMock();
     var independenceMock = createIndependenceMock();
-    var rankingsMock = createRankingsMock();
     var validationMock = createValidationMock();
     var mockScore = {
         file: 'somescore.json',
@@ -28,6 +27,17 @@ describe('ng-scores',function() {
         score: 150,
         originalScore: 150
     };
+    var fakeRankingEntry = [
+        {
+            rank: 1,
+            team: {number: 123, name: "bla"},
+            scores: [mockScore],
+            highest: mockScore
+        }
+    ];
+    var fakeRankings = {};
+    fakeRankings[stagesMock.stages[0].id] = fakeRankingEntry;
+    var rankingsMock = createRankingsMock(fakeRankings);
 
     var rawScore = {
         id: 'asd23d',
@@ -129,6 +139,28 @@ describe('ng-scores',function() {
             $scores._update();
             expect($scores.getRankings).not.toHaveBeenCalled()
         });
+    });
+
+    describe('broadcastRanking', function () {
+        it('should send a message describing the correct rankings', function () {
+            var broadcastStage = stagesMock.stages[0];
+            $scores.broadcastRanking(broadcastStage);
+            var rankingTopic = 'scores:ranking';
+            var rankingMessage = {
+                stage: {
+                    id: broadcastStage.id,
+                    name: broadcastStage.name,
+                    rounds: broadcastStage.rounds,
+                },
+                ranking: [{
+                    rank: fakeRankingEntry[0].rank,
+                    team: fakeRankingEntry[0].team,
+                    scores: fakeRankingEntry[0].scores,
+                    highest: fakeRankingEntry[0].highest
+                }]
+            };
+            $scores.getRankings().then(() => expect(messageMock.send).toHaveBeenCalledWith(rankingTopic, rankingMessage));
+        })
     });
 
     describe('acceptScores', function() {
