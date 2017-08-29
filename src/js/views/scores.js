@@ -44,15 +44,15 @@ define('views/scores',[
             };
 
             $scope.publishScore = function(score) {
-                score.wasPublished = score.published;
+                var wasPublished = score.published;
                 score.published = true;
-                saveScore(score);
+                saveScore(score, wasPublished);
             };
 
             $scope.unpublishScore = function(score) {
-                score.wasPublished = score.published;
+                var wasPublished = score.published;
                 score.published = false;
-                saveScore(score);
+                saveScore(score, wasPublished);
             };
 
             $scope.finishEditScore = function(score) {

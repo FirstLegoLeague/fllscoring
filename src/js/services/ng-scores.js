@@ -224,14 +224,12 @@ define('services/ng-scores',[
             }).then((res) => self.acceptScores(res, score.published));
         };
 
-        Scores.prototype.update = function(score) {
-            var wasPublished = score.wasPublished;
-            delete  score.wasPublished;
+        Scores.prototype.update = function(score, forceAutoPublish) {
             score.edited = (new Date()).toString();
             var self = this;
             return $independence.act('scores','/scores/update/' + score.id, score, function() {
                 self.scores[self.scores.findIndex(s => s.id === score.id)] = score;
-            }).then((res) => self.acceptScores(res, wasPublished || score.published));
+            }).then((res) => self.acceptScores(res, forceAutoPublish || score.published));
         };
 
         Scores.prototype.getRankings = function() {
