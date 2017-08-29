@@ -117,26 +117,29 @@ define('services/ng-scores',[
         }
 
         Scores.prototype.broadcastRanking = function (stage) {
-            var  self = this;
-            var rankingMessage = {
-                stage: {
-                    id: stage.id,
-                    name: stage.name,
-                    rounds: stage.rounds,
-                },
-                ranking: removeEmptyRanks(self.scoreboard)[stage.id].map(function (item) {
-                    return {
-                        rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
-                        team: {
-                            number: item.team.number,
-                            name: item.team.name,
-                        },
-                        scores: item.scores,
-                        highest: item.highest,
-                    };
-                }),
-            };
-            $message.send('scores:ranking', rankingMessage);
+            var self = this;
+            self.getRankings().then(function () {
+                var rankingMessage = {
+                    stage: {
+                        id: stage.id,
+                        name: stage.name,
+                        rounds: stage.rounds,
+                    },
+                    ranking: removeEmptyRanks(self.scoreboard)[stage.id].map(function (item) {
+                        return {
+                            rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
+                            team: {
+                                number: item.team.number,
+                                name: item.team.name,
+                            },
+                            scores: item.scores,
+                            highest: item.highest,
+                        };
+                    }),
+                };
+                $message.send('scores:ranking', rankingMessage);
+            });
+
         };
 
         Scores.prototype.load = function(data) {
@@ -193,14 +196,12 @@ define('services/ng-scores',[
 
         Scores.prototype.acceptScores = function(res, tryAutoBroadcast) {
             var self = this;
+            self.load(res.data);
             var stageID = $settings.settings.autoBroadcastStage;
             if ($settings.settings.autoBroadcast && stageID && tryAutoBroadcast) {
-                self.getRankings().then(function () {//scoreboard has to be created for the ranking to be broadcasted
-                    log('auto-broadcasting stage ' + stageID);
-                    self.broadcastRanking($stages.get(stageID));
-                });
+                log('auto-broadcasting stage ' + stageID);
+                self.broadcastRanking($stages.get(stageID));
             }
-            this.load(res.data);
             $message.send('scores:reload');
         }
 
