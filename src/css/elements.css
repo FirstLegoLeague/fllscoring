@@ -164,10 +164,19 @@ table {
     }
     .drawer .nav li i {
         width: 24px;
-        margin-right: 32px;
+        margin-right: 16px;
         display: inline-block;
         width: 20px;
+        font-size: 24px;
     }
+}
+
+/* material design icons */
+.material-icons {
+    vertical-align: text-bottom;
+    font-size: inherit;
+}
+button .material-icons {
 }
 
 /* main view */

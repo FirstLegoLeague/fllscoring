@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html manifest="fllscoring.appcache">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="components/bootstrap-css/css/bootstrap.min.css">
+        <link href="css/materialIcons.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+        <title>FLL Scoring</title>
+    </head>
+    <body>
+        <script src="js/config.js"></script>
+        <script>
+            require.map = {
+                '*': {
+                    'services/fs':'services/fs-xhr'
+                }
+            };
+        </script>
+        <script src="components/requirejs/require.js" data-main="main"></script>
+        <div ng-controller="mainCtrl" ng-init="setPlatform('nodejs')">
+            <div fll-size ng-class="containerClass($width,$height)">
+                <div class="drawerShim" ng-class="{visible:drawerVisible}" ng-click="toggleDrawer(false)"></div>
+                <div ng-include="drawer"></div>
+                <div class="viewMain" ng-class="currentPage.name" ng-cloak>
+                    <div ng-repeat="page in pages"
+                        ng-include="'views/pages/' + page.name + '.html'"
+                        ng-class="'view-' + page.name"
+                    ></div>
+                </div>
+                <div ng-include="'views/dialogs.html'"></div>
+            </div>
+        </div>
+
+        <div id="username" class="hidden">{{user}}</div>
+    </body>
+</html>

@@ -18,8 +18,8 @@ describe('ng-stages',function() {
 
     //initialize
     beforeEach(function() {
-        mockStage = { id: "practice", name: "Oefenrondes", rounds: 2 };
-        mockStageSanitized = { index: 0, id: "practice", name: "Oefenrondes", rounds: 2, $rounds: [1, 2] };
+        mockStage = { id: "practice", name: "Practice Rounds", rounds: 2 };
+        mockStageSanitized = { index: 0, id: "practice", name: "Practice Rounds", rounds: 2, $rounds: [1, 2] };
         unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
         unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     })
@@ -77,12 +77,11 @@ describe('ng-stages',function() {
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages using defaults');
                 expect($stages.allStages).toEqual([
-                    {index:0,id:"practice",name:"Oefenrondes",rounds:2,$rounds:[1,2]},
-                    {index:1,id:"qualifying",name:"Voorrondes",rounds:3,$rounds:[1,2,3]},
-                    {index:2,id:"eighth",name:"Achtste finales",rounds:0,$rounds:[]},
-                    {index:3,id:"quarter",name:"Kwartfinales",rounds:0,$rounds:[]},
-                    {index:4,id:"semi",name:"Halve finales",rounds:0,$rounds:[]},
-                    {index:5,id:"final",name:"Finale",rounds:1,$rounds:[1]}
+                    {index:0,id:"practice",name:"Practice Rounds",rounds:2,$rounds:[1,2]},
+                    {index:1,id:"qualifying",name:"Qualification Rounds",rounds:3,$rounds:[1,2,3]},
+                    {index:2,id:"quarter",name:"Quarterfinals",rounds:0,$rounds:[]},
+                    {index:3,id:"semi",name:"Semifinals",rounds:0,$rounds:[]},
+                    {index:4,id:"final",name:"Final",rounds:1,$rounds:[1]}
                 ]);
             });
         });
@@ -166,14 +165,14 @@ describe('ng-stages',function() {
             $stages.moveStage(mockStageSanitized,1);
             expect($stages.allStages).toEqual([
                 { index: 0, id: "unused", name: "Foobar", rounds: 0, $rounds: [] },
-                {index:1,id:"practice",name:"Oefenrondes",rounds:2,$rounds:[1,2]}
+                {index:1,id:"practice",name:"Practice Rounds",rounds:2,$rounds:[1,2]}
             ]);
         });
         it('move up 1 step',function() {
             $stages.moveStage(unusedMockStageSanitized,-1);
             expect($stages.allStages).toEqual([
                 { index: 0, id: "unused", name: "Foobar", rounds: 0, $rounds: [] },
-                {index:1,id:"practice",name:"Oefenrondes",rounds:2,$rounds:[1,2]}
+                {index:1,id:"practice",name:"Practice Rounds",rounds:2,$rounds:[1,2]}
             ]);
         });
     });

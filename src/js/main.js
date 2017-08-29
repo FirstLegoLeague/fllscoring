@@ -1,5 +1,6 @@
 define([
     'services/log',
+    'services/session',
     'views/settings',
     'views/teams',
     'views/scoresheet',
@@ -16,7 +17,7 @@ define([
     'angular-touch',
     'angular-sanitize',
     'angular'
-],function(log,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
+],function(log,session,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
     log('device ready');
 
@@ -26,16 +27,33 @@ define([
     //initialize main controller and load main view
     //load other main views to create dynamic views for different device layouts
     angular.module('main',[]).controller('mainCtrl',[
-        '$scope',
-        function($scope) {
+        '$scope', 'session',
+        function($scope, session) {
             log('init main ctrl');
-            $scope.mainView = 'views/main.html';
-            $scope.scoringView = 'views/mainScoring.html';
-            $scope.pages = ['teams','scoresheet','scores','ranking','settings'];
+            $scope.drawer = 'views/drawer.html';
             $scope.scoringPages = ['scoresheet','settings'];
-            $scope.currentPage = $scope.pages[1];
             $scope.validationErrors = [];
             $scope.drawerVisible = false;
+
+            session.onload(function() {
+                $scope.user = session.get('user');
+                if($scope.user === 'admin') {
+                    $scope.pages = [
+                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
+                        { name: 'teams', title: 'Teams', icon: 'people' },
+                        { name: 'scores', title: 'Scorekeeping', icon: 'list' },
+                        { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
+                        { name: 'settings', title: 'Settings', icon: 'settings' }
+                    ];
+                } else {
+                    $scope.pages = [
+                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
+                        { name: 'settings', title: 'Settings', icon: 'settings' }
+                    ];
+                }
+
+                $scope.currentPage = $scope.pages[0];
+            })
 
             $scope.$on('validationError',function(e,validationErrors) {
                 $scope.validationErrors = validationErrors;
@@ -61,9 +79,9 @@ define([
 
             $scope.containerClass = function(w,h) {
                 w = w();
-                if (w<=480) {
+                if (w <= 480) {
                     return $scope.platform + ' smallWindow';
-                } else if (w<=1024) {
+                } else if (w <= 1024) {
                     return $scope.platform + ' mediumWindow';
                 } else {
                     return $scope.platform + ' largeWindow';

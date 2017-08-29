@@ -1,0 +1,9 @@
+<div class="drawer" ng-class="{visible:drawerVisible}">
+    <div class="drawerLead">
+    </div>
+    <ul class="nav">
+        <li ng-repeat="page in pages" ng-class="{active: currentPage === page}">
+            <a ng-click="setPage(page)"><i class="material-icons">{{page.icon}}</i> <span>{{page.title}}</span></a>
+        </li>
+    </ul>
+</div>

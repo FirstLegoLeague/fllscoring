@@ -74,12 +74,14 @@ describe('teams', function() {
                     '$handshake': handshakeMock
                 });
             });
-            // Let initialization finish completely, in order to start with a
-            // clean slate of the spies
-            $scope.$digest();
-            $teams.add.calls.reset();
-            $teams.clear.calls.reset();
-            return $scope.init();
+            return $scope.init().then(function() {
+                // Let initialization finish completely, in order to start with a
+                // clean slate of the spies
+                $scope.$digest();
+                $teams.add.calls.reset();
+                $teams.clear.calls.reset();
+                // NOTE: don't clear $teams.save here or the init test becomes useless!
+            });
         });
 
         beforeEach(function() {
@@ -93,7 +95,10 @@ describe('teams', function() {
                 expect($scope.newTeam).toEqual({});
                 expect($scope.editMode).toBe(false);
             });
-
+            it('should not unnecessarily save teams', function() {
+                $scope.$digest();
+                expect($teams.save).not.toHaveBeenCalled();
+            });
         });
 
         describe('load', function() {
