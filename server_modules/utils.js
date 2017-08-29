@@ -1,16 +1,11 @@
+var log = require('./log').log;
+
 exports.root = __dirname + '/../';
 
-exports.sendError = function(res) {
-    return function(err) {
-        res.status(err.status).send(err.message);
-    }
-}
+exports.sendError = function(res, err) {
+    var status = err.status || 500;
+    var message = err.message || "Internal server error"
 
-if (!String.prototype.format) {
-    String.prototype.format = function() {
-        var args = arguments;
-        return this.replace(/{(\d+)}/g, function(match, number) { 
-            return typeof args[number] !== 'undefined' ? args[number] : match;
-        });
-    };
+    log.error(message);
+    res.status(status).send(message);
 }

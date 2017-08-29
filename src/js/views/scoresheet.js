@@ -23,38 +23,27 @@ define('views/scoresheet',[
     ]);
 
     return module.controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$stages','$settings','$challenge','$window','$q','$teams','$handshake',
-        function($scope,$fs,$stages,$settings,$challenge,$window,$q,$teams,$handshake) {
+        '$scope','$fs','$stages','$scores','$score','$settings','$challenge','$window','$q','$teams','$handshake',
+        function($scope,$fs,$stages,$scores,$score,$settings,$challenge,$window,$q,$teams,$handshake) {
             log('init scoresheet ctrl');
 
             // Set up defaults
             $scope.settings = {};
             $scope.missions = [];
             $scope.strings = [];
-            $scope.table = null;
             $scope.referee = null;
 
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;
 
-            $settings.init().then(function(res) {
-                $scope.settings = res;
-                return $scope.load();
-            });
-
-            function generateId() {
-                var max = 0x100000000; // 8 digits
-                // Add current time to prevent Math.random() generating the same
-                // sequence if it's seeded with a constant. Not sure this is
-                // really needed, but better safe than sorry...
-                var num = (Math.floor(Math.random() * max) + Date.now()) % max;
-                // Convert to nice hex representation with padded zeroes, then strip that initial 1.
-                return (num + max).toString(16).slice(1);
-            }
-
             $scope.load = function() {
-                return $challenge.load($scope.settings.challenge).then(function(defs) {
+                return $settings.init()
+                .then(function(res) {
+                    $scope.settings = res;
+                    return $challenge.load($scope.settings.challenge);
+                })
+                .then(function(defs) {
                     $scope.field = defs.field;
                     $scope.missions = defs.missions;
                     $scope.strings = defs.strings;
@@ -66,6 +55,8 @@ define('views/scoresheet',[
                     $window.alert($scope.errorMessage);
                 });
             };
+
+            $scope.load();
 
             $scope.getString = function(key) {
                 return $scope.strings[key]||key;
@@ -84,7 +75,7 @@ define('views/scoresheet',[
                 mission.errors = [];
                 mission.percentages = [];
                 mission.completed = false;
-                //addd watcher for all dependencies
+                //add watcher for all dependencies
                 $scope.$watch(function() {
                     return deps.map(function(dep) {
                         return $scope.objectiveIndex[dep].value;
@@ -211,11 +202,10 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
-                $scope.uniqueId = generateId();
+                $scope.team = undefined;
+                $scope.stage = undefined;
+                $scope.round = undefined;
                 $scope.signature = null;
-                $scope.team = null;
-                $scope.stage = null;
-                $scope.round = null;
                 $scope.missions.forEach(function(mission) {
                     mission.objectives.forEach(function(objective) {
                         delete objective["value"];
@@ -230,37 +220,34 @@ define('views/scoresheet',[
                     $window.alert('no team selected, do so first');
                     return $q.reject(new Error('no team selected, do so first'));
                 }
+                var scoresheet = angular.copy($scope.field);
+                scoresheet.stage = $scope.stage;
+                scoresheet.round = $scope.round;
+                scoresheet.team = $scope.team;
+                scoresheet.table = $scope.table;
+                scoresheet.referee = $scope.referee;
+                scoresheet.signature = $scope.signature;
 
-                var data = angular.copy($scope.field);
-                data.uniqueId = $scope.uniqueId;
-                data.team = $scope.team;
-                data.stage = $scope.stage;
-                data.round = $scope.round;
-                // data.table = $scope.settings.table;
-                data.table = $scope.table;
-                data.referee = $scope.referee;
-                data.signature = $scope.signature;
-                data.score = $scope.score();
+                scoresheet.score = $scope.score();
+                var score = $score(scoresheet);
+                score.calcFilename();
 
-                var fn = [
-                    'score',
-                    data.stage.id,
-                    'round' + data.round,
-                    'table' + data.table,
-                    'team' + data.team.number,
-                    data.uniqueId
-                ].join('_')+'.json';
-
-                return $fs.write("scoresheets/" + fn,data).then(function() {
+                return $scores.create(scoresheet, score).then(function() {
                     log('result saved');
                     $scope.clear();
-                    $window.alert('Thanks for submitting a score of ' +
-                        data.score +
-                        ' points for team (' + data.team.number + ') ' + data.team.name +
-                        ' in ' + data.stage.name + ' ' + data.round + '.'
-                    );
-                }, function(err) {
-                    $window.alert('Error submitting score: ' + String(err));
+                    message = `Thanks for submitting a score of ${scoresheet.score} points for team (${scoresheet.team.number})` +
+                        ` ${scoresheet.team.name} in ${scoresheet.stage.name} ${scoresheet.round}.`;
+                    $window.alert(message);
+                }).catch(function(err) {
+                    log(`Error: ${err}`);
+                    $scope.clear();
+                    message = `Thanks for submitting a score of ${scoresheet.score} points for team (${scoresheet.team.number})` +
+                        ` ${scoresheet.team.name} in ${scoresheet.stage.name} ${scoresheet.round}.` + `
+Notice: the score could not be sent to the server. ` +
+                            `This might be caused by poor network conditions. ` +
+                            `The score is thereafore save on your device, and will be sent when it's possible.` +
+                            `Current number of scores actions waiting to be sent: ${$scores.pendingActions()}`
+                    $window.alert(message);
                     throw err;
                 });
             };

@@ -20,13 +20,32 @@ define('views/ranking',[
 
             $scope.scores = $scores;
 
+            function removeEmptyRanks(scoreboard) {
+                let result = {};
+                for(let stageId in scoreboard) {
+                    let stage = scoreboard[stageId];
+                    result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== undefined).length);
+                }
+                return result;
+            }
+
+            $scope.$watch(function() {
+                return $scores.scoreboard;
+            }, function () {
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
+            }, true);
+
+            $scores.init().then(() => $stages.init()).then(function() {
+                $scope.stages = $stages.stages;
+                return $scores.getRankings();
+            });
+
             $scope.exportRanking = function() {
                 $handshake.$emit('exportRanking',{
                     scores: $scope.scores,
                     stages: $scope.stages
                 });
             };
-
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
             $scope.broadcastRanking = function(stage) {
@@ -136,7 +155,7 @@ define('views/ranking',[
                             entry.rank,
                             entry.team.number,
                             entry.team.name,
-                            entry.highest,
+                            entry.highest ? entry.highest.score : undefined,
                         ].concat(entry.scores);
                     });
                     var header = ["Rank", "Team Number", "Team Name", "Highest"];
@@ -153,13 +172,10 @@ define('views/ranking',[
                 $scope.rebuildCSV($scores.scoreboard);
             }, true);
 
-            $scope.stages = $stages.stages;
-            $scope.scoreboard = $scores.scoreboard;
-
             $scope.getRoundLabel = function(round){
                 return "Round " + round;
             };
-            
+
 
         }
     ]);

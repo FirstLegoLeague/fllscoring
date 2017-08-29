@@ -25,6 +25,8 @@ describe('scoresheet',function() {
             settingsMock = createSettingsMock($q,'settings');
             handshakeMock = createHandshakeMock($q);
             challengeMock = createChallengeMock();
+            scoresMock = createScoresMock();
+            scoresMock.scores[0].calcFilename = () => { this.filename = 'filename'; }
             $scope = $rootScope.$new();
             $window = {
                 Date: function() {
@@ -38,6 +40,8 @@ describe('scoresheet',function() {
                 '$scope': $scope,
                 '$fs': fsMock,
                 '$settings': settingsMock,
+                '$scores': scoresMock,
+                '$score': jasmine.createSpy('$score').and.returnValue(scoresMock.scores[0]),
                 '$stages': {},
                 '$handshake': handshakeMock,
                 '$teams': {},
@@ -59,114 +63,7 @@ describe('scoresheet',function() {
             $scope.$digest();
             expect($scope.settings).toEqual('settings');
             expect($scope.referee).toEqual(null);
-            expect($scope.table).toEqual(null);
-        });
-    });
-
-    describe('load',function() {
-        describe('processing',function() {
-            var field, mission, objective, missions, objectiveIndex;
-
-            beforeEach(function() {
-                field = 'foo';
-                mission = {
-                    score: [
-                        function() {return 1;},
-                        function() {return 2;}
-                    ]
-                };
-                objective = {
-                    value: 4
-                };
-                missions = [mission];
-                objectiveIndex = {
-                    'foo': objective
-                };
-                challengeMock.load.and.returnValue(Q.when({
-                    field: field,
-                    missions: missions,
-                    objectiveIndex: objectiveIndex
-                }));
-                challengeMock.getDependencies.and.returnValue(['foo']);
-            });
-            it('should set the field, missions and index',function() {
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect($scope.field).toBe(field);
-                    expect($scope.missions).toBe(missions);
-                    expect($scope.objectiveIndex).toBe(objectiveIndex);
-                });
-            });
-            it('should process the missions',function() {
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect(mission.errors).toEqual([]);
-                    expect(mission.percentages).toEqual([]);
-                });
-            });
-            it('should set a watcher to mission dependencies',function() {
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect(mission.result).toBe(3);
-                });
-            });
-            it('should be completed',function() {
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect(mission.completed).toBe(true);
-                });
-            });
-            it('should not be completed if some scores are undefined',function() {
-                mission.score = [
-                        function() {return 1;},
-                        function() {return undefined;}
-                ];
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect(mission.completed).toBe(false);
-                });
-            });
-            it('should not count an error, but log it to mission errors',function() {
-                var err = new Error('squeek');
-                mission.score = [
-                        function() {return 1;},
-                        function() {return err;}
-                ];
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect(mission.result).toBe(1);
-                    expect(mission.errors).toEqual([err]);
-                });
-            });
-            it('should not count a fraction, but treat as percentage',function() {
-                mission.score = [
-                        function() {return 1;},
-                        function() {return 0.5;}
-                ];
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect(mission.result).toBe(1);
-                    expect(mission.percentages).toEqual([0.5]);
-                });
-            });
-            it('should count undefined as 0',function() {
-                mission.score = [
-                        function() {return 1;},
-                        function() {return;}
-                ];
-                return $scope.load().then(function() {
-                    $scope.$digest();
-                    expect(mission.result).toBe(1);
-                });
-            });
-        });
-        it('should set an error message when loading fails',function() {
-            challengeMock.load.and.returnValue(Q.reject('squeek'));
-
-            return $scope.load().then(function() {
-                expect($scope.errorMessage).toBe('Could not load field, please configure host in settings');
-                expect($window.alert).toHaveBeenCalledWith('Could not load field, please configure host in settings');
-            });
+            expect($scope.table).toEqual(undefined);
         });
     });
 
@@ -232,8 +129,9 @@ describe('scoresheet',function() {
             ];
             $scope.stage = 1;
             $scope.round = 2;
-            $scope.team = 3;
             $scope.table = 7;
+            $scope.team = 3;
+            $scope.referee = 6;
         });
 
         it('should return empty in the happy situation',function() {
@@ -332,8 +230,9 @@ describe('scoresheet',function() {
             ];
             $scope.stage = 1;
             $scope.round = 2;
-            $scope.team = 3;
             $scope.table = 7;
+            $scope.team = 3;
+            $scope.referee = 6;
         });
 
         it('should return true in the happy situation',function() {
@@ -417,8 +316,9 @@ describe('scoresheet',function() {
             ];
             $scope.stage = 1;
             $scope.round = 2;
-            $scope.team = 3;
             $scope.table = 7;
+            $scope.team = 3;
+            $scope.referee = 6;
         });
 
         it('should return true in the happy situation',function() {
@@ -502,8 +402,7 @@ describe('scoresheet',function() {
 
     describe('clear', function() {
         beforeEach(function() {
-            //setup some values
-            $scope.signature = "dummy";
+            //setup happy situation
             $scope.missions = [
                 {
                     objectives: [
@@ -518,21 +417,17 @@ describe('scoresheet',function() {
             ];
             $scope.stage = 1;
             $scope.round = 2;
-            $scope.team = 3;
             $scope.table = 7;
+            $scope.team = 3;
             $scope.referee = 'piet';
         });
 
         it('should clear form', function() {
-            var oldId = $scope.uniqueId;
             $scope.clear();
-            expect($scope.uniqueId).not.toEqual(oldId);
-            expect(typeof $scope.uniqueId).toEqual('string');
-            expect($scope.uniqueId.length).toEqual(8);
             expect($scope.signature).toEqual(null);
-            expect($scope.team).toEqual(null);
-            expect($scope.stage).toEqual(null);
-            expect($scope.round).toEqual(null);
+            expect($scope.team).toBeUndefined();
+            expect($scope.stage).toBeUndefined();
+            expect($scope.round).toBeUndefined();
             expect($scope.missions[0].objectives[0].value).toBeUndefined();
             expect($scope.missions[0].objectives[1].value).toBeUndefined();
             //table should not clear
@@ -549,7 +444,6 @@ describe('scoresheet',function() {
             });
         });
         it('should save',function() {
-            $scope.uniqueId = "abcdef01";
             $scope.team = dummyTeam;
             $scope.field = {};
             $scope.stage = dummyStage;
@@ -558,17 +452,15 @@ describe('scoresheet',function() {
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(fsMock.write.calls.mostRecent().args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_abcdef01.json');
-                expect(fsMock.write.calls.mostRecent().args[1]).toEqual({
-                    uniqueId: "abcdef01",
+                expect(scoresMock.create).toHaveBeenCalledWith({
+                    score: 0,
                     team: dummyTeam,
                     stage: dummyStage,
                     round: 1,
                     table: 7,
                     referee: 'foo',
-                    signature: [1,2,3,4],
-                    score: 0
-                });
+                    signature: [ 1, 2, 3, 4 ]
+                }, scoresMock.scores[0]);
                 expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
             });
         });
@@ -576,19 +468,15 @@ describe('scoresheet',function() {
             $scope.team = dummyTeam;
             $scope.field = {};
             $scope.stage = dummyStage;
+            var fileName = () => 'filename.json';
+            $scope.calcFilename = fileName;
             $scope.round = 1;
             $scope.table = 7;
             var oldId = $scope.uniqueId;
-            fsMock.write.and.returnValue(Q.reject(new Error('argh')));
-            var firstFilename;
+            scoresMock.create.and.returnValue(Q.reject(new Error('argh')));
             return $scope.save().catch(function() {
-                expect($window.alert).toHaveBeenCalledWith('Error submitting score: Error: argh');
-                firstFilename = fsMock.write.calls.mostRecent().args[0];
-                // verify that filename stays the same
-                return $scope.save();
-            }).catch(function() {
-                var secondFilename = fsMock.write.calls.mostRecent().args[0];
-                expect(secondFilename).toBe(firstFilename);
+                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.
+Notice: the score could not be sent to the server. This might be caused by poor network conditions. The score is thereafore save on your device, and will be sent when it's possible.Current number of scores actions waiting to be sent: 1`);
             });
         });
     });
@@ -616,7 +504,7 @@ describe('scoresheet',function() {
             $scope.openTeamModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseTeam','foo');
             $scope.$digest();
-            expect($scope.team).toEqual(null);
+            expect($scope.team).toEqual(undefined);
         });
     });
 
@@ -637,8 +525,8 @@ describe('scoresheet',function() {
             $scope.openRoundModal('foo');
             expect(handshakeMock.$emit).toHaveBeenCalledWith('chooseRound','foo');
             $scope.$digest();
-            expect($scope.stage).toEqual(null);
-            expect($scope.round).toEqual(null);
+            expect($scope.stage).toEqual(undefined);
+            expect($scope.round).toEqual(undefined);
         });
     });
 });
