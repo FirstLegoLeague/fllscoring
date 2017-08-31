@@ -44,9 +44,8 @@ define('views/scores',[
             };
 
             $scope.publishScore = function(score) {
-                var wasPublished = score.published;
                 score.published = true;
-                saveScore(score, wasPublished);
+                saveScore(score);
             };
 
             $scope.unpublishScore = function(score) {
