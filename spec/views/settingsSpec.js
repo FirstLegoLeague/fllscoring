@@ -15,7 +15,7 @@ describe('settings', function() {
             $scope = $rootScope.$new();
             settingsMock = createSettingsMock($q, {});
             handshakeMock = createHandshakeMock($q);
-            stagesMock = createStagesMock();
+            stagesMock = createStagesMock($q);
             controller = $controller('settingsCtrl', {
                 '$scope': $scope,
                 '$stages': stagesMock,

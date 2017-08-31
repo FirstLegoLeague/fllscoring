@@ -9,6 +9,7 @@ function createStagesMock() {
     return {
         stages: stages,
         allStages: stages,
+        init: jasmine.createSpy('save').and.returnValue(Q.when()),
         get: function(id) {
             var i;
             for (i = 0; i < stages.length; i++) {
@@ -16,7 +17,7 @@ function createStagesMock() {
                     return stages[i];
                 }
             }
-            throw new Error("unknown stage");
+            return undefined;
         },
         save: jasmine.createSpy('save'),
         remove: jasmine.createSpy('remove'),

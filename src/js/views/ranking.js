@@ -14,11 +14,30 @@ define('views/ranking',[
         function($scope, $scores, $stages, $handshake, $message, $settings) {
             log('init ranking ctrl');
 
-            // temporary default sort values
-            $scope.sort = 'rank';
-            $scope.rev = false;
-
             $scope.scores = $scores;
+
+            function format(scoreboard) {
+                let result = {};
+                for(let stageId in scoreboard) {
+                    let stage = scoreboard[stageId];
+                    result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== undefined).length);
+                }
+                return result;
+            }
+
+            $stages.init().then(function () {
+                $scope.stages = $stages.stages;
+                $scope.stages.forEach(function (stage) {
+                    stage.sort = 'rank';
+                    stage.rev = false;
+                });
+            });
+
+            $scores.init().then(function() {
+                return $scores.getRankings();
+            }).then(function(scoreboard) {
+                $scope.scoreboard = format(scoreboard);
+            });
 
             $scope.exportRanking = function() {
                 $handshake.$emit('exportRanking',{
@@ -66,24 +85,14 @@ define('views/ranking',[
             };
 
             $scope.sortIcon = function(stage, col){
-                // got into trouble with a default sort order here...
-                var icon = '';
-                if (stage.sort == col) {
-                    if (stage.rev){
-                        icon = 'arrow_drop_down';
-                    } else {
-                        icon = 'arrow_drop_up';
-                    }
-                } else if (stage.sort === undefined && col == $scope.sort) {
-                    if (stage.rev === undefined && $scope.rev) {
-                        icon = 'arrow_drop_down';
-                    } else {
-                        icon = 'arrow_drop_up';
-                    }
-                } else {
-                    icon = ''; // no icon if column is not sorted
+                if(!angular.equals(stage.sort, col)){
+                    return '';
                 }
-                return icon;
+                if (stage.rev) {
+                    return 'arrow_drop_down';
+                } else {
+                    return 'arrow_drop_up';
+                }
             };
 
             $scope.toggle = function(stage) {

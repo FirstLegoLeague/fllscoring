@@ -1,11 +1,17 @@
 language: node_js
+dist: trusty
+sudo: true
 node_js:
-  - 0.10
+  - "stable"
 before_install:
   - "npm i -g bower karma-cli"
 before_script:
+  - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - sudo apt-get install -y libappindicator1 fonts-liberation
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
 after_script:
   - ls ./coverage
   - 'npm install coveralls@2.10.0 && cat "./coverage/Firefox 31.0.0 (Linux)/lcov.info" | coveralls'

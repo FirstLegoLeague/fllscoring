@@ -1,28 +1,45 @@
-define('views/scores',[
+define('views/scores', [
     'services/log',
     'services/ng-scores',
     'directives/really',
     'angular'
-],function(log) {
+], function (log) {
     var moduleName = 'scores';
-    return angular.module(moduleName,[]).controller(moduleName+'Ctrl',[
-        '$scope', '$scores','$teams','$stages','$window',
-        function($scope,$scores,$teams,$stages,$window) {
+    return angular.module(moduleName, ['filters']).controller(moduleName + 'Ctrl', [
+        '$scope', '$scores', '$teams', '$stages', '$window',
+        function ($scope, $scores, $teams, $stages, $window) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
             $scope.rev = true;
 
-            $scope.scores = $scores.scores;
-            $scope.stages = $stages.stages;
+            function enrich(scores) {
+                return scores.map(score => {
+                    score.team = $teams.get(score.teamNumber);
+                    score.stage = $stages.get(score.stageId);
+                    return score;
+                });
+            }
 
-            $scope.doSort = function(col, defaultSort) {
+            $scope.scores = [];
+            $scores.init().then(function () {
+                $scope.scores = enrich($scores.scores);
+                $scope.stages = $stages.stages;
+            });
+
+            $scope.$watch(function () {
+                return $scores.scores;
+            }, function () {
+                $scope.scores = enrich($scores.scores);
+            });
+
+            $scope.doSort = function (col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
 
-            $scope.sortIcon = function(col){
-                if(String($scope.sort)!== String(col)){//col and $scope.sort can be arrays, and so this is a quick and dirty way to check for equality
+            $scope.sortIcon = function (col) {
+                if (!angular.equals($scope.sort, col)) {
                     return '';
                 }
                 if ($scope.rev) {
@@ -32,59 +49,47 @@ define('views/scores',[
                 }
             };
 
-            $scope.removeScore = function(index) {
-                $scores.remove(index);
-                return $scores.save();
+            $scope.deleteScore = function (score) {
+                $scores.delete(score);
             };
-            $scope.editScore = function(index) {
-                var score = $scores.scores[index];
+
+            $scope.editScore = function (score) {
                 score.$editing = true;
             };
 
-            $scope.publishScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.publishScore = function (score) {
                 score.published = true;
                 saveScore(score);
             };
 
-            $scope.unpublishScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.unpublishScore = function (score) {
                 score.published = false;
                 saveScore(score);
             };
 
-            $scope.finishEditScore = function(index) {
+            $scope.finishEditScore = function (score) {
                 // The score entry is edited 'inline', then used to
                 // replace the entry in the scores list and its storage.
                 // Because scores are always 'sanitized' before storing,
                 // the $editing flag is automatically discarded.
-                var score = $scores.scores[index];
+                score.$editing = false;
                 saveScore(score);
             };
 
             function saveScore(score) {
                 try {
-                    $scores.update(score.index, score);
-                    $scores.save();
-                } catch(e) {
+                    $scores.update(score);
+                } catch (e) {
                     $window.alert("Error updating score: " + e);
                 }
             }
 
-            $scope.cancelEditScore = function() {
-                $scores._update();
+            $scope.cancelEditScore = function (score) {
+                score.$editing = false;
             };
 
-            $scope.pollSheets = function() {
-                return $scores.pollSheets().catch(function(err) {
-                    log("pollSheets() failed", err);
-                    $window.alert("failed to poll sheets: " + err);
-                });
-            };
-
-            $scope.refresh = function() {
+            $scope.refresh = function () {
                 $scores.load();
             };
-        }
-    ]);
+        }]);
 });
