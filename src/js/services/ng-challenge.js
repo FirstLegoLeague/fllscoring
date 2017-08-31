@@ -10,7 +10,7 @@ define('services/ng-challenge',[
             var mission;
             var settings;
             var baseUrl = ''; // loaded from settings
-            var fallBackChallenge = '2016_en_US';
+            var fallBackChallenge = '2017_en_US';
             var self;
 
             function indexObjectives(missions) {
