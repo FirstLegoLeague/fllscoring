@@ -145,10 +145,10 @@
                 return 30
             }
             if (M08_1 === '0' && M08_2 === 'yes') {
-                return 0
+                return new Error("Impossible combination")
             }
             if (M08_1 === '1' && M08_2 === 'yes') {
-                return 15
+                return new Error("Impossible combination")
             }
             if (M08_1 === '2' && M08_2 === 'yes') {
                 return 60
@@ -625,6 +625,7 @@
         "M08-scoring1": "Manhole cover(s) that are flipped over past vertical (and never reached Base)",
         "M08-scoring2": "2 in separate Tripod targets",
         "M08-scoring3": "Both covers are flipped over and completely in separate Tripod targets",
+        "M08-error": "Impossible combination",
         "M09-name": "M09 Tripod",
         "M09-desc": "Move the inspection camera Tripod.",
         "M09-scoring1": "All the Tripod’s feet are touching the mat",

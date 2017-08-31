@@ -41,6 +41,7 @@
         <string id="M08-scoring1">                  Manhole cover(s) that are flipped over past vertical (and never reached Base)</string>
         <string id="M08-scoring2">                  2 in separate Tripod targets</string>
         <string id="M08-scoring3">                  Both covers are flipped over and completely in separate Tripod targets</string>
+        <string id="M08-error">                     Impossible combination</string>
         
         <string id="M09-name">                      M09 Tripod</string>
         <string id="M09-desc">                      <![CDATA[Move the inspection camera Tripod.]]></string>
@@ -222,8 +223,8 @@
                 <case> <index-ref value="0" /> <index-ref value="no" /> <points amount="0"  /> </case>
                 <case> <index-ref value="1" /> <index-ref value="no" /> <points amount="15"  /> </case>
                 <case> <index-ref value="2" /> <index-ref value="no" /> <points amount="30"  /> </case>
-                <case> <index-ref value="0" /> <index-ref value="yes" /> <points amount="0"  /> </case>
-                <case> <index-ref value="1" /> <index-ref value="yes" /> <points amount="15"  /> </case>
+                <case> <index-ref value="0" /> <index-ref value="yes" /> <error message="M08-error" /> </case>
+                <case> <index-ref value="1" /> <index-ref value="yes" /> <error message="M08-error" /> </case>
                 <case> <index-ref value="2" /> <index-ref value="yes" /> <points amount="60"  /> </case>
             </cases>
         </score>
