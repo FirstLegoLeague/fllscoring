@@ -14,12 +14,14 @@ define('services/ng-message',[
             var isInitializedPromise;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
+            var socketOpen;
 
             function init() {
-                if (isInitializedPromise) {
+                if (isInitializedPromise && socketOpen) {
                     return isInitializedPromise;
                 }
                 var def = $q.defer();
+                socketOpen = true;
                 isInitializedPromise = def.promise;
                 return $settings.init().then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
@@ -39,6 +41,7 @@ define('services/ng-message',[
                         log("socket error", e);
                     };
                     ws.onclose = function() {
+                        socketOpen = false;
                         log("socket close");
                     };
                     ws.onmessage = function(msg) {
