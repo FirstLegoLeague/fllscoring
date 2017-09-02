@@ -74,7 +74,7 @@ exports.route = function(app) {
                 return rounds;
             },{});
             res.json(published);
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(utils.sendError(res)).done();
     });
 
     //get scores by round
@@ -86,7 +86,7 @@ exports.route = function(app) {
                 return score.published && score.round === round;
             });
             res.json(scoresForRound);
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(utils.sendError(res)).done();
     });
 
     //save a new score
@@ -106,7 +106,7 @@ exports.route = function(app) {
         }))
         .then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(utils.sendError(res)).done();
 
     });
 
@@ -121,7 +121,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(utils.sendError(res)).done();
     });
 
     //edit a score at an id
@@ -136,7 +136,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(utils.sendError(res)).done();
     });
 
 
