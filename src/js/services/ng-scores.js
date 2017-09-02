@@ -129,7 +129,6 @@ define('services/ng-scores',[
 
             this._updating = 0;
             this._initialized = null; // Promise<void>
-            this._pollingSheets = null; // Promise<void>
             this.init();
         }
 
@@ -310,85 +309,6 @@ define('services/ng-scores',[
             if (this._updating === 0) {
                 this._update();
             }
-        };
-
-        /**
-         * Poll storage for any new score sheets.
-         * Ignore already processed sheets, add a new score entry for each
-         * new sheet.
-         * FIXME: this is a temporary hack to get basic multi-user scoring
-         * working very quickly. Functionality like this should be moved to
-         * a server-instance and/or be distributed. The reason for integrating
-         * it directly in $scores for now, is that this reduces the change of
-         * having the state of processed sheets getting out of sync with the
-         * list of scores.
-         */
-        Scores.prototype.pollSheets = function() {
-            var self = this;
-            // Prevent (accidentally) performing the check in parallel
-            if (self._pollingSheets) {
-                return self._pollingSheets;
-            }
-
-            self._pollingSheets = $fs.list("scoresheets/").catch(function(err) {
-                // Ignore the fact that there are no sheets at all yet
-                if (err.status === 404) {
-                    return [];
-                }
-                // Convert to 'normal' errors in case of XHR response
-                if (err.status && err.responseText) {
-                    throw new Error(format("error {0} ({1}): {2}",
-                        err.status, err.statusText,
-                        err.responseText
-                    ));
-                }
-                // Otherwise, pass the error on
-                if (err instanceof Error) {
-                    throw err;
-                }
-                // Fallback
-                throw new Error("unknown error: " + String(err));
-            }).then(function(filenames) {
-                var promises = [];
-                // Walk over all sheets, find the 'new' ones
-                filenames.forEach(function(filename) {
-                    if (filename in self._sheets) {
-                        return;
-                    }
-                    // Retrieve the new sheet
-                    var p = $fs.read("scoresheets/" + filename).then(function(sheet) {
-                        // Convert to score entry and add to list
-                        var score = {
-                            file: filename,
-                            teamNumber: sheet.teamNumber !== undefined ? sheet.teamNumber : sheet.team.number,
-                            stageId: sheet.stageId !== undefined ? sheet.stageId : sheet.stage.id,
-                            round: sheet.round,
-                            score: sheet.score,
-                            table: sheet.table
-                        };
-                        self.add(score);
-                        // Mark as processed
-                        self._sheets[filename] = true;
-                        log(format("Added new scoresheet: stage {0}, round {1}, team {2}, score {3}",
-                            score.stageId, score.round, score.teamNumber, score.score
-                        ));
-                    });
-                    promises.push(p);
-                });
-                // Make sure to wait for all sheets to be processed
-                // before resolving the promise.
-                return $q.all(promises).finally(function() {
-                    // Always save scores if there was work to do,
-                    // even in case of errors, as some scores may still
-                    // have been added successfully.
-                    if (promises.length > 0) {
-                        return self.save();
-                    }
-                });
-            }).finally(function() {
-                self._pollingSheets = null;
-            });
-            return self._pollingSheets;
         };
 
         Scores.prototype._update = function(response) {

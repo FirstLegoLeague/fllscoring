@@ -56,13 +56,6 @@ define('views/scores',[
                 $scores._update();
             };
 
-            $scope.pollSheets = function() {
-                return $scores.pollSheets().catch(function(err) {
-                    log("pollSheets() failed", err);
-                    $window.alert("failed to poll sheets: " + err);
-                });
-            };
-
             $scope.refresh = function() {
                 $scores.load();
             };
