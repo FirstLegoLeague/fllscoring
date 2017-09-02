@@ -242,7 +242,7 @@ define('views/scoresheet',[
                 data.signature = $scope.signature;
                 data.score = $scope.score();
 
-                data.filename = [
+                data.file = [
                     'score',
                     data.stage.id,
                     'round' + data.round,

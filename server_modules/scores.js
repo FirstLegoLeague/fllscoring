@@ -101,6 +101,7 @@ exports.route = function(app) {
                 score.id = id();
             }
             result.scores.push(score);
+            result.sheets.push(score.file)
             return result;
         }))
         .then(function(scores) {
@@ -164,4 +165,74 @@ changeScores(function(scores) {
         throw new Error('Unkown scores version');
     }
 
+});
+
+// Polling for sheets automatically on server load
+
+function sanitizeScore(score) {
+    // Passthrough for already valid inputs
+    if (typeof score === "number")
+        return score;
+    switch (score) {
+        case "dnc":
+        case "dsq":
+        case null:
+            return score;
+    }
+    // Accept numbers stored as strings
+    var n = parseInt(score, 10);
+    if (String(n) === score)
+        return n;
+    // Try to convert some spellings of accepted strings
+    if (typeof score === "string") {
+        var s = score.toLowerCase();
+        switch (s) {
+            case "dnc":
+            case "dsq":
+                return s;
+            case "":
+                return null;
+        }
+    }
+    // Pass through the rest
+    log("Warning: invalid score " + score);
+    return score;
+}
+
+function loadScoresheetScore(filename) {
+    return fs.readJsonFile(fileSystem.getDataFilePath("scoresheets/" + score.file)).then(function(scoresheet) {
+        return {
+            file: (entry.file !== undefined && entry.file !== null) ? String(entry.file) : "",
+            teamNumber: parseInt((entry.teamNumber !== undefined) ? entry.teamNumber : entry.team.number, 10),
+            stageId: String((entry.stageId !== undefined) ? entry.stageId : entry.stage.id),
+            round: parseInt(entry.round, 10),
+            score: sanitizeScore(entry.score), // can be Number, null, "dnc", etc.
+            originalScore: parseInt(entry.originalScore !== undefined ? entry.originalScore : entry.score, 10),
+            edited: entry.edited !== undefined ? String(entry.edited) : undefined, // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
+            published: !!entry.published,
+            table: entry.table
+        };
+    });
+}
+
+changeScores(function(scores) {
+    return fileSystem.filesInDir('data/scoresheet').then(function(files) {
+        var promises = []
+
+        for(var i = 0; i < files.length; i++) {
+            if(!scores.sheets.includes(files[i])) {
+                var promise = loadScoresheetScore(files[i]).then(function(score) {
+                    scores.scores.push(score);
+                    scores.sheets.push(files[i]);
+                }).catch(function(err) {
+                    log.error(`Error reading scoresheet ${files[i]}: ${err}`);
+                });
+                promises.push(promise);
+            }
+        }
+
+        return Q.all(promises).spread(function() {
+            return scores;
+        });
+    });
 });
