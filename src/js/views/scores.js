@@ -21,7 +21,7 @@ define('views/scores',[
                 $scope.sort = col;
             };
             $scope.removeScore = function(scoreId) {
-                return $scores.remove(scoreId);
+                return $scores.delete(scoreId);
             };
             $scope.editScore = function(score) {
                 score.$editing = true;
