@@ -12,6 +12,7 @@ define('services/ng-message',[
         '$http','$settings','$q',
         function($http,$settings,$q) {
             var ws;
+            var listeners = [];
 
             function init() {
                 if (ws) {
@@ -37,10 +38,17 @@ define('services/ng-message',[
                     ws.onclose = function() {
                         log("socket close");
                     };
-                    ws.onmessage = function(msg) {
-                        log("socket message",msg);
-                        // var data = JSON.parse(msg.data);
-                        // handleMessage(data);
+                    ws.onmessage = function(msg)function(msg) {
+                        var data = JSON.parse(msg.data);
+                        var headers = JSON.parse(msg.headers);
+                        var topic = data.topic;
+
+                        listeners.filter((listener) => {
+                            return (typeof(listener.topic) === 'string' && topic === listener.topic) ||
+                            (listener.topic instanceof RegExp && topic.matches(listener.topic));
+                        }).forEach(function(listener) {
+                            listener.handler(data, msg);
+                        });
                     };
                     return def.promise;
                 });
@@ -50,13 +58,17 @@ define('services/ng-message',[
             return {
                 send: function(topic,data) {
                     return init().then(function(ws) {
+                        data = data || {};
                         ws.send(JSON.stringify({
                             type: "publish",
                             node: ws.node,
                             topic: topic,
-                            data: data
+                            data: data,
                         }));
                     });
+                },
+                on: function(topic, handler) {
+                    listeners.push({ topic: topic, handler: handler });
                 }
             };
         }
