@@ -70,6 +70,20 @@ exports.readJsonFile = function(file) {
     return exports.readFile(file).then(parseData);
 };
 
+exports.filesInDir = function(path) {
+    path = exports.resolve(path);
+
+    return Q.promise(function(resolve, reject) {
+        fs.readdir(path, (err, files) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(files);
+            }
+        });
+    });
+};
+
 exports.route = function(app) {
 
     //reading the "file system"
