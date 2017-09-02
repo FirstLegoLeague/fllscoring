@@ -12,7 +12,7 @@ define('services/ng-scores',[
 
     // Current file version for scores.
     // Increment when adding/removing 'features' to stored scores.
-    var SCORES_VERSION = 2;
+    var SCORES_VERSION = 3;
 
     return module.service('$scores',
         ['$rootScope', '$fs', '$stages', '$q', '$teams',
@@ -157,24 +157,6 @@ define('services/ng-scores',[
         };
 
 
-        Scores.prototype.clear = function() {
-            this._rawScores = [];
-            this._update();
-        };
-
-        Scores.prototype.save = function() {
-            var data = {
-                version: 2,
-                scores: this._rawScores,
-                sheets: Object.keys(this._sheets),
-            };
-            return $fs.write('scores.json', data).then(function() {
-                log('scores saved');
-            }, function(err) {
-                log('scores write error', err);
-            });
-        };
-
         Scores.prototype.load = function() {
             var self = this;
             return $fs.read('scores.json').then(function(res) {
@@ -290,27 +272,30 @@ define('services/ng-scores',[
             };
         }
 
-        Scores.prototype.add = function(score) {
-            // Create a copy of the score, in case the
-            // original score is being modified...
-            this._rawScores.push(sanitizeEntry(score));
-            this._update();
+        Scores.prototype.create = function(scoresheet) {
+            var self = this;
+
+            var score = sanitizeEntry(scoresheet);
+            return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
+                self._rawScores.push(score);
+            }).then((res) => self._update(res));
         };
 
-        /**
-         * Update score at given index.
-         * This differs from e.g. remove(index); add(score); in that
-         * it ensures that only allowed changes are made, and marks the
-         * the score as modified.
-         */
-        Scores.prototype.update = function(index, score) {
-            if (index < 0 || index >= this._rawScores.length) {
-                throw new RangeError("unknown score index: " + index);
-            }
-            var newScore = sanitizeEntry(score);
-            newScore.edited = (new Date()).toString();
-            this._rawScores.splice(index, 1, newScore);
-            this._update();
+        Scores.prototype.delete = function(score) {
+            var self = this;
+
+            return $independence.act('scores','/scores/delete/' + score.id, {}, function() {
+                self._rawScores.splice(self.scores.findIndex(s => s.id === score.id), 1);
+            }).then((res) => self._update(res));
+        };
+
+        Scores.prototype.update = function(score) {
+            var self = this;
+
+            score.edited = (new Date()).toString();
+            return $independence.act('scores','/scores/update/' + score.id, score, function() {
+                self._rawScores[self.scores.findIndex(s => s.id === score.id)] = score;
+            }).then((res) => self._update(res));
         };
 
         Scores.prototype.beginupdate = function() {
@@ -406,9 +391,14 @@ define('services/ng-scores',[
             return self._pollingSheets;
         };
 
-        Scores.prototype._update = function() {
+        Scores.prototype._update = function(response) {
             if (this._updating > 0) {
                 return;
+            }
+
+            if(response) {
+                this._rawScores = response.scores;
+                this._sheets = response.sheets;
             }
 
             var self = this;

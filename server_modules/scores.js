@@ -38,7 +38,7 @@ function changeScores(action) {
         console.log("catching");
         if(err.message === 'file not found') {
             console.log("hells yeah!");
-            return { version:3, scores: [] };
+            return { version:3, scores: [], sheets: [] };
         } else {
             console.log("ho no! " + err.message);
             throw err;
@@ -148,7 +148,8 @@ changeScores(function(scores) {
         scores.forEach(score => score.id = id())
         return {
             version: 3,
-            scores: scores
+            scores: scores,
+            sheets: []
         }
 
     } else if(scores.version === 3) {
