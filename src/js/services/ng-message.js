@@ -13,6 +13,7 @@ define('services/ng-message',[
         function($http,$settings,$q) {
             var ws;
             var listeners = [];
+            var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
 
             function init() {
                 if (ws) {
@@ -43,6 +44,9 @@ define('services/ng-message',[
                         var headers = JSON.parse(msg.headers);
                         var topic = data.topic;
 
+                        msg.from = headers["scoring-token"];;
+                        msg.fromMe = msg.from === token;
+
                         listeners.filter((listener) => {
                             return (typeof(listener.topic) === 'string' && topic === listener.topic) ||
                             (listener.topic instanceof RegExp && topic.matches(listener.topic));
@@ -64,6 +68,7 @@ define('services/ng-message',[
                             node: ws.node,
                             topic: topic,
                             data: data,
+                            headers: { "scoring-token": token }
                         }));
                     });
                 },
