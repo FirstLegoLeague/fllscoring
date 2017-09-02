@@ -140,3 +140,27 @@ exports.route = function(app) {
 
 
 };
+
+// For backward compatibility
+
+changeScores(function(scores) {
+    if(typeof(scores.version) === 'undefined') {
+        scores.forEach(score => score.id = id())
+        return {
+            version: 3,
+            scores: scores
+        }
+
+    } else if(scores.version === 3) {
+        return scores;
+
+    } else if(scores.version === 2) {
+        scores.scores.forEach(score => score.id = id())
+        scores.version = 3;
+        return scores;
+
+    } else {
+        throw new Error('Unkown scores version');
+    }
+
+});
