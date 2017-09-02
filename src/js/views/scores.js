@@ -55,10 +55,6 @@ define('views/scores',[
                 score.$editing = false;
                 $scores._update();
             };
-
-            $scope.refresh = function() {
-                $scores.load();
-            };
         }
     ]);
 });
