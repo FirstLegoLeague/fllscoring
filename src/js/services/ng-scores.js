@@ -15,8 +15,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 3;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams',
-        function($rootScope, $fs, $stages, $q, $teams) {
+        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$message',
+        function($rootScope, $fs, $stages, $q, $teams, $message) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -152,6 +152,13 @@ define('services/ng-scores',[
                         return self.load();
                     });
             }
+            message.on('scores:reload', function(data, msg) {
+                if(msg.fromMe){
+                    return;
+                }
+                self.load();
+            });
+
             return this._initialized;
         };
 
@@ -350,6 +357,7 @@ define('services/ng-scores',[
                 }
             });
             $rootScope.$broadcast('validationError', this.validationErrors);
+            $message.send('scores:reload');
         };
 
         /**
