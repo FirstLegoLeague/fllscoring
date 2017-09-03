@@ -220,32 +220,32 @@ define('views/scoresheet',[
                     return $q.reject(new Error('no team selected, do so first'));
                 }
 
-                var data = angular.copy($scope.field);
-                data.scoreEntry = new $score($scope.scoreEntry);
-                data.team = $scope.scoreEntry.team;
-                data.stage = $scope.scoreEntry.stage;
-                data.round = $scope.scoreEntry.round;
-                data.table = $scope.scoreEntry.table;
-                data.referee = $scope.referee;
-                data.signature = $scope.signature;
-                data.scoreEntry.score = $scope.score();
-                data.scoreEntry.calcFilename();
+                var scoresheet = angular.copy($scope.field);
+                var scoreEntry = new $score($scope.scoreEntry);
+                scoresheet.team = $scope.scoreEntry.team;
+                scoresheet.stage = $scope.scoreEntry.stage;
+                scoresheet.round = $scope.scoreEntry.round;
+                scoresheet.table = $scope.scoreEntry.table;
+                scoresheet.referee = $scope.referee;
+                scoresheet.signature = $scope.signature;
+                scoreEntry.score = $scope.score();
+                scoreEntry.calcFilename();
 
-                return $scores.create(data).then(function() {
+                return $scores.create(scoresheet, scoreEntry).then(function() {
                     log('result saved: ');
+                    message = `Thanks for submitting a score of ${scoreEntry.score} points for team (${scoresheet.team.number})` +
+                        ` ${scoresheet.team.name} in ${scoresheet.stage.name} ${scoresheet.round}.`;
                     $scope.clear();
-                    message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
-                        ` ${data.team.name} in ${data.stage.name} ${data.round}.`;
                     $window.alert(message);
                 }).catch(function(err) {
-                    log('result saved: ');
-                    $scope.clear();
-                    message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
-                        ` ${data.team.name} in ${data.stage.name} ${data.round}.` + `
+                    log(`Error: ${err}`);
+                    message = `Thanks for submitting a score of ${scoreEntry.score} points for team` +
+                        ` ${scoresheet.team.name} (${scoresheet.team.number}) in ${scoresheet.stage.name} ${scoresheet.round}.` + `
 Notice: the score could not be sent to the server. ` +
                             `This might be caused by poor network conditions. ` +
                             `The score is thereafore save on your device, and will be sent when it's possible.` +
                             `Current number of scores actions waiting to be sent: ${$scores.pendingActions()}`
+                    $scope.clear();
                     $window.alert(message);
                     throw err;
                 });
