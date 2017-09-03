@@ -173,7 +173,7 @@ define('views/ranking',[
             }, true);
 
             $scope.$watch(() => $scores.scoreboard, function () {
-                $scope.scoreboard = format($scores.scoreboard)
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
 
             $scope.getRoundLabel = function(round){
