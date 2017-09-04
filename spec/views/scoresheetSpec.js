@@ -456,7 +456,7 @@ describe('scoresheet',function() {
             });
         });
 
-        it('should save',function() {
+        it('should save as unpublished by default',function(done) {
             $scope.scoreEntry.id = "abcdef01";
             $scope.scoreEntry.team = dummyTeam;
             $scope.field = {};
@@ -488,10 +488,11 @@ describe('scoresheet',function() {
                         calcFilename: fileName
                     });
                 expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
+                done();
             });
         });
 
-        it('should save the score as published if the settings allow',function() {
+        it('should save the score as published if the settings allow',function(done) {
             settingsMock.settings.autoPublish = true;
             $scope.scoreEntry.id = "abcdef01";
             $scope.scoreEntry.team = dummyTeam;
@@ -526,6 +527,7 @@ describe('scoresheet',function() {
 
                 expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
                          ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
+                done();
             });
         });
 
