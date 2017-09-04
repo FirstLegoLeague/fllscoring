@@ -10,7 +10,7 @@ describe('ranking', function() {
         number: '123',
         name: 'foo'
     };
-    var fsMock, stagesMock, scoresMock, handshakeMock, messageMock;
+    var fsMock, stagesMock, scoresMock, handshakeMock, messageMock, settingsMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -20,12 +20,14 @@ describe('ranking', function() {
             handshakeMock = createHandshakeMock($q);
             stagesMock = createStagesMock();
             messageMock = createMessageMock();
+            settingsMock = createSettingsMock($q, {});
             controller = $controller('rankingCtrl', {
                 '$scope': $scope,
                 '$scores': scoresMock,
                 '$stages': stagesMock,
                 '$handshake': handshakeMock,
-                '$message': messageMock
+                '$message': messageMock,
+                '$settings': settingsMock
             });
         });
     });
