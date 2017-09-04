@@ -18,6 +18,10 @@ define('views/clock', [
             $message.on('clock:stop', () => $scope.stop(), true);
             $message.on('clock:pause', () => $scope.pause(), true);
 
+            $scope.getStateClass = function () {
+               return $scope.state;
+            };
+
             $scope.notifyAndExecute = function (command) {
                 $message.send(`clock:${command}`);
                 $scope[command]();
