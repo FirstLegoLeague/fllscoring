@@ -72,18 +72,22 @@ describe('scores', function() {
     });
 
     describe('publishScore',function() {
-        it('should publish a score and save it',function() {
+        it('should update the score with published as true',function() {
             var id = 'afg1jkhg';
-            $scope.publishScore({ id: id });
-            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: true});
+            $scope.publishScore({ id: id , published: false});
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: true}, undefined);//undefined because second parameter is not used
+            $scope.publishScore({id: id, published: true});
+            expect(scoresMock.update).toHaveBeenCalledWith({id: id, published: true}, undefined);//undefined because second parameter is not used
         });
     });
 
     describe('unpublishScore',function() {
-        it('should unpublish a score and save it',function() {
+        it('should update the score with published as false, and the correct wasPublished value',function() {
             var id = 'afg1jkhg';
-            $scope.unpublishScore({ id: id });
-            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: false });
+            $scope.unpublishScore({ id: id , published: false});
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: false}, false);
+            $scope.unpublishScore({id: id, published: true});
+            expect(scoresMock.update).toHaveBeenCalledWith({id: id, published: false}, false);
         });
     });
 
@@ -92,7 +96,7 @@ describe('scores', function() {
             var score = { id: 'afg1jkhg' };
             $scope.editScore(score);
             $scope.finishEditScore(score);
-            expect(scoresMock.update).toHaveBeenCalledWith({ id: 'afg1jkhg', $editing: false });
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: 'afg1jkhg', $editing: false }, undefined);//undefined because second parameter is not used
         });
         it('should alert if an error is thrown from scores',function() {
             scoresMock.update.and.throwError('update error');

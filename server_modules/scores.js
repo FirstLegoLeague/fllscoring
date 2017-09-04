@@ -22,7 +22,6 @@ function changeScores(action) {
         var path = fileSystem.getDataFilePath('scores.json');
         lockfile.lock('scores.json.lock', { retries: 5, retryWait: 100 }, function (err) {
             if(err) rej(err);
-
             fileSystem.readJsonFile(path)
             .catch(function(err) {
                 if(err.message === 'file not found') {

@@ -50,8 +50,9 @@ define('views/scores',[
             };
 
             $scope.unpublishScore = function(score) {
+                var wasPublished = score.published;
                 score.published = false;
-                saveScore(score);
+                saveScore(score, wasPublished);
             };
 
             $scope.finishEditScore = function(score) {
@@ -63,9 +64,9 @@ define('views/scores',[
                 saveScore(score);
             };
 
-            function saveScore(score) {
+            function saveScore(score, forceAutoBroadcast) {
                 try {
-                    $scores.update(score);
+                    $scores.update(score, forceAutoBroadcast);
                 } catch(e) {
                     $window.alert("Error updating score: " + e);
                 }

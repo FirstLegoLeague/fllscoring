@@ -5,13 +5,14 @@ define('views/ranking',[
     'services/ng-scores',
     'services/ng-handshake',
     'services/ng-message',
+    'services/ng-settings',
     'controllers/ExportRankingDialogController',
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
     return angular.module(moduleName,['ExportRankingDialog']).controller(moduleName+'Ctrl', [
-        '$scope', '$scores', '$stages','$handshake','$message',
-        function($scope, $scores, $stages, $handshake, $message) {
+        '$scope', '$scores', '$stages','$handshake','$message', '$settings',
+        function($scope, $scores, $stages, $handshake, $message, $settings) {
             log('init ranking ctrl');
 
             // temporary default sort values
@@ -29,7 +30,9 @@ define('views/ranking',[
                 return result;
             }
 
-            $scope.$watch(function() {
+          $settings.init();
+
+          $scope.$watch(function() {
                 return $scores.scoreboard;
             }, function () {
                 $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
@@ -48,32 +51,7 @@ define('views/ranking',[
             };
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
-            $scope.broadcastRanking = function(stage) {
-                // Send generic ranking info on bus, but filter it down a bit
-                // to not include Angular-injected stuff (yuk), but also omit
-                // the full scoresheets and their validation results etc.
-                // Having it spelled out exactly also helps to have some kind of
-                // 'interface' defined to the outside world.
-                var rankingMessage = {
-                    stage: {
-                        id: stage.id,
-                        name: stage.name,
-                        rounds: stage.rounds,
-                    },
-                    ranking: $scope.scoreboard[stage.id].map(function (item) {
-                        return {
-                            rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
-                            team: {
-                                number: item.team.number,
-                                name: item.team.name,
-                            },
-                            scores: item.scores,
-                            highest: item.highest,
-                        };
-                    }),
-                };
-                $message.send('scores:ranking', rankingMessage);
-            };
+            $scope.broadcastRanking = (stage) =>  $scores.broadcastRanking(stage);
 
             $scope.doSort = function(stage, col, defaultSort) {
                 if (stage.sort === undefined) {

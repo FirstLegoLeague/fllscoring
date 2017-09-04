@@ -13,6 +13,7 @@ describe('scoresheet',function() {
         name: 'foo'
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
+    var dummySettings = {bla: 'blu'};
     var fsMock = createFsMock({"settings.json": []});
     var settingsMock, handshakeMock, challengeMock;
 
@@ -22,7 +23,7 @@ describe('scoresheet',function() {
         angular.mock.module('RoundDialog');
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
-            settingsMock = createSettingsMock($q,'settings');
+            settingsMock = createSettingsMock($q, dummySettings);
             handshakeMock = createHandshakeMock($q);
             challengeMock = createChallengeMock();
             scoresMock = createScoresMock();
@@ -60,7 +61,7 @@ describe('scoresheet',function() {
             expect($scope.settings).toEqual({});
             expect($scope.missions).toEqual([]);
             $scope.$digest();
-            expect($scope.settings).toEqual('settings');
+            expect($scope.settings).toEqual(dummySettings);
             expect($scope.referee).toEqual(null);
             expect($scope.scoreEntry.table).toEqual(7);
         });
@@ -482,6 +483,41 @@ describe('scoresheet',function() {
                         team: dummyTeam,
                         stage: dummyStage,
                         round: 1,
+                        published: false,
+                        calcFilename: fileName
+                    },
+                    team: dummyTeam,
+                    stage: dummyStage,
+                    round: 1,
+                    table: 7,
+                    referee: 'foo',
+                    signature: [ 1, 2, 3, 4 ]
+                });
+                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.');
+            });
+        });
+        it('should save the score as published if the settings allow',function() {
+            settingsMock.settings.autoPublish = true;
+            $scope.scoreEntry.id = "abcdef01";
+            $scope.scoreEntry.team = dummyTeam;
+            $scope.field = {};
+            $scope.scoreEntry.stage = dummyStage;
+            $scope.scoreEntry.round = 1;
+            $scope.scoreEntry.table = 7;
+            var fileName = () => 'filename.json';
+            $scope.scoreEntry.calcFilename = fileName;
+            $scope.referee = 'foo';
+            $scope.signature = [1,2,3,4];
+            return $scope.save().then(function() {
+                expect(scoresMock.create).toHaveBeenCalledWith({
+                    scoreEntry: {
+                        score: 0,
+                        id: 'abcdef01',
+                        table: 7,
+                        team: dummyTeam,
+                        stage: dummyStage,
+                        round: 1,
+                        published: true,
                         calcFilename: fileName
                     }
                 );
