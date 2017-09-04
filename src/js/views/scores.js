@@ -15,17 +15,13 @@ define('views/scores', [
 
             function enrich(scores) {
                 return scores.map(score => {
-                    score.team = $teams.get(score.teamNumber);
-                    score.stage = $stages.get(score.stageId);
-                    return score;
+                    var enrichedScore = {};
+                    for(var key in score) enrichedScore[key] = score[key];
+                    enrichedScore.team = $teams.get(score.teamNumber);
+                    enrichedScore.stage = $stages.get(score.stageId);
+                    return enrichedScore;
                 });
             }
-
-            $scope.scores = [];
-            $scores.init().then(function () {
-                $scope.scores = enrich($scores.scores);
-                $scope.stages = $stages.stages;
-            });
 
             $scope.$watch(function () {
                 return $scores.scores;
@@ -33,7 +29,11 @@ define('views/scores', [
                 $scope.scores = enrich($scores.scores);
             });
 
-            $scope.doSort = function (col, defaultSort) {
+            $scores.init().then(function() {
+                $scope.stages = $stages.stages;
+            });
+
+            $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };

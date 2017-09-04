@@ -11,20 +11,24 @@ define('services/ng-message',[
     return module.service('$message',[
         '$http','$settings','$q',
         function($http,$settings,$q) {
-            var ws;
+            var isInitializedPromise;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
+            var socketOpen;
 
             function init() {
-                if (ws) {
-                    return $q.when(ws);
+                if (isInitializedPromise && socketOpen) {
+                    return isInitializedPromise;
                 }
+                var def = $q.defer();
+                socketOpen = true;
+                isInitializedPromise = def.promise;
                 return $settings.init().then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
                         throw new Error('no message bus configured');
                     }
-                    var def = $q.defer();
-                    ws = new WebSocket(settings.mhub);
+
+                    var ws = new WebSocket(settings.mhub);
                     ws.node = settings.node;
                     ws.onopen = function() {
                         ws.send(JSON.stringify({
@@ -37,17 +41,16 @@ define('services/ng-message',[
                         log("socket error", e);
                     };
                     ws.onclose = function() {
+                        socketOpen = false;
                         log("socket close");
                     };
                     ws.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
+                        var headers = JSON.parse(msg.headers);
                         var topic = data.topic;
 
-                        msg.from = data.data._token;
-                        msg.fromMe = data.data._token === token;
-                        delete data.data._token;
-                        if(Object.keys(data).length === 0)
-                            delete data.data;
+                        msg.from = headers["scoring-token"];;
+                        msg.fromMe = msg.from === token;
 
                         listeners.filter((listener) => {
                             return (typeof(listener.topic) === 'string' && topic === listener.topic) ||
@@ -56,7 +59,7 @@ define('services/ng-message',[
                             listener.handler(data, msg);
                         });
                     };
-                    return def.promise;
+                    return isInitializedPromise;
                 });
             }
 
@@ -65,16 +68,17 @@ define('services/ng-message',[
                 send: function(topic,data) {
                     return init().then(function(ws) {
                         data = data || {};
-                        data._token = token;
                         ws.send(JSON.stringify({
                             type: "publish",
                             node: ws.node,
                             topic: topic,
-                            data: data
+                            data: data,
+                            headers: { "scoring-token": token }
                         }));
                     });
                 },
                 on: function(topic, handler) {
+                    init();
                     listeners.push({ topic: topic, handler: handler });
                 }
             };
