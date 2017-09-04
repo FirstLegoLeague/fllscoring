@@ -504,18 +504,25 @@ describe('scoresheet',function() {
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(scoresMock.create).toHaveBeenCalledWith({
-                    scoreEntry: {
+                expect(scoresMock.create).toHaveBeenCalledWith(
+                    {
+                        team: dummyTeam,
+                        stage: dummyStage,
+                        round: 1,
+                        table: 7,
+                        referee: 'foo',
+                        signature: [ 1, 2, 3, 4 ]
+                    },
+                    {
                         score: 0,
                         id: 'abcdef01',
                         table: 7,
                         team: dummyTeam,
                         stage: dummyStage,
                         round: 1,
-                        published: true,
-                        calcFilename: fileName
-                    }
-                });
+                        calcFilename: fileName,
+                        published: true
+                    });
 
                 expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
                          ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
