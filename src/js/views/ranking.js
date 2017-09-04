@@ -21,7 +21,7 @@ define('views/ranking',[
 
             $scope.scores = $scores;
 
-            function format(scoreboard) {
+            function removeEmptyRanks(scoreboard) {
                 let result = {};
                 for(let stageId in scoreboard) {
                     let stage = scoreboard[stageId];
@@ -30,12 +30,17 @@ define('views/ranking',[
                 return result;
             }
 
-            $settings.init();
+          $settings.init();
+
+          $scope.$watch(function() {
+                return $scores.scoreboard;
+            }, function () {
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
+            }, true);
+
             $scores.init().then(function() {
                 $scope.stages = $stages.stages;
                 return $scores.getRankings();
-            }).then(function(scoreboard) {
-                $scope.scoreboard = format(scoreboard);
             });
 
             $scope.exportRanking = function() {
@@ -44,7 +49,6 @@ define('views/ranking',[
                     stages: $scope.stages
                 });
             };
-
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
             $scope.broadcastRanking = (stage) =>  $scores.broadcastRanking(stage);
@@ -147,7 +151,7 @@ define('views/ranking',[
             }, true);
 
             $scope.$watch(() => $scores.scoreboard, function () {
-                $scope.scoreboard = format($scores.scoreboard)
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
 
             $scope.getRoundLabel = function(round){

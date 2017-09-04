@@ -14,12 +14,14 @@ define('services/ng-message',[
             var isInitializedPromise;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
+            var socketOpen;
 
             function init() {
-                if (isInitializedPromise) {
+                if (isInitializedPromise && socketOpen) {
                     return isInitializedPromise;
                 }
                 var def = $q.defer();
+                socketOpen = true;
                 isInitializedPromise = def.promise;
                 return $settings.init().then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
@@ -39,17 +41,16 @@ define('services/ng-message',[
                         log("socket error", e);
                     };
                     ws.onclose = function() {
+                        socketOpen = false;
                         log("socket close");
                     };
                     ws.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
+                        var headers = data.headers;
                         var topic = data.topic;
 
-                        msg.from = data.data._token;
-                        msg.fromMe = data.data._token === token;
-                        delete data.data._token;
-                        if(Object.keys(data).length === 0)
-                            delete data.data;
+                        msg.from = headers["scoring-token"];
+                        msg.fromMe = msg.from === token;
 
                         listeners.filter((listener) => {
                             return (typeof(listener.topic) === 'string' && topic === listener.topic) ||
@@ -67,16 +68,17 @@ define('services/ng-message',[
                 send: function(topic,data) {
                     return init().then(function(ws) {
                         data = data || {};
-                        data._token = token;
                         ws.send(JSON.stringify({
                             type: "publish",
                             node: ws.node,
                             topic: topic,
-                            data: data
+                            data: data,
+                            headers: { "scoring-token": token }
                         }));
                     });
                 },
                 on: function(topic, handler) {
+                    init();
                     listeners.push({ topic: topic, handler: handler });
                 }
             };

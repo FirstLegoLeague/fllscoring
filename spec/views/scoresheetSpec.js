@@ -466,9 +466,17 @@ describe('scoresheet',function() {
             $scope.scoreEntry.calcFilename = fileName;
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
-            return $scope.save().then(function() {
-                expect(scoresMock.create).toHaveBeenCalledWith({
-                    scoreEntry: {
+            return $scope.save().then(function () {
+                expect(scoresMock.create).toHaveBeenCalledWith(
+                     {
+                        team: dummyTeam,
+                        stage: dummyStage,
+                        round: 1,
+                        table: 7,
+                        referee: 'foo',
+                        signature: [1, 2, 3, 4]
+                    },
+                    {
                         score: 0,
                         id: 'abcdef01',
                         table: 7,
@@ -511,15 +519,11 @@ describe('scoresheet',function() {
                         round: 1,
                         published: true,
                         calcFilename: fileName
-                    },
-                    team: dummyTeam,
-                    stage: dummyStage,
-                    round: 1,
-                    table: 7,
-                    referee: 'foo',
-                    signature: [ 1, 2, 3, 4 ]
-                });
-                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.');
+                    }
+                );
+
+                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
+                         ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
             });
         });
         it('should alert a message if scoresheet cannot be saved', function() {
@@ -533,7 +537,7 @@ describe('scoresheet',function() {
             var oldId = $scope.uniqueId;
             scoresMock.create.and.returnValue(Q.reject(new Error('argh')));
             return $scope.save().catch(function() {
-                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.
+                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team foo (123) in Voorrondes 1.
 Notice: the score could not be sent to the server. This might be caused by poor network conditions. The score is thereafore save on your device, and will be sent when it's possible.Current number of scores actions waiting to be sent: 1`);
             });
         });

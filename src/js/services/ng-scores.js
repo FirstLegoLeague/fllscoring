@@ -205,11 +205,8 @@ define('services/ng-scores',[
             $message.send('scores:reload');
         }
 
-        Scores.prototype.create = function(scoresheet) {
+        Scores.prototype.create = function(scoresheet, score) {
             var self = this;
-
-            var score = scoresheet.scoreEntry;
-            delete scoresheet.scoreEntry;
 
             return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
                 self.scores.push(score);
@@ -232,12 +229,12 @@ define('services/ng-scores',[
             }).then((res) => self.acceptScores(res, forceAutoPublish || score.published));
         };
 
-        Scores.prototype.getRankings = function() {
+        Scores.prototype.getRankings = function(filter) {
             this.validationErrors = $validation.validate(this.scores);
 
             var self = this;
             if(this.validationErrors.length === 0) {
-                return $rankings.calculate(this.scores).then(function(scoreboard) {
+                return $rankings.calculate(this.scores, filter).then(function(scoreboard) {
                     self.scoreboard = scoreboard;
                     return scoreboard;
                 });

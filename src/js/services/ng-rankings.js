@@ -14,12 +14,12 @@ define('services/ng-rankings',[
         ['$stages','$teams','$score','$groups',
         function($stages, $teams, $score, $groups) {
 
-            function Rank(rank, team, stage) {
+            function Rank(rank, team, stage, filter) {
                 this.team = team;
                 this.stage = stage;
 
                 this.scores = [];
-                for(let i = 0; i < stage.rounds; i++) {
+                for(let i = 0; i < (filter[stage.id] || stage.rounds); i++) {
                     this.scores[i] = rank.filter(score => score.round === (i + 1))[0];
                 }
 
@@ -38,9 +38,8 @@ define('services/ng-rankings',[
             return {
                 calculate: function(scores) {
                     scores = scores.filter(score => score.published);
-                    return $teams.init().then(function() {
-                        return $stages.init();
-                    }).then(function() {
+                    return $teams.init().then(() => $stages.init())
+                    .then(function() {
                         let teams = $teams.teams;
                         let stages = $stages.stages;
                         let ranks = $groups.multigroup(scores, [score => score.stageId, score => score.teamNumber]);
@@ -53,7 +52,7 @@ define('services/ng-rankings',[
                             stageRanks[stage.id] = teams.map(function(team) {
                                 let stageRank = ranks[stage.id] || {};
                                 let teamRank = stageRank[team.number] || [];
-                                return new Rank(teamRank, team, stage);
+                                return new Rank(teamRank, team, stage, filter || {});
                             })
 
                             // Sorting by the highest score
