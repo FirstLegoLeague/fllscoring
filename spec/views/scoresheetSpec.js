@@ -112,108 +112,108 @@ describe('scoresheet',function() {
         });
     });
 
-//     describe('preventSaveErrors',function() {
-//         beforeEach(function() {
-//             //setup happy situation
-//             $scope.missions = [
-//                 {
-//                     objectives: [
-//                         {value: 1},
-//                         {value: 2}
-//                     ],
-//                     errors: []
-//                 },{
-//                     objectives: [],
-//                     errors: []
-//                 }
-//             ];
-//             $scope.scoreEntry = {
-//                 stage: 1,
-//                 round: 2,
-//                 table: 7,
-//                 team: 3
-//             };
-//             $scope.referee = 6;
-//         });
+    describe('preventSaveErrors',function() {
+        beforeEach(function() {
+            //setup happy situation
+            $scope.missions = [
+                {
+                    objectives: [
+                        {value: 1},
+                        {value: 2}
+                    ],
+                    errors: []
+                },{
+                    objectives: [],
+                    errors: []
+                }
+            ];
+            $scope.scoreEntry = {
+                stage: 1,
+                round: 2,
+                table: 7,
+                team: 3
+            };
+            $scope.referee = 6;
+        });
 
-//         it('should return empty in the happy situation',function() {
-//             expect($scope.preventSaveErrors()).toEqual([]);
-//         });
+        it('should return empty in the happy situation',function() {
+            expect($scope.preventSaveErrors()).toEqual([]);
+        });
 
-//         it('should return empty if missions not present',function() {
-//             delete $scope.missions;
-//             expect($scope.preventSaveErrors()).toEqual([]);
-//         });
+        it('should return empty if missions not present',function() {
+            delete $scope.missions;
+            expect($scope.preventSaveErrors()).toEqual([]);
+        });
 
-//         it('should return error if stage is undefined',function() {
-//             $scope.scoreEntry.stage = undefined;
-//             expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
-//         });
+        it('should return error if stage is undefined',function() {
+            $scope.scoreEntry.stage = undefined;
+            expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
+        });
 
-//         it('should return error if stage is null',function() {
-//             $scope.scoreEntry.stage = null;
-//             expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
-//         });
+        it('should return error if stage is null',function() {
+            $scope.scoreEntry.stage = null;
+            expect($scope.preventSaveErrors()).toEqual(['No stage selected']);
+        });
 
-//         it('should return error if table is undefined and asked for',function() {
-//             $scope.scoreEntry.table = undefined;
-//             $scope.settings.askTable = true;
-//             expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
-//         });
+        it('should return error if table is undefined and asked for',function() {
+            $scope.scoreEntry.table = undefined;
+            $scope.settings.askTable = true;
+            expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
+        });
 
-//         it('should return error if table is null and asked for',function() {
-//             $scope.scoreEntry.table = null;
-//             $scope.settings.askTable = true;
-//             expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
-//         });
+        it('should return error if table is null and asked for',function() {
+            $scope.scoreEntry.table = null;
+            $scope.settings.askTable = true;
+            expect($scope.preventSaveErrors()).toEqual(['No table number entered']);
+        });
 
-//         it('should return error if referee is undefined and asked for',function() {
-//             $scope.referee = undefined;
-//             $scope.settings.askReferee = true;
-//             expect($scope.preventSaveErrors()).toEqual(['No referee entered']);
-//         });
+        it('should return error if referee is undefined and asked for',function() {
+            $scope.referee = undefined;
+            $scope.settings.askReferee = true;
+            expect($scope.preventSaveErrors()).toEqual(['No referee entered']);
+        });
 
-//         it('should return error if referee is null and asked for',function() {
-//             $scope.referee = null;
-//             $scope.settings.askReferee = true;
-//             expect($scope.preventSaveErrors()).toEqual(['No referee entered']);
-//         });
+        it('should return error if referee is null and asked for',function() {
+            $scope.referee = null;
+            $scope.settings.askReferee = true;
+            expect($scope.preventSaveErrors()).toEqual(['No referee entered']);
+        });
 
-//         it('should return error if round is undefined',function() {
-//             $scope.scoreEntry.round = undefined;
-//             expect($scope.preventSaveErrors()).toEqual(['No round selected']);
-//         });
+        it('should return error if round is undefined',function() {
+            $scope.scoreEntry.round = undefined;
+            expect($scope.preventSaveErrors()).toEqual(['No round selected']);
+        });
 
-//         it('should return error if round is null',function() {
-//             $scope.scoreEntry.round = null;
-//             expect($scope.preventSaveErrors()).toEqual(['No round selected']);
-//         });
+        it('should return error if round is null',function() {
+            $scope.scoreEntry.round = null;
+            expect($scope.preventSaveErrors()).toEqual(['No round selected']);
+        });
 
-//         it('should return error if team is undefined',function() {
-//             $scope.scoreEntry.team = undefined;
-//             expect($scope.preventSaveErrors()).toEqual(['No team selected']);
-//         });
+        it('should return error if team is undefined',function() {
+            $scope.scoreEntry.team = undefined;
+            expect($scope.preventSaveErrors()).toEqual(['No team selected']);
+        });
 
-//         it('should return error if team is null',function() {
-//             $scope.scoreEntry.team = null;
-//             expect($scope.preventSaveErrors()).toEqual(['No team selected']);
-//         });
+        it('should return error if team is null',function() {
+            $scope.scoreEntry.team = null;
+            expect($scope.preventSaveErrors()).toEqual(['No team selected']);
+        });
 
-//         it('should return error when some missions have errors',function() {
-//             $scope.missions[0].errors=['foo'];
-//             expect($scope.preventSaveErrors()).toEqual(['Some missions have errors']);
-//         });
+        it('should return error when some missions have errors',function() {
+            $scope.missions[0].errors=['foo'];
+            expect($scope.preventSaveErrors()).toEqual(['Some missions have errors']);
+        });
 
-//         it('should return error when some missions have some objectives with undefined value',function() {
-//             $scope.missions[0].objectives[0].value = undefined;
-//             expect($scope.preventSaveErrors()).toEqual(['Some missions are incomplete']);
-//         });
+        it('should return error when some missions have some objectives with undefined value',function() {
+            $scope.missions[0].objectives[0].value = undefined;
+            expect($scope.preventSaveErrors()).toEqual(['Some missions are incomplete']);
+        });
 
-//         it('should return error when some missions have some objectives with null value',function() {
-//             $scope.missions[0].objectives[0].value = null;
-//             expect($scope.preventSaveErrors()).toEqual(['Some missions are incomplete']);
-//         });
-//     });
+        it('should return error when some missions have some objectives with null value',function() {
+            $scope.missions[0].objectives[0].value = null;
+            expect($scope.preventSaveErrors()).toEqual(['Some missions are incomplete']);
+        });
+    });
 
     describe('teamRoundOk',function() {
         beforeEach(function() {
