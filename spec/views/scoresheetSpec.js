@@ -484,7 +484,7 @@ describe('scoresheet',function() {
                         team: dummyTeam,
                         stage: dummyStage,
                         round: 1,
-                        published: false,
+                        published: true,
                         calcFilename: fileName
                     });
                 expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
