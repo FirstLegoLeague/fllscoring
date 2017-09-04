@@ -1,0 +1,17 @@
+<div ng-controller="clockCtrl">
+    <div class="appbar">
+        <button ng-click="toggleDrawer()">
+            <i class="material-icons">menu</i>
+        </button>
+        <h1>
+            {{currentPage.title}}
+        </h1>
+    </div>
+
+    <button type="button" ng-click="notifyAndExecute('start')">Bla</button>
+    <p>
+        {{time | time:2}}
+    </p>
+</div>
+
+
