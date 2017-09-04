@@ -46,10 +46,10 @@ define('services/ng-message',[
                     };
                     ws.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
-                        var headers = JSON.parse(msg.headers);
+                        var headers = data.headers;
                         var topic = data.topic;
 
-                        msg.from = headers["scoring-token"];;
+                        msg.from = headers["scoring-token"];
                         msg.fromMe = msg.from === token;
 
                         listeners.filter((listener) => {
