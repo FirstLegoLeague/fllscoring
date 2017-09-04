@@ -1,7 +1,7 @@
 var Lock = require('./lock');
 var utils = require('./utils');
 var fileSystem = require('./file_system');
-var log = require('./log');
+var log = require('./log').log;
 var Q = require('q');
 var id = require('uuid/v4');
 
@@ -195,12 +195,12 @@ function sanitizeScore(score) {
         }
     }
     // Pass through the rest
-    log("Warning: invalid score " + score);
+    log.warn("Invalid score " + score);
     return score;
 }
 
 function loadScoresheetScore(filename) {
-    return fs.readJsonFile(fileSystem.getDataFilePath("scoresheets/" + score.file)).then(function(scoresheet) {
+    return fileSystem.readJsonFile(fileSystem.getDataFilePath("scoresheets/" + filename)).then(function(entry) {
         return {
             file: (entry.file !== undefined && entry.file !== null) ? String(entry.file) : "",
             teamNumber: parseInt((entry.teamNumber !== undefined) ? entry.teamNumber : entry.team.number, 10),
@@ -216,7 +216,7 @@ function loadScoresheetScore(filename) {
 }
 
 changeScores(function(scores) {
-    return fileSystem.filesInDir('data/scoresheet').then(function(files) {
+    return fileSystem.filesInDir('data/scoresheets').then(function(files) {
         var promises = []
 
         for(var i = 0; i < files.length; i++) {

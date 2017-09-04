@@ -152,7 +152,7 @@ define('services/ng-scores',[
                         return self.load();
                     });
             }
-            message.on('scores:reload', function(data, msg) {
+            $message.on('scores:reload', function(data, msg) {
                 if(msg.fromMe){
                     return;
                 }
@@ -189,7 +189,7 @@ define('services/ng-scores',[
                     }
                     self.clear();
                     scores.forEach(function(score) {
-                        self.add(score);
+                        self._rawScores.push(sanitizeScore(score));
                     });
                     self._sheets = {};
                     sheetNames.forEach(function(name) { self._sheets[name] = true; });
@@ -202,20 +202,9 @@ define('services/ng-scores',[
             });
         };
 
-        Scores.prototype.remove = function(index) {
-            // TODO: this function used to remove an associated
-            // score sheet file.
-            // However, as creating that scoresheet was not
-            // the concern of this class, I (Martin) decided
-            // that removing it should not be its concern either.
-            // Note that e.g. the clear() method also did not
-            // remove 'obsolete' scoresheet files.
-            // Additionally note that a scoresheet may be the digital
-            // representation of a 'physical' scoresheet, something
-            // with a signature even, and may indeed be a very different
-            // beast than 'merely' a score entry.
-            this._rawScores.splice(index, 1);
-            this._update();
+        Scores.prototype.clear = function() {
+            this._rawScores = [];
+            this._sheets = {};
         };
 
         /**

@@ -39,7 +39,7 @@ define('services/ng-message',[
                     ws.onclose = function() {
                         log("socket close");
                     };
-                    ws.onmessage = function(msg)function(msg) {
+                    ws.onmessage = function(msg) {
                         var data = JSON.parse(msg.data);
                         var headers = JSON.parse(msg.headers);
                         var topic = data.topic;
