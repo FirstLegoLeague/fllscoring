@@ -487,7 +487,7 @@ describe('scoresheet',function() {
                         published: false,
                         calcFilename: fileName
                     });
-                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.');
+                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
             });
         });
 
