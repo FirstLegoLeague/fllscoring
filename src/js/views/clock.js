@@ -13,10 +13,23 @@ define('views/clock', [
             $scope.state = 'stopped';
             $scope.armTime = ($settings.settings.duration || 150) * 1000;
 
-            $message.on('clock:arm', (msgData) => msgData.data.countdown ? $scope.arm(msgData.data.countdown * 1000) : $scope.arm(), true);//countdown might not be defined, in which case we ant to call this function with no parameters
-            $message.on('clock:start', (msgData) => msgData.data.countdown ? $scope.start(msgData.data.countdown * 1000) : $scope.start(), true);//countdown might not be defined
-            $message.on('clock:stop', () => $scope.stop(), true);
-            $message.on('clock:pause', () => $scope.pause(), true);
+            $message.on('clock:arm', function (msgData) {
+                msgData.data.countdown ? $scope.arm(msgData.data.countdown * 1000) : $scope.arm();//countdown might not be defined, in which case we ant to call this function with no parameters
+                $scope.$apply();
+            }, true);
+            $message.on('clock:start', function (msgData) {
+                msgData.data.countdown ? $scope.start(msgData.data.countdown * 1000) : $scope.start();//countdown might not be defined
+                $scope.$apply();
+            }, true);
+            $message.on('clock:stop', function () {
+                $scope.stop();
+                $scope.$apply()
+            }, true);
+
+            $message.on('clock:pause', function () {
+                $scope.pause();
+                $scope.$apply();
+            }, true);
 
             $scope.getStateClass = function () {
                return $scope.state;
@@ -57,7 +70,6 @@ define('views/clock', [
 
             $scope.stop = function () {
                 $scope.state = 'stopped';
-                $scope.$apply();
             };
 
 
