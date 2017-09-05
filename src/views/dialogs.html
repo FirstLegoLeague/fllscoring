@@ -29,6 +29,11 @@
                         <input type="text" ng-model="importNameColumn" size="3">
                         ({{importNameExample}})
                     </p>
+                    <p>
+                        Use custom delimiter? (Default is tab, the delimiter used when pasting from excel) <br/>
+                        <input type="checkbox" ng-model="useCustomDelimiter">
+                        <input type="text" ng-model="delimiter">
+                    </p>
 
                     <table>
                         <tr ng-repeat="line in importLines">

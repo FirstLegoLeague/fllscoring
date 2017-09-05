@@ -15,17 +15,13 @@ define('views/scores', [
 
             function enrich(scores) {
                 return scores.map(score => {
-                    score.team = $teams.get(score.teamNumber);
-                    score.stage = $stages.get(score.stageId);
-                    return score;
+                    var enrichedScore = {};
+                    for(var key in score) enrichedScore[key] = score[key];
+                    enrichedScore.team = $teams.get(score.teamNumber);
+                    enrichedScore.stage = $stages.get(score.stageId);
+                    return enrichedScore;
                 });
             }
-
-            $scope.scores = [];
-            $scores.init().then(function () {
-                $scope.scores = enrich($scores.scores);
-                $scope.stages = $stages.stages;
-            });
 
             $scope.$watch(function () {
                 return $scores.scores;
@@ -33,7 +29,11 @@ define('views/scores', [
                 $scope.scores = enrich($scores.scores);
             });
 
-            $scope.doSort = function (col, defaultSort) {
+            $scores.init().then(function() {
+                $scope.stages = $stages.stages;
+            });
+
+            $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
@@ -62,9 +62,10 @@ define('views/scores', [
                 saveScore(score);
             };
 
-            $scope.unpublishScore = function (score) {
+            $scope.unpublishScore = function(score) {
+                var wasPublished = score.published;
                 score.published = false;
-                saveScore(score);
+                saveScore(score, wasPublished);
             };
 
             $scope.finishEditScore = function (score) {
@@ -76,10 +77,10 @@ define('views/scores', [
                 saveScore(score);
             };
 
-            function saveScore(score) {
+            function saveScore(score, forceAutoBroadcast) {
                 try {
-                    $scores.update(score);
-                } catch (e) {
+                    $scores.update(score, forceAutoBroadcast);
+                } catch(e) {
                     $window.alert("Error updating score: " + e);
                 }
             }
