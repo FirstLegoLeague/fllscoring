@@ -86,7 +86,7 @@ exports.route = function(app) {
         var scoresheet = body.scoresheet;
         var score = body.score;
 
-        fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), req.body)
+        fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), JSON.stringify(scoresheet))
         .then(changeScores(function(result) {
             result.scores.push(score);
             return result;

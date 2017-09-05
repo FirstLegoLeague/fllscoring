@@ -1,0 +1,37 @@
+.countdown {
+    line-height: 40vh;
+    font-size: 15vh;
+    text-align: center;
+    color: black;
+}
+
+.armed{
+    background-color: green;
+    color: white;
+}
+
+.started{
+    color: green;
+}
+
+.paused {
+    background-color: yellow;
+    color: white;
+}
+
+.stopped {
+    background-color: red;
+    color: white;
+}
+
+.coundownControls {
+    align-items: center;
+}
+
+.coundownControls .material-icons {
+    font-size: 3vh;
+}
+
+.coundownControls .half {
+    width: 50%;
+}
