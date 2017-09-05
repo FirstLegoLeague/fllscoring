@@ -1,0 +1,32 @@
+<div ng-controller="clockCtrl">
+    <div class="appbar">
+        <button ng-click="toggleDrawer()">
+            <i class="material-icons">menu</i>
+        </button>
+        <h1>
+            {{currentPage.title}}
+        </h1>
+    </div>
+    <div class="card">
+        <h1 class="card-header countdown" ng-class="getStateClass()">{{time | time:2}}</h1>
+        <div class="coundownControls card-actions">
+            <button ng-click="notifyAndExecute('start')" class="btn btn-block" ng-if="state === 'armed' || state === 'stopped'">
+                <i class="material-icons">play_arrow</i>
+            </button>
+            <button ng-click="notifyAndExecute('pause')" class="btn btn-block" ng-if="!(state === 'armed' || state === 'stopped')">
+                <i class="material-icons" ng-if="state === 'paused'">pause_circle_filled</i>
+                <i class="material-icons" ng-if="!(state === 'paused')">pause_circle_outline</i>
+            </button>
+            <div class="btn-group-justified">
+                <button ng-click="notifyAndExecute('arm')" class="btn pull-left half">
+                    <i class="material-icons">replay</i>
+                </button>
+                <button ng-click="notifyAndExecute('stop')" class="btn pull-right half">
+                    <i class="material-icons">stop</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

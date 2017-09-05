@@ -231,7 +231,8 @@ button .material-icons {
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
-    .viewMain.settings .view-settings {
+    .viewMain.settings .view-settings,
+    .viewMain.clock .view-clock {
         display: block;
     }
 
@@ -274,7 +275,8 @@ button .material-icons {
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
-    .viewMain.settings .view-settings {
+    .viewMain.settings .view-settings,
+    .viewMain.clock .view-clock {
         display: block;
     }
 
@@ -325,7 +327,8 @@ button .material-icons {
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
-    .viewMain.settings .view-settings {
+    .viewMain.settings .view-settings,
+    .viewMain.clock .view-clock {
         display: block;
     }
 

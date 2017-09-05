@@ -6,6 +6,7 @@ define([
     'views/scoresheet',
     'views/scores',
     'views/ranking',
+    'views/clock',
     'services/ng-services',
     'directives/ng-directives',
     'directives/size',
@@ -18,7 +19,7 @@ define([
     'angular-sanitize',
     'angular-storage',
     'angular'
-],function(log,session,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
+],function(log,session,settings,teams,scoresheet,scores,ranking,clock,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
     log('device ready');
 
@@ -44,7 +45,8 @@ define([
                         { name: 'teams', title: 'Teams', icon: 'people' },
                         { name: 'scores', title: 'Scorekeeping', icon: 'list' },
                         { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
-                        { name: 'settings', title: 'Settings', icon: 'settings' }
+                        { name: 'settings', title: 'Settings', icon: 'settings' },
+                        { name: 'clock', title: 'Clock', icon: 'alarm'}
                     ];
                 } else {
                     $scope.pages = [
@@ -106,6 +108,7 @@ define([
         scoresheet.name,
         scores.name,
         ranking.name,
+        clock.name,
         filters.name,
         services.name,
         directives.name
