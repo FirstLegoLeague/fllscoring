@@ -251,7 +251,14 @@ define('views/scoresheet',[
                     data.uniqueId
                 ].join('_')+'.json';
 
-                return $scores.create(data);
+                return $scores.create(data).then(function() {
+                    $window.alert(`Thanks for submitting a score of ${data.score}`
+                         + ` points for team (${data.team.number})`
+                         + ` ${data.team.name} in ${data.stage.name} ${data.round}.`);
+                }).catch(function() {
+                    $window.alert(`Error submitting score to the server.
+The score will be saved locally until contact with the server is resotred`);
+                });
             };
 
             $scope.openDescriptionModal = function (mission) {

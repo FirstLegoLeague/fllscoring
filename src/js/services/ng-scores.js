@@ -15,8 +15,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 3;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$message',
-        function($rootScope, $fs, $stages, $q, $teams, $message) {
+        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$message','$independence',
+        function($rootScope, $fs, $stages, $q, $teams, $message, $independence) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -205,6 +205,7 @@ define('services/ng-scores',[
         Scores.prototype.clear = function() {
             this._rawScores = [];
             this._sheets = {};
+            this.scores = [];
         };
 
         /**

@@ -1,3 +1,6 @@
 var createMessageMock = function() {
-	return {};
+	return {
+        send: jasmine.createSpy('messageSendSpy'),
+        on: jasmine.createSpy('messageOnSpy')
+    };
 }

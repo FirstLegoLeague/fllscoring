@@ -42,7 +42,11 @@ define('views/scores',[
                 // replace the entry in the scores list and its storage.
                 // Because scores are always 'sanitized' before storing,
                 // the $editing flag is automatically discarded.
-                saveScore(score);
+                try {
+                    saveScore(score);
+                } catch(e) {
+                    alert(`Error updating score: ${e}`);
+                }
             };
 
             function saveScore(score) {
@@ -51,7 +55,7 @@ define('views/scores',[
                 });
             }
 
-            $scope.cancelEditScore = function() {
+            $scope.cancelEditScore = function(score) {
                 score.$editing = false;
                 $scores._update();
             };

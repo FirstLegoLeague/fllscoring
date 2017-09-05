@@ -16,7 +16,7 @@ describe('ranking', function() {
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope,$q) {
             $scope = $rootScope.$new();
-            scoresMock = createScoresMock($q);
+            scoresMock = createScoresMock();
             handshakeMock = createHandshakeMock($q);
             stagesMock = createStagesMock();
             messageMock = createMessageMock();
