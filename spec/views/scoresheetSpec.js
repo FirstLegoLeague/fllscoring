@@ -455,7 +455,8 @@ describe('scoresheet',function() {
                 expect($window.alert).toHaveBeenCalledWith('no team selected, do so first');
             });
         });
-        it('should save',function() {
+
+        it('should save as unpublished by default',function(done) {
             $scope.scoreEntry.id = "abcdef01";
             $scope.scoreEntry.team = dummyTeam;
             $scope.field = {};
@@ -466,7 +467,7 @@ describe('scoresheet',function() {
             $scope.scoreEntry.calcFilename = fileName;
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
-            return $scope.save().then(function () {
+            $scope.save().then(function () {
                 expect(scoresMock.create).toHaveBeenCalledWith(
                      {
                         team: dummyTeam,
@@ -485,18 +486,13 @@ describe('scoresheet',function() {
                         round: 1,
                         published: false,
                         calcFilename: fileName
-                    },
-                    team: dummyTeam,
-                    stage: dummyStage,
-                    round: 1,
-                    table: 7,
-                    referee: 'foo',
-                    signature: [ 1, 2, 3, 4 ]
-                });
-                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.');
+                    });
+                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
+                done();
             });
         });
-        it('should save the score as published if the settings allow',function() {
+
+        it('should save the score as published if the settings allow',function(done) {
             settingsMock.settings.autoPublish = true;
             $scope.scoreEntry.id = "abcdef01";
             $scope.scoreEntry.team = dummyTeam;
@@ -509,23 +505,32 @@ describe('scoresheet',function() {
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(scoresMock.create).toHaveBeenCalledWith({
-                    scoreEntry: {
+                expect(scoresMock.create).toHaveBeenCalledWith(
+                    {
+                        team: dummyTeam,
+                        stage: dummyStage,
+                        round: 1,
+                        table: 7,
+                        referee: 'foo',
+                        signature: [ 1, 2, 3, 4 ]
+                    },
+                    {
                         score: 0,
                         id: 'abcdef01',
                         table: 7,
                         team: dummyTeam,
                         stage: dummyStage,
                         round: 1,
-                        published: true,
-                        calcFilename: fileName
-                    }
-                );
+                        calcFilename: fileName,
+                        published: true
+                    });
 
                 expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
                          ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
+                done();
             });
         });
+
         it('should alert a message if scoresheet cannot be saved', function() {
             $scope.scoreEntry.team = dummyTeam;
             $scope.field = {};
