@@ -6,8 +6,8 @@ define('views/scores', [
 ], function (log) {
     var moduleName = 'scores';
     return angular.module(moduleName, ['filters']).controller(moduleName + 'Ctrl', [
-        '$scope', '$scores', '$teams', '$stages', '$window',
-        function ($scope, $scores, $teams, $stages, $window) {
+        '$scope', '$scores', '$teams', '$stages', '$window', '$rootScope',
+        function ($scope, $scores, $teams, $stages, $window, $rootScope) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
@@ -90,6 +90,14 @@ define('views/scores', [
             };
 
             $scope.refresh = function () {
+
+            }
+            $scope.editScoresheet = function (score) {
+                $scope.setPage($scope.pages.find(function (p) {return p.name === "scoresheet"}));
+                $rootScope.$broadcast("editScoresheet", score)
+            };
+
+            $scope.refresh = function() {
                 $scores.load();
             };
         }]);

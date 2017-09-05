@@ -15,7 +15,7 @@ describe('scoresheet',function() {
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
     var dummySettings = {bla: 'blu'};
     var fsMock = createFsMock({"settings.json": []});
-    var settingsMock, handshakeMock, challengeMock;
+    var settingsMock, handshakeMock, challengeMock, scoresMock;
 
     beforeEach(function() {
         angular.mock.module('DescriptionDialog');
@@ -41,10 +41,11 @@ describe('scoresheet',function() {
                 '$fs': fsMock,
                 '$settings': settingsMock,
                 '$scores': scoresMock,
-                '$score': jasmine.createSpy('$score').and.returnValue(scoresMock.scores[0]),
+                '$score': createScoreMock(scoresMock.scores[0]),
                 '$stages': {},
                 '$handshake': handshakeMock,
                 '$teams': {},
+                '$scores': scoresMock,
                 '$challenge': challengeMock,
                 '$window': $window
             });
@@ -544,6 +545,53 @@ describe('scoresheet',function() {
             return $scope.save().catch(function() {
                 expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team foo (123) in Voorrondes 1.
 Notice: the score could not be sent to the server. This might be caused by poor network conditions. The score is thereafore save on your device, and will be sent when it's possible.Current number of scores actions waiting to be sent: 1`);
+            });
+        });
+    });
+
+    describe('editing', function () {
+        beforeEach(function (done) {
+             scoresMock.loadScoresheet = () => Promise.resolve({
+                title: "test field",
+                "missions": [{
+                    "id": "test",
+                    "objectives": [{"id": "moo", value: 1}],
+                    "score": [null], "errors": [],
+                    "percentages": [], "completed": false
+                }],
+                "team": dummyTeam,
+                "stage": {"id": "qualifying", "name": "Voorrondes", "rounds": 3},
+                "round": 1,
+                "table": 7,
+                "referee": "foo",
+                "signature": [1, 2, 3, 4]
+            });
+            scoresMock.scores[0].team = dummyTeam;
+            scoresMock.scores[0].stage = {"id": "qualifying", "name": "Voorrondes", "rounds": 3};
+            scoresMock.round = 2;
+            $scope.load().then(done);
+        });
+        it('should load the filled scoresheet correctly', function (done) {
+            $scope.loadScoresheet(scoresMock.scores[0]);
+            expect($scope.editingScore).toBeTruthy();
+            expect($scope.scoreEntry).toEqual(scoresMock.scores[0]);
+            scoresMock.loadScoresheet().then(function () {
+                expect($scope.signature).toEqual([1, 2, 3, 4]);
+                expect($scope.referee).toEqual("foo");
+                $scope.missions.forEach(mission => mission.objectives.forEach((o) => expect(o.value).toEqual(1)));
+                done();
+            });
+        });
+
+        it('should override the old scoresheet', function (done) {
+            $scope.save = jasmine.createSpy('saveSpy');
+            $scope.pages = [];
+            $scope.loadScoresheet(scoresMock.scores[0]);
+            $scope.saveEdit();
+            expect(scoresMock.delete).toHaveBeenCalledWith(scoresMock.scores[0]);
+            scoresMock.loadScoresheet().then(function () {
+                expect($scope.save).toHaveBeenCalled();
+                done();
             });
         });
     });

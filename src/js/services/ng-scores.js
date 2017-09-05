@@ -170,6 +170,10 @@ define('services/ng-scores',[
             }
         };
 
+        Scores.prototype.loadScoresheet = function (score) {
+            return $fs.read("scoresheets/"+score.file)
+        };
+
         Scores.prototype.beginupdate = function() {
             this._updating++;
         };
