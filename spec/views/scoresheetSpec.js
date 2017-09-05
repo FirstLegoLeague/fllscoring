@@ -41,7 +41,7 @@ describe('scoresheet',function() {
                 '$fs': fsMock,
                 '$settings': settingsMock,
                 '$scores': scoresMock,
-                '$score': jasmine.createSpy('$score').and.returnValue(scoresMock.scores[0]),
+                '$score': createScoreMock(scoresMock.scores[0]),
                 '$stages': {},
                 '$handshake': handshakeMock,
                 '$teams': {},
