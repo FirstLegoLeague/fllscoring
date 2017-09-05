@@ -91,10 +91,12 @@ describe('ranking', function() {
         });
 
         //default sort order stuff, needs a bit of refactoring
-        it('should report a default sorting for any stage',function() {
-            $scope.$digest();//resolve all promises
-            $scope.stages.forEach(function (stage) {
-                expect($scope.sortIcon(stage,'rank')).toEqual('arrow_drop_up');
+        it('should report a default sorting for any stage', function (done) {
+            stagesMock.init().then(function () {
+                $scope.stages.forEach(function (stage) {
+                    expect($scope.sortIcon(stage, 'rank')).toEqual('arrow_drop_up');
+                });
+                done();
             });
         });
     });
