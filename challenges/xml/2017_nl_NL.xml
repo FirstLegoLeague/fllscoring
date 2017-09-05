@@ -5,112 +5,113 @@
 
     <strings language="en-US">
 
-        <string id="yes">                           Yes</string>
-        <string id="no">                            No</string>
+        <string id="yes">                           Ja</string>
+        <string id="no">                            Nee</string>
 
-        <string id="M01-name">                      M01 Pipe Removal</string>
-        <string id="M01-desc">                      <![CDATA[Move the Broken Pipe so it is completely in Base.]]></string>
-        <string id="M01-scoring">                   Broken Pipe is completely in Base</string>
+        <string id="M01-name">                      M01 Leiding verwijderen</string>
+        <string id="M01-desc">                      <![CDATA[Verplaats de gebroken leiding zodat deze volledig in de basis is.]]></string>
+        <string id="M01-scoring">                   Gebroken leiding is volledig in de basis</string>
                    
-        <string id="M02-name">                      M02 Flow</string>
-        <string id="M02-desc">                      <![CDATA[Move a Big Water (one time maximum) to the other team’s field *only by turning the Pump System’s valve(s).]]></string>
-        <string id="M02-scoring">                   Big Water is on other team's Field (only by turning Pump System's valves(s))</string>
+        <string id="M02-name">                      M02 Stroming</string>
+        <string id="M02-desc">                      <![CDATA[Verplaats een Groot Water (maximaal één keer) naar het veld van het andere team, *alleen door het draaien van de klep(pen) van het pompsysteem.]]></string>
+        <string id="M02-scoring">                   Groot Water is op het veld van het andere team (alleen door het draaien van de klep(pen) van het pompsysteem)</string>
                    
-        <string id="M03-name">                      M03 Pump Addition</string>
-        <string id="M03-desc">                      <![CDATA[Move the Pump Addition so it has contact with the mat and that contact is completely in the Pump Addition target.]]></string>
-        <string id="M03-scoring">                   Pump Addition has contact with the mat completely inside the target area</string>
+        <string id="M03-name">                      M03 Extra pomp plaatsen</string>
+        <string id="M03-desc">                      <![CDATA[Verplaats de extra pomp zodat deze de mat raakt en het raakvlak volledig in het Pomp plaatsingsgebied is.]]></string>
+        <string id="M03-scoring">                   De extra pomp raakt de mat volledig in het Pomp plaatsingsgebied</string>
 
-        <string id="M04-name">                      M04 Rain</string>
-        <string id="M04-desc">                      <![CDATA[Make at least one Rain come out of the Rain Cloud.]]></string>
-        <string id="M04-scoring">                   At least one Rain is out of the Rain Cloud</string>
+        <string id="M04-name">                      M04 Regen</string>
+        <string id="M04-desc">                      <![CDATA[Laat tenminste één Regendruppel uit de regenwolk komen.]]></string>
+        <string id="M04-scoring">                   Tenminste een regendruppel is uit de regenwolk</string>
 
         <string id="M05-name">                      M05 Filter</string>
-        <string id="M05-desc">                      <![CDATA[Move the Filter north until the lock latch drops.]]></string>
-        <string id="M05-scoring">                   Lock latch is in dropped position</string>
+        <string id="M05-desc">                      <![CDATA[Verplaats het filter noordwaarts tot de blokkeringsgrendel valt.]]></string>
+        <string id="M05-scoring">                   Blokkeringshendel is gevallen</string>
         
-        <string id="M06-name">                      M06 Water Treatment</string>
-        <string id="M06-desc">                      <![CDATA[Make the Water Treatment model eject its Big Water, *only by moving the Toilet’s lever.]]></string>
-        <string id="M06-scoring">                   Big Water is ejected from Water Treatment model (only by Toilet's lever)</string>
+        <string id="M06-name">                      M06 Waterzuivering</string>
+        <string id="M06-desc">                      <![CDATA[Laat het waterzuiveringsmodel het grote water uitwerpen, *alleen door het bewegen van de toilethendel.]]></string>
+        <string id="M06-scoring">                   Groot water is uit het waterzuiveringsmodel geworpen (alleen door de toilethendel)</string>
         
-        <string id="M07-name">                      M07 Fountain</string>
-        <string id="M07-desc">                      <![CDATA[Make the Fountain’s middle layer rise some obvious height and stay there, due only to a Big Water in the gray tub.]]></string>
-        <string id="M07-scoring">                   Middle layer is raised (due only to a Big Water in gray tub)</string>
+        <string id="M07-name">                      M07 Fontein</string>
+        <string id="M07-desc">                      <![CDATA[Laat de middelste laag van de fontein duidelijk wat omhoog komen, uitsluitend door het plaatsen van een Groot Water in de grijze kuip.]]></string>
+        <string id="M07-scoring">                   Middelste laag is omhoog (alleen door groot water in de grijze kuip)</string>
         
-        <string id="M08-name">                      M08 Manhole Covers</string>
-        <string id="M08-desc">                      <![CDATA[Flip Manhole cover(s) over, obviously past vertical *without it/them ever reaching Base.]]></string>
-        <string id="M08-scoring1">                  Manhole cover(s) that are flipped over past vertical (and never reached Base)</string>
-        <string id="M08-scoring2">                  2 in separate Tripod targets</string>
-        <string id="M08-scoring3">                  Both covers are flipped over and completely in separate Tripod targets</string>
-        <string id="M08-error">                     Impossible combination</string>
+        <string id="M08-name">                      M08 Putdeksels</string>
+        <string id="M08-desc">                      <![CDATA[Draai putdeksel(s) om, duidelijk voorbij verticaal *zonder dat ze ooit in de basis zijn geweest. 15 punten PER DEKSEL
+Ieder deksel scoort individueel.]]></string>
+        <string id="M08-scoring1">                  Putdeksels die voorbij verticaal zijn (en nooit in de basis geweest)</string>
+        <string id="M08-scoring2">                  2 deksels in aparte Statiefgebieden</string>
+        <string id="M08-scoring3">                  Putdeksels die voorbij verticaal zijn en volledig in aparte Statiefgebieden</string>
+        <string id="M08-error">                     Onmogelijke combinatie</string>
         
-        <string id="M09-name">                      M09 Tripod</string>
-        <string id="M09-desc">                      <![CDATA[Move the inspection camera Tripod.]]></string>
-        <string id="M09-scoring1">                  All the Tripod’s feet are touching the mat</string>
-        <string id="M09-scoring2">                  Tripod is partially in a Tripod target</string>
-        <string id="M09-scoring3">                  OR Tripod is completely in a Tripod target</string>
-        <string id="M09-scoring4">                  All the Tripod’s feet are touching the mat and Tripod is in a Tripod target</string>
-        <string id="M09-scoring5">                  No</string>
-        <string id="M09-scoring6">                  Partially</string>
-        <string id="M09-scoring7">                  Completely</string>
-        <string id="M09-error">                     Choose one of the two options</string>
+        <string id="M09-name">                      M09 Statief</string>
+        <string id="M09-desc">                      <![CDATA[Verplaats het statief van de inspectiecamera.]]></string>
+        <string id="M09-scoring1">                  Alle poten van het statief raken de mat aan</string>
+        <string id="M09-scoring2">                  Statief is gedeeltelijk in een Statiefgebied</string>
+        <string id="M09-scoring3">                  OF Statief is volledig in een Statiefgebied</string>
+        <string id="M09-scoring4">                  Alle poten van het statief raken de mat aan en het statief is .. in een Statiefgebied</string>
+        <string id="M09-scoring5">                  Nee</string>
+        <string id="M09-scoring6">                  Gedeeltelijk</string>
+        <string id="M09-scoring7">                  Volledig</string>
+        <string id="M09-error">                     Kies een van de twee opties</string>
         
-        <string id="M10-name">                      M10 Pipe Replacement</string>
-        <string id="M10-desc">                      <![CDATA[Move a New Pipe so it is where the broken one started, in full/flat contact with the mat.]]></string>
-        <string id="M10-scoring1">                  New Pipe is installed where Broken Pipe was</string>
-        <string id="M10-scoring2">                  This New Pipe has full/flat contact with the mat</string>
-        <string id="M10-scoring3">                  New Pipe is installed where Broken Pipe was, in full/flat contact with the mat</string>
+        <string id="M10-name">                      M10 Leiding vervangen</string>
+        <string id="M10-desc">                      <![CDATA[Verplaats een nieuwe leiding naar de plaats waar de gebroken leiding zich bevond, in volledig/vlak contact met de mat.]]></string>
+        <string id="M10-scoring1">                  Nieuwe leiding is verplaatst naar plaats gebroken leiding</string>
+        <string id="M10-scoring2">                  Nieuwe leiding heeft volledig/vlak contact met de mat</string>
+        <string id="M10-scoring3">                  Nieuwe leiding is verplaatst naar plaats gebroken leiding en heeft volledig/vlak contact met de mat</string>
         
-        <string id="M11-name">                      M11 Pipe Construction</string>
-        <string id="M11-desc">                      <![CDATA[Move a New Pipe.]]></string>
-        <string id="M11-scoring1">                  New Pipe has full/flat contact with the mat</string>
-        <string id="M11-scoring2">                  This New Pipe is partially in its target</string>
-        <string id="M11-scoring3">                  OR this New Pipe is completely in its target</string>
-        <string id="M11-scoring4">                  New Pipe has full/flat contact with the mat and is in its target</string>
-        <string id="M11-scoring5">                  No</string>
-        <string id="M11-scoring6">                  Partially</string>
-        <string id="M11-scoring7">                  Completely</string>
+        <string id="M11-name">                      M11 Leidingenconstructie</string>
+        <string id="M11-desc">                      <![CDATA[Verplaats een nieuwe leiding.]]></string>
+        <string id="M11-scoring1">                  Nieuwe leiding heeft volledig/vlak contact met de mat</string>
+        <string id="M11-scoring2">                  Nieuwe leiding is gedeeltelijk in zijn doel</string>
+        <string id="M11-scoring3">                  OF nieuwe leiding is volledig in zijn doel</string>
+        <string id="M11-scoring4">                  Nieuwe leiding heeft volledig/vlak contact met de mat en is .. in zijn doel</string>
+        <string id="M11-scoring5">                  Nee</string>
+        <string id="M11-scoring6">                  Gedeeltelijk</string>
+        <string id="M11-scoring7">                  Volledig</string>
         
-        <string id="M12-name">                      M12 Sludge</string>
-        <string id="M12-desc">                      <![CDATA[Move the Sludge so it is touching the visible wood of any of the six drawn garden boxes.]]></string>
-        <string id="M12-scoring">                   Sludge is touching the visible wood of a drawn garden box</string>
+        <string id="M12-name">                      M12 Slib</string>
+        <string id="M12-desc">                      <![CDATA[Verplaats het slib zodat dit het zichtbare hout van een van de zes getekende plantenbakken aanraakt.]]></string>
+        <string id="M12-scoring">                   Slib raakt het zichtbare hout van een getekende plantenbak aan</string>
                            
-        <string id="M13-name">                      M13 Flower</string>
-        <string id="M13-desc">                      <![CDATA[Make the Flower rise some obvious height and stay there, due only to a Big Water in the brown pot.]]></string>
-        <string id="M13-scoring1">                  Flower is raised (due only to a Big Water in brown pot)</string>
-        <string id="M13-scoring2">                  At least one rain is in the purple part, touching nothing but Flower model</string>
+        <string id="M13-name">                      M13 Bloem</string>
+        <string id="M13-desc">                      <![CDATA[Laat de bloem duidelijk wat omhoogkomen en daar staan, uitsluitend door Groot Water in de bruine pot.]]></string>
+        <string id="M13-scoring1">                  Bloem is omhooggekomen (alleen door groot water in de bruine pot)</string>
+        <string id="M13-scoring2">                  Tenminste een regendruppel is in het paarse deel en raakt niets aan dan het bloemmodel</string>
 
-        <string id="M14-name">                      M14 Water Well</string>
-        <string id="M14-desc">                      <![CDATA[Move the Water Well so it has contact with the mat.]]></string>
-        <string id="M14-scoring1">                  Water Well has contact with the mat partially inside the target area</string>
-        <string id="M14-scoring2">                  Water Well has contact with the mat completely inside the target area</string>
-        <string id="M14-scoring4">                  Water Well has contact with the mat inside the target area</string>
-        <string id="M14-scoring5">                  No</string>
-        <string id="M14-scoring6">                  Partially</string>
-        <string id="M14-scoring7">                  Completely</string>
+        <string id="M14-name">                      M14 Waterput</string>
+        <string id="M14-desc">                      <![CDATA[Verplaats de waterput zodat deze contact heeft met de mat.]]></string>
+        <string id="M14-scoring1">                  Waterput heeft gedeeltelijk in het doelgebied contact met de mat</string>
+        <string id="M14-scoring2">                  Waterput heeft volledig in het doelgebied contact met de mat</string>
+        <string id="M14-scoring4">                  Waterput heeft .. contact met de mat in het doelgebied</string>
+        <string id="M14-scoring5">                  Nee</string>
+        <string id="M14-scoring6">                  Gedeeltelijk</string>
+        <string id="M14-scoring7">                  Volledig</string>
         
-        <string id="M15-name">                      M15 Fire</string>
-        <string id="M15-desc">                      <![CDATA[ake the fire drop *only by making the Firetruck apply direct force to the House’s lever.]]></string>
-        <string id="M15-scoring">                   Fire is dropped (due only to Firetruck applying direct force to House’s lever)</string>
+        <string id="M15-name">                      M15 Vuur</string>
+        <string id="M15-desc">                      <![CDATA[Laat het vuur zakken *alleen door de brandweerauto directe kracht uit te laten oefenen op de hendel van het huis.]]></string>
+        <string id="M15-scoring">                   Vuur is gezakt (alleen door directe kracht van de brandweerauto op de hendel van het huis)</string>
         
-        <string id="M16-name">                      M16 Water Collection</string>
-        <string id="M16-desc">                      <![CDATA[Move or catch Big Water and/or Rain water (one Rain maximum; no Dirty Water) so it is touching the mat in the Water Target, *without the target ever reaching the white Off-Limits Line shown below.  Water may be touching the target, and/or other water, but not be touching nor guided by anything else.  Each water model is scored as an individual.]]></string>
-        <string id="M16-scoring1">                  Water Target is East of Off-Limits line (and never reached Off-Limit line)</string>
-        <string id="M16-scoring2">                  At least one Rain is touching mat in Water Target</string>
-        <string id="M16-scoring3">                  Big Water touching mat in Water Target</string>
-        <string id="M16-scoring4">                  At least one pair of Big Waters are stacked in Water Target</string>
+        <string id="M16-name">                      M16 Waterwinning</string>
+        <string id="M16-desc">                      <![CDATA[Verplaats of vang Groot Water en/of Regendruppel op (maximaal één Regendruppel; geen vervuild water) zodat het de mat aanraakt in het Waterdoel, *zonder dat het Waterdoel ooit de witte begrenzingslijn bereikt zoals in de afbeeldingen hieronder. Water mag het Waterdoel en ander water raken, maar mag noch iets anders aanraken noch door iets anders geleid worden. Ieder watermodel scoort individueel.]]></string>
+        <string id="M16-scoring1">                  Waterdoel is ten oosten van de witte begrenzingslijn (en heeft de begrenzingslijn nooit bereikt)</string>
+        <string id="M16-scoring2">                  Tenminste een regendruppel raakt de mat in waterdoel</string>
+        <string id="M16-scoring3">                  Groot water raakt de mat in waterdoel</string>
+        <string id="M16-scoring4">                  Een paar groot waters staat op elkaar in waterdoel</string>
         
-        <string id="M17-name">                      M17 Slingshot</string>
-        <string id="M17-desc">                      <![CDATA[Move the Slingshot so it is completely in its target.]]></string>
-        <string id="M17-scoring1">                  Slingshot is completely in the Slingshot target</string>
-        <string id="M17-scoring2">                  Rain AND Dirty Water are completely in the Slingshot target</string>
+        <string id="M17-name">                      M17 Katapult</string>
+        <string id="M17-desc">                      <![CDATA[Verplaats de katapult zodat deze volledig in het doelgebied van de katapult is.]]></string>
+        <string id="M17-scoring1">                  Katapult is volledig in het doelgebied</string>
+        <string id="M17-scoring2">                  Regen en vuil water zijn in het doelgebied</string>
         
-        <string id="M18-name">                      M18 Faucet</string>
-        <string id="M18-desc">                      <![CDATA[Make the water level obviously more blue than white as seen from above the cup, *only by turning the Faucet handle.]]></string>
-        <string id="M18-scoring">                   Water level is more blue than white (only by turning Faucet handle)</string>
+        <string id="M18-name">                      M18 Kraan</string>
+        <string id="M18-desc">                      <![CDATA[Maak het waterniveau duidelijk blauwer dan wit, van bovenaf het kopje gezien, *alleen door het handvat van de kraan te draaien.]]></string>
+        <string id="M18-scoring">                   Waterniveau is duidelijk blauwer dan wit (alleen door draaien aan handvat van de kraan)</string>
         
-        <string id="penalties-name">                Penalties</string>
-        <string id="penalties-desc">                <![CDATA[Penalties given]]></string>
-        <string id="penalties-scoring">             Number of Penalty discs in the white triangle area</string>
+        <string id="penalties-name">                Strafpunten</string>
+        <string id="penalties-desc">                <![CDATA[Gegeven strafpunten]]></string>
+        <string id="penalties-scoring">             Aantal strafpuntschijven in de witte driehoek</string>
                              
     </strings>
 

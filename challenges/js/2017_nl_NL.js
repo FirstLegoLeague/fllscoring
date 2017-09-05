@@ -1,11 +1,11 @@
 {
     "title": "HYDRO DYNAMICS",
     "missions": [{
-        "title": "M01 Pipe Removal",
-        "description": "Move the Broken Pipe so it is completely in Base.",
+        "title": "M01 Leiding verwijderen",
+        "description": "Verplaats de gebroken leiding zodat deze volledig in de basis is.",
         "objectives": [{
             "id": "M01",
-            "title": "Broken Pipe is completely in Base",
+            "title": "Gebroken leiding is volledig in de basis",
             "type": "yesno"
         }],
         "score": [function(M01) {
@@ -17,11 +17,11 @@
             }
         }]
     }, {
-        "title": "M02 Flow",
-        "description": "Move a Big Water (one time maximum) to the other team’s field *only by turning the Pump System’s valve(s).",
+        "title": "M02 Stroming",
+        "description": "Verplaats een Groot Water (maximaal één keer) naar het veld van het andere team, *alleen door het draaien van de klep(pen) van het pompsysteem.",
         "objectives": [{
             "id": "M02",
-            "title": "Big Water is on other team's Field (only by turning Pump System's valves(s))",
+            "title": "Groot Water is op het veld van het andere team (alleen door het draaien van de klep(pen) van het pompsysteem)",
             "type": "yesno"
         }],
         "score": [function(M02) {
@@ -33,11 +33,11 @@
             }
         }]
     }, {
-        "title": "M03 Pump Addition",
-        "description": "Move the Pump Addition so it has contact with the mat and that contact is completely in the Pump Addition target.",
+        "title": "M03 Extra pomp plaatsen",
+        "description": "Verplaats de extra pomp zodat deze de mat raakt en het raakvlak volledig in het Pomp plaatsingsgebied is.",
         "objectives": [{
             "id": "M03",
-            "title": "Pump Addition has contact with the mat completely inside the target area",
+            "title": "De extra pomp raakt de mat volledig in het Pomp plaatsingsgebied",
             "type": "yesno"
         }],
         "score": [function(M03) {
@@ -49,11 +49,11 @@
             }
         }]
     }, {
-        "title": "M04 Rain",
-        "description": "Make at least one Rain come out of the Rain Cloud.",
+        "title": "M04 Regen",
+        "description": "Laat tenminste één Regendruppel uit de regenwolk komen.",
         "objectives": [{
             "id": "M04",
-            "title": "At least one Rain is out of the Rain Cloud",
+            "title": "Tenminste een regendruppel is uit de regenwolk",
             "type": "yesno"
         }],
         "score": [function(M04) {
@@ -66,10 +66,10 @@
         }]
     }, {
         "title": "M05 Filter",
-        "description": "Move the Filter north until the lock latch drops.",
+        "description": "Verplaats het filter noordwaarts tot de blokkeringsgrendel valt.",
         "objectives": [{
             "id": "M05",
-            "title": "Lock latch is in dropped position",
+            "title": "Blokkeringshendel is gevallen",
             "type": "yesno"
         }],
         "score": [function(M05) {
@@ -81,11 +81,11 @@
             }
         }]
     }, {
-        "title": "M06 Water Treatment",
-        "description": "Make the Water Treatment model eject its Big Water, *only by moving the Toilet’s lever.",
+        "title": "M06 Waterzuivering",
+        "description": "Laat het waterzuiveringsmodel het grote water uitwerpen, *alleen door het bewegen van de toilethendel.",
         "objectives": [{
             "id": "M06",
-            "title": "Big Water is ejected from Water Treatment model (only by Toilet's lever)",
+            "title": "Groot water is uit het waterzuiveringsmodel geworpen (alleen door de toilethendel)",
             "type": "yesno"
         }],
         "score": [function(M06) {
@@ -97,11 +97,11 @@
             }
         }]
     }, {
-        "title": "M07 Fountain",
-        "description": "Make the Fountain’s middle layer rise some obvious height and stay there, due only to a Big Water in the gray tub.",
+        "title": "M07 Fontein",
+        "description": "Laat de middelste laag van de fontein duidelijk wat omhoog komen, uitsluitend door het plaatsen van een Groot Water in de grijze kuip.",
         "objectives": [{
             "id": "M07",
-            "title": "Middle layer is raised (due only to a Big Water in gray tub)",
+            "title": "Middelste laag is omhoog (alleen door groot water in de grijze kuip)",
             "type": "yesno"
         }],
         "score": [function(M07) {
@@ -113,11 +113,11 @@
             }
         }]
     }, {
-        "title": "M08 Manhole Covers",
-        "description": "Flip Manhole cover(s) over, obviously past vertical *without it/them ever reaching Base.",
+        "title": "M08 Putdeksels",
+        "description": "Draai putdeksel(s) om, duidelijk voorbij verticaal *zonder dat ze ooit in de basis zijn geweest. 15 punten PER DEKSEL\r\nIeder deksel scoort individueel.",
         "objectives": [{
             "id": "M08_1",
-            "title": "Manhole cover(s) that are flipped over past vertical (and never reached Base)",
+            "title": "Putdeksels die voorbij verticaal zijn (en nooit in de basis geweest)",
             "options": [{
                 "value": "2",
                 "title": "2"
@@ -131,7 +131,7 @@
             "type": "enum"
         }, {
             "id": "M08_2",
-            "title": "Both covers are flipped over and completely in separate Tripod targets",
+            "title": "Putdeksels die voorbij verticaal zijn en volledig in aparte Statiefgebieden",
             "type": "yesno"
         }],
         "score": [function(M08_1, M08_2) {
@@ -145,30 +145,30 @@
                 return 30
             }
             if (M08_1 === '0' && M08_2 === 'yes') {
-                return new Error("Impossible combination")
+                return new Error("Onmogelijke combinatie")
             }
             if (M08_1 === '1' && M08_2 === 'yes') {
-                return new Error("Impossible combination")
+                return new Error("Onmogelijke combinatie")
             }
             if (M08_1 === '2' && M08_2 === 'yes') {
                 return 60
             }
         }]
     }, {
-        "title": "M09 Tripod",
-        "description": "Move the inspection camera Tripod.",
+        "title": "M09 Statief",
+        "description": "Verplaats het statief van de inspectiecamera.",
         "objectives": [{
             "id": "M09",
-            "title": "All the Tripod’s feet are touching the mat and Tripod is in a Tripod target",
+            "title": "Alle poten van het statief raken de mat aan en het statief is .. in een Statiefgebied",
             "options": [{
                 "value": "completely",
-                "title": "Completely"
+                "title": "Volledig"
             }, {
                 "value": "partially",
-                "title": "Partially"
+                "title": "Gedeeltelijk"
             }, {
                 "value": "none",
-                "title": "No"
+                "title": "Nee"
             }],
             "type": "enum"
         }],
@@ -184,11 +184,11 @@
             }
         }]
     }, {
-        "title": "M10 Pipe Replacement",
-        "description": "Move a New Pipe so it is where the broken one started, in full/flat contact with the mat.",
+        "title": "M10 Leiding vervangen",
+        "description": "Verplaats een nieuwe leiding naar de plaats waar de gebroken leiding zich bevond, in volledig/vlak contact met de mat.",
         "objectives": [{
             "id": "M10",
-            "title": "New Pipe is installed where Broken Pipe was, in full/flat contact with the mat",
+            "title": "Nieuwe leiding is verplaatst naar plaats gebroken leiding en heeft volledig/vlak contact met de mat",
             "type": "yesno"
         }],
         "score": [function(M10) {
@@ -200,20 +200,20 @@
             }
         }]
     }, {
-        "title": "M11 Pipe Construction",
-        "description": "Move a New Pipe.",
+        "title": "M11 Leidingenconstructie",
+        "description": "Verplaats een nieuwe leiding.",
         "objectives": [{
             "id": "M11",
-            "title": "New Pipe has full/flat contact with the mat and is in its target",
+            "title": "Nieuwe leiding heeft volledig/vlak contact met de mat en is .. in zijn doel",
             "options": [{
                 "value": "completely",
-                "title": "Completely"
+                "title": "Volledig"
             }, {
                 "value": "partially",
-                "title": "Partially"
+                "title": "Gedeeltelijk"
             }, {
                 "value": "none",
-                "title": "No"
+                "title": "Nee"
             }],
             "type": "enum"
         }],
@@ -229,11 +229,11 @@
             }
         }]
     }, {
-        "title": "M12 Sludge",
-        "description": "Move the Sludge so it is touching the visible wood of any of the six drawn garden boxes.",
+        "title": "M12 Slib",
+        "description": "Verplaats het slib zodat dit het zichtbare hout van een van de zes getekende plantenbakken aanraakt.",
         "objectives": [{
             "id": "M12",
-            "title": "Sludge is touching the visible wood of a drawn garden box",
+            "title": "Slib raakt het zichtbare hout van een getekende plantenbak aan",
             "type": "yesno"
         }],
         "score": [function(M12) {
@@ -245,15 +245,15 @@
             }
         }]
     }, {
-        "title": "M13 Flower",
-        "description": "Make the Flower rise some obvious height and stay there, due only to a Big Water in the brown pot.",
+        "title": "M13 Bloem",
+        "description": "Laat de bloem duidelijk wat omhoogkomen en daar staan, uitsluitend door Groot Water in de bruine pot.",
         "objectives": [{
             "id": "M13_1",
-            "title": "Flower is raised (due only to a Big Water in brown pot)",
+            "title": "Bloem is omhooggekomen (alleen door groot water in de bruine pot)",
             "type": "yesno"
         }, {
             "id": "M13_2",
-            "title": "At least one rain is in the purple part, touching nothing but Flower model",
+            "title": "Tenminste een regendruppel is in het paarse deel en raakt niets aan dan het bloemmodel",
             "type": "yesno"
         }],
         "score": [function(M13_1, M13_2) {
@@ -271,20 +271,20 @@
             }
         }]
     }, {
-        "title": "M14 Water Well",
-        "description": "Move the Water Well so it has contact with the mat.",
+        "title": "M14 Waterput",
+        "description": "Verplaats de waterput zodat deze contact heeft met de mat.",
         "objectives": [{
             "id": "M14",
-            "title": "Water Well has contact with the mat inside the target area",
+            "title": "Waterput heeft .. contact met de mat in het doelgebied",
             "options": [{
                 "value": "completely",
-                "title": "Completely"
+                "title": "Volledig"
             }, {
                 "value": "partially",
-                "title": "Partially"
+                "title": "Gedeeltelijk"
             }, {
                 "value": "none",
-                "title": "No"
+                "title": "Nee"
             }],
             "type": "enum"
         }],
@@ -300,11 +300,11 @@
             }
         }]
     }, {
-        "title": "M15 Fire",
-        "description": "ake the fire drop *only by making the Firetruck apply direct force to the House’s lever.",
+        "title": "M15 Vuur",
+        "description": "Laat het vuur zakken *alleen door de brandweerauto directe kracht uit te laten oefenen op de hendel van het huis.",
         "objectives": [{
             "id": "M15",
-            "title": "Fire is dropped (due only to Firetruck applying direct force to House’s lever)",
+            "title": "Vuur is gezakt (alleen door directe kracht van de brandweerauto op de hendel van het huis)",
             "type": "yesno"
         }],
         "score": [function(M15) {
@@ -316,23 +316,23 @@
             }
         }]
     }, {
-        "title": "M16 Water Collection",
-        "description": "Move or catch Big Water and/or Rain water (one Rain maximum; no Dirty Water) so it is touching the mat in the Water Target, *without the target ever reaching the white Off-Limits Line shown below.  Water may be touching the target, and/or other water, but not be touching nor guided by anything else.  Each water model is scored as an individual.",
+        "title": "M16 Waterwinning",
+        "description": "Verplaats of vang Groot Water en/of Regendruppel op (maximaal één Regendruppel; geen vervuild water) zodat het de mat aanraakt in het Waterdoel, *zonder dat het Waterdoel ooit de witte begrenzingslijn bereikt zoals in de afbeeldingen hieronder. Water mag het Waterdoel en ander water raken, maar mag noch iets anders aanraken noch door iets anders geleid worden. Ieder watermodel scoort individueel.",
         "objectives": [{
             "id": "M16_1",
-            "title": "Water Target is East of Off-Limits line (and never reached Off-Limit line)",
+            "title": "Waterdoel is ten oosten van de witte begrenzingslijn (en heeft de begrenzingslijn nooit bereikt)",
             "type": "yesno"
         }, {
             "id": "M16_2",
-            "title": "At least one Rain is touching mat in Water Target",
+            "title": "Tenminste een regendruppel raakt de mat in waterdoel",
             "type": "yesno"
         }, {
             "id": "M16_4",
-            "title": "At least one pair of Big Waters are stacked in Water Target",
+            "title": "Een paar groot waters staat op elkaar in waterdoel",
             "type": "yesno"
         }, {
             "id": "M16_3",
-            "title": "Big Water touching mat in Water Target",
+            "title": "Groot water raakt de mat in waterdoel",
             "options": [{
                 "value": "5",
                 "title": "5"
@@ -501,15 +501,15 @@
             }
         }]
     }, {
-        "title": "M17 Slingshot",
-        "description": "Move the Slingshot so it is completely in its target.",
+        "title": "M17 Katapult",
+        "description": "Verplaats de katapult zodat deze volledig in het doelgebied van de katapult is.",
         "objectives": [{
             "id": "M17_1",
-            "title": "Slingshot is completely in the Slingshot target",
+            "title": "Katapult is volledig in het doelgebied",
             "type": "yesno"
         }, {
             "id": "M17_2",
-            "title": "Rain AND Dirty Water are completely in the Slingshot target",
+            "title": "Regen en vuil water zijn in het doelgebied",
             "type": "yesno"
         }],
         "score": [function(M17_1, M17_2) {
@@ -527,11 +527,11 @@
             }
         }]
     }, {
-        "title": "M18 Faucet",
-        "description": "Make the water level obviously more blue than white as seen from above the cup, *only by turning the Faucet handle.",
+        "title": "M18 Kraan",
+        "description": "Maak het waterniveau duidelijk blauwer dan wit, van bovenaf het kopje gezien, *alleen door het handvat van de kraan te draaien.",
         "objectives": [{
             "id": "M18",
-            "title": "Water level is more blue than white (only by turning Faucet handle)",
+            "title": "Waterniveau is duidelijk blauwer dan wit (alleen door draaien aan handvat van de kraan)",
             "type": "yesno"
         }],
         "score": [function(M18) {
@@ -543,11 +543,11 @@
             }
         }]
     }, {
-        "title": "Penalties",
-        "description": "Penalties given",
+        "title": "Strafpunten",
+        "description": "Gegeven strafpunten",
         "objectives": [{
             "id": "penalties",
-            "title": "Number of Penalty discs in the white triangle area",
+            "title": "Aantal strafpuntschijven in de witte driehoek",
             "options": [{
                 "value": "6",
                 "title": "6"
@@ -597,92 +597,92 @@
         }]
     }],
     "strings": {
-        "yes": "Yes",
-        "no": "No",
-        "M01-name": "M01 Pipe Removal",
-        "M01-desc": "Move the Broken Pipe so it is completely in Base.",
-        "M01-scoring": "Broken Pipe is completely in Base",
-        "M02-name": "M02 Flow",
-        "M02-desc": "Move a Big Water (one time maximum) to the other team’s field *only by turning the Pump System’s valve(s).",
-        "M02-scoring": "Big Water is on other team's Field (only by turning Pump System's valves(s))",
-        "M03-name": "M03 Pump Addition",
-        "M03-desc": "Move the Pump Addition so it has contact with the mat and that contact is completely in the Pump Addition target.",
-        "M03-scoring": "Pump Addition has contact with the mat completely inside the target area",
-        "M04-name": "M04 Rain",
-        "M04-desc": "Make at least one Rain come out of the Rain Cloud.",
-        "M04-scoring": "At least one Rain is out of the Rain Cloud",
+        "yes": "Ja",
+        "no": "Nee",
+        "M01-name": "M01 Leiding verwijderen",
+        "M01-desc": "Verplaats de gebroken leiding zodat deze volledig in de basis is.",
+        "M01-scoring": "Gebroken leiding is volledig in de basis",
+        "M02-name": "M02 Stroming",
+        "M02-desc": "Verplaats een Groot Water (maximaal één keer) naar het veld van het andere team, *alleen door het draaien van de klep(pen) van het pompsysteem.",
+        "M02-scoring": "Groot Water is op het veld van het andere team (alleen door het draaien van de klep(pen) van het pompsysteem)",
+        "M03-name": "M03 Extra pomp plaatsen",
+        "M03-desc": "Verplaats de extra pomp zodat deze de mat raakt en het raakvlak volledig in het Pomp plaatsingsgebied is.",
+        "M03-scoring": "De extra pomp raakt de mat volledig in het Pomp plaatsingsgebied",
+        "M04-name": "M04 Regen",
+        "M04-desc": "Laat tenminste één Regendruppel uit de regenwolk komen.",
+        "M04-scoring": "Tenminste een regendruppel is uit de regenwolk",
         "M05-name": "M05 Filter",
-        "M05-desc": "Move the Filter north until the lock latch drops.",
-        "M05-scoring": "Lock latch is in dropped position",
-        "M06-name": "M06 Water Treatment",
-        "M06-desc": "Make the Water Treatment model eject its Big Water, *only by moving the Toilet’s lever.",
-        "M06-scoring": "Big Water is ejected from Water Treatment model (only by Toilet's lever)",
-        "M07-name": "M07 Fountain",
-        "M07-desc": "Make the Fountain’s middle layer rise some obvious height and stay there, due only to a Big Water in the gray tub.",
-        "M07-scoring": "Middle layer is raised (due only to a Big Water in gray tub)",
-        "M08-name": "M08 Manhole Covers",
-        "M08-desc": "Flip Manhole cover(s) over, obviously past vertical *without it/them ever reaching Base.",
-        "M08-scoring1": "Manhole cover(s) that are flipped over past vertical (and never reached Base)",
-        "M08-scoring2": "2 in separate Tripod targets",
-        "M08-scoring3": "Both covers are flipped over and completely in separate Tripod targets",
-        "M08-error": "Impossible combination",
-        "M09-name": "M09 Tripod",
-        "M09-desc": "Move the inspection camera Tripod.",
-        "M09-scoring1": "All the Tripod’s feet are touching the mat",
-        "M09-scoring2": "Tripod is partially in a Tripod target",
-        "M09-scoring3": "OR Tripod is completely in a Tripod target",
-        "M09-scoring4": "All the Tripod’s feet are touching the mat and Tripod is in a Tripod target",
-        "M09-scoring5": "No",
-        "M09-scoring6": "Partially",
-        "M09-scoring7": "Completely",
-        "M09-error": "Choose one of the two options",
-        "M10-name": "M10 Pipe Replacement",
-        "M10-desc": "Move a New Pipe so it is where the broken one started, in full/flat contact with the mat.",
-        "M10-scoring1": "New Pipe is installed where Broken Pipe was",
-        "M10-scoring2": "This New Pipe has full/flat contact with the mat",
-        "M10-scoring3": "New Pipe is installed where Broken Pipe was, in full/flat contact with the mat",
-        "M11-name": "M11 Pipe Construction",
-        "M11-desc": "Move a New Pipe.",
-        "M11-scoring1": "New Pipe has full/flat contact with the mat",
-        "M11-scoring2": "This New Pipe is partially in its target",
-        "M11-scoring3": "OR this New Pipe is completely in its target",
-        "M11-scoring4": "New Pipe has full/flat contact with the mat and is in its target",
-        "M11-scoring5": "No",
-        "M11-scoring6": "Partially",
-        "M11-scoring7": "Completely",
-        "M12-name": "M12 Sludge",
-        "M12-desc": "Move the Sludge so it is touching the visible wood of any of the six drawn garden boxes.",
-        "M12-scoring": "Sludge is touching the visible wood of a drawn garden box",
-        "M13-name": "M13 Flower",
-        "M13-desc": "Make the Flower rise some obvious height and stay there, due only to a Big Water in the brown pot.",
-        "M13-scoring1": "Flower is raised (due only to a Big Water in brown pot)",
-        "M13-scoring2": "At least one rain is in the purple part, touching nothing but Flower model",
-        "M14-name": "M14 Water Well",
-        "M14-desc": "Move the Water Well so it has contact with the mat.",
-        "M14-scoring1": "Water Well has contact with the mat partially inside the target area",
-        "M14-scoring2": "Water Well has contact with the mat completely inside the target area",
-        "M14-scoring4": "Water Well has contact with the mat inside the target area",
-        "M14-scoring5": "No",
-        "M14-scoring6": "Partially",
-        "M14-scoring7": "Completely",
-        "M15-name": "M15 Fire",
-        "M15-desc": "ake the fire drop *only by making the Firetruck apply direct force to the House’s lever.",
-        "M15-scoring": "Fire is dropped (due only to Firetruck applying direct force to House’s lever)",
-        "M16-name": "M16 Water Collection",
-        "M16-desc": "Move or catch Big Water and/or Rain water (one Rain maximum; no Dirty Water) so it is touching the mat in the Water Target, *without the target ever reaching the white Off-Limits Line shown below.  Water may be touching the target, and/or other water, but not be touching nor guided by anything else.  Each water model is scored as an individual.",
-        "M16-scoring1": "Water Target is East of Off-Limits line (and never reached Off-Limit line)",
-        "M16-scoring2": "At least one Rain is touching mat in Water Target",
-        "M16-scoring3": "Big Water touching mat in Water Target",
-        "M16-scoring4": "At least one pair of Big Waters are stacked in Water Target",
-        "M17-name": "M17 Slingshot",
-        "M17-desc": "Move the Slingshot so it is completely in its target.",
-        "M17-scoring1": "Slingshot is completely in the Slingshot target",
-        "M17-scoring2": "Rain AND Dirty Water are completely in the Slingshot target",
-        "M18-name": "M18 Faucet",
-        "M18-desc": "Make the water level obviously more blue than white as seen from above the cup, *only by turning the Faucet handle.",
-        "M18-scoring": "Water level is more blue than white (only by turning Faucet handle)",
-        "penalties-name": "Penalties",
-        "penalties-desc": "Penalties given",
-        "penalties-scoring": "Number of Penalty discs in the white triangle area"
+        "M05-desc": "Verplaats het filter noordwaarts tot de blokkeringsgrendel valt.",
+        "M05-scoring": "Blokkeringshendel is gevallen",
+        "M06-name": "M06 Waterzuivering",
+        "M06-desc": "Laat het waterzuiveringsmodel het grote water uitwerpen, *alleen door het bewegen van de toilethendel.",
+        "M06-scoring": "Groot water is uit het waterzuiveringsmodel geworpen (alleen door de toilethendel)",
+        "M07-name": "M07 Fontein",
+        "M07-desc": "Laat de middelste laag van de fontein duidelijk wat omhoog komen, uitsluitend door het plaatsen van een Groot Water in de grijze kuip.",
+        "M07-scoring": "Middelste laag is omhoog (alleen door groot water in de grijze kuip)",
+        "M08-name": "M08 Putdeksels",
+        "M08-desc": "Draai putdeksel(s) om, duidelijk voorbij verticaal *zonder dat ze ooit in de basis zijn geweest. 15 punten PER DEKSEL\r\nIeder deksel scoort individueel.",
+        "M08-scoring1": "Putdeksels die voorbij verticaal zijn (en nooit in de basis geweest)",
+        "M08-scoring2": "2 deksels in aparte Statiefgebieden",
+        "M08-scoring3": "Putdeksels die voorbij verticaal zijn en volledig in aparte Statiefgebieden",
+        "M08-error": "Onmogelijke combinatie",
+        "M09-name": "M09 Statief",
+        "M09-desc": "Verplaats het statief van de inspectiecamera.",
+        "M09-scoring1": "Alle poten van het statief raken de mat aan",
+        "M09-scoring2": "Statief is gedeeltelijk in een Statiefgebied",
+        "M09-scoring3": "OF Statief is volledig in een Statiefgebied",
+        "M09-scoring4": "Alle poten van het statief raken de mat aan en het statief is .. in een Statiefgebied",
+        "M09-scoring5": "Nee",
+        "M09-scoring6": "Gedeeltelijk",
+        "M09-scoring7": "Volledig",
+        "M09-error": "Kies een van de twee opties",
+        "M10-name": "M10 Leiding vervangen",
+        "M10-desc": "Verplaats een nieuwe leiding naar de plaats waar de gebroken leiding zich bevond, in volledig/vlak contact met de mat.",
+        "M10-scoring1": "Nieuwe leiding is verplaatst naar plaats gebroken leiding",
+        "M10-scoring2": "Nieuwe leiding heeft volledig/vlak contact met de mat",
+        "M10-scoring3": "Nieuwe leiding is verplaatst naar plaats gebroken leiding en heeft volledig/vlak contact met de mat",
+        "M11-name": "M11 Leidingenconstructie",
+        "M11-desc": "Verplaats een nieuwe leiding.",
+        "M11-scoring1": "Nieuwe leiding heeft volledig/vlak contact met de mat",
+        "M11-scoring2": "Nieuwe leiding is gedeeltelijk in zijn doel",
+        "M11-scoring3": "OF nieuwe leiding is volledig in zijn doel",
+        "M11-scoring4": "Nieuwe leiding heeft volledig/vlak contact met de mat en is .. in zijn doel",
+        "M11-scoring5": "Nee",
+        "M11-scoring6": "Gedeeltelijk",
+        "M11-scoring7": "Volledig",
+        "M12-name": "M12 Slib",
+        "M12-desc": "Verplaats het slib zodat dit het zichtbare hout van een van de zes getekende plantenbakken aanraakt.",
+        "M12-scoring": "Slib raakt het zichtbare hout van een getekende plantenbak aan",
+        "M13-name": "M13 Bloem",
+        "M13-desc": "Laat de bloem duidelijk wat omhoogkomen en daar staan, uitsluitend door Groot Water in de bruine pot.",
+        "M13-scoring1": "Bloem is omhooggekomen (alleen door groot water in de bruine pot)",
+        "M13-scoring2": "Tenminste een regendruppel is in het paarse deel en raakt niets aan dan het bloemmodel",
+        "M14-name": "M14 Waterput",
+        "M14-desc": "Verplaats de waterput zodat deze contact heeft met de mat.",
+        "M14-scoring1": "Waterput heeft gedeeltelijk in het doelgebied contact met de mat",
+        "M14-scoring2": "Waterput heeft volledig in het doelgebied contact met de mat",
+        "M14-scoring4": "Waterput heeft .. contact met de mat in het doelgebied",
+        "M14-scoring5": "Nee",
+        "M14-scoring6": "Gedeeltelijk",
+        "M14-scoring7": "Volledig",
+        "M15-name": "M15 Vuur",
+        "M15-desc": "Laat het vuur zakken *alleen door de brandweerauto directe kracht uit te laten oefenen op de hendel van het huis.",
+        "M15-scoring": "Vuur is gezakt (alleen door directe kracht van de brandweerauto op de hendel van het huis)",
+        "M16-name": "M16 Waterwinning",
+        "M16-desc": "Verplaats of vang Groot Water en/of Regendruppel op (maximaal één Regendruppel; geen vervuild water) zodat het de mat aanraakt in het Waterdoel, *zonder dat het Waterdoel ooit de witte begrenzingslijn bereikt zoals in de afbeeldingen hieronder. Water mag het Waterdoel en ander water raken, maar mag noch iets anders aanraken noch door iets anders geleid worden. Ieder watermodel scoort individueel.",
+        "M16-scoring1": "Waterdoel is ten oosten van de witte begrenzingslijn (en heeft de begrenzingslijn nooit bereikt)",
+        "M16-scoring2": "Tenminste een regendruppel raakt de mat in waterdoel",
+        "M16-scoring3": "Groot water raakt de mat in waterdoel",
+        "M16-scoring4": "Een paar groot waters staat op elkaar in waterdoel",
+        "M17-name": "M17 Katapult",
+        "M17-desc": "Verplaats de katapult zodat deze volledig in het doelgebied van de katapult is.",
+        "M17-scoring1": "Katapult is volledig in het doelgebied",
+        "M17-scoring2": "Regen en vuil water zijn in het doelgebied",
+        "M18-name": "M18 Kraan",
+        "M18-desc": "Maak het waterniveau duidelijk blauwer dan wit, van bovenaf het kopje gezien, *alleen door het handvat van de kraan te draaien.",
+        "M18-scoring": "Waterniveau is duidelijk blauwer dan wit (alleen door draaien aan handvat van de kraan)",
+        "penalties-name": "Strafpunten",
+        "penalties-desc": "Gegeven strafpunten",
+        "penalties-scoring": "Aantal strafpuntschijven in de witte driehoek"
     }
 }
