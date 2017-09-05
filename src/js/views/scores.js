@@ -20,58 +20,44 @@ define('views/scores',[
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
-            $scope.removeScore = function(index) {
-                $scores.remove(index);
-                return $scores.save();
+            $scope.removeScore = function(scoreId) {
+                return $scores.delete(scoreId);
             };
-            $scope.editScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.editScore = function(score) {
                 score.$editing = true;
             };
 
-            $scope.publishScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.publishScore = function(score) {
                 score.published = true;
                 saveScore(score);
             };
 
-            $scope.unpublishScore = function(index) {
-                var score = $scores.scores[index];
+            $scope.unpublishScore = function(score) {
                 score.published = false;
                 saveScore(score);
             };
 
-            $scope.finishEditScore = function(index) {
+            $scope.finishEditScore = function(score) {
                 // The score entry is edited 'inline', then used to
                 // replace the entry in the scores list and its storage.
                 // Because scores are always 'sanitized' before storing,
                 // the $editing flag is automatically discarded.
-                var score = $scores.scores[index];
-                saveScore(score);
+                try {
+                    saveScore(score);
+                } catch(e) {
+                    alert(`Error updating score: ${e}`);
+                }
             };
 
             function saveScore(score) {
-                try {
-                    $scores.update(score.index, score);
-                    $scores.save();
-                } catch(e) {
-                    $window.alert("Error updating score: " + e);
-                }
+                $scores.update(score).catch(function(err) {
+                    $window.alert("Error updating score: " + err);
+                });
             }
 
-            $scope.cancelEditScore = function() {
+            $scope.cancelEditScore = function(score) {
+                score.$editing = false;
                 $scores._update();
-            };
-
-            $scope.pollSheets = function() {
-                return $scores.pollSheets().catch(function(err) {
-                    log("pollSheets() failed", err);
-                    $window.alert("failed to poll sheets: " + err);
-                });
-            };
-
-            $scope.refresh = function() {
-                $scores.load();
             };
         }
     ]);

@@ -30,6 +30,7 @@ describe('ng-scores',function() {
     var mockScore;
     var mockTeam;
     var fsMock;
+    var independenceMock;
 
     beforeEach(function() {
         fsMock = createFsMock({
@@ -37,9 +38,13 @@ describe('ng-scores',function() {
             "stages.json": [rawMockStage],
             "teams.json": [dummyTeam]
         });
+        independenceMock = createIndependenceMock();
+
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
             $provide.value('$fs', fsMock);
+            $provide.value('$message', createMessageMock());
+            $provide.value('$independence', independenceMock);
         });
         angular.mock.inject(["$scores", "$stages", "$teams", "$q", function(_$scores_, _$stages_, _$teams_,_$q_) {
             $scores = _$scores_;
@@ -80,9 +85,11 @@ describe('ng-scores',function() {
         });
     }
 
-    describe('init',function() {
-        it('should load mock score initially',function() {
-            expect(filteredScores()).toEqual([mockScore]);
+    describe('load',function() {
+        it('shuold read scores.json', function() {
+            $scores.load().then(function() {
+                expect(fsMock.read).toHaveBeenCalledWith('scores.json');
+            });
         });
     });
 
@@ -94,154 +101,51 @@ describe('ng-scores',function() {
         });
     });
 
-    describe('save',function() {
-        it('should write scores to scores.json',function() {
-            return $scores.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith(
-                    'scores.json',
-                    {
-                        version: 2,
-                        scores: [rawMockScore],
-                        sheets: []
-                    }
-                );
-            });
-        });
-
-        it('should log an error if writing fails',function() {
-            fsMock.write.and.returnValue(Q.reject('write err'));
-            return $scores.save().then(function() {
-                expect(logMock).toHaveBeenCalledWith('scores write error','write err');
+    describe('create',function() {
+        it('should call independence act',function() {
+            $scores.create(mockScore).then(function() {
+                expect(independenceMock.act).toHaveBeenCalled();
+                expect(independenceMock.act.calls.mostRecent().args[0]).toBe('scores');
+                expect(independenceMock.act.calls.mostRecent().args[1]).toBe('/scores/create');
             });
         });
     });
 
-    describe('load',function() {
-        it('should load from scores.json',function() {
-            return $scores.load().then(function() {
-                expect(fsMock.read).toHaveBeenCalledWith('scores.json');
-                expect(filteredScores()).toEqual([mockScore]);
-            });
-        });
-
-        it('should log an error if loading fails',function() {
-            fsMock.read.and.returnValue(Q.reject('read err'));
-            return $scores.load().then(function() {
-                expect(logMock).toHaveBeenCalledWith('scores read error','read err');
+    describe('delete',function() {
+        it('should call independence act',function() {
+            var id = '1df9';
+            $scores.delete({ id: id }).then(function() {
+                expect(independenceMock.act).toHaveBeenCalled();
+                expect(independenceMock.act.calls.mostRecent().args[0]).toBe('scores');
+                expect(independenceMock.act.calls.mostRecent().args[1]).toBe(`/scores/delete/${id}`);
             });
         });
     });
 
-    describe('remove',function() {
-        it('should remove the provided index', function() {
-            expect(filteredScores()).toEqual([mockScore]);
-            $scores.remove(0);
-            expect(filteredScores()).toEqual([]);
-        });
-    });
-
-    describe('add',function() {
-        beforeEach(function() {
-            $scores.clear();
-            expect(filteredScores()).toEqual([]);
-        });
-        it('should add a score to the list', function() {
-            $scores.add(mockScore);
-            expect(filteredScores()).toEqual([mockScore]);
-        });
-        it('should allow duplicates', function() {
-            // Duplicate scores are 'allowed' during adding, but
-            // are rejected in scoreboard computation.
-            $scores.add(mockScore);
-            $scores.add(mockScore);
-            expect(filteredScores()).toEqual([mockScore, mockScore]);
-            expect($scores.validationErrors.length).toBeGreaterThan(0);
-        });
-        it('should accept numeric scores as strings', function() {
-            var tmp = angular.copy(mockScore);
-            tmp.score = String(tmp.score);
-            $scores.add(tmp);
-            // Note: the 'accepted' score should really be a number, not a string
-            expect($scores.scores[0].score).toEqual(150);
-            expect($scores.validationErrors.length).toEqual(0);
-        });
-        it('should accept and convert different casing for DNC', function() {
-            var tmp = angular.copy(mockScore);
-            tmp.score = "DnC";
-            $scores.add(tmp);
-            expect($scores.scores[0].score).toEqual("dnc");
-            expect($scores.validationErrors.length).toEqual(0);
-        });
-        it('should accept and convert different casing for DSQ', function() {
-            var tmp = angular.copy(mockScore);
-            tmp.score = "DsQ";
-            $scores.add(tmp);
-            expect($scores.scores[0].score).toEqual("dsq");
-            expect($scores.validationErrors.length).toEqual(0);
-        });
-        it('should reject but convert an empty score', function() {
-            var tmp = angular.copy(mockScore);
-            tmp.score = "";
-            $scores.add(tmp);
-            expect($scores.scores[0].score).toEqual(null);
-            expect($scores.validationErrors.length).toEqual(1);
-        });
-        it('should store the edited date of a score as string',function() {
-            var tmp = angular.copy(mockScore);
-            tmp.edited = new Date(2015,1,7);
-            $scores.add(tmp);
-            expect(typeof $scores.scores[0].edited).toBe('string');
-        });
-    });
-
-    describe('update', function() {
-        beforeEach(function() {
-            $scores.clear();
-            $scores.add(mockScore);
-        });
-        it('should mark modified scores', function() {
-            mockScore.score++;
-            // Simply changing the added score shouldn't matter...
-            expect($scores.scores[0].score).toEqual(150);
-            // ... but updating it should
-            $scores.update(0, mockScore);
-            expect($scores.scores[0].originalScore).toEqual(150);
-            expect($scores.scores[0].score).toEqual(151);
-            expect($scores.scores[0].modified).toBeTruthy();
-            expect($scores.scores[0].edited).toBeTruthy();
-        });
-        it('should accept numeric scores as strings',function() {
-            mockScore.score = "151";
-            $scores.update(0, mockScore);
-            // Note: the 'accepted' score should really be a number, not a string
-            expect($scores.scores[0].originalScore).toEqual(150);
-            expect($scores.scores[0].score).toEqual(151);
-        });
-        it('should throw an error if a score out of range is edited',function() {
-            var f = function() {
-                $scores.update(-1,mockScore);
-            };
-            expect(f).toThrowError('unknown score index: -1');
-        });
-        it('should throw an error if a score out of range is edited',function() {
-            var f = function() {
-                $scores.update(1,mockScore);
-            };
-            expect(f).toThrowError('unknown score index: 1');
+    describe('update',function() {
+        it('should call independence act',function() {
+            var id = '1df9';
+            $scores.update({ id: id }).then(function() {
+                expect(independenceMock.act).toHaveBeenCalled();
+                expect(independenceMock.act.calls.mostRecent().args[0]).toBe('scores');
+                expect(independenceMock.act.calls.mostRecent().args[1]).toBe(`/scores/update/${id}`);
+            });
         });
     });
 
     describe('scoreboard', function() {
         var board;
+
         beforeEach(function() {
             board = $scores.scoreboard;
         });
+
         function fillScores(input, allowErrors) {
             $scores.beginupdate();
             $scores.clear();
             input.map(function(score) {
-                $scores.add(score);
-            });
+                $scores._addRawScore(score);
+             });
             $scores.endupdate();
             if (!allowErrors) {
                 $scores.scores.forEach(function(score) {
@@ -405,133 +309,6 @@ describe('ng-scores',function() {
             expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownTeamError));
             expect($scores.validationErrors.length).toEqual(1);
         });
-
-        it("should allow resolving error", function() {
-            fillScores([
-                { team: team1, stage: mockStage, round: 1, score: 10 },
-                { team: team1, stage: mockStage, round: 1, score: 20 },
-            ], true);
-            expect($scores.validationErrors.length).toBeGreaterThan(0);
-            $scores.update(1, { team: team1, stage: mockStage, round: 2, score: 20 });
-            expect($scores.validationErrors.length).toEqual(0);
-        });
-    });
-
-    describe("pollSheets", function() {
-        var importedScore;
-        var mockFiles;
-        var mockDirs;
-
-        beforeEach(function() {
-            importedScore = {
-                file: "sheet_1.json",
-                team: mockTeam,
-                stage: mockStage,
-                round: 1,
-                score: 456,
-                originalScore: 456
-            };
-            mockFiles = {
-                "scores.json": { version: 2, scores: [], sheets: [] },
-                "scoresheets/sheet_1.json": { teamNumber: 123, stageId: "test", round: 1, score: 456 }
-            };
-            mockDirs = {
-                "scoresheets": ["sheet_1.json"],
-            };
-            fsMock._setFiles(mockFiles);
-            fsMock._setDirs(mockDirs);
-            $scores.clear();
-        });
-
-        it("should pick up a new sheet", function() {
-            return $scores.pollSheets().then(function() {
-                expect(filteredScores()).toEqual([importedScore]);
-            });
-        });
-
-        it("should ignore already processed sheets", function() {
-            return $scores.pollSheets().then(function() {
-                expect($scores.scores.length).toEqual(1);
-                return $scores.pollSheets();
-            }).then(function() {
-                expect($scores.scores.length).toEqual(1);
-            });
-        });
-
-        it("should ignore already processed sheets across loads", function() {
-            mockFiles["scores.json"] = { version: 2, scores: [], sheets: ["sheet_1.json"] };
-            return $scores.load().then(function() {
-                return $scores.pollSheets();
-            }).then(function() {
-                expect($scores.scores.length).toEqual(0);
-            });
-        });
-
-        it("should remember processed sheets", function() {
-            return $scores.pollSheets().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith(
-                    'scores.json',
-                    {
-                        version: 2,
-                        scores: [{
-                            file: "sheet_1.json",
-                            teamNumber: 123,
-                            stageId: "test",
-                            round: 1,
-                            score: 456,
-                            originalScore: 456,
-                            published: false,
-                            edited: undefined,
-                            table: undefined,
-                        }],
-                        sheets: ["sheet_1.json"]
-                    }
-                );
-            });
-        });
-
-        describe('clicking the button twice should not poll twice (#172)',function() {
-            it('should not add the same sheet twice',function() {
-                return $q.all([
-                    $scores.pollSheets(),
-                    $scores.pollSheets()
-                ]).then(function() {
-                    expect($scores.scores.length).toEqual(1);
-                });
-            });
-        });
-
-        describe('error recovery',function() {
-            it('should continue with no sheets when a 404 is returned',function() {
-                fsMock.list.and.returnValue(Q.reject({status:404}));
-                $scores.save = jasmine.createSpy('save');
-                return $scores.pollSheets().then(function() {
-                    expect(fsMock.write).not.toHaveBeenCalled();
-                    expect($scores.save).not.toHaveBeenCalled();
-                });
-            });
-
-            it('throw an error if an http error is received',function() {
-                fsMock.list.and.returnValue(Q.reject({status:500,responseText:'server error',statusText:'foo'}));
-                return $scores.pollSheets().catch(function(err) {
-                    expect(err.message).toEqual('error 500 (foo): server error');
-                });
-            });
-
-            it('should rethrow the error if something just goes wrong',function() {
-                fsMock.list.and.returnValue(Q.reject(new Error('squeek')));
-                return $scores.pollSheets().catch(function(err) {
-                    expect(err.message).toEqual('squeek');
-                });
-            });
-
-            it('should throw an unknown error if strange stuff is returned',function() {
-                fsMock.list.and.returnValue(Q.reject('darn'));
-                return $scores.pollSheets().catch(function(err) {
-                    expect(err.message).toEqual('unknown error: darn');
-                });
-            });
-        });
-    });
+     });
 
 });

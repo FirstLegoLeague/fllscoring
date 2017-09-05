@@ -14,7 +14,7 @@ describe('ExportRankingDialogController',function() {
         angular.mock.inject(function($controller,$rootScope,$q,_$timeout_) {
             $scope = $rootScope.$new();
             $timeout = _$timeout_;
-            scoresMock = createScoresMock($q,fakeScoreboard);
+            scoresMock = createScoresMock(fakeScoreboard);
             handshakeMock = createHandshakeMock($q);
             stagesMock = createStagesMock();
             controller = $controller('ExportRankingDialogController', {

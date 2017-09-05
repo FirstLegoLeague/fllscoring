@@ -23,8 +23,8 @@ define('views/scoresheet',[
     ]);
 
     return module.controller(moduleName + 'Ctrl', [
-        '$scope','$fs','$stages','$settings','$challenge','$window','$q','$teams','$handshake',
-        function($scope,$fs,$stages,$settings,$challenge,$window,$q,$teams,$handshake) {
+        '$scope','$fs','$stages','$scores','$settings','$challenge','$window','$q','$teams','$handshake',
+        function($scope,$fs,$stages,$scores,$settings,$challenge,$window,$q,$teams,$handshake) {
             log('init scoresheet ctrl');
 
             // Set up defaults
@@ -242,7 +242,7 @@ define('views/scoresheet',[
                 data.signature = $scope.signature;
                 data.score = $scope.score();
 
-                var fn = [
+                data.file = [
                     'score',
                     data.stage.id,
                     'round' + data.round,
@@ -251,17 +251,13 @@ define('views/scoresheet',[
                     data.uniqueId
                 ].join('_')+'.json';
 
-                return $fs.write("scoresheets/" + fn,data).then(function() {
-                    log('result saved');
-                    $scope.clear();
-                    $window.alert('Thanks for submitting a score of ' +
-                        data.score +
-                        ' points for team (' + data.team.number + ') ' + data.team.name +
-                        ' in ' + data.stage.name + ' ' + data.round + '.'
-                    );
-                }, function(err) {
-                    $window.alert('Error submitting score: ' + String(err));
-                    throw err;
+                return $scores.create(data).then(function() {
+                    $window.alert(`Thanks for submitting a score of ${data.score}`
+                         + ` points for team (${data.team.number})`
+                         + ` ${data.team.name} in ${data.stage.name} ${data.round}.`);
+                }).catch(function() {
+                    $window.alert(`Error submitting score to the server.
+The score will be saved locally until contact with the server is resotred`);
                 });
             };
 

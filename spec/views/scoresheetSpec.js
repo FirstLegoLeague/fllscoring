@@ -14,6 +14,7 @@ describe('scoresheet',function() {
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
     var fsMock = createFsMock({"settings.json": []});
+    var scoresMock;
     var settingsMock, handshakeMock, challengeMock;
 
     beforeEach(function() {
@@ -25,6 +26,7 @@ describe('scoresheet',function() {
             settingsMock = createSettingsMock($q,'settings');
             handshakeMock = createHandshakeMock($q);
             challengeMock = createChallengeMock();
+            scoresMock = createScoresMock();
             $scope = $rootScope.$new();
             $window = {
                 Date: function() {
@@ -42,6 +44,7 @@ describe('scoresheet',function() {
                 '$handshake': handshakeMock,
                 '$teams': {},
                 '$challenge': challengeMock,
+                '$scores': scoresMock,
                 '$window': $window
             });
         });
@@ -558,37 +561,18 @@ describe('scoresheet',function() {
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(fsMock.write.calls.mostRecent().args[0]).toEqual('scoresheets/score_qualifying_round1_table7_team123_abcdef01.json');
-                expect(fsMock.write.calls.mostRecent().args[1]).toEqual({
-                    uniqueId: "abcdef01",
-                    team: dummyTeam,
-                    stage: dummyStage,
+                expect(scoresMock.create).toHaveBeenCalledWith({
+                    uniqueId: 'abcdef01',
+                    team: { number: '123', name: 'foo' },
+                    stage: { id: 'qualifying', name: 'Voorrondes', rounds: 3 },
                     round: 1,
                     table: 7,
                     referee: 'foo',
-                    signature: [1,2,3,4],
-                    score: 0
+                    signature: [ 1, 2, 3, 4 ],
+                    score: 0,
+                    file: 'score_qualifying_round1_table7_team123_abcdef01.json'
                 });
                 expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
-            });
-        });
-        it('should alert a message if scoresheet cannot be saved', function() {
-            $scope.team = dummyTeam;
-            $scope.field = {};
-            $scope.stage = dummyStage;
-            $scope.round = 1;
-            $scope.table = 7;
-            var oldId = $scope.uniqueId;
-            fsMock.write.and.returnValue(Q.reject(new Error('argh')));
-            var firstFilename;
-            return $scope.save().catch(function() {
-                expect($window.alert).toHaveBeenCalledWith('Error submitting score: Error: argh');
-                firstFilename = fsMock.write.calls.mostRecent().args[0];
-                // verify that filename stays the same
-                return $scope.save();
-            }).catch(function() {
-                var secondFilename = fsMock.write.calls.mostRecent().args[0];
-                expect(secondFilename).toBe(firstFilename);
             });
         });
     });

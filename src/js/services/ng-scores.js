@@ -12,11 +12,11 @@ define('services/ng-scores',[
 
     // Current file version for scores.
     // Increment when adding/removing 'features' to stored scores.
-    var SCORES_VERSION = 2;
+    var SCORES_VERSION = 3;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams',
-        function($rootScope, $fs, $stages, $q, $teams) {
+        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$message','$independence',
+        function($rootScope, $fs, $stages, $q, $teams, $message, $independence) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -129,7 +129,6 @@ define('services/ng-scores',[
 
             this._updating = 0;
             this._initialized = null; // Promise<void>
-            this._pollingSheets = null; // Promise<void>
             this.init();
         }
 
@@ -153,27 +152,16 @@ define('services/ng-scores',[
                         return self.load();
                     });
             }
+            $message.on('scores:reload', function(data, msg) {
+                if(msg.fromMe){
+                    return;
+                }
+                self.load();
+            });
+
             return this._initialized;
         };
 
-
-        Scores.prototype.clear = function() {
-            this._rawScores = [];
-            this._update();
-        };
-
-        Scores.prototype.save = function() {
-            var data = {
-                version: 2,
-                scores: this._rawScores,
-                sheets: Object.keys(this._sheets),
-            };
-            return $fs.write('scores.json', data).then(function() {
-                log('scores saved');
-            }, function(err) {
-                log('scores write error', err);
-            });
-        };
 
         Scores.prototype.load = function() {
             var self = this;
@@ -201,7 +189,7 @@ define('services/ng-scores',[
                     }
                     self.clear();
                     scores.forEach(function(score) {
-                        self.add(score);
+                        self._addRawScore(score);
                     });
                     self._sheets = {};
                     sheetNames.forEach(function(name) { self._sheets[name] = true; });
@@ -214,20 +202,10 @@ define('services/ng-scores',[
             });
         };
 
-        Scores.prototype.remove = function(index) {
-            // TODO: this function used to remove an associated
-            // score sheet file.
-            // However, as creating that scoresheet was not
-            // the concern of this class, I (Martin) decided
-            // that removing it should not be its concern either.
-            // Note that e.g. the clear() method also did not
-            // remove 'obsolete' scoresheet files.
-            // Additionally note that a scoresheet may be the digital
-            // representation of a 'physical' scoresheet, something
-            // with a signature even, and may indeed be a very different
-            // beast than 'merely' a score entry.
-            this._rawScores.splice(index, 1);
-            this._update();
+        Scores.prototype.clear = function() {
+            this._rawScores = [];
+            this._sheets = {};
+            this.scores = [];
         };
 
         /**
@@ -290,27 +268,30 @@ define('services/ng-scores',[
             };
         }
 
-        Scores.prototype.add = function(score) {
-            // Create a copy of the score, in case the
-            // original score is being modified...
-            this._rawScores.push(sanitizeEntry(score));
-            this._update();
+        Scores.prototype.create = function(scoresheet) {
+            var self = this;
+
+            var score = sanitizeEntry(scoresheet);
+            return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
+                self._rawScores.push(score);
+            }).then((res) => self._update(res));
         };
 
-        /**
-         * Update score at given index.
-         * This differs from e.g. remove(index); add(score); in that
-         * it ensures that only allowed changes are made, and marks the
-         * the score as modified.
-         */
-        Scores.prototype.update = function(index, score) {
-            if (index < 0 || index >= this._rawScores.length) {
-                throw new RangeError("unknown score index: " + index);
-            }
-            var newScore = sanitizeEntry(score);
-            newScore.edited = (new Date()).toString();
-            this._rawScores.splice(index, 1, newScore);
-            this._update();
+        Scores.prototype.delete = function(score) {
+            var self = this;
+
+            return $independence.act('scores','/scores/delete/' + score.id, {}, function() {
+                self._rawScores.splice(self.scores.findIndex(s => s.id === score.id), 1);
+            }).then((res) => self._update(res));
+        };
+
+        Scores.prototype.update = function(score) {
+            var self = this;
+
+            score.edited = (new Date()).toString();
+            return $independence.act('scores','/scores/update/' + score.id, score, function() {
+                self._rawScores[self.scores.findIndex(s => s.id === score.id)] = score;
+            }).then((res) => self._update(res));
         };
 
         Scores.prototype.beginupdate = function() {
@@ -327,88 +308,19 @@ define('services/ng-scores',[
             }
         };
 
-        /**
-         * Poll storage for any new score sheets.
-         * Ignore already processed sheets, add a new score entry for each
-         * new sheet.
-         * FIXME: this is a temporary hack to get basic multi-user scoring
-         * working very quickly. Functionality like this should be moved to
-         * a server-instance and/or be distributed. The reason for integrating
-         * it directly in $scores for now, is that this reduces the change of
-         * having the state of processed sheets getting out of sync with the
-         * list of scores.
-         */
-        Scores.prototype.pollSheets = function() {
-            var self = this;
-            // Prevent (accidentally) performing the check in parallel
-            if (self._pollingSheets) {
-                return self._pollingSheets;
-            }
-
-            self._pollingSheets = $fs.list("scoresheets/").catch(function(err) {
-                // Ignore the fact that there are no sheets at all yet
-                if (err.status === 404) {
-                    return [];
-                }
-                // Convert to 'normal' errors in case of XHR response
-                if (err.status && err.responseText) {
-                    throw new Error(format("error {0} ({1}): {2}",
-                        err.status, err.statusText,
-                        err.responseText
-                    ));
-                }
-                // Otherwise, pass the error on
-                if (err instanceof Error) {
-                    throw err;
-                }
-                // Fallback
-                throw new Error("unknown error: " + String(err));
-            }).then(function(filenames) {
-                var promises = [];
-                // Walk over all sheets, find the 'new' ones
-                filenames.forEach(function(filename) {
-                    if (filename in self._sheets) {
-                        return;
-                    }
-                    // Retrieve the new sheet
-                    var p = $fs.read("scoresheets/" + filename).then(function(sheet) {
-                        // Convert to score entry and add to list
-                        var score = {
-                            file: filename,
-                            teamNumber: sheet.teamNumber !== undefined ? sheet.teamNumber : sheet.team.number,
-                            stageId: sheet.stageId !== undefined ? sheet.stageId : sheet.stage.id,
-                            round: sheet.round,
-                            score: sheet.score,
-                            table: sheet.table
-                        };
-                        self.add(score);
-                        // Mark as processed
-                        self._sheets[filename] = true;
-                        log(format("Added new scoresheet: stage {0}, round {1}, team {2}, score {3}",
-                            score.stageId, score.round, score.teamNumber, score.score
-                        ));
-                    });
-                    promises.push(p);
-                });
-                // Make sure to wait for all sheets to be processed
-                // before resolving the promise.
-                return $q.all(promises).finally(function() {
-                    // Always save scores if there was work to do,
-                    // even in case of errors, as some scores may still
-                    // have been added successfully.
-                    if (promises.length > 0) {
-                        return self.save();
-                    }
-                });
-            }).finally(function() {
-                self._pollingSheets = null;
-            });
-            return self._pollingSheets;
+        // Making this function visible only for testing
+        Scores.prototype._addRawScore = function(score) {
+            this._rawScores.push(sanitizeEntry(score));
         };
 
-        Scores.prototype._update = function() {
+        Scores.prototype._update = function(response) {
             if (this._updating > 0) {
                 return;
+            }
+
+            if(response) {
+                this._rawScores = response.scores.map(sanitizeEntry);
+                this._sheets = response.sheets;
             }
 
             var self = this;
@@ -440,6 +352,7 @@ define('services/ng-scores',[
                 }
             });
             $rootScope.$broadcast('validationError', this.validationErrors);
+            $message.send('scores:reload');
         };
 
         /**
