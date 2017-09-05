@@ -10,19 +10,21 @@
  * Then, use {{score.index}} instead of {{$index}} in e.g. click-handlers.
  */
 define('filters/index',[
-    'filters/ng-filters'
-],function(module) {
+    'filters/ng-filters',
+    'services/log'
+],function(module, log) {
     return module.filter('index', function () {
-        return function (array, index) {
+        return function (array, indexPropertyName) {
             //bail out if not an array-like structure
             if (!(array && array.forEach)) {
+                log("Indexing none-array: " + array);
                 return array;
             }
-            if (!index) {
-                index = 'index';
+            if (!indexPropertyName) {
+                indexPropertyName = 'index';
             }
             array.forEach(function(item,i) {
-                item[index] = i;
+                item[indexPropertyName] = i;
             });
             return array;
         };

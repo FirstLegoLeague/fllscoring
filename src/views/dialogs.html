@@ -310,7 +310,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="item in filterscoreboard[stageselected.id] | index | orderBy:stageselectedselected.sort:stageselected.rev track by item.team.number" id="trrow{{$index}}">
+                                    <tr ng-repeat="item in filterscoreboard[stageselected.id] | orderBy:stageselectedselected.sort:stageselected.rev track by item.team.number" id="trrow{{$index}}">
                                         <td>{{item.rank}}</td>
                                         <td>{{item.team.number}}</td>
                                         <td><b>{{item.team.name}}</b></td>

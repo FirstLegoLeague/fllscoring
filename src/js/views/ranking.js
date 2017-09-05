@@ -15,10 +15,6 @@ define('views/ranking',[
         function($scope, $scores, $stages, $handshake, $message, $settings) {
             log('init ranking ctrl');
 
-            // temporary default sort values
-            $scope.sort = 'rank';
-            $scope.rev = false;
-
             $scope.scores = $scores;
 
             function removeEmptyRanks(scoreboard) {
@@ -38,8 +34,15 @@ define('views/ranking',[
                 $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
 
-            $scores.init().then(function() {
+            $stages.init().then(function () {
                 $scope.stages = $stages.stages;
+                $scope.stages.forEach(function (stage) {
+                    stage.sort = 'rank';
+                    stage.rev = false;
+                });
+            });
+
+            $scores.init().then(function() {
                 return $scores.getRankings();
             });
 
@@ -63,24 +66,14 @@ define('views/ranking',[
             };
 
             $scope.sortIcon = function(stage, col){
-                // got into trouble with a default sort order here...
-                var icon = '';
-                if (stage.sort == col) {
-                    if (stage.rev){
-                        icon = 'icon-sort-down';
-                    } else {
-                        icon = 'icon-sort-up';
-                    }
-                } else if (stage.sort === undefined && col == $scope.sort) {
-                    if (stage.rev === undefined && $scope.rev) {
-                        icon = 'icon-sort-down';
-                    } else {
-                        icon = 'icon-sort-up';
-                    }
-                } else {
-                    icon = ''; // no icon if column is not sorted
+                if(!angular.equals(stage.sort, col)){
+                    return '';
                 }
-                return icon;
+                if (stage.rev) {
+                    return 'arrow_drop_down';
+                } else {
+                    return 'arrow_drop_up';
+                }
             };
 
             $scope.toggle = function(stage) {
