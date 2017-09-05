@@ -549,6 +549,53 @@ Notice: the score could not be sent to the server. This might be caused by poor 
         });
     });
 
+    describe('editing', function () {
+        beforeEach(function (done) {
+             scoresMock.loadScoresheet = () => Promise.resolve({
+                title: "test field",
+                "missions": [{
+                    "id": "test",
+                    "objectives": [{"id": "moo", value: 1}],
+                    "score": [null], "errors": [],
+                    "percentages": [], "completed": false
+                }],
+                "team": dummyTeam,
+                "stage": {"id": "qualifying", "name": "Voorrondes", "rounds": 3},
+                "round": 1,
+                "table": 7,
+                "referee": "foo",
+                "signature": [1, 2, 3, 4]
+            });
+            scoresMock.scores[0].team = dummyTeam;
+            scoresMock.scores[0].stage = {"id": "qualifying", "name": "Voorrondes", "rounds": 3};
+            scoresMock.round = 2;
+            $scope.load().then(done);
+        });
+        it('should load the filled scoresheet correctly', function (done) {
+            $scope.loadScoresheet(scoresMock.scores[0]);
+            expect($scope.editingScore).toBeTruthy();
+            expect($scope.scoreEntry).toEqual(scoresMock.scores[0]);
+            scoresMock.loadScoresheet().then(function () {
+                expect($scope.signature).toEqual([1, 2, 3, 4]);
+                expect($scope.referee).toEqual("foo");
+                $scope.missions.forEach(mission => mission.objectives.forEach((o) => expect(o.value).toEqual(1)));
+                done();
+            });
+        });
+
+        it('should override the old scoresheet', function (done) {
+            $scope.save = jasmine.createSpy('saveSpy');
+            $scope.pages = [];
+            $scope.loadScoresheet(scoresMock.scores[0]);
+            $scope.saveEdit();
+            expect(scoresMock.delete).toHaveBeenCalledWith(scoresMock.scores[0]);
+            scoresMock.loadScoresheet().then(function () {
+                expect($scope.save).toHaveBeenCalled();
+                done();
+            });
+        });
+    });
+
     describe('openDesciptionModal',function() {
         it('should emit a showDescription handshake',function() {
             $scope.openDescriptionModal('foo');
