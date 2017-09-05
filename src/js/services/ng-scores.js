@@ -189,7 +189,7 @@ define('services/ng-scores',[
                     }
                     self.clear();
                     scores.forEach(function(score) {
-                        self._rawScores.push(sanitizeScore(score));
+                        self._addRawScore(score);
                     });
                     self._sheets = {};
                     sheetNames.forEach(function(name) { self._sheets[name] = true; });
@@ -308,13 +308,18 @@ define('services/ng-scores',[
             }
         };
 
+        // Making this function visible only for testing
+        Scores.prototype._addRawScore = function(score) {
+            this._rawScores.push(sanitizeEntry(score));
+        };
+
         Scores.prototype._update = function(response) {
             if (this._updating > 0) {
                 return;
             }
 
             if(response) {
-                this._rawScores = response.scores;
+                this._rawScores = response.scores.map(sanitizeEntry);
                 this._sheets = response.sheets;
             }
 
