@@ -151,9 +151,9 @@ define('views/ranking',[
                $scope.buildExportFiles();
             }, true);
 
-            $scope.$watchCollection("settings", function () {//we need to rebuild the files if the user changes his export format
-                $scope.buildExportFiles();
-            });
+            $scope.$watch(() => $settings.settings.lineStartString, () => $scope.buildExportFiles());
+            $scope.$watch(() => $settings.settings.separatorString, () => $scope.buildExportFiles());
+            $scope.$watch(() => $settings.settings.lineEndString, () => $scope.buildExportFiles());
 
             $settings.init().then(function () {//we have to wait for settings to initialize otherwise $scope.settings gets set to undefined
                $scope.settings = $settings.settings;
