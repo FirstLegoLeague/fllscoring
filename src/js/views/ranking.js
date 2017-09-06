@@ -121,7 +121,7 @@ define('views/ranking',[
                     var teams = $scope.scoreboard[stageID];
                     teams = teams.map(function (teamEntry) {
                         return [teamEntry.rank, teamEntry.team.number,
-                            teamEntry.team.name, teamEntry.highest].concat(teamEntry.scores);
+                            teamEntry.team.name, teamEntry.highest.score].concat(teamEntry.scores);
                     });
                     $scope.exportFiles[stageID] = "data:text/csv;charset=utf-8,"+encodeURIComponent($scope.encodeArray(teams));
                 });
