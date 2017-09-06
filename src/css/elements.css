@@ -18,7 +18,7 @@ h1 {
     font-weight: normal;
 }
 
-h3 {
+.score {
     font-family: 'latolight', 'Segoe UI Light','helvetica','Arial';
     font-size: 20px;
     padding: 0 7px;
@@ -102,7 +102,7 @@ table {
         text-transform: capitalize;
     }
 
-    .appbar h3 {
+    .appbar .score {
         display: inline-block;
         color: black;
         float: right;
@@ -231,7 +231,8 @@ button .material-icons {
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
-    .viewMain.settings .view-settings {
+    .viewMain.settings .view-settings,
+    .viewMain.clock .view-clock {
         display: block;
     }
 
@@ -274,7 +275,8 @@ button .material-icons {
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
-    .viewMain.settings .view-settings {
+    .viewMain.settings .view-settings,
+    .viewMain.clock .view-clock {
         display: block;
     }
 
@@ -325,7 +327,8 @@ button .material-icons {
     .viewMain.scoresheet .view-scoresheet,
     .viewMain.scores .view-scores,
     .viewMain.ranking .view-ranking,
-    .viewMain.settings .view-settings {
+    .viewMain.settings .view-settings,
+    .viewMain.clock .view-clock {
         display: block;
     }
 

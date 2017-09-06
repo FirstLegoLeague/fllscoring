@@ -56,9 +56,9 @@
                             <span>Score</span>
                              <i class="material-icons">{{sortIcon(stage, 'highest')}}</i>
                         </th>
-                        <th class="span1" ng-if="stage.rounds > 1" ng-repeat="round in stage.$rounds track by $index" ng-click="doSort(stage, 'scores['+$index+']',true)">
+                        <th class="span1" ng-if="stage.rounds > 1" ng-repeat="round in stage.$rounds track by $index" ng-click="doSort(stage, 'scores['+$index+'].score',true)">
                             <span>Round {{round}}</span>
-                             <i class="material-icons">{{sortIcon(stage, 'scores['+$index+']')}}</i>
+                             <i class="material-icons">{{sortIcon(stage, 'scores['+$index+'].score')}}</i>
                         </th>
                         <!-- padding cols -->
                         <th class="span1 clearCell" ng-repeat="col in emptyCols(stage) track by $index"></th>

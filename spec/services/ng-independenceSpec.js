@@ -23,6 +23,8 @@ describe('ng-independence',function() {
         angular.mock.inject(["$independence", function(_$independence_) {
             $independence = _$independence_;
         }]);
+
+        localStorage.clear()
     });
 
     describe('act', function() {

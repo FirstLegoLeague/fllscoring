@@ -16,7 +16,7 @@ define('views/ranking',[
 
             $scope.scores = $scores;
 
-            function format(scoreboard) {
+            function removeEmptyRanks(scoreboard) {
                 let result = {};
                 for(let stageId in scoreboard) {
                     let stage = scoreboard[stageId];
@@ -24,6 +24,14 @@ define('views/ranking',[
                 }
                 return result;
             }
+
+          $settings.init();
+
+          $scope.$watch(function() {
+                return $scores.scoreboard;
+            }, function () {
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
+            }, true);
 
             $stages.init().then(function () {
                 $scope.stages = $stages.stages;
@@ -35,8 +43,6 @@ define('views/ranking',[
 
             $scores.init().then(function() {
                 return $scores.getRankings();
-            }).then(function(scoreboard) {
-                $scope.scoreboard = format(scoreboard);
             });
 
             $scope.exportRanking = function() {
@@ -45,35 +51,9 @@ define('views/ranking',[
                     stages: $scope.stages
                 });
             };
-
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
-            $scope.broadcastRanking = function(stage) {
-                // Send generic ranking info on bus, but filter it down a bit
-                // to not include Angular-injected stuff (yuk), but also omit
-                // the full scoresheets and their validation results etc.
-                // Having it spelled out exactly also helps to have some kind of
-                // 'interface' defined to the outside world.
-                var rankingMessage = {
-                    stage: {
-                        id: stage.id,
-                        name: stage.name,
-                        rounds: stage.rounds,
-                    },
-                    ranking: $scope.scoreboard[stage.id].map(function (item) {
-                        return {
-                            rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
-                            team: {
-                                number: item.team.number,
-                                name: item.team.name,
-                            },
-                            scores: item.scores,
-                            highest: item.highest,
-                        };
-                    }),
-                };
-                $message.send('scores:ranking', rankingMessage);
-            };
+            $scope.broadcastRanking = (stage) =>  $scores.broadcastRanking(stage);
 
             $scope.doSort = function(stage, col, defaultSort) {
                 if (stage.sort === undefined) {
@@ -149,6 +129,10 @@ define('views/ranking',[
 
             $scope.$watch("scoreboard", function () {
                $scope.buildExportFiles();
+            }, true);
+
+            $scope.$watch(() => $scores.scoreboard, function () {
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
 
             $scope.$watch(() => $settings.settings.lineStartString, () => $scope.buildExportFiles());

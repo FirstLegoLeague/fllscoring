@@ -18,7 +18,6 @@ describe('ng-scores',function() {
     ]);
     var messageMock = createMessageMock();
     var independenceMock = createIndependenceMock();
-    var rankingsMock = createRankingsMock();
     var validationMock = createValidationMock();
     var mockScore = {
         file: 'somescore.json',
@@ -28,6 +27,17 @@ describe('ng-scores',function() {
         score: 150,
         originalScore: 150
     };
+    var fakeRankingEntry = [
+        {
+            rank: 1,
+            team: {number: 123, name: "bla"},
+            scores: [mockScore],
+            highest: mockScore
+        }
+    ];
+    var fakeRankings = {};
+    fakeRankings[stagesMock.stages[0].id] = fakeRankingEntry;
+    var rankingsMock = createRankingsMock(fakeRankings);
 
     var rawScore = {
         id: 'asd23d',
@@ -42,11 +52,12 @@ describe('ng-scores',function() {
         table: undefined
     };
 
-    var mockScores = { version: 2, scores: [rawScore] };
+    var mockScores = { version: 3, scores: [rawScore] };
 
     var fsMock= createFsMock({
         "scores.json": mockScores,
     });
+    var settingsMock = createSettingsMock(Q, {});
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -58,6 +69,7 @@ describe('ng-scores',function() {
             $provide.value('$independence', independenceMock);
             $provide.value('$rankings', rankingsMock);
             $provide.value('$validation', validationMock);
+            $provide.value('$settings', settingsMock);
         });
         angular.mock.inject(["$scores", "$score", "$q", function(_$scores_, _$score_,_$q_) {
             $scores = _$scores_;
@@ -111,13 +123,8 @@ describe('ng-scores',function() {
             expect($scores.load).toHaveBeenCalled();
         });
 
-        it('can accept backwards compatiale response', function(){
-            $scores.load([rawScore]);
-            expect($scores.scores.length).toBe(1);
-        });
-
         it('throws an error if it revcieves an unkown version', function(){
-            expect(() => $scores.load({ version: 3 })).toThrow(new Error('unknown scores version 3, (expected 2)'));
+            expect(() => $scores.load({ version: 4 })).toThrow(new Error('unsupported scores version 4, (expected 3)'));
         });
     });
 
@@ -134,6 +141,28 @@ describe('ng-scores',function() {
         });
     });
 
+    describe('broadcastRanking', function () {
+        it('should send a message describing the correct rankings', function () {
+            var broadcastStage = stagesMock.stages[0];
+            $scores.broadcastRanking(broadcastStage);
+            var rankingTopic = 'scores:ranking';
+            var rankingMessage = {
+                stage: {
+                    id: broadcastStage.id,
+                    name: broadcastStage.name,
+                    rounds: broadcastStage.rounds,
+                },
+                ranking: [{
+                    rank: fakeRankingEntry[0].rank,
+                    team: fakeRankingEntry[0].team,
+                    scores: fakeRankingEntry[0].scores,
+                    highest: fakeRankingEntry[0].highest
+                }]
+            };
+            $scores.getRankings().then(() => expect(messageMock.send).toHaveBeenCalledWith(rankingTopic, rankingMessage));
+        })
+    });
+
     describe('acceptScores', function() {
         beforeEach(function() {
             $scores.load = jasmine.createSpy('loadSpy');
@@ -148,6 +177,37 @@ describe('ng-scores',function() {
             $scores.acceptScores([mockScore]);
             expect(messageMock.send).toHaveBeenCalledWith('scores:reload');
         });
+
+        it('should try to auto-broadcast if call and settings permit', function () {
+            $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
+            settingsMock.settings.autoBroadcast = true;
+            var autoBroadcastStage = stagesMock.stages[0];
+            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            $scores.acceptScores({data: mockScores}, true);
+            expect($scores.broadcastRanking).toHaveBeenCalledWith(autoBroadcastStage)
+        });
+
+        it('should not try to auto-broadcast if call permits and settings do not', function () {
+            $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
+            settingsMock.settings.autoBroadcast = false;
+            var autoBroadcastStage = stagesMock.stages[0];
+            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            $scores.acceptScores({data: mockScores}, true);
+            expect($scores.broadcastRanking).not.toHaveBeenCalled();
+
+            settingsMock.settings.autoBroadcastStage = undefined;
+            settingsMock.settings.autoBroadcast = true;
+            expect($scores.broadcastRanking).not.toHaveBeenCalled();
+        })
+
+        it('should not try to auto-broadcast if call does not permit and settings do', function () {
+            $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
+            settingsMock.settings.autoBroadcast = true;
+            var autoBroadcastStage = stagesMock.stages[0];
+            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            $scores.acceptScores({data: mockScores}, false);
+            expect($scores.broadcastRanking).not.toHaveBeenCalled();
+        })
     });
 
     describe('create', function() {

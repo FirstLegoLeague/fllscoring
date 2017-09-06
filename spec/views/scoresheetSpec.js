@@ -13,8 +13,9 @@ describe('scoresheet',function() {
         name: 'foo'
     };
     var dummyStage = { id: "qualifying", name: "Voorrondes", rounds: 3 };
+    var dummySettings = {bla: 'blu'};
     var fsMock = createFsMock({"settings.json": []});
-    var settingsMock, handshakeMock, challengeMock;
+    var settingsMock, handshakeMock, challengeMock, scoresMock;
 
     beforeEach(function() {
         angular.mock.module('DescriptionDialog');
@@ -22,7 +23,7 @@ describe('scoresheet',function() {
         angular.mock.module('RoundDialog');
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
-            settingsMock = createSettingsMock($q,'settings');
+            settingsMock = createSettingsMock($q, dummySettings);
             handshakeMock = createHandshakeMock($q);
             challengeMock = createChallengeMock();
             scoresMock = createScoresMock();
@@ -40,10 +41,11 @@ describe('scoresheet',function() {
                 '$fs': fsMock,
                 '$settings': settingsMock,
                 '$scores': scoresMock,
-                '$score': jasmine.createSpy('$score').and.returnValue(scoresMock.scores[0]),
+                '$score': createScoreMock(scoresMock.scores[0]),
                 '$stages': {},
                 '$handshake': handshakeMock,
                 '$teams': {},
+                '$scores': scoresMock,
                 '$challenge': challengeMock,
                 '$window': $window
             });
@@ -60,7 +62,7 @@ describe('scoresheet',function() {
             expect($scope.settings).toEqual({});
             expect($scope.missions).toEqual([]);
             $scope.$digest();
-            expect($scope.settings).toEqual('settings');
+            expect($scope.settings).toEqual(dummySettings);
             expect($scope.referee).toEqual(null);
             expect($scope.scoreEntry.table).toEqual(7);
         });
@@ -454,7 +456,45 @@ describe('scoresheet',function() {
                 expect($window.alert).toHaveBeenCalledWith('no team selected, do so first');
             });
         });
-        it('should save',function() {
+
+        it('should save as unpublished by default',function(done) {
+            $scope.scoreEntry.id = "abcdef01";
+            $scope.scoreEntry.team = dummyTeam;
+            $scope.field = {};
+            $scope.scoreEntry.stage = dummyStage;
+            $scope.scoreEntry.round = 1;
+            $scope.scoreEntry.table = 7;
+            var fileName = () => 'filename.json';
+            $scope.scoreEntry.calcFilename = fileName;
+            $scope.referee = 'foo';
+            $scope.signature = [1,2,3,4];
+            $scope.save().then(function () {
+                expect(scoresMock.create).toHaveBeenCalledWith(
+                     {
+                        team: dummyTeam,
+                        stage: dummyStage,
+                        round: 1,
+                        table: 7,
+                        referee: 'foo',
+                        signature: [1, 2, 3, 4]
+                    },
+                    {
+                        score: 0,
+                        id: 'abcdef01',
+                        table: 7,
+                        team: dummyTeam,
+                        stage: dummyStage,
+                        round: 1,
+                        published: false,
+                        calcFilename: fileName
+                    });
+                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
+                done();
+            });
+        });
+
+        it('should save the score as published if the settings allow',function(done) {
+            settingsMock.settings.autoPublish = true;
             $scope.scoreEntry.id = "abcdef01";
             $scope.scoreEntry.team = dummyTeam;
             $scope.field = {};
@@ -466,26 +506,32 @@ describe('scoresheet',function() {
             $scope.referee = 'foo';
             $scope.signature = [1,2,3,4];
             return $scope.save().then(function() {
-                expect(scoresMock.create).toHaveBeenCalledWith({
-                    scoreEntry: {
+                expect(scoresMock.create).toHaveBeenCalledWith(
+                    {
+                        team: dummyTeam,
+                        stage: dummyStage,
+                        round: 1,
+                        table: 7,
+                        referee: 'foo',
+                        signature: [ 1, 2, 3, 4 ]
+                    },
+                    {
                         score: 0,
                         id: 'abcdef01',
                         table: 7,
                         team: dummyTeam,
                         stage: dummyStage,
                         round: 1,
-                        calcFilename: fileName
-                    },
-                    team: dummyTeam,
-                    stage: dummyStage,
-                    round: 1,
-                    table: 7,
-                    referee: 'foo',
-                    signature: [ 1, 2, 3, 4 ]
-                });
-                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.');
+                        calcFilename: fileName,
+                        published: true
+                    });
+
+                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
+                         ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
+                done();
             });
         });
+
         it('should alert a message if scoresheet cannot be saved', function() {
             $scope.scoreEntry.team = dummyTeam;
             $scope.field = {};
@@ -497,8 +543,55 @@ describe('scoresheet',function() {
             var oldId = $scope.uniqueId;
             scoresMock.create.and.returnValue(Q.reject(new Error('argh')));
             return $scope.save().catch(function() {
-                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of undefined points for team (123) foo in Voorrondes 1.
+                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team foo (123) in Voorrondes 1.
 Notice: the score could not be sent to the server. This might be caused by poor network conditions. The score is thereafore save on your device, and will be sent when it's possible.Current number of scores actions waiting to be sent: 1`);
+            });
+        });
+    });
+
+    describe('editing', function () {
+        beforeEach(function (done) {
+             scoresMock.loadScoresheet = () => Promise.resolve({
+                title: "test field",
+                "missions": [{
+                    "id": "test",
+                    "objectives": [{"id": "moo", value: 1}],
+                    "score": [null], "errors": [],
+                    "percentages": [], "completed": false
+                }],
+                "team": dummyTeam,
+                "stage": {"id": "qualifying", "name": "Voorrondes", "rounds": 3},
+                "round": 1,
+                "table": 7,
+                "referee": "foo",
+                "signature": [1, 2, 3, 4]
+            });
+            scoresMock.scores[0].team = dummyTeam;
+            scoresMock.scores[0].stage = {"id": "qualifying", "name": "Voorrondes", "rounds": 3};
+            scoresMock.round = 2;
+            $scope.load().then(done);
+        });
+        it('should load the filled scoresheet correctly', function (done) {
+            $scope.loadScoresheet(scoresMock.scores[0]);
+            expect($scope.editingScore).toBeTruthy();
+            expect($scope.scoreEntry).toEqual(scoresMock.scores[0]);
+            scoresMock.loadScoresheet().then(function () {
+                expect($scope.signature).toEqual([1, 2, 3, 4]);
+                expect($scope.referee).toEqual("foo");
+                $scope.missions.forEach(mission => mission.objectives.forEach((o) => expect(o.value).toEqual(1)));
+                done();
+            });
+        });
+
+        it('should override the old scoresheet', function (done) {
+            $scope.save = jasmine.createSpy('saveSpy');
+            $scope.pages = [];
+            $scope.loadScoresheet(scoresMock.scores[0]);
+            $scope.saveEdit();
+            expect(scoresMock.delete).toHaveBeenCalledWith(scoresMock.scores[0]);
+            scoresMock.loadScoresheet().then(function () {
+                expect($scope.save).toHaveBeenCalled();
+                done();
             });
         });
     });

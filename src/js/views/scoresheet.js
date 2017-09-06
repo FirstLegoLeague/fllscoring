@@ -36,6 +36,7 @@ define('views/scoresheet',[
             // add teams and stages to scope for selection
             $scope.teams = $teams.teams;
             $scope.stages = $stages.stages;
+            $scope.scores = $scores.scores;
 
             $scope.load = function() {
                 return $settings.init()
@@ -202,6 +203,7 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
+                $scope.editingScore = false;
                 var table = $scope.scoreEntry ? $scope.scoreEntry.table : undefined;
                 $scope.scoreEntry = new $score({ table: table });
                 $scope.signature = null;
@@ -213,6 +215,34 @@ define('views/scoresheet',[
                 log('scoresheet cleared');
             };
 
+            $scope.saveEdit = function () {
+                $scope.setPage($scope.pages.find(function (p) {return p.name === "scores"}));//When you finish editing a scoresheet, it returns you to the scores view
+                $scores.delete($scope.scoreEntry);
+                return $scores.loadScoresheet($scope.scoreEntry).then(function (result) {
+                    result.missions.forEach(function (mission) {
+                        var changedMission = $scope.missions.find(function (e) {return e.title === mission.title});
+                        mission.objectives.forEach(function (objective, i) {
+                            if(objective["value"] !== changedMission.objectives[i]["value"]){
+                                var changedValue;
+                                if(objective.options){
+                                    changedValue = objective.options.find(function (o) {return o.value === changedMission.objectives[i]["value"]}).title;
+                                } else {
+                                    changedValue = changedMission.objectives[i]["value"];
+                                }
+                                log(`Changed value of objective ${objective.title} to ${changedValue}`);
+                            }
+                        });
+                    });
+                    result.team.number !== $scope.scoreEntry.team.number ? log(`changed team to (${$scope.scoreEntry.team.number}) ${$scope.scoreEntry.team.name}`) : void(0);
+                    result.stage.id !== $scope.scoreEntry.stage.id ? log("changed stage to " + $scope.scoreEntry.stage.name) : void(0);
+                    result.round !== $scope.scoreEntry.round ? log("changed round to " + $scope.scoreEntry.round) : void(0);
+                    result.table !== $scope.scoreEntry.table ? log("changed table to " + $scope.scoreEntry.table) : void(0);
+                    result.referee !== $scope.referee ? log("changed referee to " + $scope.referee) : void(0);
+                    $scope.scoreEntry.id = $score.generateUniqueId();//This is a different score after being edited, so it has a different id
+                    $scope.save()
+                });
+            };
+
             //saves mission scoresheet
             $scope.save = function() {
                 if (!$scope.scoreEntry.team || !$scope.scoreEntry.stage || !$scope.scoreEntry.round) {
@@ -220,32 +250,33 @@ define('views/scoresheet',[
                     return $q.reject(new Error('no team selected, do so first'));
                 }
 
-                var data = angular.copy($scope.field);
-                data.scoreEntry = new $score($scope.scoreEntry);
-                data.team = $scope.scoreEntry.team;
-                data.stage = $scope.scoreEntry.stage;
-                data.round = $scope.scoreEntry.round;
-                data.table = $scope.scoreEntry.table;
-                data.referee = $scope.referee;
-                data.signature = $scope.signature;
-                data.scoreEntry.score = $scope.score();
-                data.scoreEntry.calcFilename();
+                var scoresheet = angular.copy($scope.field);
+                var scoreEntry = new $score($scope.scoreEntry);
+                scoresheet.team = $scope.scoreEntry.team;
+                scoresheet.stage = $scope.scoreEntry.stage;
+                scoresheet.round = $scope.scoreEntry.round;
+                scoresheet.table = $scope.scoreEntry.table;
+                scoresheet.referee = $scope.referee;
+                scoresheet.signature = $scope.signature;
+                scoreEntry.score = $scope.score();
+                scoreEntry.published = $settings.settings.autoPublish || false;
+                scoreEntry.calcFilename();
 
-                return $scores.create(data).then(function() {
+                return $scores.create(scoresheet, scoreEntry).then(function() {
                     log('result saved: ');
+                    message = `Thanks for submitting a score of ${scoreEntry.score} points for team (${scoresheet.team.number})` +
+                        ` ${scoresheet.team.name} in ${scoresheet.stage.name} ${scoresheet.round}.`;
                     $scope.clear();
-                    message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
-                        ` ${data.team.name} in ${data.stage.name} ${data.round}.`;
                     $window.alert(message);
                 }).catch(function(err) {
-                    log('result saved: ');
-                    $scope.clear();
-                    message = `Thanks for submitting a score of ${data.score} points for team (${data.team.number})` +
-                        ` ${data.team.name} in ${data.stage.name} ${data.round}.` + `
+                    log(`Error: ${err}`);
+                    message = `Thanks for submitting a score of ${scoreEntry.score} points for team` +
+                        ` ${scoresheet.team.name} (${scoresheet.team.number}) in ${scoresheet.stage.name} ${scoresheet.round}.` + `
 Notice: the score could not be sent to the server. ` +
                             `This might be caused by poor network conditions. ` +
                             `The score is thereafore save on your device, and will be sent when it's possible.` +
                             `Current number of scores actions waiting to be sent: ${$scores.pendingActions()}`
+                    $scope.clear();
                     $window.alert(message);
                     throw err;
                 });
@@ -271,6 +302,26 @@ Notice: the score could not be sent to the server. ` +
                     }
                 });
             };
+
+            $scope.loadScoresheet = function (score) {
+                log(`Editing scoresheet: stage ${score.stageId}, round ${score.round}, team ${score.teamNumber}, score ${score.score}`);
+                $scope.editingScore = true;
+                $scope.scoreEntry = score;
+                $scores.loadScoresheet(score).then(function (result) {
+                    $scope.signature = result.signature;
+                    $scope.referee = result.referee;
+                    $scope.missions.forEach(function (mission) {
+                        var filledMission = result.missions.find(function (e) {return e.title === mission.title});
+                        mission.objectives.forEach(function (objective, index) {
+                            objective["value"] = filledMission.objectives[index]["value"];
+                        });
+                    });
+                });
+            };
+
+            $scope.$on("editScoresheet", function (e, score) {
+                $scope.loadScoresheet(score);
+            });
 
             // Initialize empty scoresheet (mostly uniqueId)
             $scope.clear();

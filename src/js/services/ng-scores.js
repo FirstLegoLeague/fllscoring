@@ -10,6 +10,7 @@ define('services/ng-scores',[
     'services/ng-teams',
     'services/ng-independence',
     'services/ng-rankings',
+    'services/ng-settings',
     'services/ng-validation',
     'services/ng-score'
 ],function(module,log) {
@@ -17,11 +18,11 @@ define('services/ng-scores',[
 
     // Current file version for scores.
     // Increment when adding/removing 'features' to stored scores.
-    var SCORES_VERSION = 2;
+    var SCORES_VERSION = 3;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$message', '$teams','$independence', '$rankings', '$validation', '$score',
-        function($rootScope, $fs, $stages, $message, $teams, $independence, $rankings, $validation, $score) {
+        ['$rootScope', '$fs', '$stages', '$message', '$teams','$independence', '$rankings', '$validation', '$score', '$settings',
+        function($rootScope, $fs, $stages, $message, $teams, $independence, $rankings, $validation, $score, $settings) {
 
         /* Main Scores class */
 
@@ -106,29 +107,54 @@ define('services/ng-scores',[
             this._update();
         };
 
+        function removeEmptyRanks(scoreboard) {
+            let result = {};
+            for (let stageId in scoreboard) {
+                let stage = scoreboard[stageId];
+                result[stageId] = stage.filter(rank => rank.scores.filter(score => score !== undefined).length);
+            }
+            return result;
+        }
+
+        Scores.prototype.broadcastRanking = function (stage) {
+            var self = this;
+            self.getRankings().then(function () {
+                var rankingMessage = {
+                    stage: {
+                        id: stage.id,
+                        name: stage.name,
+                        rounds: stage.rounds,
+                    },
+                    ranking: removeEmptyRanks(self.scoreboard)[stage.id].map(function (item) {
+                        return {
+                            rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
+                            team: {
+                                number: item.team.number,
+                                name: item.team.name,
+                            },
+                            scores: item.scores,
+                            highest: item.highest,
+                        };
+                    }),
+                };
+                $message.send('scores:ranking', rankingMessage);
+            });
+
+        };
+
         Scores.prototype.load = function(data) {
             var self = this;
             var processScores = function(res) {
                 self.beginupdate();
                 try {
                     // Determine scores file version
-                    var scores;
-                    var version;
-                    if (res.version === undefined) {
-                        // 'Legacy' storage, all scores stored directly
-                        // as an array
-                        scores = res;
-                        version = 1;
-                    } else {
-                        // New style storage, scores in a property,
-                        // and an explicit version identifier.
-                        version = res.version;
-                        scores = res.scores;
+                    // And throw an exception if it is not supported
+                    var version = res.version || 1;
+                    if (version !== SCORES_VERSION) {
+                        throw new Error(`unsupported scores version ${version}, (expected ${SCORES_VERSION})`);
                     }
-                    if (version > SCORES_VERSION) {
-                        throw new Error(`unknown scores version ${version}, (expected ${SCORES_VERSION})`);
-                    }
-                    self.scores = scores.map(score => new $score(score));
+
+                    self.scores = res.scores.map(score => new $score(score));
                     log("scores loaded, version " + version);
                 } finally {
                     self.endupdate();
@@ -142,6 +168,10 @@ define('services/ng-scores',[
                     log('scores read error', err);
                 });
             }
+        };
+
+        Scores.prototype.loadScoresheet = function (score) {
+            return $fs.read("scoresheets/"+score.file)
         };
 
         Scores.prototype.beginupdate = function() {
@@ -168,44 +198,47 @@ define('services/ng-scores',[
             });
         };
 
-        Scores.prototype.acceptScores = function(res) {
-            this.load(res.data);
+        Scores.prototype.acceptScores = function(res, tryAutoBroadcast) {
+            var self = this;
+            self.load(res.data);
+            var stageID = $settings.settings.autoBroadcastStage;
+            if ($settings.settings.autoBroadcast && stageID && tryAutoBroadcast) {
+                log('auto-broadcasting stage ' + stageID);
+                self.broadcastRanking($stages.get(stageID));
+            }
             $message.send('scores:reload');
         }
 
-        Scores.prototype.create = function(scoresheet) {
+        Scores.prototype.create = function(scoresheet, score) {
             var self = this;
-
-            var score = scoresheet.scoreEntry;
-            delete scoresheet.scoreEntry;
 
             return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
                 self.scores.push(score);
             })
-            .then((res) => self.acceptScores(res));
+            .then((res) => self.acceptScores(res, score.published));
         };
 
         Scores.prototype.delete = function(score) {
             var self = this;
             return $independence.act('scores','/scores/delete/' + score.id, {}, function() {
                 self.scores.splice(self.scores.findIndex(s => s.id === score.id), 1);
-            }).then((res) => self.acceptScores(res));
+            }).then((res) => self.acceptScores(res, score.published));
         };
 
-        Scores.prototype.update = function(score) {
+        Scores.prototype.update = function(score, forceAutoPublish) {
             score.edited = (new Date()).toString();
             var self = this;
             return $independence.act('scores','/scores/update/' + score.id, score, function() {
                 self.scores[self.scores.findIndex(s => s.id === score.id)] = score;
-            }).then((res) => self.acceptScores(res));
+            }).then((res) => self.acceptScores(res, forceAutoPublish || score.published));
         };
 
-        Scores.prototype.getRankings = function() {
+        Scores.prototype.getRankings = function(filter) {
             this.validationErrors = $validation.validate(this.scores);
 
             var self = this;
             if(this.validationErrors.length === 0) {
-                return $rankings.calculate(this.scores).then(function(scoreboard) {
+                return $rankings.calculate(this.scores, filter).then(function(scoreboard) {
                     self.scoreboard = scoreboard;
                     return scoreboard;
                 });

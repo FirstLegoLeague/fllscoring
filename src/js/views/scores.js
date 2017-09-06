@@ -6,8 +6,8 @@ define('views/scores', [
 ], function (log) {
     var moduleName = 'scores';
     return angular.module(moduleName, ['filters']).controller(moduleName + 'Ctrl', [
-        '$scope', '$scores', '$teams', '$stages', '$window',
-        function ($scope, $scores, $teams, $stages, $window) {
+        '$scope', '$scores', '$teams', '$stages', '$window', '$rootScope',
+        function ($scope, $scores, $teams, $stages, $window, $rootScope) {
             log('init scores ctrl');
 
             $scope.sort = 'index';
@@ -15,17 +15,13 @@ define('views/scores', [
 
             function enrich(scores) {
                 return scores.map(score => {
-                    score.team = $teams.get(score.teamNumber);
-                    score.stage = $stages.get(score.stageId);
-                    return score;
+                    var enrichedScore = {};
+                    for(var key in score) enrichedScore[key] = score[key];
+                    enrichedScore.team = $teams.get(score.teamNumber);
+                    enrichedScore.stage = $stages.get(score.stageId);
+                    return enrichedScore;
                 });
             }
-
-            $scope.scores = [];
-            $scores.init().then(function () {
-                $scope.scores = enrich($scores.scores);
-                $scope.stages = $stages.stages;
-            });
 
             $scope.$watch(function () {
                 return $scores.scores;
@@ -33,7 +29,11 @@ define('views/scores', [
                 $scope.scores = enrich($scores.scores);
             });
 
-            $scope.doSort = function (col, defaultSort) {
+            $scores.init().then(function() {
+                $scope.stages = $stages.stages;
+            });
+
+            $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
             };
@@ -62,9 +62,10 @@ define('views/scores', [
                 saveScore(score);
             };
 
-            $scope.unpublishScore = function (score) {
+            $scope.unpublishScore = function(score) {
+                var wasPublished = score.published;
                 score.published = false;
-                saveScore(score);
+                saveScore(score, wasPublished);
             };
 
             $scope.finishEditScore = function (score) {
@@ -76,10 +77,10 @@ define('views/scores', [
                 saveScore(score);
             };
 
-            function saveScore(score) {
+            function saveScore(score, forceAutoBroadcast) {
                 try {
-                    $scores.update(score);
-                } catch (e) {
+                    $scores.update(score, forceAutoBroadcast);
+                } catch(e) {
                     $window.alert("Error updating score: " + e);
                 }
             }
@@ -89,6 +90,14 @@ define('views/scores', [
             };
 
             $scope.refresh = function () {
+
+            }
+            $scope.editScoresheet = function (score) {
+                $scope.setPage($scope.pages.find(function (p) {return p.name === "scoresheet"}));
+                $rootScope.$broadcast("editScoresheet", score)
+            };
+
+            $scope.refresh = function() {
                 $scores.load();
             };
         }]);
