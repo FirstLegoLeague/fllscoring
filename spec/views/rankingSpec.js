@@ -181,12 +181,18 @@ describe('ranking', function() {
     });
 
     describe('settings watcher', function () {
-        it('should rebuild the export files when the settings change', function () {
+        it('should rebuild the export files when the relevant settings change', function () {
             $scope.buildExportFiles = jasmine.createSpy('buildExportFiles');
-            $scope.settings.bla = "fo";
+            settingsMock.settings.lineStartString = "fo";
             $scope.$digest();
             expect($scope.buildExportFiles).toHaveBeenCalled();
-        })
+            settingsMock.settings.separatorString = "fo";
+            $scope.$digest();
+            expect($scope.buildExportFiles).toHaveBeenCalled();
+            settingsMock.settings.lineEndString = "fo";
+            $scope.$digest();
+            expect($scope.buildExportFiles).toHaveBeenCalled();
+        });
     });
 
     describe('getRoundLabel',function() {
