@@ -6,14 +6,11 @@
         <h1>
             {{currentPage.title}}
         </h1>
-        <span class="appbar-actions">
-            <button ng-click="exportRanking()"><i class="material-icons">file_download</i></button>
-        </span>
     </div>
 
     <div ng-repeat="stage in stages">
         <p class="pull-right" style="margin-top: 1em;">
-            <a  href="{{csvdata[stage.id]}}" download="{{csvname[stage.id]}}">
+            <a href="{{exportFiles[stage.id]}}" download="{{'ranking_'+stage.id+'.csv'}}">
                 <i class="material-icons">file_download</i>
                 Export
             </a>
