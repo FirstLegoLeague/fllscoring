@@ -71,22 +71,6 @@ describe('scores', function() {
         });
     });
 
-    describe('publishScore',function() {
-        it('should publish a score and save it',function() {
-            $scope.publishScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: true});
-            expect(scoresMock.save).toHaveBeenCalled();
-        });
-    });
-
-    describe('unpublishScore',function() {
-        it('should unpublish a score and save it',function() {
-            $scope.unpublishScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: false});
-            expect(scoresMock.save).toHaveBeenCalled();
-        });
-    });
-
     describe('finishEditScore',function() {
         it('should call update and save',function() {
             $scope.editScore(0);
@@ -107,6 +91,22 @@ describe('scores', function() {
             $scope.editScore(0);
             $scope.cancelEditScore();
             expect(scoresMock._update).toHaveBeenCalled();
+        });
+    });
+
+    describe('publishScore',function() {
+        it('should publish a score and save it',function() {
+            $scope.publishScore(0);
+            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: true});
+            expect(scoresMock.save).toHaveBeenCalled();
+        });
+    });
+
+    describe('unpublishScore',function() {
+        it('should unpublish a score and save it',function() {
+            $scope.unpublishScore(0);
+            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: false});
+            expect(scoresMock.save).toHaveBeenCalled();
         });
     });
 
