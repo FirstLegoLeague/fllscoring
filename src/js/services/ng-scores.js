@@ -460,29 +460,10 @@ define('services/ng-scores',[
          * @return Results object with validated scores and per-stage rankings
          */
         Scores.prototype.getRankings = function(stages) {
-            var self = this;
             var results = {
                 scores: [], // List of sanitized scores
                 scoreboard: {}, // Sorted rankings for each stage
             };
-
-            var haveFilter = !!stages;
-            if (!stages) {
-                stages = {};
-                $stages.stages.forEach(function(stage) {
-                    stages[stage.id] = true;
-                });
-            }
-
-            // Convert number of stages to take to a number (i.e. Infinity when
-            // e.g. `true` is passed)
-            // And create empty lists for each stage
-            var board = results.scoreboard;
-            Object.keys(stages).forEach(function(stage) {
-                var s = stages[stage];
-                stages[stage] = typeof s === "number" && s || s && Infinity || 0;
-                board[stage] = [];
-            });
 
             // Create a copy of the score, such that we can add
             // additional info (e.g. validation errors) without
@@ -576,21 +557,45 @@ define('services/ng-scores',[
                 }
             });
 
-            // Convert all valid scores to a per-stage array of objects
-            // per team (containing team and entries per round)
-            results.scores.forEach(function (s) {
-                // Ignore scores with errors, except if it's a duplicate
-                // (i.e. keep the first score in the list, to prevent it
-                // from disappearing due to a later error).
+            // Create a pass-all filter if necessary
+            var haveFilter = !!stages;
+            if (!stages) {
+                stages = {};
+                $stages.stages.forEach(function (stage) {
+                    stages[stage.id] = true;
+                });
+            }
+
+            // Convert number of stages to take to a number (i.e. Infinity when
+            // e.g. `true` is passed)
+            // And create empty lists for each stage
+            var board = results.scoreboard;
+            Object.keys(stages).forEach(function (stage) {
+                var s = stages[stage];
+                stages[stage] = typeof s === "number" && s || s && Infinity || 0;
+                board[stage] = [];
+            });
+
+            // Create filtered scores (both user-supplied filter and errors).
+            // Ignore scores with errors, except if it's a duplicate
+            // (i.e. keep the first score in the list, to prevent it
+            // from disappearing due to a later error).
+            var filteredScores = results.scores.filter(function (s) {
                 if (s.error && !(s.error instanceof DuplicateScoreError && s.error.score === s)) {
-                    return;
+                    return false;
                 }
 
                 // Ignore score if filtered
                 if (haveFilter && s.round > stages[s.stageId]) {
-                    return;
+                    return false;
                 }
 
+                return true;
+            });
+
+            // Convert all valid scores to a per-stage array of objects
+            // per team (containing team and entries per round)
+            filteredScores.forEach(function (s) {
                 // Find existing entry for this team, or create one
                 var bteam;
                 var i;
