@@ -56,7 +56,7 @@
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'UnknownTeamError'" title="{{score.error.message}}">error</i>
                 <span ng-if="!score.$editing">
-                    {{score.team.number}}
+                    {{score.teamNumber}}
                 </span>
                 <span ng-if="score.$editing">
                     <input style="width:50px" type="text" ng-model="score.teamNumber">
