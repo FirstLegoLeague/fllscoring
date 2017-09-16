@@ -2,7 +2,7 @@ function createScoresMock($q,scoreboard) {
     scoreboard = scoreboard || {};
     return {
         scores: [{
-            stageId: "qualifing",
+            stageId: "qualifying",
             round: 2,
             teamNumber: 10,
             table: "table 1",
