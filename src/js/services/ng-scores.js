@@ -460,15 +460,10 @@ define('services/ng-scores',[
          * @return Results object with validated scores and per-stage rankings
          */
         Scores.prototype.getRankings = function(stages) {
-            var results = {
-                scores: [], // List of sanitized scores
-                scoreboard: {}, // Sorted rankings for each stage
-            };
-
             // Create a copy of the score, such that we can add
             // additional info (e.g. validation errors) without
             // polluting rawScores.
-            results.scores = this._rawScores.map(function (_score) {
+            var validatedScores = this._rawScores.map(function (_score) {
                 return {
                     file: _score.file,
                     teamNumber: _score.teamNumber,
@@ -491,7 +486,7 @@ define('services/ng-scores',[
             var scoresPerTeamPerStage = {};
 
             // Walk all scores and annotate with sanity checks
-            results.scores.forEach(function (s) {
+            validatedScores.forEach(function (s) {
                 // Mark score as modified if there have been changes to the
                 // original entry
                 if (s.score !== s.originalScore) {
@@ -569,7 +564,7 @@ define('services/ng-scores',[
             // Convert number of stages to take to a number (i.e. Infinity when
             // e.g. `true` is passed)
             // And create empty lists for each stage
-            var board = results.scoreboard;
+            var board = {};
             Object.keys(stages).forEach(function (stage) {
                 var s = stages[stage];
                 stages[stage] = typeof s === "number" && s || s && Infinity || 0;
@@ -580,7 +575,7 @@ define('services/ng-scores',[
             // Ignore scores with errors, except if it's a duplicate
             // (i.e. keep the first score in the list, to prevent it
             // from disappearing due to a later error).
-            var filteredScores = results.scores.filter(function (s) {
+            var filteredScores = validatedScores.filter(function (s) {
                 if (s.error && !(s.error instanceof DuplicateScoreError && s.error.score === s)) {
                     return false;
                 }
@@ -720,14 +715,12 @@ define('services/ng-scores',[
                 });
             }
 
-            // Filter scores if requested
-            if (haveFilter) {
-                results.scores = results.scores.filter(function(score) {
-                    return !score.error && stages[score.stageId] && score.round <= stages[score.stageId];
-                });
-            }
-
-            return results;
+            return {
+                // List of sanitized and optionally filtered scores
+                scores: haveFilter ? filteredScores : validatedScores,
+                // Sorted rankings for each stage
+                scoreboard: board,
+            };
         };
 
         return new Scores();
