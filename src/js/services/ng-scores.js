@@ -483,13 +483,11 @@ define('services/ng-scores',[
                 board[stage] = [];
             });
 
-            // Walk all scores, and put them in the corresponding round of each stage.
-            // This also performs sanity checks on the scores, marking failures.
-            // Highest scores and rankings are computed later.
-            this._rawScores.forEach(function(_score) {
-                // Create a copy of the score, such that we can add
-                // additional info
-                var s = {
+            // Create a copy of the score, such that we can add
+            // additional info (e.g. validation errors) without
+            // polluting rawScores.
+            results.scores = this._rawScores.map(function (_score) {
+                return {
                     file: _score.file,
                     teamNumber: _score.teamNumber,
                     team: $teams.get(_score.teamNumber),
@@ -504,8 +502,10 @@ define('services/ng-scores',[
                     modified: false,
                     error: null
                 };
-                results.scores.push(s);
+            });
 
+            // Walk all scores and annotate with sanity checks
+            results.scores.forEach(function (s) {
                 // Mark score as modified if there have been changes to the
                 // original entry
                 if (s.score !== s.originalScore) {
