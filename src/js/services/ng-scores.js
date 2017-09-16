@@ -59,15 +59,16 @@ define('services/ng-scores',[
             this.message = format("invalid team '{0}'", String(team));
         }
 
-        function DuplicateScoreError(team, stage, round) {
-            this.team = team;
-            this.stage = stage;
-            this.round = round;
+        function DuplicateScoreError(score) {
+            this.score = score;
+            this.team = score.team;
+            this.stage = score.stage;
+            this.round = score.round;
             this.name = "DuplicateScoreError";
             this.message = format(
                 "duplicate score for team '{0}' ({1}), stage {2}, round {3}",
-                team.name, team.number,
-                stage.name, round
+                this.team.name, this.score.teamNumber,
+                this.stage.name, this.round
             );
         }
 
@@ -412,10 +413,9 @@ define('services/ng-scores',[
             }
 
             var self = this;
-            var results = this.getRankings();
 
             // Update global scores without creating a new object
-            var scores = results.scores;
+            var scores = this.getValidatedScores();
             scores.unshift(0, this.scores.length);
             this.scores.splice.apply(this.scores, scores);
 
@@ -428,8 +428,10 @@ define('services/ng-scores',[
                 }
                 delete this.scoreboard[k];
             }
-            Object.keys(results.scoreboard).forEach(function(stageId) {
-                self.scoreboard[stageId] = results.scoreboard[stageId];
+
+            var scoreboard = this.getRankings();
+            Object.keys(scoreboard).forEach(function(stageId) {
+                self.scoreboard[stageId] = scoreboard[stageId];
             });
 
             // Update validation errors (useful for views)
@@ -443,53 +445,15 @@ define('services/ng-scores',[
         };
 
         /**
-         * Compute scoreboard and sanitized/validated scores.
-         *
-         * Optionally, pass an object containing stageId => nrOfRoundsOrTrue mapping.
-         * E.g. { "practice": true, "qualifying": 2 }, which computes the ranking
-         * for all rounds in the practice stage, and the first 2 rounds of the
-         * qualifying stage.
-         *
-         * Resulting object contains `scores` and `scoreboard` properties.
-         * If no stages filter is passed, all scores will be output.
-         * If a stages filter is passed, only valid and relevant scores are
-         * output.
-         *
-         * @param  stages Optional object stageId => nrOfRoundsOrTrue
-         * @return Results object with validated scores and per-stage rankings
+         * Perform validation on scores.
+         * @return list of scores including annotations about e.g. errors
          */
-        Scores.prototype.getRankings = function(stages) {
-            var self = this;
-            var results = {
-                scores: [], // List of sanitized scores
-                scoreboard: {}, // Sorted rankings for each stage
-            };
-
-            var haveFilter = !!stages;
-            if (!stages) {
-                stages = {};
-                $stages.stages.forEach(function(stage) {
-                    stages[stage.id] = true;
-                });
-            }
-
-            // Convert number of stages to take to a number (i.e. Infinity when
-            // e.g. `true` is passed)
-            // And create empty lists for each stage
-            var board = results.scoreboard;
-            Object.keys(stages).forEach(function(stage) {
-                var s = stages[stage];
-                stages[stage] = typeof s === "number" && s || s && Infinity || 0;
-                board[stage] = [];
-            });
-
-            // Walk all scores, and put them in the corresponding round of each stage.
-            // This also performs sanity checks on the scores, marking failures.
-            // Highest scores and rankings are computed later.
-            this._rawScores.forEach(function(_score) {
-                // Create a copy of the score, such that we can add
-                // additional info
-                var s = {
+        Scores.prototype.getValidatedScores = function() {
+            // Create a copy of the score, such that we can add
+            // additional info (e.g. validation errors) without
+            // polluting rawScores.
+            var validatedScores = this._rawScores.map(function (_score) {
+                return {
                     file: _score.file,
                     teamNumber: _score.teamNumber,
                     team: $teams.get(_score.teamNumber),
@@ -504,8 +468,14 @@ define('services/ng-scores',[
                     modified: false,
                     error: null
                 };
-                results.scores.push(s);
+            });
 
+            // Map of stageId -> teamId -> roundId -> score to detect
+            // duplicate scores
+            var scoresPerTeamPerStage = {};
+
+            // Walk all scores and annotate with sanity checks
+            validatedScores.forEach(function (s) {
                 // Mark score as modified if there have been changes to the
                 // original entry
                 if (s.score !== s.originalScore) {
@@ -513,9 +483,8 @@ define('services/ng-scores',[
                 }
 
                 // Check whether score is for a 'known' stage
-                var bstage = board[_score.stageId];
-                if (!bstage) {
-                    s.error = new UnknownStageError(_score.stageId);
+                if (!s.stage) {
+                    s.error = new UnknownStageError(s.stageId);
                     return;
                 }
 
@@ -541,18 +510,101 @@ define('services/ng-scores',[
 
                 // Check whether team is valid
                 if (!s.team) {
-                    s.error = new UnknownTeamError(_score.teamNumber);
+                    s.error = new UnknownTeamError(s.teamNumber);
                     return;
+                }
+
+                // Detect duplicate entries (same stage+team+round)
+                if (!scoresPerTeamPerStage[s.stageId]) {
+                    scoresPerTeamPerStage[s.stageId] = {};
+                }
+                var scoresPerTeam = scoresPerTeamPerStage[s.stageId];
+
+                if (!scoresPerTeam[s.teamNumber]) {
+                    scoresPerTeam[s.teamNumber] = {};
+                }
+                var teamEntries = scoresPerTeam[s.teamNumber];
+
+                if (teamEntries[s.round]) {
+                    // Find the original entry with which this entry collides,
+                    // then assign an error to that entry and to ourselves.
+                    var dupEntry = teamEntries[s.round];
+                    var e = dupEntry.error;
+                    if (!e) {
+                        e = new DuplicateScoreError(dupEntry);
+                        dupEntry.error = e;
+                    }
+                    s.error = e;
+                    return;
+                } else {
+                    teamEntries[s.round] = s;
+                }
+            });
+
+            return validatedScores;
+        }
+
+        /**
+         * Compute scoreboard.
+         *
+         * Optionally, pass an object containing stageId => nrOfRoundsOrTrue mapping.
+         * E.g. { "practice": true, "qualifying": 2 }, which computes the ranking
+         * for all rounds in the practice stage, and the first 2 rounds of the
+         * qualifying stage.
+         * If no stages filter is passed, all scores will be output.
+         * If a stages filter is passed, only valid and relevant scores are
+         * output.
+         *
+         * Resulting object is a per-stage array containing one item per team,
+         * which lists the rank, team info, scores per round and highest score.
+         *
+         * @param  stages Optional object stageId => nrOfRoundsOrTrue
+         * @return Per-stage rankings
+         */
+        Scores.prototype.getRankings = function(stages) {
+            // Create a pass-all filter if necessary
+            var haveFilter = !!stages;
+            if (!stages) {
+                stages = {};
+                $stages.stages.forEach(function (stage) {
+                    stages[stage.id] = true;
+                });
+            }
+
+            // Convert number of stages to take to a number (i.e. Infinity when
+            // e.g. `true` is passed)
+            // And create empty lists for each stage
+            var board = {};
+            Object.keys(stages).forEach(function (stage) {
+                var s = stages[stage];
+                stages[stage] = typeof s === "number" && s || s && Infinity || 0;
+                board[stage] = [];
+            });
+
+            // Create filtered scores (both user-supplied filter and errors).
+            // Ignore scores with errors, except if it's a duplicate
+            // (i.e. keep the first score in the list, to prevent it
+            // from disappearing due to a later error).
+            var filteredScores = this.scores.filter(function (s) {
+                if (s.error && !(s.error instanceof DuplicateScoreError && s.error.score === s)) {
+                    return false;
                 }
 
                 // Ignore score if filtered
                 if (haveFilter && s.round > stages[s.stageId]) {
-                    return;
+                    return false;
                 }
 
+                return true;
+            });
+
+            // Convert all valid scores to a per-stage array of objects
+            // per team (containing team and entries per round)
+            filteredScores.forEach(function (s) {
                 // Find existing entry for this team, or create one
                 var bteam;
                 var i;
+                var bstage = board[s.stageId];
                 for (i = 0; i < bstage.length; i++) {
                     if (bstage[i].team.number === s.team.number) {
                         bteam = bstage[i];
@@ -575,20 +627,6 @@ define('services/ng-scores',[
                         entries: initialEntries,
                     };
                     bstage.push(bteam);
-                }
-
-                // Add score to team's entry
-                if (bteam.scores[s.round - 1] !== null) {
-                    // Find the original entry with which this entry collides,
-                    // then assign an error to that entry and to ourselves.
-                    var dupEntry = bteam.entries[s.round - 1];
-                    var e = dupEntry.error;
-                    if (!e) {
-                        e = new DuplicateScoreError(bteam.team, s.stage, s.round);
-                        dupEntry.error = e;
-                    }
-                    s.error = e;
-                    return;
                 }
                 bteam.scores[s.round - 1] = s.score;
                 bteam.entries[s.round - 1] = s;
@@ -687,14 +725,7 @@ define('services/ng-scores',[
                 });
             }
 
-            // Filter scores if requested
-            if (haveFilter) {
-                results.scores = results.scores.filter(function(score) {
-                    return !score.error && stages[score.stageId] && score.round <= stages[score.stageId];
-                });
-            }
-
-            return results;
+            return board;
         };
 
         return new Scores();

@@ -340,10 +340,10 @@ describe('ng-scores',function() {
                 { team: team3, stage: mockStage, round: 2, score: 0 },
                 { team: team3, stage: mockStage, round: 3, score: 20 },
             ]);
-            var filtered = $scores.getRankings({
+            var scoreboard = $scores.getRankings({
                 "test": 2
             });
-            var result = filtered.scoreboard["test"].map(function(entry) {
+            var result = scoreboard["test"].map(function(entry) {
                 return {
                     rank: entry.rank,
                     teamNumber: entry.team.number,
@@ -392,9 +392,10 @@ describe('ng-scores',function() {
                 { team: team1, stage: mockStage, round: 1, score: 10 },
                 { team: team1, stage: mockStage, round: 1, score: 20 },
             ], true);
+            expect($scores.validationErrors.length).toBe(2);
+            expect($scores.scores[0].error).toEqual(jasmine.any($scores.DuplicateScoreError));
             expect($scores.scores[1].error).toEqual(jasmine.any($scores.DuplicateScoreError));
             expect(board["test"][0].highest).toEqual(10);
-            expect($scores.validationErrors.length).toBeGreaterThan(0);
         });
 
         it("should ignore but warn about invalid team", function() {
