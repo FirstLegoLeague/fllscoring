@@ -57,8 +57,7 @@ define('views/scores',[
                     var ourOriginal = $scope.original[index];
                     var newScore = scoreToEditState(newScores[index]);
                     if (!angular.equals(ourOriginal, newScore)) {
-                        delete $scope.editing[index];
-                        delete $scope.original[index];
+                        $scope.cancelEditScore(index);
                     }
                 });
             }, true);
