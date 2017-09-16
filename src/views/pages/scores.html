@@ -29,47 +29,47 @@
             <td>{{score.index + 1}}</td>
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'UnknownStageError'" title="{{score.error.message}}">error</i>
-                <span ng-if="!score.$editing">
+                <span ng-if="!editing[score.index]">
                     {{score.stage.name}}
                 </span>
-                <span ng-if="score.$editing">
-                    <select ng-model="score.stageId" ng-options="stage.id as stage.name for stage in stages" style="width: 130px"></select>
+                <span ng-if="editing[score.index]">
+                    <select ng-model="editing[score.index].stageId" ng-options="stage.id as stage.name for stage in stages" style="width: 130px"></select>
                 </span>
             </td>
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'UnknownRoundError'" title="{{score.error.message}}">error</i>
-                <span ng-if="!score.$editing">
+                <span ng-if="!editing[score.index]">
                     {{score.round}}
                 </span>
-                <span ng-if="score.$editing">
-                    <input style="width:50px" type="text" ng-model="score.round">
+                <span ng-if="editing[score.index]">
+                    <input style="width:50px" type="text" ng-model="editing[score.index].round">
                 </span>
             </td>
             <td>
-                <span ng-if="!score.$editing">
+                <span ng-if="!editing[score.index]">
                     {{score.table}}
                 </span>
-                <span ng-if="score.$editing">
-                    <input style="width:50px" type="text" ng-model="score.table">
+                <span ng-if="editing[score.index]">
+                    <input style="width:50px" type="text" ng-model="editing[score.index].table">
                 </span>
             </td>
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'UnknownTeamError'" title="{{score.error.message}}">error</i>
-                <span ng-if="!score.$editing">
+                <span ng-if="!editing[score.index]">
                     {{score.team.number}}
                 </span>
-                <span ng-if="score.$editing">
-                    <input style="width:50px" type="text" ng-model="score.teamNumber">
+                <span ng-if="editing[score.index]">
+                    <input style="width:50px" type="text" ng-model="editing[score.index].teamNumber">
                 </span>
             </td>
             <td>{{score.team.name}}</td>
             <td>
                 <i class="material-icons" ng-show="score.error.name == 'InvalidScoreError'" title="{{score.error.message}}">error</i>
-                <span ng-if="!score.$editing">
+                <span ng-if="!editing[score.index]">
                     {{score.score}}
                 </span>
-                <span ng-if="score.$editing">
-                    <input style="width:50px" type="text" ng-model="score.score">
+                <span ng-if="editing[score.index]">
+                    <input style="width:50px" type="text" ng-model="editing[score.index].score">
                 </span>
                 <i class="material-icons" ng-show="score.error.name == 'DuplicateScoreError'" title="{{score.error.message}}">error</i>
             </td>
@@ -87,27 +87,27 @@
                     Unpublish
                 </button>
                 <button class="btn btn-default"
-                    ng-if="!score.$editing"
+                    ng-if="!editing[score.index]"
                     ng-click="editScore(score.index)"
                 >
                     <i class="material-icons">mode_edit</i>
                     Edit
                 </button>
                 <button class="btn btn-default"
-                    ng-if="score.$editing"
+                    ng-if="editing[score.index]"
                     ng-click="finishEditScore(score.index)"
                 >
                     <i class="material-icons">mode_edit</i>
                     Save
                 </button>
                 <button class="btn btn-danger"
-                    ng-if="!score.$editing"
+                    ng-if="!editing[score.index]"
                     fll-really-message="Are you sure you want to completely remove score {{score.score}} for round {{score.match.round}} of team {{score.team.name}}?" fll-really-click="removeScore(score.index)">
                     <i class="material-icons">delete</i>
                     Delete
                 </button>
                 <button class="btn btn-default"
-                    ng-if="score.$editing"
+                    ng-if="editing[score.index]"
                     ng-click="cancelEditScore(score.index)"
                 >
                     Cancel
