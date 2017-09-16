@@ -69,7 +69,25 @@ describe('scores', function() {
     describe('editScore',function() {
         it('should edit a score',function() {
             $scope.editScore(0);
-            expect($scope.scores[0].$editing).toBe(true);
+            expect($scope.editing[0]).toBeDefined();
+        });
+        it('should be cancelled when server score changes',function() {
+            $scope.editScore(0);
+            $scope.scores[0].teamNumber = 0;
+            $scope.$digest();
+            expect($scope.editing[0]).not.toBeDefined();
+        });
+        it('should not be cancelled when another score changes', function () {
+            $scope.editScore(0);
+            $scope.scores[1].teamNumber = 0;
+            $scope.$digest();
+            expect($scope.editing[0]).toBeDefined();
+        });
+        it('should not be cancelled when an uninteresting property changes', function () {
+            $scope.editScore(0);
+            $scope.scores[0].something = "foo";
+            $scope.$digest();
+            expect($scope.editing[0]).toBeDefined();
         });
     });
 
@@ -77,7 +95,7 @@ describe('scores', function() {
         it('should call update and save',function() {
             $scope.editScore(0);
             $scope.finishEditScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, $editing: true});
+            expect(scoresMock.update).toHaveBeenCalledWith(0, originalMockScores[0]);
             expect(scoresMock.save).toHaveBeenCalled();
         });
         it('should alert if an error is thrown from scores',function() {
@@ -86,13 +104,23 @@ describe('scores', function() {
             $scope.finishEditScore(0);
             expect($window.alert).toHaveBeenCalledWith('Error updating score: Error: update error');
         });
+        it('should not reset an unknown property of an updated server score',function() {
+            $scope.editScore(0);
+            $scope.scores[0].something = "foo";
+            $scope.$digest();
+            $scope.finishEditScore(0);
+            var expectedScore = angular.copy(originalMockScores[0]);
+            expectedScore.something = "foo";
+            expect(scoresMock.update).toHaveBeenCalledWith(0, expectedScore);
+        });
     });
 
     describe('cancelEditScore',function() {
-        it('should call _update to reset the scores',function() {
+        it('should not cause update to scores',function() {
             $scope.editScore(0);
-            $scope.cancelEditScore();
-            expect(scoresMock._update).toHaveBeenCalled();
+            $scope.cancelEditScore(0);
+            expect($scope.editing[0]).not.toBeDefined();
+            expect(scoresMock._update).not.toHaveBeenCalled();
         });
     });
 
