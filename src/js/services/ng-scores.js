@@ -513,9 +513,9 @@ define('services/ng-scores',[
                 }
 
                 // Check whether score is for a 'known' stage
-                var bstage = board[_score.stageId];
+                var bstage = board[s.stageId];
                 if (!bstage) {
-                    s.error = new UnknownStageError(_score.stageId);
+                    s.error = new UnknownStageError(s.stageId);
                     return;
                 }
 
@@ -541,7 +541,7 @@ define('services/ng-scores',[
 
                 // Check whether team is valid
                 if (!s.team) {
-                    s.error = new UnknownTeamError(_score.teamNumber);
+                    s.error = new UnknownTeamError(s.teamNumber);
                     return;
                 }
 
