@@ -504,6 +504,10 @@ define('services/ng-scores',[
                 };
             });
 
+            // Map of stageId -> teamId -> roundId -> score to detect
+            // duplicate scores
+            var scoresPerTeamPerStage = {};
+
             // Walk all scores and annotate with sanity checks
             results.scores.forEach(function (s) {
                 // Mark score as modified if there have been changes to the
@@ -544,6 +548,32 @@ define('services/ng-scores',[
                     return;
                 }
 
+                // Detect duplicate entries (same stage+team+round)
+                if (!scoresPerTeamPerStage[s.stageId]) {
+                    scoresPerTeamPerStage[s.stageId] = {};
+                }
+                var scoresPerTeam = scoresPerTeamPerStage[s.stageId];
+
+                if (!scoresPerTeam[s.teamNumber]) {
+                    scoresPerTeam[s.teamNumber] = {};
+                }
+                var teamEntries = scoresPerTeam[s.teamNumber];
+
+                if (teamEntries[s.round]) {
+                    // Find the original entry with which this entry collides,
+                    // then assign an error to that entry and to ourselves.
+                    var dupEntry = teamEntries[s.round];
+                    var e = dupEntry.error;
+                    if (!e) {
+                        e = new DuplicateScoreError(s.team, s.stage, s.round);
+                        dupEntry.error = e;
+                    }
+                    s.error = e;
+                    return;
+                } else {
+                    teamEntries[s.round] = s;
+                }
+
                 // Ignore score if filtered
                 if (haveFilter && s.round > stages[s.stageId]) {
                     return;
@@ -575,20 +605,6 @@ define('services/ng-scores',[
                         entries: initialEntries,
                     };
                     bstage.push(bteam);
-                }
-
-                // Add score to team's entry
-                if (bteam.scores[s.round - 1] !== null) {
-                    // Find the original entry with which this entry collides,
-                    // then assign an error to that entry and to ourselves.
-                    var dupEntry = bteam.entries[s.round - 1];
-                    var e = dupEntry.error;
-                    if (!e) {
-                        e = new DuplicateScoreError(bteam.team, s.stage, s.round);
-                        dupEntry.error = e;
-                    }
-                    s.error = e;
-                    return;
                 }
                 bteam.scores[s.round - 1] = s.score;
                 bteam.entries[s.round - 1] = s;
