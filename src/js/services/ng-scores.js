@@ -444,22 +444,10 @@ define('services/ng-scores',[
         };
 
         /**
-         * Compute scoreboard and sanitized/validated scores.
-         *
-         * Optionally, pass an object containing stageId => nrOfRoundsOrTrue mapping.
-         * E.g. { "practice": true, "qualifying": 2 }, which computes the ranking
-         * for all rounds in the practice stage, and the first 2 rounds of the
-         * qualifying stage.
-         *
-         * Resulting object contains `scores` and `scoreboard` properties.
-         * If no stages filter is passed, all scores will be output.
-         * If a stages filter is passed, only valid and relevant scores are
-         * output.
-         *
-         * @param  stages Optional object stageId => nrOfRoundsOrTrue
-         * @return Results object with validated scores and per-stage rankings
+         * Perform validation on scores.
+         * @return list of scores including annotations about e.g. errors
          */
-        Scores.prototype.getRankings = function(stages) {
+        Scores.prototype.getValidatedScores = function() {
             // Create a copy of the score, such that we can add
             // additional info (e.g. validation errors) without
             // polluting rawScores.
@@ -551,6 +539,28 @@ define('services/ng-scores',[
                     teamEntries[s.round] = s;
                 }
             });
+
+            return validatedScores;
+        }
+
+        /**
+         * Compute scoreboard and sanitized/validated scores.
+         *
+         * Optionally, pass an object containing stageId => nrOfRoundsOrTrue mapping.
+         * E.g. { "practice": true, "qualifying": 2 }, which computes the ranking
+         * for all rounds in the practice stage, and the first 2 rounds of the
+         * qualifying stage.
+         *
+         * Resulting object contains `scores` and `scoreboard` properties.
+         * If no stages filter is passed, all scores will be output.
+         * If a stages filter is passed, only valid and relevant scores are
+         * output.
+         *
+         * @param  stages Optional object stageId => nrOfRoundsOrTrue
+         * @return Results object with validated scores and per-stage rankings
+         */
+        Scores.prototype.getRankings = function(stages) {
+            var validatedScores = this.getValidatedScores();
 
             // Create a pass-all filter if necessary
             var haveFilter = !!stages;
