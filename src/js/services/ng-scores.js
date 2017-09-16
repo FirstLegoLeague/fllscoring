@@ -59,15 +59,16 @@ define('services/ng-scores',[
             this.message = format("invalid team '{0}'", String(team));
         }
 
-        function DuplicateScoreError(team, stage, round) {
-            this.team = team;
-            this.stage = stage;
-            this.round = round;
+        function DuplicateScoreError(score) {
+            this.score = score;
+            this.team = score.team;
+            this.stage = score.stage;
+            this.round = score.round;
             this.name = "DuplicateScoreError";
             this.message = format(
                 "duplicate score for team '{0}' ({1}), stage {2}, round {3}",
-                team.name, team.number,
-                stage.name, round
+                this.team.name, this.score.teamNumber,
+                this.stage.name, this.round
             );
         }
 
@@ -565,13 +566,24 @@ define('services/ng-scores',[
                     var dupEntry = teamEntries[s.round];
                     var e = dupEntry.error;
                     if (!e) {
-                        e = new DuplicateScoreError(s.team, s.stage, s.round);
+                        e = new DuplicateScoreError(dupEntry);
                         dupEntry.error = e;
                     }
                     s.error = e;
                     return;
                 } else {
                     teamEntries[s.round] = s;
+                }
+            });
+
+            // Convert all valid scores to a per-stage array of objects
+            // per team (containing team and entries per round)
+            results.scores.forEach(function (s) {
+                // Ignore scores with errors, except if it's a duplicate
+                // (i.e. keep the first score in the list, to prevent it
+                // from disappearing due to a later error).
+                if (s.error && !(s.error instanceof DuplicateScoreError && s.error.score === s)) {
+                    return;
                 }
 
                 // Ignore score if filtered
