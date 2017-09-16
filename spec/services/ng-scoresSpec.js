@@ -340,10 +340,10 @@ describe('ng-scores',function() {
                 { team: team3, stage: mockStage, round: 2, score: 0 },
                 { team: team3, stage: mockStage, round: 3, score: 20 },
             ]);
-            var filtered = $scores.getRankings({
+            var scoreboard = $scores.getRankings({
                 "test": 2
             });
-            var result = filtered.scoreboard["test"].map(function(entry) {
+            var result = scoreboard["test"].map(function(entry) {
                 return {
                     rank: entry.rank,
                     teamNumber: entry.team.number,

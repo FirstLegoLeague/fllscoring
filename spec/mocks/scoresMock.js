@@ -25,8 +25,6 @@ function createScoresMock($q,scoreboard) {
         update: jasmine.createSpy('scoreUpdateSpy'),
         _update: jasmine.createSpy('score_UpdateSpy'),
         save: jasmine.createSpy('scoreSaveSpy'),
-        getRankings: jasmine.createSpy('getRankings').and.returnValue({
-            scoreboard: scoreboard
-        })
+        getRankings: jasmine.createSpy('getRankings').and.returnValue(scoreboard),
     };
 }

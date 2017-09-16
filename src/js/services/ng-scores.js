@@ -413,10 +413,9 @@ define('services/ng-scores',[
             }
 
             var self = this;
-            var results = this.getRankings();
 
             // Update global scores without creating a new object
-            var scores = results.scores;
+            var scores = this.getValidatedScores();
             scores.unshift(0, this.scores.length);
             this.scores.splice.apply(this.scores, scores);
 
@@ -429,8 +428,10 @@ define('services/ng-scores',[
                 }
                 delete this.scoreboard[k];
             }
-            Object.keys(results.scoreboard).forEach(function(stageId) {
-                self.scoreboard[stageId] = results.scoreboard[stageId];
+
+            var scoreboard = this.getRankings();
+            Object.keys(scoreboard).forEach(function(stageId) {
+                self.scoreboard[stageId] = scoreboard[stageId];
             });
 
             // Update validation errors (useful for views)
@@ -544,24 +545,23 @@ define('services/ng-scores',[
         }
 
         /**
-         * Compute scoreboard and sanitized/validated scores.
+         * Compute scoreboard.
          *
          * Optionally, pass an object containing stageId => nrOfRoundsOrTrue mapping.
          * E.g. { "practice": true, "qualifying": 2 }, which computes the ranking
          * for all rounds in the practice stage, and the first 2 rounds of the
          * qualifying stage.
-         *
-         * Resulting object contains `scores` and `scoreboard` properties.
          * If no stages filter is passed, all scores will be output.
          * If a stages filter is passed, only valid and relevant scores are
          * output.
          *
+         * Resulting object is a per-stage array containing one item per team,
+         * which lists the rank, team info, scores per round and highest score.
+         *
          * @param  stages Optional object stageId => nrOfRoundsOrTrue
-         * @return Results object with validated scores and per-stage rankings
+         * @return Per-stage rankings
          */
         Scores.prototype.getRankings = function(stages) {
-            var validatedScores = this.getValidatedScores();
-
             // Create a pass-all filter if necessary
             var haveFilter = !!stages;
             if (!stages) {
@@ -585,7 +585,7 @@ define('services/ng-scores',[
             // Ignore scores with errors, except if it's a duplicate
             // (i.e. keep the first score in the list, to prevent it
             // from disappearing due to a later error).
-            var filteredScores = validatedScores.filter(function (s) {
+            var filteredScores = this.scores.filter(function (s) {
                 if (s.error && !(s.error instanceof DuplicateScoreError && s.error.score === s)) {
                     return false;
                 }
@@ -725,12 +725,7 @@ define('services/ng-scores',[
                 });
             }
 
-            return {
-                // List of sanitized and optionally filtered scores
-                scores: haveFilter ? filteredScores : validatedScores,
-                // Sorted rankings for each stage
-                scoreboard: board,
-            };
+            return board;
         };
 
         return new Scores();
