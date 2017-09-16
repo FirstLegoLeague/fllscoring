@@ -5,6 +5,7 @@ describe('scores', function() {
     });
 
     var $scope, controller, scoresMock, teamsMock, stagesMock,$window,$q;
+    var originalMockScores;
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -21,6 +22,7 @@ describe('scores', function() {
                 '$teams': teamsMock,
                 '$stages': stagesMock,
             });
+            originalMockScores = angular.copy(scoresMock.scores);
         });
         $window.alert = jasmine.createSpy('alertSpy');
     });
@@ -97,7 +99,9 @@ describe('scores', function() {
     describe('publishScore',function() {
         it('should publish a score and save it',function() {
             $scope.publishScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: true});
+            var expectedScore = angular.copy(originalMockScores[0]);
+            expectedScore.published = true;
+            expect(scoresMock.update).toHaveBeenCalledWith(0, expectedScore);
             expect(scoresMock.save).toHaveBeenCalled();
         });
     });
@@ -105,7 +109,7 @@ describe('scores', function() {
     describe('unpublishScore',function() {
         it('should unpublish a score and save it',function() {
             $scope.unpublishScore(0);
-            expect(scoresMock.update).toHaveBeenCalledWith(0, {score: 1, index: 0, published: false});
+            expect(scoresMock.update).toHaveBeenCalledWith(0, originalMockScores[0]);
             expect(scoresMock.save).toHaveBeenCalled();
         });
     });
