@@ -10,6 +10,7 @@ describe('ng-scores',function() {
     var $stages;
     var $teams;
     var $q;
+    var $interval;
     var dummyTeam =  {
         number: 123,
         name: 'foo'
@@ -41,12 +42,16 @@ describe('ng-scores',function() {
         angular.mock.module(function($provide) {
             $provide.value('$fs', fsMock);
         });
-        angular.mock.inject(["$scores", "$stages", "$teams", "$q", function(_$scores_, _$stages_, _$teams_,_$q_) {
-            $scores = _$scores_;
-            $stages = _$stages_;
-            $teams = _$teams_;
-            $q = _$q_;
-        }]);
+        angular.mock.inject([
+            "$scores", "$stages", "$teams", "$q", "$interval",
+            function(_$scores_, _$stages_, _$teams_, _$q_, $_interval_) {
+                $scores = _$scores_;
+                $stages = _$stages_;
+                $teams = _$teams_;
+                $q = _$q_;
+                $interval = $_interval_;
+            }
+        ]);
 
         return $stages.init().then(function() {
             mockStage = $stages.get(rawMockStage.id);
@@ -531,6 +536,45 @@ describe('ng-scores',function() {
                     expect(err.message).toEqual('unknown error: darn');
                 });
             });
+        });
+    });
+
+    describe('autoRefresh', function() {
+        it('should not be started when no-one is interested', function () {
+            fsMock.read.calls.reset();
+            $interval.flush($scores._autoRefreshTimeout + 1);
+            expect(fsMock.read).not.toHaveBeenCalled();
+        });
+        it('should be started when someone is interested', function () {
+            fsMock.read.calls.reset();
+            $scores.enableAutoRefresh();
+            $interval.flush($scores._autoRefreshTimeout + 1);
+            expect(fsMock.read).toHaveBeenCalled();
+        });
+        it('should keep refreshing when someone is interested', function () {
+            fsMock.read.calls.reset();
+            $scores.enableAutoRefresh();
+            $interval.flush($scores._autoRefreshTimeout + 1);
+            expect(fsMock.read).toHaveBeenCalled();
+            fsMock.read.calls.reset();
+            $interval.flush($scores._autoRefreshTimeout + 1);
+            expect(fsMock.read).toHaveBeenCalled();
+        });
+        it('should be stopped when everyone unregistered', function () {
+            $scores.enableAutoRefresh();
+            $interval.flush($scores._autoRefreshTimeout + 1);
+            $scores.disableAutoRefresh();
+
+            fsMock.read.calls.reset();
+            $interval.flush($scores._autoRefreshTimeout + 1);
+            expect(fsMock.read).not.toHaveBeenCalled();
+        });
+        it('should skip refresh when busy', function () {
+            fsMock.read.calls.reset();
+            $scores.enableAutoRefresh();
+            $scores.beginupdate();
+            $interval.flush($scores._autoRefreshTimeout + 1);
+            expect(fsMock.read).not.toHaveBeenCalled();
         });
     });
 

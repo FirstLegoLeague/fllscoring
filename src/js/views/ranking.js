@@ -156,10 +156,16 @@ define('views/ranking',[
             $scope.stages = $stages.stages;
             $scope.scoreboard = $scores.scoreboard;
 
+            // Ensure periodic updates of scores view
+            $scores.enableAutoRefresh();
+            $scope.$on("$destroy", function () {
+                $scores.disableAutoRefresh();
+            });
+
             $scope.getRoundLabel = function(round){
                 return "Round " + round;
             };
-            
+
 
         }
     ]);

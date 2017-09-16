@@ -16,6 +16,12 @@ define('views/scores',[
             $scope.scores = $scores.scores;
             $scope.stages = $stages.stages;
 
+            // Ensure periodic updates of scores view
+            $scores.enableAutoRefresh();
+            $scope.$on("$destroy", function () {
+                $scores.disableAutoRefresh();
+            });
+
             $scope.doSort = function(col, defaultSort) {
                 $scope.rev = (String($scope.sort) === String(col)) ? !$scope.rev : !!defaultSort;
                 $scope.sort = col;
