@@ -1,13 +1,13 @@
 bower.json
-dist
+dist/*
 encloseConfig.js
 Gruntfile.js
 karma.conf.js
 localserver.js
 npm-shrinkwrap.json
 pgbuildconfig.example.json
-spec
-tools
+spec/*
+tools/*
 
 # Created by https://www.gitignore.io/api/node
 
