@@ -36,42 +36,48 @@ describe('ng-validation',function() {
             stage: stagesMock.stages[0],
             round: 1,
             team: teamsMock.teams[0],
-            score: 231
+            score: 231,
+            timeCreated: 0
         });
 
         unknownStageScore = new $score({
             stageId: unknownStageId,
             round: 1,
             team: teamsMock.teams[0],
-            score: 231
+            score: 231,
+            timeCreated: 0
         });
 
         unkownRoundScore = new $score({
             stage: stagesMock.stages[0],
             round: unkownRound,
             team: teamsMock.teams[0],
-            score: 231
+            score: 231,
+            timeCreated: 0
         });
 
         invalidScoreScore = new $score({
             stage: stagesMock.stages[0],
             round: 1,
             team: teamsMock.teams[0],
-            score: invalidScore
+            score: invalidScore,
+            timeCreated: 0
         });
 
         unknownTeamScore = new $score({
             stage: stagesMock.stages[0],
             round: 1,
             teamNumber: unknownTeamNumber,
-            score: 231
+            score: 231,
+            timeCreated: 0
         });
 
         duplicateScore = new $score({
             stage: stagesMock.stages[0],
             round: 1,
             team: teamsMock.teams[0],
-            score: 456
+            score: 456,
+            timeCreated: 1
         });
     });
 
