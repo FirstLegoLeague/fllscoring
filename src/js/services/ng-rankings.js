@@ -43,7 +43,6 @@ define('services/ng-rankings',[
                         let stageRanks = {};
                         stages.forEach(function(stage) {
                             let rankNumber = 1;
-                            let lastHighest = null;
                             let stageRank = ranks[stage.id] || {};
 
                             // Mapping to Rank objects
@@ -56,12 +55,8 @@ define('services/ng-rankings',[
                             stageRanks[stage.id].sort(Rank.compare);
 
                             // Adding rank number
-                            stageRanks[stage.id].map((rank) => {
-                                if(lastHighest !== null && lastHighest !== rank.highest) {
-                                    rankNumber++;
-                                }
-                                rank.rank = rankNumber;
-                                lastHighest = rank.highest;
+                            stageRanks[stage.id].forEach((rank) => {
+                                rank.rank = rankNumber++;
                                 return rank;
                             });
 
