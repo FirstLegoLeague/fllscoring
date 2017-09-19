@@ -68,7 +68,7 @@ define('services/ng-score',[
                     originalScore: Number(entry.originalScore || entry.score),
                     edited: Boolean(entry.edited) ? String(entry.edited) : undefined, // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
                     table: entry.table,
-                    published: Boolean(entry.published)
+                    published: Boolean(entry.published),
                 };
             };
 
