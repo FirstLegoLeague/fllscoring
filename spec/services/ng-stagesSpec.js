@@ -77,11 +77,11 @@ describe('ng-stages',function() {
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages using defaults');
                 expect($stages.allStages).toEqual([
-                    {index:0,id:"practice",name:"Practice Rounds",rounds:2,$rounds:[1,2]},
+                    {index:0,id:"practice",name:"Practice Rounds",rounds:1,$rounds:[1]},
                     {index:1,id:"qualifying",name:"Qualification Rounds",rounds:3,$rounds:[1,2,3]},
                     {index:2,id:"quarter",name:"Quarterfinals",rounds:0,$rounds:[]},
                     {index:3,id:"semi",name:"Semifinals",rounds:0,$rounds:[]},
-                    {index:4,id:"final",name:"Final",rounds:1,$rounds:[1]}
+                    {index:4,id:"final",name:"Final",rounds:0,$rounds:[]}
                 ]);
             });
         });

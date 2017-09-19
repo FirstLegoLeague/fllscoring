@@ -69,11 +69,11 @@ define('services/ng-stages',[
             }, function(err) {
                 log('stages read error', err);
                 log('stages using defaults');
-                self.add({ id: "practice", name: "Practice Rounds", rounds: 2 });
+                self.add({ id: "practice", name: "Practice Rounds", rounds: 1 });
                 self.add({ id: "qualifying", name: "Qualification Rounds", rounds: 3 });
                 self.add({ id: "quarter", name: "Quarterfinals", rounds: 0 });
                 self.add({ id: "semi", name: "Semifinals", rounds: 0 });
-                self.add({ id: "final", name: "Final", rounds: 1 });
+                self.add({ id: "final", name: "Final", rounds: 0 });
             });
         };
 
