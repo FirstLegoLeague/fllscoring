@@ -119,7 +119,7 @@ describe('ng-validation',function() {
 
         it('returns only DuplicateScoreError if givven two duplicate scores', function() {
             var errors = $validation.validate([legalScore, duplicateScore]);
-            expect(errors.length).toBe(1);
+            expect(errors.length).toBe(2);
             expect(errors[0].name).toBe('DuplicateScoreError');
         });
 
