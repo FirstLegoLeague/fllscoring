@@ -88,8 +88,6 @@ exports.route = function(app) {
 
         fileSystem.writeFile(fileSystem.getDataFilePath("scoresheets/" + score.file), JSON.stringify(scoresheet))
         .then(changeScores(function(result) {
-            // Add Server time when saved to file
-            score.timeCreated = utils.getServerTime().getTime();
             result.scores.push(score);
             return result;
         }))

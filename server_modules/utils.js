@@ -10,7 +10,3 @@ exports.sendError = function(res, err) {
     res.status(status).send(message);
 }
 
-// Gets the server date and time
-exports.getServerTime = function () {
-    return new Date();
-};
