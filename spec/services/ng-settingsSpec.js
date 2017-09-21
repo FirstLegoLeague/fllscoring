@@ -50,10 +50,11 @@ describe('ng-settings',function() {
                 askReferee: true,
                 mhub: `ws://${window.location.hostname}:13900`, //notice that window.location in necessary because you can't know where the karma server will run
                 node: 'default',
-                challenge: '2017_en_US',
+                challenge: '2017_en_US-official',
                 host: window.location.origin + '/',
                 autoPublish: true,
-
+                autoBroadcast: true,
+                autoBroadcastStage: 'practice'
             }
             fsMock.read.and.returnValue($q.reject('no file'));
             fsMock.write.and.returnValue($q.when());
