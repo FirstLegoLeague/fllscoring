@@ -2,6 +2,7 @@ define('views/settings',[
     'services/log',
     'services/ng-stages',
     'services/ng-settings',
+    'services/ng-challenge',
     'services/ng-handshake',
     'controllers/NewStageDialogController',
     'angular'
@@ -10,17 +11,18 @@ define('views/settings',[
     return angular.module(moduleName,[
         'NewStageDialog'
     ]).controller(moduleName+'Ctrl',[
-        '$scope', '$stages','$settings','$q','$handshake',
-        function($scope, $stages, $settings, $q, $handshake) {
+        '$scope', '$stages','$settings','$q','$handshake','$challenge',
+        function($scope, $stages, $settings, $q, $handshake,$challenge) {
             log('init settings ctrl');
             $scope.log = log.get();
             // initialize first tab
             $scope.tab = 1;
 
-            $settings.init().then(function(res) {
-                $scope.settings = res;
-                $scope.settings.tables = res.tables||[];
-                $scope.settings.referees = res.referees||[];
+            $q.all([$settings.init(),$challenge.getChallenges()]).then(function(res) {
+                $scope.settings = res[0];
+                $scope.settings.tables = res[0].tables||[];
+                $scope.settings.referees = res[0].referees||[];
+                $scope.challenges = res[1];
             });
 
             $scope.addItem = function(collection) {
