@@ -46,9 +46,11 @@ define('services/ng-settings',[
                     askReferee: true,
                     mhub: `ws://${window.location.hostname}:13900`,
                     node: 'default',
-                    challenge: '2017_en_US',
+                    challenge: '2017_en_US-official',
                     host: window.location.origin + '/',
                     autoPublish: true,
+                    autoBroadcast: true,
+                    autoBroadcastStage: 'practice'
                 };
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
