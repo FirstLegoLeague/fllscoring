@@ -23,16 +23,25 @@ define('services/ng-rankings',[
                     this.scores[i] = rank.filter(score => score.round === (i + 1))[0];
                 }
 
-                this.ordered = rank.sort($score.compare)
+                this.ordered = rank.sort($score.compare);
                 this.highest = this.ordered[0];
             }
 
             Rank.compare = function(rank1, rank2) {
-                for(var i = 0; i < rank1.ordered.length && i < rank2.ordered.length; i++) {
-                    let comparation = $score.compare(rank1.ordered[i], rank2.ordered[i]);
-                    if(comparation !== 0) return comparation;
+                for(let i = 0; i < rank1.ordered.length && i < rank2.ordered.length; i++) {
+                    let comparison = $score.compare(rank1.ordered[i], rank2.ordered[i]);
+                    if(comparison !== 0) return comparison;
                 }
-                return 0;
+                /** explained by example:
+                 *  team1's scores: [100, 50, 30]
+                 *  team2's scores: [100, 50]
+                 *
+                 *  team1 has the lead since they had more matches.
+                 *
+                 *  The codes gets here iff the teams' scores are equals,
+                 *  in the range we can check (i.e. one team may played more matches).
+                */
+                return rank2.ordered.length - rank1.ordered.length;
             };
 
             return {
@@ -46,25 +55,20 @@ define('services/ng-rankings',[
                         let stageRanks = {};
                         stages.forEach(function(stage) {
                             let rankNumber = 1;
-                            let lastHighest = null;
+                            let stageRank = ranks[stage.id] || {};
 
                             // Mapping to Rank objects
                             stageRanks[stage.id] = teams.map(function(team) {
-                                let stageRank = ranks[stage.id] || {};
                                 let teamRank = stageRank[team.number] || [];
                                 return new Rank(teamRank, team, stage, filter || {});
-                            })
+                            });
 
                             // Sorting by the highest score
-                            .sort(Rank.compare)
+                            stageRanks[stage.id].sort(Rank.compare);
 
                             // Adding rank number
-                            .map((rank) => {
-                                if(lastHighest !== null && lastHighest !== rank.highest) {
-                                    rankNumber++;
-                                }
-                                rank.rank = rankNumber;
-                                lastHighest = rank.highest;
+                            stageRanks[stage.id].forEach((rank) => {
+                                rank.rank = rankNumber++;
                                 return rank;
                             });
 
