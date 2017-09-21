@@ -1,6 +1,6 @@
 var utils = require('./utils');
 var fileSystem = require('./file_system');
-var fs = require("fs");
+var fs = require('fs');
 var path = require('path');
 
 exports.route = function(app) {
@@ -13,7 +13,8 @@ exports.route = function(app) {
     });
 
     app.get('/challenges/', function(req, res) {
-        fs.readdir('challenges/js', function(err, files) {
+        var challengesDir = fileSystem.resolve('challenges/js');
+        fs.readdir(challengesDir, function(err, files) {
             if (err) {
                 res.status(404).send(err.message);
                 return;
