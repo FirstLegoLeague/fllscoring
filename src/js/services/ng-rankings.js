@@ -28,8 +28,20 @@ define('services/ng-rankings',[
             }
 
             Rank.compare = function(rank1, rank2) {
-                // A rank is bigger then other iff his highest score is bigger than the other's highest score
-                return $score.compare(rank1.highest, rank2.highest);
+                for(let i = 0; i < rank1.ordered.length && i < rank2.ordered.length; i++) {
+                    let comparison = $score.compare(rank1.ordered[i], rank2.ordered[i]);
+                    if(comparison !== 0) return comparison;
+                }
+                /** explained by example:
+                 *  team1's scores: [100, 50, 30]
+                 *  team2's scores: [100, 50]
+                 *
+                 *  team1 has the lead since they had more matches.
+                 *
+                 *  The codes gets here iff the teams' scores are equals,
+                 *  in the range we can check (i.e. one team may played more matches).
+                */
+                return rank2.ordered.length - rank1.ordered.length;
             };
 
             return {
