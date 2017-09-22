@@ -50,7 +50,8 @@ define('services/ng-settings',[
                     host: window.location.origin + '/',
                     autoPublish: true,
                     autoBroadcast: true,
-                    autoBroadcastStage: 'practice'
+                    autoBroadcastStage: 'practice',
+                    ignoreNegativeScores: true
                 };
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
