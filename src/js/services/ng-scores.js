@@ -200,13 +200,22 @@ define('services/ng-scores',[
 
         Scores.prototype.acceptScores = function(res, tryAutoBroadcast) {
             var self = this;
-            self.load(res.data);
+            if(res) {
+                self.load(res.data);
+            }
+
             var stageID = $settings.settings.autoBroadcastStage;
             if ($settings.settings.autoBroadcast && stageID && tryAutoBroadcast) {
                 log('auto-broadcasting stage ' + stageID);
                 self.broadcastRanking($stages.get(stageID));
             }
             $message.send('scores:reload');
+
+            if(res) {
+                return res;
+            } else {
+                throw new Error('No response');
+            }
         }
 
         Scores.prototype.create = function(scoresheet, score) {
