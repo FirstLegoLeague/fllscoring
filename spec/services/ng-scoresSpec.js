@@ -155,8 +155,8 @@ describe('ng-scores',function() {
                 ranking: [{
                     rank: fakeRankingEntry[0].rank,
                     team: fakeRankingEntry[0].team,
-                    scores: fakeRankingEntry[0].scores,
-                    highest: fakeRankingEntry[0].highest
+                    scores: [mockScore.score],
+                    highest: fakeRankingEntry[0].highest.score
                 }]
             };
             $scores.getRankings().then(() => expect(messageMock.send).toHaveBeenCalledWith(rankingTopic, rankingMessage));
