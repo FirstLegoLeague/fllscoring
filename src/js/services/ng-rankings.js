@@ -54,7 +54,7 @@ define('services/ng-rankings',[
                         let ranks = $groups.multigroup(scores, [score => score.stageId, score => score.teamNumber]);
                         let stageRanks = {};
                         stages.forEach(function(stage) {
-                            let rankNumber = 1;
+                            let rankNumber = 0;
                             let stageRank = ranks[stage.id] || {};
 
                             // Mapping to Rank objects
@@ -67,9 +67,13 @@ define('services/ng-rankings',[
                             stageRanks[stage.id].sort(Rank.compare);
 
                             // Adding rank number
+                            var lastRank = null;
                             stageRanks[stage.id].forEach((rank) => {
-                                rank.rank = rankNumber++;
-                                return rank;
+                                if(lastRank === null || Rank.compare(lastRank,rank) !== 0) {
+                                    rankNumber++;
+                                }
+                                rank.rank = rankNumber;
+                                lastRank = rank;
                             });
 
                         });

@@ -54,7 +54,8 @@ describe('ng-settings',function() {
                 host: window.location.origin + '/',
                 autoPublish: true,
                 autoBroadcast: true,
-                autoBroadcastStage: 'practice'
+                autoBroadcastStage: 'practice',
+                ignoreNegativeScores: true
             }
             fsMock.read.and.returnValue($q.reject('no file'));
             fsMock.write.and.returnValue($q.when());

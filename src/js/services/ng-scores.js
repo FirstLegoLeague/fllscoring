@@ -118,6 +118,8 @@ define('services/ng-scores',[
 
         Scores.prototype.broadcastRanking = function (stage) {
             var self = this;
+            var ignoreNegativeScores = $settings.settings.ignoreNegativeScores;
+
             self.getRankings().then(function () {
                 var rankingMessage = {
                     stage: {
@@ -126,14 +128,22 @@ define('services/ng-scores',[
                         rounds: stage.rounds,
                     },
                     ranking: removeEmptyRanks(self.scoreboard)[stage.id].map(function (item) {
+                        if(ignoreNegativeScores) {
+                            var scores = item.scores.map(score => score ? Math.max(score.score, 0) : undefined);
+                            var highest = Math.max(item.highest.score, 0);
+                        } else {
+                            var scores = item.scores.map(score => score ? score.score : undefined);
+                            var highest = item.highest.score;
+                        }
+
                         return {
                             rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
                             team: {
                                 number: item.team.number,
                                 name: item.team.name,
                             },
-                            scores: item.scores,
-                            highest: item.highest,
+                            scores: scores,
+                            highest: highest
                         };
                     }),
                 };
@@ -200,13 +210,22 @@ define('services/ng-scores',[
 
         Scores.prototype.acceptScores = function(res, tryAutoBroadcast) {
             var self = this;
-            self.load(res.data);
+            if(res) {
+                self.load(res.data);
+            }
+
             var stageID = $settings.settings.autoBroadcastStage;
             if ($settings.settings.autoBroadcast && stageID && tryAutoBroadcast) {
                 log('auto-broadcasting stage ' + stageID);
                 self.broadcastRanking($stages.get(stageID));
             }
             $message.send('scores:reload');
+
+            if(res) {
+                return res;
+            } else {
+                throw new Error('No response');
+            }
         }
 
         Scores.prototype.create = function(scoresheet, score) {
