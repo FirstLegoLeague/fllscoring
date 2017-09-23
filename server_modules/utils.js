@@ -9,3 +9,4 @@ exports.sendError = function(res, err) {
     log.error(message);
     res.status(status).send(message);
 }
+

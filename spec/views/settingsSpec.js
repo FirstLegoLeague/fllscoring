@@ -7,7 +7,7 @@ describe('settings', function() {
 
     var $scope, controller;
 
-    var settingsMock, handshakeMock, stagesMock;
+    var settingsMock, handshakeMock, stagesMock, challengesMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -15,12 +15,14 @@ describe('settings', function() {
             $scope = $rootScope.$new();
             settingsMock = createSettingsMock($q, {});
             handshakeMock = createHandshakeMock($q);
-            stagesMock = createStagesMock($q);
+            stagesMock = createStagesMock();
+            challengesMock = createChallengeMock();
             controller = $controller('settingsCtrl', {
                 '$scope': $scope,
                 '$stages': stagesMock,
                 '$settings': settingsMock,
-                '$handshake': handshakeMock
+                '$handshake': handshakeMock,
+                '$challenge': challengesMock
             });
         });
     });
@@ -29,10 +31,14 @@ describe('settings', function() {
         it('should initialize', function() {
             //let $settings init
             $scope.$digest();
-            expect($scope.settings).toEqual({
-                tables: [],
-                referees: []
-            });
+            expect($scope.addItem).not.toBe(undefined);
+            expect($scope.addTable).not.toBe(undefined);
+            expect($scope.removeItem).not.toBe(undefined);
+            expect($scope.save).not.toBe(undefined);
+            expect($scope.removeStage).not.toBe(undefined);
+            expect($scope.moveDown).not.toBe(undefined);
+            expect($scope.moveUp).not.toBe(undefined);
+            expect($scope.createStage).not.toBe(undefined);
         });
 
     });

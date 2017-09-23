@@ -146,7 +146,6 @@
     </div>
     <div ng-show="tab === 3">
         <p>
-
             <span class="textfield">
                 <input type="text" ng-model="settings.host"/>
                 <label for="">Host</label>
@@ -154,12 +153,11 @@
             shared host to get data from and save data to. E.g. 'http://localhost:1390/'
         </p>
         <p>
-
             <span class="textfield">
-                <input type="text" ng-model="settings.challenge"/>
+                <select ng-model="settings.challenge" ng-options="x for x in challenges" />
                 <label for="">Challenge</label>
             </span>
-            currently the filename containing missions! E.g. '2016_en_US' (no file extension)
+            Select the Challenge used at this event.
         </p>
     </div>
     <div ng-show="tab === 4">
@@ -200,6 +198,12 @@
                         <label for="autoPublish">
                             <input id="autoPublish" type="checkbox" ng-model="settings.autoPublish">
                             Auto Publish
+                        </label>
+                    </p>
+                    <p>
+                        <label for="ignoreNegativeScores">
+                            <input id="ignoreNegativeScores" type="checkbox" ng-model="settings.ignoreNegativeScores">
+                            Broadcast 0 for negative scores
                         </label>
                     </p>
                 </div>
