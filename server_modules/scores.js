@@ -90,10 +90,10 @@ exports.route = function(app) {
         .then(changeScores(function(result) {
             result.scores.push(score);
             return result;
-        }))
+        })
         .then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+        }).catch(err => utils.sendError(res, err)));
 
     });
 
