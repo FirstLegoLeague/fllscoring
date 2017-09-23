@@ -11,54 +11,32 @@ define('services/ng-independence',[
     function($q,$localStorage,$http) {
         function IndependentActionStroage() {}
 
-        function actAheadOfServer(token, url, data) {
-            $localStorage[`action_${token}_${Date.now()}`] = JSON.stringify({ url: url, data: data });
+        function queueAction(token, url, data) {
+            $localStorage[`action_${token}_${Date.now()}`] = JSON.stringify({ url: url, data: data, index: Object.keys($localStorage).length});
         }
 
         IndependentActionStroage.prototype.act = function(token, url, data, fallback) {
             var self = this;
-            return $http.post(url, data).then(function(res) {
-                self.sendSavedActionsToServer(token);
-                return res;
-            }, function(err) {
-                actAheadOfServer(token, url, data);
-                if(fallback) {
-                    fallback();
-                }
+            queueAction(token, url, data);
+            const promise = self.sendSavedActionsToServer(token);
+            promise.catch(function () {
+                if (fallback) fallback();
             });
+            return promise;
         };
 
-        IndependentActionStroage.prototype.sendSavedActionsToServer = function(token) {
-            if(this._sendingSavedActionsToServer) return;
-            this._sendingSavedActionsToServer = true;
-
+        IndependentActionStroage.prototype.sendSavedActionsToServer = function (token) {
             var self = this;
-            let promises = [];
-
-            for(let key in $localStorage) {
-                var _break = false;
-
-                if(key.startsWith(`action_${token}`)) {
-                    let action = JSON.parse($localStorage[key]);
-
-                    let promise = self.act(key, action.url, action.data).then(function() {
-                        delete $localStorage[key];
-                    }, function() {
-                        _break = true;
-                    });
-
+            var promises = [];
+            angular.forEach($localStorage, function (actionString, key) {
+                if (key.startsWith(`action_${token}`)) {
+                    let action = JSON.parse(actionString);
+                    const promise = $http.post(action.url, action.data);
+                    promise.then(() => delete $localStorage[key]);
                     promises.push(promise);
                 }
-                if(_break)  break;
-            }
-            if(promises.length === 0) {
-                self._sendingSavedActionsToServer = false;
-                return;
-            }
-
-            $q.all(promises).then(function() {
-                self._sendingSavedActionsToServer = false;
             });
+            return $q.all(promises);
         };
 
         IndependentActionStroage.prototype.pendingActions = function(key) {
