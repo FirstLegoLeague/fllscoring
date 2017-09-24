@@ -17,9 +17,10 @@ define('services/ng-independence',[
 
         IndependentActionStroage.prototype.act = function(token, url, data, fallback) {
             var self = this;
-            queueAction(token, url, data);
-            const promise = self.sendSavedActionsToServer(token);
+            self.sendSavedActionsToServer(token);
+            const promise = $http.post(url, data);
             promise.catch(function () {
+                queueAction(token, url, data);
                 if (fallback) fallback();
             });
             return promise;
