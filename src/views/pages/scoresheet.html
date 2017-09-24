@@ -44,7 +44,7 @@
             <form id="scoresheetForm" ng-submit="validateScoresheet()">
                 <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.errors.length, ok:mission.completed}">
 
-                    <div class="card-menu cursor-pointer" ng-click="openDescriptionModal(mission)"><i class="material-icons">info_outline</i></div>
+                    <div class="card-menu" ng-click="openDescriptionModal(mission)" style="cursor: pointer;"><i class="material-icons">info_outline</i></div>
 
                     <h2 class="card-header">
                         {{mission.title}}
