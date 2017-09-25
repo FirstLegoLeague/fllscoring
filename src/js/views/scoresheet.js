@@ -267,7 +267,7 @@ define('views/scoresheet',[
                     message = `Thanks for submitting a score of ${scoreEntry.score} points for team (${scoresheet.team.number})` +
                         ` ${scoresheet.team.name} in ${scoresheet.stage.name} ${scoresheet.round}.`;
                     $scope.clear();
-                    $window.alert(message);
+                    setTimeout(() => $window.alert(message), 0);
                 }).catch(function(err) {
                     log(`Error: ${err}`);
                     message = `Thanks for submitting a score of ${scoreEntry.score} points for team` +
