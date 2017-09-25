@@ -27,7 +27,7 @@ define('views/scores', [
                 return $scores.scores;
             }, function () {
                 $scope.scores = enrich($scores.scores);
-            });
+            }, true);
 
             $scores.init().then(function() {
                 $scope.stages = $stages.stages;
