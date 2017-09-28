@@ -1,6 +1,8 @@
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
-var users = require('../encloseConfig').users;
+
+var configFile = require('./args').configFile;
+var users = require(configFile).users;
 var fileSystem = require('./file_system');
 var utils = require('./utils');
 
