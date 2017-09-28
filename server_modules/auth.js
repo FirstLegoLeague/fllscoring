@@ -57,12 +57,12 @@ exports.route = function(app) {
 };
 
 /**
-/* This function returns a middleware that throws a "403 Not Authorized" when a user doesn't fit the condition
-/* If the condition is a string, the user must have that username
-/* If the confition is an array, the user's username must be included in that array
-/* If the condition is a function, the user must return true for that function.
-/* It is meant to come in the beginning of a route function, so that it'll stop the execution of the function
-/* Doesn't call next if the user in not authorized.
+* This function returns a middleware that throws a "403 Not Authorized" when a user doesn't fit the condition
+* If the condition is a string, the user must have that username
+* If the confition is an array, the user's username must be included in that array
+* If the condition is a function, the user must return true for that function.
+* It is meant to come in the beginning of a route function, so that it'll stop the execution of the function
+* Doesn't call next if the user in not authorized.
 */
 exports.authorize = function(userCondition) {
     var condition = () => true;
@@ -91,3 +91,8 @@ exports.authorize = function(userCondition) {
         }
     }
 }
+
+/**
+* A sample usage in which any user is authorized
+*/
+exports.authorize.any = authorize(user => !!user);

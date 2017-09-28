@@ -1,6 +1,8 @@
 var lockfile = require('lockfile');
 var utils = require('./utils');
 var fileSystem = require('./file_system');
+var autorize = require('./auth').authorize;
+var authorize = require('./auth').authorize;
 var Q = require('q');
 
 function filterPublished(score) {
@@ -51,7 +53,7 @@ function changeScores(action) {
 exports.route = function(app) {
 
     //get all, grouped by round
-    app.get('/scores/',function(req,res) {
+    app.get('/scores/', function(req,res) {
         Q.all([
             fileSystem.readJsonFile(fileSystem.getDataFilePath('scores.json')),
             fileSystem.readJsonFile(fileSystem.getDataFilePath('teams.json')).then(reduceToMap('number'))
@@ -69,7 +71,7 @@ exports.route = function(app) {
     });
 
     //get scores by round
-    app.get('/scores/:round',function(req,res) {
+    app.get('/scores/:round', function(req,res) {
         var round = parseInt(req.params.round,10);
 
         fileSystem.readJsonFile(fileSystem.getDataFilePath('scores.json')).then(function(result) {
@@ -81,7 +83,7 @@ exports.route = function(app) {
     });
 
     //save a new score
-    app.post('/scores/create',function(req,res) {
+    app.post('/scores/create', exports.authorize.any, function(req,res) {
         var scoresheet = req.body.scoresheet;
         var score = req.body.score;
 
@@ -97,7 +99,7 @@ exports.route = function(app) {
     });
 
     //delete a score at an id
-    app.post('/scores/delete/:id',function(req,res) {
+    app.post('/scores/delete/:id', exports.authorize.any, function(req,res) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
@@ -111,7 +113,7 @@ exports.route = function(app) {
     });
 
     //edit a score at an id
-    app.post('/scores/update/:id',function(req,res) {
+    app.post('/scores/update/:id', exports.authorize.any, function(req,res) {
         var score = req.body;
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);

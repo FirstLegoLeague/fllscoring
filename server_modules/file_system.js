@@ -5,6 +5,7 @@ var path = require('path')
 var utils = require('./utils');
 var args = require('./args');
 var log = require('./log').log;
+var authorize = require('./auth').authorize;
 
 function parseData(data) {
     return jsonParsingPromise = Q.promise(function(resolve,reject) {
@@ -71,7 +72,7 @@ exports.readJsonFile = function(file) {
 exports.route = function(app) {
 
     //reading the "file system"
-    app.get(/^\/fs\/(.*)$/, function(req, res) {
+    app.get(/^\/fs\/(.*)$/, authorize.any, function(req, res) {
         var file = exports.getDataFilePath(req.params[0]);
         fs.stat(file, function(err, stat) {
             if (err) {
@@ -111,7 +112,7 @@ exports.route = function(app) {
     });
 
     // writing the "file system"
-    app.post(/^\/fs\/(.*)$/, function(req, res) {
+    app.post(/^\/fs\/(.*)$/, authorize.any, function(req, res) {
         var file = exports.getDataFilePath(req.params[0]);
         exports.writeFile(file, req.body).then(function() {
             res.status(200).end();
@@ -121,7 +122,7 @@ exports.route = function(app) {
     });
 
     // deleting in the "file system"
-    app.delete(/^\/fs\/(.*)$/, function(req, res) {
+    app.delete(/^\/fs\/(.*)$/, authorize.any, function(req, res) {
         var file = exports.getDataFilePath(req.params[0]);
         fs.unlink(file, function(err) {
             if (err) {
