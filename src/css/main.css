@@ -5,7 +5,8 @@
 @import url('spinner.css');
 @import url('dialog.css');
 @import url('material.css');
+@import url('clock.css');
 
 table.table td.clearCell, table.table th.clearCell {
-	background-color: #ffffff !important;
+    background-color: #ffffff !important;
 }

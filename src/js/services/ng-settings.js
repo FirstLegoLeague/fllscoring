@@ -40,13 +40,19 @@ define('services/ng-settings',[
                 return self.settings;
             }).catch(function(err) {
                 var defaults = {
-                    tables: [{name:'Table 1'}],
-                    referees: [{name:'Head referee'}],
+                    tables: [{name: 'Table 1'}],
+                    referees: [{name: 'Head referee'}],
                     askTable: true,
                     askReferee: true,
-                    mhub: 'ws://localhost:13900',
-                    node: 'default'
-                }
+                    mhub: `ws://${window.location.hostname}:13900`,
+                    node: 'default',
+                    challenge: '2017_en_US-official',
+                    host: window.location.origin + '/',
+                    autoPublish: true,
+                    autoBroadcast: true,
+                    autoBroadcastStage: 'practice',
+                    ignoreNegativeScores: true
+                };
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
                 return $fs.write('settings.json',defaults).then(function() {

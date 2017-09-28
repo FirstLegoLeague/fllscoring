@@ -5,18 +5,14 @@ define('views/ranking',[
     'services/ng-scores',
     'services/ng-handshake',
     'services/ng-message',
-    'controllers/ExportRankingDialogController',
+    'services/ng-settings',
     'angular'
 ],function(log) {
     var moduleName = 'ranking';
-    return angular.module(moduleName,['ExportRankingDialog']).controller(moduleName+'Ctrl', [
-        '$scope', '$scores', '$stages','$handshake','$message',
-        function($scope, $scores, $stages, $handshake, $message) {
+    return angular.module(moduleName,[]).controller(moduleName+'Ctrl', [
+        '$scope', '$scores', '$stages','$handshake','$message', '$settings',
+        function($scope, $scores, $stages, $handshake, $message, $settings) {
             log('init ranking ctrl');
-
-            // temporary default sort values
-            $scope.sort = 'rank';
-            $scope.rev = false;
 
             $scope.scores = $scores;
 
@@ -29,14 +25,23 @@ define('views/ranking',[
                 return result;
             }
 
-            $scope.$watch(function() {
+          $settings.init();
+
+          $scope.$watch(function() {
                 return $scores.scoreboard;
             }, function () {
                 $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
 
-            $scores.init().then(function() {
+            $stages.init().then(function () {
                 $scope.stages = $stages.stages;
+                $scope.stages.forEach(function (stage) {
+                    stage.sort = 'rank';
+                    stage.rev = false;
+                });
+            });
+
+            $scores.init().then(function() {
                 return $scores.getRankings();
             });
 
@@ -48,32 +53,7 @@ define('views/ranking',[
             };
             //TODO: this is a very specific message tailored to display system.
             //we want less contract here
-            $scope.broadcastRanking = function(stage) {
-                // Send generic ranking info on bus, but filter it down a bit
-                // to not include Angular-injected stuff (yuk), but also omit
-                // the full scoresheets and their validation results etc.
-                // Having it spelled out exactly also helps to have some kind of
-                // 'interface' defined to the outside world.
-                var rankingMessage = {
-                    stage: {
-                        id: stage.id,
-                        name: stage.name,
-                        rounds: stage.rounds,
-                    },
-                    ranking: $scope.scoreboard[stage.id].map(function (item) {
-                        return {
-                            rank: item.rank, // Note: there can be multiple rows with same (shared) rank!
-                            team: {
-                                number: item.team.number,
-                                name: item.team.name,
-                            },
-                            scores: item.scores,
-                            highest: item.highest,
-                        };
-                    }),
-                };
-                $message.send('scores:ranking', rankingMessage);
-            };
+            $scope.broadcastRanking = (stage) =>  $scores.broadcastRanking(stage);
 
             $scope.doSort = function(stage, col, defaultSort) {
                 if (stage.sort === undefined) {
@@ -85,24 +65,14 @@ define('views/ranking',[
             };
 
             $scope.sortIcon = function(stage, col){
-                // got into trouble with a default sort order here...
-                var icon = '';
-                if (stage.sort == col) {
-                    if (stage.rev){
-                        icon = 'icon-sort-down';
-                    } else {
-                        icon = 'icon-sort-up';
-                    }
-                } else if (stage.sort === undefined && col == $scope.sort) {
-                    if (stage.rev === undefined && $scope.rev) {
-                        icon = 'icon-sort-down';
-                    } else {
-                        icon = 'icon-sort-up';
-                    }
-                } else {
-                    icon = ''; // no icon if column is not sorted
+                if(!angular.equals(stage.sort, col)){
+                    return '';
                 }
-                return icon;
+                if (stage.rev) {
+                    return 'arrow_drop_down';
+                } else {
+                    return 'arrow_drop_up';
+                }
             };
 
             $scope.toggle = function(stage) {
@@ -121,60 +91,59 @@ define('views/ranking',[
                 return new Array($scope.maxRounds() - stage.$rounds.length);
             };
 
-            // Data for CSV export links, indexed by stage ID
-            $scope.csvdata = {}; // CSV data itself
-            $scope.csvname = {}; // Filenames suggested to user
+            /**
+             * encodes a two dimensional array as a string according to the settings
+             * specified by the user as reported by the ng-settings.$settings service
+             *
+             * @param array the array to be encoded
+             * @returns {string} the encoded string form of the array
+             */
+            $scope.encodeArray = function (array) {
+                var string = "";
+                var settings = $settings.settings;
+                array.forEach(function (row) {
+                    row = row.map((elem) => elem || elem === 0 ? String(elem) : "");
+                    string = string.concat(settings.lineStartString ? String(settings.lineStartString) : "");
+                    string = string.concat(row.join(settings.separatorString ? String(settings.separatorString) : ""));
+                    string = string.concat((settings.lineEndString ? String(settings.lineEndString) : "") + "\r\n");
+                });
+                return string;
+            };
 
-            // Convert a 2D matrix to a CSV string.
-            // All cells are converted to strings and fully quoted,
-            // except null or undefined cells, which are passed as empty
-            // values (without quotes).
-            function toCSV(rows) {
-                return rows.map(function(row) {
-                    return row.map(function(col) {
-                        // Escape quotes, and wrap in quotes
-                        if (col === undefined || col === null) {
-                            col = "";
-                        }
-                        return '"' + String(col).replace(/"/gi, '""') + '"';
-                    }).join(",");
-                }).join("\r\n"); // Use Windows line-endings, to make it Notepad-friendly
-            }
+            $scope.exportFiles = {};
 
             /**
-             * Rebuild CSV data (contents and filenames) of given scoreboard.
-             * @param scoreboard Per-stage ranking as present in e.g. $scores.scoreboard.
+             * Builds the .csv file for exporting score for each stage and assigns it
+             * to exportFiles in the field corresponding to that stage's id
              */
-            $scope.rebuildCSV = function(scoreboard) {
-                $scope.csvdata = {};
-                $scope.csvname = {};
-                Object.keys(scoreboard).forEach(function(stageId) {
-                    var ranking = scoreboard[stageId];
-                    var rows = ranking.map(function(entry) {
-                        return [
-                            entry.rank,
-                            entry.team.number,
-                            entry.team.name,
-                            entry.highest ? entry.highest.score : undefined,
-                        ].concat(entry.scores);
+            $scope.buildExportFiles= function () {
+                Object.keys($scope.scoreboard).forEach(function (stageID) {
+                    var teams = $scope.scoreboard[stageID];
+                    teams = teams.map(function (teamEntry) {
+                        return [teamEntry.rank, teamEntry.team.number,
+                            teamEntry.team.name, teamEntry.highest.score].concat(teamEntry.scores);
                     });
-                    var header = ["Rank", "Team Number", "Team Name", "Highest"];
-                    var stage = $stages.get(stageId);
-                    header = header.concat(stage.$rounds.map(function(round) { return "Round " + round; }));
-                    rows.unshift(header);
-                    $scope.csvname[stageId] = encodeURIComponent("ranking_" + stageId + ".csv");
-                    $scope.csvdata[stageId] = "data:text/csv;charset=utf-8," + encodeURIComponent(toCSV(rows));
+                    $scope.exportFiles[stageID] = "data:text/csv;charset=utf-8,"+encodeURIComponent($scope.encodeArray(teams));
                 });
             };
 
-            // Rebuild CSV data and filenames when scoreboard is updated
-            $scope.$watch("scoreboard", function() {
-                $scope.rebuildCSV($scores.scoreboard);
+            $scope.$watch("scoreboard", function () {
+               $scope.buildExportFiles();
             }, true);
 
             $scope.$watch(() => $scores.scoreboard, function () {
-                $scope.scoreboard = format($scores.scoreboard)
+                $scope.scoreboard = removeEmptyRanks($scores.scoreboard)
             }, true);
+
+            $scope.$watch(() => $settings.settings.lineStartString, () => $scope.buildExportFiles());
+            $scope.$watch(() => $settings.settings.separatorString, () => $scope.buildExportFiles());
+            $scope.$watch(() => $settings.settings.lineEndString, () => $scope.buildExportFiles());
+
+            $settings.init().then(function () {//we have to wait for settings to initialize otherwise $scope.settings gets set to undefined
+               $scope.settings = $settings.settings;
+            });
+            $scope.stages = $stages.stages;
+            $scope.scoreboard = $scores.scoreboard;
 
             $scope.getRoundLabel = function(round){
                 return "Round " + round;

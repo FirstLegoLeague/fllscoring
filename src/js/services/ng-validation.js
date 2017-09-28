@@ -50,8 +50,8 @@ define('services/ng-validation',[
                 }
             }, {
                 validate: (score, scores) => {
-                    for(var i = 0; i < scores.length && scores[i] !== score; i++) {
-                        if(score.stageId === scores[i].stageId && score.round === scores[i].round && score.teamNumber === scores[i].teamNumber) {
+                    for(var i = 0; i < scores.length; i++) {
+                        if(score.stageId === scores[i].stageId && score.round === scores[i].round && score.teamNumber === scores[i].teamNumber && scores[i] !== score) {
                             return false;
                         }
                     }

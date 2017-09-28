@@ -36,6 +36,16 @@ define('services/ng-score',[
             };
 
             Score.compare = function(score1, score2) {
+                if(score1 === undefined && score2 === undefined){
+                    // if both score1 and score2 are undefined so they are equals
+                    return 0;
+                } else if(score1 === undefined && score2 !== undefined){
+                    // if score1 is undefined and score2 is defined so score2 is "bigger"
+                    return 1;
+                } else if(score1 !== undefined && score2 === undefined){
+                    // if score2 is undefined and score1 is defined so score1 is "bigger"
+                    return -1;
+                }
                 return score2.score - score1.score;
             };
 
@@ -68,7 +78,7 @@ define('services/ng-score',[
                     originalScore: Number(entry.originalScore || entry.score),
                     edited: Boolean(entry.edited) ? String(entry.edited) : undefined, // timestamp, e.g. "Wed Nov 26 2014 21:11:43 GMT+0100 (CET)"
                     table: entry.table,
-                    published: Boolean(entry.published)
+                    published: Boolean(entry.published),
                 };
             };
 

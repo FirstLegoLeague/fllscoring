@@ -6,9 +6,9 @@
         <h1>
             {{currentPage.title}}
         </h1>
-        <h3>
-            Current Score: {{score()}}
-        </h3>
+        <h1 class="score">
+            Current Score: <b>{{score()}}</b>
+        </h1>
     </div>
     <div>
         <div ng-show="errorMessage">
@@ -44,7 +44,7 @@
             <form id="scoresheetForm" ng-submit="validateScoresheet()">
                 <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.errors.length, ok:mission.completed}">
 
-                    <div class="card-menu" ng-click="openDescriptionModal(mission)"><i class="material-icons">info_outline</i></div>
+                    <div class="card-menu" ng-click="openDescriptionModal(mission)" style="cursor: pointer;"><i class="material-icons">info_outline</i></div>
 
                     <h2 class="card-header">
                         {{mission.title}}
@@ -124,7 +124,8 @@
 
         <div>
             <button class="btn btn-danger" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="clear()"><i class="material-icons">clear</i> Discard</button>
-            <button class="btn btn-success" id="save" ng-disabled="!isSaveable()" ng-click="save()"><i class="material-icons">check</i> Save</button>
+            <button class="btn btn-success save" ng-disabled="!isSaveable()" ng-show="!editingScore" ng-click="save()"><i class="material-icons">check</i> Save</button>
+            <button class="btn btn-success save" ng-disabled="!isSaveable()" ng-show="editingScore" fll-really-message="Sure to edit this scoresheet?" fll-really-click="saveEdit()"><i class="material-icons">check</i> Finish Edit</button>
         </div>
 
     </div>

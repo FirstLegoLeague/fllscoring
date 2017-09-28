@@ -13,7 +13,11 @@ describe('scores', function() {
             $window = _$window_;
             $q = _$q_;
             scoresMock = createScoresMock();
-            teamsMock = createTeamsMock();
+            teamsMock = createTeamsMock([
+                {number: 132},
+                {number: 2581},
+                {number: 445}
+            ]);
             stagesMock = createStagesMock();
             controller = $controller('scoresCtrl', {
                 '$scope': $scope,
@@ -23,6 +27,7 @@ describe('scores', function() {
             });
         });
         $window.alert = jasmine.createSpy('alertSpy');
+        $scope.$digest();//resolve all initialization promises
     });
 
     describe('initialization', function() {
@@ -72,18 +77,22 @@ describe('scores', function() {
     });
 
     describe('publishScore',function() {
-        it('should publish a score and save it',function() {
+        it('should update the score with published as true',function() {
             var id = 'afg1jkhg';
-            $scope.publishScore({ id: id });
-            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: true});
+            $scope.publishScore({ id: id , published: false});
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: true}, undefined);//undefined because second parameter is not used
+            $scope.publishScore({id: id, published: true});
+            expect(scoresMock.update).toHaveBeenCalledWith({id: id, published: true}, undefined);//undefined because second parameter is not used
         });
     });
 
     describe('unpublishScore',function() {
-        it('should unpublish a score and save it',function() {
+        it('should update the score with published as false, and the correct wasPublished value',function() {
             var id = 'afg1jkhg';
-            $scope.unpublishScore({ id: id });
-            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: false });
+            $scope.unpublishScore({ id: id , published: false});
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: id, published: false}, false);
+            $scope.unpublishScore({id: id, published: true});
+            expect(scoresMock.update).toHaveBeenCalledWith({id: id, published: false}, false);
         });
     });
 
@@ -92,7 +101,7 @@ describe('scores', function() {
             var score = { id: 'afg1jkhg' };
             $scope.editScore(score);
             $scope.finishEditScore(score);
-            expect(scoresMock.update).toHaveBeenCalledWith({ id: 'afg1jkhg', $editing: false });
+            expect(scoresMock.update).toHaveBeenCalledWith({ id: 'afg1jkhg', $editing: false }, undefined);//undefined because second parameter is not used
         });
         it('should alert if an error is thrown from scores',function() {
             scoresMock.update.and.throwError('update error');
@@ -112,4 +121,24 @@ describe('scores', function() {
         });
     });
 
+    describe('sortIcon',function() {
+        it('should give the up icon when col is sorted',function() {
+            $scope.sort = 'foo';
+            expect($scope.sortIcon('bla')).toEqual('');
+            expect($scope.sortIcon('foo')).toEqual('arrow_drop_down');
+        });
+        it('should give the up icon when col is sorted in reverse', function () {
+            $scope.sort = 'foo';
+            $scope.rev = true;
+            expect($scope.sortIcon('bla')).toEqual('');
+            expect($scope.sortIcon('foo')).toEqual('arrow_drop_down');
+        });
+
+        //default sort order stuff, needs a bit of refactoring
+        it('should report a default sorting for any stage',function() {
+            expect($scope.sortIcon('index')).toEqual('arrow_drop_down');
+            $scope.rev = false;
+            expect($scope.sortIcon('index')).toEqual('arrow_drop_up');
+        });
+    });
 });

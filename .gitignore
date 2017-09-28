@@ -8,6 +8,7 @@ pgbuildconfig.json
 data/
 build/
 sessions/
+.idea/*
 *.sublime*
 
 # bower stuff, include actual files

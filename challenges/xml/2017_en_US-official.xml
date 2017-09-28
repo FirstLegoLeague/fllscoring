@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/challenge.xsl"?>
+<fll:challenge
+    xmlns:fll="http://fll-tools.com/applications/scoring/v1/challenge.xsd" year="2017" version="1" name="HYDRO DYNAMICS">
+
+    <strings language="en-US">
+
+        <string id="yes">                           Yes</string>
+        <string id="no">                            No</string>
+
+        <string id="M01-name">                      M01 Pipe Removal</string>
+        <string id="M01-desc">                      <![CDATA[Move the Broken Pipe so it is completely in Base.]]></string>
+        <string id="M01-scoring">                   Broken Pipe is completely in Base</string>
+
+        <string id="M02-name">                      M02 Flow</string>
+        <string id="M02-desc">                      <![CDATA[Move a Big Water (one time maximum) to the other team’s field *only by turning the Pump System’s valve(s).]]></string>
+        <string id="M02-scoring">                   Big Water is on other team's Field (only by turning Pump System's valves(s))</string>
+
+        <string id="M03-name">                      M03 Pump Addition</string>
+        <string id="M03-desc">                      <![CDATA[Move the Pump Addition so it has contact with the mat and that contact is completely in the Pump Addition target.]]></string>
+        <string id="M03-scoring">                   Pump Addition has contact with the mat completely inside the target area</string>
+
+        <string id="M04-name">                      M04 Rain</string>
+        <string id="M04-desc">                      <![CDATA[Make at least one Rain come out of the Rain Cloud.]]></string>
+        <string id="M04-scoring">                   At least one Rain is out of the Rain Cloud</string>
+
+        <string id="M05-name">                      M05 Filter</string>
+        <string id="M05-desc">                      <![CDATA[Move the Filter north until the lock latch drops.]]></string>
+        <string id="M05-scoring">                   Lock latch is in dropped position</string>
+
+        <string id="M06-name">                      M06 Water Treatment</string>
+        <string id="M06-desc">                      <![CDATA[Make the Water Treatment model eject its Big Water, *only by moving the Toilet’s lever.]]></string>
+        <string id="M06-scoring">                   Big Water is ejected from Water Treatment model (only by Toilet's lever)</string>
+
+        <string id="M07-name">                      M07 Fountain</string>
+        <string id="M07-desc">                      <![CDATA[Make the Fountain’s middle layer rise some obvious height and stay there, due only to a Big Water in the gray tub.]]></string>
+        <string id="M07-scoring">                   Middle layer is raised (due only to a Big Water in gray tub)</string>
+
+        <string id="M08-name">                      M08 Manhole Covers</string>
+        <string id="M08-desc">                      <![CDATA[Flip Manhole cover(s) over, obviously past vertical *without it/them ever reaching Base.]]></string>
+        <string id="M08-scoring1">                  Manhole cover(s) that are flipped over past vertical (and never reached Base)</string>
+        <string id="M08-scoring2">                  2 in separate Tripod targets</string>
+        <string id="M08-scoring3">                  Both covers are flipped over and completely in separate Tripod targets</string>
+
+        <string id="M09-name">                      M09 Tripod</string>
+        <string id="M09-desc">                      <![CDATA[Move the inspection camera Tripod.]]></string>
+        <string id="M09-scoring1">                  All the Tripod’s feet are touching the mat</string>
+        <string id="M09-scoring2">                  Tripod is partially in a Tripod target</string>
+        <string id="M09-scoring3">                  OR Tripod is completely in a Tripod target</string>
+        <string id="M09-error">                     Choose one of the two options</string>
+
+        <string id="M10-name">                      M10 Pipe Replacement</string>
+        <string id="M10-desc">                      <![CDATA[Move a New Pipe so it is where the broken one started, in full/flat contact with the mat.]]></string>
+        <string id="M10-scoring1">                  New Pipe is installed where Broken Pipe was</string>
+        <string id="M10-scoring2">                  This New Pipe has full/flat contact with the mat</string>
+        <string id="M10-scoring3">                  New Pipe is installed where Broken Pipe was, in full/flat contact with the mat</string>
+
+        <string id="M11-name">                      M11 Pipe Construction</string>
+        <string id="M11-desc">                      <![CDATA[Move a New Pipe.]]></string>
+        <string id="M11-scoring1">                  New Pipe has full/flat contact with the mat</string>
+        <string id="M11-scoring2">                  This New Pipe is partially in its target</string>
+        <string id="M11-scoring3">                  OR this New Pipe is completely in its target</string>
+
+        <string id="M12-name">                      M12 Sludge</string>
+        <string id="M12-desc">                      <![CDATA[Move the Sludge so it is touching the visible wood of any of the six drawn garden boxes.]]></string>
+        <string id="M12-scoring">                   Sludge is touching the visible wood of a drawn garden box</string>
+
+        <string id="M13-name">                      M13 Flower</string>
+        <string id="M13-desc">                      <![CDATA[Make the Flower rise some obvious height and stay there, due only to a Big Water in the brown pot.]]></string>
+        <string id="M13-scoring1">                  Flower is raised (due only to a Big Water in brown pot)</string>
+        <string id="M13-scoring2">                  At least one rain is in the purple part, touching nothing but Flower model</string>
+
+        <string id="M14-name">                      M14 Water Well</string>
+        <string id="M14-desc">                      <![CDATA[Move the Water Well so it has contact with the mat.]]></string>
+        <string id="M14-scoring1">                  Water Well has contact with the mat partially inside the target area</string>
+        <string id="M14-scoring2">                  Water Well has contact with the mat completely inside the target area</string>
+
+        <string id="M15-name">                      M15 Fire</string>
+        <string id="M15-desc">                      <![CDATA[ake the fire drop *only by making the Firetruck apply direct force to the House’s lever.]]></string>
+        <string id="M15-scoring">                   Fire is dropped (due only to Firetruck applying direct force to House’s lever)</string>
+
+        <string id="M16-name">                      M16 Water Collection</string>
+        <string id="M16-desc">                      <![CDATA[Move or catch Big Water and/or Rain water (one Rain maximum; no Dirty Water) so it is touching the mat in the Water Target, *without the target ever reaching the white Off-Limits Line shown below.  Water may be touching the target, and/or other water, but not be touching nor guided by anything else.  Each water model is scored as an individual.]]></string>
+        <string id="M16-scoring1">                  Water Target is East of Off-Limits line (and never reached Off-Limit line)</string>
+        <string id="M16-scoring2">                  At least one Rain is touching mat in Water Target</string>
+        <string id="M16-scoring3">                  Big Water touching mat in Water Target</string>
+        <string id="M16-scoring4">                  At least one pair of Big Waters are stacked in Water Target</string>
+
+        <string id="M17-name">                      M17 Slingshot</string>
+        <string id="M17-desc">                      <![CDATA[Move the Slingshot so it is completely in its target.]]></string>
+        <string id="M17-scoring1">                  Slingshot is completely in the Slingshot target</string>
+        <string id="M17-scoring2">                  Rain AND Dirty Water are completely in the Slingshot target</string>
+
+        <string id="M18-name">                      M18 Faucet</string>
+        <string id="M18-desc">                      <![CDATA[Make the water level obviously more blue than white as seen from above the cup, *only by turning the Faucet handle.]]></string>
+        <string id="M18-scoring">                   Water level is more blue than white (only by turning Faucet handle)</string>
+
+        <string id="penalties-name">                Penalties</string>
+        <string id="penalties-desc">                <![CDATA[Penalties given]]></string>
+        <string id="penalties-scoring">             Number of Penalty discs in the white triangle area</string>
+
+    </strings>
+
+    <!-- Do NOT edit below this line -->
+
+    <mission name="M01-name" description="M01-desc">
+        <objective-yesno id="M01" description="M01-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M01" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="20"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M02-name" description="M02-desc">
+        <objective-yesno id="M02" description="M02-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M02" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="25"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M03-name" description="M03-desc">
+        <objective-yesno id="M03" description="M03-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M03" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="20"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M04-name" description="M04-desc">
+        <objective-yesno id="M04" description="M04-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M04" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="20"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M05-name" description="M05-desc">
+        <objective-yesno id="M05" description="M05-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M05" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="30"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M06-name" description="M06-desc">
+        <objective-yesno id="M06" description="M06-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M06" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="20"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M07-name" description="M07-desc">
+        <objective-yesno id="M07" description="M07-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M07" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="20"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M08-name" description="M08-desc">
+        <objective-enum id="M08-1" description="M08-scoring1" default="0">
+            <option name="2" description="2" />
+            <option name="1" description="1" />
+            <option name="0" description="0" />
+        </objective-enum>
+        <objective-yesno id="M08-2" description="M08-scoring3" default="no" />
+        <score>
+            <indexes>
+                <index objective="M08-1" />
+                <index objective="M08-2" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <index-ref value="no" /> <points amount="15"  /> </case>
+                <case> <index-ref value="2" /> <index-ref value="no" /> <points amount="30"  /> </case>
+                <case> <index-ref value="0" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <index-ref value="yes" /> <points amount="15"  /> </case>
+                <case> <index-ref value="2" /> <index-ref value="yes" /> <points amount="60"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+
+
+    <mission name="M09-name" description="M09-desc">
+        <objective-yesno id="M09-1" description="M09-scoring1" default="no" />
+        <objective-yesno id="M09-2" description="M09-scoring2" default="no" />
+        <objective-yesno id="M09-3" description="M09-scoring3" default="no" />
+        <score>
+            <indexes>
+                <index objective="M09-1" />
+                <index objective="M09-2" />
+                <index objective="M09-3" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="yes" /> <error message="M09-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="yes" /> <points amount="20"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="no" /> <points amount="15"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="yes" /> <error message="M09-error" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+
+
+    <mission name="M10-name" description="M10-desc">
+        <objective-yesno id="M10-1" description="M10-scoring1" default="no" />
+        <objective-yesno id="M10-2" description="M10-scoring2" default="no" />
+        <score>
+            <indexes>
+                <index objective="M10-1" />
+                <index objective="M10-2" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="20"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+
+    <mission name="M11-name" description="M11-desc">
+        <objective-yesno id="M11-1" description="M11-scoring1" default="no" />
+        <objective-yesno id="M11-2" description="M11-scoring2" default="no" />
+        <objective-yesno id="M11-3" description="M11-scoring3" default="no" />
+        <score>
+            <indexes>
+                <index objective="M11-1" />
+                <index objective="M11-2" />
+                <index objective="M11-3" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="yes" /> <error message="M09-error" /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="yes" /> <points amount="20"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="no" /> <points amount="15"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="yes" /> <error message="M09-error" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+
+
+    <mission name="M12-name" description="M12-desc">
+        <objective-yesno id="M12" description="M12-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M12" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="30"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M13-name" description="M13-desc">
+        <objective-yesno id="M13-1" description="M13-scoring1" default="no" />
+        <objective-yesno id="M13-2" description="M13-scoring2" default="no" />
+        <score>
+            <indexes>
+                <index objective="M13-1" />
+                <index objective="M13-2" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <points amount="30"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="60"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M14-name" description="M14-desc">
+        <objective-yesno id="M14-1" description="M14-scoring1" default="no" />
+        <objective-yesno id="M14-2" description="M14-scoring2" default="no" />
+        <score>
+            <indexes>
+                <index objective="M14-1" />
+                <index objective="M14-2" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <points amount="25"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <points amount="15"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <error message="M09-error" /> </case>
+            </cases>
+        </score>
+    </mission>
+
+
+
+    <mission name="M15-name" description="M15-desc">
+        <objective-yesno id="M15" description="M15-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M15" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="25"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M16-name" description="M16-desc">
+        <objective-yesno id="M16-1" description="M16-scoring1" default="no" />
+        <objective-yesno id="M16-2" description="M16-scoring2" default="no" />
+        <objective-enum id="M16-3" description="M16-scoring3" default="0">
+            <option name="5" description="5" />
+            <option name="4" description="4" />
+            <option name="3" description="3" />
+            <option name="2" description="2" />
+            <option name="1" description="1" />
+            <option name="0" description="0" />
+        </objective-enum>
+        <objective-yesno id="M16-4" description="M16-scoring4" default="no" />
+        <score>
+            <indexes>
+                <index objective="M16-1" />
+                <index objective="M16-2" />
+                <index objective="M16-3" />
+                <index objective="M16-4" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="0" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="0" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="1" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="1" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="2" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="2" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="3" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="3" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="4" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="4" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="5" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <index-ref value="5" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="0" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="0" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="1" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="1" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="2" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="2" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="3" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="3" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="4" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="4" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="5" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <index-ref value="5" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="0" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="0" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="1" /> <index-ref value="no" /> <points amount="10"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="1" /> <index-ref value="yes" /> <points amount="10"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="2" /> <index-ref value="no" /> <points amount="20"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="2" /> <index-ref value="yes" /> <points amount="50"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="3" /> <index-ref value="no" /> <points amount="30"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="3" /> <index-ref value="yes" /> <points amount="60"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="4" /> <index-ref value="no" /> <points amount="40"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="4" /> <index-ref value="yes" /> <points amount="70"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="5" /> <index-ref value="no" /> <points amount="50"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <index-ref value="5" /> <index-ref value="yes" /> <points amount="80"  /> </case>
+
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="0" /> <index-ref value="no" /> <points amount="10"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="0" /> <index-ref value="yes" /> <points amount="10"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="1" /> <index-ref value="no" /> <points amount="20"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="1" /> <index-ref value="yes" /> <points amount="20"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="2" /> <index-ref value="no" /> <points amount="30"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="2" /> <index-ref value="yes" /> <points amount="60"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="3" /> <index-ref value="no" /> <points amount="40"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="3" /> <index-ref value="yes" /> <points amount="70"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="4" /> <index-ref value="no" /> <points amount="50"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="4" /> <index-ref value="yes" /> <points amount="80"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="5" /> <index-ref value="no" /> <points amount="60"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <index-ref value="5" /> <index-ref value="yes" /> <points amount="90"  /> </case>
+
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M17-name" description="M17-desc">
+        <objective-yesno id="M17-1" description="M17-scoring1" default="no" />
+        <objective-yesno id="M17-2" description="M17-scoring2" default="no" />
+        <score>
+            <indexes>
+                <index objective="M17-1" />
+                <index objective="M17-2" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="no" /> <index-ref value="yes" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="no" /> <points amount="20"  /> </case>
+                <case> <index-ref value="yes" /> <index-ref value="yes" /> <points amount="35"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="M18-name" description="M18-desc">
+        <objective-yesno id="M18" description="M18-scoring" default="no" />
+        <score>
+            <indexes>
+                <index objective="M18" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="no" /> <points amount="0"  /> </case>
+                <case> <index-ref value="yes" /> <points amount="25"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+    <mission name="penalties-name" description="penalties-desc">
+        <objective-enum id="penalties" description="penalties-scoring" default="0">
+            <option name="6" description="6" />
+            <option name="5" description="5" />
+            <option name="4" description="4" />
+            <option name="3" description="3" />
+            <option name="2" description="2" />
+            <option name="1" description="1" />
+            <option name="0" description="0" />
+        </objective-enum>
+        <score>
+            <indexes>
+                <index objective="penalties" />
+            </indexes>
+            <cases>
+                <case> <index-ref value="0" /> <points amount="0"  /> </case>
+                <case> <index-ref value="1" /> <points amount="-5"  /> </case>
+                <case> <index-ref value="2" /> <points amount="-10"  /> </case>
+                <case> <index-ref value="3" /> <points amount="-15"  /> </case>
+                <case> <index-ref value="4" /> <points amount="-20"  /> </case>
+                <case> <index-ref value="5" /> <points amount="-25"  /> </case>
+                <case> <index-ref value="6" /> <points amount="-30"  /> </case>
+            </cases>
+        </score>
+    </mission>
+
+</fll:challenge>
