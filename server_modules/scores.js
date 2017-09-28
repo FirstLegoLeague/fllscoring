@@ -1,7 +1,6 @@
 var lockfile = require('lockfile');
 var utils = require('./utils');
 var fileSystem = require('./file_system');
-var autorize = require('./auth').authorize;
 var authorize = require('./auth').authorize;
 var Q = require('q');
 
@@ -83,7 +82,7 @@ exports.route = function(app) {
     });
 
     //save a new score
-    app.post('/scores/create', exports.authorize.any, function(req,res) {
+    app.post('/scores/create', authorize.any, function(req,res) {
         var scoresheet = req.body.scoresheet;
         var score = req.body.score;
 
@@ -99,7 +98,7 @@ exports.route = function(app) {
     });
 
     //delete a score at an id
-    app.post('/scores/delete/:id', exports.authorize.any, function(req,res) {
+    app.post('/scores/delete/:id', authorize.any, function(req,res) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
@@ -113,7 +112,7 @@ exports.route = function(app) {
     });
 
     //edit a score at an id
-    app.post('/scores/update/:id', exports.authorize.any, function(req,res) {
+    app.post('/scores/update/:id', authorize.any, function(req,res) {
         var score = req.body;
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
