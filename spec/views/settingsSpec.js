@@ -7,7 +7,7 @@ describe('settings', function() {
 
     var $scope, controller;
 
-    var settingsMock, handshakeMock, stagesMock, challengesMock, scoresMock;
+    var settingsMock, handshakeMock, stagesMock, challengesMock;
 
     beforeEach(function() {
         angular.mock.module(module.name);
@@ -17,14 +17,12 @@ describe('settings', function() {
             handshakeMock = createHandshakeMock($q);
             stagesMock = createStagesMock();
             challengesMock = createChallengeMock();
-            scoresMock = createScoreMock();
             controller = $controller('settingsCtrl', {
                 '$scope': $scope,
                 '$stages': stagesMock,
                 '$settings': settingsMock,
                 '$handshake': handshakeMock,
-                '$challenge': challengesMock,
-                '$scores': scoresMock
+                '$challenge': challengesMock
             });
         });
     });
