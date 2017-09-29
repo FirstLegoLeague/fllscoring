@@ -97,4 +97,4 @@ exports.authorize = function(userCondition) {
 /**
 * A sample usage in which any user is authorized
 */
-exports.authorize.any = authorize(user => !!user);
+exports.authorize.any = exports.authorize(user => !!user);
