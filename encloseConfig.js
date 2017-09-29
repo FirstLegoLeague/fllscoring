@@ -1,5 +1,5 @@
 "use strict";
- 
+
 module.exports = {
   scripts: "./src/**/*.js",
   assets: ["./src/**/*",
