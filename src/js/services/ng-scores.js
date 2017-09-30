@@ -68,6 +68,13 @@ define('services/ng-scores',[
                 self._update();
             }, true);
 
+            // Watching for changes in autoBroadcastStage
+            $rootScope.$watch(() => $settings.settings.autoBroadcastStage, function (newValue, oldValue, scope){
+                if($settings.settings.autoBroadcastStage) {
+                    self.broadcastRanking($stages.get($settings.settings.autoBroadcastStage));
+                }
+            },true);
+
             this._updating = 0;
             this._initialized = null; // Promise<void>
             this.init();
