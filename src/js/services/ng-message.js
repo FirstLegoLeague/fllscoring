@@ -36,13 +36,17 @@ define('services/ng-message',[
                             node: settings.node
                         }));
 
-                        ws.send(JSON.stringify({
-                            type: "login",
-                            node: settings.node,
-                            username: $session.get('passport').user.username,
-                            password: $session.get('passport').user.mhubPassword
-                        }));
-                        def.resolve(ws);
+                        let passport = $session.get('passport');
+
+                        if(passport) {
+                            ws.send(JSON.stringify({
+                                type: "login",
+                                node: settings.node,
+                                username: .user.username,
+                                password: $session.get('passport').user.mhubPassword
+                            }));
+                            def.resolve(ws);
+                        }
                     };
                     ws.onerror = function(e){
                         log("socket error", e);

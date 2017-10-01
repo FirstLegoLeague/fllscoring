@@ -47,8 +47,12 @@ define([
             $scope.drawerVisible = false;
 
             $session.load().then(function(session) {
-                $scope.user = session['passport'].user;
-                $scope.pages = PAGES.filter(page => $scope.user.pages.includes(page.name));
+                if(session['passport']) {
+                    $scope.user = session['passport'].user;
+                    $scope.pages = PAGES.filter(page => $scope.user.pages.includes(page.name));
+                } else {
+                    $scope.pages = PAGES;
+                }
                 $scope.currentPage = $scope.pages[0];
             });
 
