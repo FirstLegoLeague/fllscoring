@@ -23,7 +23,7 @@ define('services/ng-message',[
                 var def = $q.defer();
                 socketOpen = true;
                 isInitializedPromise = def.promise;
-                return $session.load().then(() => $settings.init()).then(function(settings) {
+                return $session.load().then($settings.init).then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
                         throw new Error('no message bus configured');
                     }
