@@ -203,7 +203,7 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
-                $scope.editingScore = false;
+
                 var table = $scope.scoreEntry ? $scope.scoreEntry.table : undefined;
                 $scope.scoreEntry = new $score({ table: table });
                 $scope.signature = null;
@@ -212,6 +212,11 @@ define('views/scoresheet',[
                         delete objective["value"];
                     });
                 });
+
+                if($scope.editingScore){
+                    $scope.setPage($scope.pages.find(function (p) {return p.name === "scores"}));
+                    $scope.editingScore = false;
+                }
                 log('scoresheet cleared');
             };
 
