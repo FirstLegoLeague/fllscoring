@@ -91,7 +91,7 @@ if(users) {
             if(condition(user, req, res)) {
                 next();
             } else {
-                utils.sendError({ status: 403, message: 'Not Authorized' }, res);
+                utils.sendError(res, { status: 403, message: 'Not Authorized' });
             }
         }
     }
