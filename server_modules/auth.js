@@ -88,7 +88,7 @@ if(users) {
         return function(req, res, next) {
             var user = req.user;
 
-            if(condition(user)) {
+            if(condition(user, req, res)) {
                 next();
             } else {
                 utils.sendError({ status: 403, message: 'Not Authorized' }, res);
