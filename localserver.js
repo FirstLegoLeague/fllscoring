@@ -4,18 +4,25 @@ var utils = require('./server_modules/utils');
 var fileSystem = require('./server_modules/file_system');
 var args = require('./server_modules/args');
 var views = require('./server_modules/views');
+var auth = require('./server_modules/auth');
+var bodyParser = require('body-parser');
 
 var configs = [require('./server_modules/slave_mode')];
 
 var middlewareLayers = [express.static(fileSystem.resolve('src')),
+                        require('cookie-parser')(),
+                        bodyParser.urlencoded({ extended: true }),
+                        bodyParser.json(),
                         require('./server_modules/sessions').middleware,
-                        require('./server_modules/auth').basic(args.basicAuthCreds),
+                        auth.initialize(),
+                        auth.session(),
+                        auth.middleware,
                         require('./server_modules/cors').middleware,
                         require('./server_modules/cache').middleware,
-                        require('./server_modules/body_builder').middleware,
                         require('./server_modules/log').middleware];
 
 var routers = [views,
+                auth,
                 fileSystem,
                 require('./server_modules/sessions'),
                 require('./server_modules/teams'),

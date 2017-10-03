@@ -9,8 +9,8 @@ define('services/ng-message',[
     "use strict";
 
     return module.service('$message',[
-        '$http','$settings','$q',
-        function($http,$settings,$q) {
+        '$http','$settings','$session','$q',
+        function($http,$settings,$session,$q) {
             var isInitializedPromise;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
@@ -23,7 +23,7 @@ define('services/ng-message',[
                 var def = $q.defer();
                 socketOpen = true;
                 isInitializedPromise = def.promise;
-                return $settings.init().then(function(settings) {
+                return $session.load().then($settings.init).then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
                         throw new Error('no message bus configured');
                     }
@@ -35,7 +35,18 @@ define('services/ng-message',[
                             type: "subscribe",
                             node: settings.node
                         }));
-                        def.resolve(ws);
+
+                        let passport = $session.get('passport');
+
+                        if(passport) {
+                            ws.send(JSON.stringify({
+                                type: "login",
+                                node: settings.node,
+                                username: passport.user.username,
+                                password: passport.user.mhubPassword
+                            }));
+                            def.resolve(ws);
+                        }
                     };
                     ws.onerror = function(e){
                         log("socket error", e);
