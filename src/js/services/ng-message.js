@@ -42,8 +42,8 @@ define('services/ng-message',[
                             ws.send(JSON.stringify({
                                 type: "login",
                                 node: settings.node,
-                                username: .user.username,
-                                password: $session.get('passport').user.mhubPassword
+                                username: passport.user.username,
+                                password: passport.user.mhubPassword
                             }));
                             def.resolve(ws);
                         }
