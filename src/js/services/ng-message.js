@@ -23,7 +23,7 @@ define('services/ng-message',[
                 var def = $q.defer();
                 socketOpen = true;
                 isInitializedPromise = def.promise;
-                return $session.load().then($settings.init).then(function(settings) {
+                return $session.load().then(() => $settings.init()).then(function(settings) {
                     if (!(settings.mhub && settings.node)) {
                         throw new Error('no message bus configured');
                     }
@@ -45,8 +45,8 @@ define('services/ng-message',[
                                 username: passport.user.username,
                                 password: passport.user.mhubPassword
                             }));
-                            def.resolve(ws);
                         }
+                        def.resolve(ws);
                     };
                     ws.onerror = function(e){
                         log("socket error", e);
