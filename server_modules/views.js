@@ -7,7 +7,7 @@ exports.route = function(app) {
         res.sendFile(fileSystem.resolve('index.html'));
     });
 
-    app.get('/views/:view', authenticate((user, req) => {
+    app.get('/views/:view', authorize((user, req) => {
         let view = req.params.view;
         return req.user.pages.findIndex(page => view.startsWith(page)) !== -1; // Using startsWith for easy hierarchy
     }));
