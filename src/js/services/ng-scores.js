@@ -563,7 +563,6 @@ define('services/ng-scores',[
          */
         Scores.prototype.getRankings = function(stageFilter) {
             // Create a pass-all filter if necessary
-            var haveFilter = !!stageFilter;
             if (!stageFilter) {
                 stageFilter = {};
                 $stages.stages.forEach(function (stage) {
@@ -588,7 +587,7 @@ define('services/ng-scores',[
                 }
 
                 // Ignore score if filtered
-                if (haveFilter && s.round > stageFilter[s.stageId]) {
+                if (s.round > stageFilter[s.stageId]) {
                     return false;
                 }
 
