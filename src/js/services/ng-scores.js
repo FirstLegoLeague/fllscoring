@@ -6,7 +6,8 @@ define('services/ng-scores',[
     'services/ng-services',
     'services/log',
     'services/ng-fs',
-    'services/ng-stages'
+    'services/ng-stages',
+    'factories/poller',
 ],function(module,log) {
     "use strict";
 
@@ -15,8 +16,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 2;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams', '$interval',
-        function($rootScope, $fs, $stages, $q, $teams, $interval) {
+        ['$rootScope', '$fs', '$stages', '$q', '$teams', 'Poller',
+        function($rootScope, $fs, $stages, $q, $teams, Poller) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -130,9 +131,8 @@ define('services/ng-scores',[
             this._updating = 0;
             this._initialized = null; // Promise<void>
             this._pollingSheets = null; // Promise<void>
-            this._autoRefreshUsers = 0;
-            this._autoRefreshInterval = undefined; // $interval handle
-            this._autoRefreshTimeout = 30 * 1000; // ms before reloading scores.json
+            this.AUTO_REFRESH_INTERVAL = 30 * 1000; // milliseconds
+            this._autoRefreshPoller = new Poller(this.AUTO_REFRESH_INTERVAL, function() { self._onAutoRefresh(); });
             this.init();
         }
 
@@ -180,7 +180,7 @@ define('services/ng-scores',[
 
         Scores.prototype.load = function() {
             var self = this;
-            this._updateAutoRefreshTimer();
+            this._autoRefreshPoller.reset();
             return $fs.read('scores.json').then(function(res) {
                 self.beginupdate();
                 try {
@@ -340,42 +340,21 @@ define('services/ng-scores',[
          * controller destruction).
          */
         Scores.prototype.enableAutoRefresh = function() {
-            this._autoRefreshUsers++;
-            this._updateAutoRefreshTimer();
+            this._autoRefreshPoller.start();
         };
 
         /**
          * Unregister interest in auto-refresh. See enableAutoRefresh().
          */
         Scores.prototype.disableAutoRefresh = function () {
-            if (this._autoRefreshUsers <= 0) {
-                throw new Error("enableAutoRefresh()/disableAutoRefresh() calls mismatched");
-            }
-            this._autoRefreshUsers--;
-            if (this._autoRefreshUsers === 0) {
-                // Only stop the timer when needed, otherwise
-                // we unnecessarily restart it
-                this._updateAutoRefreshTimer();
-            }
+            this._autoRefreshPoller.stop();
         };
 
-        /**
-         * Restart refresh timer, if anyone is interested in auto-refreshing.
-         */
-        Scores.prototype._updateAutoRefreshTimer = function() {
-            var self = this;
-            if (this._autoRefreshInterval !== undefined) {
-                $interval.cancel(this._autoRefreshInterval);
-                this._autoRefreshInterval = undefined;
-            }
-            if (this._autoRefreshUsers > 0) {
-                this._autoRefreshInterval = $interval(function() {
-                    // Reload scores from server (if we're not already
-                    // in the middle of something).
-                    if (self._updating <= 0) {
-                        self.load();
-                    }
-                }, this._autoRefreshTimeout);
+        Scores.prototype._onAutoRefresh = function () {
+            // Reload scores from server (if we're not already
+            // in the middle of something).
+            if (this._updating <= 0) {
+                this.load();
             }
         };
 

@@ -542,38 +542,38 @@ describe('ng-scores',function() {
     describe('autoRefresh', function() {
         it('should not be started when no-one is interested', function () {
             fsMock.read.calls.reset();
-            $interval.flush($scores._autoRefreshTimeout + 1);
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             expect(fsMock.read).not.toHaveBeenCalled();
         });
         it('should be started when someone is interested', function () {
             fsMock.read.calls.reset();
             $scores.enableAutoRefresh();
-            $interval.flush($scores._autoRefreshTimeout + 1);
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             expect(fsMock.read).toHaveBeenCalled();
         });
         it('should keep refreshing when someone is interested', function () {
             fsMock.read.calls.reset();
             $scores.enableAutoRefresh();
-            $interval.flush($scores._autoRefreshTimeout + 1);
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             expect(fsMock.read).toHaveBeenCalled();
             fsMock.read.calls.reset();
-            $interval.flush($scores._autoRefreshTimeout + 1);
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             expect(fsMock.read).toHaveBeenCalled();
         });
         it('should be stopped when everyone unregistered', function () {
             $scores.enableAutoRefresh();
-            $interval.flush($scores._autoRefreshTimeout + 1);
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             $scores.disableAutoRefresh();
 
             fsMock.read.calls.reset();
-            $interval.flush($scores._autoRefreshTimeout + 1);
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             expect(fsMock.read).not.toHaveBeenCalled();
         });
         it('should skip refresh when busy', function () {
             fsMock.read.calls.reset();
             $scores.enableAutoRefresh();
             $scores.beginupdate();
-            $interval.flush($scores._autoRefreshTimeout + 1);
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             expect(fsMock.read).not.toHaveBeenCalled();
         });
     });
