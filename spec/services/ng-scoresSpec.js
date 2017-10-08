@@ -576,6 +576,16 @@ describe('ng-scores',function() {
             $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
             expect(fsMock.read).not.toHaveBeenCalled();
         });
+        it('should continue refresh after it was busy before', function () {
+            fsMock.read.calls.reset();
+            $scores.enableAutoRefresh();
+            $scores.beginupdate();
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
+            expect(fsMock.read).not.toHaveBeenCalled();
+            $scores.endupdate();
+            $interval.flush($scores.AUTO_REFRESH_INTERVAL + 1);
+            expect(fsMock.read).toHaveBeenCalled();
+        });
     });
 
 });
