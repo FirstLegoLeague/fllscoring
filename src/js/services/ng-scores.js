@@ -558,16 +558,16 @@ define('services/ng-scores',[
          * Resulting object is a per-stage array containing one item per team,
          * which lists the rank, team info, scores per round and highest score.
          *
-         * @param  stages Optional object stageId => nrOfRoundsOrTrue
+         * @param  stageFilter Optional object stageId => nrOfRoundsOrTrue
          * @return Per-stage rankings
          */
-        Scores.prototype.getRankings = function(stages) {
+        Scores.prototype.getRankings = function(stageFilter) {
             // Create a pass-all filter if necessary
-            var haveFilter = !!stages;
-            if (!stages) {
-                stages = {};
+            var haveFilter = !!stageFilter;
+            if (!stageFilter) {
+                stageFilter = {};
                 $stages.stages.forEach(function (stage) {
-                    stages[stage.id] = true;
+                    stageFilter[stage.id] = true;
                 });
             }
 
@@ -575,9 +575,9 @@ define('services/ng-scores',[
             // e.g. `true` is passed)
             // And create empty lists for each stage
             var board = {};
-            Object.keys(stages).forEach(function (stage) {
-                var s = stages[stage];
-                stages[stage] = typeof s === "number" && s || s && Infinity || 0;
+            Object.keys(stageFilter).forEach(function (stage) {
+                var s = stageFilter[stage];
+                stageFilter[stage] = typeof s === "number" && s || s && Infinity || 0;
                 board[stage] = [];
             });
 
@@ -588,7 +588,7 @@ define('services/ng-scores',[
                 }
 
                 // Ignore score if filtered
-                if (haveFilter && s.round > stages[s.stageId]) {
+                if (haveFilter && s.round > stageFilter[s.stageId]) {
                     return false;
                 }
 
@@ -609,7 +609,7 @@ define('services/ng-scores',[
                     }
                 }
                 if (!bteam) {
-                    var maxRounds = Math.min(s.stage.rounds, stages[s.stageId]);
+                    var maxRounds = Math.min(s.stage.rounds, stageFilter[s.stageId]);
                     var initialScores = new Array(maxRounds);
                     var initialEntries = new Array(maxRounds);
                     for (i = 0; i < maxRounds; i++) {
