@@ -6,6 +6,7 @@ define([
     'views/scoresheet',
     'views/scores',
     'views/ranking',
+    'factories/ng-factories',
     'services/ng-services',
     'directives/ng-directives',
     'directives/size',
@@ -17,7 +18,7 @@ define([
     'angular-touch',
     'angular-sanitize',
     'angular'
-],function(log,session,settings,teams,scoresheet,scores,ranking,services,directives,size,filters,indexFilter,fsTest,dbTest) {
+],function(log,session,settings,teams,scoresheet,scores,ranking,factories,services,directives,size,filters,indexFilter,fsTest,dbTest) {
 
     log('device ready');
 
@@ -107,6 +108,7 @@ define([
         ranking.name,
         filters.name,
         services.name,
-        directives.name
+        directives.name,
+        factories.name,
     ]);
 });
