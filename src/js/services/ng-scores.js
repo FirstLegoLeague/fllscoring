@@ -582,11 +582,8 @@ define('services/ng-scores',[
             });
 
             // Create filtered scores (both user-supplied filter and errors).
-            // Ignore scores with errors, except if it's a duplicate
-            // (i.e. keep the first score in the list, to prevent it
-            // from disappearing due to a later error).
             var filteredScores = this.scores.filter(function (s) {
-                if (s.error && !(s.error instanceof DuplicateScoreError && s.error.score === s)) {
+                if (s.error) {
                     return false;
                 }
 
