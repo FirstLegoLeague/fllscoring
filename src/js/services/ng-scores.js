@@ -231,10 +231,23 @@ define('services/ng-scores',[
         };
 
         /**
+         * Determine whether given score is valid, i.e. a number, or "dnc" (Did Not Compete),
+         * or "dsq" (DiSQualified).
+         * Note: `null` and `undefined` are invalid: remove the score to denote this instead.
+         *
+         * @param score {any} Score value to test
+         * @return true when score is valid
+         */
+        Scores.prototype.isValidScore = function (score) {
+            return typeof score === "number" && score > -Infinity && score < Infinity ||
+                score === "dnc" || score === "dsq";
+        };
+
+        /**
          * Convert 'dirty' score value to correct type used during score
          * computations etc.
          * Valid inputs are fixed strings like "dnc" (Did Not Compete) and
-         * "dnq" (Did Not Qualify) in any combination of upper/lower case,
+         * "dsq" (DiSQualified) in any combination of upper/lower case,
          * null (dummy entry, maybe because score was removed) and numbers
          * (also as strings). Empty string is converted to null.
          * Invalid input is simply returned (and later marked as invalid
@@ -448,6 +461,8 @@ define('services/ng-scores',[
          * @return list of scores including annotations about e.g. errors
          */
         Scores.prototype.getValidatedScores = function() {
+            var self = this;
+
             // Create a copy of the score, such that we can add
             // additional info (e.g. validation errors) without
             // polluting rawScores.
@@ -498,11 +513,7 @@ define('services/ng-scores',[
                 // mean that one could 'reset' a team's score for that round.
                 // If a team did not play in a round, there will simply be no
                 // entry in scores.
-                if (!(
-                    typeof s.score === "number" && s.score > -Infinity && s.score < Infinity ||
-                    s.score === "dnc" ||
-                    s.score === "dsq"
-                )) {
+                if (!self.isValidScore(s.score)) {
                     s.error = new InvalidScoreError(s.score);
                     return;
                 }
