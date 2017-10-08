@@ -60,14 +60,13 @@ define('services/ng-scores',[
         }
 
         function DuplicateScoreError(score) {
-            this.score = score;
             this.team = score.team;
             this.stage = score.stage;
             this.round = score.round;
             this.name = "DuplicateScoreError";
             this.message = format(
                 "duplicate score for team '{0}' ({1}), stage {2}, round {3}",
-                this.team.name, this.score.teamNumber,
+                this.team.name, score.teamNumber,
                 this.stage.name, this.round
             );
         }
