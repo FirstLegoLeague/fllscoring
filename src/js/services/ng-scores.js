@@ -326,9 +326,13 @@ define('services/ng-scores',[
                 throw new Error("beginupdate()/endupdate() calls mismatched");
             }
             this._updating--;
-            if (this._updating === 0) {
+            if (!this.isUpdating()) {
                 this._update();
             }
+        };
+
+        Scores.prototype.isUpdating = function () {
+            return this._updating > 0;
         };
 
         /**
@@ -353,7 +357,7 @@ define('services/ng-scores',[
         Scores.prototype._onAutoRefresh = function () {
             // Reload scores from server (if we're not already
             // in the middle of something).
-            if (this._updating <= 0) {
+            if (!this.isUpdating()) {
                 this.load();
             }
         };
@@ -438,7 +442,7 @@ define('services/ng-scores',[
         };
 
         Scores.prototype._update = function() {
-            if (this._updating > 0) {
+            if (this.isUpdating()) {
                 return;
             }
 
