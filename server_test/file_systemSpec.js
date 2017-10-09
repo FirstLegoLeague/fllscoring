@@ -126,5 +126,11 @@ describe("file_system", () => {
             await file_system.writeFile("some/path/foo.txt", "something");
             expect(nodeFs.readFileSync("some/path/foo.txt", "utf8")).toBe("something");
         });
+
+        it("can be hooked", async () => {
+            file_system.registerHook("write", "foo.txt", (data) => data.toUpperCase());
+            await file_system.writeFile("foo.txt", "something");
+            expect(nodeFs.readFileSync("foo.txt", "utf8")).toBe("SOMETHING");
+        });
     });
 });

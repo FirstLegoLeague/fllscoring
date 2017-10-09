@@ -161,7 +161,8 @@ exports.writeFile = function (file, contents) {
     file = exports.resolve(file);
     var dir = path.dirname(file);
     return Q.nfcall(mkdirp, dir)
-        .then(() => Q.nfcall(fs.writeFile, file, contents));
+        .then(() => exports.callHooks("write", file, contents))
+        .then((transformed) => Q.nfcall(fs.writeFile, file, transformed));
 };
 
 exports.readJsonFile = function(file) {
