@@ -51,19 +51,11 @@ exports.readFile = function(file) {
     });
 };
 
-exports.writeFile = function(file, contents) {
+exports.writeFile = function (file, contents) {
     file = exports.resolve(file);
-
-    return Q.promise(function(resolve, reject) {
-        var dir = path.dirname(file);
-        mkdirp(dir, function(err) {
-            if (err) return reject(err);
-            fs.writeFile(file, contents, function(err) {
-                if(err) return reject(err);
-                resolve();
-            });
-        });
-    });
+    var dir = path.dirname(file);
+    return Q.nfcall(mkdirp, dir)
+        .then(() => Q.nfcall(fs.writeFile, file, contents));
 };
 
 exports.readJsonFile = function(file) {
