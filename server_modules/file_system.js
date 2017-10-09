@@ -22,7 +22,7 @@ exports.getDataFilePath = function(file) {
 };
 
 exports.resolve = function(file) {
-    return path.resolve(path.dirname(process.argv[1]), file);
+    return path.resolve(args.rootdir, file);
 };
 
 exports.readFile = function(file) {
