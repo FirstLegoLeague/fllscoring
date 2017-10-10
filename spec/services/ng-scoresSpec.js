@@ -231,6 +231,30 @@ describe('ng-scores',function() {
         });
     });
 
+    describe('isValidScore', function () {
+        it('should accept valid scores', function () {
+            expect($scores.isValidScore(0)).toBe(true);
+            expect($scores.isValidScore(-1)).toBe(true);
+            expect($scores.isValidScore(1000)).toBe(true);
+            expect($scores.isValidScore("dnc")).toBe(true); // Did Not Compete
+            expect($scores.isValidScore("dsq")).toBe(true); // DiSQualified
+        });
+
+        it('should reject invalid scores', function () {
+            expect($scores.isValidScore(undefined)).toBe(false);
+            expect($scores.isValidScore(null)).toBe(false);
+            expect($scores.isValidScore(NaN)).toBe(false);
+            expect($scores.isValidScore(Infinity)).toBe(false);
+            expect($scores.isValidScore(-Infinity)).toBe(false);
+            expect($scores.isValidScore("dnq")).toBe(false);
+            expect($scores.isValidScore("foo")).toBe(false);
+            expect($scores.isValidScore(true)).toBe(false);
+            expect($scores.isValidScore(false)).toBe(false);
+            expect($scores.isValidScore({})).toBe(false);
+            expect($scores.isValidScore([])).toBe(false);
+        });
+    });
+
     describe('scoreboard', function() {
         var board;
         beforeEach(function() {
@@ -240,6 +264,7 @@ describe('ng-scores',function() {
             $scores.beginupdate();
             $scores.clear();
             input.map(function(score) {
+                score.published = true;
                 $scores.add(score);
             });
             $scores.endupdate();
@@ -359,7 +384,7 @@ describe('ng-scores',function() {
             ]);
         });
 
-        it("should ignore but warn about scores for unknown rounds / stages", function() {
+        it("should include but warn about scores for unknown rounds / stages", function() {
             fillScores([
                 { team: team1, stage: { id: "foo" }, round: 1, score: 0 },
                 { team: team1, stage: mockStage, round: 0, score: 0 },
@@ -368,7 +393,7 @@ describe('ng-scores',function() {
             expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownStageError));
             expect($scores.scores[1].error).toEqual(jasmine.any($scores.UnknownRoundError));
             expect($scores.scores[2].error).toEqual(jasmine.any($scores.UnknownRoundError));
-            expect(board["test"].length).toEqual(0);
+            expect(board["test"].length).toEqual(1);
             expect($scores.validationErrors.length).toEqual(3);
         });
 
@@ -387,7 +412,7 @@ describe('ng-scores',function() {
             expect($scores.validationErrors.length).toEqual(5);
         });
 
-        it("should ignore but warn about duplicate score", function() {
+        it("should include but warn about duplicate score", function() {
             fillScores([
                 { team: team1, stage: mockStage, round: 1, score: 10 },
                 { team: team1, stage: mockStage, round: 1, score: 20 },
@@ -395,6 +420,8 @@ describe('ng-scores',function() {
             expect($scores.validationErrors.length).toBe(2);
             expect($scores.scores[0].error).toEqual(jasmine.any($scores.DuplicateScoreError));
             expect($scores.scores[1].error).toEqual(jasmine.any($scores.DuplicateScoreError));
+            // Last score will overwrite any previous entry
+            expect(board["test"][0].highest).toEqual(20);
         });
 
         it("should ignore but warn about invalid team", function() {
