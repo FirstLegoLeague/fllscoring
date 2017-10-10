@@ -572,6 +572,8 @@ define('services/ng-scores',[
          * @return Per-stage rankings
          */
         Scores.prototype.getRankings = function(stageFilter) {
+            var self = this;
+
             // Create a pass-all filter if necessary
             if (!stageFilter) {
                 stageFilter = {};
@@ -592,12 +594,18 @@ define('services/ng-scores',[
 
             // Create filtered scores (both user-supplied filter and errors).
             var filteredScores = this.scores.filter(function (s) {
-                if (s.error) {
+                // Only include published scores
+                if (!s.published) {
+                    return false;
+                }
+
+                // Ignore completely invalid scores
+                if (!self.isValidScore(s.score)) {
                     return false;
                 }
 
                 // Ignore score if filtered
-                if (s.round > stageFilter[s.stageId]) {
+                if (!stageFilter[s.stageId] || s.round > stageFilter[s.stageId]) {
                     return false;
                 }
 
