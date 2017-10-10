@@ -1,11 +1,20 @@
 language: node_js
 node_js:
-  - 0.10
+- "6.11.1"
 before_install:
-  - "npm i -g bower karma-cli"
+- npm i -g bower karma-cli
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 after_script:
-  - ls ./coverage
-  - 'npm install coveralls@2.10.0 && cat "./coverage/Firefox 31.0.0 (Linux)/lcov.info" | coveralls'
+- ls ./coverage
+- npm install coveralls@2.10.0 && cat "./coverage/Firefox 31.0.0 (Linux)/lcov.info"
+  | coveralls
+deploy:
+  provider: npm
+  email: dev@fll-tools.com
+  api_key:
+    secure: XiN+tPDSRs5Ekfc6MuRdIaLgKqDMato8a0Z2z5tF1V3haO7OLxE8WF4o7hRGnQ23xUHdHIUrPsAviBJ4ILyUj0wP9f6iYdF/FiI1qfWMRDG2OIr2qiB/wenCZp6qnnUkbmPBfWDKdXAIkkH4Psx7kbI7A+sarioI2mLTS0Mv8rE=
+  on:
+    tags: true
+    repo: FirstLegoLeague/fllscoring
