@@ -60,14 +60,13 @@ define('services/ng-scores',[
         }
 
         function DuplicateScoreError(score) {
-            this.score = score;
             this.team = score.team;
             this.stage = score.stage;
             this.round = score.round;
             this.name = "DuplicateScoreError";
             this.message = format(
                 "duplicate score for team '{0}' ({1}), stage {2}, round {3}",
-                this.team.name, this.score.teamNumber,
+                this.team.name, score.teamNumber,
                 this.stage.name, this.round
             );
         }
@@ -558,16 +557,15 @@ define('services/ng-scores',[
          * Resulting object is a per-stage array containing one item per team,
          * which lists the rank, team info, scores per round and highest score.
          *
-         * @param  stages Optional object stageId => nrOfRoundsOrTrue
+         * @param  stageFilter Optional object stageId => nrOfRoundsOrTrue
          * @return Per-stage rankings
          */
-        Scores.prototype.getRankings = function(stages) {
+        Scores.prototype.getRankings = function(stageFilter) {
             // Create a pass-all filter if necessary
-            var haveFilter = !!stages;
-            if (!stages) {
-                stages = {};
+            if (!stageFilter) {
+                stageFilter = {};
                 $stages.stages.forEach(function (stage) {
-                    stages[stage.id] = true;
+                    stageFilter[stage.id] = true;
                 });
             }
 
@@ -575,23 +573,20 @@ define('services/ng-scores',[
             // e.g. `true` is passed)
             // And create empty lists for each stage
             var board = {};
-            Object.keys(stages).forEach(function (stage) {
-                var s = stages[stage];
-                stages[stage] = typeof s === "number" && s || s && Infinity || 0;
+            Object.keys(stageFilter).forEach(function (stage) {
+                var s = stageFilter[stage];
+                stageFilter[stage] = typeof s === "number" && s || s && Infinity || 0;
                 board[stage] = [];
             });
 
             // Create filtered scores (both user-supplied filter and errors).
-            // Ignore scores with errors, except if it's a duplicate
-            // (i.e. keep the first score in the list, to prevent it
-            // from disappearing due to a later error).
             var filteredScores = this.scores.filter(function (s) {
-                if (s.error && !(s.error instanceof DuplicateScoreError && s.error.score === s)) {
+                if (s.error) {
                     return false;
                 }
 
                 // Ignore score if filtered
-                if (haveFilter && s.round > stages[s.stageId]) {
+                if (s.round > stageFilter[s.stageId]) {
                     return false;
                 }
 
@@ -612,7 +607,7 @@ define('services/ng-scores',[
                     }
                 }
                 if (!bteam) {
-                    var maxRounds = Math.min(s.stage.rounds, stages[s.stageId]);
+                    var maxRounds = Math.min(s.stage.rounds, stageFilter[s.stageId]);
                     var initialScores = new Array(maxRounds);
                     var initialEntries = new Array(maxRounds);
                     for (i = 0; i < maxRounds; i++) {

@@ -395,7 +395,6 @@ describe('ng-scores',function() {
             expect($scores.validationErrors.length).toBe(2);
             expect($scores.scores[0].error).toEqual(jasmine.any($scores.DuplicateScoreError));
             expect($scores.scores[1].error).toEqual(jasmine.any($scores.DuplicateScoreError));
-            expect(board["test"][0].highest).toEqual(10);
         });
 
         it("should ignore but warn about invalid team", function() {
