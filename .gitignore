@@ -14,6 +14,8 @@ sessions/
 # bower stuff, include actual files
 src/components/*/*
 
+npm-shrinkwrap.json
+
 !src/components/angular/angular*.js
 !src/components/angular/angular*.map
 !src/components/angular-sanitize/angular-sanitize*.js
