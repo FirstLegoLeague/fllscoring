@@ -618,13 +618,15 @@ define('services/ng-scores',[
                 });
             }
 
-            // Convert number of stages to take to a number (i.e. Infinity when
-            // e.g. `true` is passed)
+            // Ensure the number of rounds to use for each stage is a
+            // number, and is not higher than the configured number of
+            // rounds per stage.
             // And create empty lists for each stage
             var board = {};
             Object.keys(stageFilter).forEach(function (stage) {
                 var s = stageFilter[stage];
-                stageFilter[stage] = typeof s === "number" && s || s && Infinity || 0;
+                var maxRounds = typeof s === "number" && s || s && Infinity || 0;
+                stageFilter[stage] = Math.min(maxRounds, $stages.get(stage).rounds);
                 board[stage] = [];
             });
 
@@ -662,7 +664,7 @@ define('services/ng-scores',[
                     }
                 }
                 if (!bteam) {
-                    var maxRounds = Math.min(s.stage.rounds, stageFilter[s.stageId]);
+                    var maxRounds = stageFilter[s.stageId];
                     var initialScores = new Array(maxRounds);
                     var initialEntries = new Array(maxRounds);
                     for (i = 0; i < maxRounds; i++) {
