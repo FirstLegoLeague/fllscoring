@@ -123,7 +123,12 @@
 
 
         <div>
-            <button class="btn btn-danger" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="clear()"><i class="material-icons">clear</i> Discard</button>
+            <button class="btn btn-danger" id="discard" fll-really-message="Sure to discard this score sheet?" fll-really-click="clear()">
+                <i class="material-icons">clear</i>
+
+                <span ng-hide="editingScore"> Discard </span>
+                <span ng-show="editingScore"> Cancel Edit</span>
+            </button>
             <button class="btn btn-success save" ng-disabled="!isSaveable()" ng-show="!editingScore" ng-click="save()"><i class="material-icons">check</i> Save</button>
             <button class="btn btn-success save" ng-disabled="!isSaveable()" ng-show="editingScore" fll-really-message="Sure to edit this scoresheet?" fll-really-click="saveEdit()"><i class="material-icons">check</i> Finish Edit</button>
         </div>
