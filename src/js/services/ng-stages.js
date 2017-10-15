@@ -125,6 +125,9 @@ define('services/ng-stages',[
         Stages.prototype.moveStage = function(stage,steps) {
             var oldIndex = stage.index;
             var rawStage = this._rawStages[oldIndex];
+            Object.keys(rawStage).forEach((key)=>{
+                rawStage[key] = stage[key];
+            });
             //remove from the list
             this._rawStages.splice(oldIndex,1);
             //calculate insert position
