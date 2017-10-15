@@ -171,7 +171,7 @@ define('views/scoresheet',[
                     list.push('Some missions are incomplete');
                 }
                 if(!signed()){
-                    list.push('team has not signed');
+                    list.push('Scoresheet not signed');
                 }
 
                 return list;
