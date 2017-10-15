@@ -244,6 +244,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return true in the happy situation',function() {
@@ -332,6 +333,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return true in the happy situation',function() {
