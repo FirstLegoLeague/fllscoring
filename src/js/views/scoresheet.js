@@ -160,12 +160,18 @@ define('views/scoresheet',[
                         });
                     });
                 }
+                function signed(){
+                    return $scope.signature ? true : false;
+                }
 
                 if (errors()) {
                     list.push('Some missions have errors');
                 }
                 if (inComplete()) {
                     list.push('Some missions are incomplete');
+                }
+                if(!signed()){
+                    list.push('team has not signed');
                 }
 
                 return list;
