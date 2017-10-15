@@ -26,6 +26,8 @@ var routers = [views,
                 fileSystem,
                 require('./server_modules/sessions'),
                 require('./server_modules/teams'),
+                require('./server_modules/settings'),
+                require('./server_modules/stages'),
                 require('./server_modules/scores'),
                 require('./server_modules/challenges')];
 

@@ -8,7 +8,7 @@ define('services/ng-settings',[
 ],function(module,log) {
     "use strict";
 
-    return module.service('$settings', ["$fs", function($fs) {
+    return module.service('$settings', ["$fs","$http", function($fs,$http) {
         function Settings() {
             /**
              * Array of all settings.
@@ -55,6 +55,12 @@ define('services/ng-settings',[
                 };
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
+                var data = { settings: defaults };
+                $http.post("/settings/save", data).success(function (data, status) {
+                    log('Data posted successfully');
+                }).error(function () {
+                    log('failed retrieving settings');
+                });
                 return $fs.write('settings.json',defaults).then(function() {
                     self.settings = defaults;
                     return self.settings;
