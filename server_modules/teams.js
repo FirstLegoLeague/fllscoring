@@ -18,5 +18,12 @@ exports.route = function(app) {
             res.json(team);
         }).catch(err => utils.sendError(res, err)).done();
     });
-
+    app.post('/teams/save', function (req, res, next) {
+        var teams = JSON.stringify(req.body.teams);
+        fileSystem.writeFile(fileSystem.getDataFilePath('teams.json'), teams).then(function () {
+            res.status(200).end();
+        }).catch(function (err) {
+            utils.sendError(res, { status: 500, message: `error writing file` })
+        });
+    });
 };
