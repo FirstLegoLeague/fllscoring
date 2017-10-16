@@ -6,6 +6,7 @@ var args = require('./server_modules/args');
 var views = require('./server_modules/views');
 var auth = require('./server_modules/auth');
 var bodyParser = require('body-parser');
+var log = require('./server_modules/log');
 
 var configs = [require('./server_modules/slave_mode')];
 
@@ -19,11 +20,12 @@ var middlewareLayers = [express.static(fileSystem.resolve('src')),
                         auth.middleware,
                         require('./server_modules/cors').middleware,
                         require('./server_modules/cache').middleware,
-                        require('./server_modules/log').middleware];
+                        log.middleware];
 
 var routers = [views,
                 auth,
                 fileSystem,
+                log,
                 require('./server_modules/sessions'),
                 require('./server_modules/teams'),
                 require('./server_modules/scores'),
@@ -43,6 +45,6 @@ routers.forEach(function(router) {
 });
 
 app.listen(args.port, function() {
-    console.log('Listening on port ', args.port);
-    console.log(`open browser to http://localhost:${args.port}/`);
+    log.info(`Listening on port ${args.port}`);
+    log.info(`open browser to http://localhost:${args.port}/`);
 });
