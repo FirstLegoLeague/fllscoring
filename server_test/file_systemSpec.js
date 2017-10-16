@@ -92,10 +92,18 @@ describe("file_system", () => {
             );
         });
 
-        it("matches against relative paths", async () => {
+        it("matches against POSIX-style relative paths", async () => {
             file_system.registerHook("write", "data/foo.txt", (data) => data.toUpperCase());
             const fullPath = file_system.resolve("data/foo.txt");
+            // Note: fullPath will be '/some/path/data/foo.txt' on Linux, and
+            // e.g. 'C:\some\path\data\foo.txt' on Windows
             const result = await file_system.callHooks("write", fullPath, "something");
+            expect(result).toBe("SOMETHING");
+        });
+
+        it("supports Windows-style paths", async () => {
+            file_system.registerHook("write", "data/bar/foo.txt", (data) => data.toUpperCase());
+            const result = await file_system.callHooks("write", "data\\bar\\foo.txt", "something");
             expect(result).toBe("SOMETHING");
         });
     });

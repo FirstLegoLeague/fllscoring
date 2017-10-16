@@ -72,8 +72,8 @@ exports.callHooks = function (type, filename, data) {
         throw new Error("unknown hook type " + type);
     }
 
-    // Make filename a relative path, e.g. "data/scores.json"
-    filename = path.relative(args.rootdir, filename);
+    // Make filename a relative path with forward slashes, e.g. "data/scores.json"
+    filename = path.relative(args.rootdir, filename).replace(/\\/g, '/');
 
     // Start with source data
     const initial = Promise.resolve(data);
