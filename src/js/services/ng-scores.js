@@ -658,7 +658,7 @@ define('services/ng-scores',[
                 var i;
                 var bstage = board[s.stageId];
                 for (i = 0; i < bstage.length; i++) {
-                    if (bstage[i].team.number === s.team.number) {
+                    if (bstage[i].teamNumber === s.teamNumber) {
                         bteam = bstage[i];
                         break;
                     }
@@ -672,7 +672,7 @@ define('services/ng-scores',[
                         initialEntries[i] = null;
                     }
                     bteam = {
-                        team: s.team,
+                        teamNumber: s.teamNumber,
                         scores: initialScores,
                         rank: null,
                         highest: null,
@@ -737,7 +737,7 @@ define('services/ng-scores',[
                     // extra criterion.
                     // Note: team number's might be strings, so don't assume numeric
                     // compare is possible.
-                    result = (teamEntry1.team.number > teamEntry2.team.number) ? 1 : -1;
+                    result = (teamEntry1.teamNumber > teamEntry2.teamNumber) ? 1 : -1;
                 }
                 return result;
             }
@@ -774,6 +774,18 @@ define('services/ng-scores',[
                 stage.reduce(calculateRank,{
                     rank: 0,
                     lastScores: null
+                });
+            }
+
+            // Convert team number into team object
+            for (var stageId in board) {
+                if (!board.hasOwnProperty(stageId)) {
+                    continue;
+                }
+                var stage = board[stageId];
+                stage.forEach(function (teamEntry) {
+                    teamEntry.team = $teams.get(teamEntry.teamNumber);
+                    delete teamEntry.teamNumber;
                 });
             }
 
