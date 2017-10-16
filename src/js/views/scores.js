@@ -28,7 +28,13 @@ define('views/scores', [
             }, function () {
                 $scope.scores = enrich($scores.scores);
             }, true);
-
+            $scope.$watch(function () {
+                return $teams.teams;
+            }, function () {
+                $scope.scores.forEach(function(score){
+                    score.team = $teams.get(score.teamNumber);
+                });
+            }, true);
             $scores.init().then(function() {
                 $scope.stages = $stages.stages;
             });
