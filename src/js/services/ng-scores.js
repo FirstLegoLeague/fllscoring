@@ -621,13 +621,10 @@ define('services/ng-scores',[
             // Ensure the number of rounds to use for each stage is a
             // number, and is not higher than the configured number of
             // rounds per stage.
-            // And create empty lists for each stage
-            var board = {};
             Object.keys(stageFilter).forEach(function (stage) {
                 var s = stageFilter[stage];
                 var maxRounds = typeof s === "number" && s || s && Infinity || 0;
                 stageFilter[stage] = Math.min(maxRounds, $stages.get(stage).rounds);
-                board[stage] = [];
             });
 
             // Create filtered scores (both user-supplied filter and errors).
@@ -648,6 +645,12 @@ define('services/ng-scores',[
                 }
 
                 return true;
+            });
+
+            // Create empty lists for each requested stage
+            var board = {};
+            Object.keys(stageFilter).forEach(function (stage) {
+                board[stage] = [];
             });
 
             // Convert all valid scores to a per-stage array of objects
