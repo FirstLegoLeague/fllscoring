@@ -135,6 +135,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return empty in the happy situation',function() {
@@ -214,6 +215,11 @@ describe('scoresheet',function() {
             $scope.missions[0].objectives[0].value = null;
             expect($scope.preventSaveErrors()).toEqual(['Some missions are incomplete']);
         });
+
+        it('should return error when signature pad is undefined', function () {
+            $scope.signature = undefined;
+            expect($scope.preventSaveErrors()).toEqual(['Scoresheet not signed']);
+        });
     });
 
     describe('teamRoundOk',function() {
@@ -238,6 +244,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return true in the happy situation',function() {
@@ -326,6 +333,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return true in the happy situation',function() {
