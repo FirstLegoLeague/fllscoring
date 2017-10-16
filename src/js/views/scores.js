@@ -28,13 +28,32 @@ define('views/scores', [
             }, function () {
                 $scope.scores = enrich($scores.scores);
             }, true);
+            
             $scope.$watch(function () {
-                return $teams.teams;
-            }, function () {
-                $scope.scores.forEach(function(score){
-                    score.team = $teams.get(score.teamNumber);
-                });
+                return $teams._teamsMap;
+            }, function (newValue, oldValue) {
+                if (newValue !== oldValue && indexIsTeamNum(newValue)) {
+                    $scope.scores.forEach(function (score) {
+                        score.team = $teams.get(score.teamNumber);
+                        if (score.team) {
+                            score.error = null;
+                        }
+                    });
+                    $scores.validationErrors = $validation.validate($scores.scores);
+                    $scores._update();
+                }
             }, true);
+
+            function indexIsTeamNum(teamMap) {
+                var indexNumMatch = true;
+                Object.keys(teamMap).forEach((key) => {
+                    if (teamMap[key].hasOwnProperty('number')) {
+                        indexNumMatch = teamMap[key].number == key;
+                    }
+                });
+                return indexNumMatch;
+            }
+
             $scores.init().then(function() {
                 $scope.stages = $stages.stages;
             });
