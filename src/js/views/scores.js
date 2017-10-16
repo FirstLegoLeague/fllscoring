@@ -45,13 +45,9 @@ define('views/scores', [
             }, true);
 
             function indexIsTeamNum(teamMap) {
-                var indexNumMatch = true;
-                Object.keys(teamMap).forEach((key) => {
-                    if (teamMap[key].hasOwnProperty('number')) {
-                        indexNumMatch = teamMap[key].number == key;
-                    }
-                });
-                return indexNumMatch;
+                return Object.keys(teamMap).find((key)=>{
+                    return teamMap[key] == key;
+                }) === undefined;
             }
 
             $scores.init().then(function() {
