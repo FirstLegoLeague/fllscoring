@@ -202,15 +202,6 @@ describe('teams', function() {
             });
         });
 
-        describe('watching teams change',function() {
-            it('should save if teams change',function() {
-                $scope.saveTeams = jasmine.createSpy('saveTeams');
-                $scope.teams[0].name = 'newName';
-                $scope.$digest();
-                expect($scope.saveTeams).toHaveBeenCalled();
-            });
-        });
-
         describe('toggleExtended',function() {
             it('should not toggle when in edit mode',function() {
                 $scope.editMode = true;
