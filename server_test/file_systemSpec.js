@@ -84,6 +84,32 @@ describe("file_system", () => {
             expect(result).toBe("SOMETHINGSOMETHING");
         });
 
+        it("handles synchronous errors in a hook", async () => {
+            let called = false;
+            file_system.registerHook("write", "foo.txt", (data) => { throw new Error("boom"); });
+            file_system.registerHook("write", "foo.txt", (data) => called = true);
+            await file_system.callHooks("write", "foo.txt", "something").then(
+                () => fail("should throw"),
+                (e) => {
+                    expect(e instanceof Error).toBe(true);
+                    expect(called).toBe(false);
+                }
+            );
+        });
+
+        it("handles asynchronous errors in a hook", async () => {
+            let called = false;
+            file_system.registerHook("write", "foo.txt", (data) => Promise.reject(new Error("boom")));
+            file_system.registerHook("write", "foo.txt", (data) => called = true);
+            await file_system.callHooks("write", "foo.txt", "something").then(
+                () => fail("should throw"),
+                (e) => {
+                    expect(e instanceof Error).toBe(true);
+                    expect(called).toBe(false);
+                }
+            );
+        });
+
         it("throws when returning nothing from hook", async () => {
             file_system.registerHook("write", "foo.txt", (data) => { /* no op */ });
             await file_system.callHooks("write", "foo.txt", "something").then(
