@@ -18,7 +18,7 @@ define('services/ng-scores',[
 
     // Current file version for scores.
     // Increment when adding/removing 'features' to stored scores.
-    var SCORES_VERSION = 2;
+    var SCORES_VERSION = 3;
 
     return module.service('$scores',
         ['$rootScope', '$fs', '$stages', '$message', '$teams','$independence', '$rankings', '$validation', '$score', '$settings',
