@@ -57,14 +57,13 @@ define('services/ng-settings',[
                 log('settings read error, trying to create file', err);
                 var data = { settings: defaults };
                 $http.post("/settings/save", data).success(function (data, status) {
+                    self.settings = data.settings;
                     log('Data posted successfully');
                 }).error(function () {
                     log('failed retrieving settings');
                 });
-                return $fs.write('settings.json',defaults).then(function() {
-                    self.settings = defaults;
-                    return self.settings;
-                });
+                return self.settings;
+
             }).catch(function(err) {
                 //return ephemeral settings
                 log('unable to create settings file, giving up', err);
@@ -72,6 +71,8 @@ define('services/ng-settings',[
                 return self.settings;
             });
         };
+
+        
 
         Settings.prototype.save = function() {
             return $fs.write('settings.json',this.settings);
