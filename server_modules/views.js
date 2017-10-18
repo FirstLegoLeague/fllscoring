@@ -5,6 +5,7 @@ exports.route = function(app) {
 
     app.get('/',function(req,res) {
         res.sendFile(fileSystem.resolve('index.html'));
+        next();
     });
 
     app.get('/views/pages/:view', authorize((user, req) => {

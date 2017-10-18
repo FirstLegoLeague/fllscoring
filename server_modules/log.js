@@ -16,18 +16,23 @@ exports.log = function(level, message) {
     }
 });
 
-exports.middleware = function(req, res, next) {
+exports.beforeLayer = function(req, res, next) {
     req.log = exports.log;
     req.log.debug(`Starting ${req.method} ${req.originalUrl}`);
     next();
 };
 
+exports.afterLayer = function(req, res, next) {
+    req.log.debug(`Complete error status ${res.statusCode}`);
+    next();
+};
 
 exports.route = function(app) {
 
-    app.post('/log/:level', function(req, res) {
+    app.post('/log/:level', function(req, res, next) {
         exports.log(req.params.level, req.body.message);
         res.sendStatus(200);
+        next();
     });
 
 };

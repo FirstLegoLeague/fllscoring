@@ -5,6 +5,7 @@ if(users) {
     var passport = require('passport');
     var Strategy = require('passport-local').Strategy;
 
+    var utils = require('./utils');
     var fileSystem = require('./file_system');
 
     passport.use(new Strategy(function(username, password, done) {
@@ -43,13 +44,15 @@ if(users) {
             next();
         } else {
             res.redirect('/login');
+            next();
         }
     };
 
     exports.route = function(app) {
 
-        app.get('/login', function(req,res) {
+        app.get('/login', function(req,res,next) {
             res.sendFile(fileSystem.resolve('login.html'));
+            next();
         });
 
         app.post('/login', passport.authenticate('local', {
@@ -91,16 +94,15 @@ if(users) {
                 next();
             } else {
                 res.sendError({ status: 403, message: 'Not Authorized' });
+                next();
             }
         }
     }
 } else {
-    let doNothing = (req, res, next) => next();
-
-    exports.middleware = doNothing;
-    exports.initialize = () => doNothing;
-    exports.session = () => doNothing;
-    exports.authorize = () => doNothing;
+    exports.middleware = utils.doNothing;
+    exports.initialize = () => utils.doNothing;
+    exports.session = () => utils.doNothing;
+    exports.authorize = () => utils.doNothing;
 
     exports.route = () => {};
 }
