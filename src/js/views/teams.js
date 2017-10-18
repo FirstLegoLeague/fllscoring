@@ -137,12 +137,7 @@ define('views/teams',[
                 newTeams.forEach(function(team) {
                     $teams.add(team);
                 });
-                var data = { teams: $teams._rawTeams };
-                $http.post("/teams/save", data).success(function (data, status) {
-                    log('Data posted successfully');
-                }).error(function () {
-                    log('failed retrieving teams');
-                });
+
                 return $teams.save().finally(function() {
                     $scope.saving = false;
                     $scope.needSave = false;

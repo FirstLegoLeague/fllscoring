@@ -35,8 +35,8 @@ define('services/ng-settings',[
         Settings.prototype.load = function() {
             var self = this;
             // this.clear();
-            return $fs.read('settings.json').then(function(res) {
-                self.settings = res;
+            return $http.get('/settings').then(function(res) {
+                self.settings = res.data;
                 return self.settings;
             }).catch(function(err) {
                 var defaults = {
@@ -56,14 +56,11 @@ define('services/ng-settings',[
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
                 var data = { settings: defaults };
-                $http.post("/settings/save", data).success(function (data, status) {
-                    self.settings = data.settings;
+                return $http.post("/settings/save", data).success(function (data, status) {
                     log('Data posted successfully');
                 }).error(function () {
                     log('failed retrieving settings');
                 });
-                return self.settings;
-
             }).catch(function(err) {
                 //return ephemeral settings
                 log('unable to create settings file, giving up', err);
@@ -72,10 +69,8 @@ define('services/ng-settings',[
             });
         };
 
-        
-
         Settings.prototype.save = function() {
-            return $fs.write('settings.json',this.settings);
+            return $http.post('/settings/save',{settings: this.settings});
         };
 
         return new Settings();
