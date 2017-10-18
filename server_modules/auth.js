@@ -6,7 +6,6 @@ if(users) {
     var Strategy = require('passport-local').Strategy;
 
     var fileSystem = require('./file_system');
-    var utils = require('./utils');
 
     passport.use(new Strategy(function(username, password, done) {
         process.nextTick(function() {
@@ -91,7 +90,7 @@ if(users) {
             if(condition(user, req, res)) {
                 next();
             } else {
-                utils.sendError(res, { status: 403, message: 'Not Authorized' });
+                res.sendError({ status: 403, message: 'Not Authorized' });
             }
         }
     }

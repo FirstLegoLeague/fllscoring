@@ -1,5 +1,4 @@
 var lockfile = require('lockfile');
-var utils = require('./utils');
 var fileSystem = require('./file_system');
 var authorize = require('./auth').authorize;
 var Q = require('q');
@@ -66,7 +65,7 @@ exports.route = function(app) {
                 return rounds;
             },{});
             res.json(published);
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(err => res.sendError(err)).done();
     });
 
     //get scores by round
@@ -78,7 +77,7 @@ exports.route = function(app) {
                 return score.published && score.round === round;
             });
             res.json(scoresForRound);
-        }).catch(err => utils.sendError(res, err)).done();
+        }).catch(err => res.sendError(err)).done();
     });
 
     //save a new score
@@ -93,7 +92,7 @@ exports.route = function(app) {
         }))
         .then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+        }).catch(err => res.sendError(err));
 
     });
 
@@ -108,7 +107,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+        }).catch(err => res.sendError(err));
     });
 
     //edit a score at an id
@@ -123,7 +122,7 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+        }).catch(err => res.sendError(err));
     });
 
 
