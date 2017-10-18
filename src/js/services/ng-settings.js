@@ -3,12 +3,11 @@
  */
 define('services/ng-settings',[
     'services/ng-services',
-    'services/log',
-    'services/ng-fs'
+    'services/log'
 ],function(module,log) {
     "use strict";
 
-    return module.service('$settings', ["$fs","$http", function($fs,$http) {
+    return module.service('$settings', ["$http", function($http) {
         function Settings() {
             /**
              * Array of all settings.

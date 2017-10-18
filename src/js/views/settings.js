@@ -46,12 +46,6 @@ define('views/settings',[
             };
 
             $scope.save = function() {
-                var data = { settings: $settings.settings };
-                $http.post("/settings/save", data).success(function (data, status) {
-                    log('Data posted successfully');
-                }).error(function () {
-                    log('failed retrieving settings');
-                });
                 return $q.all($settings.save(), saveStages());
             };
 
@@ -62,12 +56,7 @@ define('views/settings',[
                 stages.forEach(function(stage) {
                     return $stages.add(stage);
                 });
-                var data = { stages: $stages._rawStages };
-                $http.post("/stages/save", data).success(function (data, status) {
-                    log('Data posted successfully');
-                }).error(function () {
-                    log('failed retrieving settings');
-                });
+                
                 return $stages.save();
             };
 

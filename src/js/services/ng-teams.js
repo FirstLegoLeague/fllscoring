@@ -3,12 +3,11 @@
  */
 define('services/ng-teams',[
     'services/ng-services',
-    'services/log',
-    'services/ng-fs'
+    'services/log'
 ],function(module,log) {
     "use strict";
 
-    return module.service('$teams', ["$fs","$http", function($fs,$http) {
+    return module.service('$teams', ["$http", function($http) {
         function Teams() {
             /**
              * Array of all teams.

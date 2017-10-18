@@ -1,6 +1,7 @@
 var utils = require('./utils');
 var fileSystem = require('./file_system');
 var log = require('./log').log;
+var authorize = require('./auth').authorize;
 
 exports.route = function (app, filename) {
 
@@ -10,7 +11,7 @@ exports.route = function (app, filename) {
         }).catch(err => utils.sendError(res, err)).done();
     });
 
-    app.post(`/${filename}/save`, function (req, res, next) {
+    app.post(`/${filename}/save`,authorize.any, function (req, res, next) {
 
         var data = JSON.stringify(req.body[`${filename}`]);
         fileSystem.writeFile(fileSystem.getDataFilePath(`${filename}.json`), data).then(function () {
