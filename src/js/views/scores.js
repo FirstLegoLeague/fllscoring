@@ -35,11 +35,7 @@ define('views/scores', [
                 if (newValue !== oldValue && indexIsTeamNum(newValue)) {
                     $scope.scores.forEach(function (score) {
                         score.team = $teams.get(score.teamNumber);
-                        if (score.team) {
-                            score.error = null;
-                        }
                     });
-                    $scores.validationErrors = $validation.validate($scores.scores);
                     $scores._update();
                 }
             }, true);
