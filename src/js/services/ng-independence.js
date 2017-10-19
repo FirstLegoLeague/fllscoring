@@ -15,30 +15,35 @@ define('services/ng-independence',[
             $localStorage[`action_${token}_${Date.now()}`] = JSON.stringify({ url: url, data: data, index: Object.keys($localStorage).length});
         }
 
-        IndependentActionStroage.prototype.act = function(token, url, data, fallback) {
+        IndependentActionStroage.prototype.act = function (token, url, data, fallback) {
             var self = this;
-            self.sendSavedActionsToServer(token);
-            const promise = $http.post(url, data);
-            promise.catch(function () {
-                queueAction(token, url, data);
-                if (fallback) fallback();
-            });
+            queueAction(token, url, data);
+            var promise = self.sendSavedActionsToServer();
+            promise.catch(fallback);
             return promise;
         };
 
-        IndependentActionStroage.prototype.sendSavedActionsToServer = function (token) {
+        IndependentActionStroage.prototype.sendSavedActionsToServer = function () {
             var self = this;
-            var promises = [];
-            angular.forEach($localStorage, function (actionString, key) {
-                if (key.startsWith(`action_${token}`)) {
-                    let action = JSON.parse(actionString);
-                    const promise = $http.post(action.url, action.data);
-                    promise.then(() => delete $localStorage[key]);
-                    promises.push(promise);
+            var queue = angular.copy($localStorage);
+            angular.forEach(queue, (value, key) => {
+                if(key.startsWith("action")){
+                    queue[key] = JSON.parse(value);
+                    queue[key].originalKey = key;
+                } else {
+                    delete queue[key];
                 }
             });
-            return $q.all(promises);
+            queue = Object.values(queue);
+            queue.sort((p, f) => p.index - f.index);
+            return queue.reduce((promise, action) => promise.then(() => actionToPromise(action)), $q.when()) //And people said learning haskell is a waste of time. BEHOLD THE GLORY OF ~A NEW SUN~ FUNCTIONAL PROGRAMMING
         };
+
+        function actionToPromise(action) {
+            const promise = $http.post(action.url, action.data);
+            promise.then(() => delete $localStorage[action.originalKey]);
+            return promise;
+        }
 
         IndependentActionStroage.prototype.pendingActions = function(key) {
             return Object.keys($localStorage).filter((k) => k.startsWith(`action_${key}`)).length
