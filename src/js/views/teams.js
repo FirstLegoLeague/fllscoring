@@ -92,6 +92,7 @@ define('views/teams',[
                                 name: team.name
                             });
                         });
+                        $scope.status = '';
                     }
                 });
             };
@@ -111,6 +112,7 @@ define('views/teams',[
                 }
                 $teams.add($scope.newTeam);
                 $scope.newTeam = {};
+                $scope.status = '';
                 return $scope.saveTeams();
             };
 

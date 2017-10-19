@@ -488,8 +488,10 @@ describe('scoresheet',function() {
                         published: false,
                         calcFilename: fileName
                     });
-                expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.');
-                done();
+                setTimeout(() => {
+                    expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.')
+                    done();
+                }, 0);
             });
         });
 
@@ -525,10 +527,11 @@ describe('scoresheet',function() {
                         calcFilename: fileName,
                         published: true
                     });
-
-                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
-                         ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
-                done();
+                setTimeout(() => {
+                    expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
+                        ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
+                    done();
+                }, 0);
             });
         });
 
