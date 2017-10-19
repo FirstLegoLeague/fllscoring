@@ -30,16 +30,11 @@ define('services/ng-independence',[
             }
             self._sendingActions = true;
             var queue = angular.copy($localStorage);
-            angular.forEach(queue, (value, key) => {
-                if(key.startsWith("action")){
-                    queue[key] = JSON.parse(value);
-                    queue[key].originalKey = key;
-                } else {
-                    delete queue[key];
-                }
-            });
-            queue = Object.values(queue);
-            queue.sort((p, f) => p.index - f.index);
+            queue = Object.keys(queue).filter(k => k.startsWith("action")).map(k => {
+                var a = JSON.parse(queue[k]);
+                a.originalKey = k;
+                return a;
+            }).sort((p, f) => p.index - f.index);
             var promise = queue.reduce((promise, action) => promise.then(() => actionToPromise(action)), $q.when());
             promise.then(() => self._sendingActions = false, () => self._sendingActions = false);
             return promise;
