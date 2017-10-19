@@ -25,10 +25,10 @@ define('services/ng-independence',[
 
         IndependentActionStroage.prototype.sendSavedActionsToServer = function () {
             var self = this;
-            if(self.__sendingActions){
+            if(self._sendingActions){
                 throw new Error("Already sending actions to server");
             }
-            self.__sendingActions = true;
+            self._sendingActions = true;
             var queue = angular.copy($localStorage);
             angular.forEach(queue, (value, key) => {
                 if(key.startsWith("action")){
@@ -40,8 +40,8 @@ define('services/ng-independence',[
             });
             queue = Object.values(queue);
             queue.sort((p, f) => p.index - f.index);
-            var promise = queue.reduce((promise, action) => promise.then(() => actionToPromise(action)), $q.when()) //And people said learning haskell is a waste of time. BEHOLD THE GLORY OF ~A NEW SUN~ FUNCTIONAL PROGRAMMING
-            promise.then(() => self.__sendingActions = false, () => self.__sendingActions = false);
+            var promise = queue.reduce((promise, action) => promise.then(() => actionToPromise(action)), $q.when());
+            promise.then(() => self._sendingActions = false, () => self._sendingActions = false);
             return promise;
         };
 

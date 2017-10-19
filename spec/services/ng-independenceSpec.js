@@ -88,7 +88,7 @@ describe('ng-independence',function() {
         });
 
         it('can run only one instance at once', function() {
-            $independence.__sendingActions = positiveNonTrueValue;
+            $independence._sendingActions = positiveNonTrueValue;
             expect($independence.sendSavedActionsToServer).toThrowError();
         });
 
