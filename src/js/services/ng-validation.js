@@ -9,8 +9,8 @@ define('services/ng-validation',[
     "use strict";
 
     return module.service('$validation',
-        ['$stages','$teams',
-        function($stages, $teams) {
+        ['$stages','$teams','$log',
+        function($stages, $teams, $log) {
 
             const VALIDATORS = [{
                 validate: (score) => $stages.get(score.stageId),
@@ -81,6 +81,7 @@ define('services/ng-validation',[
                             }
                         }
                     });
+                    $log.debug(`validation check found ${errors.length} errors.`);
                     return errors;
                 }
             };

@@ -9,8 +9,8 @@ define('services/ng-message',[
     "use strict";
 
     return module.service('$message',[
-        '$http','$settings','$session','$q',
-        function($http,$settings,$session,$q) {
+        '$http','$log','$settings','$session','$q',
+        function($http,$log,$settings,$session,$q) {
             var isInitializedPromise;
             var listeners = [];
             var token = parseInt(Math.floor(0x100000*(Math.random())), 16);
@@ -79,6 +79,7 @@ define('services/ng-message',[
                 send: function(topic,data) {
                     return init().then(function(ws) {
                         data = data || {};
+                        $log.debug(`Sending message ${topic}`);
                         ws.send(JSON.stringify({
                             type: "publish",
                             node: ws.node,

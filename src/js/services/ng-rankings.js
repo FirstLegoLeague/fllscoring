@@ -11,8 +11,8 @@ define('services/ng-rankings',[
     "use strict";
 
     return module.service('$rankings',
-        ['$stages','$teams','$score','$groups',
-        function($stages, $teams, $score, $groups) {
+        ['$stages','$teams','$score','$groups','$log',
+        function($stages, $teams, $score, $groups, $log) {
 
             function Rank(rank, team, stage, filter) {
                 this.team = team;
@@ -77,6 +77,7 @@ define('services/ng-rankings',[
                             });
 
                         });
+                        $log.debug(`rankings calculated ${stags.length} stages and ${teams.length} teams`);
                         return stageRanks;
                     });
                 }
