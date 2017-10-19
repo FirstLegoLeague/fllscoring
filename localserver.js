@@ -7,6 +7,7 @@ var views = require('./server_modules/views');
 var auth = require('./server_modules/auth');
 var bodyParser = require('body-parser');
 var log = require('./server_modules/log');
+var closeRequest = () => {}; // A middleware that doesn't call the next() function.
 
 var configs = [require('./server_modules/slave_mode')];
 
@@ -32,7 +33,7 @@ var routers = [views,
                 require('./server_modules/scores'),
                 require('./server_modules/challenges')];
 
-var afterLayers = [log.afterLayer];
+var afterLayers = [log.afterLayer, closeRequest];
 
 configs.forEach(config => config.configure(app));
 beforeLayers.forEach(layer => app.use(layer));
@@ -40,6 +41,6 @@ routers.forEach(router => router.route(app));
 afterLayers.forEach(layer => app.use(layer));
 
 app.listen(args.port, function() {
-    log.info(`Listening on port ${args.port}`);
-    log.info(`open browser to http://localhost:${args.port}/`);
+    log.log.info(`Listening on port ${args.port}`);
+    log.log.info(`open browser to http://localhost:${args.port}/`);
 });

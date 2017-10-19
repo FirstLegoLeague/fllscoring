@@ -5,7 +5,6 @@ if(users) {
     var passport = require('passport');
     var Strategy = require('passport-local').Strategy;
 
-    var utils = require('./utils');
     var fileSystem = require('./file_system');
 
     passport.use(new Strategy(function(username, password, done) {
@@ -99,6 +98,8 @@ if(users) {
         }
     }
 } else {
+    var utils = require('./utils');
+
     exports.middleware = utils.doNothing;
     exports.initialize = () => utils.doNothing;
     exports.session = () => utils.doNothing;
