@@ -2,7 +2,7 @@ var log = require('./log').log;
 
 exports.root = __dirname + '/../';
 
-export.doNothing = (req, res, next) => next();
+exports.doNothing = (req, res, next) => next();
 
 exports.middleware = function(res, res, next) {
     res.sendError = function(err) {
