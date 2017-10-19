@@ -49,6 +49,12 @@ define('views/settings',[
                 return $q.all($settings.save(), saveStages());
             };
 
+            $scope.$watch(function() {
+                return $stages.stages;
+            }, function() {
+                $scope.currentStage = $stages.stages[1];
+                $settings.currentStage = $scope.currentStage;
+            }, true);
             function saveStages() {
                 //update all stages
                 var stages = angular.copy($scope.allStages);
@@ -81,6 +87,7 @@ define('views/settings',[
             };
 
             $scope.allStages = $stages.allStages;
+            
         }
     ]);
 });

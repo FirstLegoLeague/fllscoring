@@ -296,9 +296,28 @@ define('views/scoresheet',[
                 $handshake.$emit('chooseTeam',teams).then(function(result) {
                     if (result) {
                         $scope.scoreEntry.team = result.team;
+                        $scope.fillStageRound(result.team);
                     }
                 });
             };
+
+
+            $scope.fillStageRound = function(team){
+                var completed = [];
+                $scores.scores.forEach(function (score) {
+                    if (score.teamNumber === team.number && score.stageId === $settings.currentStage.id) {
+                        completed.push(score.round);
+                    }
+                });
+                var firstNotCompleted = $settings.currentStage.$rounds.find((round)=>{
+                    return completed.indexOf(round) === -1;
+                });
+
+                if($settings.currentStage.$rounds.indexOf(firstNotCompleted) > 0){
+                    $scope.scoreEntry.stage = $settings.currentStage;
+                    $scope.scoreEntry.round = firstNotCompleted;
+                }
+            }
 
             $scope.openRoundModal = function (stages) {
                 $handshake.$emit('chooseRound',stages).then(function(result) {
