@@ -1,8 +1,8 @@
-define('services/ng-session',[
+define('services/ng-log',[
     'services/ng-services',
 ], function(module) {
 
-    return module.service('$session', [
+    return module.service('$log', [
         '$http',
         function($http) {
 
