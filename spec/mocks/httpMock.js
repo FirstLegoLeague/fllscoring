@@ -1,5 +1,16 @@
 var createHttpMock = function(responses) {
-    var mock = {};
+    var addedResponses = [];
+    var mock = {
+        addResponse: function (method, url, data) {
+            responses[method][url] = data;
+            addedResponses.push({method: method, url: url})
+        },
+
+        resetResponses: function () {
+            addedResponses.forEach(v => delete responses[v.method][v.url])
+            addedResponses = [];
+        }
+    };
 
     if(!responses) {
         responses = {};
