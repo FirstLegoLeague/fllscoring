@@ -61,13 +61,12 @@ describe('ng-independence',function() {
         it('clears localStorage on a successful requests', function (done) {
             $independence.act(token, failureUrl, data, fallback).catch(function () {
                 expect(Object.keys(localstorageMock).length).toBe(1);
-            });
-
-            httpMock.addResponse("post", failureUrl, {});
-            $independence.act(token, successUrl, data, fallback).then(function () {
-                expect(Object.keys(localstorageMock).length).toBe(0);
-                httpMock.resetResponses();
-                done();
+                httpMock.addResponse("post", failureUrl, {});
+                $independence.act(token, successUrl, data, fallback).then(function () {
+                    expect(Object.keys(localstorageMock).length).toBe(0);
+                    httpMock.resetResponses();
+                    done();
+                });
             });
         });
 
@@ -89,26 +88,13 @@ describe('ng-independence',function() {
         });
 
         it('can run only one instance at once', function() {
-            $independence._sendingSavedActionsToServer = positiveNonTrueValue;
-            $independence.sendSavedActionsToServer(key);
-            expect($independence._sendingSavedActionsToServer).toBe(positiveNonTrueValue);
+            $independence.__sendingActions = positiveNonTrueValue;
+            expect($independence.sendSavedActionsToServer).toThrowError();
         });
 
-        it('finishes instantly if there are no matching keys', function() {
-            $independence.sendSavedActionsToServer(key);
-            expect($independence._sendingSavedActionsToServer).toBe(false);
-        });
-
-        it('calls act once for each key', function() {
-            $independence.act(key,'/failure',{},() => {}).then(function() {
-                $independence.sendSavedActionsToServer(key);
-                expect($independence.act).toHaveBeenCalled();
-            });
-        });
-
-        it('doesn\'t act if there are no keys', function() {
-            $independence.sendSavedActionsToServer(key);
-            expect($independence.act).not.toHaveBeenCalled();
+        it('doesn\'t send a request if there are no actions', function() {
+            $independence.sendSavedActionsToServer();
+            expect(httpMock.post).not.toHaveBeenCalled();
         });
 
     });
