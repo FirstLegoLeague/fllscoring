@@ -4,12 +4,13 @@
 define('services/ng-validation',[
     'services/ng-services',
     'services/ng-stages',
-    'services/ng-teams'
+    'services/ng-teams',
+    'services/ng-serverlog'
 ],function(module) {
     "use strict";
 
     return module.service('$validation',
-        ['$stages','$teams','$log',
+        ['$stages','$teams','$serverlog',
         function($stages, $teams, $log) {
 
             const VALIDATORS = [{

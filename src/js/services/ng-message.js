@@ -4,12 +4,13 @@
 define('services/ng-message',[
     'services/ng-services',
     'services/log',
-    'services/ng-settings'
+    'services/ng-settings',
+    'services/ng-serverlog'
 ],function(module,log) {
     "use strict";
 
     return module.service('$message',[
-        '$http','$log','$settings','$session','$q',
+        '$http','$serverlog','$settings','$session','$q',
         function($http,$log,$settings,$session,$q) {
             var isInitializedPromise;
             var listeners = [];
