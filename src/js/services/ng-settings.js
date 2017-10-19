@@ -18,6 +18,7 @@ define('services/ng-settings',[
              */
             this.settings = {};
             this.init();
+            this.currentStage;
         }
 
 
@@ -66,6 +67,8 @@ define('services/ng-settings',[
                 return self.settings;
             });
         };
+
+        
 
         Settings.prototype.save = function() {
             return $fs.write('settings.json',this.settings);
