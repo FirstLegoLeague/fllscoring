@@ -13,6 +13,7 @@ describe('ng-validation',function() {
     { number: 32 }
     ]);
     var stagesMock = createStagesMock();
+    var serverlogMock = createServerlogMock();
 
     var unknownStageId = 'super practice';
     var unkownRound = 10;
@@ -26,6 +27,7 @@ describe('ng-validation',function() {
         angular.mock.module(function($provide) {
             $provide.value('$teams', teamsMock);
             $provide.value('$stages', stagesMock);
+            $provide.value('$serverlog', serverlogMock);
         });
         angular.mock.inject(["$validation","$score", function(_$validation_, _$score_) {
             $validation = _$validation_;
