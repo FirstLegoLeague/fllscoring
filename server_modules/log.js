@@ -1,7 +1,13 @@
 var fs = require('fs');
 var path = require('path');
+var rotate = require('rotating-file-stream');
 
 const LOG_PATH = path.resolve(__dirname, '..', 'log', 'log.log');
+
+var stream = rotate(LOG_PATH, {
+    size:     '10M',
+    interval: '1d'
+});
 
 exports.log = function(level, message) {
     let line = `${level.toUpperCase()} - ${Date.now().toLocaleString()}: ${message}`;
