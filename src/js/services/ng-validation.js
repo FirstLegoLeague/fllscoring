@@ -9,7 +9,7 @@ define('services/ng-validation',[
     "use strict";
 
     return module.service('$validation',
-        ['$stages','$teams'
+        ['$stages','$teams',
         function($stages, $teams) {
 
             const VALIDATORS = [{
