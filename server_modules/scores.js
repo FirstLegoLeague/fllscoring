@@ -104,7 +104,7 @@ exports.route = function(app) {
         }).catch(err => {
             res.sendError(err);
             next();
-        });
+        }));
 
     });
 
