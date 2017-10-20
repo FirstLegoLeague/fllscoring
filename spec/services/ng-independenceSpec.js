@@ -37,7 +37,6 @@ describe('ng-independence',function() {
 
         beforeEach(function() {
             $independence.sendSavedActionsToServer = jasmine.createSpy('sendSavedActionsToServer').and.callFake($independence.sendSavedActionsToServer);
-            token = 'test';
             successUrl = '/success';
             failureUrl = '/failure';
             data = {};
@@ -46,7 +45,7 @@ describe('ng-independence',function() {
 
 
         it('doesn\'t call fallback if the action was successful', function() {
-            $independence.act(token, successUrl, data, fallback);
+            $independence.act(successUrl, data, fallback);
             expect(fallback).not.toHaveBeenCalled();
         });
 
@@ -55,14 +54,14 @@ describe('ng-independence',function() {
                 expect(Object.keys(localstorageMock).length).toBe(1);
                 done();
             };
-            $independence.act(token, failureUrl, data, fallback).catch(checkFunction);
+            $independence.act(failureUrl, data, fallback).catch(checkFunction);
         });
 
         it('clears localStorage on a successful requests', function (done) {
-            $independence.act(token, failureUrl, data, fallback).catch(function () {
+            $independence.act(failureUrl, data, fallback).catch(function () {
                 expect(Object.keys(localstorageMock).length).toBe(1);
                 httpMock.addResponse("post", failureUrl, {});
-                $independence.act(token, successUrl, data, fallback).then(function () {
+                $independence.act(successUrl, data, fallback).then(function () {
                     expect(Object.keys(localstorageMock).length).toBe(0);
                     httpMock.resetResponses();
                     done();
@@ -71,7 +70,7 @@ describe('ng-independence',function() {
         });
 
         it('calls fallback if the action failed', function(done) {
-            $independence.act(token, failureUrl, data, fallback).catch(function() {
+            $independence.act(failureUrl, data, fallback).catch(function() {
                 expect(fallback).toHaveBeenCalled();
                 done()
             });
@@ -100,30 +99,22 @@ describe('ng-independence',function() {
     });
 
     describe('pendingActions', function() {
-        var key = 'test';
-        var anotherKey = 'anotherTest';
         beforeEach(function () {
            localstorageMock = {};
         });
 
         it('returns 0 if there are not pending actions', function(done) {
-            expect($independence.pendingActions(key)).toBe(0);
+            expect($independence.pendingActions()).toBe(0);
             done()
         });
 
         it('returns 1 if there is one pending action', function(done) {
-            $independence.act(key,'/failure',{},() => {}).catch(function() {
-                expect($independence.pendingActions(key)).toBe(1);
+            $independence.act('/failure',{},() => {}).catch(function() {
+                expect($independence.pendingActions()).toBe(1);
                 done()
             });
         });
 
-        it('returns 0 if there is one pending action with another key', function(done) {
-            $independence.act(anotherKey,'/failure',{},() => {}).catch(function() {
-                expect($independence.pendingActions(key)).toBe(0);
-                done()
-            });
-        });
     });
 
 });

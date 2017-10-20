@@ -11,13 +11,13 @@ define('services/ng-independence',[
     function($q,$localStorage,$http) {
         function IndependentActionStroage() {}
 
-        function queueAction(token, url, data) {
-            $localStorage[`action_${token}_${Date.now()}`] = JSON.stringify({ url: url, data: data, index: Object.keys($localStorage).length});
+        function queueAction(url, data) {
+            $localStorage[`action_${Date.now()}`] = JSON.stringify({ url: url, data: data, index: Object.keys($localStorage).length});
         }
 
-        IndependentActionStroage.prototype.act = function (token, url, data, fallback) {
+        IndependentActionStroage.prototype.act = function (url, data, fallback) {
             var self = this;
-            queueAction(token, url, data);
+            queueAction(url, data);
             var promise = self.sendSavedActionsToServer();
             promise.catch(fallback);
             return promise;
@@ -45,8 +45,8 @@ define('services/ng-independence',[
             return promise;
         }
 
-        IndependentActionStroage.prototype.pendingActions = function(key) {
-            return Object.keys($localStorage).filter((k) => k.startsWith(`action_${key}`)).length
+        IndependentActionStroage.prototype.pendingActions = function() {
+            return Object.keys($localStorage).filter((k) => k.startsWith(`action`)).length
         };
 
         return new IndependentActionStroage();
