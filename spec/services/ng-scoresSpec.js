@@ -218,7 +218,7 @@ describe('ng-scores',function() {
 
         it('adds a score to scores upon failure', function() {
             var inititalLength = $scores.scores.length;
-            independenceMock.act = jasmine.createSpy('independenceAct').and.callFake(function(key, url, data, fallback) {
+            independenceMock.act = jasmine.createSpy('independenceAct').and.callFake(function(url, data, fallback) {
                 fallback();
                 return new Promise(function(res, rej) {
                     res();
@@ -238,7 +238,7 @@ describe('ng-scores',function() {
 
         it('removes a score from scores upon failure', function() {
             var inititalLength = $scores.scores.length;
-            independenceMock.act = jasmine.createSpy('independenceAct').and.callFake(function(key, url, data, fallback) {
+            independenceMock.act = jasmine.createSpy('independenceAct').and.callFake(function(url, data, fallback) {
                 fallback();
                 return new Promise(function(res, rej) {
                     res();
@@ -258,7 +258,7 @@ describe('ng-scores',function() {
 
         it('updates a score in scores upon failure', function() {
             var newScore = { id: 'asdfg' };
-            independenceMock.act = jasmine.createSpy('independenceAct').and.callFake(function(key, url, data, fallback) {
+            independenceMock.act = jasmine.createSpy('independenceAct').and.callFake(function(url, data, fallback) {
                 fallback();
                 return new Promise(function(res, rej) {
                     res();
