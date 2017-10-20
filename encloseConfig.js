@@ -7,5 +7,4 @@ module.exports = {
   dirs:  ["./src",
           "./src/data",
           "./challenges"]
-
 };

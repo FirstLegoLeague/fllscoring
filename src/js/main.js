@@ -32,31 +32,29 @@ define([
         '$scope', '$session',
         function($scope, $session) {
             log('init main ctrl');
+
+            const PAGES = [
+                { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
+                { name: 'teams', title: 'Teams', icon: 'people' },
+                { name: 'scores', title: 'Scorekeeping', icon: 'list' },
+                { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
+                { name: 'settings', title: 'Settings', icon: 'settings' }
+            ];
+
             $scope.drawer = 'views/drawer.html';
             $scope.scoringPages = ['scoresheet','settings'];
             $scope.validationErrors = [];
             $scope.drawerVisible = false;
 
             $session.load().then(function(session) {
-                $scope.user = session['user'];
-                if($scope.user === 'admin') {
-                    $scope.pages = [
-                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
-                        { name: 'teams', title: 'Teams', icon: 'people' },
-                        { name: 'scores', title: 'Scorekeeping', icon: 'list' },
-                        { name: 'ranking', title: 'Ranking', icon: 'format_list_numbered' },
-                        { name: 'settings', title: 'Settings', icon: 'settings' },
-                        { name: 'clock', title: 'Clock', icon: 'alarm'}
-                    ];
+                if(session['passport']) {
+                    $scope.user = session['passport'].user;
+                    $scope.pages = PAGES.filter(page => $scope.user.pages.includes(page.name));
                 } else {
-                    $scope.pages = [
-                        { name: 'scoresheet', title: 'Scoresheet', icon: 'check' },
-                        { name: 'settings', title: 'Settings', icon: 'settings' }
-                    ];
+                    $scope.pages = PAGES;
                 }
-
                 $scope.currentPage = $scope.pages[0];
-            })
+            });
 
             $scope.$on('validationError',function(e,validationErrors) {
                 $scope.validationErrors = validationErrors;

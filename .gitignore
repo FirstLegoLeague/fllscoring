@@ -3,6 +3,7 @@ coverage/
 nw-builds/
 nw-cache/
 temp/
+log/*.log
 pgbuildconfig.json
 .cordova/config.json
 data/
@@ -13,6 +14,8 @@ sessions/
 
 # bower stuff, include actual files
 src/components/*/*
+
+npm-shrinkwrap.json
 
 !src/components/angular/angular*.js
 !src/components/angular/angular*.map

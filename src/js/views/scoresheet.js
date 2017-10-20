@@ -160,12 +160,18 @@ define('views/scoresheet',[
                         });
                     });
                 }
+                function signed(){
+                    return $scope.signature ? true : false;
+                }
 
                 if (errors()) {
                     list.push('Some missions have errors');
                 }
                 if (inComplete()) {
                     list.push('Some missions are incomplete');
+                }
+                if(!signed()){
+                    list.push('Scoresheet not signed');
                 }
 
                 return list;
@@ -203,7 +209,7 @@ define('views/scoresheet',[
             };
 
             $scope.clear = function() {
-                $scope.editingScore = false;
+
                 var table = $scope.scoreEntry ? $scope.scoreEntry.table : undefined;
                 $scope.scoreEntry = new $score({ table: table });
                 $scope.signature = null;
@@ -212,6 +218,11 @@ define('views/scoresheet',[
                         delete objective["value"];
                     });
                 });
+
+                if($scope.editingScore){
+                    $scope.setPage($scope.pages.find(function (p) {return p.name === "scores"}));
+                    $scope.editingScore = false;
+                }
                 log('scoresheet cleared');
             };
 

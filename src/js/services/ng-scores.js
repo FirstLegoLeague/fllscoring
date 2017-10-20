@@ -264,6 +264,7 @@ define('services/ng-scores',[
 
             var self = this;
             if(this.validationErrors.length === 0) {
+                self.scores.forEach((score)=>{score.error = null});
                 return $rankings.calculate(this.scores, filter).then(function(scoreboard) {
                     self.scoreboard = scoreboard;
                     return scoreboard;
