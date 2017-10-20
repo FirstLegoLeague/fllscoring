@@ -87,6 +87,7 @@ exports.route = function(app) {
                         return;
                     }
                     res.send(data);
+                    next();
                 });
             } else if (stat.isDirectory()) {
                 fs.readdir(file, function(err, filenames) {
