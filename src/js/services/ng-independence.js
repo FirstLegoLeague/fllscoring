@@ -29,11 +29,10 @@ define('services/ng-independence',[
                 throw new Error("Already sending actions to server");
             }
             self._sendingActions = true;
-            var queue = angular.copy($localStorage);
-            queue = Object.keys(queue).filter(k => k.startsWith("action")).map(key => {
-                var temp = JSON.parse(queue[key]);
-                temp.originalKey = key;
-                return temp;
+            var queue = Object.keys($localStorage).filter(k => k.startsWith("action")).map(key => {
+                var action = JSON.parse($localStorage[key]);
+                action.originalKey = key;
+                return action;
             }).sort((p, f) => p.index - f.index);
             var promise = queue.reduce((promise, action) => promise.then(() => actionToPromise(action)), $q.when());
             promise.then(() => self._sendingActions = false, () => self._sendingActions = false);
