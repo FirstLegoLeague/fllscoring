@@ -32,13 +32,3 @@ exports.afterLayer = function(req, res, next) {
     req.log.debug(`Complete error status ${res.statusCode}`);
     next();
 };
-
-exports.route = function(app) {
-
-    app.post('/log/:level', function(req, res, next) {
-        exports.log(req.params.level, req.body.message);
-        res.sendStatus(200);
-        next();
-    });
-
-};

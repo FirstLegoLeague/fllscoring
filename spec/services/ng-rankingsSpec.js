@@ -19,7 +19,6 @@ describe('ng-rankings',function() {
     var mockScores;
     var mockRankings;
     var fsMock;
-    var serverlogMock = createServerlogMock();
 
     //initialize
     beforeEach(function() {
@@ -243,7 +242,6 @@ describe('ng-rankings',function() {
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
             $provide.value('$fs', fsMock);
-            $provide.value('$serverlog', serverlogMock)
         });
         angular.mock.inject(["$rankings", function(_$rankings_) {
             $rankings = _$rankings_;
