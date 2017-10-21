@@ -1,5 +1,9 @@
 describe('really',function() {
-    var module = factory('directives/really');
+    var module;
+
+    beforeEach(function() {
+        module = factory('directives/really');
+    });
 
     var $compile,$rootScope,windowMock = {
         confirm: jasmine.createSpy('confirmSpy')

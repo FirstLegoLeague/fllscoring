@@ -1,9 +1,5 @@
 describe('ng-teams',function() {
-    var module = factory('services/ng-teams',{
-        'services/log': logMock,
-        'services/fs': {},
-    });
-
+    var module;
     var $teams;
     var rawMockTeam = { number: "123", name: "Oefenrondes", cityState: "foo" };
     var rawMockTeam2 = { number: "123", name: "Oefenrondes", translationNeeded: true };
@@ -48,6 +44,10 @@ describe('ng-teams',function() {
     var fsMock;
 
     beforeEach(function() {
+        module = factory('services/ng-teams',{
+            'services/log': logMock,
+            'services/fs': {},
+        });
         fsMock = createFsMock({"teams.json": [rawMockTeam]});
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {

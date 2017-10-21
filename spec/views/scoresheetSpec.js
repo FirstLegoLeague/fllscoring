@@ -1,11 +1,6 @@
 describe('scoresheet',function() {
 
-    var module = factory('views/scoresheet',{
-        'services/log': logMock,
-        'services/fs': {},
-        'signaturepad': {},
-    });
-
+    var module;
     var $scope, controller, $window;
     var dummyTeam =  {
         number: '123',
@@ -16,6 +11,11 @@ describe('scoresheet',function() {
     var settingsMock, handshakeMock, challengeMock;
 
     beforeEach(function() {
+        module = factory('views/scoresheet',{
+            'services/log': logMock,
+            'services/fs': {},
+            'signaturepad': {},
+        });
         angular.mock.module('DescriptionDialog');
         angular.mock.module('TeamDialog');
         angular.mock.module('RoundDialog');

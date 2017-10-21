@@ -1,9 +1,9 @@
 xdescribe('spinner',function() {
-    var module = factory('directives/spinner');
-
+    var module;
     var $compile, $scope, $timeout, element, container, frame, prev, next;
 
     beforeEach(function() {
+        module = factory('directives/spinner');
         //add some styling to make it work
         var style = angular.element(multiline(function() {/*
             <style id="spinnerStyle">

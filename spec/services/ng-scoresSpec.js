@@ -1,10 +1,6 @@
 describe('ng-scores',function() {
     "use strict";
-    var module = factory('services/ng-scores',{
-        'services/log': logMock,
-        'services/fs': {},
-    });
-
+    var module;
     var $scores;
     var $stages;
     var $teams;
@@ -31,6 +27,10 @@ describe('ng-scores',function() {
     var fsMock;
 
     beforeEach(function() {
+        module = factory('services/ng-scores',{
+            'services/log': logMock,
+            'services/fs': {},
+        });
         fsMock = createFsMock({
             "scores.json": { version: 2, scores: [rawMockScore], sheets: [] },
             "stages.json": [rawMockStage],
@@ -561,3 +561,4 @@ describe('ng-scores',function() {
     });
 
 });
+

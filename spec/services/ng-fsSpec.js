@@ -1,12 +1,12 @@
 describe('ng-fs',function() {
     var fsMock = createFsMock({'foo': '"dummydata"'});
-    var module = factory('services/ng-fs',{
-        'services/fs': fsMock
-    });
-
-    var $fs
+    var module;
+    var $fs;
 
     beforeEach(function() {
+        module = factory('services/ng-fs',{
+            'services/fs': fsMock
+        });
         angular.mock.module(module.name);
         angular.mock.inject(['$fs',function(fs) {
             $fs = fs;

@@ -1,16 +1,16 @@
 describe('ExportRankingDialogController',function() {
 
-    var module = factory('controllers/ExportRankingDialogController',{
-        'services/log': logMock,
-        'services/fs': {},
-    });
-
+    var module;
     var $scope, $timeout, stagesMock, scoresMock, handshakeMock;
     var fakeScoreboard = {
         "1": [1,2,3,4]
     };
 
     beforeEach(function() {
+        module = factory('controllers/ExportRankingDialogController',{
+            'services/log': logMock,
+            'services/fs': {},
+        });
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q,_$timeout_) {
             $scope = $rootScope.$new();

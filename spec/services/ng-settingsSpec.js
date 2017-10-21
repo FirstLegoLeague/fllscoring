@@ -1,12 +1,12 @@
 describe('ng-settings',function() {
-    var module = factory('services/ng-settings',{
-        'services/log': logMock,
-        'services/fs': {},
-    });
-
+    var module;
     var $settings, $httpBackend, $q, $rootScope, settingsMock, fsMock;
 
     beforeEach(function() {
+        module = factory('services/ng-settings',{
+            'services/log': logMock,
+            'services/fs': {},
+        });
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
             var s = $provide.service('$fs',function($q) {

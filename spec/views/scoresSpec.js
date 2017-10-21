@@ -1,14 +1,14 @@
 describe('scores', function() {
 
-    var module = factory('views/scores', {
-        'services/log': logMock,
-        'services/fs': {},
-    });
-
+    var module;
     var $scope, controller, scoresMock, teamsMock, stagesMock,$window,$q;
     var originalMockScores;
 
     beforeEach(function() {
+        module = factory('views/scores', {
+            'services/log': logMock,
+            'services/fs': {},
+        });
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope,_$window_,_$q_) {
             $scope = $rootScope.$new();

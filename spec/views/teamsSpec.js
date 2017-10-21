@@ -1,8 +1,11 @@
 describe('teams', function() {
 
-    var module = factory('views/teams', {
-        'services/log': logMock,
-        'services/fs': {},
+    var module;
+    beforeEach(function() {
+        module = factory('views/teams', {
+            'services/log': logMock,
+            'services/fs': {},
+        });
     });
 
     var $scope, controller, $httpBackend, $teams, handshakeMock;

@@ -1,9 +1,9 @@
 describe('size',function() {
-    var module = factory('directives/size');
-
+    var module;
     var $compile,$rootScope;
 
     beforeEach(function() {
+        module = factory('directives/size');
         angular.mock.module(module.name);
         inject(function(_$compile_,_$rootScope_) {
             $compile = _$compile_;

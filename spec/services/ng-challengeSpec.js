@@ -6,12 +6,13 @@ describe('ng-challenge',function() {
     var fsMock, settingsMock,$q,$rootScope,$httpBackend;
     fsMock = createFsMock({'foo': JSON.stringify(dummyChallenge)});
 
-    var module = factory('services/ng-challenge',{
-        'services/log': logMock,
-        'services/fs': fsMock
-    });
+    var module;
 
     beforeEach(function() {
+        module = factory('services/ng-challenge',{
+            'services/log': logMock,
+            'services/fs': fsMock
+        });
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
             $provide.service('$settings', function($q) {

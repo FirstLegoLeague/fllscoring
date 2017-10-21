@@ -1,9 +1,9 @@
 describe('ng-throttle',function() {
-    var module = factory('services/ng-throttle');
-
+    var module;
     var $throttle,$timeout;
 
     beforeEach(function() {
+        module = factory('services/ng-throttle');
         angular.mock.module(module.name);
         angular.mock.inject(function(_$throttle_,_$timeout_) {
             $throttle = _$throttle_;

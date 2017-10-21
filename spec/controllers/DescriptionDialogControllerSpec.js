@@ -1,10 +1,10 @@
 describe('DescriptionDialogController',function() {
 
-    var module = factory('controllers/DescriptionDialogController');
-
+    var module;
     var $scope, controller, handshakeMock;
 
     beforeEach(function() {
+        module = factory('controllers/DescriptionDialogController');
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
             $scope = $rootScope.$new();

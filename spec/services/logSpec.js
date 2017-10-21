@@ -1,5 +1,8 @@
 describe('log',function() {
-    var log = factory('services/log');
+    var log;
+    beforeEach(function() {
+        log = factory('services/log');
+    });
 
     describe('logging',function() {
         beforeEach(function() {

@@ -1,10 +1,7 @@
 describe('ng-stages',function() {
     "use strict";
 
-    var module = factory('services/ng-stages',{
-        'services/log': logMock
-    });
-
+    var module;
     var $rootScope;
     var $stages;
     var $q;
@@ -16,6 +13,10 @@ describe('ng-stages',function() {
 
     //initialize
     beforeEach(function() {
+        module = factory('services/ng-stages',{
+            'services/log': logMock,
+            'services/fs': {}
+        });
         mockStage = { id: "practice", name: "Practice Rounds", rounds: 2 };
         mockStageSanitized = { index: 0, id: "practice", name: "Practice Rounds", rounds: 2, $rounds: [1, 2] };
         unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
