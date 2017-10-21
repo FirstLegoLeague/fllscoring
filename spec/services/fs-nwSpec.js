@@ -4,7 +4,7 @@ describe('fs-nw',function() {
         var fs = factory('services/fs-nw',{
             'q':Q,
             'idbstore': window.IDBStore
-        },true);
+        });
         describe('reading',function() {
             it('should read a test file',function() {
                 return fs.write('foo/foo.txt','jsfd978sd').then(function() {
