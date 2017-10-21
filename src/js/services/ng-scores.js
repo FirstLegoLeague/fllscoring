@@ -6,7 +6,8 @@ define('services/ng-scores',[
     'services/ng-services',
     'services/log',
     'services/ng-fs',
-    'services/ng-stages'
+    'services/ng-stages',
+    'services/ng-teams',
 ],function(module,log) {
     "use strict";
 
