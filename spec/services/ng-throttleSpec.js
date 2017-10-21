@@ -1,8 +1,5 @@
 describe('ng-throttle',function() {
-    var ngServices = factory('services/ng-services');
-    var module = factory('services/ng-throttle',{
-        'services/ng-services': ngServices
-    });
+    var module = factory('services/ng-throttle');
 
     var $throttle,$timeout;
 

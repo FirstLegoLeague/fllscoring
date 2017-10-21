@@ -1,8 +1,5 @@
 xdescribe('spinner',function() {
-    var ngDirectives = factory('directives/ng-directives');
-    var module = factory('directives/spinner',{
-        'directives/ng-directives': ngDirectives
-    });
+    var module = factory('directives/spinner');
 
     var $compile, $scope, $timeout, element, container, frame, prev, next;
 

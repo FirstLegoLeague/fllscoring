@@ -1,5 +1,4 @@
 describe('ng-challenge',function() {
-    var ngServices = factory('services/ng-services');
     var challenge, q;
 
     var dummyChallenge = {foo:'bar'};
@@ -9,7 +8,6 @@ describe('ng-challenge',function() {
 
     var module = factory('services/ng-challenge',{
         'services/log': logMock,
-        'services/ng-services': ngServices,
         'services/fs': fsMock
     });
 

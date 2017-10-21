@@ -1,9 +1,8 @@
 describe('ng-scores',function() {
     "use strict";
-    var ngServices = factory('services/ng-services');
     var module = factory('services/ng-scores',{
-        'services/ng-services': ngServices,
-        'services/log': logMock
+        'services/log': logMock,
+        'services/fs': {},
     });
 
     var $scores;

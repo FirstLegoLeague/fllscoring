@@ -1,7 +1,6 @@
 describe('sigpad',function() {
-    var ngDirectives = factory('directives/ng-directives');
     var module = factory('directives/sigpad',{
-        'directives/ng-directives': ngDirectives
+        'signaturepad': {},
     });
 
 

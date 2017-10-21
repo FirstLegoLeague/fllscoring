@@ -1,8 +1,5 @@
 describe('indexFilter',function() {
-    var ngFilters = factory('filters/ng-filters');
-    var module = factory('filters/index',{
-        'filters/ng-filters': ngFilters
-    });
+    var module = factory('filters/index');
 
     var index;
 

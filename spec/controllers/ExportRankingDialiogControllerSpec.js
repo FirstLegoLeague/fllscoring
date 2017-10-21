@@ -2,6 +2,7 @@ describe('ExportRankingDialogController',function() {
 
     var module = factory('controllers/ExportRankingDialogController',{
         'services/log': logMock,
+        'services/fs': {},
     });
 
     var $scope, $timeout, stagesMock, scoresMock, handshakeMock;

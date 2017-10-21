@@ -2,8 +2,7 @@ describe('teams', function() {
 
     var module = factory('views/teams', {
         'services/log': logMock,
-        'services/ng-throttle': factory('services/ng-throttle'),
-        'controllers/TeamImportDialogController': factory('controllers/TeamImportDialogController')
+        'services/fs': {},
     });
 
     var $scope, controller, $httpBackend, $teams, handshakeMock;

@@ -1,9 +1,7 @@
 describe('ng-stages',function() {
     "use strict";
 
-    var ngServices = factory('services/ng-services');
     var module = factory('services/ng-stages',{
-        'services/ng-services': ngServices,
         'services/log': logMock
     });
 

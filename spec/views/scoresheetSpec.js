@@ -2,9 +2,8 @@ describe('scoresheet',function() {
 
     var module = factory('views/scoresheet',{
         'services/log': logMock,
-        'controllers/DescriptionDialogController': factory('controllers/DescriptionDialogController'),
-        'controllers/TeamDialogController': factory('controllers/TeamDialogController'),
-        'controllers/RoundDialogController': factory('controllers/RoundDialogController')
+        'services/fs': {},
+        'signaturepad': {},
     });
 
     var $scope, controller, $window;

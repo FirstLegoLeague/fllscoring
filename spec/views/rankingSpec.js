@@ -2,7 +2,7 @@ describe('ranking', function() {
 
     var module = factory('views/ranking', {
         'services/log': logMock,
-        'controllers/ExportRankingDialogController': factory('controllers/ExportRankingDialogController')
+        'services/fs': {},
     });
 
     var $scope, controller;

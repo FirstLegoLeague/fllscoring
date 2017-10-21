@@ -1,8 +1,7 @@
 describe('ng-settings',function() {
-    var ngServices = factory('services/ng-services');
     var module = factory('services/ng-settings',{
-        'services/ng-services': ngServices,
-        'services/log': logMock
+        'services/log': logMock,
+        'services/fs': {},
     });
 
     var $settings, $httpBackend, $q, $rootScope, settingsMock, fsMock;

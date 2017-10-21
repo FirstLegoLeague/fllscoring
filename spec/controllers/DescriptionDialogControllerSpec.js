@@ -1,8 +1,6 @@
 describe('DescriptionDialogController',function() {
 
-    var module = factory('controllers/DescriptionDialogController',{
-        // 'services/log': logMock,
-    });
+    var module = factory('controllers/DescriptionDialogController');
 
     var $scope, controller, handshakeMock;
 

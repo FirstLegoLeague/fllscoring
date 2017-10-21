@@ -2,6 +2,7 @@ describe('TeamDialogController',function() {
 
     var module = factory('controllers/TeamDialogController',{
         'services/log': logMock,
+        'services/fs': {},
     });
 
     var $scope, controller, settingsMock, handshakeMock;

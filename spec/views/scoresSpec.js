@@ -1,7 +1,8 @@
 describe('scores', function() {
 
     var module = factory('views/scores', {
-        'services/log': logMock
+        'services/log': logMock,
+        'services/fs': {},
     });
 
     var $scope, controller, scoresMock, teamsMock, stagesMock,$window,$q;

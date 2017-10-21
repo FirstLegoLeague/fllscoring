@@ -2,7 +2,7 @@ describe('settings', function() {
 
     var module = factory('views/settings', {
         'services/log': logMock,
-        'controllers/NewStageDialogController': factory('controllers/NewStageDialogController')
+        'services/fs': {},
     });
 
     var $scope, controller;
