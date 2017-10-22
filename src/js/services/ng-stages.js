@@ -55,7 +55,7 @@ define('services/ng-stages',[
             return $http.post("/stages/save", { stages: this.stages }).success(function (data, status) {
                 log('Data posted successfully');
             }).error(function () {
-                log('failed retrieving settings');
+                log('failed retrieving stages');
             });
         };
 

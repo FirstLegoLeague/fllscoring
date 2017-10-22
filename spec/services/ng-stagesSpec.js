@@ -15,6 +15,7 @@ describe('ng-stages',function() {
     var unusedMockStage;
     var unusedMockStageSanitized;
     var fsMock;
+        
 
     //initialize
     beforeEach(function() {
@@ -23,7 +24,14 @@ describe('ng-stages',function() {
         unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
         unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     })
-
+    var httpMock = createHttpMock({
+        get: {
+            '/stages': { data: [mockStage] }
+        },
+        post: {
+            '/stages/save': defaults
+        }
+    });
     beforeEach(function() {
         fsMock = createFsMock({"stages.json": [mockStage]});
         angular.mock.module(module.name);
@@ -42,6 +50,7 @@ describe('ng-stages',function() {
 
     describe('init',function() {
         it('should load stages by default', function() {
+            expect(httpMock.get).toHaveBeenCalledWith('/stages');
             expect($stages.stages).toEqual([mockStageSanitized]);
         });
     });
@@ -49,11 +58,13 @@ describe('ng-stages',function() {
     describe('save',function() {
         it('should write stages to stages.json',function() {
             return $stages.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('stages.json',[mockStage]);
+                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStage]});
+                
             });
         });
         it('should log an error if writing fails',function() {
             fsMock.write.and.returnValue(Q.reject('aargh'));
+            httpMock.post.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
             });
