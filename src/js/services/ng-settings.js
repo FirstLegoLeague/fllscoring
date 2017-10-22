@@ -18,7 +18,6 @@ define('services/ng-settings',[
              */
             this.settings = {};
             this.init();
-            this.currentStage;
         }
 
 
@@ -52,6 +51,7 @@ define('services/ng-settings',[
                     autoPublish: true,
                     autoBroadcast: true,
                     autoBroadcastStage: 'practice',
+                    currentStage: 'practice',
                     ignoreNegativeScores: true
                 };
                 //create settings file if not there

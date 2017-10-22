@@ -4,6 +4,7 @@ define('views/settings',[
     'services/ng-settings',
     'services/ng-challenge',
     'services/ng-handshake',
+    'services/ng-message',
     'controllers/NewStageDialogController',
     'angular'
 ],function(log) {
@@ -11,8 +12,8 @@ define('views/settings',[
     return angular.module(moduleName,[
         'NewStageDialog'
     ]).controller(moduleName+'Ctrl',[
-        '$scope', '$stages','$settings','$q','$handshake','$challenge',
-        function($scope, $stages, $settings, $q, $handshake,$challenge) {
+        '$scope', '$stages','$settings','$q','$handshake','$challenge','$message',
+        function($scope, $stages, $settings, $q, $handshake,$challenge,$message) {
             log('init settings ctrl');
             $scope.log = log.get();
             // initialize first tab
@@ -28,6 +29,14 @@ define('views/settings',[
             $scope.addItem = function(collection) {
                 collection.push({});
             };
+
+            $scope.$watch(function () {
+                return $settings.settings.currentStage;
+            }, function () {
+                $settings.currentStageObject = $stages.get($settings.settings.currentStage);
+                $message.send("settings:currentStage",$settings.settings.currentStage);
+            }, true);
+
             //specialized adding for tables, finds a number in the name and adds 1 to it
             $scope.addTable = function() {
                 var collection = $scope.settings.tables;
@@ -49,12 +58,6 @@ define('views/settings',[
                 return $q.all($settings.save(), saveStages());
             };
 
-            $scope.$watch(function() {
-                return $stages.stages;
-            }, function() {
-                $scope.currentStage = $stages.stages[1];
-                $settings.currentStage = $scope.currentStage;
-            }, true);
             function saveStages() {
                 //update all stages
                 var stages = angular.copy($scope.allStages);
@@ -87,6 +90,10 @@ define('views/settings',[
             };
 
             $scope.allStages = $stages.allStages;
+
+            $message.on('settings:currentStage',function(data){
+                $settings.currentStageObject = $stages.get(data);
+            },true);
             
         }
     ]);

@@ -305,16 +305,16 @@ define('views/scoresheet',[
             $scope.fillStageRound = function(team){
                 var completed = [];
                 $scores.scores.forEach(function (score) {
-                    if (score.teamNumber === team.number && score.stageId === $settings.currentStage.id) {
+                    if (score.teamNumber === team.number && score.stageId === $settings.currentStageObject.id) {
                         completed.push(score.round);
                     }
                 });
-                var firstNotCompleted = $settings.currentStage.$rounds.find((round)=>{
+                var firstNotCompleted = $settings.currentStageObject.$rounds.find((round)=>{
                     return completed.indexOf(round) === -1;
                 });
 
-                if($settings.currentStage.$rounds.indexOf(firstNotCompleted) > 0){
-                    $scope.scoreEntry.stage = $settings.currentStage;
+                if($settings.currentStageObject.$rounds.indexOf(firstNotCompleted) > 0){
+                    $scope.scoreEntry.stage = $settings.currentStageObject;
                     $scope.scoreEntry.round = firstNotCompleted;
                 }
             }

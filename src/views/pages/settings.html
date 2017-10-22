@@ -143,6 +143,10 @@
                 </p>
             </div>
         </div>
+        <p>
+            <select title="currentStageSelect" ng-model="settings.currentStage" ng-options="stage.id as stage.name for stage in allStages | filter : {rounds :'!0'}">
+            </select>
+        </p>
     </div>
     <div ng-show="tab === 3">
         <p>
