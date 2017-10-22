@@ -3,6 +3,7 @@ coverage/
 nw-builds/
 nw-cache/
 temp/
+log/*.log
 pgbuildconfig.json
 .cordova/config.json
 data/

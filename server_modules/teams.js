@@ -1,4 +1,3 @@
-var utils = require('./utils');
 var fileSystem = require('./file_system');
 var file = require('./files');
 
@@ -10,7 +9,11 @@ exports.route = function (app) {
                 return team.number == req.params.nr;
             })[0];
             res.json(team);
-        }).catch(err => utils.sendError(res, err)).done();
+            next();
+        }).catch(err => {
+            res.sendError(err);
+            next();
+        }).done();
     });
     file.route(app, 'teams');
 };

@@ -2,7 +2,6 @@ var fs = require('fs');
 var Q = require('q');
 var mkdirp = require('mkdirp');
 var path = require('path')
-var utils = require('./utils');
 var args = require('./args');
 var log = require('./log').log;
 var authorize = require('./auth').authorize;
@@ -72,25 +71,29 @@ exports.readJsonFile = function(file) {
 exports.route = function(app) {
 
     //reading the "file system"
-    app.get(/^\/fs\/(.*)$/, authorize.any, function(req, res) {
+    app.get(/^\/fs\/(.*)$/, authorize.any, function(req, res, next) {
         var file = exports.getDataFilePath(req.params[0]);
         fs.stat(file, function(err, stat) {
             if (err) {
-                utils.sendError(res, { status: 404, message: `file not found ${file}` })
+                res.sendError({ status: 404, message: `file not found ${file}` });
+                next();
                 return;
             }
             if (stat.isFile()) {
                 fs.readFile(file, function(err, data) {
                     if (err) {
-                        utils.sendError(res, { status: 500, message: `error reading file ${file}` })
+                        res.sendError({ status: 500, message: `error reading file ${file}` });
+                        next();
                         return;
                     }
                     res.send(data);
+                    next();
                 });
             } else if (stat.isDirectory()) {
                 fs.readdir(file, function(err, filenames) {
                     if (err) {
-                        utils.sendError(res, { status: 500, message: `error reading dir ${file}` })
+                        res.sendError({ status: 500, message: `error reading dir ${file}` });
+                        next();
                         return;
                     }
                     // FIXME: this doesn't work for filenames containing
@@ -99,36 +102,43 @@ exports.route = function(app) {
                         return name.indexOf("\n") >= 0;
                     });
                     if (hasNewline) {
-                        utils.sendError(res, { status: 500, message: `invalid filename(s) ${filenames.join(', ')}` })
+                        res.sendError({ status: 500, message: `invalid filename(s) ${filenames.join(', ')}` });
+                        next();
                         return;
                     }
                     res.send(filenames.join('\n'));
+                    next();
                 });
             } else {
-                utils.sendError(res, { status: 500, message: `error reading file ${file}` })
+                res.sendError({ status: 500, message: `error reading file ${file}` });
+                next();
                 return;
             }
         });
     });
 
     // writing the "file system"
-    app.post(/^\/fs\/(.*)$/, authorize.any, function(req, res) {
+    app.post(/^\/fs\/(.*)$/, authorize.any, function(req, res, next) {
         var file = exports.getDataFilePath(req.params[0]);
         exports.writeFile(file, req.body).then(function() {
             res.status(200).end();
+            next();
         }).catch(function(err) {
-            utils.sendError(res, { status: 500, message: `error writing file ${file}` })
+            res.sendError({ status: 500, message: `error writing file ${file}` });
+            next();
         });
     });
 
     // deleting in the "file system"
-    app.delete(/^\/fs\/(.*)$/, authorize.any, function(req, res) {
+    app.delete(/^\/fs\/(.*)$/, authorize.any, function(req, res, next) {
         var file = exports.getDataFilePath(req.params[0]);
         fs.unlink(file, function(err) {
             if (err) {
-                utils.sendError(res, { status: 500, message: `error removing file ${file}` })
+                res.sendError({ status: 500, message: `error removing file ${file}` });
+                next();
             }
             res.status(200).end();
+            next();
         });
     });
 

@@ -73,17 +73,17 @@
                 <td>{{team.pitLocation}}</td>
                 <td><i ng-show="team.translationNeeded===true" class="material-icons">check</i></td>
             </tr>
-            <tr ng-show="editMode" ng-repeat="team in teams | orderBy:sort:rev" track by team.number>
-                <td><input type="text" ng-model=team.number class="team-number"></td>
-                <td><input type="text" ng-model=team.name></td>
-                <td><input type="text" ng-model=team.cityState>
-                <td><input type="text" ng-model=team.country></td>
-                <td><input type="text" ng-model=team.affiliation></td>
-                <td><input type="text" ng-model=team.coach1></td>
-                <td><input type="text" ng-model=team.coach2></td>
-                <td><input type="text" ng-model=team.judgingGroup class="team-number"></td>
-                <td><input type="text" ng-model=team.pitLocation class="team-number"></td>
-                <td><input type="checkbox" ng-model=team.translationNeeded></td>
+            <tr ng-show="editMode" ng-repeat="team in teams | orderBy:sort:rev track by team.number">
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.number class="team-number"></td>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.name></td>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.cityState>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.country></td>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.affiliation></td>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.coach1></td>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.coach2></td>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.judgingGroup class="team-number"></td>
+                <td><input ng-blur="lostFocus()" type="text" ng-model=team.pitLocation class="team-number"></td>
+                <td><input ng-blur="lostFocus()" type="checkbox" ng-model=team.translationNeeded></td>
                 <td>
                     <span ng-show="editMode">
                         <i class="material-icons clickable" title="delete" fll-really-message="Sure to delete this team?" fll-really-click="removeTeam(team.number)">delete</i>

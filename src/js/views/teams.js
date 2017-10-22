@@ -27,6 +27,11 @@ define('views/teams',[
 
             var initialized = null;
 
+            $scope.lostFocus = function () {
+                $scope.needSave = true;
+                $scope.saveTeams();
+            }
+
             $scope.init = function() {
                 if (!initialized) {
                     initialized = $teams.init().then(function() {
@@ -36,20 +41,6 @@ define('views/teams',[
                         } else {
                             $scope.status = '';
                         }
-
-                        // Editing of teams happens by directly modifying the
-                        // underlying team model, and there's not really a dedicated
-                        // save button. So we need to watch for changes, and periodically
-                        // 'auto-save' if we detect such changes.
-                        // See $scope.saveTeams() for more info, and why we need to remove this.
-                        $scope.$watch('teams', function(newValue, oldValue) {
-                            if (newValue === oldValue) {
-                                // Skip the initial call
-                                return;
-                            }
-                            $scope.needSave = true;
-                            $scope.saveTeams();
-                        }, true);
                     });
                 }
                 return initialized;

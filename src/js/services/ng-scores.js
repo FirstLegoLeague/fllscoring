@@ -238,7 +238,7 @@ define('services/ng-scores',[
         Scores.prototype.create = function(scoresheet, score) {
             var self = this;
 
-            return $independence.act('scores','/scores/create',{ scoresheet: scoresheet, score: score }, function() {
+            return $independence.act('/scores/create',{ scoresheet: scoresheet, score: score }, function() {
                 self.scores.push(score);
             })
             .then((res) => self.acceptScores(res, score.published));
@@ -246,7 +246,7 @@ define('services/ng-scores',[
 
         Scores.prototype.delete = function(score) {
             var self = this;
-            return $independence.act('scores','/scores/delete/' + score.id, {}, function() {
+            return $independence.act('/scores/delete/' + score.id, {}, function() {
                 self.scores.splice(self.scores.findIndex(s => s.id === score.id), 1);
             }).then((res) => self.acceptScores(res, score.published));
         };
@@ -254,7 +254,7 @@ define('services/ng-scores',[
         Scores.prototype.update = function(score, forceAutoPublish) {
             score.edited = (new Date()).toString();
             var self = this;
-            return $independence.act('scores','/scores/update/' + score.id, score, function() {
+            return $independence.act('/scores/update/' + score.id, score, function() {
                 self.scores[self.scores.findIndex(s => s.id === score.id)] = score;
             }).then((res) => self.acceptScores(res, forceAutoPublish || score.published));
         };
@@ -264,6 +264,7 @@ define('services/ng-scores',[
 
             var self = this;
             if(this.validationErrors.length === 0) {
+                self.scores.forEach((score)=>{score.error = null});
                 return $rankings.calculate(this.scores, filter).then(function(scoreboard) {
                     self.scoreboard = scoreboard;
                     return scoreboard;

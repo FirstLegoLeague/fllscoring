@@ -2,11 +2,16 @@ var log = require('./log').log;
 
 exports.root = __dirname + '/../';
 
-exports.sendError = function(res, err) {
-    var status = err.status || 500;
-    var message = err.message || "Internal server error"
+exports.doNothing = (req, res, next) => next();
 
-    log.error(message);
-    res.status(status).send(message);
-}
+exports.middleware = function(res, res, next) {
+    res.sendError = function(err) {
+        var status = err.status || 500;
+        var message = err.message || "Internal server error"
 
+        log.error(message);
+        this.status(status).send(message);
+    };
+
+    next();
+};

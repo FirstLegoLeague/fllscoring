@@ -4,11 +4,7 @@ describe('ng-independence',function() {
         'services/ng-services': ngServices
     });
 
-    var httpMock = createHttpMock({
-        post: {
-            '/success': {}
-        }
-    });
+    var httpMock;
     var localstorageMock;
 
     var $independence;
@@ -16,9 +12,14 @@ describe('ng-independence',function() {
     beforeEach(function() {
         angular.mock.module(module.name);
         localstorageMock = {};
+        httpMock = createHttpMock({
+            post: {
+                '/success': {}
+            }
+        });
         angular.mock.module(function($provide) {
             $provide.value('$http', httpMock);
-            $provide.value('$localstorage', localstorageMock);
+            $provide.value('$localStorage', localstorageMock);
         });
         angular.mock.inject(["$independence", function(_$independence_) {
             $independence = _$independence_;
@@ -35,48 +36,46 @@ describe('ng-independence',function() {
         var fallback;
 
         beforeEach(function() {
-            $independence.sendSavedActionsToServer = jasmine.createSpy('sendSavedActionsToServer');
-
-            token = 'test';
+            $independence.sendSavedActionsToServer = jasmine.createSpy('sendSavedActionsToServer').and.callFake($independence.sendSavedActionsToServer);
             successUrl = '/success';
             failureUrl = '/failure';
             data = {};
             fallback = jasmine.createSpy('fallback');
         });
 
-        it('calls sendSavedActionsToServer if the action was successful', function() {
-            $independence.act(token, successUrl, data, fallback).then(function(){
-                expect($independence.sendSavedActionsToServer).toHaveBeenCalledWith(token);
-            });
-        });
 
         it('doesn\'t call fallback if the action was successful', function() {
-            $independence.act(token, successUrl, data, fallback);
+            $independence.act(successUrl, data, fallback);
             expect(fallback).not.toHaveBeenCalled();
         });
 
-        it('doesn\'t call localstorage if the action was successful', function() {
-            $independence.act(token, successUrl, data, fallback);
-            expect(Object.keys(localstorageMock).length).toBe(0);
-        });
-
-        it('doesn\'t call sendSavedActionsToServer if the action failed', function() {
-            $independence.act(token, successUrl, data, fallback).then(function() {}, function() {
-                expect(fallback).toHaveBeenCalled();
-            });
-        });
-
-        it('calls fallback if the action failed', function() {
-            $independence.act(token, successUrl, data, fallback).then(function() {}, function() {
-                expect(fallback).toHaveBeenCalled();
-            });
-        });
-
-        it('calls localstorage if the action was successful', function() {
-            $independence.act(token, successUrl, data, fallback).then(function() {}, function() {
+        it('saves action to localstorage if it failed', function (done) {
+            var checkFunction = function () {
                 expect(Object.keys(localstorageMock).length).toBe(1);
+                done();
+            };
+            $independence.act(failureUrl, data, fallback).catch(checkFunction);
+        });
+
+        it('clears localStorage on a successful requests', function (done) {
+            $independence.act(failureUrl, data, fallback).catch(function () {
+                expect(Object.keys(localstorageMock).length).toBe(1);
+                httpMock.addResponse("post", failureUrl, {});
+                $independence.act(successUrl, data, fallback).then(function () {
+                    expect(Object.keys(localstorageMock).length).toBe(0);
+                    httpMock.resetResponses();
+                    done();
+                });
             });
         });
+
+        it('calls fallback if the action failed', function(done) {
+            $independence.act(failureUrl, data, fallback).catch(function() {
+                expect(fallback).toHaveBeenCalled();
+                done()
+            });
+        });
+
     });
 
     describe('sendSavedActionsToServer', function() {
@@ -88,49 +87,34 @@ describe('ng-independence',function() {
         });
 
         it('can run only one instance at once', function() {
-            $independence._sendingSavedActionsToServer = positiveNonTrueValue;
-            $independence.sendSavedActionsToServer(key);
-            expect($independence._sendingSavedActionsToServer).toBe(positiveNonTrueValue);
+            $independence._sendingActions = positiveNonTrueValue;
+            expect($independence.sendSavedActionsToServer).toThrowError();
         });
 
-        it('finishes instantly if there are no matching keys', function() {
-            $independence.sendSavedActionsToServer(key);
-            expect($independence._sendingSavedActionsToServer).toBe(false);
-        });
-
-        it('calls act once for each key', function() {
-            $independence.act(key,'/failure',{},() => {}).then(function() {
-                $independence.sendSavedActionsToServer(key);
-                expect($independence.act).toHaveBeenCalled();
-            });
-        });
-
-        it('doesn\'t act if there are no keys', function() {
-            $independence.sendSavedActionsToServer(key);
-            expect($independence.act).not.toHaveBeenCalled();
+        it('doesn\'t send a request if there are no actions', function() {
+            $independence.sendSavedActionsToServer();
+            expect(httpMock.post).not.toHaveBeenCalled();
         });
 
     });
 
     describe('pendingActions', function() {
-        var key = 'test';
-        var anotherKey = 'anotherTest';
-
-        it('returns 0 if there are not pending actions', function() {
-            expect($independence.pendingActions(key)).toBe(0);
+        beforeEach(function () {
+           localstorageMock = {};
         });
 
-        it('returns 1 if there is one pending action', function() {
-            $independence.act(key,'/failure',{},() => {}).then(function() {
-                expect($independence.pendingActions(key)).toBe(1);
+        it('returns 0 if there are not pending actions', function(done) {
+            expect($independence.pendingActions()).toBe(0);
+            done()
+        });
+
+        it('returns 1 if there is one pending action', function(done) {
+            $independence.act('/failure',{},() => {}).catch(function() {
+                expect($independence.pendingActions()).toBe(1);
+                done()
             });
         });
 
-        it('returns 0 if there is one pending action with another key', function() {
-            $independence.act(anotherKey,'/failure',{},() => {}).then(function() {
-                expect($independence.pendingActions(key)).toBe(0);
-            });
-        });
     });
 
 });
