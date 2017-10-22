@@ -1,5 +1,4 @@
 var lockfile = require('lockfile');
-var utils = require('./utils');
 var fileSystem = require('./file_system');
 var authorize = require('./auth').authorize;
 var Q = require('q');
@@ -52,7 +51,7 @@ function changeScores(action) {
 exports.route = function(app) {
 
     //get all, grouped by round
-    app.get('/scores/', function(req,res) {
+    app.get('/scores/', function(req,res,next) {
         Q.all([
             fileSystem.readJsonFile(fileSystem.getDataFilePath('scores.json')),
             fileSystem.readJsonFile(fileSystem.getDataFilePath('teams.json')).then(reduceToMap('number'))
@@ -66,11 +65,15 @@ exports.route = function(app) {
                 return rounds;
             },{});
             res.json(published);
-        }).catch(err => utils.sendError(res, err)).done();
+            next();
+        }).catch(err => {
+            res.sendError(err);
+            next();
+        }).done();
     });
 
     //get scores by round
-    app.get('/scores/:round', function(req,res) {
+    app.get('/scores/:round', function(req,res,next) {
         var round = parseInt(req.params.round,10);
 
         fileSystem.readJsonFile(fileSystem.getDataFilePath('scores.json')).then(function(result) {
@@ -78,11 +81,15 @@ exports.route = function(app) {
                 return score.published && score.round === round;
             });
             res.json(scoresForRound);
-        }).catch(err => utils.sendError(res, err)).done();
+            next();
+        }).catch(err => {
+            res.sendError(err);
+            next();
+        }).done();
     });
 
     //save a new score
-    app.post('/scores/create', authorize.any, function(req,res) {
+    app.post('/scores/create', authorize.any, function(req,res,next) {
         var scoresheet = req.body.scoresheet;
         var score = req.body.score;
 
@@ -90,15 +97,19 @@ exports.route = function(app) {
         .then(changeScores(function(result) {
             result.scores.push(score);
             return result;
-        }))
+        })
         .then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+            next();
+        }).catch(err => {
+            res.sendError(err);
+            next();
+        }));
 
     });
 
     //delete a score at an id
-    app.post('/scores/delete/:id', authorize.any, function(req,res) {
+    app.post('/scores/delete/:id', authorize.any, function(req,res,next) {
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
             if(index === -1) {
@@ -108,11 +119,15 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+            next();
+        }).catch(err => {
+            res.sendError(err);
+            next();
+        });
     });
 
     //edit a score at an id
-    app.post('/scores/update/:id', authorize.any, function(req,res) {
+    app.post('/scores/update/:id', authorize.any, function(req,res,next) {
         var score = req.body;
         changeScores(function(result) {
             var index = result.scores.findIndex((score) => score.id === req.params.id);
@@ -123,7 +138,11 @@ exports.route = function(app) {
             return result;
         }).then(function(scores) {
             res.json(scores).end();
-        }).catch(err => utils.sendError(res, err));
+            next();
+        }).catch(err => {
+            res.sendError(err);
+            next();
+        });
     });
 
 

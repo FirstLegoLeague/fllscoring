@@ -135,6 +135,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return empty in the happy situation',function() {
@@ -214,6 +215,11 @@ describe('scoresheet',function() {
             $scope.missions[0].objectives[0].value = null;
             expect($scope.preventSaveErrors()).toEqual(['Some missions are incomplete']);
         });
+
+        it('should return error when signature pad is undefined', function () {
+            $scope.signature = undefined;
+            expect($scope.preventSaveErrors()).toEqual(['Scoresheet not signed']);
+        });
     });
 
     describe('teamRoundOk',function() {
@@ -238,6 +244,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return true in the happy situation',function() {
@@ -326,6 +333,7 @@ describe('scoresheet',function() {
                 team: 3
             };
             $scope.referee = 6;
+            $scope.signature = [1,2,3,4];
         });
 
         it('should return true in the happy situation',function() {
@@ -489,7 +497,8 @@ describe('scoresheet',function() {
                         calcFilename: fileName
                     });
                 setTimeout(() => {
-                    expect($window.alert).toHaveBeenCalledWith('Thanks for submitting a score of 0 points for team (123) foo in Voorrondes 1.')
+                    expect($window.alert).toHaveBeenCalledWith(`Thank you for the score!
+team: #123, Voorrondes round 1`);
                     done();
                 }, 0);
             });
@@ -528,14 +537,14 @@ describe('scoresheet',function() {
                         published: true
                     });
                 setTimeout(() => {
-                    expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team (${dummyTeam.number})` +
-                        ` ${dummyTeam.name} in ${dummyStage.name} 1.`);
+                    expect($window.alert).toHaveBeenCalledWith(`Thank you for the score!
+team: #123, Voorrondes round 1`);
                     done();
                 }, 0);
             });
         });
 
-        it('should alert a message if scoresheet cannot be saved', function() {
+        it('should alert a message if scoresheet cannot be saved', function(done) {
             $scope.scoreEntry.team = dummyTeam;
             $scope.field = {};
             $scope.scoreEntry.stage = dummyStage;
@@ -546,8 +555,11 @@ describe('scoresheet',function() {
             var oldId = $scope.uniqueId;
             scoresMock.create.and.returnValue(Q.reject(new Error('argh')));
             return $scope.save().catch(function() {
-                expect($window.alert).toHaveBeenCalledWith(`Thanks for submitting a score of 0 points for team foo (123) in Voorrondes 1.
-Notice: the score could not be sent to the server. This might be caused by poor network conditions. The score is thereafore save on your device, and will be sent when it's possible.Current number of scores actions waiting to be sent: 1`);
+                setTimeout(() => {
+                    expect($window.alert).toHaveBeenCalledWith(`Thank you for the score!
+team: #123, Voorrondes round 1`);
+                    done();
+                }, 0);
             });
         });
     });

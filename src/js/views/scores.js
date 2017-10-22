@@ -28,6 +28,23 @@ define('views/scores', [
             }, function () {
                 $scope.scores = enrich($scores.scores);
             }, true);
+            
+            $scope.$watch(function () {
+                return $teams._teamsMap;
+            }, function (newValue, oldValue) {
+                if (newValue !== oldValue && indexIsTeamNum(newValue)) {
+                    $scope.scores.forEach(function (score) {
+                        score.team = $teams.get(score.teamNumber);
+                    });
+                    $scores._update();
+                }
+            }, true);
+
+            function indexIsTeamNum(teamMap) {
+                return !Object.keys(teamMap).some((key)=>{
+                    return `${teamMap[key].number}` !== key;
+                });
+            }
 
             $scores.init().then(function() {
                 $scope.stages = $stages.stages;

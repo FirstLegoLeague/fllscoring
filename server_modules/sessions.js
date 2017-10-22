@@ -14,8 +14,9 @@ exports.middleware = session(config);
 
 exports.route = function(app) {
 
-    app.get('/session', function(req, res) {
+    app.get('/session', function(req, res, next) {
         res.json(req.session);
+        next();
     })
 
 };

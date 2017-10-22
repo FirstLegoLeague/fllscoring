@@ -3,8 +3,9 @@ var authorize = require('./auth').authorize;
 
 exports.route = function(app) {
 
-    app.get('/',function(req,res) {
+    app.get('/',function(req,res,next) {
         res.sendFile(fileSystem.resolve('index.html'));
+        next();
     });
 
     app.get('/views/pages/:view', authorize((user, req) => {
