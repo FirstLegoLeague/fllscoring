@@ -303,6 +303,9 @@ define('views/scoresheet',[
 
 
             $scope.fillStageRound = function(team){
+                if(!$settings.currentStageObject){
+                    return;
+                }
                 var completed = [];
                 $scores.scores.forEach(function (score) {
                     if (score.teamNumber === team.number && score.stageId === $settings.currentStageObject.id) {
