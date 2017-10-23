@@ -20,6 +20,9 @@ var createChallengeMock = function() {
         }),
         getDependencies: jasmine.createSpy('challenge.getDependencies').and.callFake(function() {
             return []; // todo
+        }),
+        getChallenges: jasmine.createSpy('challeges.getChallenges').and.callFake(function(){
+            return Q.when([]);
         })
     };
 };

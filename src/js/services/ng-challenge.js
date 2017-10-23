@@ -26,6 +26,7 @@ define('services/ng-challenge',[
             function getChallenge(challengeName) {
                 var url = baseUrl+'challenge/'+challengeName;
                 return $http.get(url,{
+                    //check the need for this function:
                     transformResponse: function(d) {return d;}
                 }).then(function(response) {
                     log('challenge \''+challengeName+'\' loaded');
@@ -38,10 +39,18 @@ define('services/ng-challenge',[
                     var deps = fn.toString().match(/^function\s*\((.*?)\)/)[1];
                     return deps?deps.split(/\s*,\s*/):[];
                 },
+                getChallenges: function(){
+                    var url = baseUrl+'challenges/';
+                    return $http.get(url).then(function(response){
+                        log('Challenges loaded');
+                        return response.data;
+                    });
+                },
                 load: function(challenge) {
                     //use non-angular fs to load plain javascript instead of json
                         // var field = field2;
                     //temp: get from remote service
+                    
                     return $settings.init().then(function(settings) {
                         baseUrl = (settings.host||'');
                         if (challenge) {
