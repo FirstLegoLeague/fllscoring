@@ -301,24 +301,22 @@ define('views/scoresheet',[
                 });
             };
 
-
             $scope.fillStageRound = function(team){
                 if(!$settings.currentStageObject){
                     return;
                 }
-                var completed = [];
-                $scores.scores.forEach(function (score) {
-                    if (score.teamNumber === team.number && score.stageId === $settings.currentStageObject.id) {
-                        completed.push(score.round);
-                    }
-                });
+                var completedRoundsInCurrentStage = $scores.scores.filter((score)=>{
+                    return score.teamNumber === team.number && score.stageId === $settings.currentStageObject.id;
+                }).map((score)=>score.round);
                 var firstNotCompleted = $settings.currentStageObject.$rounds.find((round)=>{
-                    return completed.indexOf(round) === -1;
+                    return completedRoundsInCurrentStage.indexOf(round) === -1;
                 });
-
-                if($settings.currentStageObject.$rounds.indexOf(firstNotCompleted) > 0){
+                if ($settings.currentStageObject.$rounds.indexOf(firstNotCompleted) > 0) {
                     $scope.scoreEntry.stage = $settings.currentStageObject;
                     $scope.scoreEntry.round = firstNotCompleted;
+                } else {
+                    $scope.scoreEntry.stage = $settings.currentStageObject;
+                    $scope.scoreEntry.round = $settings.currentStageObject.$rounds[0];
                 }
             }
 

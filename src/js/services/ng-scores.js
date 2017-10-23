@@ -221,8 +221,8 @@ define('services/ng-scores',[
                 self.load(res.data);
             }
 
-            var stageID = $settings.settings.autoBroadcastStage;
-            if ($settings.settings.autoBroadcast && stageID && tryAutoBroadcast) {
+            var stageID = $settings.settings.currentStage;
+            if ($settings.settings.currentStage && stageID && tryAutoBroadcast) {
                 log('auto-broadcasting stage ' + stageID);
                 self.broadcastRanking($stages.get(stageID));
             }

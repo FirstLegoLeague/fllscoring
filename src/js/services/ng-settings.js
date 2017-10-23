@@ -50,7 +50,6 @@ define('services/ng-settings',[
                     host: window.location.origin + '/',
                     autoPublish: true,
                     autoBroadcast: true,
-                    autoBroadcastStage: 'practice',
                     currentStage: 'practice',
                     ignoreNegativeScores: true
                 };
