@@ -21,7 +21,7 @@ describe('ng-settings',function() {
                 host: window.location.origin + '/',
                 autoPublish: true,
                 autoBroadcast: true,
-                autoBroadcastStage: 'practice',
+                currentStage: 'practice',
                 ignoreNegativeScores: true
             }
             httpMock  = createHttpMock({
@@ -54,8 +54,8 @@ describe('ng-settings',function() {
         it('should set local settings on success load',function(done) {
             expect(httpMock.get).toHaveBeenCalledWith('/settings');
             $settings.load().then(function(res) {
-                expect(res).toEqual({});
-                expect($settings.settings).toEqual({});
+                expect(res).toEqual(defaults);
+                expect($settings.settings).toEqual(defaults);
                 done();
             });
             
@@ -76,8 +76,8 @@ describe('ng-settings',function() {
                 ignoreNegativeScores: true
             }
             expect(httpMock.get).toHaveBeenCalledWith('/settings');
-            expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings: defaults});
             $settings.load();
+            expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings: defaults});
             $rootScope.$digest();
             expect($settings.settings).toEqual(defaults);
         });
@@ -92,8 +92,8 @@ describe('ng-settings',function() {
     describe('save',function() {
         it('should write the local settings to the settings.json file',function() {
             $settings.settings = 'foo';
-            expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings: 'foo'});
             $settings.save();
+            expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings: 'foo'});
         });
     });
 });

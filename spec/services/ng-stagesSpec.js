@@ -57,7 +57,7 @@ describe('ng-stages',function() {
         it('should write stages to stages.json',function() {
             $stages.stages = [mockStage];
             return $stages.save().then(function() {
-                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStage]});
+                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStageSanitized]});
                 
             });
         });
