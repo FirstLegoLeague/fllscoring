@@ -50,7 +50,7 @@ define('services/ng-settings',[
                     host: window.location.origin + '/',
                     autoPublish: true,
                     autoBroadcast: true,
-                    autoBroadcastStage: 'practice',
+                    currentStage: 'practice',
                     ignoreNegativeScores: true
                 };
                 //create settings file if not there
@@ -66,6 +66,8 @@ define('services/ng-settings',[
                 return self.settings;
             });
         };
+
+        
 
         Settings.prototype.save = function() {
             return $fs.write('settings.json',this.settings);
