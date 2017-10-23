@@ -53,9 +53,9 @@ define('services/ng-stages',[
 
         Stages.prototype.save = function () {
             return $http.post("/stages/save", { stages: this.stages }).success(function (data, status) {
-                log('Data posted successfully');
+                log('Stages saved');
             }).error(function () {
-                log('failed retrieving stages');
+                log('Failed saving stages');
             });
         };
 
