@@ -14,7 +14,6 @@ describe('ng-stages',function() {
     var mockStageSanitized;
     var unusedMockStage;
     var unusedMockStageSanitized;
-    var fsMock;
         
 
     //initialize
@@ -26,17 +25,16 @@ describe('ng-stages',function() {
     })
     var httpMock = createHttpMock({
         get: {
-            '/stages': { data: [mockStage] }
+            '/stages': { data: [mockStageSanitized] }
         },
         post: {
-            '/stages/save': defaults
+            '/stages/save': mockStageSanitized
         }
     });
     beforeEach(function() {
-        fsMock = createFsMock({"stages.json": [mockStage]});
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
-            $provide.value('$fs', fsMock);
+            $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$q", "$stages", "$rootScope", function(_$q_, _$stages_, _$rootScope_) {
             $q = _$q_;
@@ -57,13 +55,13 @@ describe('ng-stages',function() {
 
     describe('save',function() {
         it('should write stages to stages.json',function() {
+            $stages.stages = [mockStage];
             return $stages.save().then(function() {
                 expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStage]});
                 
             });
         });
         it('should log an error if writing fails',function() {
-            fsMock.write.and.returnValue(Q.reject('aargh'));
             httpMock.post.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
@@ -78,13 +76,13 @@ describe('ng-stages',function() {
             });
         });
         it('should log an error if reading fails',function() {
-            fsMock.read.and.returnValue(Q.reject('squeek'));
+            httpMock.get.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages read error','squeek');
             });
         });
         it('should initialize with default stages if reading fails',function() {
-            fsMock.read.and.returnValue(Q.reject('squeek'));
+            httpMock.get.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages using defaults');
                 expect($stages.allStages).toEqual([

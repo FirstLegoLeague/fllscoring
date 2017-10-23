@@ -55,9 +55,9 @@ define('services/ng-settings',[
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
                 var data = { settings: defaults };
-                return $http.post("/settings/save", data).success(function (data, status) {
+                return $http.post("/settings/save", data).then(function (data, status) {
                     log('Data posted successfully');
-                }).error(function () {
+                },function () {
                     log('failed retrieving settings');
                 });
             }).catch(function(err) {

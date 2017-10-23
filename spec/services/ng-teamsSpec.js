@@ -47,12 +47,19 @@ describe('ng-teams',function() {
         translationNeeded: true
     };
     var fsMock;
+    var httpMock = createHttpMock({
+        get: {
+            '/teams': { data: [savedMockTeam] }
+        },
+        post: {
+            '/teams/save': mockTeam
+        }
+    });
 
     beforeEach(function() {
-        fsMock = createFsMock({"teams.json": [rawMockTeam]});
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
-            $provide.value('$fs', fsMock);
+            $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$teams", function(_$teams_) {
             $teams = _$teams_;
@@ -71,12 +78,12 @@ describe('ng-teams',function() {
     describe('save',function() {
         it('should write teams to teams.json',function() {
             return $teams.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('teams.json',[savedMockTeam]);
+                expect(httpMock.post).toHaveBeenCalledWith('/teams/save',{teams: [mockTeam]});
             });
         });
 
         it('should log an error if writing fails',function() {
-            fsMock.write.and.returnValue(Q.reject('foo'));
+            httpMock.post.and.returnValue(Q.reject('foo'));
             return $teams.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('teams write error','foo');
             });
@@ -91,7 +98,7 @@ describe('ng-teams',function() {
         });
 
         it('should log an error if loading fails',function() {
-            fsMock.read.and.returnValue(Q.reject('foo'));
+            httpMock.get.and.returnValue(Q.reject('foo'));
             return $teams.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('teams read error','foo');
             });
