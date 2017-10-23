@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node localserver",
-    "test": "karma start --single-run --browsers Firefox --reporters dots,coverage"
+    "test": "jasmine server_test/*.js && karma start --single-run --browsers Firefox --reporters dots,coverage"
   },
   "repository": {
     "type": "git",
@@ -19,12 +19,14 @@
     "grunt-http-server": "^2.0.0",
     "grunt-karma": "^2.0.0",
     "grunt-nw-builder": "^3.0.0",
+    "jasmine": "^2.8.0",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.0",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
+    "mock-fs": "^4.4.1",
     "phantomjs-prebuilt": "^2.1.7",
     "saxon-stream2": "0.0.1"
   },
