@@ -72,7 +72,7 @@ describe('ng-settings',function() {
                 host: window.location.origin + '/',
                 autoPublish: true,
                 autoBroadcast: true,
-                autoBroadcastStage: 'practice',
+                currentStage: 'practice',
                 ignoreNegativeScores: true
             }
             expect(httpMock.get).toHaveBeenCalledWith('/settings');

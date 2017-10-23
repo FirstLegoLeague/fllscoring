@@ -182,7 +182,7 @@ describe('ng-scores',function() {
             $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
             settingsMock.settings.autoBroadcast = true;
             var autoBroadcastStage = stagesMock.stages[0];
-            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            settingsMock.settings.currentStage = autoBroadcastStage.id;
             $scores.acceptScores({data: mockScores}, true);
             expect($scores.broadcastRanking).toHaveBeenCalledWith(autoBroadcastStage)
         });
@@ -191,11 +191,11 @@ describe('ng-scores',function() {
             $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
             settingsMock.settings.autoBroadcast = false;
             var autoBroadcastStage = stagesMock.stages[0];
-            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            settingsMock.settings.currentStage = autoBroadcastStage.id;
             $scores.acceptScores({data: mockScores}, true);
             expect($scores.broadcastRanking).not.toHaveBeenCalled();
 
-            settingsMock.settings.autoBroadcastStage = undefined;
+            settingsMock.settings.currentStage = undefined;
             settingsMock.settings.autoBroadcast = true;
             expect($scores.broadcastRanking).not.toHaveBeenCalled();
         })
@@ -204,7 +204,7 @@ describe('ng-scores',function() {
             $scores.broadcastRanking = jasmine.createSpy('broadcastRankingSpy');
             settingsMock.settings.autoBroadcast = true;
             var autoBroadcastStage = stagesMock.stages[0];
-            settingsMock.settings.autoBroadcastStage = autoBroadcastStage.id;
+            settingsMock.settings.currentStage = autoBroadcastStage.id;
             $scores.acceptScores({data: mockScores}, false);
             expect($scores.broadcastRanking).not.toHaveBeenCalled();
         })

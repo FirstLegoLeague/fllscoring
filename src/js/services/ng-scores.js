@@ -68,10 +68,10 @@ define('services/ng-scores',[
                 self._update();
             }, true);
 
-            // Watching for changes in autoBroadcastStage
-            $rootScope.$watch(() => $settings.settings.autoBroadcastStage, function (newValue, oldValue, scope){
-                if($settings.settings.autoBroadcastStage) {
-                    self.broadcastRanking($stages.get($settings.settings.autoBroadcastStage));
+            // Watching for changes in currentStage
+            $rootScope.$watch(() => $settings.settings.currentStage, function (newValue, oldValue, scope){
+                if($settings.settings.currentStage) {
+                    self.broadcastRanking($stages.get($settings.settings.currentStage));
                 }
             },true);
 
@@ -221,7 +221,7 @@ define('services/ng-scores',[
                 self.load(res.data);
             }
 
-            var stageID = $settings.settings.autoBroadcastStage;
+            var stageID = $settings.settings.currentStage;
             if ($settings.settings.autoBroadcast && stageID && tryAutoBroadcast) {
                 log('auto-broadcasting stage ' + stageID);
                 self.broadcastRanking($stages.get(stageID));

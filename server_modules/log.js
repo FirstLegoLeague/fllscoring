@@ -4,6 +4,10 @@ var rotate = require('rotating-file-stream');
 
 const LOG_PATH = path.resolve(__dirname, '..', 'log', 'log.log');
 
+if (!fs.existsSync(path.dirname(LOG_PATH))) {
+    fs.mkdirSync(path.dirname(LOG_PATH))
+}
+
 var stream = rotate(LOG_PATH, {
     size:     '10M',
     interval: '1d'
