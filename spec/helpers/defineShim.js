@@ -5,9 +5,9 @@
  * It adds two functions to the global namespace: define() and factory().
  */
 !function() {
-	var store = {};
+    var store = {};
 
-	function resolve(name, deps, cache) {
+    function resolve(name, deps, cache) {
         if (typeof name !== "string") {
             throw new Error("factory(): invalid module name: " + name);
         }
@@ -16,13 +16,13 @@
             return cache[name];
         }
 
-		if (!store[name]) {
+        if (!store[name]) {
             throw new Error("factory(): module " + name + " is not yet define()'ed");
         }
 
         // Resolve dependencies of this module to either the
         // passed in custom dependencies, or the 'real' ones.
-		var resolvedDeps = store[name].deps.map(function(dep) {
+        var resolvedDeps = store[name].deps.map(function(dep) {
             // Use custom deps, if passed
             if (deps && dep in deps) {
                 return deps[dep];
@@ -80,11 +80,11 @@
             throw new Error("factory(): invalid dependencies (expected an array): " + deps);
         }
         //store factories in a global store
-		store[name] = {
-			factory: factory,
-			deps: deps
-		};
-	};
+        store[name] = {
+            factory: factory,
+            deps: deps
+        };
+    };
 }();
 
 // Pre-register 'well-known' modules
