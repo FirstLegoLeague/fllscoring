@@ -48,7 +48,9 @@ describe('ng-stages',function() {
 
     describe('init',function() {
         it('should load stages by default', function() {
-            expect(httpMock.get).toHaveBeenCalledWith('/stages');
+            return $stages.init().then(function(){
+                expect(httpMock.get).toHaveBeenCalledWith('/stages');
+            });
             expect($stages.stages).toEqual([mockStageSanitized]);
         });
     });
@@ -57,7 +59,7 @@ describe('ng-stages',function() {
         it('should write stages to stages.json',function() {
             $stages.stages = [mockStage];
             return $stages.save().then(function() {
-                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStageSanitized]});
+                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStage]});
                 
             });
         });
