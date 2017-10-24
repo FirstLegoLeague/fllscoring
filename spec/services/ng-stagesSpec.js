@@ -64,6 +64,8 @@ describe('ng-stages',function() {
             });
         });
         it('should log an error if writing fails',function() {
+            console.log(httpMock.post)
+            console.log(httpMock['post']);
             httpMock.post.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');

@@ -75,7 +75,6 @@ describe('ng-settings',function() {
                 currentStage: 'practice',
                 ignoreNegativeScores: true
             }
-            httpMock["get"]['/settings'] = {};
             $settings.load();
             $rootScope.$digest();
             expect($settings.settings).toEqual(defaults);
