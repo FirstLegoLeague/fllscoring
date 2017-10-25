@@ -19,7 +19,7 @@ describe('ng-settings',function() {
         currentStage: 'practice',
         ignoreNegativeScores: true
     }
-    var httpMock  = createHttpMock({
+    var httpMock = createHttpMock({
         get: {
             '/settings': {data: defaults}
         },
@@ -51,6 +51,10 @@ describe('ng-settings',function() {
 
     describe('load',function() {
 
+        beforeEach(function(){
+            httpMock.resetResponses();
+        });
+
         it('should set local settings on success load',function(done) {
             expect(httpMock.get).toHaveBeenCalledWith('/settings');
             $settings.load().then(function(res) {
@@ -75,7 +79,8 @@ describe('ng-settings',function() {
                 currentStage: 'practice',
                 ignoreNegativeScores: true
             }
-            httpMock.addResponse('get','/settings',{});
+            httpMock.addResponse('get','/settings',undefined);
+            httpMock.addResponse('post','/settings/save',{settings:defaults});
             $settings.load().then(function(){
                 expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings:defaults});
                 expect($settings.settings).toEqual(defaults);
