@@ -58,6 +58,8 @@ describe('ng-teams',function() {
 
     beforeEach(function() {
         angular.mock.module(module.name);
+        var l = logMock.get();
+        l.splice(0,l.length);
         angular.mock.module(function($provide) {
             $provide.value('$http', httpMock);
         });
@@ -107,7 +109,9 @@ describe('ng-teams',function() {
 
     describe('remove',function() {
 
-
+        beforeEach(function(done){
+            $teams.init().then(()=>{done();});
+        });
 
         it('should remove the provided id',function() {
             expect($teams.teams).toEqual([mockTeam]);
@@ -150,6 +154,11 @@ describe('ng-teams',function() {
     });
 
     describe('get',function() {
+
+        beforeEach(function(done){
+            $teams.init().then(()=>{done();});
+        });
+
         it('should get a sanitized team', function() {
             expect($teams.get(123)).toEqual(mockTeam);
         });
