@@ -112,10 +112,10 @@ describe('ng-stages',function() {
 
     describe('remove',function() {
 
-        beforeEach(function(done){
-            $stages.init();
-            done();
-        });
+        // beforeEach(function(done){
+        //     $stages.init();
+        //     done();
+        // });
 
         it('should remove the provided id',function() {
             expect($stages.stages).toEqual([mockStageSanitized]);
@@ -131,18 +131,12 @@ describe('ng-stages',function() {
 
     describe('add',function() {
 
-        beforeEach(function(){
-            console.info(`before add things ${$stages._stagesMap}`);
-        });
-
         it('should add a stage to the list and add autogen properties',function() {
             $stages.clear();
-            console.info(`first ${$stages._stagesMap}`);
             var res = $stages.add(mockStage);
             expect($stages.stages).toEqual([mockStageSanitized]);
         });
         it('should reject duplicate stage ids',function() {
-            console.info(`second ${$stages._stagesMap}`);
             $stages.clear();
             $stages.add(mockStage);
             expect(function() {
@@ -150,7 +144,6 @@ describe('ng-stages',function() {
             }).toThrow();
         });
         it('should reject a stage without an id, name, or rounds',function() {
-            console.info(`third ${$stages._stagesMap}`);
             $stages.clear();
             $stages.add({ id: "foo", name: "bar", rounds: 0 });
             expect(function() {
@@ -180,7 +173,6 @@ describe('ng-stages',function() {
         });
         it('should maintain existing stages and allStages arrays', function() {
             $stages.clear();
-            console.info(`last ${$stages._stagesMap}`);
             var allStages = $stages.allStages;
             var stages = $stages.stages;
             expect(allStages).toEqual([]);
