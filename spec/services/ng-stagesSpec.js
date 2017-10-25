@@ -43,7 +43,7 @@ describe('ng-stages',function() {
         }]);
         // $stages needs to initialize itself, wait for that to
         // complete before starting each test.
-        return $stages.init();
+        
     });
 
     describe('init',function() {
@@ -56,6 +56,13 @@ describe('ng-stages',function() {
     });
 
     describe('save',function() {
+
+        beforeEach(function(done){
+            $stages.init();
+            done();
+        });
+
+
         it('should write stages to stages.json',function() {
             $stages.stages = [mockStage];
             return $stages.save().then(function() {
@@ -74,6 +81,10 @@ describe('ng-stages',function() {
     });
 
     describe('load', function() {
+        beforeEach(function(done){
+            $stages.init();
+            done();
+        });
         it('should load and sanitize stages',function() {
             return $stages.load().then(function() {
                 expect($stages.stages).toEqual([mockStageSanitized]);
@@ -101,6 +112,12 @@ describe('ng-stages',function() {
     });
 
     describe('remove',function() {
+
+        beforeEach(function(done){
+            $stages.init();
+            done();
+        });
+
         it('should remove the provided id',function() {
             expect($stages.stages).toEqual([mockStageSanitized]);
             $stages.remove("practice");
@@ -114,6 +131,10 @@ describe('ng-stages',function() {
     });
 
     describe('add',function() {
+        beforeEach(function(done){
+            $stages.init();
+            done();
+        });
         it('should add a stage to the list and add autogen properties',function() {
             $stages.clear();
             var res = $stages.add(mockStage);
@@ -191,6 +212,11 @@ describe('ng-stages',function() {
     });
 
     describe('get',function() {
+        beforeEach(function(done){
+            $stages.init();
+            done();
+        });
+
         it('should get a sanitized stage', function() {
             expect($stages.get("practice")).toEqual(mockStageSanitized);
         });
