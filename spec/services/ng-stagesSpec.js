@@ -23,17 +23,9 @@ describe('ng-stages',function() {
         unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
         unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     })
-    var httpMock = createHttpMock({
-        get: {
-            '/stages': { data: [mockStageSanitized] }
-        },
-        post: {
-            '/stages/save': {stages: [mockStageSanitized]}
-        }
-    });
+    var httpMock;
     beforeEach(function() {
         angular.mock.module(module.name);
-        httpMock.resetResponses();
         httpMock = createHttpMock({
             get: {
                 '/stages': { data: [mockStageSanitized] }
@@ -61,17 +53,11 @@ describe('ng-stages',function() {
                 expect(httpMock.get).toHaveBeenCalledWith('/stages');
                 expect($stages.stages).toEqual([mockStageSanitized]);
                 done();
-            },function(err){
-                console.error(`How did I get here? ${err}`);
             });
-        },10000);
+        });
     });
 
     describe('save',function() {
-
-        // beforeEach(function(done){
-        //     $stages.init().then(()=>{done();});
-        // });
 
         it('should write stages to stages.json',function(done) {
             $stages.stages = [mockStageSanitized];
@@ -220,8 +206,12 @@ describe('ng-stages',function() {
     });
 
     describe('get',function() {
+
+        beforeEach(function(done){
+            $stages.init().then(()=> done());
+        });
+
         it('should get a sanitized stage', function() {
-            console.info($stages);
             expect($stages.get("practice")).toEqual(mockStageSanitized);
         });
     });

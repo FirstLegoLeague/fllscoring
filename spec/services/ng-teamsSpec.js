@@ -47,26 +47,23 @@ describe('ng-teams',function() {
         translationNeeded: true
     };
     var fsMock;
-    var httpMock = createHttpMock({
-        get: {
-            '/teams': { data: [savedMockTeam] }
-        },
-        post: {
-            '/teams/save': {teams:[savedMockTeam]}
-        }
-    });
-
+    var httpMock;
     beforeEach(function() {
         angular.mock.module(module.name);
+        httpMock = createHttpMock({
+            get: {
+                '/teams': { data: [savedMockTeam] }
+            },
+            post: {
+                '/teams/save': {teams:[savedMockTeam]}
+            }
+        });
         angular.mock.module(function($provide) {
             $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$teams", function(_$teams_) {
             $teams = _$teams_;
         }]);
-        // $teams needs to initialize itself, wait for that to
-        // complete before starting each test.
-        
     });
 
     describe('initializing',function() {
@@ -97,15 +94,12 @@ describe('ng-teams',function() {
     });
 
     describe('load', function() {
-
-        
-
         it('should load and sanitize teams',function(done) {
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);
                 done();
             });
-        },10000);
+        });
 
         it('should log an error if loading fails',function(done) {
             httpMock.get.and.returnValue(Q.reject('foo'));
@@ -117,10 +111,6 @@ describe('ng-teams',function() {
     });
 
     describe('remove',function() {
-
-        beforeEach(function(done){
-            $teams.init().then(()=>{done();});
-        });
 
         it('should remove the provided id',function() {
             expect($teams.teams).toEqual([mockTeam]);
