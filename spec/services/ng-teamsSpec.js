@@ -112,6 +112,10 @@ describe('ng-teams',function() {
 
     describe('remove',function() {
 
+        beforeEach(function (done) {
+            $teams.init().then(() => done(), (err) => { console.error(err); done(); });
+        });
+
         it('should remove the provided id',function() {
             expect($teams.teams).toEqual([mockTeam]);
             $teams.remove(123);
