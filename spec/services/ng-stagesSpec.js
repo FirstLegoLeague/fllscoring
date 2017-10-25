@@ -62,17 +62,18 @@ describe('ng-stages',function() {
         });
 
 
-        it('should write stages to stages.json',function() {
+        it('should write stages to stages.json',function(done) {
             $stages.stages = [mockStageSanitized];
             return $stages.save().then(function() {
                 expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStageSanitized]});
-                
+                done();
             });
         });
-        it('should log an error if writing fails',function() {
+        it('should log an error if writing fails',function(done) {
             httpMock.post.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
+                done();
             });
         });
     });
@@ -88,13 +89,14 @@ describe('ng-stages',function() {
                 done();
             });
         });
-        it('should log an error if reading fails',function() {
+        it('should log an error if reading fails',function(done) {
             httpMock.get.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages read error','squeek');
+                done();
             });
         });
-        it('should initialize with default stages if reading fails',function() {
+        it('should initialize with default stages if reading fails',function(done) {
             httpMock.get.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages using defaults');
@@ -105,6 +107,7 @@ describe('ng-stages',function() {
                     {index:3,id:"semi",name:"Semifinals",rounds:0,$rounds:[]},
                     {index:4,id:"final",name:"Final",rounds:0,$rounds:[]}
                 ]);
+                done();
             });
         });
     });
@@ -206,10 +209,6 @@ describe('ng-stages',function() {
     });
 
     describe('get',function() {
-        beforeEach(function(done){
-            $stages.init().then(()=>{done();});
-        });
-
         it('should get a sanitized stage', function() {
             expect($stages.get("practice")).toEqual(mockStageSanitized);
         });

@@ -80,31 +80,35 @@ describe('ng-teams',function() {
     });
 
     describe('save',function() {
-        it('should write teams to teams.json',function() {
+        it('should write teams to teams.json',function(done) {
             return $teams.save().then(function() {
                 expect(httpMock.post).toHaveBeenCalledWith('/teams/save',{teams: [savedMockTeam]});
+                done();
             });
         });
 
-        it('should log an error if writing fails',function() {
+        it('should log an error if writing fails',function(done) {
             httpMock.post.and.returnValue(Q.reject('foo'));
             return $teams.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('teams write error','foo');
+                done();
             });
         });
     });
 
     describe('load', function() {
-        it('should load and sanitize teams',function() {
+        it('should load and sanitize teams',function(done) {
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);
+                done();
             });
         });
 
-        it('should log an error if loading fails',function() {
+        it('should log an error if loading fails',function(done) {
             httpMock.get.and.returnValue(Q.reject('foo'));
             return $teams.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('teams read error','foo');
+                done();
             });
         });
     });
@@ -156,11 +160,6 @@ describe('ng-teams',function() {
     });
 
     describe('get',function() {
-
-        beforeEach(function(done){
-            $teams.init().then(()=>{done();});
-        });
-
         it('should get a sanitized team', function() {
             expect($teams.get(123)).toEqual(mockTeam);
         });

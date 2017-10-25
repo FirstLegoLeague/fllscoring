@@ -60,7 +60,7 @@ describe('ng-settings',function() {
             });
             
         });
-        it('should write a default settings file if the file is not there',function() {
+        it('should write a default settings file if the file is not there',function(done) {
             var defaults = {
                 tables: [{name:'Table 1'}],
                 referees: [{name:'Head referee'}],
@@ -78,29 +78,33 @@ describe('ng-settings',function() {
             $settings.load().then(function(){
                 expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings:defaults});
                 expect($settings.settings).toEqual(defaults);
+                $rootScope.$digest();
+                done();
             });
-            $rootScope.$digest();
+            
             
         });
-        it('should just create local settings if no file could be created',function() {
+        it('should just create local settings if no file could be created',function(done) {
             defaults = {};
-            //$settings.settings = {}; 
-            // the whole point is for load to ignore whatever settings the $settings.settings object currently has. 
-            // In the load function, the existing value of $settings.settings is irrelevant.
             httpMock["get"]["/settings"] = {data:{}};
             $settings.load().then(function(){
                 expect($settings.settings).toEqual({});
+                $rootScope.$digest();
+                done();
             });
-            $rootScope.$digest();
+            
             
         });
     });
 
     describe('save',function() {
-        it('should write the local settings to the settings.json file',function() {
+        it('should write the local settings to the settings.json file',function(done) {
             $settings.settings = 'foo';
-            $settings.save();
-            expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings: 'foo'});
+            $settings.save().then(function(){
+                expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings: 'foo'});
+                done();
+            });
+            
         });
     });
 });
