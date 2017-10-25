@@ -72,6 +72,7 @@ describe('ng-stages',function() {
         });
         it('should log an error if writing fails',function() {
             httpMock.post.and.returnValue(Q.reject('aargh'));
+            console.info(`${logMock.get}`);
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
             });
@@ -131,6 +132,11 @@ describe('ng-stages',function() {
     });
 
     describe('add',function() {
+
+        beforeEach(function(){
+            console.log(`before add things ${$stages._stagesMap}`);
+        });
+
         it('should add a stage to the list and add autogen properties',function() {
             $stages.clear();
             console.log(`first ${$stages._stagesMap}`);

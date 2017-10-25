@@ -76,8 +76,8 @@ describe('ng-settings',function() {
                 ignoreNegativeScores: true
             }
             $settings.load().then(function(){
-                expect($settings.settings).toEqual(defaults);
                 expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings:defaults});
+                expect($settings.settings).toEqual(defaults);
             });
             $rootScope.$digest();
             
