@@ -52,7 +52,7 @@ describe('ng-teams',function() {
             '/teams': { data: [savedMockTeam] }
         },
         post: {
-            '/teams/save': mockTeam
+            '/teams/save': {teams:[savedMockTeam]}
         }
     });
 
@@ -106,6 +106,9 @@ describe('ng-teams',function() {
     });
 
     describe('remove',function() {
+
+
+
         it('should remove the provided id',function() {
             expect($teams.teams).toEqual([mockTeam]);
             $teams.remove(123);

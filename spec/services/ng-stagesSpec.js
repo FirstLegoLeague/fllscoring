@@ -32,7 +32,7 @@ describe('ng-stages',function() {
                     '/stages': { data: [mockStageSanitized] }
                 },
                 post: {
-                    '/stages/save': mockStageSanitized
+                    '/stages/save': {stages: [mockStageSanitized]}
                 }
             });
             $provide.value('$http', httpMock);
@@ -58,8 +58,7 @@ describe('ng-stages',function() {
     describe('save',function() {
 
         beforeEach(function(done){
-            $stages.init();
-            done();
+            $stages.init().then(()=>{done();});
         });
 
 
@@ -112,10 +111,9 @@ describe('ng-stages',function() {
 
     describe('remove',function() {
 
-        // beforeEach(function(done){
-        //     $stages.init();
-        //     done();
-        // });
+        beforeEach(function(done){
+            $stages.init().then(()=>{done();});
+        });
 
         it('should remove the provided id',function() {
             expect($stages.stages).toEqual([mockStageSanitized]);
@@ -209,9 +207,7 @@ describe('ng-stages',function() {
 
     describe('get',function() {
         beforeEach(function(done){
-            $stages.init().then(function(){
-                done();
-            });
+            $stages.init().then(()=>{done();});
         });
 
         it('should get a sanitized stage', function() {
