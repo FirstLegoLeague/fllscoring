@@ -209,8 +209,9 @@ describe('ng-stages',function() {
 
     describe('get',function() {
         beforeEach(function(done){
-            $stages.init();
-            done();
+            $stages.init().then(function(){
+                done();
+            });
         });
 
         it('should get a sanitized stage', function() {

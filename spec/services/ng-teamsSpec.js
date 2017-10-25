@@ -78,7 +78,7 @@ describe('ng-teams',function() {
     describe('save',function() {
         it('should write teams to teams.json',function() {
             return $teams.save().then(function() {
-                expect(httpMock.post).toHaveBeenCalledWith('/teams/save',{teams: [mockTeam]});
+                expect(httpMock.post).toHaveBeenCalledWith('/teams/save',{teams: [savedMockTeam]});
             });
         });
 
