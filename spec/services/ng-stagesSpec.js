@@ -81,8 +81,7 @@ describe('ng-stages',function() {
 
     describe('load', function() {
         beforeEach(function(done){
-            $stages.init();
-            done();
+            $stages.init().then(()=>{done();});
         });
 
         it('should load and sanitize stages',function(done) {
@@ -134,17 +133,17 @@ describe('ng-stages',function() {
     describe('add',function() {
 
         beforeEach(function(){
-            console.log(`before add things ${$stages._stagesMap}`);
+            console.info(`before add things ${$stages._stagesMap}`);
         });
 
         it('should add a stage to the list and add autogen properties',function() {
             $stages.clear();
-            console.log(`first ${$stages._stagesMap}`);
+            console.info(`first ${$stages._stagesMap}`);
             var res = $stages.add(mockStage);
             expect($stages.stages).toEqual([mockStageSanitized]);
         });
         it('should reject duplicate stage ids',function() {
-            console.log(`second ${$stages._stagesMap}`);
+            console.info(`second ${$stages._stagesMap}`);
             $stages.clear();
             $stages.add(mockStage);
             expect(function() {
@@ -152,7 +151,7 @@ describe('ng-stages',function() {
             }).toThrow();
         });
         it('should reject a stage without an id, name, or rounds',function() {
-            console.log(`third ${$stages._stagesMap}`);
+            console.info(`third ${$stages._stagesMap}`);
             $stages.clear();
             $stages.add({ id: "foo", name: "bar", rounds: 0 });
             expect(function() {
@@ -182,7 +181,7 @@ describe('ng-stages',function() {
         });
         it('should maintain existing stages and allStages arrays', function() {
             $stages.clear();
-            console.log(`last ${$stages._stagesMap}`);
+            console.info(`last ${$stages._stagesMap}`);
             var allStages = $stages.allStages;
             var stages = $stages.stages;
             expect(allStages).toEqual([]);
