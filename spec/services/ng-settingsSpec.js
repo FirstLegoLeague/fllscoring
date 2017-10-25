@@ -75,20 +75,25 @@ describe('ng-settings',function() {
                 currentStage: 'practice',
                 ignoreNegativeScores: true
             }
-            $settings.load();
+            $settings.load().then(function(){
+                expect($settings.settings).toEqual(defaults);
+                expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings:defaults});
+            });
             $rootScope.$digest();
-            expect($settings.settings).toEqual(defaults);
+            
         });
         it('should just create local settings if no file could be created',function() {
             defaults = {};
-            $settings.settings = {}; 
+            //$settings.settings = {}; 
             // the whole point is for load to ignore whatever settings the $settings.settings object currently has. 
             // In the load function, the existing value of $settings.settings is irrelevant.
             httpMock.addResponse("get",'/settings',{data:defaults});
             httpMock.addResponse("post",'/settings/save',{settings:defaults});
-            $settings.load();
+            $settings.load().then(function(){
+                expect($settings.settings).toEqual({});
+            });
             $rootScope.$digest();
-            expect($settings.settings).toEqual({});
+            
         });
     });
 

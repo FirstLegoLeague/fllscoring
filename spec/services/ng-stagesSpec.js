@@ -47,11 +47,13 @@ describe('ng-stages',function() {
     });
 
     describe('init',function() {
-        it('should load stages by default', function() {
+        it('should load stages by default', function(done) {
             return $stages.init().then(function(){
                 expect(httpMock.get).toHaveBeenCalledWith('/stages');
+                expect($stages.stages).toEqual([mockStageSanitized]);
+                done();
             });
-            expect($stages.stages).toEqual([mockStageSanitized]);
+            
         });
     });
 
@@ -85,9 +87,10 @@ describe('ng-stages',function() {
             $stages.init();
             done();
         });
-        it('should load and sanitize stages',function() {
+        it('should load and sanitize stages',function(done) {
             return $stages.load().then(function() {
                 expect($stages.stages).toEqual([mockStageSanitized]);
+                done();
             });
         });
         it('should log an error if reading fails',function() {
