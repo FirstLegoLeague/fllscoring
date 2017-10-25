@@ -221,6 +221,7 @@ describe('ng-stages',function() {
 
     describe('get',function() {
         it('should get a sanitized stage', function() {
+            console.info($stages);
             expect($stages.get("practice")).toEqual(mockStageSanitized);
         });
     });
