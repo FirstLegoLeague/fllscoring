@@ -95,14 +95,12 @@ describe('ng-teams',function() {
 
     describe('load', function() {
         it('should load and sanitize teams',function(done) {
+            $teams.clear();
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);
                 done();
-            },(err)=>{
-                console.error(`in teams load: ${err}`);
-                done();
             });
-        },10000);
+        });
 
         it('should log an error if loading fails',function(done) {
             httpMock.get.and.returnValue(Q.reject('foo'));
