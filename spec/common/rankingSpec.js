@@ -105,7 +105,7 @@ describe('common/ranking', function () {
                 { teamNumber: 41, stageId: 'test', round: 0, score: 0, published: true },
                 { teamNumber: 41, stageId: 'test', round: 4, score: 0, published: true },
             ], { test: 3 });
-            expect(board['test'].length).toEqual(1);
+            expect(board['test'].length).toEqual(0);
         });
 
         it("should ignore invalid scores", function () {

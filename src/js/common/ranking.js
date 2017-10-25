@@ -62,7 +62,7 @@ define("common/ranking", function (require, exports, module) {
             }
 
             // Ignore score if filtered
-            if (!stageFilter[s.stageId] || s.round > stageFilter[s.stageId]) {
+            if (!stageFilter[s.stageId] || s.round > stageFilter[s.stageId] || s.round < 1) {
                 return false;
             }
 

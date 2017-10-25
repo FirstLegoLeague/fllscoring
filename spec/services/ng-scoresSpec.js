@@ -373,7 +373,7 @@ describe('ng-scores',function() {
             expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownStageError));
             expect($scores.scores[1].error).toEqual(jasmine.any($scores.UnknownRoundError));
             expect($scores.scores[2].error).toEqual(jasmine.any($scores.UnknownRoundError));
-            expect(board["test"].length).toEqual(1);
+            expect(board["test"].length).toEqual(0);
             expect($scores.validationErrors.length).toEqual(3);
         });
 
