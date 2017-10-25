@@ -75,6 +75,7 @@ describe('ng-settings',function() {
                 currentStage: 'practice',
                 ignoreNegativeScores: true
             }
+            httpMock.addResponse('get','/settings',{});
             $settings.load().then(function(){
                 expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings:defaults});
                 expect($settings.settings).toEqual(defaults);

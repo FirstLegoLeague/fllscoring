@@ -58,7 +58,7 @@ define('services/ng-settings',[
                 return $http.post("/settings/save", data).then(function (data, status) {
                     log('Data posted successfully');
                 },function () {
-                    log('failed retrieving settings');
+                    log('failed writing settings');
                 });
             }).catch(function(err) {
                 //return ephemeral settings

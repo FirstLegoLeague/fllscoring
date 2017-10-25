@@ -57,9 +57,9 @@ describe('ng-stages',function() {
 
     describe('save',function() {
 
-        beforeEach(function(done){
-            $stages.init().then(()=>{done();});
-        });
+        // beforeEach(function(done){
+        //     $stages.init().then(()=>{done();});
+        // });
 
         it('should write stages to stages.json',function(done) {
             $stages.stages = [mockStageSanitized];
