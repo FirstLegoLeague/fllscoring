@@ -42,9 +42,9 @@ define('services/ng-teams',[
 
         Teams.prototype.save = function() {
             return $http.post("/teams/save", { teams: this._rawTeams }).then(function (data, status) {
-                log('Data posted successfully');
+                log(`Teams saved to teams.json: ${JSON.stringify(data)}`);
             }, (function (err) {
-                log('teams write error', err);
+                log('Teams write error', err);
             }));
         };
 

@@ -87,7 +87,7 @@ describe('ng-teams',function() {
         it('should log an error if writing fails',function(done) {
             httpMock.post.and.returnValue(Q.reject('foo'));
             return $teams.save().then(function() {
-                expect(logMock).toHaveBeenCalledWith('teams write error','foo');
+                expect(logMock).toHaveBeenCalledWith('Teams write error','foo');
                 done();
             });
         });

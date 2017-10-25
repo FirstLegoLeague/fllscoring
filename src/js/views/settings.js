@@ -12,8 +12,8 @@ define('views/settings',[
     return angular.module(moduleName,[
         'NewStageDialog'
     ]).controller(moduleName+'Ctrl',[
-        '$scope', '$stages','$settings','$q','$handshake','$challenge','$message','$http',
-        function($scope, $stages, $settings, $q, $handshake,$challenge,$message,$http) {
+        '$scope', '$stages','$settings','$q','$handshake','$challenge','$message',
+        function($scope, $stages, $settings, $q, $handshake,$challenge,$message) {
             log('init settings ctrl');
             $scope.log = log.get();
             // initialize first tab

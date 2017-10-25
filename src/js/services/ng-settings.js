@@ -56,9 +56,9 @@ define('services/ng-settings',[
                 log('settings read error, trying to create file', err);
                 var data = { settings: defaults };
                 return $http.post("/settings/save", data).then(function (data, status) {
-                    log('Data posted successfully');
-                },function () {
-                    log('failed writing settings');
+                    log(`Settings saved to settings.json: ${JSON.stringify(data)}`);
+                },function (err) {
+                    log('Failed writing settings', err);
                 });
             }).catch(function(err) {
                 //return ephemeral settings
