@@ -72,7 +72,7 @@ describe('ng-stages',function() {
         });
         it('should log an error if writing fails',function() {
             httpMock.post.and.returnValue(Q.reject('aargh'));
-            console.info(`${logMock.get}`);
+            console.info(`${logMock.get()}`);
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
             });
@@ -80,10 +80,10 @@ describe('ng-stages',function() {
     });
 
     describe('load', function() {
-        // beforeEach(function(done){
-        //     $stages.init();
-        //     done();
-        // });
+        beforeEach(function(done){
+            $stages.init();
+            done();
+        });
 
         it('should load and sanitize stages',function(done) {
             return $stages.load().then(function() {
