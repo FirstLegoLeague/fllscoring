@@ -34,6 +34,14 @@ describe('ng-stages',function() {
     beforeEach(function() {
         angular.mock.module(module.name);
         httpMock.resetResponses();
+        httpMock = createHttpMock({
+            get: {
+                '/stages': { data: [mockStageSanitized] }
+            },
+            post: {
+                '/stages/save': {stages: [mockStageSanitized]}
+            }
+        });
         angular.mock.module(function($provide) {
             $provide.value('$http', httpMock);
         });
@@ -45,13 +53,18 @@ describe('ng-stages',function() {
     });
 
     describe('init',function() {
+        beforeEach(function(done){
+            done();
+        });
         it('should load stages by default', function (done) {
             return $stages.init().then(function () {
-                //expect(httpMock.get).toHaveBeenCalledWith('/stages');
+                expect(httpMock.get).toHaveBeenCalledWith('/stages');
                 expect($stages.stages).toEqual([mockStageSanitized]);
                 done();
+            },function(err){
+                console.error(`How did I get here? ${err}`);
             });
-        });
+        },10000);
     });
 
     describe('save',function() {
