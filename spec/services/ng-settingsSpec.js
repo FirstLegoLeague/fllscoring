@@ -56,8 +56,8 @@ describe('ng-settings',function() {
         });
 
         it('should set local settings on success load',function(done) {
-            expect(httpMock.get).toHaveBeenCalledWith('/settings');
             $settings.load().then(function(res) {
+                expect(httpMock.get).toHaveBeenCalledWith('/settings');
                 expect(res).toEqual(defaults);
                 expect($settings.settings).toEqual(defaults);
                 done();

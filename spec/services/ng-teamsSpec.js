@@ -94,8 +94,10 @@ describe('ng-teams',function() {
     });
 
     describe('load', function() {
+        beforeEach((done) => $teams.init().then(() => done(), (err) => { console.error(err); done(); }));
         it('should load and sanitize teams',function(done) {
             $teams.clear();
+            httpMock.addResponse('get','/teams',{data: [savedMockTeam]});
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);
                 done();
