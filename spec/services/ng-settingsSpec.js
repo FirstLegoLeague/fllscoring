@@ -4,34 +4,33 @@ describe('ng-settings',function() {
         'services/ng-services': ngServices,
         'services/log': logMock
     });
-    var defaults;
     var $settings, $q, $rootScope, settingsMock, fsMock;
-    var httpMock;
+    var defaults = {
+        tables: [{ name: 'Table 1' }],
+        referees: [{ name: 'Head referee' }],
+        askTable: true,
+        askReferee: true,
+        mhub: `ws://${window.location.hostname}:13900`, //notice that window.location in necessary because you can't know where the karma server will run
+        node: 'default',
+        challenge: '2017_en_US-official',
+        host: window.location.origin + '/',
+        autoPublish: true,
+        autoBroadcast: true,
+        currentStage: 'practice',
+        ignoreNegativeScores: true
+    }
+    var httpMock  = createHttpMock({
+        get: {
+            '/settings': {data: defaults}
+        },
+        post: {
+            '/settings/save': {settings: defaults}
+        }
+    });
     beforeEach(function() {
         angular.mock.module(module.name);
+        httpMock.resetResponses();
         angular.mock.module(function($provide) {
-            defaults = {
-                tables: [{ name: 'Table 1' }],
-                referees: [{ name: 'Head referee' }],
-                askTable: true,
-                askReferee: true,
-                mhub: `ws://${window.location.hostname}:13900`, //notice that window.location in necessary because you can't know where the karma server will run
-                node: 'default',
-                challenge: '2017_en_US-official',
-                host: window.location.origin + '/',
-                autoPublish: true,
-                autoBroadcast: true,
-                currentStage: 'practice',
-                ignoreNegativeScores: true
-            }
-            httpMock  = createHttpMock({
-                get: {
-                    '/settings': {data: defaults}
-                },
-                post: {
-                    '/settings/save': {settings: defaults}
-                }
-            });
             $provide.value('$http',httpMock);
         });
         angular.mock.inject(function(_$settings_, _$q_,_$rootScope_) {
@@ -51,6 +50,7 @@ describe('ng-settings',function() {
     });
 
     describe('load',function() {
+
         it('should set local settings on success load',function(done) {
             expect(httpMock.get).toHaveBeenCalledWith('/settings');
             $settings.load().then(function(res) {
@@ -78,15 +78,15 @@ describe('ng-settings',function() {
             $settings.load().then(function(){
                 expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings:defaults});
                 expect($settings.settings).toEqual(defaults);
-                $rootScope.$digest();
                 done();
             });
+            $rootScope.$digest();
             
             
         });
         it('should just create local settings if no file could be created',function(done) {
             defaults = {};
-            httpMock["get"]["/settings"] = {data:{}};
+            $settings.settings = {}; //this is how settings starts out
             $settings.load().then(function(){
                 expect($settings.settings).toEqual({});
                 $rootScope.$digest();

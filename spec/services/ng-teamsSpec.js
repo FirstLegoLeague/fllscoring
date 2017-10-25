@@ -97,6 +97,7 @@ describe('ng-teams',function() {
     });
 
     describe('load', function() {
+
         it('should load and sanitize teams',function(done) {
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);

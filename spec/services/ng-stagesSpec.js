@@ -23,18 +23,18 @@ describe('ng-stages',function() {
         unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
         unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     })
-    var httpMock;
+    var httpMock = createHttpMock({
+        get: {
+            '/stages': { data: [mockStageSanitized] }
+        },
+        post: {
+            '/stages/save': {stages: [mockStageSanitized]}
+        }
+    });
     beforeEach(function() {
         angular.mock.module(module.name);
+        httpMock.resetResponses();
         angular.mock.module(function($provide) {
-            httpMock = createHttpMock({
-                get: {
-                    '/stages': { data: [mockStageSanitized] }
-                },
-                post: {
-                    '/stages/save': {stages: [mockStageSanitized]}
-                }
-            });
             $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$q", "$stages", "$rootScope", function(_$q_, _$stages_, _$rootScope_) {
@@ -60,7 +60,6 @@ describe('ng-stages',function() {
         beforeEach(function(done){
             $stages.init().then(()=>{done();});
         });
-
 
         it('should write stages to stages.json',function(done) {
             $stages.stages = [mockStageSanitized];

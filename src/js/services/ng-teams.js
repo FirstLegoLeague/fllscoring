@@ -43,8 +43,8 @@ define('services/ng-teams',[
         Teams.prototype.save = function() {
             return $http.post("/teams/save", { teams: this._rawTeams }).then(function (data, status) {
                 console.info('Data posted successfully');
-            }, (function () {
-                console.error('failed retrieving teams');
+            }, (function (err) {
+                log('teams write error', err);
             }));
         };
 
@@ -56,7 +56,7 @@ define('services/ng-teams',[
                     self.add(t);
                 });
             }, function(err) {
-                console.error('teams read error', err);
+                log('teams read error', err);
             });
         };
 
