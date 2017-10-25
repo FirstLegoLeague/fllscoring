@@ -58,8 +58,6 @@ describe('ng-teams',function() {
 
     beforeEach(function() {
         angular.mock.module(module.name);
-        var l = logMock.get();
-        l.splice(0,l.length);
         angular.mock.module(function($provide) {
             $provide.value('$http', httpMock);
         });
@@ -68,10 +66,14 @@ describe('ng-teams',function() {
         }]);
         // $teams needs to initialize itself, wait for that to
         // complete before starting each test.
-        return $teams.init();
+        
     });
 
     describe('initializing',function() {
+        beforeEach(function(done){
+            $teams.init().then(()=>{done();});
+        });
+
         it('should load teams by default', function() {
             expect($teams.teams).toEqual([mockTeam]);
         });
