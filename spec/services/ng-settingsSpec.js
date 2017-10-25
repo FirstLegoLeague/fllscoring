@@ -87,8 +87,7 @@ describe('ng-settings',function() {
             //$settings.settings = {}; 
             // the whole point is for load to ignore whatever settings the $settings.settings object currently has. 
             // In the load function, the existing value of $settings.settings is irrelevant.
-            httpMock.addResponse("get",'/settings',{data:defaults});
-            httpMock.addResponse("post",'/settings/save',{settings:defaults});
+            httpMock["get"]["/settings"] = {data:{}};
             $settings.load().then(function(){
                 expect($settings.settings).toEqual({});
             });

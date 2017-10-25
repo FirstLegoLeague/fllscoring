@@ -64,9 +64,9 @@ describe('ng-stages',function() {
 
 
         it('should write stages to stages.json',function() {
-            $stages.stages = [mockStage];
+            $stages.stages = [mockStageSanitized];
             return $stages.save().then(function() {
-                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStage]});
+                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStageSanitized]});
                 
             });
         });
@@ -79,10 +79,11 @@ describe('ng-stages',function() {
     });
 
     describe('load', function() {
-        beforeEach(function(done){
-            $stages.init();
-            done();
-        });
+        // beforeEach(function(done){
+        //     $stages.init();
+        //     done();
+        // });
+
         it('should load and sanitize stages',function(done) {
             return $stages.load().then(function() {
                 expect($stages.stages).toEqual([mockStageSanitized]);
@@ -136,6 +137,7 @@ describe('ng-stages',function() {
             expect($stages.stages).toEqual([mockStageSanitized]);
         });
         it('should reject duplicate stage ids',function() {
+            console.log($stages._stagesMap);
             $stages.clear();
             $stages.add(mockStage);
             expect(function() {
