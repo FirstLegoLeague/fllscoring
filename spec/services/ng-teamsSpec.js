@@ -99,6 +99,9 @@ describe('ng-teams',function() {
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);
                 done();
+            }, (err) => {
+                console.error(err);
+                done();
             });
         });
 
