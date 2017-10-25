@@ -99,7 +99,7 @@ describe('ng-teams',function() {
                 expect($teams.teams).toEqual([mockTeam]);
                 done();
             });
-        });
+        },10000);
 
         it('should log an error if loading fails',function(done) {
             httpMock.get.and.returnValue(Q.reject('foo'));
@@ -112,9 +112,7 @@ describe('ng-teams',function() {
 
     describe('remove',function() {
 
-        beforeEach(function (done) {
-            $teams.init().then(() => done(), (err) => { console.error(err); done(); });
-        });
+        beforeEach((done) => $teams.init().then(() => done(), (err) => { console.error(err); done(); }));
 
         it('should remove the provided id',function() {
             expect($teams.teams).toEqual([mockTeam]);
@@ -157,6 +155,7 @@ describe('ng-teams',function() {
     });
 
     describe('get',function() {
+        beforeEach((done) => $teams.init().then(() => done(), (err) => { console.error(err); done(); }));
         it('should get a sanitized team', function() {
             expect($teams.get(123)).toEqual(mockTeam);
         });
