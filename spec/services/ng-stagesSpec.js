@@ -23,17 +23,18 @@ describe('ng-stages',function() {
         unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
         unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     })
-    var httpMock = createHttpMock({
-        get: {
-            '/stages': { data: [mockStageSanitized] }
-        },
-        post: {
-            '/stages/save': mockStageSanitized
-        }
-    });
+    var httpMock;
     beforeEach(function() {
         angular.mock.module(module.name);
         angular.mock.module(function($provide) {
+            httpMock = createHttpMock({
+                get: {
+                    '/stages': { data: [mockStageSanitized] }
+                },
+                post: {
+                    '/stages/save': mockStageSanitized
+                }
+            });
             $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$q", "$stages", "$rootScope", function(_$q_, _$stages_, _$rootScope_) {
@@ -41,9 +42,6 @@ describe('ng-stages',function() {
             $rootScope = _$rootScope_;
             $stages = _$stages_;
         }]);
-        // $stages needs to initialize itself, wait for that to
-        // complete before starting each test.
-        
     });
 
     describe('init',function() {
@@ -73,8 +71,6 @@ describe('ng-stages',function() {
             });
         });
         it('should log an error if writing fails',function() {
-            console.log(httpMock.post)
-            console.log(httpMock['post']);
             httpMock.post.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
@@ -134,10 +130,6 @@ describe('ng-stages',function() {
     });
 
     describe('add',function() {
-        beforeEach(function(done){
-            $stages.init();
-            done();
-        });
         it('should add a stage to the list and add autogen properties',function() {
             $stages.clear();
             var res = $stages.add(mockStage);
