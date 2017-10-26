@@ -4,22 +4,37 @@ describe('ng-settings',function() {
         'services/ng-services': ngServices,
         'services/log': logMock
     });
-
-    var $settings, $httpBackend, $q, $rootScope, settingsMock, fsMock;
-
+    var $settings, $q, $rootScope, settingsMock, fsMock;
+    var defaults = {
+        tables: [{ name: 'Table 1' }],
+        referees: [{ name: 'Head referee' }],
+        askTable: true,
+        askReferee: true,
+        mhub: `ws://${window.location.hostname}:13900`, //notice that window.location in necessary because you can't know where the karma server will run
+        node: 'default',
+        challenge: '2017_en_US-official',
+        host: window.location.origin + '/',
+        autoPublish: true,
+        autoBroadcast: true,
+        currentStage: 'practice',
+        ignoreNegativeScores: true
+    }
+    var httpMock = createHttpMock({
+        get: {
+            '/settings': {data: defaults}
+        },
+        post: {
+            '/settings/save': {settings: defaults}
+        }
+    });
     beforeEach(function() {
         angular.mock.module(module.name);
+        httpMock.resetResponses();
         angular.mock.module(function($provide) {
-            var s = $provide.service('$fs',function($q) {
-                fsMock = createFsMock({
-                    'settings.json': {}
-                });
-                return fsMock;
-            });
+            $provide.value('$http',httpMock);
         });
-        angular.mock.inject(function(_$settings_, _$q_, _$httpBackend_,_$rootScope_) {
+        angular.mock.inject(function(_$settings_, _$q_,_$rootScope_) {
             $settings = _$settings_;
-            $httpBackend = _$httpBackend_;
             $q = _$q_;
             $rootScope = _$rootScope_;
         });
@@ -35,14 +50,21 @@ describe('ng-settings',function() {
     });
 
     describe('load',function() {
+
+        beforeEach(function(){
+            httpMock.resetResponses();
+        });
+
         it('should set local settings on success load',function(done) {
             $settings.load().then(function(res) {
-                expect(res).toEqual({});
-                expect($settings.settings).toEqual({});
+                expect(httpMock.get).toHaveBeenCalledWith('/settings');
+                expect(res).toEqual(defaults);
+                expect($settings.settings).toEqual(defaults);
                 done();
             });
+            
         });
-        it('should write a default settings file if the file is not there',function() {
+        it('should write a default settings file if the file is not there',function(done) {
             var defaults = {
                 tables: [{name:'Table 1'}],
                 referees: [{name:'Head referee'}],
@@ -57,27 +79,38 @@ describe('ng-settings',function() {
                 currentStage: 'practice',
                 ignoreNegativeScores: true
             }
-            fsMock.read.and.returnValue($q.reject('no file'));
-            fsMock.write.and.returnValue($q.when());
-            $settings.load();
+            httpMock.addResponse('get','/settings',undefined);
+            httpMock.addResponse('post','/settings/save',{settings:defaults});
+            $settings.load().then(function(){
+                expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings:defaults});
+                expect($settings.settings).toEqual(defaults);
+                done();
+            });
             $rootScope.$digest();
-            expect(fsMock.write).toHaveBeenCalledWith('settings.json',defaults);
-            expect($settings.settings).toEqual(defaults);
+            
+            
         });
-        it('should just create local settings if no file could be created',function() {
-            fsMock.read.and.returnValue($q.reject('no file'));
-            fsMock.write.and.returnValue($q.reject('write error'));
-            $settings.load();
-            $rootScope.$digest();
-            expect($settings.settings).toEqual({});
+        it('should just create local settings if no file could be created',function(done) {
+            defaults = {};
+            $settings.settings = {}; //this is how settings starts out
+            $settings.load().then(function(){
+                expect($settings.settings).toEqual({});
+                $rootScope.$digest();
+                done();
+            });
+            
+            
         });
     });
 
     describe('save',function() {
-        it('should write the local settings to the settings.json file',function() {
+        it('should write the local settings to the settings.json file',function(done) {
             $settings.settings = 'foo';
-            $settings.save();
-            expect(fsMock.write).toHaveBeenCalledWith('settings.json','foo');
+            $settings.save().then(function(){
+                expect(httpMock.post).toHaveBeenCalledWith('/settings/save',{settings: 'foo'});
+                done();
+            });
+            
         });
     });
 });

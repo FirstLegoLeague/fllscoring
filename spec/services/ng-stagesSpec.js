@@ -14,7 +14,7 @@ describe('ng-stages',function() {
     var mockStageSanitized;
     var unusedMockStage;
     var unusedMockStageSanitized;
-    var fsMock;
+        
 
     //initialize
     beforeEach(function() {
@@ -23,57 +23,78 @@ describe('ng-stages',function() {
         unusedMockStage = { id: "unused", name: "Foobar", rounds: 0 };
         unusedMockStageSanitized = { index: 1, id: "unused", name: "Foobar", rounds: 0, $rounds: [] };
     })
-
+    var httpMock;
     beforeEach(function() {
-        fsMock = createFsMock({"stages.json": [mockStage]});
         angular.mock.module(module.name);
+        httpMock = createHttpMock({
+            get: {
+                '/stages': { data: [mockStageSanitized] }
+            },
+            post: {
+                '/stages/save': {stages: [mockStageSanitized]}
+            }
+        });
         angular.mock.module(function($provide) {
-            $provide.value('$fs', fsMock);
+            $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$q", "$stages", "$rootScope", function(_$q_, _$stages_, _$rootScope_) {
             $q = _$q_;
             $rootScope = _$rootScope_;
             $stages = _$stages_;
         }]);
-        // $stages needs to initialize itself, wait for that to
-        // complete before starting each test.
-        return $stages.init();
     });
 
     describe('init',function() {
-        it('should load stages by default', function() {
-            expect($stages.stages).toEqual([mockStageSanitized]);
+        beforeEach(function(done){
+            done();
+        });
+        it('should load stages by default', function (done) {
+            return $stages.init().then(function () {
+                expect(httpMock.get).toHaveBeenCalledWith('/stages');
+                expect($stages.stages).toEqual([mockStageSanitized]);
+                done();
+            });
         });
     });
 
     describe('save',function() {
-        it('should write stages to stages.json',function() {
+
+        it('should write stages to stages.json',function(done) {
+            $stages.stages = [mockStageSanitized];
             return $stages.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('stages.json',[mockStage]);
+                expect(httpMock.post).toHaveBeenCalledWith('/stages/save',{stages: [mockStageSanitized]});
+                done();
             });
         });
-        it('should log an error if writing fails',function() {
-            fsMock.write.and.returnValue(Q.reject('aargh'));
+        it('should log an error if writing fails',function(done) {
+            httpMock.post.and.returnValue(Q.reject('aargh'));
             return $stages.save().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages write error','aargh');
+                done();
             });
         });
     });
 
     describe('load', function() {
-        it('should load and sanitize stages',function() {
+        beforeEach(function(done){
+            $stages.init().then(()=>{done();});
+        });
+
+        it('should load and sanitize stages',function(done) {
             return $stages.load().then(function() {
                 expect($stages.stages).toEqual([mockStageSanitized]);
+                done();
             });
         });
-        it('should log an error if reading fails',function() {
-            fsMock.read.and.returnValue(Q.reject('squeek'));
+        it('should log an error if reading fails',function(done) {
+            httpMock.get.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages read error','squeek');
+                done();
             });
         });
-        it('should initialize with default stages if reading fails',function() {
-            fsMock.read.and.returnValue(Q.reject('squeek'));
+        it('should initialize with default stages if reading fails',function(done) {
+            httpMock.get.and.returnValue(Q.reject('squeek'));
             return $stages.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('stages using defaults');
                 expect($stages.allStages).toEqual([
@@ -83,11 +104,17 @@ describe('ng-stages',function() {
                     {index:3,id:"semi",name:"Semifinals",rounds:0,$rounds:[]},
                     {index:4,id:"final",name:"Final",rounds:0,$rounds:[]}
                 ]);
+                done();
             });
         });
     });
 
     describe('remove',function() {
+
+        beforeEach(function(done){
+            $stages.init().then(()=>{done();});
+        });
+
         it('should remove the provided id',function() {
             expect($stages.stages).toEqual([mockStageSanitized]);
             $stages.remove("practice");
@@ -101,6 +128,7 @@ describe('ng-stages',function() {
     });
 
     describe('add',function() {
+
         it('should add a stage to the list and add autogen properties',function() {
             $stages.clear();
             var res = $stages.add(mockStage);
@@ -178,6 +206,11 @@ describe('ng-stages',function() {
     });
 
     describe('get',function() {
+
+        beforeEach(function(done){
+            $stages.init().then(()=> done());
+        });
+
         it('should get a sanitized stage', function() {
             expect($stages.get("practice")).toEqual(mockStageSanitized);
         });

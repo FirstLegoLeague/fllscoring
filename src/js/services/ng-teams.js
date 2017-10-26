@@ -3,12 +3,11 @@
  */
 define('services/ng-teams',[
     'services/ng-services',
-    'services/log',
-    'services/ng-fs'
+    'services/log'
 ],function(module,log) {
     "use strict";
 
-    return module.service('$teams', ["$fs", function($fs) {
+    return module.service('$teams', ["$http", function($http) {
         function Teams() {
             /**
              * Array of all teams.
@@ -42,18 +41,18 @@ define('services/ng-teams',[
         };
 
         Teams.prototype.save = function() {
-            return $fs.write('teams.json', this._rawTeams).then(function() {
-                log('teams saved');
-            }, function(err) {
-                log('teams write error', err);
-            });
+            return $http.post("/teams/save", { teams: this._rawTeams }).then(function (data, status) {
+                log(`Teams saved to teams.json: ${JSON.stringify(data)}`);
+            }, (function (err) {
+                log('Teams write error', err);
+            }));
         };
 
         Teams.prototype.load = function() {
             var self = this;
             this.clear();
-            return $fs.read('teams.json').then(function(res) {
-                res.forEach(function(t) {
+            return $http.get('/teams').then(function(res) {
+                res.data.forEach(function(t) {
                     self.add(t);
                 });
             }, function(err) {

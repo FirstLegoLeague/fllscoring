@@ -128,6 +128,7 @@ define('views/teams',[
                 newTeams.forEach(function(team) {
                     $teams.add(team);
                 });
+
                 return $teams.save().finally(function() {
                     $scope.saving = false;
                     $scope.needSave = false;

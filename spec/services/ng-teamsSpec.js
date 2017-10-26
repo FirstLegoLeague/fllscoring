@@ -47,58 +47,79 @@ describe('ng-teams',function() {
         translationNeeded: true
     };
     var fsMock;
-
+    var httpMock;
     beforeEach(function() {
-        fsMock = createFsMock({"teams.json": [rawMockTeam]});
         angular.mock.module(module.name);
+        httpMock = createHttpMock({
+            get: {
+                '/teams': { data: [savedMockTeam] }
+            },
+            post: {
+                '/teams/save': {teams:[savedMockTeam]}
+            }
+        });
         angular.mock.module(function($provide) {
-            $provide.value('$fs', fsMock);
+            $provide.value('$http', httpMock);
         });
         angular.mock.inject(["$teams", function(_$teams_) {
             $teams = _$teams_;
         }]);
-        // $teams needs to initialize itself, wait for that to
-        // complete before starting each test.
-        return $teams.init();
     });
 
     describe('initializing',function() {
+        beforeEach(function(done){
+            $teams.init().then(()=>{done();});
+        });
+
         it('should load teams by default', function() {
             expect($teams.teams).toEqual([mockTeam]);
         });
     });
 
     describe('save',function() {
-        it('should write teams to teams.json',function() {
+        it('should write teams to teams.json',function(done) {
             return $teams.save().then(function() {
-                expect(fsMock.write).toHaveBeenCalledWith('teams.json',[savedMockTeam]);
+                expect(httpMock.post).toHaveBeenCalledWith('/teams/save',{teams: [savedMockTeam]});
+                done();
             });
         });
 
-        it('should log an error if writing fails',function() {
-            fsMock.write.and.returnValue(Q.reject('foo'));
+        it('should log an error if writing fails',function(done) {
+            httpMock.post.and.returnValue(Q.reject('foo'));
             return $teams.save().then(function() {
-                expect(logMock).toHaveBeenCalledWith('teams write error','foo');
+                expect(logMock).toHaveBeenCalledWith('Teams write error','foo');
+                done();
             });
         });
     });
 
     describe('load', function() {
-        it('should load and sanitize teams',function() {
+        beforeEach((done) => $teams.init().then(() => done(), (err) => { console.error(err); done(); }));
+        it('should load and sanitize teams',function(done) {
+            $teams.clear();
+            httpMock.addResponse('get','/teams',{data: [savedMockTeam]});
             return $teams.load().then(function() {
                 expect($teams.teams).toEqual([mockTeam]);
+                done();
+            }, (err) => {
+                console.error(err);
+                done();
             });
         });
 
-        it('should log an error if loading fails',function() {
-            fsMock.read.and.returnValue(Q.reject('foo'));
+        it('should log an error if loading fails',function(done) {
+            httpMock.get.and.returnValue(Q.reject('foo'));
             return $teams.load().then(function() {
                 expect(logMock).toHaveBeenCalledWith('teams read error','foo');
+                done();
             });
         });
     });
 
     describe('remove',function() {
+
+        beforeEach((done) => $teams.init().then(() => done(), (err) => { console.error(err); done(); }));
+
         it('should remove the provided id',function() {
             expect($teams.teams).toEqual([mockTeam]);
             $teams.remove(123);
@@ -140,6 +161,7 @@ describe('ng-teams',function() {
     });
 
     describe('get',function() {
+        beforeEach((done) => $teams.init().then(() => done(), (err) => { console.error(err); done(); }));
         it('should get a sanitized team', function() {
             expect($teams.get(123)).toEqual(mockTeam);
         });

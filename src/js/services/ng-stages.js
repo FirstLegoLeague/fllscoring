@@ -8,7 +8,7 @@ define('services/ng-stages',[
 ],function(module,log) {
     "use strict";
 
-    return module.service('$stages', ["$q", "$fs", function($q, $fs) {
+    return module.service('$stages', ["$q", "$http", function($q, $http) {
         function Stages() {
             /**
              * Array of all stages, including stages that
@@ -51,19 +51,19 @@ define('services/ng-stages',[
             this._update();
         };
 
-        Stages.prototype.save = function() {
-            return $fs.write('stages.json', this._rawStages).then(function() {
-                log('stages saved');
-            }, function(err) {
-                log('stages write error', err);
+        Stages.prototype.save = function () {
+            return $http.post("/stages/save", { stages: this.stages }).then(function (data, status) {
+                log('Stages saved');
+            },function (error) {
+                log('stages write error', error);
             });
         };
 
         Stages.prototype.load = function() {
             var self = this;
             this.clear();
-            return $fs.read('stages.json').then(function(res) {
-                res.forEach(function(s) {
+            return $http.get("/stages").then(function(res) {
+                res.data.forEach(function(s) {
                     self.add(s);
                 });
             }, function(err) {

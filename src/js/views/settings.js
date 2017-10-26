@@ -65,6 +65,7 @@ define('views/settings',[
                 stages.forEach(function(stage) {
                     return $stages.add(stage);
                 });
+                
                 return $stages.save();
             };
 

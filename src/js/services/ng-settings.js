@@ -3,12 +3,11 @@
  */
 define('services/ng-settings',[
     'services/ng-services',
-    'services/log',
-    'services/ng-fs'
+    'services/log'
 ],function(module,log) {
     "use strict";
 
-    return module.service('$settings', ["$fs", function($fs) {
+    return module.service('$settings', ["$http", function($http) {
         function Settings() {
             /**
              * Array of all settings.
@@ -35,8 +34,8 @@ define('services/ng-settings',[
         Settings.prototype.load = function() {
             var self = this;
             // this.clear();
-            return $fs.read('settings.json').then(function(res) {
-                self.settings = res;
+            return $http.get('/settings').then(function(res) {
+                self.settings = res.data;
                 return self.settings;
             }).catch(function(err) {
                 var defaults = {
@@ -55,9 +54,11 @@ define('services/ng-settings',[
                 };
                 //create settings file if not there
                 log('settings read error, trying to create file', err);
-                return $fs.write('settings.json',defaults).then(function() {
-                    self.settings = defaults;
-                    return self.settings;
+                var data = { settings: defaults };
+                return $http.post("/settings/save", data).then(function (data, status) {
+                    log(`Settings saved to settings.json: ${JSON.stringify(data)}`);
+                },function (err) {
+                    log('Failed writing settings', err);
                 });
             }).catch(function(err) {
                 //return ephemeral settings
@@ -70,7 +71,7 @@ define('services/ng-settings',[
         
 
         Settings.prototype.save = function() {
-            return $fs.write('settings.json',this.settings);
+            return $http.post('/settings/save',{settings: this.settings});
         };
 
         return new Settings();
