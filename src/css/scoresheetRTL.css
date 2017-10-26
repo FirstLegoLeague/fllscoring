@@ -1,0 +1,25 @@
+.objective.rtl {
+    direction: rtl;
+}
+
+.card.rtl {
+    direction: rtl !important; 
+}
+
+.card.rtl .card-header bdo {
+    direction: ltr;
+}
+
+.card-menu.rtl {
+    direction: rtl;
+    left: 16px;
+    right: auto;
+}
+.card.ok.rtl h2::before {
+    content: '✔ ';
+    color: green;
+}
+.card.error.rtl h2::before {
+    content: '✘ ';
+    color: crimson;
+}

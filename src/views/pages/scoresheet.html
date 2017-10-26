@@ -1,4 +1,4 @@
-<div ng-controller="scoresheetCtrl" id="scoresheet">
+    <div ng-controller="scoresheetCtrl" id="scoresheet">
     <div class="appbar">
         <button ng-click="toggleDrawer()">
             <i class="material-icons">menu</i>
@@ -42,13 +42,13 @@
                 </div>
             </section>
             <form id="scoresheetForm" ng-submit="validateScoresheet()">
-                <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.errors.length, ok:mission.completed}">
+                <section class="card" ng-repeat="mission in missions" ng-class="{error:mission.errors.length, ok:mission.completed, rtl:rtlLang}">
 
-                    <div class="card-menu" ng-click="openDescriptionModal(mission)" style="cursor: pointer;"><i class="material-icons">info_outline</i></div>
+                    <div class="card-menu" ng-class="{rtl:rtlLang}" ng-click="openDescriptionModal(mission)" style="cursor: pointer;"><i class="material-icons">info_outline</i></div>
 
                     <h2 class="card-header">
                         {{mission.title}}
-                        ({{mission.result}})
+                        <bdo>({{mission.result}})</bdo>
                     </h2>
                     <div class="card-body">
                         <div class="objective" ng-repeat="objective in mission.objectives" ng-switch="objective.type">

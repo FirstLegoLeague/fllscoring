@@ -122,6 +122,7 @@ function toObj(arr,key) {
 function processFile(fn) {
     var xml = fs.readFileSync(fn,'utf8');
     parse(xml,function(err,def) {
+        const rtl = def['fll:challenge'].strings[0].$.rtlDoc === "true";
         strings = def['fll:challenge'].strings[0].string.reduce(parseString,{});
     // console.log(strings);
     // return;
@@ -130,7 +131,8 @@ function processFile(fn) {
         var jsm = {
             title: def['fll:challenge'].$.name,
             missions: missions.map(parseMission),
-            strings: strings
+            strings: strings,
+            rtl: rtl
         };
         var json = JSON.stringify(jsm,null,4);
         //replace funtion keys with actual function body
