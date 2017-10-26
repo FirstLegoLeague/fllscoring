@@ -1,12 +1,9 @@
 describe('indexFilter',function() {
-    var ngFilters = factory('filters/ng-filters');
-    var module = factory('filters/index',{
-        'filters/ng-filters': ngFilters
-    });
-
+    var module;
     var index;
 
     beforeEach(function() {
+        module = factory('filters/index');
         angular.mock.module(module.name);
         angular.mock.inject(function(indexFilter) {
             index = indexFilter;

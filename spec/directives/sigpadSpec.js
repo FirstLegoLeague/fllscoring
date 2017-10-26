@@ -1,15 +1,13 @@
 describe('sigpad',function() {
-    var ngDirectives = factory('directives/ng-directives');
-    var module = factory('directives/sigpad',{
-        'directives/ng-directives': ngDirectives
-    });
-
-
+    var module;
     var $compile,$rootScope,
         regenerateSpy,
         drawEnd;
 
     beforeEach(function() {
+        module = factory('directives/sigpad',{
+            'signaturepad': {},
+        });
         angular.mock.module(module.name);
         inject(function(_$compile_,_$rootScope_) {
             $compile = _$compile_;
