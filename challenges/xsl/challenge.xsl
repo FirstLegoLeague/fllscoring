@@ -56,6 +56,19 @@
                     .objective .values span {
                         margin: 0 10px;
                     }
+
+
+                    .mission.rtl {
+                        border: 1px solid silver;
+                        border-radius: 4px;
+                        padding: 10px;
+                        margin-left: 0px;
+                        margin-right: 0px;
+                        margin-top: 5px;
+                        margin-bottom: 0px;
+                        counter-increment: mission;
+                        direction: rtl;
+                    }
                 </style>
             </head>
             <body>
@@ -70,12 +83,24 @@
 
     <xsl:template match="mission">
         <xsl:variable name="key" select="@name"/>
-        <div class="mission">
-            <h2>
-                <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
-            </h2>
-            <xsl:apply-templates />
-        </div>
+        <xsl:choose>
+            <xsl:when test="/fll:challenge/strings/@rtlDoc='true'">
+                <div class="mission rtl">
+                    <h2>
+                        <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
+                    </h2>
+                    <xsl:apply-templates />
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <div class="mission">
+                    <h2>
+                        <xsl:value-of select="/fll:challenge/strings/string[@id=$key]"/>
+                    </h2>
+                    <xsl:apply-templates />
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="objective-enum">
