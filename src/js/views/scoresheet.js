@@ -46,6 +46,7 @@ define('views/scoresheet',[
                 })
                 .then(function(defs) {
                     $scope.field = defs.field;
+                    $scope.rtlLang = $scope.field.rtl || false;
                     $scope.missions = defs.missions;
                     $scope.strings = defs.strings;
                     $scope.objectiveIndex = defs.objectiveIndex;
