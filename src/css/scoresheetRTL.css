@@ -6,16 +6,8 @@
     direction: ltr;
 }
 
-.card-menu.rtl {
+.card.rtl .card-menu{
     direction: rtl;
     left: 16px;
     right: auto;
 }
-/* .card.ok.rtl h2::before {
-    content: '✔ ';
-    color: green;
-}
-.card.error.rtl h2::before {
-    content: '✘ ';
-    color: crimson;
-} */
