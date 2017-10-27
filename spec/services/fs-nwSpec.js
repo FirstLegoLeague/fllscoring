@@ -1,10 +1,14 @@
 describe('fs-nw',function() {
 
     describe('store exists',function() {
-        var fs = factory('services/fs-nw',{
-            'q':Q,
-            'idbstore': window.IDBStore
-        },true);
+        var fs;
+        beforeEach(function() {
+            fs = factory('services/fs-nw',{
+                'q':Q,
+                'idbstore': window.IDBStore
+            });
+        });
+
         describe('reading',function() {
             it('should read a test file',function() {
                 return fs.write('foo/foo.txt','jsfd978sd').then(function() {

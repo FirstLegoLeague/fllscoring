@@ -1,12 +1,13 @@
 describe('TeamDialogController',function() {
 
-    var module = factory('controllers/TeamDialogController',{
-        'services/log': logMock,
-    });
-
+    var module;
     var $scope, controller, settingsMock, handshakeMock;
 
     beforeEach(function() {
+        module = factory('controllers/TeamDialogController',{
+            'services/log': logMock,
+            'services/fs': {},
+        });
         angular.mock.module(module.name);
         angular.mock.inject(function($controller,$rootScope,$q) {
             $scope = $rootScope.$new();

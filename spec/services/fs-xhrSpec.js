@@ -15,9 +15,12 @@ describe('fs-xhr',function() {
         ajax: jasmine.createSpy('jqajax').and.returnValue(createJQPromise('ajax'))
     };
 
-    var fs = factory('services/fs-xhr',{
-        'q':Q,
-        'jquery': fakeJQuery
+    var fs;
+    beforeEach(function() {
+        fs = factory('services/fs-xhr',{
+            'q':Q,
+            'jquery': fakeJQuery
+        });
     });
 
     describe('fs signature',function() {

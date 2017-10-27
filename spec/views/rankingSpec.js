@@ -1,10 +1,6 @@
 describe('ranking', function() {
 
-    var module = factory('views/ranking', {
-        'services/log': logMock,
-        'controllers/ExportRankingDialogController': factory('controllers/ExportRankingDialogController')
-    });
-
+    var module;
     var $scope, controller;
     var dummyTeam = {
         number: '123',
@@ -13,6 +9,10 @@ describe('ranking', function() {
     var fsMock, stagesMock, scoresMock, handshakeMock, messageMock;
 
     beforeEach(function() {
+        module = factory('views/ranking', {
+            'services/log': logMock,
+            'services/fs': {},
+        });
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope,$q) {
             $scope = $rootScope.$new();

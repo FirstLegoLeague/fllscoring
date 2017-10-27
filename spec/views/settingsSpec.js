@@ -1,15 +1,14 @@
 describe('settings', function() {
 
-    var module = factory('views/settings', {
-        'services/log': logMock,
-        'controllers/NewStageDialogController': factory('controllers/NewStageDialogController')
-    });
-
+    var module;
     var $scope, controller;
-
     var settingsMock, handshakeMock, stagesMock, challengesMock;
 
     beforeEach(function() {
+        module = factory('views/settings', {
+            'services/log': logMock,
+            'services/fs': {},
+        });
         angular.mock.module(module.name);
         angular.mock.inject(function($controller, $rootScope, $q) {
             $scope = $rootScope.$new();

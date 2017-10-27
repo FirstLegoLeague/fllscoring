@@ -1,6 +1,7 @@
 describe('log',function() {
-    var log = factory('services/log',{
-        jquery: $
+    var log;
+    beforeEach(function() {
+        log = factory('services/log');
     });
 
     describe('logging',function() {

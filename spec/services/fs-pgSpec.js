@@ -1,13 +1,13 @@
 describe('fs-pg',function() {
 
-    var fs = factory('services/fs-pg',{
-        'q':Q,
-        'services/log': logMock
-    });
-
+    var fs;
     var FileEntry, DirectoryEntry, FileSystem, FileReader, FileWriter;
 
     beforeEach(function() {
+        fs = factory('services/fs-pg',{
+            'q':Q,
+            'services/log': logMock
+        });
         //fake local filesystem as provided by phonegap
         //TODO: maybe extract phonegap fs mock?
         window.LocalFileSystem = {

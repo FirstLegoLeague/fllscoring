@@ -1,7 +1,8 @@
 describe('really',function() {
-    var ngDirectives = factory('directives/ng-directives');
-    var module = factory('directives/really',{
-        'directives/ng-directives': ngDirectives
+    var module;
+
+    beforeEach(function() {
+        module = factory('directives/really');
     });
 
     var $compile,$rootScope,windowMock = {
