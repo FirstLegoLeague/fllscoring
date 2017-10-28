@@ -7,6 +7,7 @@ define('services/ng-scores',[
     'services/log',
     'services/ng-fs',
     'services/ng-stages',
+    'factories/poller',
     'services/ng-teams',
 ],function(module,log) {
     "use strict";
@@ -16,8 +17,8 @@ define('services/ng-scores',[
     var SCORES_VERSION = 2;
 
     return module.service('$scores',
-        ['$rootScope', '$fs', '$stages', '$q', '$teams',
-        function($rootScope, $fs, $stages, $q, $teams) {
+        ['$rootScope', '$fs', '$stages', '$q', '$teams', 'Poller',
+        function($rootScope, $fs, $stages, $q, $teams, Poller) {
 
         // Replace placeholders in format string.
         // Example: format("Frobnicate {0} {1} {2}", "foo", "bar")
@@ -131,6 +132,8 @@ define('services/ng-scores',[
             this._updating = 0;
             this._initialized = null; // Promise<void>
             this._pollingSheets = null; // Promise<void>
+            this.AUTO_REFRESH_INTERVAL = 30 * 1000; // milliseconds
+            this._autoRefreshPoller = new Poller(this.AUTO_REFRESH_INTERVAL, function() { self._onAutoRefresh(); });
             this.init();
         }
 
@@ -178,6 +181,7 @@ define('services/ng-scores',[
 
         Scores.prototype.load = function() {
             var self = this;
+            this._autoRefreshPoller.reset();
             return $fs.read('scores.json').then(function(res) {
                 self.beginupdate();
                 try {
@@ -336,8 +340,39 @@ define('services/ng-scores',[
                 throw new Error("beginupdate()/endupdate() calls mismatched");
             }
             this._updating--;
-            if (this._updating === 0) {
+            if (!this.isUpdating()) {
                 this._update();
+            }
+        };
+
+        Scores.prototype.isUpdating = function () {
+            return this._updating > 0;
+        };
+
+        /**
+         * Enable automatic refresh of scores if no e.g. manual
+         * refresh happened for a while. This is mostly used as
+         * a backup scenario in case we e.g. missed an (MHub) event,
+         * or when MHub is not available.
+         * Use disableAutoRefresh() when no longer needed (e.g. on
+         * controller destruction).
+         */
+        Scores.prototype.enableAutoRefresh = function() {
+            this._autoRefreshPoller.start();
+        };
+
+        /**
+         * Unregister interest in auto-refresh. See enableAutoRefresh().
+         */
+        Scores.prototype.disableAutoRefresh = function () {
+            this._autoRefreshPoller.stop();
+        };
+
+        Scores.prototype._onAutoRefresh = function () {
+            // Reload scores from server (if we're not already
+            // in the middle of something).
+            if (!this.isUpdating()) {
+                this.load();
             }
         };
 
@@ -421,7 +456,7 @@ define('services/ng-scores',[
         };
 
         Scores.prototype._update = function() {
-            if (this._updating > 0) {
+            if (this.isUpdating()) {
                 return;
             }
 

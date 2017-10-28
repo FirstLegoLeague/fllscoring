@@ -16,6 +16,12 @@ define('views/scores',[
             $scope.scores = $scores.scores;
             $scope.stages = $stages.stages;
 
+            // Ensure periodic updates of scores view
+            $scores.enableAutoRefresh();
+            $scope.$on("$destroy", function () {
+                $scores.disableAutoRefresh();
+            });
+
             $scope.editing = {}; // Keep state of currently-editing scores
             $scope.original = {}; // Keep original score when edit started
 

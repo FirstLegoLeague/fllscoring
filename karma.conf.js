@@ -20,6 +20,7 @@ module.exports = function(config) {
       'src/components/q/q.js',
       'src/components/idbwrapper/idbstore.js',
       'spec/helpers/*.js',
+      'src/js/factories/*.js',
       'src/js/directives/*.js',
       'src/js/services/*.js',
       'src/js/views/*.js',
