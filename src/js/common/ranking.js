@@ -10,18 +10,7 @@ if (typeof exports === 'object' && typeof exports.nodeName !== 'string' && typeo
 }
 define("common/ranking", function (require, exports, module) {
 
-    /**
-     * Determine whether given score is valid, i.e. a number, or "dnc" (Did Not Compete),
-     * or "dsq" (DiSQualified).
-     * Note: `null` and `undefined` are invalid: remove the score to denote this instead.
-     *
-     * @param score {any} Score value to test
-     * @return true when score is valid
-     */
-    function isValidScore(score) {
-        return typeof score === "number" && score > -Infinity && score < Infinity ||
-            score === "dnc" || score === "dsq";
-    }
+    var scoring = require("./scoring");
 
     /**
      * Compute rankings based on given scores and a stageFilter.
@@ -49,11 +38,11 @@ define("common/ranking", function (require, exports, module) {
      * @property teamNumber {number}
      * @property scores {Array.<number>}
      * @property sortedScores {Array.<number>}
-     * @property entries {Array.<ScoreObject>}
+     * @property entries {Array.<Score>}
      * @property highestScore {number}
      *
      * @param scores {Array.<Score>} Scores
-     * @param stageFilter {StageFilter} Hash of stageId => numberOfRounds
+     * @param stageFilter {{ [stageId: string]: number }} Hash of stageId => numberOfRounds
      * @return {Array.<Rank>} Ranking based on filtered scores
      */
     function calculateScoreboard(scores, stageFilter) {
@@ -68,7 +57,7 @@ define("common/ranking", function (require, exports, module) {
             }
 
             // Ignore completely invalid scores
-            if (!isValidScore(s.score)) {
+            if (!scoring.isValidScore(s.score)) {
                 return false;
             }
 
@@ -216,6 +205,5 @@ define("common/ranking", function (require, exports, module) {
         return board;
     }
 
-    exports.isValidScore = isValidScore;
     exports.calculateScoreboard = calculateScoreboard;
 });

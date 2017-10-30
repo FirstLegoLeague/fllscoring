@@ -5,12 +5,13 @@
 define('services/ng-scores',[
     'services/ng-services',
     'services/log',
+    'common/scoring',
     'common/ranking',
     'services/ng-fs',
     'services/ng-stages',
     'factories/poller',
     'services/ng-teams',
-],function(module, log, ranking) {
+],function(module, log, scoring, ranking) {
     "use strict";
 
     // Current file version for scores.
@@ -537,7 +538,7 @@ define('services/ng-scores',[
                 // mean that one could 'reset' a team's score for that round.
                 // If a team did not play in a round, there will simply be no
                 // entry in scores.
-                if (!ranking.isValidScore(s.score)) {
+                if (!scoring.isValidScore(s.score)) {
                     s.error = new InvalidScoreError(s.score);
                     return;
                 }

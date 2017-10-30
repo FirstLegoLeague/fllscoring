@@ -1,31 +1,7 @@
-describe('ranking', function () {
+describe('common/ranking', function () {
     var ranking;
     beforeEach(function () {
         ranking = factory('common/ranking');
-    });
-
-    describe('isValidScore', function () {
-        it('should accept valid scores', function () {
-            expect(ranking.isValidScore(0)).toBe(true);
-            expect(ranking.isValidScore(-1)).toBe(true);
-            expect(ranking.isValidScore(1000)).toBe(true);
-            expect(ranking.isValidScore("dnc")).toBe(true); // Did Not Compete
-            expect(ranking.isValidScore("dsq")).toBe(true); // DiSQualified
-        });
-
-        it('should reject invalid scores', function () {
-            expect(ranking.isValidScore(undefined)).toBe(false);
-            expect(ranking.isValidScore(null)).toBe(false);
-            expect(ranking.isValidScore(NaN)).toBe(false);
-            expect(ranking.isValidScore(Infinity)).toBe(false);
-            expect(ranking.isValidScore(-Infinity)).toBe(false);
-            expect(ranking.isValidScore("dnq")).toBe(false);
-            expect(ranking.isValidScore("foo")).toBe(false);
-            expect(ranking.isValidScore(true)).toBe(false);
-            expect(ranking.isValidScore(false)).toBe(false);
-            expect(ranking.isValidScore({})).toBe(false);
-            expect(ranking.isValidScore([])).toBe(false);
-        });
     });
 
     describe('calculateScoreboard', function () {
