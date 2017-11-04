@@ -235,30 +235,6 @@ describe('ng-scores',function() {
         });
     });
 
-    describe('isValidScore', function () {
-        it('should accept valid scores', function () {
-            expect($scores.isValidScore(0)).toBe(true);
-            expect($scores.isValidScore(-1)).toBe(true);
-            expect($scores.isValidScore(1000)).toBe(true);
-            expect($scores.isValidScore("dnc")).toBe(true); // Did Not Compete
-            expect($scores.isValidScore("dsq")).toBe(true); // DiSQualified
-        });
-
-        it('should reject invalid scores', function () {
-            expect($scores.isValidScore(undefined)).toBe(false);
-            expect($scores.isValidScore(null)).toBe(false);
-            expect($scores.isValidScore(NaN)).toBe(false);
-            expect($scores.isValidScore(Infinity)).toBe(false);
-            expect($scores.isValidScore(-Infinity)).toBe(false);
-            expect($scores.isValidScore("dnq")).toBe(false);
-            expect($scores.isValidScore("foo")).toBe(false);
-            expect($scores.isValidScore(true)).toBe(false);
-            expect($scores.isValidScore(false)).toBe(false);
-            expect($scores.isValidScore({})).toBe(false);
-            expect($scores.isValidScore([])).toBe(false);
-        });
-    });
-
     describe('scoreboard', function() {
         var board;
         beforeEach(function() {
@@ -397,7 +373,7 @@ describe('ng-scores',function() {
             expect($scores.scores[0].error).toEqual(jasmine.any($scores.UnknownStageError));
             expect($scores.scores[1].error).toEqual(jasmine.any($scores.UnknownRoundError));
             expect($scores.scores[2].error).toEqual(jasmine.any($scores.UnknownRoundError));
-            expect(board["test"].length).toEqual(1);
+            expect(board["test"].length).toEqual(0);
             expect($scores.validationErrors.length).toEqual(3);
         });
 

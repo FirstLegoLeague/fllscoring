@@ -134,8 +134,8 @@ define('views/ranking',[
                     var rows = ranking.map(function(entry) {
                         return [
                             entry.rank,
-                            entry.team.number,
-                            entry.team.name,
+                            entry.team ? entry.team.number : 0,
+                            entry.team ? entry.team.name : "",
                             entry.highest,
                         ].concat(entry.scores);
                     });

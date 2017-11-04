@@ -21,6 +21,7 @@ module.exports = function(config) {
       'src/components/idbwrapper/idbstore.js',
       'spec/helpers/*.js',
       'src/js/factories/*.js',
+      'src/js/common/*.js',
       'src/js/directives/*.js',
       'src/js/services/*.js',
       'src/js/views/*.js',
