@@ -9,7 +9,7 @@ define('services/session', [
             var eventListeners = [];
             var session = {};
 
-            $http.get('/session').then(function (response) {
+            $http.get('session').then(function (response) {
                 for (var key in response.data) {
                     session[key] = response.data[key];
                 }
