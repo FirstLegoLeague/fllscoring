@@ -53,6 +53,20 @@ describe('TeamImportDialogController',function() {
             expect($scope.importNumberExample).toEqual('');
             expect($scope.importNameExample).toEqual('');
         });
+
+        it('should correctly populate importLines when using a custom delimiter', function () {
+            $scope.importLines = [];
+            $scope.useCustomDelimiter = true;
+            $scope.delimiter = ",";
+            $scope.importRaw = "42,FooBar\n7,QuxMoo";
+            $scope.$digest();
+            expect($scope.importLines).toEqual([
+                ['42','FooBar'],
+                ['7','QuxMoo']
+            ]);
+            expect($scope.importNumberExample).toEqual('42');
+            expect($scope.importNameExample).toEqual('FooBar');
+        })
     });
 
     describe('handshake receive',function() {
