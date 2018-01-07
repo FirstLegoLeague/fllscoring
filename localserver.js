@@ -8,6 +8,7 @@ var views = require('./server_modules/views');
 var configs = [require('./server_modules/slave_mode')];
 
 var middlewareLayers = [
+    require('morgan')('combined'),
     express.static(fileSystem.resolve('src')),
     require('./server_modules/sessions').middleware,
     require('./server_modules/auth').basic(args.basicAuthCreds),
