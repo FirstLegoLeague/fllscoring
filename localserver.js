@@ -5,7 +5,9 @@ var fileSystem = require('./server_modules/file_system');
 var args = require('./server_modules/args');
 var views = require('./server_modules/views');
 
-var configs = [require('./server_modules/slave_mode')];
+var configs = [
+    require('./server_modules/slave_mode'),
+];
 
 var middlewareLayers = [
     require('morgan')('combined'),
