@@ -7,21 +7,24 @@ var views = require('./server_modules/views');
 
 var configs = [require('./server_modules/slave_mode')];
 
-var middlewareLayers = [express.static(fileSystem.resolve('src')),
-                        require('./server_modules/sessions').middleware,
-                        require('./server_modules/auth').basic(args.basicAuthCreds),
-                        require('./server_modules/cors').middleware,
-                        require('./server_modules/cache').middleware,
-                        require('./server_modules/body_builder').middleware,
-                        require('./server_modules/log').middleware];
+var middlewareLayers = [
+    express.static(fileSystem.resolve('src')),
+    require('./server_modules/sessions').middleware,
+    require('./server_modules/auth').basic(args.basicAuthCreds),
+    require('./server_modules/cors').middleware,
+    require('./server_modules/cache').middleware,
+    require('./server_modules/body_builder').middleware,
+    require('./server_modules/log').middleware,
+];
 
-var routers = [views,
-                fileSystem,
-                require('./server_modules/sessions'),
-                require('./server_modules/teams'),
-                require('./server_modules/scores'),
-                require('./server_modules/challenges')];
-
+var routers = [
+    views,
+    fileSystem,
+    require('./server_modules/sessions'),
+    require('./server_modules/teams'),
+    require('./server_modules/scores'),
+    require('./server_modules/challenges'),
+];
 
 configs.forEach(function(config) {
     config.configure(app);
