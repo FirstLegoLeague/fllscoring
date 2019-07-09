@@ -14,7 +14,7 @@ define('services/ng-message',[
             var ws;
 
             function init() {
-                if (ws) {
+                if (ws && ws.readyState === 1) {//the socket has to be open to work
                     return $q.when(ws);
                 }
                 return $settings.init().then(function(settings) {
@@ -32,6 +32,9 @@ define('services/ng-message',[
                         def.resolve(ws);
                     };
                     ws.onerror = function(e){
+                        if(e.type === "error"){
+                            alert("mhub server is inaccessible!")
+                        }
                         log("socket error", e);
                     };
                     ws.onclose = function() {

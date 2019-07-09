@@ -19,6 +19,9 @@ define('services/fs-xhr',['q','jquery'],function(Q,$) {
         this._get(url).done(function(data) {
             def.resolve(data);
         }).fail(function(data) {
+            if(data.statusText === "error"){ //status text given when server is inaccessible
+                alert("Server is inaccessible!")
+            }
             def.reject(data);
         });
 
@@ -31,6 +34,9 @@ define('services/fs-xhr',['q','jquery'],function(Q,$) {
         this._post(url,data).done(function(data) {
             def.resolve(data);
         }).fail(function(data) {
+            if(data.statusText === "error"){ //status text given when server is inaccessible
+                alert("Server is inaccessible!")
+            }
             def.reject(data);
         });
         return def.promise;
@@ -40,6 +46,9 @@ define('services/fs-xhr',['q','jquery'],function(Q,$) {
         var def = Q.defer();
         var url = baseurl+path;
         this._delete(url).done(function(data) {
+            if(data.statusText === "error"){ //status text given when server is inaccessible
+                alert("Server is inaccessible!")
+            }
             def.resolve(data);
         }).fail(function(data) {
             def.reject(data);
