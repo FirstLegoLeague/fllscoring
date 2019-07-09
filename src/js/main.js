@@ -37,6 +37,8 @@ define([
             $scope.drawerVisible = false;
 
             session.onload(function() {
+                $scope.serverAddress = session.get('serverAddress');
+
                 $scope.user = session.get('user');
                 if($scope.user === 'admin') {
                     $scope.pages = [

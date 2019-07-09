@@ -13,7 +13,8 @@ var middlewareLayers = [express.static(fileSystem.resolve('src')),
                         require('./server_modules/cors').middleware,
                         require('./server_modules/cache').middleware,
                         require('./server_modules/body_builder').middleware,
-                        require('./server_modules/log').middleware];
+                        require('./server_modules/log').middleware,
+                        require('./server_modules/address').middleware];
 
 var routers = [views,
                 fileSystem,

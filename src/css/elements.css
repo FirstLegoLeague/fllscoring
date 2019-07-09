@@ -127,6 +127,8 @@ table {
         box-shadow: 0 2px 5px rgba(0,0,0,0.26);
     }
     .drawer .drawerLead {
+        text-align: center;
+        color: darkblue;
         /*height: 156px;*/
         height: 64px;
         /*background-color: red;*/
